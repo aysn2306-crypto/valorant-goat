@@ -1,0 +1,14 @@
+# Beat map for the Clutch sample (video/src/sample). Ids match ClutchBoard / CategoryIntro timings.
+section: clutch
+fps: 30
+beats:
+  - {id: name, line: 1, word: clutch}          # CLUTCH letters type in
+  - {id: meaning, line: 2}                      # cyan meaning line
+  - {id: field, line: 3}                        # histogram builds
+  - {id: highlight, line: 4, word: but}         # top five light up
+  - {id: row5, line: 5, word: something}
+  - {id: row4, line: 6, word: less}
+  - {id: row3, line: 7, word: derke}
+  - {id: row2, line: 8, word: aspas}
+  - {id: riser, line: 9}                        # tension line, riser starts
+  - {id: row1, line: 10, lead: 0.05}            # #1 lands a hair before the name
