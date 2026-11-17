@@ -47,7 +47,7 @@ def num(s):
 def stage_weight(stage):
     s = str(stage).lower()
     w = CFG["match_weight"]["stage"]
-    if any(k in s for k in ("playoff", "bracket", "knockout", "final")):
+    if any(k in s for k in ("playoff", "bracket", "knockout")) or (s.startswith("final") is False and "final" in s and "qualifier" not in s):
         return w["playoffs"]
     return w["group"]
 
@@ -56,6 +56,8 @@ def load_stats():
     ev = pd.read_csv(CSV / "events.csv")
     st = pd.read_csv(CSV / "stage_stats.csv", dtype={"player_id": str})
     st = st[st.player_id.notna() & (st.player_id != "")]
+    # exclude non-competitive or amateur-level stages: showmatches (all-star games) and open qualifiers
+    st = st[~st.stage.astype(str).str.contains(r"showmatch|open qualifier", case=False, regex=True)]
     st = st.merge(ev[["event_id", "year", "tier", "name"]], on="event_id")
     for c in ["maps", "rnd", "rating", "acs", "kd", "adr", "kpr", "apr", "k", "d", "a", "fk", "fd", "kmax"]:
         st[c] = st[c].map(num)
@@ -273,6 +275,7 @@ def main():
 
     # trophies + honours
     pl = pd.read_csv(CSV / "placements.csv", dtype={"player_id": str})
+    pl = pl[~pl.stage.astype(str).str.contains(r"showmatch|open qualifier", case=False, regex=True)]  # not real placements
     pl_raw = pl.copy()
     pl = pl.merge(events[["event_id", "tier"]], on="event_id")
     rng_ = pl.placement.map(place_range)
