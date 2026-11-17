@@ -12,6 +12,8 @@ fairness:
   compare_within: [role, season]
   igl_calling_tax: measured   # gap estimated from data, added back to IGL stat scores
   shrinkage_rounds_k: 1000    # weight on own data = n / (n + k)
+  consistency_k: 3000
+  leadership_k_matches: 100
 
 categories:   # weight in the overall score (sums to 100)
   trophies_honours: 28
@@ -44,3 +46,5 @@ trophy_points:
 
 events: {last_event: "Valorant Champions 2026"}
 robustness: {runs: 1000, max_weight_change: 0.30}
+# v2 test changes (17 Nov, after draft test 1): trophies scored by real points (best = 100),
+# consistency shrink k=3000 rounds toward pool-typical swing, leadership k=100 matches and IGL events only.

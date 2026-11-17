@@ -157,6 +157,36 @@ def glicko_team_residuals(matches, events):
     return res, cnt
 
 
+def igl_periods(players, events):
+    """Set of (player_id, event_id) where the player was the team's in-game leader.
+
+    Liquipedia only stores the CURRENT role, so a Liquipedia IGL counts as IGL for their current
+    stint (the unbroken run of counted events with their latest team). Earlier stints are added
+    only from data/manual/igl_extra.csv, each row with a source."""
+    pl = pd.read_csv(CSV / "placements.csv", dtype={"player_id": str})
+    pl = pl[pl.event_id.isin(events.event_id)]
+    m = pd.read_csv(CSV / "matches.csv")
+    first = m.groupby("event_id").date.min()
+    pl["date"] = pl.event_id.map(first).fillna(pl.year.astype(str) + "-01-01")
+    pl = pl.sort_values("date").drop_duplicates(["player_id", "event_id"], keep="last")
+    out, src = set(), {}
+    flagged = set(players.loc[players.igl == 1, "player_id"])
+    for pid, g in pl[pl.player_id.isin(flagged)].groupby("player_id"):
+        teams = list(g.team)[::-1]; evs = list(g.event_id)[::-1]
+        for t, e in zip(teams, evs):
+            if t != teams[0]:
+                break
+            out.add((pid, e))
+        src[pid] = f"Liquipedia current role ({teams[0]} stint)"
+    ex = ROOT / "data" / "manual" / "igl_extra.csv"
+    if ex.exists():
+        for r in pd.read_csv(ex).itertuples():
+            g = pl[(pl.player.str.lower() == r.player.lower()) & (pl.team == r.team) & pl.year.between(r.from_year, r.to_year)]
+            for pid, e in zip(g.player_id, g.event_id):
+                out.add((pid, e)); src[pid] = "; ".join(dict.fromkeys(filter(None, src.get(pid, "").split("; ") + [r.source])))
+    return out, src
+
+
 def main():
     OUT.mkdir(exist_ok=True)
     k = CFG["fairness"]["shrinkage_rounds_k"]
@@ -166,14 +196,18 @@ def main():
     players = pd.read_csv(CSV / "players.csv", dtype={"player_id": str})
     pool = set(players.player_id)
     sp = st[st.player_id.isin(pool)]
-    igl = dict(zip(players.player_id, players.igl))
     names = dict(zip(players.player_id, players.player))
+    igl_ev, igl_src = igl_periods(players, events)
 
     rows = []
     for pid, g in sp.groupby("player_id"):
         g = g.copy()
         g["wr"] = g.rnd * g.w
-        r = {"player_id": pid, "player": names.get(pid), "igl": int(igl.get(pid, 0)),
+        g["igl_row"] = [(pid, e) in igl_ev for e in g.event_id]
+        igl_share = float(g.loc[g.igl_row, "rnd"].sum() / g.rnd.sum())
+        r = {"player_id": pid, "player": names.get(pid), "igl": int(igl_share > 0), "igl_share": round(igl_share, 2),
+             "igl_source": igl_src.get(pid, ""),
+             "acs_standin_share": round(float(g.loc[g.rating_proxy, "rnd"].sum() / g.rnd.sum()), 2),
              "rounds": int(g.rnd.sum()), "main_role": g.groupby("role").rnd.sum().idxmax(),
              "first_year": int(g.year.min()), "last_year": int(g.year.max())}
         zs = {}
@@ -192,9 +226,11 @@ def main():
         # consistency: per-event rating z
         ez = g.groupby("event_id").apply(lambda e: wavg(e, "z_rating", "rnd")[0], include_groups=False)
         r["n_events"] = len(ez)
-        sh = g.rnd.sum() / (g.rnd.sum() + k)  # same k=1000-round shrinkage as the stats
+        kc = CFG["fairness"].get("consistency_k", 3000)
+        sh = g.rnd.sum() / (g.rnd.sum() + kc)  # v2: stronger pull to average for short careers
         r["c_above"] = (ez > 0).mean() * sh + 0.5 * (1 - sh)
-        r["c_swing"] = -(ez.std() if len(ez) > 1 else 1.0) * sh
+        r["c_std"] = ez.std() if len(ez) > 1 else np.nan
+        r["c_sh"] = sh
         # peak + longevity: best seasons, decaying weights
         sz = g.groupby("year").apply(lambda e: shrink(*wavg(e, "z_rating", "wr"), 400), include_groups=False)
         vals = sorted((max(0.0, v + 1.0) for v in sz), reverse=True)
@@ -202,17 +238,21 @@ def main():
         r["best_season"] = int(sz.idxmax()) if len(sz) else None
         rows.append(r)
     P = pd.DataFrame(rows).set_index("player_id")
+    # v2: pull a short career's event-to-event swing toward the pool's typical swing (not toward zero swing)
+    P["c_swing"] = -(P.c_sh * P.c_std.fillna(P.c_std.mean()) + (1 - P.c_sh) * P.c_std.mean())
 
     # IGL calling tax: measured gap in fragging z between IGLs and non-IGLs (same role-season scale)
     frag_raw = 0.4 * P.z_rating + 0.3 * P.z_adr + 0.2 * P.z_kpr2 + 0.1 * P.z_kpr2 * 0  # multikills unavailable
     frag_raw = frag_raw / 0.9
-    tax = float(frag_raw[P.igl == 0].mean() - frag_raw[P.igl == 1].mean()) if (P.igl == 1).any() else 0.0
+    # v2: tax measured from players who called for most of their rounds vs players who never did
+    tax = float(frag_raw[P.igl_share == 0].mean() - frag_raw[P.igl_share >= 0.5].mean()) if (P.igl_share >= 0.5).any() else 0.0
     tax = max(tax, 0.0)
-    frag_adj = frag_raw + tax * P.igl
+    frag_adj = frag_raw + tax * P.igl_share  # added back only for the share of rounds spent calling
     open_adj = 0.5 * P.z_fkpr2 + 0.5 * P.z_fk_share
 
     # trophies + honours
     pl = pd.read_csv(CSV / "placements.csv", dtype={"player_id": str})
+    pl_raw = pl.copy()
     pl = pl.merge(events[["event_id", "tier"]], on="event_id")
     rng_ = pl.placement.map(place_range)
     pl["lo"], pl["hi"] = rng_.str[0], rng_.str[1]
@@ -236,14 +276,14 @@ def main():
     P["trophy_pts"] = tro.reindex(P.index).fillna(0)
     P["intl_titles"] = pl[pl.counted & (pl.hi == 1) & pl.tier.isin(["champions", "masters"])].groupby("player_id").size().reindex(P.index).fillna(0).astype(int)
     P["champs_titles"] = pl[pl.counted & (pl.hi == 1) & (pl.tier == "champions")].groupby("player_id").size().reindex(P.index).fillna(0).astype(int)
-    aw = pd.read_csv(CSV / "awards.csv") if (CSV / "awards.csv").exists() and (CSV / "awards.csv").stat().st_size > 5 else pd.DataFrame()
+    aw = pd.read_csv(ROOT / "data" / "manual" / "mvps.csv")  # v2: sourced list, one row per event MVP
     P["mvps"], P["mvp_pts"] = 0, 0.0
     unmatched_mvp = []
     if len(aw):
-        aw = aw[aw.award.astype(str).str.strip().str.upper() == "MVP"]  # event MVP only, not day/match MVPs
-        low = {str(n).lower(): pid for pid, n in P.player.items()}
         for a in aw.itertuples():
-            pid = low.get(str(a.player).lower())
+            # match by name AND team at that event (avoids name collisions like Neon)
+            cand = pl_raw[(pl_raw.event_id == a.event_id) & (pl_raw.player.str.lower() == str(a.player).lower())]
+            pid = cand.player_id.iloc[0] if len(cand) and cand.player_id.iloc[0] in P.index else None
             if pid is None:
                 unmatched_mvp.append(f"{a.player} ({a.event})"); continue
             P.loc[pid, "mvps"] += 1
@@ -254,14 +294,18 @@ def main():
     matches = pd.read_csv(CSV / "matches.csv")
     resid, cnt = glicko_team_residuals(matches, events)
     lead = {}
+    kl = CFG["fairness"].get("leadership_k_matches", 100)
     for pid, g in pl[pl.player_id.isin(P.index[P.igl == 1])].groupby("player_id"):
+        g = g[[(pid, e) in igl_ev for e in g.event_id]]  # v2: only events where they were the caller
         s = sum(resid.get((e, t), 0.0) for e, t in zip(g.event_id, g.team))
         n = sum(cnt.get((e, t), 0) for e, t in zip(g.event_id, g.team))
-        lead[pid] = (s / n) * n / (n + 30) if n else 0.0  # wins above expected per match, shrunk (k=30 matches)
+        lead[pid] = s / (n + kl) if n else 0.0  # wins above expected per match, shrunk toward 0 (k matches)
+    P["lead_matches"] = pd.Series({pid: sum(cnt.get((e, t), 0) for e, t in zip(g.event_id, g.team) if (pid, e) in igl_ev)
+                                   for pid, g in pl[pl.player_id.isin(P.index)].groupby("player_id")}).reindex(P.index).fillna(0).astype(int)
     P["lead_raw"] = pd.Series(lead).reindex(P.index)
 
     C = pd.DataFrame(index=P.index)
-    C["trophies_honours"] = percentile(P.honours)
+    C["trophies_honours"] = P.honours / P.honours.max() * 100  # v2: real points (best = 100), not percentile
     C["fragging"] = percentile(frag_adj)
     C["big_game_form"] = percentile(0.6 * P.z_big_vs_base + 0.4 * P.z_big)
     C["peak_longevity"] = percentile(P.peak_long)
@@ -315,7 +359,8 @@ def main():
     an.append(f"- Agents with no role mapping (counted as flex): {', '.join(unknown_agents) or 'none'}")
     an.append(f"- MVP awards not matched to a pool player: {', '.join(unmatched_mvp) or 'none'}")
     an.append(f"- Players without a clean Liquipedia player page: {', '.join(players[players.liquipedia != 'ok'].player)}")
-    an.append(f"- IGLs flagged (current Liquipedia role): {', '.join(sorted(P[P.igl == 1].player))}")
+    an.append(f"- IGL periods: {', '.join(f'{n} ({sh:.0%} of rounds)' for n, sh in sorted(zip(P[P.igl == 1].player, P[P.igl == 1].igl_share)))}")
+    an.append(f"- Players with 20%+ of rounds at events where ACS stood in for Rating: {', '.join(P[P.acs_standin_share >= 0.2].player) or 'none'}")
     nodata = pl[~pl.counted & (pl.hi == 1) & pl.tier.isin(['champions', 'masters'])]
     an.append(f"- Intl wins NOT counted (player under 50% of team maps): {', '.join(f'{a} {b}' for a, b in zip(nodata.player, nodata.event)) or 'none'}")
     (OUT / "anomalies.md").write_text("\n".join(an) + "\n")
