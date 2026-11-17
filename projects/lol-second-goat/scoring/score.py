@@ -58,11 +58,44 @@ def load():
     for c in ["K", "D", "A", "Gold", "CS", "Dmg", "TK", "TG", "Min", "W", "TCS"]:
         s[c] = pd.to_numeric(s[c], errors="coerce")
     s.loc[s.Dmg <= 0, "Dmg"] = np.nan
+    s = fill_damage(s)
     s.loc[s.Gold <= 0, "Gold"] = np.nan
     s.loc[s.TG <= 0, "TG"] = np.nan
     s.loc[s.TK <= 0, "TK"] = np.nan
     s.loc[s.Min <= 0, "Min"] = np.nan
     return t, s
+
+
+OE_LEAGUE = {"World Championship": ["WLDs"], "Mid-Season Invitational": ["MSI"], "LoL The Champions": ["OGN", "LCK"],
+             "LoL Champions Korea": ["LCK"], "Tencent LoL Pro League": ["LPL"],
+             "Europe League Championship Series": ["EU LCS"], "LoL EMEA Championship": ["LEC", "EU LCS"],
+             "North America League Championship Series": ["NA LCS"], "League of Legends Championship Series": ["LCS", "NA LCS"],
+             "LoL Master Series": ["LMS"], "Mid-Season Cup 2020": ["LCK", "LPL"]}
+
+
+def fill_damage(s):
+    """Leaguepedia has champion damage only from mid-2020. Fill earlier rows with the player's damage per minute in that
+    league and year from Oracle's Elixir (data/raw/oe, downloaded on ay's PC 17 Nov 2026), matched on name, league, year."""
+    f = os.path.join(ROOT, "data", "raw", "oe", "oe_players_2014_2020.csv.gz")
+    if not os.path.exists(f):
+        return s
+    o = pd.read_csv(f, usecols=["league", "year", "playername", "gamelength", "damagetochampions"], low_memory=False)
+    o = o.dropna(subset=["damagetochampions", "gamelength", "playername"])
+    o["key"] = o.playername.astype(str).str.lower()
+    a = o.groupby(["key", "year", "league"]).agg(dmg=("damagetochampions", "sum"), sec=("gamelength", "sum")).reset_index()
+    a["dpm_oe"] = a.dmg / (a.sec / 60)
+    lut = {(r.key, r.year, r.league): r.dpm_oe for r in a.itertuples()}
+    need = s.Dmg.isna() & s.Min.notna()
+    filled = 0
+    for i in s.index[need]:
+        key = display(s.at[i, "Link"]).lower()
+        for lg in OE_LEAGUE.get(s.at[i, "League"], []):
+            v = lut.get((key, s.at[i, "year"], lg))
+            if v is not None:
+                s.at[i, "Dmg"] = v * s.at[i, "Min"]; filled += 1
+                break
+    print(f"damage filled from Oracle's Elixir: {filled} of {int(need.sum())} player-event rows without damage")
+    return s
 
 
 def region_strength(s):
@@ -295,7 +328,7 @@ def main():
 
 def report(P, R, T, C, wins, seconds, sweep, strength, fk, s):
     R = R.sort_values("score", ascending=False)
-    L = ["# DRAFT TEST 2 (League, algorithm v3): not the final ranking", "",
+    L = ["# DRAFT TEST 3 (League, algorithm v3): not the final ranking", "",
          f"Data: Leaguepedia scoreboards, {s.Page.nunique()} tournaments, {int(s.G.sum() / 10):,} games (approx.), "
          f"{s.Link.nunique():,} players; pool {len(P)} players with {CFG['pool']['min_games']}+ games. "
          "Faker is ranked like everyone else (ay, 17 Nov).", "",
@@ -307,6 +340,7 @@ def report(P, R, T, C, wins, seconds, sweep, strength, fk, s):
          "6-year one on the same peak. Longevity is still its own category. With career averages Faker ranks #12.",
          "3. Worlds, MSI and First Stand MVP / Finals MVP awards added from Liquipedia (25 awards, data/manual/mvps.csv): "
          "Worlds 15 points, MSI 8, First Stand 5, full value.",
+         "5. Damage per minute for 2014-2020 filled from Oracle's Elixir (6,222 of 8,065 player-event rows that had none).",
          "4. Longevity: an elite year is 20+ games at 0.2 SD above the role average (was 0.35, which almost nobody reached).", "",
          "## Overall top 15 (everyone, Faker included)", "",
          "| # | Player | Role | Regions | Years | Worlds | MSI | Domestic | MVPs | Score | #1 in 1000 runs | #2 in 1000 runs |",
@@ -345,13 +379,15 @@ def report(P, R, T, C, wins, seconds, sweep, strength, fk, s):
     L += ["", "## Region strength by year (international game win share, best region = 1.0)", "",
           strength.round(2).to_markdown()]
     L += ["", "## Known gaps (fix before the final run)",
-          "- Leaguepedia scoreboards have champion damage only from mid-2020, so Carry before 2020 is gold share alone. "
-          "Oracle's Elixir has damage from 2014 but is blocked from the cloud (Cloudflare); it can be downloaded on ay's PC.",
-          "- No laning numbers (gold or CS difference at 15 minutes) in Leaguepedia scoreboards; same fix.",
+          "- Champion damage: Leaguepedia from mid-2020, Oracle's Elixir (downloaded on ay's PC) fills 2014-2020 by player, "
+          "league and year. Still missing: 2011-2013, most of Korea 2014 and some LPL rows (name mismatches); those games "
+          "use gold or CS share alone for Carry.",
+          "- Laning numbers (gold and CS difference at 15) are in the Oracle's Elixir file for 2014-2020 but not used: "
+          "Leaguepedia has none, so a laning category would only cover part of history.",
           "- Finals MVP and event MVP awards are not counted yet (Liquipedia list to build, as in the Valorant data).",
           "- Season 1 and 2 (2011-2012) have thin data and are discounted; LMS is the only minor region included.",
           "- Region strength comes from cross-region games at Worlds, MSI, First Stand and the 2020 Mid-Season Cup."]
-    open(os.path.join(OUT, "draft-test-2.md"), "w").write("\n".join(L) + "\n")
+    open(os.path.join(OUT, "draft-test-3.md"), "w").write("\n".join(L) + "\n")
     print("\n".join(L[:40]))
 
 
