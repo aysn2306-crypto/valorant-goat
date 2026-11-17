@@ -4,7 +4,7 @@ version: 3
 
 pool:
   min_games: 150          # major leagues + Worlds/MSI/First Stand, 2011 to Worlds 2026
-  benchmark: Faker        # scored, shown as 100, left out of the ranking
+  benchmark: Faker        # ay 17 Nov: Faker is ranked like everyone else (no calibration)
 
 trophy_points:            # full value, no diminishing returns (ay's rule)
   worlds:      {1: 100, 2: 60, 3: 35}
@@ -12,6 +12,7 @@ trophy_points:            # full value, no diminishing returns (ay's rule)
   first_stand: {1: 25, 2: 15, 3: 9}
   msc:         {1: 15, 2: 9, 3: 5}
   domestic:    {1: 20, 2: 10, 3: 5}      # times region strength that year
+  awards: {worlds_mvp: 15, msi_mvp: 8, first_stand_mvp: 5}   # Finals MVP or event MVP, full value
   domestic_cup: 0.5                      # LCK Cup and LPL split titles from 2025 (several per year) count half
   min_share_of_games: 0.5
   early_worlds: {2011: 0.5, 2012: 0.75}  # 8 and 12 team events with thin fields
@@ -36,3 +37,5 @@ categories:               # sums to 100
   consistency: 7
 
 robustness: {runs: 1000, max_weight_change: 0.30}
+longevity: {min_games: 20, min_impact: 0.2}   # an elite year: 20+ games at 0.2 SD above the role average, after shrinkage
+best_years: 5

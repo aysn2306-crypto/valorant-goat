@@ -6,36 +6,37 @@ Data: Leaguepedia scoreboards, 303 tournaments, 25,987 games (approx.), 1,915 pl
 
 | # | Player | Role | Regions | Years | Worlds | MSI | Domestic | Score | % of Faker | #1 in 1000 runs |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 88.1 | 115% | 100.0% |
+| 1 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 88.0 | 115% | 100.0% |
 | 2 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 86.5 | 113% | 0.0% |
 | 3 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 86.1 | 112% | 0.0% |
-| 4 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 83.4 | 109% | 0.0% |
-| 5 | Oner | Jungle | LCK | 2021-2026 | 3 | 0 | 1 | 80.8 | 105% | 0.0% |
-| 6 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 80.3 | 105% | 0.0% |
-| 7 | Wolf | Support | LCK | 2013-2018 | 2 | 2 | 4 | 79.3 | 103% | 0.0% |
-| 8 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 78.2 | 102% | 0.0% |
-| 9 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 78.1 | 102% | 0.0% |
-| 10 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 77.9 | 102% | 0.0% |
-| 11 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 77.2 | 101% | 0.0% |
-| 12 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 77.2 | 101% | 0.0% |
-| 13 | Bang | Bot | LCK/LCS | 2012-2021 | 2 | 2 | 4 | 77.0 | 100% | 0.0% |
-| 14 | Bengi | Jungle | LCK/LPL | 2013-2017 | 3 | 0 | 3 | 75.8 | 99% | 0.0% |
-| 15 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 75.2 | 98% | 0.0% |
+| 4 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 83.3 | 109% | 0.0% |
+| 5 | Oner | Jungle | LCK | 2021-2026 | 3 | 0 | 1 | 80.6 | 105% | 0.0% |
+| 6 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 80.3 | 104% | 0.0% |
+| 7 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 79.5 | 104% | 0.0% |
+| 8 | Wolf | Support | LCK | 2013-2018 | 2 | 2 | 4 | 79.0 | 103% | 0.0% |
+| 9 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 78.3 | 102% | 0.0% |
+| 10 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 78.1 | 102% | 0.0% |
+| 11 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 78.1 | 102% | 0.0% |
+| 12 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 77.3 | 101% | 0.0% |
+| 13 | Bang | Bot | LCK/LCS | 2012-2021 | 2 | 2 | 4 | 77.1 | 100% | 0.0% |
+| 14 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 75.0 | 98% | 0.0% |
+| 15 | Bengi | Jungle | LCK/LPL | 2013-2017 | 3 | 0 | 3 | 74.9 | 98% | 0.0% |
 
-Benchmark: Faker score 76.7, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 13, peak 95, winning 99, longevity 95, carry 48, clean_play 84, consistency 63
+Benchmark: Faker score 76.8, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 13, peak 95, winning 99, longevity 96, carry 48, clean_play 84, consistency 63
 
 ## Players ay named
 
 | Player | Rank | Score | Worlds | Trophy pts | Big stage | Peak (year) |
 |---|---|---|---|---|---|---|
 | Knight | 3 | 86.1 | 1 | 630 | 100 | 100 (2026) |
-| Viper | 8 | 78.2 | 2 | 391 | 96 | 95 (2024) |
-| Bin | 11 | 77.2 | 1 | 541 | 94 | 81 (2024) |
+| Viper | 9 | 78.3 | 2 | 391 | 96 | 95 (2024) |
+| Bin | 10 | 78.1 | 1 | 541 | 94 | 81 (2024) |
 
 ## Tipping point (trophy weight -> #2 overall, then #3)
 
 - trophy weight 0%: Chovy first, Knight next
-- trophy weight 4%: Keria first, Knight next
+- trophy weight 2%: Knight first, Chovy next
+- trophy weight 6%: Keria first, Knight next
 
 ## Side-board: Most Decorated (pure trophy points, no carry share)
 
@@ -63,7 +64,7 @@ Benchmark: Faker score 76.7, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 **winning**: Bengi 100, Canyon 100, Chovy 100, Duro 99, Wolf 99
 
-**longevity**: Chovy 100, Ruler 100, Knight 100, Keria 99, Aiming 99
+**longevity**: Kiin 100, Ruler 100, Knight 100, Peanut 99, Viper 99
 
 **carry**: Kanavi 100, Nuguri 100, Chovy 100, Road 99, Meteor 99
 

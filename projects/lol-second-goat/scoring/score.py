@@ -26,21 +26,41 @@ def display(link):
 def load():
     t = pd.read_csv(os.path.join(CSV, "tournaments.csv"), dtype=str).fillna("")
     s = pd.read_csv(os.path.join(CSV, "player_event_stats.csv"))
+    s["TCS"] = np.nan
+    eg_path = os.path.join(CSV, "early_games.csv")
+    if os.path.exists(eg_path):
+        eg = pd.read_csv(eg_path)
+        for c in ["Kills", "Gold", "CS"]:
+            eg[c] = pd.to_numeric(eg[c], errors="coerce")
+        tm = eg.groupby(["GameId", "Team"]).agg(tk=("Kills", "sum"), tcs=("CS", "sum"), tg=("Gold", "sum"),
+                                                 gold_n=("Gold", "count"), n=("Link", "size")).reset_index()
+        tm.loc[tm.gold_n < tm.n, "tg"] = np.nan          # team gold only when all five have gold
+        eg = eg.merge(tm, on=["GameId", "Team"])
+        agg = eg.groupby(["Page", "Link", "Role", "Team"]).agg(eTK=("tk", "sum"), eTCS=("tcs", "sum"),
+                                                               eTG=("tg", lambda x: x.sum() if x.notna().all() else np.nan)).reset_index()
+        s = s.merge(agg, on=["Page", "Link", "Role", "Team"], how="left")
+        s["TK"] = s.TK.where(s.TK > 0, s.eTK)
+        s["TG"] = s.TG.where(s.TG > 0, s.eTG)
+        s["TCS"] = s.eTCS
+        s = s.drop(columns=["eTK", "eTCS", "eTG"])
     rd = pd.read_csv(os.path.join(CSV, "player_redirects.csv"), dtype=str).dropna()
     exact = dict(zip(rd.AllName, rd.OverviewPage))
     lower = {k.lower(): v for k, v in exact.items()}
     s["Link"] = [exact.get(l, lower.get(str(l).lower(), l)) for l in s.Link]
     s = s.groupby(["Page", "Link", "Role", "Team"], as_index=False).agg(
-        {**{c: "sum" for c in ["G", "W", "K", "D", "A", "Gold", "CS", "Dmg", "TK", "TG", "Min"]}, "First": "min", "Last": "max"})
+        {**{c: lambda x: x.sum(min_count=1) for c in ["G", "W", "K", "D", "A", "Gold", "CS", "Dmg", "TK", "TG", "Min", "TCS"]}, "First": "min", "Last": "max"})
     s = s.merge(t[["OverviewPage", "League", "Name", "IsPlayoffs"]], left_on="Page", right_on="OverviewPage", how="left")
     s["year"] = s.First.str[:4].astype(int)
     s["kind"] = np.where(s.League.isin(INTL.keys()), "intl", "dom")
     s["region"] = s.League.map(REGION).fillna("INTL")
     s["role"] = s.Role.map(ROLE)
     s = s[s.role.notna() & (s.G > 0)].copy()
-    for c in ["K", "D", "A", "Gold", "CS", "Dmg", "TK", "TG", "Min", "W"]:
+    for c in ["K", "D", "A", "Gold", "CS", "Dmg", "TK", "TG", "Min", "W", "TCS"]:
         s[c] = pd.to_numeric(s[c], errors="coerce")
     s.loc[s.Dmg <= 0, "Dmg"] = np.nan
+    s.loc[s.Gold <= 0, "Gold"] = np.nan
+    s.loc[s.TG <= 0, "TG"] = np.nan
+    s.loc[s.TK <= 0, "TK"] = np.nan
     s.loc[s.Min <= 0, "Min"] = np.nan
     return t, s
 
@@ -83,14 +103,16 @@ def zscores(s):
     s["kp"] = (s.K + s.A) / s.TK.replace(0, np.nan)
     s["dpm"] = s.Dmg / s.Min
     s["gold_share"] = s.Gold / s.TG.replace(0, np.nan)
+    s["cs_share"] = s.CS / s.TCS.replace(0, np.nan)
     s["low_deaths"] = -(s.D / s.Min.fillna(s.G * 32))
     ref = s[s.G >= 3]
-    for m in ["kda", "kp", "dpm", "gold_share", "low_deaths"]:
+    for m in ["kda", "kp", "dpm", "gold_share", "cs_share", "low_deaths"]:
         g = ref.groupby(["role", "year"])
         mu = g.apply(lambda d: np.average(d[m].dropna(), weights=d.loc[d[m].notna(), "G"]) if d[m].notna().any() else np.nan, include_groups=False)
         sd = g[m].std()
         key = list(zip(s.role, s.year))
         s["z_" + m] = (s[m].values - mu.reindex(key).values) / sd.reindex(key).values
+    s["z_gold_share"] = s.z_gold_share.fillna(s.z_cs_share)   # early games without gold: CS share stands in
     for name, cols in [("impact", CFG["impact"]["impact"]), ("carry", CFG["impact"]["carry"]), ("clean", CFG["impact"]["clean"])]:
         s["z_" + name] = s[["z_" + c for c in cols]].mean(axis=1, skipna=True)
     return s
@@ -147,6 +169,27 @@ def titles(t, s, strength):
     return pd.DataFrame(rows)
 
 
+def mvps(s):
+    """Worlds / MSI / First Stand MVP awards from Liquipedia (data/manual/mvps.csv), full points, no carry share."""
+    f = os.path.join(ROOT, "data", "manual", "mvps.csv")
+    if not os.path.exists(f):
+        return pd.DataFrame()
+    m = pd.read_csv(f)
+    pts = CFG["trophy_points"]["awards"]
+    intl = s[s.kind == "intl"]
+    rows = []
+    for a in m.itertuples():
+        cand = intl[(intl.year == a.year) & (intl.League == a.league) & (intl.Link.map(display).str.lower() == a.player.lower())]
+        if cand.empty:
+            print("MVP not matched:", a)
+            continue
+        link = cand.groupby("Link").G.sum().idxmax()
+        p = pts[a.key]
+        rows.append(dict(Link=link, event=f"{a.league} {a.year} {a.award}", page="", team="", year=a.year,
+                         tier="award", place=0, base=p, credit=1.0, pts=p, G=0))
+    return pd.DataFrame(rows)
+
+
 def percentile(x):
     return x.rank(pct=True) * 100
 
@@ -175,20 +218,38 @@ def main():
     g = s[s.Link.isin(pool)].groupby("Link")
     intl = s[s.Link.isin(pool) & (s.kind == "intl")].groupby("Link")
     P["intl_games"] = intl.G.sum().reindex(pool).fillna(0)
-    P["big_stage_raw"] = shrink(intl.apply(lambda d: wmean(d, "z_impact"), include_groups=False).reindex(pool).fillna(0), P.intl_games, k)
+    N = CFG.get("best_years", 0)
+
+    def best_years(d_all, col, kk):
+        """Per calendar year: games-weighted value, shrunk toward the role average. Career mode (N=0) averages
+        every game; best-years mode averages the player's best N years, so playing on past a peak never lowers
+        a score (longevity is scored on its own)."""
+        if not N:
+            return shrink(d_all.groupby("Link").apply(lambda d: wmean(d, col), include_groups=False), d_all.groupby("Link").G.sum(), kk)
+        y = d_all.groupby(["Link", "year"]).apply(lambda d: pd.Series({"v": wmean(d, col), "G": d.G.sum()}), include_groups=False).reset_index()
+        y["v"] = shrink(y.v.fillna(0), y.G, kk)
+        return y.groupby("Link").v.apply(lambda v: v.nlargest(N).mean())
+
+    P["big_stage_raw"] = best_years(s[s.Link.isin(pool) & (s.kind == "intl")], "z_impact", 15).reindex(pool).fillna(0)
     yr = s[s.Link.isin(pool)].groupby(["Link", "year"]).apply(lambda d: pd.Series({"imp": wmean(d, "a_impact"), "G": d.G.sum()}), include_groups=False).reset_index()
     yr["imp_s"] = shrink(yr.imp.fillna(0), yr.G, k)
     best = yr.loc[yr.groupby("Link").imp_s.idxmax()].set_index("Link")
     P["peak_raw"], P["peak_year"] = best.imp_s, best.year
-    P["elite_years"] = yr[(yr.G >= 20) & (yr.imp_s >= 0.35)].groupby("Link").size().reindex(pool).fillna(0)
-    P["win_raw"] = shrink(g.apply(lambda d: wmean(d, "a_win"), include_groups=False), P.games, k)
-    P["carry_raw"] = shrink(g.apply(lambda d: wmean(d, "a_carry"), include_groups=False), P.games, k)
-    P["clean_raw"] = shrink(g.apply(lambda d: wmean(d, "a_clean"), include_groups=False), P.games, k)
+    LG = CFG.get("longevity", {"min_games": 20, "min_impact": 0.35})
+    P["elite_years"] = yr[(yr.G >= LG["min_games"]) & (yr.imp_s >= LG["min_impact"])].groupby("Link").size().reindex(pool).fillna(0)
+    sp = s[s.Link.isin(pool)]
+    P["win_raw"] = best_years(sp, "a_win", k)
+    P["carry_raw"] = best_years(sp, "a_carry", k)
+    P["clean_raw"] = best_years(sp, "a_clean", k)
     ev = s[s.Link.isin(pool) & (s.G >= 5)]
     cons = ev.groupby("Link").apply(lambda d: pd.Series({"n": len(d), "up": (d.a_impact > 0).sum()}), include_groups=False)
     P["consistency_raw"] = ((cons.up + 2) / (cons.n + 4)).reindex(pool)   # shrink toward 50%
+    M = mvps(s)
+    if not M.empty:
+        T = pd.concat([T, M], ignore_index=True)
     tp = T.groupby("Link").agg(trophy_pts=("pts", "sum"), raw_pts=("base", "sum"))
     P = P.join(tp).fillna({"trophy_pts": 0, "raw_pts": 0})
+    P["mvps"] = T[T.tier == "award"].groupby("Link").size().reindex(pool).fillna(0).astype(int) if (T.tier == "award").any() else 0
     for tier in ["worlds", "msi", "first_stand", "domestic"]:
         P[tier + "_titles"] = T[(T.tier == tier) & (T.place == 1)].groupby("Link").size().reindex(pool).fillna(0).astype(int)
 
@@ -210,13 +271,16 @@ def main():
     P["dominant"] = C[["big_stage", "peak", "winning", "carry", "clean_play", "consistency"]].mean(axis=1)
 
     # robustness and tipping point, Faker left out of the ranking
-    R = P.drop(fk)
+    R = P
     rng = np.random.default_rng(7)
     wins = pd.Series(0, index=R.index)
+    seconds = pd.Series(0, index=R.index)
     for _ in range(CFG["robustness"]["runs"]):
         w = W * (1 + rng.uniform(-1, 1, len(W)) * CFG["robustness"]["max_weight_change"])
         sc = (C.loc[R.index, W.index] * w).sum(axis=1)
-        wins[sc.idxmax()] += 1
+        o = sc.sort_values(ascending=False).index
+        wins[o[0]] += 1
+        seconds[o[1]] += 1
     sweep = []
     for tw in range(0, 61, 2):
         w = W.copy(); rest = W.drop("trophies"); w[rest.index] = rest / rest.sum() * (100 - tw); w["trophies"] = tw
@@ -226,21 +290,30 @@ def main():
     P.to_csv(os.path.join(CSV, "draft_scores.csv"))
     T.to_csv(os.path.join(CSV, "title_credits.csv"), index=False)
     strength.round(2).to_csv(os.path.join(CSV, "region_strength.csv"))
-    report(P, R, T, C, wins, sweep, strength, fk, s)
+    report(P, R, T, C, wins, seconds, sweep, strength, fk, s)
 
 
-def report(P, R, T, C, wins, sweep, strength, fk, s):
+def report(P, R, T, C, wins, seconds, sweep, strength, fk, s):
     R = R.sort_values("score", ascending=False)
-    L = ["# DRAFT TEST 1 (League, algorithm v3): not the final ranking", "",
+    L = ["# DRAFT TEST 2 (League, algorithm v3): not the final ranking", "",
          f"Data: Leaguepedia scoreboards, {s.Page.nunique()} tournaments, {int(s.G.sum() / 10):,} games (approx.), "
          f"{s.Link.nunique():,} players; pool {len(P)} players with {CFG['pool']['min_games']}+ games. "
-         f"Faker is scored as the benchmark (100) and left out of the ranking.", "",
-         "## Overall top 15 (Faker left out)", "",
-         "| # | Player | Role | Regions | Years | Worlds | MSI | Domestic | Score | % of Faker | #1 in 1000 runs |",
-         "|---|---|---|---|---|---|---|---|---|---|---|"]
+         "Faker is ranked like everyone else (ay, 17 Nov).", "",
+         "## What changed since test 1",
+         "1. Early-era gap filled: team kills, gold and CS rebuilt from game-level scoreboards for 2011-2015, so every game "
+         "since 2013 has kill participation and a resource share (CS share stands in where gold was not recorded).",
+         "2. Fairness rule: big-stage form, winning, carry and clean play use each player's best 5 calendar years, not the "
+         "career average. Before, every year past a peak pulled the average down, so a 13-year career scored worse than a "
+         "6-year one on the same peak. Longevity is still its own category. With career averages Faker ranks #12.",
+         "3. Worlds, MSI and First Stand MVP / Finals MVP awards added from Liquipedia (25 awards, data/manual/mvps.csv): "
+         "Worlds 15 points, MSI 8, First Stand 5, full value.",
+         "4. Longevity: an elite year is 20+ games at 0.2 SD above the role average (was 0.35, which almost nobody reached).", "",
+         "## Overall top 15 (everyone, Faker included)", "",
+         "| # | Player | Role | Regions | Years | Worlds | MSI | Domestic | MVPs | Score | #1 in 1000 runs | #2 in 1000 runs |",
+         "|---|---|---|---|---|---|---|---|---|---|---|---|"]
     for i, (l, p) in enumerate(R.head(15).iterrows(), 1):
         L.append(f"| {i} | {p['name']} | {p.role} | {p.regions} | {p.years} | {p.worlds_titles} | {p.msi_titles} | {p.domestic_titles} | "
-                 f"{p.score:.1f} | {p.vs_faker:.0f}% | {wins.get(l, 0) / 10:.1f}% |")
+                 f"{p.mvps} | {p.score:.1f} | {wins.get(l, 0) / 10:.1f}% | {seconds.get(l, 0) / 10:.1f}% |")
     f = P.loc[fk]
     L += ["", f"Benchmark: Faker score {f.score:.1f}, {f.worlds_titles} Worlds, {f.msi_titles} MSI, {f.domestic_titles} domestic; "
           f"category scores: " + ", ".join(f"{c} {f['c_' + c]:.0f}" for c in C.columns), ""]
@@ -250,7 +323,7 @@ def report(P, R, T, C, wins, sweep, strength, fk, s):
         for l in R.index[R.name == n]:
             p = R.loc[l]
             L.append(f"| {n} | {ranks[l]} | {p.score:.1f} | {p.worlds_titles} | {p.trophy_pts:.0f} | {p.c_big_stage:.0f} | {p.c_peak:.0f} ({int(p.peak_year)}) |")
-    L += ["", "## Tipping point (trophy weight -> #2 overall, then #3)", ""]
+    L += ["", "## Tipping point (trophy weight -> #1 overall, then #2)", ""]
     prev = None
     for tw, a, b in sweep:
         if a != prev:
@@ -262,7 +335,7 @@ def report(P, R, T, C, wins, sweep, strength, fk, s):
     L += ["", "## Side-board: Most Dominant (individual categories only)", ""]
     for i, (l, p) in enumerate(R.sort_values("dominant", ascending=False).head(5).iterrows(), 1):
         L.append(f"{i}. {p['name']} ({p.role}, {int(p.games)} games, peak {int(p.peak_year)}): {p.dominant:.1f}")
-    L += ["", "## Every category top 5 (Faker left out)", ""]
+    L += ["", "## Every category top 5 (Faker included)", ""]
     for c in C.columns:
         L.append(f"**{c}**: " + ", ".join(f"{R.loc[l, 'name']} {R.loc[l, 'c_' + c]:.0f}" for l in R.sort_values('c_' + c, ascending=False).head(5).index))
         L.append("")
@@ -278,7 +351,7 @@ def report(P, R, T, C, wins, sweep, strength, fk, s):
           "- Finals MVP and event MVP awards are not counted yet (Liquipedia list to build, as in the Valorant data).",
           "- Season 1 and 2 (2011-2012) have thin data and are discounted; LMS is the only minor region included.",
           "- Region strength comes from cross-region games at Worlds, MSI, First Stand and the 2020 Mid-Season Cup."]
-    open(os.path.join(OUT, "draft-test-1.md"), "w").write("\n".join(L) + "\n")
+    open(os.path.join(OUT, "draft-test-2.md"), "w").write("\n".join(L) + "\n")
     print("\n".join(L[:40]))
 
 
