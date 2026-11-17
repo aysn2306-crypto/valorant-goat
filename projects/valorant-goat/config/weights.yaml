@@ -48,3 +48,7 @@ events: {last_event: "Valorant Champions 2026"}
 robustness: {runs: 1000, max_weight_change: 0.30}
 # v2 test changes (17 Nov, after draft test 1): trophies scored by real points (best = 100),
 # consistency shrink k=3000 rounds toward pool-typical swing, leadership k=100 matches and IGL events only.
+v3:   # 17 Nov, after ay's test-2 feedback: GOAT = individual dominance x how much you drove winning
+  credit_alpha: 0.5          # title credit = 1 + 0.5 x (own event impact - team average), clipped 0.5-1.5
+  trophy_curve: linear       # ay 17 Nov: no diminishing returns, a trophy is a trophy
+  peak: {best_12_months: 0.6, longevity: 0.4}

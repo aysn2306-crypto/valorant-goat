@@ -199,6 +199,18 @@ def main():
     names = dict(zip(players.player_id, players.player))
     igl_ev, igl_src = igl_periods(players, events)
 
+    # v3: event start dates (for 12-month windows) and each player's impact relative to teammates per event
+    ev_date = pd.to_datetime(pd.read_csv(CSV / "matches.csv").groupby("event_id").date.min())
+    st["date"] = st.event_id.map(ev_date)
+    st["w_imp"] = st.rnd * np.where(st.playoff, 2.0, 1.0)  # playoff rounds count double (no per-final stats yet)
+    imp = (st.dropna(subset=["z_rating"]).groupby(["event_id", "team_tag", "player_id"])
+           .apply(lambda e: np.average(e.z_rating, weights=e.w_imp), include_groups=False).rename("impact").reset_index())
+    imp["team_mean"] = imp.groupby(["event_id", "team_tag"]).impact.transform("mean")
+    a = CFG.get("v3", {}).get("credit_alpha", 0.5)
+    imp["credit"] = (1 + a * (imp.impact - imp.team_mean)).clip(0.5, 1.5)
+    credit = imp.sort_values("credit").drop_duplicates(["event_id", "player_id"], keep="last").set_index(["event_id", "player_id"]).credit
+    sp = st[st.player_id.isin(pool)]
+
     rows = []
     for pid, g in sp.groupby("player_id"):
         g = g.copy()
@@ -236,6 +248,15 @@ def main():
         vals = sorted((max(0.0, v + 1.0) for v in sz), reverse=True)
         r["peak_long"] = sum(v * w for v, w in zip(vals, CFG["category_inputs"]["peak_longevity"]["season_weights"]))
         r["best_season"] = int(sz.idxmax()) if len(sz) else None
+        # v3 peak dominance: best rolling 12 months vs the field (role+season adjusted rating z, shrunk k=400 rounds)
+        best, best_start = -9.0, None
+        for d0 in sorted(g.date.dropna().unique()):
+            win = g[(g.date >= d0) & (g.date < d0 + pd.Timedelta(days=365))]
+            z12, n12 = wavg(win, "z_rating", "wr")
+            v = shrink(z12, n12, 400)
+            if v > best:
+                best, best_start = v, pd.Timestamp(d0).strftime("%Y-%m")
+        r["peak12"], r["peak12_from"] = best, best_start
         rows.append(r)
     P = pd.DataFrame(rows).set_index("player_id")
     # v2: pull a short career's event-to-event swing toward the pool's typical swing (not toward zero swing)
@@ -272,8 +293,12 @@ def main():
     pl["counted"] = pl.share >= mshare
     rec = {int(y): v for y, v in CFG["trophy_points"]["recency_boost"].items()}
     pl["pts"] = [trophy_points(t, int(p)) * rec.get(int(y), 1.0) if c else 0 for t, p, y, c in zip(pl.tier, pl.place, pl.year, pl.counted)]
-    tro = pl.groupby("player_id").pts.sum()
-    P["trophy_pts"] = tro.reindex(P.index).fillna(0)
+    pl["credit"] = [float(credit.get((e, p), 1.0)) for e, p in zip(pl.event_id, pl.player_id)]
+    pl["credited_pts"] = pl.pts * pl.credit
+    P["trophy_pts"] = pl.groupby("player_id").pts.sum().reindex(P.index).fillna(0)
+    P["credited_pts"] = pl.groupby("player_id").credited_pts.sum().reindex(P.index).fillna(0)
+    titles = pl[pl.counted & (pl.hi == 1) & pl.tier.isin(["champions", "masters"])]
+    P["title_credit"] = titles.groupby("player_id").credit.apply(lambda c: ", ".join(f"{x:.2f}" for x in c)).reindex(P.index).fillna("")
     P["intl_titles"] = pl[pl.counted & (pl.hi == 1) & pl.tier.isin(["champions", "masters"])].groupby("player_id").size().reindex(P.index).fillna(0).astype(int)
     P["champs_titles"] = pl[pl.counted & (pl.hi == 1) & (pl.tier == "champions")].groupby("player_id").size().reindex(P.index).fillna(0).astype(int)
     aw = pd.read_csv(ROOT / "data" / "manual" / "mvps.csv")  # v2: sourced list, one row per event MVP
@@ -288,7 +313,8 @@ def main():
                 unmatched_mvp.append(f"{a.player} ({a.event})"); continue
             P.loc[pid, "mvps"] += 1
             P.loc[pid, "mvp_pts"] += CFG["trophy_points"]["awards"]["champions_mvp" if a.tier == "champions" else "masters_mvp"] * rec.get(int(a.year), 1.0)
-    P["honours"] = P.trophy_pts + P.mvp_pts
+    P["honours"] = P.trophy_pts + P.mvp_pts                       # raw: "Most Decorated" side-board
+    P["honours_v3"] = P.credited_pts + P.mvp_pts                  # v3: credit share, full value per trophy (ay: no diminishing returns)
 
     # leadership: IGL's teams vs Glicko-2 expectation
     matches = pd.read_csv(CSV / "matches.csv")
@@ -305,10 +331,10 @@ def main():
     P["lead_raw"] = pd.Series(lead).reindex(P.index)
 
     C = pd.DataFrame(index=P.index)
-    C["trophies_honours"] = P.honours / P.honours.max() * 100  # v2: real points (best = 100), not percentile
+    C["trophies_honours"] = P.honours_v3 / P.honours_v3.max() * 100  # v3: credit-weighted points, best = 100
     C["fragging"] = percentile(frag_adj)
     C["big_game_form"] = percentile(0.6 * P.z_big_vs_base + 0.4 * P.z_big)
-    C["peak_longevity"] = percentile(P.peak_long)
+    C["peak_longevity"] = 0.6 * percentile(P.peak12) + 0.4 * percentile(P.peak_long)  # v3: best 12 months + longevity
     C["opening_duels"] = percentile(open_adj)
     C["clutch_factor"] = percentile(0.5 * P.z_clutch_pct + 0.3 * P.z_clutch_p100 + 0.2 * P.z_playoff_clutch)
     C["team_play"] = percentile(0.5 * P.z_kast + 0.3 * P.z_apr2 + 0.2 * P.z_neg_dpr)
@@ -318,6 +344,10 @@ def main():
     W = CFG["categories"]
     cats = list(W)
     P["overall"] = sum(C[c] * W[c] for c in cats) / 100
+    # side-boards for the video
+    P["decorated"] = P.honours / P.honours.max() * 100
+    indiv = ["fragging", "big_game_form", "peak_longevity", "opening_duels", "clutch_factor", "team_play", "consistency"]
+    P["dominant"] = sum(C[c] * W[c] for c in indiv) / sum(W[c] for c in indiv)
 
     # robustness: 1000 runs, every weight moved by up to +-30%
     rng = np.random.default_rng(7)
