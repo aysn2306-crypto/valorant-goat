@@ -1,0 +1,1628 @@
+event_id,stage,place,team_id,team
+449,Playoffs,1st,3531,Acend
+449,Playoffs,2nd,682,Gambit Esports
+449,Playoffs,3rd–4th,2355,KRÜ Esports
+449,Playoffs,3rd–4th,474,Team Liquid
+449,Playoffs,5th–8th,2593,FNATIC
+449,Playoffs,5th–8th,2112,X10 Esports
+449,Playoffs,5th–8th,188,Cloud9
+449,Playoffs,5th–8th,6199,Team Secret
+449,Group Stage,9th–12th,427,ENVY
+449,Group Stage,9th–12th,420,Team Vikings
+449,Group Stage,9th–12th,198,Vision Strikers
+449,Group Stage,9th–12th,2,Sentinels
+449,Group Stage,13th–16th,4894,Keyd Stars
+449,Group Stage,13th–16th,4050,FULL SENSE
+449,Group Stage,13th–16th,2406,FURIA
+449,Group Stage,13th–16th,277,Crazy Raccoon
+1015,Playoffs,1st,6961,LOUD
+1015,Playoffs,2nd,8127,OpTic Gaming
+1015,Playoffs,3rd,8185,KIWOOM DRX
+1015,Playoffs,4th,628,FunPlus Phoenix
+1015,Playoffs,5th–6th,533,XSET
+1015,Playoffs,5th–6th,2593,FNATIC
+1015,Playoffs,7th–8th,2359,LEVIATÁN
+1015,Playoffs,7th–8th,474,Team Liquid
+1015,Group Stage,9th–12th,624,Paper Rex
+1015,Group Stage,9th–12th,5448,ZETA DIVISION
+1015,Group Stage,9th–12th,2355,KRÜ Esports
+1015,Group Stage,9th–12th,120,100 Thieves
+1015,Group Stage,13th–16th,1120,EDward Gaming
+1015,Group Stage,13th–16th,466,BOOM Esports
+1015,Group Stage,13th–16th,7397,XERXIA Esports
+1015,Group Stage,13th–16th,2406,FURIA
+1657,Playoffs,1st,5248,Evil Geniuses
+1657,Playoffs,2nd,624,Paper Rex
+1657,Playoffs,3rd,6961,LOUD
+1657,Playoffs,4th,2593,FNATIC
+1657,Playoffs,5th–6th,8185,KIWOOM DRX
+1657,Playoffs,5th–6th,1120,EDward Gaming
+1657,Playoffs,7th–8th,12010,Bilibili Gaming
+1657,Playoffs,7th–8th,1184,FUT Esports
+1657,Group Stage,9th–12th,1034,NRG
+1657,Group Stage,9th–12th,2304,Giants Gaming
+1657,Group Stage,9th–12th,14,T1
+1657,Group Stage,9th–12th,4915,Natus Vincere
+1657,Group Stage,13th–16th,2355,KRÜ Esports
+1657,Group Stage,13th–16th,11328,FunPlus Phoenix
+1657,Group Stage,13th–16th,5448,ZETA DIVISION
+1657,Group Stage,13th–16th,474,Team Liquid
+2097,Playoffs,1st,1120,EDward Gaming
+2097,Playoffs,2nd,1001,Team Heretics
+2097,Playoffs,3rd,2359,LEVIATÁN
+2097,Playoffs,4th,2,Sentinels
+2097,Playoffs,5th–6th,8185,KIWOOM DRX
+2097,Playoffs,5th–6th,2593,FNATIC
+2097,Playoffs,7th–8th,12685,Trace Esports
+2097,Playoffs,7th–8th,11058,G2 Esports
+2097,Group Stage,9th–12th,2355,KRÜ Esports
+2097,Group Stage,9th–12th,17,Gen.G
+2097,Group Stage,9th–12th,2059,Team Vitality
+2097,Group Stage,9th–12th,624,Paper Rex
+2097,Group Stage,13th–16th,12010,Bilibili Gaming
+2097,Group Stage,13th–16th,11328,FunPlus Phoenix
+2097,Group Stage,13th–16th,8304,TALON
+2097,Group Stage,13th–16th,1184,FUT Esports
+2283,Playoffs,1st,1034,NRG
+2283,Playoffs,2nd,2593,FNATIC
+2283,Playoffs,3rd,8185,KIWOOM DRX
+2283,Playoffs,4th,624,Paper Rex
+2283,Playoffs,5th–6th,7386,MIBR
+2283,Playoffs,5th–6th,1001,Team Heretics
+2283,Playoffs,7th–8th,11058,G2 Esports
+2283,Playoffs,7th–8th,14419,GIANTX
+2283,Group Stage,9th–12th,13581,Xi Lai Gaming
+2283,Group Stage,9th–12th,878,Rex Regum Qeon
+2283,Group Stage,9th–12th,474,Team Liquid
+2283,Group Stage,9th–12th,14,T1
+2283,Group Stage,13th–16th,2,Sentinels
+2283,Group Stage,13th–16th,12010,Bilibili Gaming
+2283,Group Stage,13th–16th,1120,EDward Gaming
+2283,Group Stage,13th–16th,11981,Dragon Ranger Gaming
+2766,Playoffs,1st,6961,LOUD
+2766,Playoffs,2nd,2059,Team Vitality
+2766,Playoffs,3rd,120,100 Thieves
+2766,Playoffs,4th,11058,G2 Esports
+2766,Playoffs,5th–6th,1034,NRG
+2766,Playoffs,5th–6th,14,T1
+2766,Playoffs,7th–8th,11060,Nongshim RedForce
+2766,Playoffs,7th–8th,624,Paper Rex
+2766,Group Stage,9th–12th,1184,FUT Esports
+2766,Group Stage,9th–12th,918,Global Esports
+2766,Group Stage,9th–12th,474,Team Liquid
+2766,Group Stage,9th–12th,8877,Karmine Corp
+2766,Group Stage,13th–16th,13576,JD Gaming
+2766,Group Stage,13th–16th,1120,EDward Gaming
+2766,Group Stage,13th–16th,731,TYLOO
+2766,Group Stage,13th–16th,13581,Xi Lai Gaming
+353,Main Event,1st,2,Sentinels
+353,Main Event,2nd,2593,FNATIC
+353,Main Event,3rd,2328,NUTURN
+353,Main Event,4th,474,Team Liquid
+353,Main Event,5th–6th,420,Team Vikings
+353,Main Event,5th–6th,2815,Version1
+353,Main Event,7th–8th,2355,KRÜ Esports
+353,Main Event,7th–8th,2112,X10 Esports
+353,Main Event,9th–10th,3512,Sharks Esports
+353,Main Event,9th–10th,277,Crazy Raccoon
+466,Playoffs,1st,682,Gambit Esports
+466,Playoffs,2nd,427,ENVY
+466,Playoffs,3rd–4th,120,100 Thieves
+466,Playoffs,3rd–4th,257,G2 Esports
+466,Playoffs,5th–8th,198,Vision Strikers
+466,Playoffs,5th–8th,2,Sentinels
+466,Playoffs,5th–8th,3531,Acend
+466,Playoffs,5th–8th,2355,KRÜ Esports
+466,Group Stage,9th–12th,277,Crazy Raccoon
+466,Group Stage,9th–12th,4567,Papara SuperMassive
+466,Group Stage,9th–12th,4894,Keyd Stars
+466,Group Stage,9th–12th,1670,F4Q
+466,Group Stage,13th–16th,624,Paper Rex
+466,Group Stage,13th–16th,581,Liberty
+466,Group Stage,13th–16th,5448,ZETA DIVISION
+466,Group Stage,13th–16th,6389,Bren Esports
+926,Playoffs,1st,8127,OpTic Gaming
+926,Playoffs,2nd,6961,LOUD
+926,Playoffs,3rd,5448,ZETA DIVISION
+926,Playoffs,4th,624,Paper Rex
+926,Playoffs,5th–6th,257,G2 Esports
+926,Playoffs,5th–6th,8185,KIWOOM DRX
+926,Playoffs,7th–8th,6675,The Guard
+926,Playoffs,7th–8th,474,Team Liquid
+926,Playoffs,8th,628,FunPlus Phoenix
+926,Group Stage,9th–10th,7391,Ninjas In Pyjamas
+926,Group Stage,9th–10th,7397,XERXIA Esports
+926,Group Stage,11th–12th,2593,FNATIC
+926,Group Stage,11th–12th,2355,KRÜ Esports
+1014,Playoffs,1st,628,FunPlus Phoenix
+1014,Playoffs,2nd,624,Paper Rex
+1014,Playoffs,3rd,8127,OpTic Gaming
+1014,Playoffs,4th,2593,FNATIC
+1014,Playoffs,5th–6th,8185,KIWOOM DRX
+1014,Playoffs,5th–6th,2359,LEVIATÁN
+1014,Playoffs,7th–8th,1209,Guild Esports
+1014,Playoffs,7th–8th,533,XSET
+1014,Group Stage,9th–10th,2355,KRÜ Esports
+1014,Group Stage,9th–10th,2988,NORTHEPTION
+1014,Group Stage,11th–12th,6961,LOUD
+1014,Group Stage,11th–12th,7397,XERXIA Esports
+1188,Playoffs,1st,2593,FNATIC
+1188,Playoffs,2nd,6961,LOUD
+1188,Playoffs,3rd–4th,8185,KIWOOM DRX
+1188,Playoffs,3rd–4th,4915,Natus Vincere
+1188,Bracket Stage,1st–4th,6961,LOUD
+1188,Bracket Stage,1st–4th,8185,KIWOOM DRX
+1188,Bracket Stage,1st–4th,4915,Natus Vincere
+1188,Bracket Stage,1st–4th,2593,FNATIC
+1188,Bracket Stage,5th–8th,1034,NRG
+1188,Bracket Stage,5th–8th,8304,TALON
+1188,Bracket Stage,5th–8th,2359,LEVIATÁN
+1188,Bracket Stage,5th–8th,120,100 Thieves
+1188,Bracket Stage,9th–16th,2304,Giants Gaming
+1188,Bracket Stage,9th–16th,8877,Karmine Corp
+1188,Bracket Stage,9th–16th,188,Cloud9
+1188,Bracket Stage,9th–16th,5248,Evil Geniuses
+1188,Bracket Stage,9th–16th,6199,Team Secret
+1188,Bracket Stage,9th–16th,2059,Team Vitality
+1188,Bracket Stage,9th–16th,1184,FUT Esports
+1188,Bracket Stage,9th–16th,2406,FURIA
+1188,Bracket Stage,17th–32nd,7035,KOI
+1188,Bracket Stage,17th–32nd,278,DetonatioN FocusMe
+1188,Bracket Stage,17th–32nd,17,Gen.G
+1188,Bracket Stage,17th–32nd,11328,FunPlus Phoenix
+1188,Bracket Stage,17th–32nd,397,BBL Esports
+1188,Bracket Stage,17th–32nd,624,Paper Rex
+1188,Bracket Stage,17th–32nd,1001,Team Heretics
+1188,Bracket Stage,17th–32nd,7386,MIBR
+1188,Bracket Stage,17th–32nd,474,Team Liquid
+1188,Bracket Stage,17th–32nd,2355,KRÜ Esports
+1188,Bracket Stage,17th–32nd,5448,ZETA DIVISION
+1188,Bracket Stage,17th–32nd,918,Global Esports
+1188,Bracket Stage,17th–32nd,878,Rex Regum Qeon
+1188,Bracket Stage,17th–32nd,1120,EDward Gaming
+1188,Bracket Stage,17th–32nd,2,Sentinels
+1188,Bracket Stage,17th–32nd,14,T1
+1188,Showmatch,1st,12066,Team FRTTT
+1188,Showmatch,2nd,12065,Team tarik
+1494,Playoffs,1st,2593,FNATIC
+1494,Playoffs,2nd,5248,Evil Geniuses
+1494,Playoffs,3rd,624,Paper Rex
+1494,Playoffs,4th,1034,NRG
+1494,Playoffs,5th–6th,474,Team Liquid
+1494,Playoffs,5th–6th,1120,EDward Gaming
+1494,Playoffs,7th–8th,8185,KIWOOM DRX
+1494,Playoffs,7th–8th,6961,LOUD
+1494,Group Stage,1st–2nd,1034,NRG
+1494,Group Stage,1st–2nd,5248,Evil Geniuses
+1494,Group Stage,3rd–4th,1120,EDward Gaming
+1494,Group Stage,3rd–4th,8185,KIWOOM DRX
+1494,Group Stage,5th–6th,14,T1
+1494,Group Stage,5th–6th,1184,FUT Esports
+1494,Group Stage,7th–8th,1837,Attacking Soul Esports
+1494,Group Stage,7th–8th,4915,Natus Vincere
+1921,Playoffs,1st,2,Sentinels
+1921,Playoffs,2nd,17,Gen.G
+1921,Playoffs,3rd,624,Paper Rex
+1921,Playoffs,4th,6961,LOUD
+1921,Swiss Stage,5th–6th,8877,Karmine Corp
+1921,Swiss Stage,5th–6th,1120,EDward Gaming
+1921,Swiss Stage,7th–8th,1001,Team Heretics
+1921,Swiss Stage,7th–8th,11328,FunPlus Phoenix
+1999,Playoffs,1st,17,Gen.G
+1999,Playoffs,2nd,1001,Team Heretics
+1999,Playoffs,3rd,11058,G2 Esports
+1999,Playoffs,4th,120,100 Thieves
+1999,Playoffs,5th–6th,624,Paper Rex
+1999,Playoffs,5th–6th,1184,FUT Esports
+1999,Playoffs,7th–8th,1120,EDward Gaming
+1999,Playoffs,7th–8th,2593,FNATIC
+1999,Swiss Stage,9th–10th,2359,LEVIATÁN
+1999,Swiss Stage,9th–10th,11328,FunPlus Phoenix
+1999,Swiss Stage,11th–12th,14,T1
+1999,Swiss Stage,11th–12th,11981,Dragon Ranger Gaming
+2281,Playoffs,1st,14,T1
+2281,Playoffs,2nd,11058,G2 Esports
+2281,Playoffs,3rd,1120,EDward Gaming
+2281,Playoffs,4th,2059,Team Vitality
+2281,Swiss Stage,5th–6th,474,Team Liquid
+2281,Swiss Stage,5th–6th,8185,KIWOOM DRX
+2281,Swiss Stage,7th–8th,2,Sentinels
+2281,Swiss Stage,7th–8th,12685,Trace Esports
+2282,Playoffs,1st,624,Paper Rex
+2282,Playoffs,2nd,2593,FNATIC
+2282,Playoffs,3rd,13790,Wolves Esports
+2282,Playoffs,4th,11058,G2 Esports
+2282,Playoffs,5th–6th,17,Gen.G
+2282,Playoffs,5th–6th,2,Sentinels
+2282,Playoffs,7th–8th,13581,Xi Lai Gaming
+2282,Playoffs,7th–8th,878,Rex Regum Qeon
+2282,Swiss Stage,9th–10th,474,Team Liquid
+2282,Swiss Stage,9th–10th,12010,Bilibili Gaming
+2282,Swiss Stage,11th–12th,1001,Team Heretics
+2282,Swiss Stage,11th–12th,7386,MIBR
+2760,Playoffs,1st,11060,Nongshim RedForce
+2760,Playoffs,2nd,624,Paper Rex
+2760,Playoffs,3rd,1034,NRG
+2760,Playoffs,4th,11058,G2 Esports
+2760,Playoffs,5th–6th,1119,All Gamers
+2760,Playoffs,5th–6th,397,BBL Esports
+2760,Playoffs,7th–8th,12694,Gentle Mates
+2760,Playoffs,7th–8th,2406,FURIA
+2760,Swiss Stage,9th–10th,14,T1
+2760,Swiss Stage,9th–10th,474,Team Liquid
+2760,Swiss Stage,11th–12th,1120,EDward Gaming
+2760,Swiss Stage,11th–12th,13581,Xi Lai Gaming
+2765,Playoffs,1st,2359,LEVIATÁN
+2765,Playoffs,2nd,624,Paper Rex
+2765,Playoffs,3rd,1120,EDward Gaming
+2765,Playoffs,4th,2059,Team Vitality
+2765,Playoffs,5th–6th,1184,FUT Esports
+2765,Playoffs,5th–6th,13581,Xi Lai Gaming
+2765,Playoffs,7th–8th,11058,G2 Esports
+2765,Playoffs,7th–8th,1001,Team Heretics
+2765,Swiss Stage,9th–10th,1034,NRG
+2765,Swiss Stage,9th–10th,918,Global Esports
+2765,Swiss Stage,11th–12th,11981,Dragon Ranger Gaming
+2765,Swiss Stage,11th–12th,4050,FULL SENSE
+1189,Playoffs,1st,6961,LOUD
+1189,Playoffs,2nd,1034,NRG
+1189,Playoffs,3rd,5248,Evil Geniuses
+1189,Playoffs,4th,188,Cloud9
+1189,Playoffs,5th–6th,2359,LEVIATÁN
+1189,Playoffs,5th–6th,2406,FURIA
+1189,Regular Season,1st,6961,LOUD
+1189,Regular Season,2nd,188,Cloud9
+1189,Regular Season,3rd,1034,NRG
+1189,Regular Season,4th,2359,LEVIATÁN
+1189,Regular Season,5th,2406,FURIA
+1189,Regular Season,6th,5248,Evil Geniuses
+1189,Regular Season,7th,2,Sentinels
+1189,Regular Season,8th,120,100 Thieves
+1189,Regular Season,9th,7386,MIBR
+1189,Regular Season,10th,2355,KRÜ Esports
+1190,Playoffs,1st,474,Team Liquid
+1190,Playoffs,2nd,2593,FNATIC
+1190,Playoffs,3rd,1184,FUT Esports
+1190,Playoffs,4th,4915,Natus Vincere
+1190,Playoffs,5th–6th,2304,Giants Gaming
+1190,Playoffs,5th–6th,2059,Team Vitality
+1190,Regular Season,1st,2593,FNATIC
+1190,Regular Season,2nd,4915,Natus Vincere
+1190,Regular Season,3rd,474,Team Liquid
+1190,Regular Season,4th,2304,Giants Gaming
+1190,Regular Season,5th,1184,FUT Esports
+1190,Regular Season,6th,2059,Team Vitality
+1190,Regular Season,7th,397,BBL Esports
+1190,Regular Season,8th,1001,Team Heretics
+1190,Regular Season,9th,7035,KOI
+1190,Regular Season,10th,8877,Karmine Corp
+1191,Playoffs,1st,624,Paper Rex
+1191,Playoffs,2nd,8185,KIWOOM DRX
+1191,Playoffs,3rd,14,T1
+1191,Playoffs,4th,17,Gen.G
+1191,Playoffs,5th–6th,6199,Team Secret
+1191,Playoffs,5th–6th,5448,ZETA DIVISION
+1191,League Play,1st,8185,KIWOOM DRX
+1191,League Play,2nd,624,Paper Rex
+1191,League Play,3rd,14,T1
+1191,League Play,4th,5448,ZETA DIVISION
+1191,League Play,5th,6199,Team Secret
+1191,League Play,6th,17,Gen.G
+1191,League Play,7th,878,Rex Regum Qeon
+1191,League Play,8th,918,Global Esports
+1191,League Play,9th,8304,TALON
+1191,League Play,10th,278,DetonatioN FocusMe
+1923,Playoffs,1st,2,Sentinels
+1923,Playoffs,2nd,6961,LOUD
+1923,Playoffs,3rd–4th,5248,Evil Geniuses
+1923,Playoffs,3rd–4th,1034,NRG
+1923,Play-Ins,2nd,11058,G2 Esports
+1923,Play-Ins,3rd,7386,MIBR
+1923,Group Stage,1st–3rd,1034,NRG
+1923,Group Stage,1st–3rd,6961,LOUD
+1923,Group Stage,1st–3rd,5248,Evil Geniuses
+1923,Group Stage,4th–6th,7386,MIBR
+1923,Group Stage,4th–6th,2,Sentinels
+1923,Group Stage,4th–6th,11058,G2 Esports
+1923,Group Stage,7th–9th,188,Cloud9
+1923,Group Stage,7th–9th,2359,LEVIATÁN
+1923,Group Stage,7th–9th,2355,KRÜ Esports
+1923,Group Stage,10th–11th,2406,FURIA
+1923,Group Stage,10th–11th,120,100 Thieves
+1924,Playoffs,1st,17,Gen.G
+1924,Playoffs,2nd,624,Paper Rex
+1924,Playoffs,3rd–4th,14,T1
+1924,Playoffs,3rd–4th,8185,KIWOOM DRX
+1924,Play-Ins,2nd,6199,Team Secret
+1924,Play-Ins,3rd,5448,ZETA DIVISION
+1924,Group Stage,1st–3rd,14,T1
+1924,Group Stage,1st–3rd,8185,KIWOOM DRX
+1924,Group Stage,1st–3rd,624,Paper Rex
+1924,Group Stage,4th–6th,5448,ZETA DIVISION
+1924,Group Stage,4th–6th,6199,Team Secret
+1924,Group Stage,4th–6th,17,Gen.G
+1924,Group Stage,7th–9th,918,Global Esports
+1924,Group Stage,7th–9th,8304,TALON
+1924,Group Stage,7th–9th,878,Rex Regum Qeon
+1924,Group Stage,10th–11th,6387,BLEED
+1924,Group Stage,10th–11th,278,DetonatioN FocusMe
+1925,Playoffs,1st,8877,Karmine Corp
+1925,Playoffs,2nd,1001,Team Heretics
+1925,Playoffs,3rd–4th,4915,Natus Vincere
+1925,Playoffs,3rd–4th,2593,FNATIC
+1925,Play-In Stage,2nd,2059,Team Vitality
+1925,Play-In Stage,3rd,7035,KOI
+1925,Group Stage,1st–3rd,1001,Team Heretics
+1925,Group Stage,1st–3rd,4915,Natus Vincere
+1925,Group Stage,1st–3rd,2593,FNATIC
+1925,Group Stage,4th–6th,8877,Karmine Corp
+1925,Group Stage,4th–6th,7035,KOI
+1925,Group Stage,4th–6th,2059,Team Vitality
+1925,Group Stage,7th–9th,1184,FUT Esports
+1925,Group Stage,7th–9th,474,Team Liquid
+1925,Group Stage,7th–9th,12694,Gentle Mates
+1925,Group Stage,10th–11th,14419,GIANTX
+1925,Group Stage,10th–11th,397,BBL Esports
+1926,Playoffs,1st,1120,EDward Gaming
+1926,Playoffs,2nd,11328,FunPlus Phoenix
+1926,Playoffs,3rd–4th,11981,Dragon Ranger Gaming
+1926,Playoffs,3rd–4th,12685,Trace Esports
+1926,Play-Ins,2nd,12010,Bilibili Gaming
+1926,Play-Ins,3rd,14137,Titan Esports Club
+1926,Group Stage,7th–9th,12064,Nova Esports
+1926,Group Stage,7th–9th,13576,JD Gaming
+1926,Group Stage,7th–9th,13790,Wolves Esports
+1926,Group Stage,10th–11th,731,TYLOO
+1926,Group Stage,10th–11th,1119,All Gamers
+2004,Playoffs,1st,120,100 Thieves
+2004,Playoffs,2nd,11058,G2 Esports
+2004,Playoffs,3rd,2359,LEVIATÁN
+2004,Playoffs,4th,2355,KRÜ Esports
+2004,Playoffs,5th–6th,188,Cloud9
+2004,Playoffs,5th–6th,6961,LOUD
+2004,Regular Season,7th–8th,2,Sentinels
+2004,Regular Season,7th–8th,5248,Evil Geniuses
+2004,Regular Season,9th–10th,1034,NRG
+2004,Regular Season,9th–10th,2406,FURIA
+2004,Regular Season,11th,7386,MIBR
+1998,Playoffs,1st,2593,FNATIC
+1998,Playoffs,2nd,1001,Team Heretics
+1998,Playoffs,3rd,1184,FUT Esports
+1998,Playoffs,4th,8877,Karmine Corp
+1998,Playoffs,5th–6th,4915,Natus Vincere
+1998,Playoffs,5th–6th,474,Team Liquid
+1998,Regular Season,7th–8th,397,BBL Esports
+1998,Regular Season,7th–8th,12694,Gentle Mates
+1998,Regular Season,9th–10th,2059,Team Vitality
+1998,Regular Season,9th–10th,14419,GIANTX
+1998,Regular Season,11th,7035,KOI
+2002,Playoffs,1st,624,Paper Rex
+2002,Playoffs,2nd,17,Gen.G
+2002,Playoffs,3rd,14,T1
+2002,Playoffs,4th,8185,KIWOOM DRX
+2002,Playoffs,5th–6th,6199,Team Secret
+2002,Playoffs,5th–6th,8304,TALON
+2002,Regular Season,7th–8th,918,Global Esports
+2002,Regular Season,7th–8th,878,Rex Regum Qeon
+2002,Regular Season,9th–10th,6387,BLEED
+2002,Regular Season,9th–10th,5448,ZETA DIVISION
+2002,Regular Season,11th,278,DetonatioN FocusMe
+2006,Playoffs,1st,1120,EDward Gaming
+2006,Playoffs,2nd,11328,FunPlus Phoenix
+2006,Playoffs,3rd,11981,Dragon Ranger Gaming
+2006,Playoffs,4th,12685,Trace Esports
+2006,Playoffs,5th–6th,1119,All Gamers
+2006,Playoffs,5th–6th,12064,Nova Esports
+2006,Regular Season,7th–8th,12010,Bilibili Gaming
+2006,Regular Season,7th–8th,731,TYLOO
+2006,Regular Season,9th–10th,13790,Wolves Esports
+2006,Regular Season,9th–10th,14137,Titan Esports Club
+2006,Regular Season,11th,13576,JD Gaming
+2095,Playoffs,1st,2359,LEVIATÁN
+2095,Playoffs,2nd,11058,G2 Esports
+2095,Playoffs,3rd,2355,KRÜ Esports
+2095,Playoffs,4th,120,100 Thieves
+2095,Playoffs,5th–6th,188,Cloud9
+2095,Playoffs,5th–6th,2,Sentinels
+2095,Regular Season,7th,1034,NRG
+2095,Regular Season,8th,6961,LOUD
+2095,Regular Season,9th,5248,Evil Geniuses
+2095,Regular Season,10th,2406,FURIA
+2095,Regular Season,11th,7386,MIBR
+2094,Playoffs,1st,2593,FNATIC
+2094,Playoffs,2nd,2059,Team Vitality
+2094,Playoffs,3rd,1001,Team Heretics
+2094,Playoffs,4th,1184,FUT Esports
+2094,Playoffs,5th–6th,8877,Karmine Corp
+2094,Playoffs,5th–6th,4915,Natus Vincere
+2094,Regular Season,7th,397,BBL Esports
+2094,Regular Season,8th,474,Team Liquid
+2094,Regular Season,9th,14419,GIANTX
+2094,Regular Season,10th,12694,Gentle Mates
+2094,Regular Season,11th,7035,KOI
+2005,Playoffs,1st,17,Gen.G
+2005,Playoffs,2nd,8185,KIWOOM DRX
+2005,Playoffs,3rd,624,Paper Rex
+2005,Playoffs,4th,8304,TALON
+2005,Playoffs,5th–6th,878,Rex Regum Qeon
+2005,Playoffs,5th–6th,6199,Team Secret
+2005,Regular Season,7th,14,T1
+2005,Regular Season,8th,5448,ZETA DIVISION
+2005,Regular Season,9th,918,Global Esports
+2005,Regular Season,10th,278,DetonatioN FocusMe
+2005,Regular Season,11th,6387,BLEED
+2096,Playoffs,1st,1120,EDward Gaming
+2096,Playoffs,2nd,11328,FunPlus Phoenix
+2096,Playoffs,3rd,12685,Trace Esports
+2096,Playoffs,4th,12010,Bilibili Gaming
+2096,Playoffs,5th–6th,1119,All Gamers
+2096,Playoffs,5th–6th,13576,JD Gaming
+2096,Regular Season,7th,12064,Nova Esports
+2096,Regular Season,8th,731,TYLOO
+2096,Regular Season,9th,13790,Wolves Esports
+2096,Regular Season,10th,11981,Dragon Ranger Gaming
+2096,Regular Season,11th,14137,Titan Esports Club
+2274,Main Event,1st,11058,G2 Esports
+2274,Main Event,2nd,2,Sentinels
+2274,Main Event,3rd,7386,MIBR
+2274,Main Event,4th,2355,KRÜ Esports
+2274,Main Event,5th–6th,2359,LEVIATÁN
+2274,Main Event,5th–6th,6961,LOUD
+2274,Main Event,7th–8th,5248,Evil Geniuses
+2274,Main Event,7th–8th,1034,NRG
+2274,Main Event,9th–12th,2406,FURIA
+2274,Main Event,9th–12th,188,Cloud9
+2274,Main Event,9th–12th,120,100 Thieves
+2274,Main Event,9th–12th,15072,2Game Esports
+2275,Main Event,1st,1120,EDward Gaming
+2275,Main Event,2nd,12685,Trace Esports
+2275,Main Event,3rd,12010,Bilibili Gaming
+2275,Main Event,4th,11981,Dragon Ranger Gaming
+2275,Main Event,5th–6th,11328,FunPlus Phoenix
+2275,Main Event,5th–6th,13581,Xi Lai Gaming
+2275,Main Event,7th–8th,12064,Nova Esports
+2275,Main Event,7th–8th,13576,JD Gaming
+2275,Main Event,9th–12th,13790,Wolves Esports
+2275,Main Event,9th–12th,731,TYLOO
+2275,Main Event,9th–12th,14137,Titan Esports Club
+2275,Main Event,9th–12th,1119,All Gamers
+2276,Main Event,1st,2059,Team Vitality
+2276,Main Event,2nd,474,Team Liquid
+2276,Main Event,3rd,1001,Team Heretics
+2276,Main Event,4th,1184,FUT Esports
+2276,Main Event,5th–6th,2593,FNATIC
+2276,Main Event,5th–6th,397,BBL Esports
+2276,Main Event,7th–8th,12694,Gentle Mates
+2276,Main Event,7th–8th,14419,GIANTX
+2276,Main Event,9th–12th,7035,KOI
+2276,Main Event,9th–12th,4915,Natus Vincere
+2276,Main Event,9th–12th,8877,Karmine Corp
+2276,Main Event,9th–12th,11479,Apeks
+2277,Main Event,1st,8185,KIWOOM DRX
+2277,Main Event,2nd,14,T1
+2277,Main Event,3rd,17,Gen.G
+2277,Main Event,4th,8304,TALON
+2277,Main Event,5th–6th,11060,Nongshim RedForce
+2277,Main Event,5th–6th,278,DetonatioN FocusMe
+2277,Main Event,7th–8th,878,Rex Regum Qeon
+2277,Main Event,7th–8th,624,Paper Rex
+2277,Main Event,9th–12th,466,BOOM Esports
+2277,Main Event,9th–12th,6199,Team Secret
+2277,Main Event,9th–12th,918,Global Esports
+2277,Main Event,9th–12th,5448,ZETA DIVISION
+2347,Playoffs,1st,11058,G2 Esports
+2347,Playoffs,2nd,2,Sentinels
+2347,Playoffs,3rd,7386,MIBR
+2347,Playoffs,4th,5248,Evil Geniuses
+2347,Playoffs,5th–6th,120,100 Thieves
+2347,Playoffs,5th–6th,2355,KRÜ Esports
+2347,Playoffs,7th–8th,1034,NRG
+2347,Playoffs,7th–8th,188,Cloud9
+2347,Group Stage,9th–10th,15072,2Game Esports
+2347,Group Stage,9th–10th,2359,LEVIATÁN
+2347,Group Stage,11th–12th,6961,LOUD
+2347,Group Stage,11th–12th,2406,FURIA
+2380,Playoffs,1st,2593,FNATIC
+2380,Playoffs,2nd,1001,Team Heretics
+2380,Playoffs,3rd,474,Team Liquid
+2380,Playoffs,4th,397,BBL Esports
+2380,Playoffs,5th–6th,4915,Natus Vincere
+2380,Playoffs,5th–6th,1184,FUT Esports
+2380,Playoffs,7th–8th,8877,Karmine Corp
+2380,Playoffs,7th–8th,2059,Team Vitality
+2380,Group Stage,9th–10th,14419,GIANTX
+2380,Group Stage,9th–10th,7035,KOI
+2380,Group Stage,11th–12th,11479,Apeks
+2380,Group Stage,11th–12th,12694,Gentle Mates
+2379,Playoffs,1st,878,Rex Regum Qeon
+2379,Playoffs,2nd,17,Gen.G
+2379,Playoffs,3rd,624,Paper Rex
+2379,Playoffs,4th,8185,KIWOOM DRX
+2379,Playoffs,5th–6th,8304,TALON
+2379,Playoffs,5th–6th,466,BOOM Esports
+2379,Playoffs,7th–8th,11060,Nongshim RedForce
+2379,Playoffs,7th–8th,14,T1
+2379,Group Stage,9th–10th,918,Global Esports
+2379,Group Stage,9th–10th,5448,ZETA DIVISION
+2379,Group Stage,11th–12th,278,DetonatioN FocusMe
+2379,Group Stage,11th–12th,6199,Team Secret
+2359,Playoffs,1st,13581,Xi Lai Gaming
+2359,Playoffs,2nd,12010,Bilibili Gaming
+2359,Playoffs,3rd,13790,Wolves Esports
+2359,Playoffs,4th,1120,EDward Gaming
+2359,Playoffs,5th–6th,11981,Dragon Ranger Gaming
+2359,Playoffs,5th–6th,12685,Trace Esports
+2359,Playoffs,7th–8th,14137,Titan Esports Club
+2359,Playoffs,7th–8th,12064,Nova Esports
+2359,Group Stage,9th–10th,11328,FunPlus Phoenix
+2359,Group Stage,9th–10th,13576,JD Gaming
+2359,Group Stage,11th–12th,731,TYLOO
+2359,Group Stage,11th–12th,1119,All Gamers
+2501,Playoffs,1st,11058,G2 Esports
+2501,Playoffs,2nd,1034,NRG
+2501,Playoffs,3rd,2,Sentinels
+2501,Playoffs,4th,188,Cloud9
+2501,Playoffs,5th–6th,2359,LEVIATÁN
+2501,Playoffs,5th–6th,120,100 Thieves
+2501,Playoffs,7th–8th,2355,KRÜ Esports
+2501,Playoffs,7th–8th,5248,Evil Geniuses
+2501,Group Stage,9th–10th,15072,2Game Esports
+2501,Group Stage,9th–10th,7386,MIBR
+2501,Group Stage,11th–12th,2406,FURIA
+2501,Group Stage,11th–12th,6961,LOUD
+2498,Playoffs,1st,474,Team Liquid
+2498,Playoffs,2nd,14419,GIANTX
+2498,Playoffs,3rd,397,BBL Esports
+2498,Playoffs,4th,4915,Natus Vincere
+2498,Playoffs,5th–6th,2593,FNATIC
+2498,Playoffs,5th–6th,1001,Team Heretics
+2498,Playoffs,7th–8th,8877,Karmine Corp
+2498,Playoffs,7th–8th,2059,Team Vitality
+2498,Group Stage,9th–10th,1184,FUT Esports
+2498,Group Stage,9th–10th,7035,KOI
+2498,Group Stage,11th–12th,12694,Gentle Mates
+2498,Group Stage,11th–12th,11479,Apeks
+2500,Playoffs,1st,624,Paper Rex
+2500,Playoffs,2nd,878,Rex Regum Qeon
+2500,Playoffs,3rd,8304,TALON
+2500,Playoffs,4th,14,T1
+2500,Playoffs,5th–6th,11060,Nongshim RedForce
+2500,Playoffs,5th–6th,8185,KIWOOM DRX
+2500,Playoffs,7th–8th,278,DetonatioN FocusMe
+2500,Playoffs,7th–8th,17,Gen.G
+2500,Group Stage,9th–10th,6199,Team Secret
+2500,Group Stage,9th–10th,5448,ZETA DIVISION
+2500,Group Stage,11th–12th,918,Global Esports
+2500,Group Stage,11th–12th,466,BOOM Esports
+2499,Playoffs,1st,12010,Bilibili Gaming
+2499,Playoffs,2nd,11981,Dragon Ranger Gaming
+2499,Playoffs,3rd,1120,EDward Gaming
+2499,Playoffs,4th,13581,Xi Lai Gaming
+2499,Playoffs,5th–6th,731,TYLOO
+2499,Playoffs,5th–6th,1119,All Gamers
+2499,Playoffs,7th–8th,12685,Trace Esports
+2499,Playoffs,7th–8th,11328,FunPlus Phoenix
+2499,Group Stage,9th–10th,13576,JD Gaming
+2499,Group Stage,9th–10th,12064,Nova Esports
+2499,Group Stage,11th–12th,14137,Titan Esports Club
+2499,Group Stage,11th–12th,13790,Wolves Esports
+2682,Main Event,1st,2406,FURIA
+2682,Main Event,2nd,11058,G2 Esports
+2682,Main Event,3rd,1034,NRG
+2682,Main Event,4th,7386,MIBR
+2682,Main Event,5th,120,100 Thieves
+2682,Main Event,6th,188,Cloud9
+2682,Main Event,7th–8th,5248,Evil Geniuses
+2682,Main Event,7th–8th,2359,LEVIATÁN
+2682,Main Event,9th–10th,427,ENVY
+2682,Main Event,9th–10th,2,Sentinels
+2682,Main Event,11th–12th,6961,LOUD
+2682,Main Event,11th–12th,2355,KRÜ Esports
+2683,Main Event,1st,11060,Nongshim RedForce
+2683,Main Event,2nd,14,T1
+2683,Main Event,3rd,624,Paper Rex
+2683,Main Event,4th,878,Rex Regum Qeon
+2683,Main Event,5th,278,DetonatioN FocusMe
+2683,Main Event,6th,8185,KIWOOM DRX
+2683,Main Event,7th–8th,4050,FULL SENSE
+2683,Main Event,7th–8th,918,Global Esports
+2683,Main Event,9th–10th,5448,ZETA DIVISION
+2683,Main Event,9th–10th,17,Gen.G
+2683,Main Event,11th–12th,6199,Team Secret
+2683,Main Event,11th–12th,11229,VARREL
+2684,Main Event,1st,397,BBL Esports
+2684,Main Event,2nd,12694,Gentle Mates
+2684,Main Event,3rd,474,Team Liquid
+2684,Main Event,4th,2593,FNATIC
+2684,Main Event,5th,2059,Team Vitality
+2684,Main Event,6th,1001,Team Heretics
+2684,Main Event,7th–8th,4915,Natus Vincere
+2684,Main Event,7th–8th,14419,GIANTX
+2684,Main Event,9th–10th,8877,Karmine Corp
+2684,Main Event,9th–10th,18019,ULF Esports
+2684,Main Event,11th–12th,1184,FUT Esports
+2684,Main Event,11th–12th,3478,PCIFIC Esports
+2685,Main Event,1st,1119,All Gamers
+2685,Main Event,2nd,13581,Xi Lai Gaming
+2685,Main Event,3rd,1120,EDward Gaming
+2685,Main Event,4th,12010,Bilibili Gaming
+2685,Main Event,5th,11981,Dragon Ranger Gaming
+2685,Main Event,6th,731,TYLOO
+2685,Main Event,7th–8th,12685,Trace Esports
+2685,Main Event,7th–8th,13576,JD Gaming
+2685,Main Event,9th–10th,13790,Wolves Esports
+2685,Main Event,9th–10th,14137,Titan Esports Club
+2685,Main Event,11th–12th,12064,Nova Esports
+2685,Main Event,11th–12th,11328,FunPlus Phoenix
+2860,Playoffs,1st,11058,G2 Esports
+2860,Playoffs,2nd,2359,LEVIATÁN
+2860,Playoffs,3rd,1034,NRG
+2860,Playoffs,4th,120,100 Thieves
+2860,Playoffs,5th–6th,2355,KRÜ Esports
+2860,Playoffs,5th–6th,7386,MIBR
+2860,Playoffs,7th–8th,2406,FURIA
+2860,Playoffs,7th–8th,6961,LOUD
+2860,Group Stage,9th–10th,427,ENVY
+2860,Group Stage,9th–10th,2,Sentinels
+2860,Group Stage,11th–12th,188,Cloud9
+2860,Group Stage,11th–12th,5248,Evil Geniuses
+2863,Playoffs,1st,1001,Team Heretics
+2863,Playoffs,2nd,2059,Team Vitality
+2863,Playoffs,3rd,1184,FUT Esports
+2863,Playoffs,4th,6392,Eternal Fire
+2863,Playoffs,5th–6th,2593,FNATIC
+2863,Playoffs,5th–6th,12694,Gentle Mates
+2863,Playoffs,7th–8th,397,BBL Esports
+2863,Playoffs,7th–8th,474,Team Liquid
+2863,Group Stage,9th–10th,4915,Natus Vincere
+2863,Group Stage,9th–10th,14419,GIANTX
+2863,Group Stage,11th–12th,8877,Karmine Corp
+2863,Group Stage,11th–12th,3478,PCIFIC Esports
+2775,Playoffs,1st,624,Paper Rex
+2775,Playoffs,2nd,4050,FULL SENSE
+2775,Playoffs,3rd,918,Global Esports
+2775,Playoffs,4th,14,T1
+2775,Playoffs,5th–6th,878,Rex Regum Qeon
+2775,Playoffs,5th–6th,8185,KIWOOM DRX
+2775,Playoffs,7th–8th,278,DetonatioN FocusMe
+2775,Playoffs,7th–8th,11060,Nongshim RedForce
+2775,Group Stage,9th–10th,6199,Team Secret
+2775,Group Stage,9th–10th,5448,ZETA DIVISION
+2775,Group Stage,11th–12th,17,Gen.G
+2775,Group Stage,11th–12th,11229,VARREL
+2864,Playoffs,1st,1120,EDward Gaming
+2864,Playoffs,2nd,13581,Xi Lai Gaming
+2864,Playoffs,3rd,11981,Dragon Ranger Gaming
+2864,Playoffs,4th,1119,All Gamers
+2864,Playoffs,5th–6th,731,TYLOO
+2864,Playoffs,5th–6th,13576,JD Gaming
+2864,Playoffs,7th–8th,14137,Titan Esports Club
+2864,Playoffs,7th–8th,12685,Trace Esports
+2864,Group Stage,9th–10th,12010,Bilibili Gaming
+2864,Group Stage,9th–10th,12064,Nova Esports
+2864,Group Stage,11th–12th,11328,FunPlus Phoenix
+2864,Group Stage,11th–12th,13790,Wolves Esports
+2977,Playoffs,1st,120,100 Thieves
+2977,Playoffs,2nd,6961,LOUD
+2977,Playoffs,3rd,1034,NRG
+2977,Playoffs,4th,11058,G2 Esports
+2977,Playoffs,5th–6th,2359,LEVIATÁN
+2977,Playoffs,5th–6th,7386,MIBR
+2977,Playoffs,7th–8th,2406,FURIA
+2977,Playoffs,7th–8th,5248,Evil Geniuses
+2977,Play-Ins,5th–6th,427,ENVY
+2977,Play-Ins,5th–6th,2355,KRÜ Esports
+2977,Play-Ins,7th–8th,22142,BESTIA
+2977,Play-Ins,7th–8th,2,Sentinels
+2977,Play-Ins,9th–12th,188,Cloud9
+2977,Play-Ins,9th–12th,11001,M80
+2977,Play-Ins,9th–12th,15072,2Game Esports
+2977,Play-Ins,9th–12th,23141,Fluxo W7M
+2977,Group Stage,1st–2nd,1034,NRG
+2977,Group Stage,1st–2nd,120,100 Thieves
+2977,Group Stage,3rd–4th,2359,LEVIATÁN
+2977,Group Stage,3rd–4th,6961,LOUD
+2977,Group Stage,5th–6th,7386,MIBR
+2977,Group Stage,5th–6th,11058,G2 Esports
+2977,Group Stage,7th–8th,5248,Evil Geniuses
+2977,Group Stage,7th–8th,2,Sentinels
+2977,Group Stage,9th–10th,427,ENVY
+2977,Group Stage,9th–10th,188,Cloud9
+2977,Group Stage,11th–12th,2406,FURIA
+2977,Group Stage,11th–12th,2355,KRÜ Esports
+2976,Playoffs,1st,8877,Karmine Corp
+2976,Playoffs,2nd,474,Team Liquid
+2976,Playoffs,3rd,1184,FUT Esports
+2976,Playoffs,4th,20085,Fire Flux Esports
+2976,Playoffs,5th–6th,876,Enterprise Esports
+2976,Playoffs,5th–6th,397,BBL Esports
+2976,Playoffs,7th–8th,14478,Eintracht Frankfurt
+2976,Playoffs,7th–8th,2059,Team Vitality
+2976,Play-Ins,5th–6th,6392,Eternal Fire
+2976,Play-Ins,5th–6th,11232,Joblife
+2976,Play-Ins,7th–8th,1001,Team Heretics
+2976,Play-Ins,7th–8th,2593,FNATIC
+2976,Play-Ins,9th–12th,12694,Gentle Mates
+2976,Play-Ins,9th–12th,4915,Natus Vincere
+2976,Play-Ins,9th–12th,3478,PCIFIC Esports
+2976,Play-Ins,9th–12th,14419,GIANTX
+2976,Group Stage,1st–2nd,397,BBL Esports
+2976,Group Stage,1st–2nd,8877,Karmine Corp
+2976,Group Stage,3rd–4th,2059,Team Vitality
+2976,Group Stage,3rd–4th,474,Team Liquid
+2976,Group Stage,5th–6th,1184,FUT Esports
+2976,Group Stage,5th–6th,1001,Team Heretics
+2976,Group Stage,7th–8th,4915,Natus Vincere
+2976,Group Stage,7th–8th,6392,Eternal Fire
+2976,Group Stage,9th–10th,12694,Gentle Mates
+2976,Group Stage,9th–10th,2593,FNATIC
+2976,Group Stage,11th–12th,3478,PCIFIC Esports
+2976,Group Stage,11th–12th,14419,GIANTX
+2776,Playoffs,1st,918,Global Esports
+2776,Playoffs,2nd,11060,Nongshim RedForce
+2776,Playoffs,3rd,14,T1
+2776,Playoffs,4th,11229,VARREL
+2776,Playoffs,5th–6th,624,Paper Rex
+2776,Playoffs,5th–6th,17,Gen.G
+2776,Playoffs,7th–8th,19189,ONSIDE GAMING
+2776,Playoffs,7th–8th,8185,KIWOOM DRX
+2776,Play-Ins,5th–6th,623,Sharper Esports
+2776,Play-Ins,5th–6th,278,DetonatioN FocusMe
+2776,Play-Ins,7th–8th,4050,FULL SENSE
+2776,Play-Ins,7th–8th,5448,ZETA DIVISION
+2776,Play-Ins,9th–12th,6199,Team Secret
+2776,Play-Ins,9th–12th,878,Rex Regum Qeon
+2776,Play-Ins,9th–12th,18299,QT DIG∞
+2776,Play-Ins,9th–12th,17167,Xipto Esports
+2776,Group Stage,1st–2nd,17,Gen.G
+2776,Group Stage,1st–2nd,11229,VARREL
+2776,Group Stage,3rd–4th,918,Global Esports
+2776,Group Stage,3rd–4th,624,Paper Rex
+2776,Group Stage,5th–6th,5448,ZETA DIVISION
+2776,Group Stage,5th–6th,14,T1
+2776,Group Stage,7th–8th,11060,Nongshim RedForce
+2776,Group Stage,7th–8th,278,DetonatioN FocusMe
+2776,Group Stage,9th–10th,878,Rex Regum Qeon
+2776,Group Stage,9th–10th,6199,Team Secret
+2776,Group Stage,11th–12th,4050,FULL SENSE
+2776,Group Stage,11th–12th,8185,KIWOOM DRX
+2978,Playoffs,1st,731,TYLOO
+2978,Playoffs,2nd,13576,JD Gaming
+2978,Playoffs,3rd,12010,Bilibili Gaming
+2978,Playoffs,4th,12064,Nova Esports
+2978,Playoffs,5th–6th,13581,Xi Lai Gaming
+2978,Playoffs,5th–6th,1119,All Gamers
+2978,Playoffs,7th–8th,14137,Titan Esports Club
+2978,Playoffs,7th–8th,12685,Trace Esports
+2978,Play-Ins,5th–6th,1120,EDward Gaming
+2978,Play-Ins,5th–6th,11981,Dragon Ranger Gaming
+2978,Play-Ins,7th–8th,13790,Wolves Esports
+2978,Play-Ins,7th–8th,11328,FunPlus Phoenix
+2978,Play-Ins,9th–10th,20603,A Team
+2978,Play-Ins,9th–10th,12784,KeepBest Gaming
+2978,Group Stage,1st,12064,Nova Esports
+2978,Group Stage,2nd,12010,Bilibili Gaming
+2978,Group Stage,3rd,13581,Xi Lai Gaming
+2978,Group Stage,4th,731,TYLOO
+2978,Group Stage,5th,1120,EDward Gaming
+2978,Group Stage,5th,1119,All Gamers
+2978,Group Stage,7th,11328,FunPlus Phoenix
+2978,Group Stage,8th,13790,Wolves Esports
+2978,Group Stage,9th,11981,Dragon Ranger Gaming
+2978,Group Stage,10th,13576,JD Gaming
+2978,Group Stage,11th,12685,Trace Esports
+2978,Group Stage,12th,14137,Titan Esports Club
+333,Main Event,1st,2,Sentinels
+333,Main Event,2nd,337,FaZe Clan
+333,Main Event,3rd,17,Gen.G
+333,Main Event,4th,427,ENVY
+333,Main Event,5th–6th,642,Luminosity
+333,Main Event,5th–6th,120,100 Thieves
+333,Main Event,7th–8th,103,Immortals
+333,Main Event,7th–8th,533,XSET
+334,Main Event,1st,3531,Acend
+334,Main Event,2nd,1001,Team Heretics
+334,Main Event,3rd–4th,628,FunPlus Phoenix
+334,Main Event,3rd–4th,1209,Guild Esports
+334,Main Event,5th–6th,3908,Team BDS
+334,Main Event,5th–6th,3,Ninjas in Pyjamas
+334,Main Event,7th–8th,2533,Alliance
+334,Main Event,7th–8th,2566,Ballista
+338,Tournament,1st,420,Team Vikings
+338,Tournament,2nd,243,Gamelanders Blue
+338,Tournament,3rd–4th,203,paiN Gaming
+338,Tournament,3rd–4th,2406,FURIA
+338,Tournament,5th–8th,3512,Sharks Esports
+338,Tournament,5th–8th,1830,Vorax
+338,Tournament,5th–8th,1911,Imperial Esports
+338,Tournament,5th–8th,2428,SLICK
+340,Main Event: LAN,1st,4094,Six Karma
+340,Main Event: LAN,2nd,724,E-Xolos LAZER
+340,Main Event: LAN,3rd–4th,3322,Border Monsters
+340,Main Event: LAN,3rd–4th,363,INFINITY
+340,Main Event: LAN,5th–6th,1991,Akave Esports
+340,Main Event: LAN,5th–6th,3129,Reven Esports
+340,Main Event: LAN,7th–8th,3125,Funkboings
+340,Main Event: LAN,7th–8th,777,Kaizen Esports
+340,Main Event: LAS,1st,719,Australs
+340,Main Event: LAS,2nd,644,Wygers Argentina
+340,Main Event: LAS,3rd–4th,361,Furious Gaming
+340,Main Event: LAS,3rd–4th,2355,KRÜ Esports
+340,Main Event: LAS,5th–6th,2358,Stampede Gaming
+340,Main Event: LAS,5th–6th,367,9z Globant
+340,Main Event: LAS,7th–8th,3942,Meta Gaming
+340,Main Event: LAS,7th–8th,2354,Optix
+342,Main Event,1st,1184,FUT Esports
+342,Main Event,2nd,397,BBL Esports
+342,Main Event,3rd,1913,RARE Esports
+342,Main Event,4th,921,Oxygen Esports
+342,Main Event,5th–6th,2416,Cyber Skull Esports
+342,Main Event,5th–6th,6132,İstanbul Wildcats
+342,Main Event,7th–8th,1453,OtherSide
+342,Main Event,7th–8th,1675,Zero Zone
+344,Main Event,1st,682,Gambit Esports
+344,Main Event,2nd,108,forZe
+344,Main Event,3rd,1020,CrowСrowd
+344,Main Event,4th,10094,GMT Esports
+344,Main Event,5th–6th,6267,One Breath Gaming
+344,Main Event,5th–6th,1341,Team Singularity
+344,Main Event,7th–8th,2049,Team Divinity
+344,Main Event,7th–8th,488,tyeasy
+347,Main Event,1st,2112,X10 Esports
+347,Main Event,2nd,617,Team SMG
+347,Main Event,3rd–4th,3546,KPC Computer Studio
+347,Main Event,3rd–4th,466,BOOM Esports
+347,Main Event,5th–8th,4050,FULL SENSE
+347,Main Event,5th–8th,6389,Bren Esports
+347,Main Event,5th–8th,3717,Galaxy Racer
+347,Main Event,5th–8th,1915,NXL LIGAGAME
+351,Playoffs,1st,198,Vision Strikers
+351,Playoffs,2nd,2328,NUTURN
+351,Playoffs,3rd–4th,2933,MUYAHO
+351,Playoffs,3rd–4th,2542,DAMWON Gaming
+351,Group Stage,5th–6th,1970,TNL Esports
+351,Group Stage,5th–6th,2806,GoNGo Prince
+351,Group Stage,7th–8th,2548,APEX PEOPLE
+351,Group Stage,7th–8th,1670,F4Q
+352,Main Event,1st,277,Crazy Raccoon
+352,Main Event,2nd,279,Absolute JUPITER
+352,Main Event,3rd,104,REJECT
+352,Main Event,4th,516,FAV gaming
+352,Main Event,5th–6th,280,LAG Gaming
+352,Main Event,5th–6th,1734,FIRST Gaming
+352,Main Event,7th–8th,2108,BLUE BEES.ESP
+352,Main Event,7th–8th,2934,FENNEL
+372,Main Event,1st,2,Sentinels
+372,Main Event,2nd,2815,Version1
+372,Main Event,3rd,188,Cloud9
+372,Main Event,4th,427,ENVY
+372,Main Event,5th–6th,120,100 Thieves
+372,Main Event,5th–6th,1034,NRG
+372,Main Event,7th–8th,533,XSET
+372,Main Event,7th–8th,856,Andbox
+376,Main Event,1st,474,Team Liquid
+376,Main Event,2nd,2593,FNATIC
+376,Main Event,3rd–4th,682,Gambit Esports
+376,Main Event,3rd–4th,921,Oxygen Esports
+376,Main Event,5th–6th,628,FunPlus Phoenix
+376,Main Event,5th–6th,1209,Guild Esports
+376,Main Event,7th–8th,1184,FUT Esports
+376,Main Event,7th–8th,397,BBL Esports
+366,Main Event,1st,420,Team Vikings
+366,Main Event,2nd,3512,Sharks Esports
+366,Main Event,3rd,2406,FURIA
+366,Main Event,4th,581,Liberty
+366,Main Event,5th–6th,1916,INGAMING Esports
+366,Main Event,5th–6th,243,Gamelanders Blue
+366,Main Event,7th–8th,203,paiN Gaming
+366,Main Event,7th–8th,2428,SLICK
+398,Main Event,1st,2355,KRÜ Esports
+398,Main Event,2nd,363,INFINITY
+398,Main Event,3rd–4th,4094,Six Karma
+398,Main Event,3rd–4th,367,9z Globant
+398,Main Event,5th–6th,724,E-Xolos LAZER
+398,Main Event,5th–6th,4353,ATROPELADOS
+398,Main Event,7th–8th,3322,Border Monsters
+398,Main Event,7th–8th,3942,Meta Gaming
+429,Main Event,1st,2112,X10 Esports
+429,Main Event,2nd,4050,FULL SENSE
+429,Main Event,3rd,624,Paper Rex
+429,Main Event,4th,1915,NXL LIGAGAME
+429,Main Event,5th–6th,6389,Bren Esports
+429,Main Event,5th–6th,2746,6045Pirates
+429,Main Event,7th–8th,904,CBT Gaming
+429,Main Event,7th–8th,466,BOOM Esports
+429,Main Event,9th–10th,4325,CERBERUS Esports
+429,Main Event,9th–10th,4324,FEARUS
+441,Main Event,1st,277,Crazy Raccoon
+441,Main Event,2nd,279,Absolute JUPITER
+441,Main Event,3rd,104,REJECT
+441,Main Event,4th,516,FAV gaming
+441,Main Event,5th–6th,2988,NORTHEPTION
+441,Main Event,5th–6th,282,SCARZ
+441,Main Event,7th–8th,2934,FENNEL
+441,Main Event,7th–8th,280,LAG Gaming
+426,Playoffs,1st,2328,NUTURN
+426,Playoffs,2nd,2542,DAMWON Gaming
+426,Playoffs,3rd–4th,198,Vision Strikers
+426,Playoffs,3rd–4th,3945,Rio Company
+426,Playoffs,5th–8th,2806,GoNGo Prince
+426,Playoffs,5th–8th,1970,TNL Esports
+426,Playoffs,5th–8th,1670,F4Q
+426,Playoffs,5th–8th,1140,TUBEPLE Gaming
+426,Group Stage,1st–4th,1970,TNL Esports
+426,Group Stage,1st–4th,2328,NUTURN
+426,Group Stage,1st–4th,3945,Rio Company
+426,Group Stage,1st–4th,1670,F4Q
+426,Group Stage,5th–8th,198,Vision Strikers
+426,Group Stage,5th–8th,2542,DAMWON Gaming
+426,Group Stage,5th–8th,1140,TUBEPLE Gaming
+426,Group Stage,5th–8th,2806,GoNGo Prince
+426,Group Stage,9th–16th,2559,SPEAR GAMING
+426,Group Stage,9th–16th,2561,GOMA
+426,Group Stage,9th–16th,3311,I need Girlfriend
+426,Group Stage,9th–16th,4030,AUTOCRACY
+426,Group Stage,9th–16th,2556,Gehenna Sweepers
+426,Group Stage,9th–16th,1327,Feel So Good
+426,Group Stage,9th–16th,4025,Food Eat
+426,Group Stage,9th–16th,2554,World Game Star
+426,Preliminary Round,1st–16th,2806,GoNGo Prince
+426,Preliminary Round,1st–16th,2561,GOMA
+426,Preliminary Round,1st–16th,1670,F4Q
+426,Preliminary Round,1st–16th,2554,World Game Star
+426,Preliminary Round,1st–16th,1140,TUBEPLE Gaming
+426,Preliminary Round,1st–16th,4030,AUTOCRACY
+426,Preliminary Round,1st–16th,198,Vision Strikers
+426,Preliminary Round,1st–16th,1327,Feel So Good
+426,Preliminary Round,1st–16th,2328,NUTURN
+426,Preliminary Round,1st–16th,4025,Food Eat
+426,Preliminary Round,1st–16th,3945,Rio Company
+426,Preliminary Round,1st–16th,2559,SPEAR GAMING
+426,Preliminary Round,1st–16th,2542,DAMWON Gaming
+426,Preliminary Round,1st–16th,2556,Gehenna Sweepers
+426,Preliminary Round,1st–16th,1970,TNL Esports
+426,Preliminary Round,1st–16th,3311,I need Girlfriend
+578,Main Event,1st,2,Sentinels
+578,Main Event,2nd,120,100 Thieves
+578,Main Event,3rd,427,ENVY
+578,Main Event,4th,533,XSET
+578,Main Event,5th–6th,637,Rise
+578,Main Event,5th–6th,337,FaZe Clan
+578,Main Event,7th–8th,106,TSM
+578,Main Event,7th–8th,642,Luminosity
+547,Main Event,1st,682,Gambit Esports
+547,Main Event,2nd,4567,Papara SuperMassive
+547,Main Event,3rd,3531,Acend
+547,Main Event,4th,257,G2 Esports
+547,Main Event,5th–6th,2304,Giants Gaming
+547,Main Event,5th–6th,474,Team Liquid
+547,Main Event,7th–8th,1209,Guild Esports
+547,Main Event,7th–8th,108,forZe
+547,Main Event,9th–12th,4915,Natus Vincere
+547,Main Event,9th–12th,20085,Fire Flux Esports
+547,Main Event,9th–12th,628,FunPlus Phoenix
+547,Main Event,9th–12th,921,Oxygen Esports
+536,Main Event,1st,4894,Keyd Stars
+536,Main Event,2nd,581,Liberty
+536,Main Event,3rd,2406,FURIA
+536,Main Event,4th,420,Team Vikings
+536,Main Event,5th–6th,7013,Stars Horizon
+536,Main Event,5th–6th,3512,Sharks Esports
+536,Main Event,7th–8th,4927,Jaguares Esports
+536,Main Event,7th–8th,243,Gamelanders Blue
+621,LATAM Playoffs,1st,2355,KRÜ Esports
+621,LATAM Playoffs,2nd,719,Australs
+621,LATAM Playoffs,3rd,4094,Six Karma
+621,LATAM Playoffs,4th,363,INFINITY
+621,LAN Playoffs,1st,363,INFINITY
+621,LAN Playoffs,2nd,4094,Six Karma
+621,LAN Playoffs,3rd,724,E-Xolos LAZER
+621,LAN Playoffs,4th,3322,Border Monsters
+621,LAS Playoffs,1st,2355,KRÜ Esports
+621,LAS Playoffs,2nd,719,Australs
+621,LAS Playoffs,3rd,367,9z Globant
+621,LAS Playoffs,4th,5996,Pana.Rabbit
+570,Playoffs,1st,6389,Bren Esports
+570,Playoffs,2nd,624,Paper Rex
+570,Playoffs,3rd,1110,Alter Ego
+570,Playoffs,4th,4050,FULL SENSE
+570,Playoffs,5th–6th,466,BOOM Esports
+570,Playoffs,5th–6th,5931,Team Big BAAM
+570,Playoffs,7th–8th,4325,CERBERUS Esports
+570,Playoffs,7th–8th,904,CBT Gaming
+570,Group Stage,1st–4th,6389,Bren Esports
+570,Group Stage,1st–4th,624,Paper Rex
+570,Group Stage,1st–4th,5931,Team Big BAAM
+570,Group Stage,1st–4th,1110,Alter Ego
+570,Group Stage,5th–8th,904,CBT Gaming
+570,Group Stage,5th–8th,4050,FULL SENSE
+570,Group Stage,5th–8th,466,BOOM Esports
+570,Group Stage,5th–8th,4325,CERBERUS Esports
+570,Group Stage,9th–12th,623,Sharper Esports
+570,Group Stage,9th–12th,2032,ONIC G
+570,Group Stage,9th–12th,2112,X10 Esports
+570,Group Stage,9th–12th,5413,UwU
+570,Group Stage,13th–16th,4329,EGO
+570,Group Stage,13th–16th,6397,Five Ace Esports
+570,Group Stage,13th–16th,3717,Galaxy Racer
+570,Group Stage,13th–16th,3136,Oasis Gaming
+540,Main Event,1st,5448,ZETA DIVISION
+540,Main Event,2nd,277,Crazy Raccoon
+540,Main Event,3rd,2988,NORTHEPTION
+540,Main Event,4th,2934,FENNEL
+540,Main Event,5th–6th,2987,Feeling
+540,Main Event,5th–6th,5148,Insomnia
+540,Main Event,7th–8th,513,BlackBird Ignis
+540,Main Event,7th–8th,104,REJECT
+595,Playoffs,1st,198,Vision Strikers
+595,Playoffs,2nd,1670,F4Q
+595,Playoffs,3rd–4th,2542,DAMWON Gaming
+595,Playoffs,3rd–4th,1970,TNL Esports
+595,Playoffs,5th–8th,2328,NUTURN
+595,Playoffs,5th–8th,5355,GochuGaru
+595,Playoffs,5th–8th,2554,World Game Star
+595,Playoffs,5th–8th,2806,GoNGo Prince
+595,Group Stage (Main),1st–4th,1670,F4Q
+595,Group Stage (Main),1st–4th,1970,TNL Esports
+595,Group Stage (Main),1st–4th,198,Vision Strikers
+595,Group Stage (Main),1st–4th,2328,NUTURN
+595,Group Stage (Main),5th–8th,2542,DAMWON Gaming
+595,Group Stage (Main),5th–8th,5355,GochuGaru
+595,Group Stage (Main),5th–8th,2806,GoNGo Prince
+595,Group Stage (Main),5th–8th,2554,World Game Star
+595,Group Stage (Main),9th–12th,5342,Unknown
+595,Group Stage (Main),9th–12th,5346,Alpha Six Gaming
+595,Group Stage (Main),9th–12th,4026,Noble Experience
+595,Group Stage (Main),9th–12th,3315,Mujig 100su
+595,Group Stage (Main),13th–16th,5337,Klaus
+595,Group Stage (Main),13th–16th,4451,RYU Gaming
+595,Group Stage (Main),13th–16th,4764,GOMA
+595,Group Stage (Main),13th–16th,5351,DFR
+595,Group Stage (Seed),1st–4th,1970,TNL Esports
+595,Group Stage (Seed),1st–4th,2328,NUTURN
+595,Group Stage (Seed),1st–4th,1670,F4Q
+595,Group Stage (Seed),1st–4th,198,Vision Strikers
+595,Group Stage (Seed),5th–8th,2542,DAMWON Gaming
+595,Group Stage (Seed),5th–8th,2554,World Game Star
+595,Group Stage (Seed),5th–8th,2806,GoNGo Prince
+595,Group Stage (Seed),5th–8th,5355,GochuGaru
+595,Group Stage (Seed),9th–16th,4026,Noble Experience
+595,Group Stage (Seed),9th–16th,4764,GOMA
+595,Group Stage (Seed),9th–16th,5346,Alpha Six Gaming
+595,Group Stage (Seed),9th–16th,5337,Klaus
+595,Group Stage (Seed),9th–16th,5351,DFR
+595,Group Stage (Seed),9th–16th,5342,Unknown
+595,Group Stage (Seed),9th–16th,3315,Mujig 100su
+595,Group Stage (Seed),9th–16th,4451,RYU Gaming
+595,Open Qualifier,1st–8th,2328,NUTURN
+595,Open Qualifier,1st–8th,2542,DAMWON Gaming
+595,Open Qualifier,1st–8th,198,Vision Strikers
+595,Open Qualifier,1st–8th,2554,World Game Star
+595,Open Qualifier,1st–8th,2806,GoNGo Prince
+595,Open Qualifier,1st–8th,1970,TNL Esports
+595,Open Qualifier,1st–8th,1670,F4Q
+595,Open Qualifier,1st–8th,5355,GochuGaru
+595,Open Qualifier,9th–16th,5337,Klaus
+595,Open Qualifier,9th–16th,4026,Noble Experience
+595,Open Qualifier,9th–16th,5342,Unknown
+595,Open Qualifier,9th–16th,4764,GOMA
+595,Open Qualifier,9th–16th,4451,RYU Gaming
+595,Open Qualifier,9th–16th,5351,DFR
+595,Open Qualifier,9th–16th,5346,Alpha Six Gaming
+595,Open Qualifier,9th–16th,3315,Mujig 100su
+595,Open Qualifier,17th–24th,5339,oFby
+595,Open Qualifier,17th–24th,5340,Straight Warfare
+595,Open Qualifier,17th–24th,5343,ELNiS Esports
+595,Open Qualifier,17th–24th,5344,Tail Nine Esports
+595,Open Qualifier,17th–24th,1139,BE INFAMOUS
+595,Open Qualifier,17th–24th,5349,Young&Old
+595,Open Qualifier,17th–24th,5348,PM
+595,Open Qualifier,17th–24th,2556,Gehenna Sweepers
+595,Open Qualifier,25th–32nd,5338,Rhythm
+595,Open Qualifier,25th–32nd,5341,Zero Risk
+595,Open Qualifier,25th–32nd,2555,LFT
+595,Open Qualifier,25th–32nd,5345,Man Of the Match
+595,Open Qualifier,25th–32nd,5353,Floma Gaming
+595,Open Qualifier,25th–32nd,5350,Team Credit
+595,Open Qualifier,25th–32nd,5347,AGAiN
+595,Open Qualifier,25th–32nd,5356,Bë přø
+558,Main Event,1st,188,Cloud9
+558,Main Event,2nd,637,Rise
+558,Main Event,3rd,120,100 Thieves
+558,Main Event,4th,533,XSET
+558,Main Event,5th–6th,2815,Version1
+558,Main Event,5th–6th,17,Gen.G
+558,Main Event,7th–8th,337,FaZe Clan
+558,Main Event,7th–8th,642,Luminosity
+559,Main Event,1st,474,Team Liquid
+559,Main Event,2nd,1209,Guild Esports
+559,Main Event,3rd,257,G2 Esports
+559,Main Event,4th,1184,FUT Esports
+559,Main Event,5th–6th,4567,Papara SuperMassive
+559,Main Event,5th–6th,921,Oxygen Esports
+559,Main Event,7th–8th,6267,One Breath Gaming
+559,Main Event,7th–8th,1466,Anubis Gaming
+560,Main Event,1st,4050,FULL SENSE
+560,Main Event,2nd,2988,NORTHEPTION
+560,Main Event,3rd,2542,DAMWON Gaming
+560,Main Event,4th,2328,NUTURN
+560,Main Event,5th–6th,1670,F4Q
+560,Main Event,5th–6th,624,Paper Rex
+560,Main Event,7th–8th,466,BOOM Esports
+560,Main Event,7th–8th,918,Global Esports
+560,Main Event,9th–10th,2934,FENNEL
+560,Main Event,9th–10th,104,REJECT
+561,Playoffs,1st,2406,FURIA
+561,Playoffs,2nd,719,Australs
+561,Playoffs,3rd–4th,243,Gamelanders Blue
+561,Playoffs,3rd–4th,581,Liberty
+561,Group Stage,5th–6th,4094,Six Karma
+561,Group Stage,5th–6th,3512,Sharks Esports
+561,Group Stage,7th–8th,363,INFINITY
+561,Group Stage,7th–8th,724,E-Xolos LAZER
+799,Main Event,1st,6675,The Guard
+799,Main Event,2nd,8127,OpTic Gaming
+799,Main Event,3rd,188,Cloud9
+799,Main Event,4th,533,XSET
+799,Main Event,5th–6th,2815,Version1
+799,Main Event,5th–6th,642,Luminosity
+799,Main Event,7th–8th,2,Sentinels
+799,Main Event,7th–8th,1615,Knights
+799,Group Stage,1st–2nd,188,Cloud9
+799,Group Stage,1st–2nd,2815,Version1
+799,Group Stage,3rd–4th,6675,The Guard
+799,Group Stage,3rd–4th,8127,OpTic Gaming
+799,Group Stage,5th–6th,533,XSET
+799,Group Stage,5th–6th,2,Sentinels
+799,Group Stage,7th–8th,642,Luminosity
+799,Group Stage,7th–8th,1615,Knights
+799,Group Stage,9th–10th,120,100 Thieves
+799,Group Stage,9th–10th,1034,NRG
+799,Group Stage,11th–12th,5248,Evil Geniuses
+799,Group Stage,11th–12th,337,FaZe Clan
+799,Open Qualifier #2,1st–2nd,5248,Evil Geniuses
+799,Open Qualifier #2,1st–2nd,1615,Knights
+799,Open Qualifier #2,3rd–4th,642,Luminosity
+799,Open Qualifier #2,3rd–4th,637,Rise
+799,Open Qualifier #2,5th–6th,2350,Soniqs
+799,Open Qualifier #2,5th–6th,473,Built By Gamers
+799,Open Qualifier #2,7th–8th,4940,Pioneers
+799,Open Qualifier #2,7th–8th,6461,Akrew
+799,Open Qualifier #2,9th–12th,2291,Ghost Gaming
+799,Open Qualifier #2,9th–12th,5444,Bait Academy
+799,Open Qualifier #2,9th–12th,106,TSM
+799,Open Qualifier #2,9th–12th,468,Renegades
+799,Open Qualifier #2,13th–16th,4388,Cosmic Divide
+799,Open Qualifier #2,13th–16th,856,Andbox
+799,Open Qualifier #2,13th–16th,470,Complexity
+799,Open Qualifier #2,13th–16th,17,Gen.G
+799,Open Qualifier #2,17th–24th,6164,Radiance
+799,Open Qualifier #2,17th–24th,14,T1
+799,Open Qualifier #2,17th–24th,337,FaZe Clan
+799,Open Qualifier #2,17th–24th,4345,SoaR
+799,Open Qualifier #2,17th–24th,7966,Pack a Punch
+799,Open Qualifier #2,17th–24th,7853,Run it Down
+799,Open Qualifier #2,17th–24th,2348,VIRTUOSO
+799,Open Qualifier #2,17th–24th,5832,Zero MarksMen Black
+799,Open Qualifier #2,25th–32nd,8052,Reformed
+799,Open Qualifier #2,25th–32nd,1654,Archons
+799,Open Qualifier #2,25th–32nd,6653,GunsForHire
+799,Open Qualifier #2,25th–32nd,3337,BASILISK
+799,Open Qualifier #2,25th–32nd,793,Moon Raccoons
+799,Open Qualifier #2,25th–32nd,6146,Team Rocket
+799,Open Qualifier #2,25th–32nd,8063,OMICRON
+799,Open Qualifier #2,25th–32nd,4880,Synergy
+799,Open Qualifier #1,1st–2nd,2815,Version1
+799,Open Qualifier #1,1st–2nd,533,XSET
+799,Open Qualifier #1,3rd–4th,6675,The Guard
+799,Open Qualifier #1,3rd–4th,1034,NRG
+799,Open Qualifier #1,5th–6th,6461,Akrew
+799,Open Qualifier #1,5th–6th,637,Rise
+799,Open Qualifier #1,7th–8th,106,TSM
+799,Open Qualifier #1,7th–8th,1615,Knights
+799,Open Qualifier #1,9th–12th,14,T1
+799,Open Qualifier #1,9th–12th,5444,Bait Academy
+799,Open Qualifier #1,9th–12th,2350,Soniqs
+799,Open Qualifier #1,9th–12th,4940,Pioneers
+799,Open Qualifier #1,13th–16th,642,Luminosity
+799,Open Qualifier #1,13th–16th,856,Andbox
+799,Open Qualifier #1,13th–16th,17,Gen.G
+799,Open Qualifier #1,13th–16th,3337,BASILISK
+799,Open Qualifier #1,17th–24th,4345,SoaR
+799,Open Qualifier #1,17th–24th,5832,Zero MarksMen Black
+799,Open Qualifier #1,17th–24th,7966,Pack a Punch
+799,Open Qualifier #1,17th–24th,6164,Radiance
+799,Open Qualifier #1,17th–24th,468,Renegades
+799,Open Qualifier #1,17th–24th,4388,Cosmic Divide
+799,Open Qualifier #1,17th–24th,337,FaZe Clan
+799,Open Qualifier #1,17th–24th,470,Complexity
+799,Open Qualifier #1,25th–32nd,5482,Kowareta
+799,Open Qualifier #1,25th–32nd,4880,Synergy
+799,Open Qualifier #1,25th–32nd,473,Built By Gamers
+799,Open Qualifier #1,25th–32nd,5248,Evil Geniuses
+799,Open Qualifier #1,25th–32nd,4529,IlluZion
+799,Open Qualifier #1,25th–32nd,2291,Ghost Gaming
+799,Open Qualifier #1,25th–32nd,2348,VIRTUOSO
+799,Open Qualifier #1,25th–32nd,4346,DarkZero Esports
+854,Playoffs,1st,628,FunPlus Phoenix
+854,Playoffs,2nd,257,G2 Esports
+854,Playoffs,3rd,2593,FNATIC
+854,Playoffs,4th,474,Team Liquid
+854,Playoffs,5th–6th,1209,Guild Esports
+854,Playoffs,5th–6th,8326,M3 Champions
+854,Group Stage,7th–8th,4915,Natus Vincere
+854,Group Stage,7th–8th,397,BBL Esports
+854,Group Stage,9th–10th,6460,LDN UTD
+854,Group Stage,9th–10th,3531,Acend
+854,Group Stage,11th–12th,472,BIG
+854,Group Stage,11th–12th,4567,Papara SuperMassive
+829,Playoffs,1st,6961,LOUD
+829,Playoffs,2nd,7391,Ninjas In Pyjamas
+829,Playoffs,3rd,4894,Keyd Stars
+829,Playoffs,4th,2406,FURIA
+829,Playoffs,5th–6th,243,Gamelanders Blue
+829,Playoffs,5th–6th,6946,TBK Esports
+829,Group Stage,7th–8th,581,Liberty
+829,Group Stage,7th–8th,1916,INGAMING Esports
+829,Group Stage,9th–10th,420,Team Vikings
+829,Group Stage,9th–10th,3512,Sharks Esports
+829,Open Qualifier #2,1st–2nd,5322,Botafogo eSports
+829,Open Qualifier #2,1st–2nd,7349,Renegados
+829,Open Qualifier #2,3rd,7309,B4 Esports
+829,Open Qualifier #2,4th,6406,SG e-Sports
+829,Open Qualifier #2,5th–8th,7667,Last Dance
+829,Open Qualifier #2,5th–8th,6766,Mowil Esports
+829,Open Qualifier #2,5th–8th,7344,TRY eSports
+829,Open Qualifier #2,5th–8th,7640,4 ruim e 1 ruim
+829,Open Qualifier #1,1st–2nd,5322,Botafogo eSports
+829,Open Qualifier #1,1st–2nd,7370,Pancada e Amigos
+829,Open Qualifier #1,3rd–4th,7637,não temos um plano
+829,Open Qualifier #1,3rd–4th,7349,Renegados
+829,Open Qualifier #1,5th–8th,6884,Treinão do Fra
+829,Open Qualifier #1,5th–8th,7355,RD E-SPORTS
+829,Open Qualifier #1,5th–8th,6479,LilBabies
+829,Open Qualifier #1,5th–8th,7309,B4 Esports
+850,Playoffs,1st,8185,KIWOOM DRX
+850,Playoffs,2nd,8182,Incheon On Sla2ers
+850,Playoffs,3rd,8075,HolyMolly
+850,Playoffs,4th,2542,DAMWON Gaming
+850,Playoffs,5th–6th,8086,Maru Gaming
+850,Playoffs,5th–6th,2554,World Game Star
+850,Group Stage,1st,8185,KIWOOM DRX
+850,Group Stage,2nd,8182,Incheon On Sla2ers
+850,Group Stage,3rd,2542,DAMWON Gaming
+850,Group Stage,4th,2554,World Game Star
+850,Group Stage,5th,8086,Maru Gaming
+850,Group Stage,6th,8075,HolyMolly
+850,Group Stage,7th,8088,Team T5
+850,Group Stage,8th,8082,Desperado
+850,Open Qualifier: Ro42,1st–12th,8088,Team T5
+850,Open Qualifier: Ro42,1st–12th,8090,Next eSports
+850,Open Qualifier: Ro42,1st–12th,7896,Team GP
+850,Open Qualifier: Ro42,1st–12th,8099,CNJ Esports
+850,Open Qualifier: Ro42,1st–12th,6995,ESportsConnected
+850,Open Qualifier: Ro42,1st–12th,2559,SPEAR GAMING
+850,Open Qualifier: Ro42,1st–12th,8104,Veronica7
+850,Open Qualifier: Ro42,1st–12th,8094,Pentagon
+850,Open Qualifier: Ro42,1st–12th,8075,HolyMolly
+850,Open Qualifier: Ro42,1st–12th,8079,VPZ
+850,Open Qualifier: Ro42,1st–12th,8082,Desperado
+850,Open Qualifier: Ro42,1st–12th,6622,Team LuZi
+850,Open Qualifier: Ro42,13th–24th,8086,Maru Gaming
+850,Open Qualifier: Ro42,13th–24th,6725,Warriors Esports
+850,Open Qualifier: Ro42,13th–24th,8092,Team Inv
+850,Open Qualifier: Ro42,13th–24th,8100,Amollang
+850,Open Qualifier: Ro42,13th–24th,8101,Veni Vidi Vici
+850,Open Qualifier: Ro42,13th–24th,5340,Straight Warfare
+850,Open Qualifier: Ro42,13th–24th,1132,CNEsports
+850,Open Qualifier: Ro42,13th–24th,8097,miracle victory
+850,Open Qualifier: Ro42,13th–24th,5339,oFby
+850,Open Qualifier: Ro42,13th–24th,8080,KPZ
+850,Open Qualifier: Ro42,13th–24th,8081,LEVEL UP
+850,Open Qualifier: Ro42,13th–24th,6624,INS4NE
+850,Open Qualifier: Ro42,25th–36th,8087,Acris Esports
+850,Open Qualifier: Ro42,25th–36th,8093,Never Surrender
+850,Open Qualifier: Ro42,25th–36th,8098,Bottom Fraggers
+850,Open Qualifier: Ro42,25th–36th,8102,1TK
+850,Open Qualifier: Ro42,25th–36th,8103,WNF Esports
+850,Open Qualifier: Ro42,25th–36th,8105,PieSKipper
+850,Open Qualifier: Ro42,25th–36th,8091,18again
+850,Open Qualifier: Ro42,25th–36th,8096,zerotwo
+850,Open Qualifier: Ro42,25th–36th,8076,Flying High
+850,Open Qualifier: Ro42,25th–36th,1329,Fiat Lux
+850,Open Qualifier: Ro42,25th–36th,8083,PC
+850,Open Qualifier: Ro42,25th–36th,8084,Lone Way E-SPORTS
+850,Open Qualifier: Ro42,37th–42nd,8077,FIRST PIECE
+850,Open Qualifier: Ro42,37th–42nd,8078,GCA
+850,Open Qualifier: Ro42,37th–42nd,5346,Alpha Six Gaming
+850,Open Qualifier: Ro42,37th–42nd,8085,No Smoke
+850,Open Qualifier: Ro42,37th–42nd,8089,SNJ
+850,Open Qualifier: Ro42,37th–42nd,8095,nice try
+853,Playoffs,1st,5448,ZETA DIVISION
+853,Playoffs,2nd,277,Crazy Raccoon
+853,Playoffs,3rd,6869,IGZIST
+853,Playoffs,4th,516,FAV gaming
+853,Playoffs,5th–6th,2988,NORTHEPTION
+853,Playoffs,5th–6th,104,REJECT
+853,Playoffs,7th–8th,294,CREST GAMING Zst
+853,Playoffs,7th–8th,6798,REIGNITE
+884,Knockouts,1st,624,Paper Rex
+884,Knockouts,2nd,7397,XERXIA Esports
+884,Knockouts,3rd,6387,BLEED
+884,Knockouts,4th,466,BOOM Esports
+884,Knockouts,5th–6th,8309,Persija Esports
+884,Knockouts,5th–6th,4050,FULL SENSE
+884,Knockouts,7th–8th,4210,Made in Thailand
+884,Knockouts,7th–8th,4150,South Built Esports
+884,Group Stage,9th–12th,4325,CERBERUS Esports
+884,Group Stage,9th–12th,7313,Bonkers
+884,Group Stage,9th–12th,2032,ONIC G
+884,Group Stage,9th–12th,799,Velocity Gaming
+884,Group Stage,13th–16th,7987,No Namers
+884,Group Stage,13th–16th,4330,Fancy United Esports
+884,Group Stage,13th–16th,7031,NAOS
+884,Group Stage,13th–16th,3108,Oblivion Force
+884,Play-Ins,17th–18th,5366,Action PH
+884,Play-Ins,17th–18th,3107,Griffin E-Sports
+884,Play-Ins,19th–20th,5931,Team Big BAAM
+884,Play-Ins,19th–20th,918,Global Esports
+925,Regional Finals,1st,2355,KRÜ Esports
+925,Regional Finals,2nd,2359,LEVIATÁN
+925,Regional Finals,3rd,724,E-Xolos LAZER
+925,Regional Finals,4th,7269,FUSION
+800,Playoffs,1st,533,XSET
+800,Playoffs,2nd,8127,OpTic Gaming
+800,Playoffs,3rd,337,FaZe Clan
+800,Playoffs,4th,1034,NRG
+800,Playoffs,5th–6th,5248,Evil Geniuses
+800,Playoffs,5th–6th,120,100 Thieves
+800,Playoffs,7th–8th,2291,Ghost Gaming
+800,Playoffs,7th–8th,642,Luminosity
+800,Group Stage,1st–2nd,533,XSET
+800,Group Stage,1st–2nd,8127,OpTic Gaming
+800,Group Stage,3rd–4th,2291,Ghost Gaming
+800,Group Stage,3rd–4th,337,FaZe Clan
+800,Group Stage,5th–6th,120,100 Thieves
+800,Group Stage,5th–6th,5248,Evil Geniuses
+800,Group Stage,7th–8th,1034,NRG
+800,Group Stage,7th–8th,642,Luminosity
+800,Group Stage,9th–10th,6675,The Guard
+800,Group Stage,9th–10th,188,Cloud9
+800,Group Stage,11th–12th,106,TSM
+800,Group Stage,11th–12th,2,Sentinels
+800,Open Qualifier #2,1st–2nd,120,100 Thieves
+800,Open Qualifier #2,1st–2nd,5248,Evil Geniuses
+800,Open Qualifier #2,3rd–4th,2291,Ghost Gaming
+800,Open Qualifier #2,3rd–4th,2,Sentinels
+800,Open Qualifier #2,5th–6th,1615,Knights
+800,Open Qualifier #2,5th–6th,6461,Akrew
+800,Open Qualifier #2,7th–8th,6451,Built By Gamers Academy
+800,Open Qualifier #2,7th–8th,4345,SoaR
+800,Open Qualifier #2,9th–12th,17,Gen.G
+800,Open Qualifier #2,9th–12th,8370,NYFU
+800,Open Qualifier #2,9th–12th,4346,DarkZero Esports
+800,Open Qualifier #2,9th–12th,7854,Girl Kissers
+800,Open Qualifier #2,13th–16th,2348,VIRTUOSO
+800,Open Qualifier #2,13th–16th,470,Complexity
+800,Open Qualifier #2,13th–16th,4388,Cosmic Divide
+800,Open Qualifier #2,13th–16th,2350,Soniqs
+800,Open Qualifier #2,17th–24th,14,T1
+800,Open Qualifier #2,17th–24th,793,Moon Raccoons
+800,Open Qualifier #2,17th–24th,3337,BASILISK
+800,Open Qualifier #2,17th–24th,2815,Version1
+800,Open Qualifier #2,17th–24th,8569,Skwirel Warriers
+800,Open Qualifier #2,17th–24th,2938,PUGSTARS
+800,Open Qualifier #2,17th–24th,5038,YFP
+800,Open Qualifier #2,17th–24th,5829,Team Mystic
+800,Open Qualifier #2,25th–32nd,3748,Team Reckaroo
+800,Open Qualifier #2,25th–32nd,6045,Lenny Time
+800,Open Qualifier #2,25th–32nd,8568,Clanless
+800,Open Qualifier #2,25th–32nd,8460,Flex Gaming
+800,Open Qualifier #2,25th–32nd,7049,Rated Gaming
+800,Open Qualifier #2,25th–32nd,5832,Zero MarksMen Black
+800,Open Qualifier #2,25th–32nd,12836,Aspyre x Swarm
+800,Open Qualifier #2,25th–32nd,1267,Cloud9 White
+800,Open Qualifier #1,1st–2nd,1034,NRG
+800,Open Qualifier #1,1st–2nd,337,FaZe Clan
+800,Open Qualifier #1,3rd–4th,106,TSM
+800,Open Qualifier #1,3rd–4th,642,Luminosity
+800,Open Qualifier #1,5th–6th,120,100 Thieves
+800,Open Qualifier #1,5th–6th,2815,Version1
+800,Open Qualifier #1,7th–8th,1615,Knights
+800,Open Qualifier #1,7th–8th,2,Sentinels
+800,Open Qualifier #1,9th–12th,4346,DarkZero Esports
+800,Open Qualifier #1,9th–12th,5248,Evil Geniuses
+800,Open Qualifier #1,9th–12th,8370,NYFU
+800,Open Qualifier #1,9th–12th,6451,Built By Gamers Academy
+800,Open Qualifier #1,13th–16th,2348,VIRTUOSO
+800,Open Qualifier #1,13th–16th,17,Gen.G
+800,Open Qualifier #1,13th–16th,5832,Zero MarksMen Black
+800,Open Qualifier #1,13th–16th,470,Complexity
+800,Open Qualifier #1,17th–24th,8357,Zer0 Latency
+800,Open Qualifier #1,17th–24th,6461,Akrew
+800,Open Qualifier #1,17th–24th,793,Moon Raccoons
+800,Open Qualifier #1,17th–24th,2350,Soniqs
+800,Open Qualifier #1,17th–24th,7854,Girl Kissers
+800,Open Qualifier #1,17th–24th,14,T1
+800,Open Qualifier #1,17th–24th,3337,BASILISK
+800,Open Qualifier #1,17th–24th,8264,Nearest Airport
+800,Open Qualifier #1,25th–32nd,4345,SoaR
+800,Open Qualifier #1,25th–32nd,2291,Ghost Gaming
+800,Open Qualifier #1,25th–32nd,8460,Flex Gaming
+800,Open Qualifier #1,25th–32nd,6045,Lenny Time
+800,Open Qualifier #1,25th–32nd,1267,Cloud9 White
+800,Open Qualifier #1,25th–32nd,4388,Cosmic Divide
+800,Open Qualifier #1,25th–32nd,2938,PUGSTARS
+800,Open Qualifier #1,25th–32nd,7853,Run it Down
+984,Playoffs,1st,2593,FNATIC
+984,Playoffs,2nd,628,FunPlus Phoenix
+984,Playoffs,3rd,1209,Guild Esports
+984,Playoffs,4th,8326,M3 Champions
+984,Playoffs,5th–6th,3531,Acend
+984,Playoffs,5th–6th,474,Team Liquid
+984,Group Stage,7th–8th,8903,OG LDN UTD
+984,Group Stage,7th–8th,397,BBL Esports
+984,Group Stage,9th–10th,257,G2 Esports
+984,Group Stage,9th–10th,4915,Natus Vincere
+984,Group Stage,11th–12th,6882,FOKUS
+984,Group Stage,11th–12th,472,BIG
+911,Playoffs,1st,6961,LOUD
+911,Playoffs,2nd,7391,Ninjas In Pyjamas
+911,Playoffs,3rd,4894,Keyd Stars
+911,Playoffs,4th,7332,Los Grandes
+911,Playoffs,5th–6th,7386,MIBR
+911,Playoffs,5th–6th,2406,FURIA
+911,Group Stage,7th–8th,7013,Stars Horizon
+911,Group Stage,7th–8th,6946,TBK Esports
+911,Group Stage,9th–10th,243,Gamelanders Blue
+911,Group Stage,9th–10th,581,Liberty
+911,Final Qualifier,1st–2nd,1311,Galaxy Carrots
+911,Final Qualifier,1st–2nd,7332,Los Grandes
+911,Final Qualifier,3rd–4th,8266,Tropinha do TIKTOK 2.0
+911,Final Qualifier,3rd–4th,7386,MIBR
+911,Final Qualifier,5th–6th,5322,Botafogo eSports
+911,Final Qualifier,5th–6th,7337,Bomb Crypto
+911,Final Qualifier,7th–8th,7349,Renegados
+911,Final Qualifier,7th–8th,6406,SG e-Sports
+911,Closed Qualifier #2,1st–4th,8266,Tropinha do TIKTOK 2.0
+911,Closed Qualifier #2,1st–4th,1311,Galaxy Carrots
+911,Closed Qualifier #2,1st–4th,6406,SG e-Sports
+911,Closed Qualifier #2,1st–4th,7337,Bomb Crypto
+911,Closed Qualifier #2,5th–8th,8267,Tuzzy E-Sports
+911,Closed Qualifier #2,5th–8th,8269,doidera
+911,Closed Qualifier #2,5th–8th,7013,Stars Horizon
+911,Closed Qualifier #2,5th–8th,8335,OIP
+911,Open Qualifier #2,1st–4th,6406,SG e-Sports
+911,Open Qualifier #2,1st–4th,8266,Tropinha do TIKTOK 2.0
+911,Open Qualifier #2,1st–4th,8335,OIP
+911,Open Qualifier #2,1st–4th,8269,doidera
+911,Open Qualifier #2,5th–8th,8330,Os Selvagens
+911,Open Qualifier #2,5th–8th,8298,REiGN
+911,Open Qualifier #2,5th–8th,7355,RD E-SPORTS
+911,Open Qualifier #2,5th–8th,7640,4 ruim e 1 ruim
+911,Closed Qualifier #1,1st–4th,5322,Botafogo eSports
+911,Closed Qualifier #1,1st–4th,7349,Renegados
+911,Closed Qualifier #1,1st–4th,7386,MIBR
+911,Closed Qualifier #1,1st–4th,7332,Los Grandes
+911,Closed Qualifier #1,5th–8th,7337,Bomb Crypto
+911,Closed Qualifier #1,5th–8th,7013,Stars Horizon
+911,Closed Qualifier #1,5th–8th,8267,Tuzzy E-Sports
+911,Closed Qualifier #1,5th–8th,1311,Galaxy Carrots
+911,Open Qualifier #1,1st–2nd,8267,Tuzzy E-Sports
+911,Open Qualifier #1,1st–2nd,7337,Bomb Crypto
+911,Open Qualifier #1,3rd–4th,4958,ODDIK
+911,Open Qualifier #1,3rd–4th,7374,LUSA White
+911,Open Qualifier #1,5th–8th,6220,Só Deus Sabe
+911,Open Qualifier #1,5th–8th,7383,Utah Bless
+911,Open Qualifier #1,5th–8th,7055,Team Liquid Brazil
+911,Open Qualifier #1,5th–8th,2343,Rise Gaming
+998,Playoffs,1st,8185,KIWOOM DRX
+998,Playoffs,2nd,8086,Maru Gaming
+998,Playoffs,3rd,2542,DAMWON Gaming
+998,Playoffs,4th,2554,World Game Star
+998,Playoffs,5th–6th,8182,Incheon On Sla2ers
+998,Playoffs,5th–6th,2559,SPEAR GAMING
+998,Group Stage,1st,8185,KIWOOM DRX
+998,Group Stage,2nd,8182,Incheon On Sla2ers
+998,Group Stage,3rd,2542,DAMWON Gaming
+998,Group Stage,4th,2554,World Game Star
+998,Group Stage,5th,8086,Maru Gaming
+998,Group Stage,6th,2559,SPEAR GAMING
+998,Group Stage,7th,8099,CNJ Esports
+998,Group Stage,8th,8897,Tartarus
+998,S1 Tiebreaker,1st,8086,Maru Gaming
+998,S1 Tiebreaker,2nd,2554,World Game Star
+1013,Main Event,1st,2988,NORTHEPTION
+1013,Main Event,2nd,5448,ZETA DIVISION
+1013,Main Event,3rd,277,Crazy Raccoon
+1013,Main Event,4th,104,REJECT
+1013,Main Event,5th–6th,516,FAV gaming
+1013,Main Event,5th–6th,2108,BLUE BEES.ESP
+1013,Main Event,7th–8th,6793,Jadeite
+1013,Main Event,7th–8th,283,Sengoku Gaming
+1063,Playoffs,1st,624,Paper Rex
+1063,Playoffs,2nd,7397,XERXIA Esports
+1063,Playoffs,3rd,6199,Team Secret
+1063,Playoffs,4th,2032,ONIC G
+1063,Playoffs,5th–6th,1110,Alter Ego
+1063,Playoffs,5th–6th,6387,BLEED
+1063,Playoffs,7th–8th,3107,Griffin E-Sports
+1063,Playoffs,7th–8th,466,BOOM Esports
+1063,Group Stage,9th–12th,9161,Gaimin Gladiators
+1063,Group Stage,9th–12th,878,Rex Regum Qeon
+1063,Group Stage,9th–12th,1208,ORDER
+1063,Group Stage,9th–12th,4330,Fancy United Esports
+1063,Group Stage,13th–16th,4210,Made in Thailand
+1063,Group Stage,13th–16th,918,Global Esports
+1063,Group Stage,13th–16th,3136,Oasis Gaming
+1063,Group Stage,13th–16th,4993,FW Esports
+1063,Play-Ins,17th–18th,4325,CERBERUS Esports
+1063,Play-Ins,17th–18th,8928,Ghetto Artist
+1063,Play-Ins,19th–20th,2917,Enigma Gaming
+1063,Play-Ins,19th–20th,5931,Team Big BAAM
+1086,Playoffs,1st,2359,LEVIATÁN
+1086,Playoffs,2nd,2355,KRÜ Esports
+1086,Playoffs,3rd,7269,FUSION
+1086,Playoffs,4th,724,E-Xolos LAZER
+1130,Main Event,1st,120,100 Thieves
+1130,Main Event,2nd,6675,The Guard
+1130,Main Event,3rd,337,FaZe Clan
+1130,Main Event,4th,188,Cloud9
+1130,Main Event,5th–6th,2,Sentinels
+1130,Main Event,5th–6th,1034,NRG
+1130,Main Event,7th–8th,9353,Shopify Rebellion Black
+1130,Main Event,7th–8th,5248,Evil Geniuses
+1117,Main Event,1st,474,Team Liquid
+1117,Main Event,2nd,8326,M3 Champions
+1117,Main Event,3rd,257,G2 Esports
+1117,Main Event,4th,8903,OG LDN UTD
+1117,Main Event,5th–6th,4915,Natus Vincere
+1117,Main Event,5th–6th,1209,Guild Esports
+1117,Main Event,7th–8th,3531,Acend
+1117,Main Event,7th–8th,397,BBL Esports
+1111,Main Event,1st,2355,KRÜ Esports
+1111,Main Event,2nd,2406,FURIA
+1111,Main Event,3rd,6946,TBK Esports
+1111,Main Event,4th,4894,Keyd Stars
+1111,Main Event,5th–6th,7391,Ninjas In Pyjamas
+1111,Main Event,5th–6th,367,9z Globant
+1111,Main Event,7th–8th,7269,FUSION
+1111,Main Event,7th–8th,724,E-Xolos LAZER
+1083,Main Event,1st,1120,EDward Gaming
+1083,Main Event,2nd,8182,Incheon On Sla2ers
+1083,Main Event,3rd,2988,NORTHEPTION
+1083,Main Event,4th,5443,KONE eSports Club
+1083,Main Event,5th–6th,277,Crazy Raccoon
+1083,Main Event,5th–6th,104,REJECT
+1083,Main Event,7th–8th,8086,Maru Gaming
+1083,Main Event,7th–8th,2542,DAMWON Gaming
+1084,Main Event,1st,466,BOOM Esports
+1084,Main Event,2nd,2032,ONIC G
+1084,Main Event,3rd,6387,BLEED
+1084,Main Event,4th,6199,Team Secret
+1084,Main Event,5th–6th,1208,ORDER
+1084,Main Event,5th–6th,4210,Made in Thailand
+1084,Main Event,7th–8th,4325,CERBERUS Esports
+1084,Main Event,7th–8th,1110,Alter Ego
+1084,Main Event,9th–10th,3107,Griffin E-Sports
+1084,Main Event,9th–10th,4330,Fancy United Esports
+1658,Main Event,1st,2355,KRÜ Esports
+1658,Main Event,2nd,2359,LEVIATÁN
+1658,Main Event,3rd,188,Cloud9
+1658,Main Event,4th,2,Sentinels
+1658,Main Event,5th–6th,120,100 Thieves
+1658,Main Event,5th–6th,2406,FURIA
+1658,Main Event,7th,7386,MIBR
+1659,Playoffs,1st,2304,Giants Gaming
+1659,Playoffs,2nd,4915,Natus Vincere
+1659,Playoffs,3rd,7035,KOI
+1659,Playoffs,4th,8877,Karmine Corp
+1659,Playoffs,5th–6th,1001,Team Heretics
+1659,Playoffs,5th–6th,397,BBL Esports
+1660,Main Event,1st,5448,ZETA DIVISION
+1660,Main Event,2nd,6199,Team Secret
+1660,Main Event,3rd,17,Gen.G
+1660,Main Event,4th,878,Rex Regum Qeon
+1660,Main Event,5th–6th,918,Global Esports
+1660,Main Event,5th–6th,8304,TALON
+1660,Main Event,7th,278,DetonatioN FocusMe

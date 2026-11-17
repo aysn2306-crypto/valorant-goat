@@ -1,8 +1,8 @@
 """Tiny disk cache: every raw response is saved once under data/raw/ and
 never fetched again. Delete a file to force a refetch."""
-import hashlib, json, pathlib
+import hashlib, json, os, pathlib
 
-RAW = pathlib.Path(__file__).resolve().parents[1] / "raw"
+RAW = pathlib.Path(os.environ.get("VG_RAW") or pathlib.Path(__file__).resolve().parents[1] / "raw")
 
 
 def cached(namespace: str, key: str, fetch):

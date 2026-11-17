@@ -1,0 +1,176 @@
+event_id,stage_id,stage
+449,1486,Playoffs
+449,945,Group Stage
+1015,2184,Playoffs
+1015,2183,Group Stage
+1657,3264,Playoffs
+1657,3145,Group Stage
+2097,4131,Playoffs
+2097,4035,Group Stage
+2283,5080,Playoffs
+2283,5079,Group Stage
+2766,5864,Playoffs
+2766,5865,Group Stage
+466,1303,Playoffs
+466,921,Group Stage
+926,1843,Playoffs
+926,1842,Group Stage
+1014,2119,Playoffs
+1014,2120,Group Stage
+1188,2756,Playoffs
+1188,2317,Bracket Stage
+1188,2830,Showmatch
+1494,3154,Playoffs
+1494,2857,Group Stage
+1921,3821,Playoffs
+1921,3663,Swiss Stage
+1921,3858,Showmatch
+1999,3974,Playoffs
+1999,3842,Swiss Stage
+1999,3997,Showmatch
+2281,4414,Playoffs
+2281,4415,Swiss Stage
+2281,4578,Showmatch
+2282,4416,Playoffs
+2282,4417,Swiss Stage
+2282,4938,Showmatch
+2760,5546,Playoffs
+2760,5359,Swiss Stage
+2765,5768,Playoffs
+2765,5767,Swiss Stage
+1189,2867,Playoffs
+1189,2315,Regular Season
+1190,2858,Playoffs
+1190,2314,Regular Season
+1191,2872,Playoffs
+1191,3135,Showmatch
+1191,2316,League Play
+1923,3719,Playoffs
+1923,3718,Play-Ins
+1923,3637,Group Stage
+1924,3723,Playoffs
+1924,3722,Play-Ins
+1924,3638,Group Stage
+1925,3721,Playoffs
+1925,3720,Play-In Stage
+1925,3639,Group Stage
+1926,3725,Playoffs
+1926,3724,Play-Ins
+1926,3640,Group Stage
+2004,3837,Playoffs
+2004,3836,Regular Season
+1998,3826,Playoffs
+1998,3825,Regular Season
+2002,3833,Playoffs
+2002,3832,Regular Season
+2006,3841,Playoffs
+2006,3840,Regular Season
+2095,4032,Playoffs
+2095,4031,Regular Season
+2094,4030,Playoffs
+2094,4029,Regular Season
+2005,3839,Playoffs
+2005,3838,Regular Season
+2096,4034,Playoffs
+2096,4033,Regular Season
+2347,4542,Playoffs
+2347,4541,Group Stage
+2380,4613,Playoffs
+2380,4612,Group Stage
+2379,4610,Playoffs
+2379,4609,Group Stage
+2359,4614,Playoffs
+2359,4570,Group Stage
+2501,4861,Playoffs
+2501,4859,Group Stage
+2501,5097,Showmatch
+2498,4860,Playoffs
+2498,4856,Group Stage
+2498,5103,Showmatch
+2500,4862,Playoffs
+2500,4858,Group Stage
+2500,5067,Showmatch
+2499,4863,Playoffs
+2499,4857,Group Stage
+2499,5094,Showmatch
+2860,5557,Playoffs
+2860,5556,Group Stage
+2863,5560,Playoffs
+2863,5561,Group Stage
+2775,5375,Playoffs
+2775,5374,Group Stage
+2864,5606,Playoffs
+2864,5605,Group Stage
+2977,5779,Playoffs
+2977,5780,Play-Ins
+2977,5781,Group Stage
+2976,5776,Playoffs
+2976,5777,Play-Ins
+2976,5778,Group Stage
+2776,5378,Playoffs
+2776,5377,Play-Ins
+2776,5376,Group Stage
+2978,5782,Playoffs
+2978,5783,Play-Ins
+2978,5784,Group Stage
+340,700,Main Event: LAN
+340,701,Main Event: LAS
+351,723,Playoffs
+351,724,Group Stage
+426,862,Playoffs
+426,861,Group Stage
+426,860,Preliminary Round
+621,1236,LATAM Playoffs
+621,1234,LAN Playoffs
+621,1235,LAS Playoffs
+570,1128,Playoffs
+570,1127,Group Stage
+595,1160,Playoffs
+595,1159,Group Stage (Main)
+595,1161,Group Stage (Seeding)
+595,1158,Open Qualifier
+561,1376,Playoffs
+561,1097,Group Stage
+799,1737,Main Event
+799,1559,Group Stage
+799,1736,Open Qualifier #2
+799,1558,Open Qualifier #1
+854,1670,Playoffs
+854,1669,Group Stage
+829,1605,Playoffs
+829,1604,Group Stage
+829,1614,Closed Qualifier #2
+829,1603,Open Qualifier #2
+829,1613,Closed Qualifier #1
+829,1602,Open Qualifier #1
+850,1662,Playoffs
+850,1661,Group Stage
+850,1758,Open Qualifier: Round of 16
+850,1663,Open Qualifier: Round of 24
+850,1660,Open Qualifier: Round of 42
+884,1753,Knockouts
+884,1752,Group Stage
+884,1778,Play-Ins
+800,1953,Playoffs
+800,1561,Group Stage
+800,1903,Open Qualifier #2
+800,1560,Open Qualifier #1
+984,1932,Playoffs
+984,1931,Group Stage
+911,1814,Playoffs
+911,1809,Group Stage
+911,1808,Access Series
+911,1813,Final Qualifier
+911,1807,Closed Qualifier  #2
+911,1806,Open Qualifier #2
+911,1812,Closed Qualifier #1
+911,1805,Open Qualifier #1
+998,1967,Playoffs
+998,1968,Group Stage
+998,1977,Closed Qualifier: Round of 12
+998,1969,Closed Qualifier: Round of 24
+998,1970,Open Qualifier
+998,1971,Stage 1 Tiebreaker
+1063,2061,Playoffs
+1063,2060,Group Stage
+1063,2059,Play-Ins

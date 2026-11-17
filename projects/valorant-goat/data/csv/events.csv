@@ -1,0 +1,107 @@
+event_id,name,year,tier
+449,Valorant Champions 2021,2021,champions
+1015,Valorant Champions 2022,2022,champions
+1657,Valorant Champions 2023,2023,champions
+2097,Valorant Champions 2024,2024,champions
+2283,Valorant Champions 2025,2025,champions
+2766,Valorant Champions 2026,2026,champions
+353,Valorant Champions Tour Stage 2: Masters Reykjavík,2021,masters
+466,Valorant Champions Tour Stage 3: Masters Berlin,2021,masters
+926,Valorant Champions Tour Stage 1: Masters Reykjavík,2022,masters
+1014,Valorant Champions Tour Stage 2: Masters Copenhagen,2022,masters
+1188,Champions Tour 2023: LOCK//IN São Paulo,2023,masters
+1494,Champions Tour 2023: Masters Tokyo,2023,masters
+1921,Champions Tour 2024: Masters Madrid,2024,masters
+1999,Champions Tour 2024: Masters Shanghai,2024,masters
+2281,Valorant Masters Bangkok 2025,2025,masters
+2282,Valorant Masters Toronto 2025,2025,masters
+2760,Valorant Masters Santiago 2026,2026,masters
+2765,Valorant Masters London 2026,2026,masters
+1189,Champions Tour 2023: Americas League,2023,intl_league
+1190,Champions Tour 2023: EMEA League,2023,intl_league
+1191,Champions Tour 2023: Pacific League,2023,intl_league
+1923,Champions Tour 2024: Americas Kickoff,2024,intl_league
+1924,Champions Tour 2024: Pacific Kickoff,2024,intl_league
+1925,Champions Tour 2024: EMEA Kickoff,2024,intl_league
+1926,Champions Tour 2024: China Kickoff,2024,intl_league
+2004,Champions Tour 2024: Americas Stage 1,2024,intl_league
+1998,Champions Tour 2024: EMEA Stage 1,2024,intl_league
+2002,Champions Tour 2024: Pacific Stage 1,2024,intl_league
+2006,Champions Tour 2024: China Stage 1,2024,intl_league
+2095,Champions Tour 2024: Americas Stage 2,2024,intl_league
+2094,Champions Tour 2024: EMEA Stage 2,2024,intl_league
+2005,Champions Tour 2024: Pacific Stage 2,2024,intl_league
+2096,Champions Tour 2024: China Stage 2,2024,intl_league
+2274,VCT 2025: Americas Kickoff,2025,intl_league
+2275,VCT 2025: China Kickoff,2025,intl_league
+2276,VCT 2025: EMEA Kickoff,2025,intl_league
+2277,VCT 2025: Pacific Kickoff,2025,intl_league
+2347,VCT 2025: Americas Stage 1,2025,intl_league
+2380,VCT 2025: EMEA Stage 1,2025,intl_league
+2379,VCT 2025: Pacific Stage 1,2025,intl_league
+2359,VCT 2025: China Stage 1,2025,intl_league
+2501,VCT 2025: Americas Stage 2,2025,intl_league
+2498,VCT 2025: EMEA Stage 2,2025,intl_league
+2500,VCT 2025: Pacific Stage 2,2025,intl_league
+2499,VCT 2025: China Stage 2,2025,intl_league
+2682,VCT 2026: Americas Kickoff,2026,intl_league
+2683,VCT 2026: Pacific Kickoff,2026,intl_league
+2684,VCT 2026: EMEA Kickoff,2026,intl_league
+2685,VCT 2026: China Kickoff,2026,intl_league
+2860,VCT 2026: Americas Stage 1,2026,intl_league
+2863,VCT 2026: EMEA Stage 1,2026,intl_league
+2775,VCT 2026: Pacific Stage 1,2026,intl_league
+2864,VCT 2026: China Stage 1,2026,intl_league
+2977,VCT 2026: Americas Stage 2,2026,intl_league
+2976,VCT 2026: EMEA Stage 2,2026,intl_league
+2776,VCT 2026: Pacific Stage 2,2026,intl_league
+2978,VCT 2026: China Stage 2,2026,intl_league
+333,Champions Tour North America Stage 1: Masters,2021,challengers_qualifier
+334,Champions Tour Europe Stage 1: Masters,2021,challengers_qualifier
+338,Champions Tour Brazil Stage 1: Masters,2021,challengers_qualifier
+340,Champions Tour LATAM Stage 1: Masters,2021,challengers_qualifier
+342,Champions Tour Turkey Stage 1: Masters,2021,challengers_qualifier
+344,Champions Tour CIS Stage 1: Masters,2021,challengers_qualifier
+347,Champions Tour SEA Stage 1: Masters,2021,challengers_qualifier
+351,Champions Tour Korea Stage 1: Masters,2021,challengers_qualifier
+352,Champions Tour Japan Stage 1: Masters,2021,challengers_qualifier
+372,Champions Tour North America Stage 2: Challengers Finals,2021,challengers_qualifier
+376,Champions Tour Stage 2: EMEA Challengers Playoffs,2021,challengers_qualifier
+366,Champions Tour Brazil Stage 2: Challengers Finals,2021,challengers_qualifier
+398,Champions Tour LATAM Stage 2: Challengers Finals,2021,challengers_qualifier
+429,Champions Tour SEA Stage 2: Challengers Finals,2021,challengers_qualifier
+441,Champions Tour Japan Stage 2: Challengers Finals,2021,challengers_qualifier
+426,Champions Tour Korea Stage 2: Challengers,2021,challengers_qualifier
+578,Champions Tour North America Stage 3: Challengers Playoffs,2021,challengers_qualifier
+547,Champions Tour Stage 3: EMEA Challengers Playoffs,2021,challengers_qualifier
+536,Champions Tour Brazil Stage 3: Challengers Playoffs,2021,challengers_qualifier
+621,Champions Tour LATAM Stage 3: Challengers Playoffs,2021,challengers_qualifier
+570,Champions Tour SEA Stage 3: Challengers Playoffs,2021,challengers_qualifier
+540,Champions Tour Japan Stage 3: Challengers Playoffs,2021,challengers_qualifier
+595,Champions Tour Korea Stage 3: Challengers,2021,challengers_qualifier
+558,Champions Tour North America: Last Chance Qualifier,2021,challengers_qualifier
+559,Champions Tour EMEA: Last Chance Qualifier,2021,challengers_qualifier
+560,Champions Tour Asia-Pacific: Last Chance Qualifier,2021,challengers_qualifier
+561,Champions Tour South America: Last Chance Qualifier,2021,challengers_qualifier
+799,Champions Tour North America Stage 1: Challengers,2022,challengers_qualifier
+854,Champions Tour Stage 1: EMEA Challengers,2022,challengers_qualifier
+829,Champions Tour Brazil Stage 1: Challengers 1,2022,challengers_qualifier
+850,Champions Tour Korea Stage 1: Challengers,2022,challengers_qualifier
+853,Champions Tour Japan Stage 1: Challengers Playoffs,2022,challengers_qualifier
+884,Champions Tour Asia-Pacific Stage 1: Challengers Playoffs,2022,challengers_qualifier
+925,Champions Tour Latin America Stage 1: Playoffs,2022,challengers_qualifier
+800,Champions Tour North America Stage 2: Challengers,2022,challengers_qualifier
+984,Champions Tour EMEA Stage 2: Challengers,2022,challengers_qualifier
+911,Champions Tour Brazil Stage 2: Challengers,2022,challengers_qualifier
+998,Champions Tour Korea Stage 2: Challengers,2022,challengers_qualifier
+1013,Champions Tour Japan Stage 2: Challengers Playoffs,2022,challengers_qualifier
+1063,Champions Tour Asia-Pacific Stage 2: Challengers Playoffs,2022,challengers_qualifier
+1086,Champions Tour Latin America Stage 2: Playoffs,2022,challengers_qualifier
+1130,Champions Tour North America: Last Chance Qualifier,2022,challengers_qualifier
+1117,Champions Tour EMEA: Last Chance Qualifier,2022,challengers_qualifier
+1111,Champions Tour South America: Last Chance Qualifier,2022,challengers_qualifier
+1083,Champions Tour East Asia: Last Chance Qualifier,2022,challengers_qualifier
+1084,Champions Tour Asia-Pacific: Last Chance Qualifier,2022,challengers_qualifier
+1658,Champions Tour 2023: Americas Last Chance Qualifier,2023,challengers_qualifier
+1659,Champions Tour 2023: EMEA Last Chance Qualifier,2023,challengers_qualifier
+1660,Champions Tour 2023: Pacific Last Chance Qualifier,2023,challengers_qualifier
