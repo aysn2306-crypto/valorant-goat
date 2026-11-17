@@ -1,0 +1,19 @@
+# Data
+vlrdevapi[pandas]==3.1.2
+requests>=2.32
+pandas>=2.2
+pyyaml>=6.0
+# vendored vlrggapi server (vendor/vlrggapi, pinned commit 61684af)
+httpx==0.28.1
+cachetools==7.2.8
+uvicorn==0.54.0
+fastapi==0.162.0
+selectolax==1.0.2
+# Graphics
+matplotlib>=3.9
+plotly==6.1.2
+kaleido>=1.0
+pillow>=10.4
+# Editing (ffmpeg must also be installed on the system)
+moviepy==2.1.2
+glicko2==2.1.0

@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+data/raw/
+edit/out/
+edit/assets/*
+!edit/assets/.gitkeep
+graphics/out/**/*.png
+graphics/out/**/*.mp4

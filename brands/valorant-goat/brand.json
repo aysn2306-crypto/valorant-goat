@@ -1,0 +1,38 @@
+{
+  "name": "Valorant GOAT",
+  "description": "Dark esports-analysis look: charcoal, electric cyan, gold kept for trophies and the GOAT reveal only",
+  "version": "1.0.0",
+
+  "colors": {
+    "primary": "#22D3EE",
+    "primaryLight": "#67E8F9",
+    "accentGold": "#F5B83D",
+    "negative": "#FF5A5F",
+    "positive": "#34D399",
+    "textDark": "#EDEFF2",
+    "textMedium": "#EDEFF2",
+    "textLight": "#6B7685",
+    "bgLight": "#1B212B",
+    "bgDark": "#0E1116",
+    "bgOverlay": "rgba(14, 17, 22, 0.92)",
+    "divider": "#1B212B",
+    "shadow": "rgba(0, 0, 0, 0.4)"
+  },
+
+  "fonts": {
+    "primary": "Inter, system-ui, sans-serif",
+    "display": "Anton, \"Bebas Neue\", Impact, sans-serif",
+    "mono": "ui-monospace, SFMono-Regular, Menlo, monospace"
+  },
+
+  "spacing": { "xs": 8, "sm": 16, "md": 24, "lg": 48, "xl": 80, "xxl": 120 },
+  "borderRadius": { "sm": 8, "md": 16, "lg": 18 },
+
+  "typography": {
+    "h1": { "size": 120, "weight": 400 },
+    "h2": { "size": 88, "weight": 400 },
+    "h3": { "size": 56, "weight": 700 },
+    "body": { "size": 44, "weight": 400 },
+    "label": { "size": 30, "weight": 600, "letterSpacing": 2 }
+  }
+}

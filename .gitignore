@@ -95,7 +95,8 @@ assets/voices/**/*.flac
 assets/voices/**/*.ogg
 
 # Projects directory (user's local video work - not part of toolkit)
-projects/
+projects/*
+!projects/valorant-goat/
 
 # Async video jobs (tools/video_job.py): state, logs, project copies and renders
 jobs/

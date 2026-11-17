@@ -1,0 +1,22 @@
+# Rough-cut timeline. Copy to edit/timeline.yaml and fill in.
+# Each segment is an image (PNG card/chart) or a video clip (gameplay, VOD, screen recording).
+# Durations are seconds. The voiceover plays over everything; music sits under it at low volume.
+output: edit/out/rough_cut.mp4
+fps: 30
+voiceover: edit/assets/voiceover.wav     # ay's narration (optional)
+music: null                               # e.g. edit/assets/music.mp3 (royalty-free only)
+music_volume: 0.12
+segments:
+  - image: graphics/out/chapter_01.png
+    duration: 3
+  - image: graphics/out/chart_demo_champions2022_rating.png
+    duration: 4
+    zoom: 1.04          # slow push-in, 4% over the segment
+  - image: graphics/out/stat_demo_yay.png
+    duration: 4
+  # - clip: edit/assets/clutch.mp4
+  #   start: 12.0
+  #   end: 18.5
+  #   mute: true
+  - image: graphics/out/chapter_goat.png
+    duration: 3

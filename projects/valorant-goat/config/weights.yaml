@@ -1,0 +1,46 @@
+# Algorithm v2 (category-based). Source of truth: the "Valorant GOAT: The Algorithm" doc.
+# Weights are LOCKED before the full ranking runs (fairness rule 3).
+approved: false  # answers drafted by Claude at ay's request (17 Nov); flip to true when ay signs off the algorithm doc
+version: 2
+
+match_weight:
+  event_tier: {champions: 1.00, masters: 0.85, intl_league: 0.60, challengers_qualifier: 0.50, other: 0.0}
+  stage: {group: 1.00, playoffs: 1.15, bracket_final: 1.25, grand_final: 1.40}
+  opponent_strength: {min: 0.80, max: 1.20}   # from Glicko-2 team percentile on match day
+
+fairness:
+  compare_within: [role, season]
+  igl_calling_tax: measured   # gap estimated from data, added back to IGL stat scores
+  shrinkage_rounds_k: 1000    # weight on own data = n / (n + k)
+
+categories:   # weight in the overall score (sums to 100)
+  trophies_honours: 28
+  fragging: 15
+  big_game_form: 12
+  peak_longevity: 10
+  opening_duels: 8
+  clutch_factor: 8
+  team_play: 7
+  consistency: 7
+  leadership: 5      # IGLs only, bonus
+
+category_inputs:
+  fragging: {rating: 0.40, adr: 0.30, kpr: 0.20, multikills_pr: 0.10}
+  opening_duels: {fkpr: 0.50, fk_share: 0.50}
+  clutch_factor: {clutch_pct: 0.50, clutches_per_100: 0.30, playoff_clutches: 0.20}
+  team_play: {kast: 0.50, apr: 0.30, low_dpr: 0.20}
+  big_game_form: {playoff_vs_own_baseline: 0.60, playoff_rating: 0.40}
+  consistency: {share_events_above_role_avg: 0.60, low_event_swing: 0.40}
+  peak_longevity: {season_weights: [1.00, 0.95, 0.90, 0.85, 0.80, 0.75]}
+  leadership: {team_wins_over_glicko_expected: 1.0}
+
+trophy_points:
+  champions: {1: 100, 2: 60, 3: 40, 4: 30, 5-6: 18, 7-8: 12, 9-12: 5, 13-16: 2}
+  masters:   {1: 60, 2: 36, 3: 24, 4: 18, 5-6: 11, 7-8: 7, 9-12: 3, 13-16: 1}
+  regional:  {1: 15, 2: 8, 3: 5}
+  awards: {champions_mvp: 15, masters_mvp: 8}
+  min_share_of_maps_started: 0.5
+  recency_boost: {2021: 0.85, 2022: 0.90, 2023: 0.95, 2024: 1.00, 2025: 1.05, 2026: 1.10}
+
+events: {last_event: "Valorant Champions 2026"}
+robustness: {runs: 1000, max_weight_change: 0.30}
