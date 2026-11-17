@@ -106,3 +106,17 @@ for a prompt app), posted 14 Nov 2026, no narration. Frames and notes on ay's PC
 | "Motion Skills" (iArt.ai) | A paid website, no repo. Skip. |
 | Agent Skills Hub list | A directory of Remotion tools, not a tool. |
 | threejs-skills | 3D scenes; we don't need 3D. Skip. |
+
+### The second TikTok ay sent (17 Nov 2026)
+
+"Claude Code as your reel editor in 3 prompts" by @viralex.aii, posted 3 Nov 2026 (84 s, about 970k views). Notes,
+timed transcript and frames on ay's PC in `Documents\valorant-goat-research\tiktok-ZN8aSm26a\`. No sound or music
+advice beyond "quiet music if references/music.mp3 exists".
+
+- **Tools:** Remotion, HyperFrames, FFmpeg, faster-whisper 1.2.1, yt-dlp. All free for ay. We already run this exact
+  stack (see `edit/WORKFLOW.md`), so nothing to install.
+- **Method:** prompt 1 installs and tests the tools; prompt 2 studies 3 to 5 reference reels frame by frame and by
+  ear and writes a `style.md` ("take inspiration, but don't copy"); prompt 3 cuts the clip with Whisper word
+  timestamps, adds word-by-word subtitles and exports drafts v1, v2... from plain-word notes.
+- **Verdict:** same method as ours (references first, Whisper cuts, numbered drafts). Prompts 2 and 3 are a handy
+  template for the vertical Shorts we cut from the finished video.
