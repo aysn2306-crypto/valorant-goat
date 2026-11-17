@@ -23,7 +23,10 @@ a manifest row (source page, licence, SHA-256) as [[SOUND]] rule 9 says.
   sound: fan projects must say they are fan made and not endorsed by Riot, and Riot's logos and trademarks may not
   be used in the project. Ads on YouTube videos are allowed.
 
-## 2. Epidemic Sound with its Claude connector (paid)
+## 2. Epidemic Sound with its Claude connector (paid, not used)
+
+**ay decided on 17 Nov 2026: no paid sources.** Kept here only as a record of what was checked.
+
 
 - **Price:** Creator plan $17.99 a month, or $119.88 a year (US prices, checked by recurdash.com on 17 Oct 2026).
   Covers one YouTube channel plus one account each on TikTok, Instagram, Facebook and Twitch.

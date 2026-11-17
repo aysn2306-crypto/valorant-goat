@@ -31,7 +31,7 @@ Adds to [[SOUND]] (which sets the cue grammar and levels). Sources at the bottom
 
 ## Where to get layers
 
-- Low and mid impact layers, whooshes, UI ticks: Sonniss GDC archive or Epidemic (see [[sources]]).
+- Low and mid impact layers, whooshes, UI ticks: Sonniss GDC archive, Freesound CC0 (see [[sources]]).
 - Valorant's own feel: credit-safe VALORANT music for beds. In-game sounds come only inside official footage we
   already show, never as separate files.
 

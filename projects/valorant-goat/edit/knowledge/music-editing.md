@@ -21,9 +21,10 @@ bottom.
 6. **Change or strip the bed every 30 to 60 seconds**, or when the story turns. A bed that loops longer than that
    tires the ear even if nobody notices why.
 7. **Small changes between big ones:** drop an instrument out and bring it back, or swap the lead, instead of a new
-   track. This needs stems (Epidemic has them).
-8. **Strip back before a key line, then bring the full beat back** on the payoff. With stems: mute drums and bass
-   under the setup sentence, unmute on the reveal word.
+   track. This needs stems; without them, use a quieter section of the same track or a filter sweep.
+8. **Strip back before a key line, then bring the full beat back** on the payoff. With stems, mute drums and bass
+   under the setup sentence and unmute on the reveal word; without stems, a low pass filter on the bed does a
+   similar job.
 9. **Duck under the voice, rise in the gaps.** [[SOUND]] rule 7 has the levels.
 
 ## Getting in
@@ -45,9 +46,9 @@ bottom.
 
 ## Making a track fit a section exactly
 
-15. **With Epidemic:** ask the connector's `EditRecording` for the section length and pin the drop to the reveal
-    time. It rebuilds the track on its own bar lines, which sounds better than any cut we make by hand.
-16. **Without it:** remove or repeat whole 4 or 8 bar phrases (never part of a bar), cut on downbeats, and button
+15. **Paid services can re-cut a track for you** (Epidemic's `EditRecording`); ay chose free sources, so we cut by
+    hand in code.
+16. **How:** remove or repeat whole 4 or 8 bar phrases (never part of a bar), cut on downbeats, and button
     the ending (rule 12).
 
 ## Effects that belong to the music
