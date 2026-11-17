@@ -7,11 +7,12 @@ pool:
   benchmark: Faker        # ay 17 Nov: Faker is ranked like everyone else (no calibration)
 
 trophy_points:            # full value, no diminishing returns (ay's rule)
-  worlds:      {1: 100, 2: 60, 3: 35}
-  msi:         {1: 50, 2: 30, 3: 18}
-  first_stand: {1: 25, 2: 15, 3: 9}
+  # key = best place in the bucket (3 = semifinal, 5 = quarterfinal, 9 = last 16)
+  worlds:      {1: 100, 2: 60, 3: 35, 5: 15, 9: 5}
+  msi:         {1: 50, 2: 30, 3: 18, 5: 8}
+  first_stand: {1: 25, 2: 15, 3: 9, 5: 4}
   msc:         {1: 15, 2: 9, 3: 5}
-  domestic:    {1: 20, 2: 10, 3: 5}      # times region strength that year
+  domestic:    {1: 20, 2: 10, 3: 5, 4: 0}      # times region strength that year
   awards: {worlds_mvp: 15, msi_mvp: 8, first_stand_mvp: 5}   # Finals MVP or event MVP, full value
   domestic_cup: 0.5                      # LCK Cup and LPL split titles from 2025 (several per year) count half
   min_share_of_games: 0.5

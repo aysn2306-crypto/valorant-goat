@@ -160,29 +160,41 @@ def shrink(x, n, k):
     return x * n / (n + k)
 
 
+def bucket(table, place):
+    keys = [k for k in table if k <= place]
+    return table[max(keys)] if keys else 0
+
+
 def titles(t, s, strength):
-    r = pd.read_csv(os.path.join(CSV, "results_top4.csv"), dtype=str).fillna("")
-    r = r[(r.Showmatch != "1") & r.PlaceN.isin(["1", "2", "3"]) & (r.Team != "")]
+    r = pd.read_csv(os.path.join(CSV, "results_top16.csv"), dtype=str).fillna("")
+    r = r[(r.Showmatch != "1") & (pd.to_numeric(r.PlaceN, errors="coerce") <= 16) & (r.Team != "")]
     bad = re.compile(r"Play-In|Road to MSI|Showmatch|Regional|Qualif|Preseason|All Star|LPPL|Promotion|Rounds", re.I)
     r = r[~r.Name.str.contains(bad)]
     r["year"] = r.Date.str[:4].astype(int)
     tp = CFG["trophy_points"]
+    # leagues that crown several split champions a year plus one season champion (LEC 2023+, LPL 2025+, LCK Cup):
+    # the season title counts in full, the split titles at half
+    final_re = re.compile(r"Season Finals|Grand Finals|Season Playoffs|Championship", re.I)
+    has_final = {(e.League, e.year) for e in r.itertuples() if final_re.search(e.Name) and e.League in REGION}
     rows = []
     for _, e in r.iterrows():
         if e.League in INTL:
             tier = INTL[e.League]
             if "/" in e.Page:      # parent page only (Main Event / Play-In sub-pages repeat the result)
                 continue
-            pts = tp[tier][int(e.PlaceN)] * (tp["early_worlds"].get(e.year, 1.0) if tier == "worlds" else 1.0)
+            pts = bucket(tp[tier], int(e.PlaceN)) * (tp["early_worlds"].get(e.year, 1.0) if tier == "worlds" else 1.0)
         elif e.League in REGION:
-            cup = e.Name.startswith("LCK Cup") or (e.League == "Tencent LoL Pro League" and "Split" in e.Name and e.IsPlayoffs == "1")
+            cup = e.Name.startswith("LCK Cup") or (e.League == "Tencent LoL Pro League" and "Split" in e.Name and e.IsPlayoffs == "1") \
+                or ((e.League, e.year) in has_final and not final_re.search(e.Name) and e.IsPlayoffs == "1")
             champions_era = e.League == "LoL The Champions" and e.year < 2015
             if not (e.IsPlayoffs == "1" or cup or champions_era):
                 continue
             reg = REGION[e.League]
             tier = "domestic"
-            pts = tp["domestic"][int(e.PlaceN)] * strength.loc[e.year, reg] * (tp["domestic_cup"] if cup else 1.0)
+            pts = bucket(tp["domestic"], int(e.PlaceN)) * strength.loc[e.year, reg] * (tp["domestic_cup"] if cup else 1.0)
         else:
+            continue
+        if pts <= 0:
             continue
         ev = s[((s.Page == e.Page) | s.Page.str.startswith(e.Page + "/")) & (s.Team == e.Team)]
         if ev.empty:
@@ -328,7 +340,7 @@ def main():
 
 def report(P, R, T, C, wins, seconds, sweep, strength, fk, s):
     R = R.sort_values("score", ascending=False)
-    L = ["# DRAFT TEST 3 (League, algorithm v3): not the final ranking", "",
+    L = ["# DRAFT TEST 4 (League, algorithm v3): not the final ranking", "",
          f"Data: Leaguepedia scoreboards, {s.Page.nunique()} tournaments, {int(s.G.sum() / 10):,} games (approx.), "
          f"{s.Link.nunique():,} players; pool {len(P)} players with {CFG['pool']['min_games']}+ games. "
          "Faker is ranked like everyone else (ay, 17 Nov).", "",
@@ -340,6 +352,8 @@ def report(P, R, T, C, wins, seconds, sweep, strength, fk, s):
          "6-year one on the same peak. Longevity is still its own category. With career averages Faker ranks #12.",
          "3. Worlds, MSI and First Stand MVP / Finals MVP awards added from Liquipedia (25 awards, data/manual/mvps.csv): "
          "Worlds 15 points, MSI 8, First Stand 5, full value.",
+         "6. Placings count, not just wins: Worlds runner-up 60, semifinal 35, quarterfinal 15, last 16 5; MSI 30 / 18 / 8; "
+         "First Stand 15 / 9 / 4; domestic final 10, semifinal 5 (times region strength).",
          "5. Damage per minute for 2014-2020 filled from Oracle's Elixir (6,222 of 8,065 player-event rows that had none).",
          "4. Longevity: an elite year is 20+ games at 0.2 SD above the role average (was 0.35, which almost nobody reached).", "",
          "## Overall top 15 (everyone, Faker included)", "",
@@ -387,7 +401,7 @@ def report(P, R, T, C, wins, seconds, sweep, strength, fk, s):
           "- Finals MVP and event MVP awards are not counted yet (Liquipedia list to build, as in the Valorant data).",
           "- Season 1 and 2 (2011-2012) have thin data and are discounted; LMS is the only minor region included.",
           "- Region strength comes from cross-region games at Worlds, MSI, First Stand and the 2020 Mid-Season Cup."]
-    open(os.path.join(OUT, "draft-test-3.md"), "w").write("\n".join(L) + "\n")
+    open(os.path.join(OUT, "draft-test-4.md"), "w").write("\n".join(L) + "\n")
     print("\n".join(L[:40]))
 
 
