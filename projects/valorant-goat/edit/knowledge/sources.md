@@ -86,3 +86,20 @@ local folder too.
 | `retention-editing` skill (thecraighewitt/skills) | not stated | A persona and questions, no concrete rules visible. Skip. |
 | Public Obsidian vaults (search across GitHub, Obsidian Publish, ecosyste.ms) | | None on YouTube editing or sound design. |
 | Remotion official skills, video-shotcraft, HyperFrames sound notes | | Already in the repo. |
+
+### The TikTok ay sent (17 Nov 2026)
+
+"10 GitHub repos that turn Claude into a video editor", a photo slideshow by @promptifexappofficial (an ad account
+for a prompt app), posted 14 Nov 2026, no narration. Frames and notes on ay's PC in
+`Documents\valorant-goat-research\tiktok-ZN8aSVTvQ\`. None of the nine tools covers sound or music.
+
+| Tool | Verdict for us |
+| --- | --- |
+| claude-shorts (AgriciDaniel, MIT) | Worth a trial later for cutting Shorts from the finished video (Remotion captions). |
+| ffmpeg-skill (`npx ffmpeg-skill`, MIT) | Same ground as the toolkit's `ffmpeg` skill plus `qc.py`. Skip. |
+| yt-dlp, Whisper | Already in our pipeline. |
+| Ghost Editor | Talking-head reels, renders on a Mac. Not our format. Skip. |
+| MotionClone | Rebuilds a reference motion clip as a project; early access, needs a ChatGPT plan. Skip for now. |
+| "Motion Skills" (iArt.ai) | A paid website, no repo. Skip. |
+| Agent Skills Hub list | A directory of Remotion tools, not a tool. |
+| threejs-skills | 3D scenes; we don't need 3D. Skip. |
