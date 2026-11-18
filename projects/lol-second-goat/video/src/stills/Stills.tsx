@@ -208,30 +208,28 @@ export const S8IntlOnly: React.FC = () => {
   );
 };
 
-// 9. Twist three: split Faker in two
+// 9. Twist three: split Faker in two. The whole pool is shown (ay 18 Nov: "why so few dots?"): only 13 of 528 score above 70.
 export const S9TwoFakers: React.FC = () => {
-  const xr: [number, number] = [2012, 2022], yr: [number, number] = [69, 89];
+  const xr: [number, number] = [2010.5, 2026.5], yr: [number, number] = [15, 92];
   const { X, Y } = scale(B, xr, yr);
   const rows = (S.split as [string, string, string, number][]).map(([link, name, years, s]) => ({ link, name, first: Number(years.slice(0, 4)), s }));
   const cut = 73.6;
-  const side: Record<string, "left" | "right" | "above" | "below"> = { Knight: "left", Keria: "right", Chovy: "left", Ruler: "left", Zeus: "right" };
   return (
     <Stage title="TWO FAKERS">
       <div style={{ position: "absolute", left: B.x0, top: B.y0 - 10, width: B.x1 - B.x0 + 30, height: Y(cut) - B.y0 + 10,
-        background: "linear-gradient(180deg, rgba(92,190,80,0.16) 0%, rgba(92,190,80,0.05) 100%)" }} />
+        background: "linear-gradient(180deg, rgba(92,190,80,0.2) 0%, rgba(92,190,80,0.06) 100%)" }} />
       <div style={{ position: "absolute", left: B.x0, top: Y(cut), width: B.x1 - B.x0 + 30, borderTop: "3px dashed rgba(237,239,242,0.7)" }} />
-      <Big x={B.x1 - 10} y={Y(cut) - 52} size={40} align="right" w={300}>TOP 7</Big>
-      <Axes b={B} xr={xr} yr={yr} xt={[2012, 2014, 2016, 2018, 2020, 2022]} yt={[70, 75, 80, 85]} xl="FIRST SEASON" yl="SCORE" xf={(v) => String(v)} />
+      <Big x={B.x1 + 20} y={Y(cut) - 50} size={36} align="right" w={200}>TOP 7</Big>
+      <Axes b={B} xr={xr} yr={yr} xt={[2011, 2014, 2017, 2020, 2023, 2026]} yt={[20, 40, 60, 80]} xl="FIRST SEASON" yl="SCORE" xf={(v) => String(v)} />
       {rows.filter((r) => !r.name.startsWith("Faker")).map((r) => (
-        <React.Fragment key={r.link}>
-          <Dot x={X(r.first)} y={Y(r.s)} r={10} color={heat((r.s - 69) / 18)} />
-          {side[r.name] && <Callout x={X(r.first)} y={Y(r.s)} name={r.name} value={r0(r.s)} side={side[r.name]} ring={22} />}
-        </React.Fragment>
+        <Dot key={r.link} x={X(r.first + (hash(r.link) - 0.5) * 0.75)} y={Y(r.s)} r={7} color={heat((r.s - 20) / 62)} o={r.s > cut ? 1 : 0.8} />
       ))}
+      <Callout x={X(2018 + (hash("Knight (Zhuo Ding)") - 0.5) * 0.75)} y={Y(86.4)} name="Knight" value="86" side="right" ring={20} />
       {rows.filter((r) => r.name.startsWith("Faker")).map((r) => (
         <React.Fragment key={r.link}>
-          <Face id="faker" x={X(r.first)} y={Y(r.s)} size={92} />
-          <div style={{ position: "absolute", left: X(r.first) + 58, top: Y(r.s) - 34, whiteSpace: "nowrap" }}>
+          <Face id="faker" x={X(r.first)} y={Y(r.s)} size={76} />
+          <div style={{ position: "absolute", left: X(r.first) - 360, width: 315, textAlign: "right", top: Y(r.s) - 34, whiteSpace: "nowrap",
+            textShadow: "0 0 6px #0B0B0F, 0 0 12px #0B0B0F, 0 0 18px #0B0B0F" }}>
             <div style={{ fontFamily: F.body, fontWeight: 800, fontSize: 26, color: C.gold }}>FAKER {r.name.slice(6)}</div>
             <div style={{ fontFamily: F.body, fontWeight: 800, fontSize: 38, color: C.text, lineHeight: 1 }}>{r0(r.s)}</div>
           </div>
