@@ -57,10 +57,14 @@ export const Formula: React.FC<{ title: string; sub?: string; lines: { t: string
     <Frame title={title} sub={sub} subject={subject} chapter={chapter}>
       <div style={{ position: "absolute", left: 140, top: 290, width: side ? 980 : 1640 }}>
         {lines.map((l, i) => {
-          const o = prog(f, l.at, l.at + 10);
+          // every line is on screen (dimmed) from the start, so the slide is never empty; each lights up on its cue
+          const early = lines[0].at > 40;
+          const pre = early ? 0.22 * prog(f, 4, 16) : 0;
+          const o = Math.max(pre, prog(f, l.at, l.at + 10));
+          const lit = prog(f, l.at, l.at + 10);
           return (
             <div key={i} style={{ fontFamily: F.body, fontSize: l.small ? 32 : 50, fontWeight: l.small ? 400 : 500, color: l.small ? C.muted : C.text,
-              marginBottom: l.small ? 22 : 40, opacity: o, transform: `translateX(${(1 - o) * -16}px)`, lineHeight: 1.3 }}>{render(l.t)}</div>
+              marginBottom: l.small ? 22 : 40, opacity: o, transform: `translateX(${(1 - lit) * -16 * (early ? 0.4 : 1)}px)`, lineHeight: 1.3 }}>{render(l.t)}</div>
           );
         })}
       </div>
