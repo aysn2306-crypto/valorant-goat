@@ -284,7 +284,7 @@ export const S9TwoFakers: React.FC = () => {
 // (MODEL-CURRENT commit 67d8ad3): round photo, small rank badge, name under it, a small "TIER n" per row, no percentages, no title.
 // ay 18:09: wider spread of regions (MODEL-CURRENT commit 789f9d7)
 const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler", "bin", "viper"], ["gumayusi", "caps", "deft", "theshy", "uzi"],
-  ["scout", "perkz", "doinb", "bengi", "jankos"]];
+  ["scout", "perkz", "doinb", "bengi", "jankos", "bjergsen"]];
 // 19a (ay 18:15): after tiers 5 and 4 fill, dim all but Uzi and Bengi and show where 2025/26 published lists put them
 // (research/model-vs-published-lists.md; esports.net and spilled.gg only, Red Bull dropped as unranked).
 const LISTS: Record<string, [string, string][]> = {
@@ -296,7 +296,7 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean }> = ({ focus, int
   const cuts = [top, 330, 490, 640, 795, base];
   const hw = (y: number) => ((y - top) / (base - top)) * half;
   const fills = ["rgba(245,184,61,0.30)", "rgba(34,211,238,0.18)", "rgba(150,160,175,0.15)", "rgba(150,160,175,0.10)", "rgba(150,160,175,0.06)"];
-  const sizes = [112, 86, 74, 68, 68], gaps = [0, 230, 190, 175, 175];
+  const sizes = [112, 86, 74, 68, 68], gaps = [0, 230, 190, 175, 165];
   const pos = (i: number, j: number) => ({ x: cx + (j - (TIERS[i].length - 1) / 2) * gaps[i], y: i === 0 ? 236 : cuts[i] + 34 + sizes[i] / 2 });
   const kn = pos(1, 0), fk = pos(0, 0);
   const lit = (id: string) => (internet ? id in LISTS : !focus || id === "knight" || id === "faker");
