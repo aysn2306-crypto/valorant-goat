@@ -4,6 +4,8 @@ Sources: video-shotcraft `references/sound-design.md` + `music-beat-sync.md` (Ap
 HyperFrames `references/sound.md`, our own measurements. The reference-video cue study (Jxmy, MachineLoLing,
 top video essays) refines the cue sheet at the bottom; until it lands those cues are marked DRAFT.
 
+Deeper notes (music editing, effect layering, better sound sources and their licences): [knowledge/](knowledge/README.md).
+
 ## Rules
 
 1. **Sound is a timeline asset.** One SFX table per section (`{ at, src, volume }`), derived from the beat map, never
