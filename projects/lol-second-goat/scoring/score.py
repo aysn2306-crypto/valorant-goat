@@ -200,6 +200,26 @@ def zscores(s, use_rating=True):
     return s
 
 
+def opponent_adjust(s):
+    """A good game against a strong team is worth more. Each team's average opponent Elo at an event (2016 on,
+    scoring/games.py) moves the season rating by the slope the data itself shows: inside the same player and year,
+    how much his rating drops per Elo point of opposition. Earlier events stay as they are."""
+    f = os.path.join(CSV, "event_opp.csv")
+    if not os.path.exists(f):
+        return s
+    ev = pd.read_csv(f)
+    s = s.drop(columns=[c for c in ["opp_elo"] if c in s.columns]).merge(ev[["Page", "Team", "opp_elo"]], on=["Page", "Team"], how="left")
+    d = s[(s.G >= 3) & s.opp_elo.notna() & s.z_impact.notna()].copy()
+    for c in ["opp_elo", "z_impact"]:
+        d[c + "_c"] = d[c] - d.groupby(["Link", "year"])[c].transform("mean")
+    b = float((d.opp_elo_c * d.z_impact_c * d.G).sum() / (d.opp_elo_c ** 2 * d.G).sum())   # within-player slope
+    s["opp_slope"] = b
+    s["z_impact_raw"] = s.z_impact
+    s["z_impact"] = s.z_impact - b * (s.opp_elo.fillna(1500) - 1500)
+    print(f"opponent adjustment: {-b * 100:.3f} SD per 100 Elo of opposition")
+    return s
+
+
 def wmean(d, col):
     m = d[col].notna()
     return np.average(d.loc[m, col], weights=d.loc[m, "G"]) if m.any() else np.nan
@@ -225,6 +245,21 @@ def titles(t, s, strength):
     # the season title counts in full, the split titles at half
     final_re = re.compile(r"Season Finals|Grand Finals|Season Playoffs|Championship", re.I)
     has_final = {(e.League, e.year) for e in r.itertuples() if final_re.search(e.Name) and e.League in REGION}
+    # title difficulty (ay, 18 Nov: modest 0.85x to 1.15x): how strong the teams a champion met at that event were
+    # (average opponent Elo, 2016 on), ranked against other titles of the same tier (domestic: same region, so region
+    # strength is not counted twice). Earlier titles stay at 1.0.
+    path_mult = {}
+    f = os.path.join(CSV, "event_opp.csv")
+    if os.path.exists(f):
+        ev = pd.read_csv(f).set_index(["Page", "Team"]).opp_elo
+        champs = r[pd.to_numeric(r.PlaceN, errors="coerce") == 1].copy()
+        champs["opp"] = [ev.get((pg, tm), np.nan) for pg, tm in zip(champs.Page, champs.Team)]
+        champs["grp"] = [INTL.get(l, "dom_" + REGION.get(l, "x")) for l in champs.League]
+        champs = champs.dropna(subset=["opp"])
+        champs["pct"] = champs.groupby("grp").opp.rank(pct=True)
+        lo, hi = CFG.get("title_difficulty", [0.85, 1.15])
+        for row in champs.itertuples():
+            path_mult[(row.Page, row.Team)] = lo + (hi - lo) * (row.pct - 0.5 / max(1, (champs.grp == row.grp).sum())) if (champs.grp == row.grp).sum() > 1 else 1.0
     rows = []
     yr_imp = s.groupby(["Link", "year"]).apply(lambda d: wmean(d, "z_impact"), include_groups=False).to_dict()
     for _, e in r.iterrows():
@@ -253,6 +288,7 @@ def titles(t, s, strength):
         need = tp["min_share_of_games"] * per.G.max()
         imp = ev.groupby("Link").apply(lambda d: wmean(d, "z_impact"), include_groups=False)
         team_mean = imp[per.set_index("Link").G >= need].mean()
+        path = path_mult.get((e.Page, e.Team), 1.0)
         for _, p in per.iterrows():
             if p.G < need:
                 continue
@@ -266,7 +302,7 @@ def titles(t, s, strength):
             # in a 15-game Worlds box score, which wrongly made Knight a solo carrier)
             mates = np.nanmean([yr_imp.get((l, e.year), np.nan) for l in per[per.G >= need].Link if l != p.Link] or [np.nan])
             rows.append(dict(Link=p.Link, event=e.Name, page=e.Page, team=e.Team, year=e.year, tier=tier,
-                             place=int(e.PlaceN), base=pts, credit=credit, lead=lead, pts=pts * credit, G=p.G,
+                             place=int(e.PlaceN), base=pts * path, path=path, credit=credit, lead=lead, pts=pts * path * credit, G=p.G,
                              mates=float(mates) if pd.notna(mates) else 0.0))
     return pd.DataFrame(rows)
 
@@ -355,6 +391,7 @@ def main():
     if variant == "no_region":
         strength[:] = 1.0
     s = zscores(s)
+    s = opponent_adjust(s)
     pen = CFG["impact"]["region_penalty_sd"]
     st = np.array([strength.loc[y, r] if r in strength.columns else 1.0 for y, r in zip(s.year, s.region)])
     s["strength"] = np.where(s.kind == "dom", st, 1.0)
@@ -398,6 +435,22 @@ def main():
     P["peak_raw"], P["peak_year"] = best.imp_s, best.year
     LG = CFG.get("longevity", {"min_games": 20, "min_impact": 0.35})
     P["elite_years"] = yr[(yr.G >= LG["min_games"]) & (yr.imp_s >= LG["min_impact"])].groupby("Link").size().reindex(pool).fillna(0)
+    # longevity as value above the elite line (CORP / Tennis Abstract): a monster year counts more than a barely elite one
+    ok = yr[yr.G >= LG["min_games"]]
+    P["longevity_raw"] = (ok.imp_s - LG["min_impact"]).clip(lower=0).groupby(ok.Link).sum().reindex(pool).fillna(0)
+    P["individual_raw"] = best_years(s[s.Link.isin(pool)], "a_impact", k)
+    cf = os.path.join(CSV, "clutch.csv")
+    if os.path.exists(cf):
+        cl = pd.read_csv(cf)
+        cl["Link"] = cl.Link.map(redirect)
+        # Worlds/MSI/First Stand knockouts count double: the biggest best-of-fives in the game
+        cl["w"] = np.where(cl.Page.str.contains("World Championship|Mid-Season Invitational|First Stand", regex=True), 2.0, 1.0)
+        cl["d"] = (cl.won - cl.exp) * cl.w
+        g = cl.groupby("Link").agg(n=("w", "sum"), d=("d", "sum"))
+        P["clutch_raw"] = (g.d / (g.n + CFG.get("clutch_shrink", 25))).reindex(pool)
+        P["clutch_n"] = g.n.reindex(pool).fillna(0).astype(int)
+    else:
+        P["clutch_raw"], P["clutch_n"] = np.nan, 0
     sp = s[s.Link.isin(pool)]
     P["win_raw"] = best_years(sp, "a_win", k)
     P["carry_raw"] = best_years(sp, "a_carry", k)
@@ -425,13 +478,15 @@ def main():
     P["mvps"] = T[T.tier == "award"].groupby("Link").size().reindex(pool).fillna(0).astype(int) if (T.tier == "award").any() else 0
     for tier in ["worlds", "msi", "first_stand", "domestic"]:
         P[tier + "_titles"] = T[(T.tier == tier) & (T.place == 1)].groupby("Link").size().reindex(pool).fillna(0).astype(int)
+    won = T[(T.place == 1) & (T.tier != "award")]
+    P["title_teams"] = won.groupby("Link").team.nunique().reindex(pool).fillna(0).astype(int)
 
     C = pd.DataFrame(index=pool)
     C["trophies"] = P.trophy_pts / P.trophy_pts.max() * 100
     C["big_stage"] = percentile(P.big_stage_raw)
     C["peak"] = percentile(P.peak_raw)
     C["winning"] = percentile(P.win_raw)
-    C["longevity"] = percentile(P.elite_years + P.games / 10000)
+    C["longevity"] = percentile(P.longevity_raw + P.games / 1e6)
     C["carry"] = percentile(P.carry_raw)
     C["clean_play"] = percentile(P.clean_raw)
     C["consistency"] = percentile(P.consistency_raw)
@@ -441,13 +496,21 @@ def main():
     C["solo_carry"] = percentile(P.solo_carry_pts + P.team_carry_raw.fillna(0) / 100)
     C["recognition"] = percentile(P.recognition_raw)
     C["team_lift"] = percentile(P.team_lift_raw)
-    W = pd.Series(CFG["categories"], dtype=float)
+    C["clutch"] = percentile(P.clutch_raw.fillna(P.clutch_raw.median()))
+    C["title_teams"] = percentile(P.title_teams + P.trophy_pts / 1e5)
+    C["individual"] = percentile(P.individual_raw)
+    # pillars (research 18 Nov): correlated stat boards are merged before weighting, so kills and damage are not
+    # counted four or five times under different names. Every board is still shown in the video, unweighted.
+    C["big_stage_clutch"] = percentile(0.6 * C.big_stage + 0.4 * C.clutch)
+    C["carry_pillar"] = percentile(C.team_carry + C.solo_carry)
+    C["intangibles"] = percentile(C.recognition + C.team_lift)
+    W = pd.Series(CFG["pillars"] if "pillars" in CFG else CFG["categories"], dtype=float)
     P["score"] = (C[W.index] * W).sum(axis=1) / W.sum()
     fk = [l for l in pool if display(l) == CFG["pool"]["benchmark"]][0]
     P["vs_faker"] = P.score / P.loc[fk, "score"] * 100
     P = P.join(C.add_prefix("c_"))
     P["decorated"] = P.raw_pts
-    P["dominant"] = C[["big_stage", "peak", "winning", "laning", "killing", "teamfight", "team_carry", "clean_play", "consistency"]].mean(axis=1)
+    P["dominant"] = C[["big_stage_clutch", "peak", "individual", "carry_pillar"]].mean(axis=1)
 
     # robustness and tipping point, Faker left out of the ranking
     R = P

@@ -48,6 +48,18 @@ categories:               # sums to 100 (v4, 18 Nov). Trophies kept at 28; the s
   recognition: 4          # PROXY for intangibles: All-Pro / MVP votes per covered split
   team_lift: 2            # PROXY for intangibles: team win rate with vs without him
 
+pillars:                  # v6 (18 Nov), what the score is built from; sums to 100
+  trophies: 28            # results, tiered, full value, x title difficulty, x role-fair credit
+  big_stage_clutch: 14    # Worlds/MSI form (60%) + best-of-five and game-5 results above Elo expectation (40%)
+  peak: 12                # best single year
+  longevity: 10           # sum of each year's rating above the elite line
+  individual: 22          # season rating fitted to All-Pro picks, opponent and region adjusted, best 5 years
+  carry_pillar: 8         # team carry + solo carry (ay: carrying a weak team counts)
+  intangibles: 6          # PROXIES: All-Pro/MVP votes + team win rate with vs without him
+
+title_difficulty: [0.85, 1.15]   # ay's pick 18 Nov: each title x how strong the teams met were (ranked within tier)
+clutch_shrink: 25
+
 robustness: {runs: 1000, max_weight_change: 0.30}
 longevity: {min_games: 20, min_impact: 0.2}   # an elite year: 20+ games at 0.2 SD above the role average, after shrinkage
 best_years: 5
