@@ -15,20 +15,20 @@ Data: Leaguepedia scoreboards, 303 tournaments, 25,987 games (approx.), 1,915 pl
 | # | Player | Role | Regions | Years | Worlds | MSI | Domestic | MVPs | Score | #1 in 1000 runs | #2 in 1000 runs |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Faker | Mid | LCK | 2013-2026 | 6 | 2 | 10 | 3 | 92.6 | 100.0% | 0.0% |
-| 2 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 2 | 73.9 | 0.0% | 99.6% |
-| 3 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 1 | 72.4 | 0.0% | 0.4% |
-| 4 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 0 | 69.0 | 0.0% | 0.0% |
-| 5 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 68.5 | 0.0% | 0.0% |
-| 6 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 66.0 | 0.0% | 0.0% |
-| 7 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 65.7 | 0.0% | 0.0% |
-| 8 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 64.2 | 0.0% | 0.0% |
-| 9 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 64.1 | 0.0% | 0.0% |
-| 10 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 0 | 63.1 | 0.0% | 0.0% |
-| 11 | Gumayusi | Bot | LCK | 2021-2026 | 3 | 1 | 1 | 1 | 61.4 | 0.0% | 0.0% |
-| 12 | Oner | Jungle | LCK | 2021-2026 | 3 | 0 | 1 | 0 | 61.3 | 0.0% | 0.0% |
-| 13 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 0 | 60.0 | 0.0% | 0.0% |
-| 14 | Caps | Mid | LEC | 2017-2026 | 0 | 1 | 18 | 1 | 58.7 | 0.0% | 0.0% |
-| 15 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 0 | 58.6 | 0.0% | 0.0% |
+| 2 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 2 | 72.9 | 0.0% | 100.0% |
+| 3 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 1 | 70.7 | 0.0% | 0.0% |
+| 4 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 68.1 | 0.0% | 0.0% |
+| 5 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 0 | 66.7 | 0.0% | 0.0% |
+| 6 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 64.5 | 0.0% | 0.0% |
+| 7 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 64.4 | 0.0% | 0.0% |
+| 8 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 63.3 | 0.0% | 0.0% |
+| 9 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 62.8 | 0.0% | 0.0% |
+| 10 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 0 | 61.2 | 0.0% | 0.0% |
+| 11 | Oner | Jungle | LCK | 2021-2026 | 3 | 0 | 1 | 0 | 59.5 | 0.0% | 0.0% |
+| 12 | Gumayusi | Bot | LCK | 2021-2026 | 3 | 1 | 1 | 1 | 59.1 | 0.0% | 0.0% |
+| 13 | Caps | Mid | LEC | 2017-2026 | 0 | 1 | 18 | 1 | 58.5 | 0.0% | 0.0% |
+| 14 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 0 | 58.4 | 0.0% | 0.0% |
+| 15 | Xiaohu | Mid | LPL | 2015-2026 | 0 | 3 | 5 | 0 | 58.0 | 0.0% | 0.0% |
 
 Benchmark: Faker score 92.6, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 79, peak 77, winning 99, longevity 100, carry 78, clean_play 70, consistency 78, laning 74, killing 89, teamfight 64, vision 72, team_carry 64, solo_carry 68, recognition 70, team_lift 50, clutch 100, title_teams 60, individual 79, big_stage_clutch 94, carry_pillar 71, skill 79, impact 100, intangibles 61
 
@@ -36,14 +36,14 @@ Benchmark: Faker score 92.6, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 | Player | Rank | Score | Worlds | Trophy pts | Big stage | Peak (year) |
 |---|---|---|---|---|---|---|
-| Knight | 2 | 73.9 | 1 | 695 | 95 | 100 (2026) |
-| Viper | 10 | 63.1 | 2 | 554 | 79 | 73 (2026) |
-| Bin | 8 | 64.2 | 1 | 561 | 83 | 82 (2026) |
+| Knight | 2 | 72.9 | 1 | 695 | 95 | 100 (2026) |
+| Viper | 10 | 61.2 | 2 | 554 | 79 | 73 (2026) |
+| Bin | 8 | 63.3 | 1 | 561 | 83 | 82 (2026) |
 
 ## Tipping point (trophy weight -> #1 overall, then #2)
 
-- trophy weight 0%: Knight first, Chovy next
-- trophy weight 10%: Faker first, Knight next
+- trophy weight 0%: Knight first, Faker next
+- trophy weight 6%: Faker first, Knight next
 
 ## Side-board: Most Decorated (pure trophy points, no carry share)
 
@@ -107,7 +107,7 @@ Benchmark: Faker score 92.6, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 **skill**: Chovy 100, Knight 100, Keria 95, Zeus 91, Kiin 90
 
-**impact**: Faker 100, Ruler 94, Chovy 91, Canyon 89, Peanut 87
+**impact**: Faker 100, Ruler 91, Doinb 87, TheShy 82, JackeyLove 81
 
 **intangibles**: Chovy 100, Caliste 89, Inspired 88, Khan 83, CoreJJ 83
 
