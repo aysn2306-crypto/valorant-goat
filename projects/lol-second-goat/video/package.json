@@ -1,0 +1,28 @@
+{
+  "name": "valorant-goat-video",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "studio": "remotion studio",
+    "draft": "remotion render --scale=0.5 --concurrency=4 --crf=28",
+    "final": "remotion render --concurrency=4 --crf=18",
+    "still": "remotion still"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.544",
+    "@remotion/fonts": "^4.0.544",
+    "@remotion/google-fonts": "4.0.544",
+    "@remotion/media-utils": "4.0.544",
+    "@remotion/noise": "4.0.544",
+    "@remotion/shapes": "4.0.544",
+    "@remotion/transitions": "4.0.544",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.544",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}
