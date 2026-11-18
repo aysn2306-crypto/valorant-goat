@@ -1,6 +1,10 @@
-case,knight,faker
-now,74.9,84.3
-+1 Worlds,78.1,84.3
-+2 Worlds,81.3,84.3
-+3 Worlds,84.5,84.3
-+2 Worlds +2 MSI,84.6,84.3
+case,knight,faker,trophy_pts_added
+now,73.1,91.5,0
++1 Worlds,76.8,91.5,106
++1 Worlds +4 LPL,78.8,91.5,163
++2 Worlds,80.5,91.5,212
++2 Worlds +2 MSI,84.2,91.5,320
++3 Worlds,84.1,91.5,318
++3 Worlds +1 MSI,86.0,91.5,372
++4 Worlds,87.8,91.5,425
++8 LPL,77.1,91.5,114

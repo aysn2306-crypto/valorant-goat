@@ -1,0 +1,9 @@
+file,url,title,date,kind,note
+article_01_esportsinsider-com.png,https://esportsinsider.com/2026/05/keria-second-best-in-league-debate,It's too early to be calling Keria the second-best League of Legends player of all time,2026-05-05,article,cookie: none found
+article_02_sheepesports-com.png,https://www.sheepesports.com/us/articles/knight-named-as-worlds-2026-most-valuable-player/en,Knight named Worlds 2026 Most Valuable Player | Sheep Esports,2026-11-15,article,cookie: none found
+article_03_invenglobal-com.png,https://www.invenglobal.com/articles/28568/chovy-vs-knight-the-ultimate-showdown-to-complete-perfection,"'Chovy' vs 'knight', the Ultimate Showdown to Complete 'Perfection' - Inven Global",2026-11-13,article,cookie: Reject all; ad + data-use popover hidden before the shot
+article_04_earlygame-com.png,https://earlygame.com/lol/lol-community-reignites-the-goat-debate-faker-ruler-uzi,"LoL: Community Reignites The GOAT Debate – Faker, Ruler,… | EarlyGame",2023-08-11,article,"cookie modal had no reject button: removed from the page before the shot, nothing accepted. Note: 2023 article"
+article_05_teamliquid-com.png,https://teamliquid.com/articles/whos-the-2nd-best-league-of-legends-player,Who's the 2nd Best League of Legends player? — a response,2025-02-12,article,cookie: none found
+article_06_insider-gaming-com.png,https://insider-gaming.com/knight-crowned-lol-worlds-2026-mvp-after-blg-victory/,Knight Crowned LoL Worlds 2026 MVP After BLG Victory,2026-11-15,article,"cookie modal (Accept/Manage only) removed from the page before the shot, nothing accepted"
+(none),https://old.reddit.com/r/leagueoflegends,reddit posts,,reddit,NOT CAPTURED: old.reddit and www.reddit redirect headless browsers to login / bot challenge
+(none),https://x.com/search,X posts on Knight,,x,NOT CAPTURED: X needs sign-in
