@@ -792,8 +792,15 @@ export const SampleKnightRadar: React.FC = () => {
         fontFamily: F.body, fontWeight: 800, fontSize: 18, color: "#AEB6C2", letterSpacing: 1 }}>AVERAGE PRO</div>
       {PARTS.map(([n], i) => { const l = label(i); return <Big key={n} x={l.x} y={l.y} size={38} align={l.align} w={420}
         color={PARTS[i][3] > PARTS[i][2] ? C.cyan : C.gold}>{n}</Big>; })}
-      <Big x={kx + 14} y={ky + 8} size={44} color={C.cyan} w={200}>{r0(PARTS[0][3])}</Big>
-      <Big x={fx - 20} y={fy - 44} size={44} align="right" color={C.gold} w={200}>100</Big>
+      <Big x={kx + 82} y={ky - 10} size={44} color={C.cyan} w={200}>{r0(PARTS[0][3])}</Big>
+      {/* ay 19:41: Knight matches Faker almost everywhere; circle the trophy gap as the one thing he needs */}
+      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+        <ellipse cx={cx} cy={(ky + fy) / 2} rx={70} ry={(ky - fy) / 2 + 40} fill="none" stroke={CREAM} strokeWidth={5} strokeDasharray="14 9"
+          style={{ filter: "drop-shadow(0 0 8px rgba(236,230,210,0.6))" }} />
+        <path d={`M ${cx - 80} ${(ky + fy) / 2} L ${cx - 230} ${(ky + fy) / 2 - 40}`} stroke={CREAM} strokeWidth={4} />
+      </svg>
+      <Big x={cx - 240} y={(ky + fy) / 2 - 110} size={46} align="right" w={420} color={CREAM}>THE BIG GAP</Big>
+      <Big x={fx + 82} y={fy - 30} size={44} color={C.gold} w={200}>100</Big>
       <Face id="faker" x={1560} y={400} size={140} ring={C.gold} glow={C.gold} />
       <Big x={1560} y={480} size={48} align="center" color={C.gold} w={300}>#1 FAKER</Big>
       <Face id="knight" x={1560} y={680} size={140} ring={C.cyan} glow={C.cyan} />
@@ -1106,6 +1113,42 @@ export const R4ChampPool: React.FC = () => {
           </React.Fragment>
         );
       })}
+    </Stage>
+  );
+};
+
+// 06 (round 6). Clutch as a directional portrait histogram. Reference: MachineLoLing 13m50 "directional histogram"
+// (red-to-green field, "gets counterpicked <- -> counterpicks") + 01m48 "portrait histogram" (one portrait per unit).
+export const R6ClutchHist: React.FC = () => {
+  const rows = (S.clutch as Cl[]).filter((r) => r[2] >= 60).sort((a, z) => a[3] - z[3]);
+  const b: Box = { x0: 250, y0: 250, x1: 1700, y1: 830 };
+  const xr: [number, number] = [-20, 28];
+  const { X } = scale(b, xr, [0, 1]);
+  const bw = 2, d = 46, pitch = 48;
+  const stack: Record<number, number> = {};
+  const units = rows.map((r) => { const bin = Math.floor(r[3] / bw); const k = (stack[bin] = (stack[bin] ?? -1) + 1);
+    return { id: r[0], name: r[1], v: r[3], x: X(bin * bw + bw / 2), y: b.y1 - pitch * (k + 0.5) }; });
+  const faces = new Set(["faker", "bin", "gumayusi", "knight", "zeus", "chovy", "ruler", "keria"]);
+  const lit = new Set(["faker", "bin", "knight"]);
+  return (
+    <Stage title="CLUTCH OR CHOKE?">
+      <div style={{ position: "absolute", left: b.x0, top: b.y0 - 30, width: b.x1 - b.x0, height: b.y1 - b.y0 + 30,
+        background: "linear-gradient(90deg, rgba(150,50,55,0.42) 0%, rgba(40,40,48,0.15) 42%, rgba(40,40,48,0.15) 50%, rgba(40,130,95,0.42) 100%)" }} />
+      <div style={{ position: "absolute", left: X(0), top: b.y0 - 30, height: b.y1 - b.y0 + 30, borderLeft: "2px dashed rgba(237,239,242,0.4)" }} />
+      <Axes b={b} xr={xr} yr={[0, 1]} xt={[-20, -10, 0, 10, 20]} yt={[]} xl="SERIES WON ABOVE EXPECTED" yl="" xf={(v) => (v > 0 ? `+${v}` : String(v))} />
+      <div style={{ position: "absolute", left: b.x0 + 20, top: b.y0 - 18, fontFamily: F.title, fontSize: 40, color: "#FF8A8E", letterSpacing: 1 }}>← CHOKES</div>
+      <div style={{ position: "absolute", right: 1920 - b.x1 + 20, top: b.y0 - 18, fontFamily: F.title, fontSize: 40, color: "#6EE7A8", letterSpacing: 1 }}>CLUTCH →</div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 150, textAlign: "center", fontFamily: F.body, fontWeight: 800, fontSize: 22, letterSpacing: 1.5, color: "#8A94A3" }}>
+        ONE CIRCLE = ONE PLAYER WITH 60+ BEST-OF SERIES</div>
+      {units.map((u) => faces.has(u.id)
+        ? <Face key={u.id} id={u.id} x={u.x} y={u.y} size={d} ring={u.id === "faker" ? C.gold : lit.has(u.id) ? C.cyan : "#E9ECF1"} glow={u.id === "faker" ? C.gold : lit.has(u.id) ? "rgba(34,211,238,0.5)" : "rgba(0,0,0,0.4)"} />
+        : <div key={u.id} style={{ position: "absolute", left: u.x - d / 2 + 4, top: u.y - d / 2 + 4, width: d - 8, height: d - 8, borderRadius: d, background: "rgba(214,219,226,0.28)",
+            border: "2px solid rgba(214,219,226,0.45)" }} />)}
+      {units.filter((u) => lit.has(u.id)).map((u) => (
+        <div key={"l" + u.id} style={{ position: "absolute", left: u.x - 120, width: 240, top: u.y - 74 - (u.id === "bin" ? 0 : 0), textAlign: "center", whiteSpace: "nowrap",
+          fontFamily: F.body, fontWeight: 800, fontSize: 24, color: u.id === "faker" ? C.gold : C.cyan, textShadow: "0 0 6px #0B0B0F" }}>
+          {u.name.toUpperCase()} +{Math.round(u.v)}</div>
+      ))}
     </Stage>
   );
 };
