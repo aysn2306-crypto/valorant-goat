@@ -137,7 +137,9 @@ Timing:
 | And one more, because I had to. Split Faker's career down the middle. 2013 to 2019, and 2020 to now. Three world titles in each half. | GRAPHIC: Faker's face splits into two. |
 | So I split him into two players. | Hold. |
 | The young Faker alone is number two of all time, less than a point behind Knight. In a third of the reruns, he's number one. The second half is still top fifteen. He did both. | GRAPHIC: Faker 2013 to 2019 lands at #2 (87.3, Knight 88.0), Faker 2020 to 2026 at #13. **[SILENCE]** |
-| And the model can't see everything. Shotcalling, comms, being the voice in the room. Bengi helped win three Worlds and sits at 44 here. | GRAPHIC: Bengi's dot far down, note: what the model can't see. |
+| Now run the model at the end of every year. Faker is number one in every single one since 2015. | GRAPHIC: ranking by year (17a), Faker's line flat across the top. |
+| The number two spot moves. Bang held it for seven straight years. Then Ruler. Then Chovy, twice. | Lines cross under Faker. |
+| And Knight? Seventh in 2023. Fourth. Sixth. And this year, second. | Knight's line lights cyan and climbs to #2. **[SILENCE]** |
 
 ## 7. The GOAT pyramid (9:40 to 11:00)
 
@@ -149,7 +151,7 @@ Timing:
 | At the bottom, numbers thirty two to sixty one. Legends of their own regions. | Tier 5 fills: Scout, Perkz, Doinb, Bengi, Jankos, Bjergsen. |
 | Then the stars. The best player on a great team. | Tier 4 fills: Gumayusi, Caps, Deft, TheShy, Uzi. |
 | Now, the internet won't like this. Every all-time list from the last two years has Uzi and Bengi in its top ten. | Everything dims except Uzi (#31) and Bengi (#44). Small list cards pop beside them: esports.net 2025 (Bengi #2, Uzi #4), spilled.gg 2026 (Uzi #5, Bengi #9). Red Bull's list is unranked, so it isn't on screen. |
-| We have them at thirty one and forty four. Uzi never won Worlds, and trophies are the biggest part of this model. Bengi won three, but his own numbers rank two hundred and forty seventh. | Hold on the two faces. **[SILENCE]** |
+| We have them at thirty one and forty four. Uzi never won Worlds, and trophies are the biggest part of this model. Bengi won three, but his own numbers rank two hundred and forty seventh. Shotcalling, comms, being the voice in the room: the model can't see any of that. | Hold on the two faces. **[SILENCE]** |
 | Then the absolute top of League. | Tier 3 fills: Keria, Ruler, Bin, Viper. |
 | Then a tier of two, a point and a half apart. | Two empty slots. **[SILENCE]** |
 | Chovy. | Chovy fills. |
