@@ -282,16 +282,17 @@ export const S9TwoFakers: React.FC = () => {
 
 // 10. Finale: the GOAT pyramid (v11). Tiers are cut where the score gaps are: Faker | Knight, Chovy (3.4 clear of #4) |
 // Keria, Ruler (2.5 clear) | Zeus to Viper (1.7 clear of Gumayusi). Equal-height tiers; each face carries its % of Faker.
-const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler"], ["zeus", "canyon", "bin", "peanut", "viper"]];
+const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler"], ["zeus", "canyon", "bin", "peanut", "viper"],
+  ["gumayusi", "oner", "kiin", "caps", "kanavi", "xiaohu"]]; // tier 5 added 17:32 (1.6 gap below to Meiko)
 // ay 18 Nov 17:30: built bottom up instead of a countdown, example players with their rank, then zoom on Knight and an arrow
 // from tier 2 to tier 1 to lead into "what would it take to reach Faker".
 const Pyramid: React.FC<{ focus?: boolean }> = ({ focus }) => {
-  const top = 170, base = 920, half = 760, cx = 960;
-  const cuts = [top, 430, 600, 750, base];
+  const top = 165, base = 945, half = 800, cx = 960;
+  const cuts = [top, 395, 545, 680, 810, base];
   const hw = (y: number) => ((y - top) / (base - top)) * half;
-  const fills = ["rgba(245,184,61,0.30)", "rgba(34,211,238,0.18)", "rgba(150,160,175,0.14)", "rgba(150,160,175,0.09)"];
-  const sizes = [140, 96, 84, 80], gaps = [0, 230, 230, 180];
-  const pos = (i: number, j: number) => ({ x: cx + (j - (TIERS[i].length - 1) / 2) * gaps[i], y: i === 0 ? 330 : (cuts[i] + cuts[i + 1]) / 2 - 16 });
+  const fills = ["rgba(245,184,61,0.30)", "rgba(34,211,238,0.18)", "rgba(150,160,175,0.14)", "rgba(150,160,175,0.10)", "rgba(150,160,175,0.06)"];
+  const sizes = [124, 86, 72, 66, 62], gaps = [0, 230, 230, 175, 165];
+  const pos = (i: number, j: number) => ({ x: cx + (j - (TIERS[i].length - 1) / 2) * gaps[i], y: i === 0 ? 305 : (cuts[i] + cuts[i + 1]) / 2 - (i >= 3 ? 20 : 14) });
   const kn = pos(1, 0), fk = pos(0, 0);
   const lit = (id: string) => !focus || id === "knight" || id === "faker";
   return (
@@ -313,7 +314,7 @@ const Pyramid: React.FC<{ focus?: boolean }> = ({ focus }) => {
                 background: i === 0 ? C.gold : i === 1 ? C.cyan : "#E9ECF1", color: "#0B0B0F", fontFamily: F.title, fontSize: size * 0.26,
                 display: "flex", alignItems: "center", justifyContent: "center" }}>#{P(id).rank}</div>
               <div style={{ position: "absolute", left: x - 110, width: 220, top: y + size / 2 + 2, textAlign: "center", fontFamily: F.body, fontWeight: 800,
-                fontSize: i === 0 ? 30 : i === 1 ? 26 : 22, color: i === 0 ? C.gold : i === 1 ? C.cyan : C.text, whiteSpace: "nowrap", lineHeight: 1.1,
+                fontSize: i === 0 ? 28 : i === 1 ? 24 : i === 2 ? 21 : 18, color: i === 0 ? C.gold : i === 1 ? C.cyan : C.text, whiteSpace: "nowrap", lineHeight: 1.1,
                 textShadow: "0 0 6px #0B0B0F" }}>{P(id).name.toUpperCase()} {i === 0 ? "" : r0(P(id).vsFaker) + "%"}</div>
             </div>
           );
@@ -322,10 +323,10 @@ const Pyramid: React.FC<{ focus?: boolean }> = ({ focus }) => {
           <>
             <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
               <defs><marker id="ah" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill={C.text} /></marker></defs>
-              <path d={`M ${kn.x - 40} ${kn.y - 60} C ${kn.x - 120} ${kn.y - 150}, ${fk.x - 160} ${fk.y + 40}, ${fk.x - 82} ${fk.y + 10}`} stroke={C.text} strokeWidth={5}
+              <path d={`M ${kn.x - 34} ${kn.y - 44} C ${kn.x - 110} ${kn.y - 130}, ${fk.x - 160} ${fk.y + 40}, ${fk.x - 82} ${fk.y + 10}`} stroke={C.text} strokeWidth={5}
                 fill="none" strokeDasharray="14 10" markerEnd="url(#ah)" style={{ filter: "drop-shadow(0 0 6px rgba(255,255,255,0.6))" }} />
             </svg>
-            <div style={{ position: "absolute", left: kn.x - 560, top: (kn.y + fk.y) / 2 - 40, width: 380, textAlign: "right", fontFamily: F.title, fontSize: 40,
+            <div style={{ position: "absolute", left: kn.x - 470, top: (kn.y + fk.y) / 2 - 30, width: 300, textAlign: "right", fontFamily: F.title, fontSize: 40,
               letterSpacing: 1, color: CREAM, lineHeight: 1.05, textShadow: "0 0 12px #0B0B0F" }}>WHAT WOULD IT TAKE?</div>
           </>
         )}
