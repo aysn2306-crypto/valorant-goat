@@ -52,7 +52,7 @@ Timing:
 | VO | SCREEN |
 |---|---|
 | Next problem. LPL players looked like monsters. | GRAPHIC: kills per game by region. |
-| But an LPL game has about three more kills in it than an LCK game. More fighting, more kills for everyone. | GRAPHIC: 26.6 vs 23.6, the gap labelled. |
+| Since 2016, an LPL game has had about three more kills in it than an LCK game. More fighting, more kills for everyone. | GRAPHIC: 26.6 vs 23.6, the gap labelled. |
 | So every stat is compared only against players in the same role, same league, same year. | GRAPHIC: one dot cloud per league, recentred. |
 
 ### 3.3 Who you beat matters
@@ -132,9 +132,9 @@ Timing:
 |---|---|
 | What if only international trophies counted? | GRAPHIC: domestic trophies fall away. |
 | Then number two is Keria. | Keria rises. |
-| And one more, because I had to. Faker's career is really two careers. Three world titles from 2013 to 2016, three more from 2023. | GRAPHIC: Faker's face splits into two. |
+| And one more, because I had to. Split Faker's career down the middle. 2013 to 2019, and 2020 to now. Three world titles in each half. | GRAPHIC: Faker's face splits into two. |
 | So I split him into two players. | Hold. |
-| The second Faker alone is number three of all time. The first one, number twelve. He did both. | GRAPHIC: Faker 2017 to 2026 lands at #3, Faker 2013 to 2016 at #12. **[SILENCE]** |
+| The young Faker alone is number two of all time, less than a point behind Knight. In a third of the reruns, he's number one. The second half is still top fifteen. He did both. | GRAPHIC: Faker 2013 to 2019 lands at #2 (87.3, Knight 88.0), Faker 2020 to 2026 at #13. **[SILENCE]** |
 | And the model can't see everything. Shotcalling, comms, being the voice in the room. Bengi helped win three Worlds and sits at 44 here. | GRAPHIC: Bengi's dot far down, note: what the model can't see. |
 
 ## 7. The GOAT pyramid (9:40 to 11:00)
@@ -177,7 +177,7 @@ Timing:
 | Pyramid gaps | Faker, 18.7 gap; Knight, Chovy; 3.4 gap; Keria, Ruler; 2.5 gap; Zeus, Canyon, Bin, Peanut, Viper; then 1.7 gap | draft_scores.csv |
 | 1,000 reruns | Faker #1 in 1,000; Knight #2 in 996 (Chovy in 4) | whatif.py |
 | International only | Faker 92.6, Keria 72.9, Knight 71.4, Zeus 68.8, Ruler 66.4 | whatif_intl_only.csv |
-| Two Fakers | Knight 88.0, Chovy 86.3, Faker 2017-26 85.2 (#3) ... Faker 2013-16 72.7 (#12) | draft_scores_split_faker.csv |
+| Two Fakers (even halves) | Knight 88.0, Faker 2013-19 87.3 (#2, #1 in 377 of 1,000 reruns), Chovy 86.4 ... Faker 2020-26 69.6 (#13) | draft_scores_split_faker.csv |
 | Trophy points | Faker 1,509; Canyon 714, Ruler 705, Knight 695, Chovy 684; gap 795 | draft_scores.csv |
 | Trophy values | Worlds 100, MSI 56, First Stand 40, LCK 44, LPL 35, LEC about 12 | config/weights.yaml |
 | Hardest Worlds since 2016 | T1 2024 8.7 coin flips, BLG 2026 7.2 (research measure) | research/trophy-values-from-data.md |

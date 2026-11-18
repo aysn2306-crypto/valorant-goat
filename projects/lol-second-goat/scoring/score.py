@@ -26,6 +26,8 @@ def display(link):
 
 
 _RD = {}
+FS = int(os.environ.get("FAKER_SPLIT", 2019))   # last year of the first Faker
+FA, FB = f"Faker 2013-{FS % 100:02d}", f"Faker {FS + 1}-26"
 
 
 def redirect(l):
@@ -352,7 +354,7 @@ def recognition(s, pool):
     if os.environ.get("VARIANT") == "split_faker":
         yr = a.OverviewPage.str.extract(r"(20\d\d)")[0].astype(float)
         m = a.Link == "Faker"
-        a.loc[m, "Link"] = np.where(yr[m] <= 2016, "Faker 2013-16", "Faker 2017-26")
+        a.loc[m, "Link"] = np.where(yr[m] <= FS, FA, FB)
     tier = {"All Pro Team": 3, "1st All-Pro Team": 3, "2nd All Pro Team": 2, "2nd All-Pro Team": 2, "3rd All Pro Team": 1, "3rd All-Pro Team": 1}
     ap = a[a.Display.isin(tier)].assign(pts=lambda d: d.Display.map(tier))
     covered = set(ap.OverviewPage)
@@ -456,10 +458,11 @@ def main():
         t, s = load()
         pd.to_pickle((t, s), cache)
     if variant == "split_faker":
-        # ay's twist: Faker's two careers as two players (2013-16: three Worlds; 2017 on: three Worlds)
+        # ay's twist: Faker's career as two players, split into even halves by years (ay 18 Nov 17:23):
+        # 2013-19 (Worlds 2013, 2015, 2016) and 2020-26 (Worlds 2023, 2024, 2025)
         s = s.copy()
         m = s.Link == "Faker"
-        s.loc[m, "Link"] = np.where(s.loc[m, "year"] <= 2016, "Faker 2013-16", "Faker 2017-26")
+        s.loc[m, "Link"] = np.where(s.loc[m, "year"] <= FS, FA, FB)
     strength = region_strength(s)
     if variant == "no_region":
         strength[:] = 1.0
@@ -529,7 +532,7 @@ def main():
         cl["Link"] = cl.Link.map(redirect)
         if os.environ.get("VARIANT") == "split_faker":
             m = cl.Link == "Faker"
-            cl.loc[m, "Link"] = np.where(cl.loc[m, "year"] <= 2016, "Faker 2013-16", "Faker 2017-26")
+            cl.loc[m, "Link"] = np.where(cl.loc[m, "year"] <= FS, FA, FB)
         # Worlds/MSI/First Stand knockouts count double: the biggest best-of-fives in the game
         if FUTURE_CFG:
             l, base = FUTURE_CFG["link"], int(FUTURE_CFG.get("from_year", 2026))
@@ -630,7 +633,7 @@ def main():
         ps["Link"] = ps.Link.map(redirect)
         if os.environ.get("VARIANT") == "split_faker":
             m = ps.Link == "Faker"
-            ps.loc[m, "Link"] = np.where(ps.loc[m, "year"] <= 2016, "Faker 2013-16", "Faker 2017-26")
+            ps.loc[m, "Link"] = np.where(ps.loc[m, "year"] <= FS, FA, FB)
         first = s.groupby("Link").year.min()
         imp = {}
         for l, dd in ps.groupby("Link"):
