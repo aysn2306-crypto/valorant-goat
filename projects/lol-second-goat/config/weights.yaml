@@ -27,16 +27,29 @@ impact:                   # per game, z-scored inside role + year
   region_penalty_sd: 1.0  # domestic numbers lose (1 - region strength) standard deviations
   shrink_games: 40
 
-categories:               # sums to 100
-  trophies: 28
-  big_stage: 15
-  peak: 12
-  winning: 10
-  longevity: 10
-  carry: 10
-  clean_play: 8
-  consistency: 7
+categories:               # sums to 100 (v4, 18 Nov). Trophies kept at 28; the stat block split by the All-Pro fit
+  trophies: 28            # results, tiered, full value (ay's rule)
+  big_stage: 10           # Worlds/MSI form
+  peak: 10
+  longevity: 8
+  winning: 6
+  consistency: 4
+  laning: 7               # gold/CS/XP diff at 15: the strongest individual signal in the All-Pro fit
+  killing: 4
+  teamfight: 4
+  clean_play: 4
+  team_carry: 4           # gap to own teammates ("MVP of the team")
+  solo_carry: 4           # placement points earned above teammates ("carried them there")
+  vision: 1               # voters gave vision ~0 weight; kept small so supports get a board
+  recognition: 4          # PROXY for intangibles: All-Pro / MVP votes per covered split
+  team_lift: 2            # PROXY for intangibles: team win rate with vs without him
 
 robustness: {runs: 1000, max_weight_change: 0.30}
 longevity: {min_games: 20, min_impact: 0.2}   # an elite year: 20+ games at 0.2 SD above the role average, after shrinkage
 best_years: 5
+
+league_stats:             # new League sections (18 Nov), per game, z-scored inside role + year
+  laning: [gd15, csd15, xpd15]        # Oracle's Elixir, 2014 on (LPL laning from 2018)
+  killing: [kills_pm, dpm]
+  teamfight: [dshare, kp]
+  vision: [vis_pm, assists_pm]        # vision score from Leaguepedia / Oracle's Elixir where recorded

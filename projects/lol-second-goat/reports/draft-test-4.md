@@ -14,37 +14,36 @@ Data: Leaguepedia scoreboards, 303 tournaments, 25,987 games (approx.), 1,915 pl
 
 | # | Player | Role | Regions | Years | Worlds | MSI | Domestic | MVPs | Score | #1 in 1000 runs | #2 in 1000 runs |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Faker | Mid | LCK | 2013-2026 | 6 | 2 | 10 | 3 | 92.8 | 100.0% | 0.0% |
-| 2 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 0 | 88.0 | 0.0% | 100.0% |
-| 3 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 2 | 87.1 | 0.0% | 0.0% |
-| 4 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 86.7 | 0.0% | 0.0% |
-| 5 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 1 | 85.0 | 0.0% | 0.0% |
-| 6 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 83.0 | 0.0% | 0.0% |
-| 7 | Bang | Bot | LCK/LCS | 2012-2021 | 2 | 2 | 4 | 0 | 81.0 | 0.0% | 0.0% |
-| 8 | Oner | Jungle | LCK | 2021-2026 | 3 | 0 | 1 | 0 | 80.2 | 0.0% | 0.0% |
-| 9 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 0 | 79.7 | 0.0% | 0.0% |
-| 10 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 79.4 | 0.0% | 0.0% |
-| 11 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 79.4 | 0.0% | 0.0% |
-| 12 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 0 | 78.3 | 0.0% | 0.0% |
-| 13 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 78.0 | 0.0% | 0.0% |
-| 14 | Meiko | Support | LPL | 2015-2026 | 1 | 1 | 4 | 0 | 77.9 | 0.0% | 0.0% |
-| 15 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 0 | 76.9 | 0.0% | 0.0% |
+| 1 | Faker | Mid | LCK | 2013-2026 | 6 | 2 | 10 | 3 | 94.1 | 100.0% | 0.0% |
+| 2 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 2 | 87.4 | 0.0% | 99.3% |
+| 3 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 0 | 86.3 | 0.0% | 0.7% |
+| 4 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 85.5 | 0.0% | 0.0% |
+| 5 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 1 | 85.1 | 0.0% | 0.0% |
+| 6 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 0 | 79.0 | 0.0% | 0.0% |
+| 7 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 78.9 | 0.0% | 0.0% |
+| 8 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 0 | 78.2 | 0.0% | 0.0% |
+| 9 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 77.9 | 0.0% | 0.0% |
+| 10 | Meiko | Support | LPL | 2015-2026 | 1 | 1 | 4 | 0 | 77.8 | 0.0% | 0.0% |
+| 11 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 77.6 | 0.0% | 0.0% |
+| 12 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 0 | 77.1 | 0.0% | 0.0% |
+| 13 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 76.1 | 0.0% | 0.0% |
+| 14 | Uzi | Bot | LPL | 2013-2023 | 0 | 1 | 2 | 1 | 75.5 | 0.0% | 0.0% |
+| 15 | Khan | Top | LCK/LPL | 2014-2021 | 0 | 0 | 6 | 0 | 75.2 | 0.0% | 0.0% |
 
-Benchmark: Faker score 92.8, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 87, peak 89, winning 100, longevity 97, carry 94, clean_play 92, consistency 66
+Benchmark: Faker score 94.1, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 98, peak 96, winning 100, longevity 98, carry 94, clean_play 92, consistency 75, laning 97, killing 96, teamfight 68, vision 91, team_carry 83, solo_carry 98, recognition 95, team_lift 48
 
 ## Players ay named
 
 | Player | Rank | Score | Worlds | Trophy pts | Big stage | Peak (year) |
 |---|---|---|---|---|---|---|
-| Knight | 3 | 87.1 | 1 | 685 | 100 | 100 (2026) |
-| Viper | 9 | 79.7 | 2 | 456 | 93 | 95 (2024) |
-| Bin | 13 | 78.0 | 1 | 566 | 95 | 83 (2024) |
+| Knight | 2 | 87.4 | 1 | 725 | 100 | 100 (2026) |
+| Viper | 6 | 79.0 | 2 | 451 | 97 | 93 (2024) |
+| Bin | 11 | 77.6 | 1 | 592 | 98 | 89 (2020) |
 
 ## Tipping point (trophy weight -> #1 overall, then #2)
 
 - trophy weight 0%: Knight first, Chovy next
-- trophy weight 12%: Keria first, Knight next
-- trophy weight 20%: Faker first, Keria next
+- trophy weight 16%: Faker first, Knight next
 
 ## Side-board: Most Decorated (pure trophy points, no carry share)
 
@@ -56,48 +55,64 @@ Benchmark: Faker score 92.8, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 ## Side-board: Most Dominant (individual categories only)
 
-1. Chovy (Mid, 1018 games, peak 2024): 99.6
-2. Knight (Mid, 1102 games, peak 2026): 99.5
-3. Keria (Support, 995 games, peak 2024): 98.7
-4. Ruler (Bot, 1177 games, peak 2022): 97.4
-5. Viper (Bot, 1041 games, peak 2024): 96.6
+1. Knight (Mid, 1102 games, peak 2026): 99.7
+2. Chovy (Mid, 1018 games, peak 2024): 98.4
+3. Ruler (Bot, 1177 games, peak 2020): 96.4
+4. Kanavi (Jungle, 837 games, peak 2022): 96.0
+5. Viper (Bot, 1041 games, peak 2024): 96.0
 
 ## Every category top 5 (Faker included)
 
-**trophies**: Faker 100, Keria 60, Ruler 59, Knight 55, Canyon 51
+**trophies**: Faker 100, Keria 64, Ruler 57, Knight 57, Chovy 50
 
-**big_stage**: Piglet 100, Keria 100, Knight 100, Ruler 99, DanDy 99
+**big_stage**: Keria 100, Uzi 100, Knight 100, Meiko 99, Zeus 99
 
-**peak**: Knight 100, Chovy 100, Bdd 100, Ninja 99, Keria 99
+**peak**: Knight 100, Lehends 100, Smeb 100, Nuguri 99, BeryL 99
 
 **winning**: Chovy 100, Faker 100, Canyon 100, Ruler 99, Peanut 99
 
-**longevity**: Ruler 100, Knight 100, Chovy 100, Keria 99, Meiko 99
+**longevity**: Ruler 100, Knight 100, Kiin 100, Chovy 99, Scout 99
 
 **carry**: Kanavi 100, Chovy 100, Uzi 100, Huni 99, Nuguri 99
 
 **clean_play**: Chovy 100, ShowMaker 100, Knight 100, Rekkles 99, Bdd 99
 
-**consistency**: Chovy 100, Knight 100, Viper 100, Aiming 99, Ruler 99
+**consistency**: Chovy 100, Knight 100, Kanavi 100, Viper 99, Froggen 99
+
+**laning**: TheShy 100, SofM 100, Knight 100, Chovy 99, Bin 99
+
+**killing**: TheShy 100, Knight 100, Kanavi 100, Uzi 99, Rookie 99
+
+**teamfight**: Elk 100, Uzi 100, Doinb 100, Knight 99, Froggen 99
+
+**vision**: Chovy 100, Doinb 100, Rookie 100, Baolan 99, Deft 99
+
+**team_carry**: Knight 100, Froggen 100, Bjergsen 100, Kanavi 99, Uzi 99
+
+**solo_carry**: Uzi 100, Knight 100, Keria 100, Chovy 99, Huni 99
+
+**recognition**: Chovy 100, Keria 100, Canyon 100, Caps 99, Rekkles 99
+
+**team_lift**: DanDy 100, MMD 100, Ambition 100, Dhokla 99, Zest 99
 
 ## Worlds title carry shares (credit 0.5 to 1.5)
 
-- Worlds Season 1 Fnatic: Shushei 1.12, Mellisan 1.06, LaMiaZeaLoT 1.00, Cyanide 0.99, XPeke 0.85
-- Worlds Season 2 Taipei Assassins: Toyz 1.18, Stanley 1.10, BeBe 1.01, Lilballz 0.90, MiSTakE 0.81
-- Worlds Season 3 SK Telecom T1: Piglet 1.23, Bengi 1.07, Impact 0.94, Faker 0.93, PoohManDu 0.83
-- Worlds 2014 Samsung White: DanDy 1.17, Mata 1.07, Looper 1.05, PawN 0.93, Imp 0.77
-- Worlds 2015 SK Telecom T1: Bang 1.23, Wolf 0.99, MaRin 0.98, Faker 0.94, Bengi 0.87
-- Worlds 2016 SK Telecom T1: Wolf 1.15, Bang 1.15, Bengi 0.99, Faker 0.93, Blank 0.92, Duke 0.89
-- Worlds 2017 Samsung Galaxy: Ruler 1.16, CoreJJ 1.14, CuVee 1.05, Ambition 0.84, Crown 0.81
-- Worlds 2018 Invictus Gaming: Ning 1.13, TheShy 1.11, Rookie 0.99, Baolan 0.93, JackeyLove 0.83
-- Worlds 2019 FunPlus Phoenix: Tian 1.19, Doinb 1.09, Crisp 1.02, Lwx 0.88, GimGoon 0.83
-- Worlds 2020 DAMWON Gaming: Canyon 1.35, Nuguri 1.06, Ghost 0.94, ShowMaker 0.85, BeryL 0.80
-- Worlds 2021 EDward Gaming: Meiko 1.24, Flandre 1.08, Scout 0.95, Viper 0.89, Jiejie 0.83
-- Worlds 2022 DRX: BeryL 1.18, Pyosik 1.09, Zeka 0.99, Kingen 0.92, Deft 0.82
-- Worlds 2023 T1: Zeus 1.20, Keria 1.20, Oner 0.99, Faker 0.84, Gumayusi 0.76
-- Worlds 2024 T1: Zeus 1.13, Keria 1.08, Oner 1.05, Gumayusi 1.03, Faker 0.72
-- Worlds 2025 T1: Keria 1.19, Faker 1.04, Oner 1.00, Gumayusi 0.92, Doran 0.86
-- Worlds 2026 Bilibili Gaming: Knight 1.46, Xun 1.02, Viper 0.92, Bin 0.87, ON 0.73
+- Worlds Season 1 Fnatic: Shushei 1.17, LaMiaZeaLoT 1.07, Cyanide 1.05, Mellisan 0.97, XPeke 0.78
+- Worlds Season 2 Taipei Assassins: Toyz 1.24, BeBe 1.12, Stanley 1.04, MiSTakE 0.86, Lilballz 0.74
+- Worlds Season 3 SK Telecom T1: Piglet 1.50, Bengi 1.05, Faker 0.85, Impact 0.79, PoohManDu 0.76
+- Worlds 2014 Samsung White: Looper 1.37, DanDy 1.30, PawN 1.04, Imp 0.66, Mata 0.63
+- Worlds 2015 SK Telecom T1: MaRin 1.35, Bang 1.24, Faker 1.06, Wolf 0.76, Bengi 0.59
+- Worlds 2016 SK Telecom T1: Wolf 1.26, Faker 1.21, Bang 1.14, Bengi 0.91, Blank 0.87, Duke 0.68
+- Worlds 2017 Samsung Galaxy: CuVee 1.43, Ruler 1.12, CoreJJ 1.06, Ambition 0.80, Crown 0.59
+- Worlds 2018 Invictus Gaming: Rookie 1.21, TheShy 1.15, Baolan 0.95, Ning 0.89, JackeyLove 0.79
+- Worlds 2019 FunPlus Phoenix: Tian 1.33, Crisp 1.19, Lwx 1.03, Doinb 0.95, GimGoon 0.50
+- Worlds 2020 DAMWON Gaming: Canyon 1.50, Ghost 0.99, Nuguri 0.90, BeryL 0.81, ShowMaker 0.63
+- Worlds 2021 EDward Gaming: Meiko 1.34, Flandre 1.16, Scout 0.96, Viper 0.88, Jiejie 0.66
+- Worlds 2022 DRX: BeryL 1.39, Pyosik 1.12, Zeka 0.95, Kingen 0.88, Deft 0.66
+- Worlds 2023 T1: Zeus 1.50, Keria 1.35, Oner 0.76, Faker 0.69, Gumayusi 0.65
+- Worlds 2024 T1: Keria 1.11, Oner 1.09, Zeus 1.08, Gumayusi 1.06, Faker 0.66
+- Worlds 2025 T1: Keria 1.36, Oner 1.06, Faker 1.05, Gumayusi 0.88, Doran 0.65
+- Worlds 2026 Bilibili Gaming: Knight 1.50, Xun 1.02, Bin 0.89, Viper 0.83, ON 0.64
 
 ## Region strength by year (international game win share, best region = 1.0)
 

@@ -1,8 +1,10 @@
 """DRAFT scoring for "the 2nd greatest League player after Faker" (algorithm v3, see config/weights.yaml)."""
-import os, re, sys
+import json, os, re, sys
 import numpy as np
 import pandas as pd
 import yaml
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import features
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CFG = yaml.safe_load(open(os.path.join(ROOT, "config", "weights.yaml")))
@@ -21,6 +23,17 @@ ROLE = {"Top": "Top", "Jungle": "Jungle", "Mid": "Mid", "Bot": "Bot", "ADC": "Bo
 
 def display(link):
     return re.sub(r"\s*\(.*\)$", "", link)
+
+
+_RD = {}
+
+
+def redirect(l):
+    if not _RD:
+        rd = pd.read_csv(os.path.join(CSV, "player_redirects.csv"), dtype=str).dropna()
+        _RD["exact"] = dict(zip(rd.AllName, rd.OverviewPage))
+        _RD["lower"] = {k.lower(): v for k, v in _RD["exact"].items()}
+    return _RD["exact"].get(l, _RD["lower"].get(str(l).lower(), l))
 
 
 def load():
@@ -43,10 +56,7 @@ def load():
         s["TG"] = s.TG.where(s.TG > 0, s.eTG)
         s["TCS"] = s.eTCS
         s = s.drop(columns=["eTK", "eTCS", "eTG"])
-    rd = pd.read_csv(os.path.join(CSV, "player_redirects.csv"), dtype=str).dropna()
-    exact = dict(zip(rd.AllName, rd.OverviewPage))
-    lower = {k.lower(): v for k, v in exact.items()}
-    s["Link"] = [exact.get(l, lower.get(str(l).lower(), l)) for l in s.Link]
+    s["Link"] = [redirect(l) for l in s.Link]
     s = s.groupby(["Page", "Link", "Role", "Team"], as_index=False).agg(
         {**{c: lambda x: x.sum(min_count=1) for c in ["G", "W", "K", "D", "A", "Gold", "CS", "Dmg", "TK", "TG", "Min", "TCS"]}, "First": "min", "Last": "max"})
     s = s.merge(t[["OverviewPage", "League", "Name", "IsPlayoffs"]], left_on="Page", right_on="OverviewPage", how="left")
@@ -63,6 +73,7 @@ def load():
     s.loc[s.TG <= 0, "TG"] = np.nan
     s.loc[s.TK <= 0, "TK"] = np.nan
     s.loc[s.Min <= 0, "Min"] = np.nan
+    s = features.add(s, display, OE_LEAGUE, redirect)
     return t, s
 
 
@@ -70,7 +81,9 @@ OE_LEAGUE = {"World Championship": ["WLDs"], "Mid-Season Invitational": ["MSI"],
              "LoL Champions Korea": ["LCK"], "Tencent LoL Pro League": ["LPL"],
              "Europe League Championship Series": ["EU LCS"], "LoL EMEA Championship": ["LEC", "EU LCS"],
              "North America League Championship Series": ["NA LCS"], "League of Legends Championship Series": ["LCS", "NA LCS"],
-             "LoL Master Series": ["LMS"], "Mid-Season Cup 2020": ["LCK", "LPL"]}
+             "LoL Master Series": ["LMS"], "Mid-Season Cup 2020": ["LCK", "LPL"], "First Stand": ["FST"],
+             "League of Legends Championship of The Americas North": ["LTA N", "LCS"],
+             "League of Legends Championship of The Americas": ["LTA", "LTA N", "LTA S"]}
 
 
 def fill_damage(s):
@@ -131,15 +144,25 @@ def region_strength(s):
     return tab.clip(0.2, 1.0)
 
 
-def zscores(s):
+METRICS = ["kda", "kp", "dpm", "gold_share", "cs_share", "low_deaths", "kills_pm", "assists_pm", "dshare", "vis_pm",
+           "gd15", "csd15", "xpd15"]
+
+
+RATING_FEATS = ["kda", "kp", "dpm", "gold_share", "low_deaths", "kills_pm", "assists_pm", "dshare", "vis_pm",
+                "gd15", "csd15", "xpd15", "gap"]
+
+
+def zscores(s, use_rating=True):
     s["kda"] = (s.K + s.A) / s.D.clip(lower=1)
     s["kp"] = (s.K + s.A) / s.TK.replace(0, np.nan)
     s["dpm"] = s.Dmg / s.Min
     s["gold_share"] = s.Gold / s.TG.replace(0, np.nan)
     s["cs_share"] = s.CS / s.TCS.replace(0, np.nan)
     s["low_deaths"] = -(s.D / s.Min.fillna(s.G * 32))
+    s["kills_pm"] = s.K / s.Min.fillna(s.G * 32)
+    s["assists_pm"] = s.A / s.Min.fillna(s.G * 32)
     ref = s[s.G >= 3]
-    for m in ["kda", "kp", "dpm", "gold_share", "cs_share", "low_deaths"]:
+    for m in METRICS:
         g = ref.groupby(["role", "year"])
         mu = g.apply(lambda d: np.average(d[m].dropna(), weights=d.loc[d[m].notna(), "G"]) if d[m].notna().any() else np.nan, include_groups=False)
         sd = g[m].std()
@@ -148,6 +171,30 @@ def zscores(s):
     s["z_gold_share"] = s.z_gold_share.fillna(s.z_cs_share)   # early games without gold: CS share stands in
     for name, cols in [("impact", CFG["impact"]["impact"]), ("carry", CFG["impact"]["carry"]), ("clean", CFG["impact"]["clean"])]:
         s["z_" + name] = s[["z_" + c for c in cols]].mean(axis=1, skipna=True)
+    for name, cols in CFG.get("league_stats", {}).items():
+        s["z_" + name] = s[["z_" + c for c in cols]].mean(axis=1, skipna=True)
+    # gap to teammates: own impact minus the games-weighted impact of the rest of the roster at that event
+    zi = s.z_impact.fillna(0) * s.G
+    tot = s.assign(zi=zi).groupby(["Page", "Team"]).agg(zi=("zi", "sum"), g=("G", "sum"))
+    key = list(zip(s.Page, s.Team))
+    others_g = tot.g.reindex(key).values - s.G.values
+    s["mates_impact"] = (tot.zi.reindex(key).values - zi.values) / np.where(others_g > 0, others_g, np.nan)
+    s["z_gap"] = s.z_impact - s.mates_impact
+    f = os.path.join(ROOT, "config", "fitted_season_weights.json")
+    if use_rating and os.path.exists(f):
+        # season rating: the stat blend fitted to All-Pro selections (scoring/validate.py), win rate left out
+        w = json.load(open(f))["weights"]
+        r = sum(w[c] * s["z_" + c].fillna(0).clip(-4, 4) for c in RATING_FEATS)
+        ref = s.G >= 3
+        mu = r[ref].groupby([s.role[ref], s.year[ref]]).mean()
+        sd = r[ref].groupby([s.role[ref], s.year[ref]]).std()
+        key = list(zip(s.role, s.year))
+        s["z_impact_v3"] = s.z_impact
+        s["z_impact"] = (r.values - mu.reindex(key).values) / sd.reindex(key).values
+        zi = s.z_impact.fillna(0) * s.G
+        tot = s.assign(zi=zi).groupby(["Page", "Team"]).agg(zi=("zi", "sum"), g=("G", "sum"))
+        s["mates_impact"] = (tot.zi.reindex(key2 := list(zip(s.Page, s.Team))).values - zi.values) / np.where(others_g > 0, others_g, np.nan)
+        s["z_gap"] = s.z_impact - s.mates_impact
     return s
 
 
@@ -209,8 +256,10 @@ def titles(t, s, strength):
             c = CFG["credit"]
             diff = shrink(imp[p.Link] - team_mean, p.G, c["shrink_games"]) if pd.notna(imp[p.Link]) else 0
             credit = float(np.clip(1 + c["alpha"] * diff, c["min"], c["max"]))
+            mates = imp[[l for l in per[per.G >= need].Link if l != p.Link]].mean()
             rows.append(dict(Link=p.Link, event=e.Name, page=e.Page, team=e.Team, year=e.year, tier=tier,
-                             place=int(e.PlaceN), base=pts, credit=credit, pts=pts * credit, G=p.G))
+                             place=int(e.PlaceN), base=pts, credit=credit, pts=pts * credit, G=p.G,
+                             mates=float(mates) if pd.notna(mates) else 0.0))
     return pd.DataFrame(rows)
 
 
@@ -235,6 +284,51 @@ def mvps(s):
     return pd.DataFrame(rows)
 
 
+def recognition(s, pool):
+    """Intangibles proxy 1: what voters saw. All-Pro points (1st 3, 2nd 2, 3rd 1) plus 3 per season MVP, per split
+    played in seasons where Leaguepedia records the vote (LCK/LPL from 2020, EU/NA from 2015), shrunk toward zero.
+    Players with no covered split get the pool median, so missing votes neither help nor hurt."""
+    f = os.path.join(CSV, "individual_achievements.csv")
+    a = pd.read_csv(f, dtype=str).fillna("")
+    a["Link"] = [redirect(l) for l in a.Player]
+    tier = {"All Pro Team": 3, "1st All-Pro Team": 3, "2nd All Pro Team": 2, "2nd All-Pro Team": 2, "3rd All Pro Team": 1, "3rd All-Pro Team": 1}
+    ap = a[a.Display.isin(tier)].assign(pts=lambda d: d.Display.map(tier))
+    covered = set(ap.OverviewPage)
+    mv = a[a.Display.isin(["Most Valuable Player", "Player of the Split", "Regular Season MVP", "MVP"])].assign(pts=3)
+    pts = pd.concat([ap.groupby(["OverviewPage", "Link"]).pts.max().reset_index(), mv[["OverviewPage", "Link", "pts"]]])
+    tot = pts.groupby("Link").pts.sum().reindex(pool).fillna(0)
+    played = s[s.Page.isin(covered) & s.Link.isin(pool)].groupby("Link").Page.nunique().reindex(pool).fillna(0)
+    rate = tot / (played + 2)
+    rate[played == 0] = np.nan
+    return rate.fillna(rate.median()), tot, played
+
+
+def team_lift(s, pool, strength):
+    """Intangibles proxy 2: does the team win more with him? For each team-year he played, the team's win rate with
+    him minus the same team's win rate in the two years before and after without him (domestic events, region-scaled),
+    games-weighted and shrunk. Noisy: roster moves rarely change one player at a time."""
+    d = s[s.kind == "dom"]
+    team = d.groupby(["Page", "Team"]).agg(W=("W", "max"), G=("G", "max"), year=("year", "first"), region=("region", "first")).reset_index()
+    roster = d.groupby(["Page", "Team"]).Link.agg(set)
+    out = {}
+    for l in pool:
+        mine = d[d.Link == l][["Page", "Team", "year"]].drop_duplicates()
+        if mine.empty:
+            out[l] = np.nan; continue
+        diffs, ws = [], []
+        for tm, yrs in mine.groupby("Team").year:
+            yrs = set(yrs)
+            near = team[(team.Team == tm) & team.year.between(min(yrs) - 2, max(yrs) + 2)]
+            w_ = near[[l in roster.get((p, tm), set()) for p in near.Page]]
+            wo = near[[l not in roster.get((p, tm), set()) for p in near.Page]]
+            if w_.G.sum() < 10 or wo.G.sum() < 10:
+                continue
+            diffs.append(w_.W.sum() / w_.G.sum() - wo.W.sum() / wo.G.sum()); ws.append(min(w_.G.sum(), wo.G.sum()))
+        out[l] = shrink(np.average(diffs, weights=ws), sum(ws), 40) if diffs else np.nan
+    r = pd.Series(out)
+    return r.fillna(0)
+
+
 def percentile(x):
     return x.rank(pct=True) * 100
 
@@ -249,6 +343,8 @@ def main():
     for c in ["impact", "carry", "clean"]:
         s["a_" + c] = s["z_" + c] - pen * (1 - s.strength)
     s["a_win"] = (s.W / s.G - 0.5) * s.strength
+    for c in CFG.get("league_stats", {}):
+        s["a_" + c] = s["z_" + c] - pen * (1 - s.strength)
     T = titles(t, s, strength)
 
     games = s.groupby("Link").G.sum()
@@ -265,7 +361,7 @@ def main():
     P["intl_games"] = intl.G.sum().reindex(pool).fillna(0)
     N = CFG.get("best_years", 0)
 
-    def best_years(d_all, col, kk):
+    def best_years(d_all, col, kk, pad=False):
         """Per calendar year: games-weighted value, shrunk toward the role average. Career mode (N=0) averages
         every game; best-years mode averages the player's best N years, so playing on past a peak never lowers
         a score (longevity is scored on its own)."""
@@ -273,9 +369,11 @@ def main():
             return shrink(d_all.groupby("Link").apply(lambda d: wmean(d, col), include_groups=False), d_all.groupby("Link").G.sum(), kk)
         y = d_all.groupby(["Link", "year"]).apply(lambda d: pd.Series({"v": wmean(d, col), "G": d.G.sum()}), include_groups=False).reset_index()
         y["v"] = shrink(y.v.fillna(0), y.G, kk)
+        if pad:   # missing years count as average (0): sustained form, not one hot event
+            return y.groupby("Link").v.apply(lambda v: v.nlargest(N).sum() / N)
         return y.groupby("Link").v.apply(lambda v: v.nlargest(N).mean())
 
-    P["big_stage_raw"] = best_years(s[s.Link.isin(pool) & (s.kind == "intl")], "z_impact", 15).reindex(pool).fillna(0)
+    P["big_stage_raw"] = best_years(s[s.Link.isin(pool) & (s.kind == "intl")], "z_impact", 15, pad=True).reindex(pool).fillna(0)
     yr = s[s.Link.isin(pool)].groupby(["Link", "year"]).apply(lambda d: pd.Series({"imp": wmean(d, "a_impact"), "G": d.G.sum()}), include_groups=False).reset_index()
     yr["imp_s"] = shrink(yr.imp.fillna(0), yr.G, k)
     best = yr.loc[yr.groupby("Link").imp_s.idxmax()].set_index("Link")
@@ -286,14 +384,24 @@ def main():
     P["win_raw"] = best_years(sp, "a_win", k)
     P["carry_raw"] = best_years(sp, "a_carry", k)
     P["clean_raw"] = best_years(sp, "a_clean", k)
+    for c in CFG.get("league_stats", {}):
+        P[c + "_raw"] = best_years(sp[sp["z_" + c].notna()], "a_" + c, k).reindex(pool).fillna(0)
+    P["team_carry_raw"] = best_years(sp, "z_gap", k)
+    P["recognition_raw"], P["allpro_pts"], P["covered_splits"] = recognition(s, pool)
+    P["team_lift_raw"] = team_lift(s, pool, strength)
     ev = s[s.Link.isin(pool) & (s.G >= 5)]
     cons = ev.groupby("Link").apply(lambda d: pd.Series({"n": len(d), "up": (d.a_impact > 0).sum()}), include_groups=False)
     P["consistency_raw"] = ((cons.up + 2) / (cons.n + 4)).reindex(pool)   # shrink toward 50%
     M = mvps(s)
     if not M.empty:
         T = pd.concat([T, M], ignore_index=True)
-    tp = T.groupby("Link").agg(trophy_pts=("pts", "sum"), raw_pts=("base", "sum"))
-    P = P.join(tp).fillna({"trophy_pts": 0, "raw_pts": 0})
+    # solo carry: placement points earned above his own teammates, worth more when those teammates were weak
+    # (cast = their average impact at that event; a stacked roster like T1 2023-24 scales it down)
+    T["mates"] = T.get("mates", pd.Series(0.0, index=T.index)).fillna(0)
+    T["cast"] = np.clip(1 - T.mates, 0.25, 1.75)
+    T["carry_pts"] = (T.base * (T.credit - 1)).clip(lower=0) * T.cast
+    tp = T.groupby("Link").agg(trophy_pts=("pts", "sum"), raw_pts=("base", "sum"), solo_carry_pts=("carry_pts", "sum"))
+    P = P.join(tp).fillna({"trophy_pts": 0, "raw_pts": 0, "solo_carry_pts": 0})
     P["mvps"] = T[T.tier == "award"].groupby("Link").size().reindex(pool).fillna(0).astype(int) if (T.tier == "award").any() else 0
     for tier in ["worlds", "msi", "first_stand", "domestic"]:
         P[tier + "_titles"] = T[(T.tier == tier) & (T.place == 1)].groupby("Link").size().reindex(pool).fillna(0).astype(int)
@@ -307,13 +415,19 @@ def main():
     C["carry"] = percentile(P.carry_raw)
     C["clean_play"] = percentile(P.clean_raw)
     C["consistency"] = percentile(P.consistency_raw)
+    for c in CFG.get("league_stats", {}):
+        C[c] = percentile(P[c + "_raw"])
+    C["team_carry"] = percentile(P.team_carry_raw)
+    C["solo_carry"] = percentile(P.solo_carry_pts + P.team_carry_raw.fillna(0) / 100)
+    C["recognition"] = percentile(P.recognition_raw)
+    C["team_lift"] = percentile(P.team_lift_raw)
     W = pd.Series(CFG["categories"], dtype=float)
     P["score"] = (C[W.index] * W).sum(axis=1) / W.sum()
     fk = [l for l in pool if display(l) == CFG["pool"]["benchmark"]][0]
     P["vs_faker"] = P.score / P.loc[fk, "score"] * 100
     P = P.join(C.add_prefix("c_"))
     P["decorated"] = P.raw_pts
-    P["dominant"] = C[["big_stage", "peak", "winning", "carry", "clean_play", "consistency"]].mean(axis=1)
+    P["dominant"] = C[["big_stage", "peak", "winning", "laning", "killing", "teamfight", "team_carry", "clean_play", "consistency"]].mean(axis=1)
 
     # robustness and tipping point, Faker left out of the ranking
     R = P
