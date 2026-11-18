@@ -1,6 +1,6 @@
 # Current League model (the one every thread uses)
 
-**Version 12 (FINAL unless ay reopens), 18 Nov 2026, 19:25 London. v12 = career-level plus-minus (ay chose "Fix it" 19:14).** ay approved each change on cards: halfway trophy blend (16:58), LCK/LPL fix (17:09), keep trophies as share of Faker (17:09), count 2013-15 games (17:10). Owner: the model thread. If a number here differs from anything older (script, stills, notes), this file wins.
+**Version 13, 18 Nov 2026, 21:40 London. v13 = Recognition fixed (ay 21:00: the LCK held no All-Pro vote before 2020, so Faker's prime counted nothing). v12 = career-level plus-minus (ay chose "Fix it" 19:14).** ay approved each change on cards: halfway trophy blend (16:58), LCK/LPL fix (17:09), keep trophies as share of Faker (17:09), count 2013-15 games (17:10). Owner: the model thread. If a number here differs from anything older (script, stills, notes), this file wins.
 Scores file: `projects/lol-second-goat/data/csv/draft_scores.csv` (branch claude/project-thread-a343zy). Video data: `video/src/data/league.json`. Regenerate this file with `python3 scoring/model_current.py`.
 
 ## GOAT pyramid (ay 18 Nov 17:46, final design)
@@ -11,15 +11,19 @@ Tiers follow the model's ranking only, never reputation. A few example faces per
 |---|---|---|
 | 1 | #1 | Faker (#1) |
 | 2 | #2 to #3 | Knight (#2), Chovy (#3) |
-| 3 | #4 to #10 | Ruler (#4), Keria (#5), Bin (#8), Viper (#10) |
-| 4 | #11 to #30 | Gumayusi (#12), Caps (#13), Deft (#17), TheShy (#21), Uzi (#30) |
-| 5 | #31 to #62 | Scout (#31), Doinb (#35), Bengi (#41), Perkz (#43), Bjergsen (#56), Jankos (#62) |
+| 3 | #4 to #10 | Ruler (#4), Keria (#5), Bin (#9), Viper (#10) |
+| 4 | #11 to #30 | Caps (#11), Gumayusi (#13), Deft (#17), Uzi (#21), TheShy (#25), Scout (#27) |
+| 5 | #31 to #62 | Doinb (#37), Perkz (#41), Bengi (#44), Bjergsen (#51), Jankos (#52) |
 
 Faces picked for a spread of regions (ay 18:09: less LCK and old SKT heavy).
 
 Reveal: build from the bottom up. In tier 2, Chovy fills first, then a beat of silence, then Knight. Faker goes alone on top. Zoom in on Knight at #2, then an arrow draws from tier 2 up to tier 1 ("what would it take to get from here to here?") and leads into the outro.
 
 ## What changed
+**v13 (ay 21:00, Recognition fix):** the LCK and LPL held no All-Pro vote before 2020, so a prime spent there (Faker 2013-19) counted nothing. (1) Every regular-season split of a major league in a year with no vote gets a model All-Pro: the top three at each role by impact rating, 3/2/1 points, among players with half the role's most games. Real votes are used wherever they exist; MVPs count 3 as before. (2) Honours are counted in full, as All-NBA selections are in a Hall of Fame case; the old per-split rate let every late season water down the peak. (3) The with/without half is dropped from Recognition: it gave Faker the pool median because T1 never played without him, and plus-minus (team impact) measures the same thing properly. Faker's Recognition 61 to 88 (#4 of 527 behind Chovy, Caps, Bjergsen); Knight 78 to 85. Top 10: Faker 94.5, Knight 73.4, Chovy 70.7, Ruler 68.5, Keria 66.9, Canyon 64.8, Zeus 64.5, Peanut 62.8, Bin 62.6, Viper 61.1. Knight #2 in all 1,000 reruns. Two Fakers: Faker 2013-19 #1 at 90.0 (951 of 1,000 reruns), Knight 87.2; Faker 2020-26 #13. Uzi 30 to 21, Bengi 41 to 44, Scout 31 to 27. 99 of the top 100 unchanged as a set.
+
+**What-ifs on v13 (not the model):** Gen.G win the Worlds 2026 final (Finals MVP to Chovy): Chovy #2 73.5, Ruler #3 71.0, Knight #4 70.4 (data/csv/draft_scores_geng_wins.csv). Dream seasons (Worlds + MSI + best domestic year + a copy of the title season's stats, plus-minus, clutch and honours; Faker plays no more): Knight passes Faker after 3 (2029: 93.5 vs 91.0), Chovy after 4 (2030: 95.0 vs 89.5) (data/csv/dream_seasons.csv). Year-end ranks for every player 2014-2026: data/csv/score_by_year_all.csv (2014 pool is 14 players; use 2015 on).
+
 **v12 (ay 19:14, audit thread):** team impact plus-minus now fits a career rating per player under each season rating. Season-only keys could not tell five players apart when they played every game together (49% of player seasons had a rating identical to a teammate's; now 3%). Ruler moves to #4 and Keria to #5. Top 10: Faker 92.6, Knight 72.9, Chovy 70.7, Ruler 68.1, Keria 66.7, Zeus 64.5, Canyon 64.4, Bin 63.3, Peanut 62.8, Viper 61.2. Knight #2 in all 1,000 reruns. Two Fakers: Faker 2013-19 is now #1 (88.1, ahead of Knight 86.7, #1 in 768 of 1,000 reruns); Faker 2020-26 #13.
 
 **v11.1 (audit fixes, 18 Nov 19:15):** Recognition counts major-league All-Pro votes only (academy and minor-league picks such as LCK CL and LTA South used to add points). Team impact averages the best 5 plus-minus seasons for everyone (data now covers 2011 on). Scores move by 0.01 to 0.02 at most in the top 12, and no rank changes in the top 80.

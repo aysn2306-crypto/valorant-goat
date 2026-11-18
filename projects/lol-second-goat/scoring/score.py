@@ -242,6 +242,10 @@ def bucket(table, place):
 def titles(t, s, strength):
     r = pd.read_csv(os.path.join(CSV, "results_top16.csv"), dtype=str).fillna("")
     r = r[(r.Showmatch != "1") & (pd.to_numeric(r.PlaceN, errors="coerce") <= 16) & (r.Team != "")]
+    if os.environ.get("VARIANT") == "geng_wins":   # what-if (ay 18 Nov): Gen.G win the Worlds 2026 final, BLG runners-up
+        m = r.Page == "2026 Season World Championship"
+        r.loc[m & (r.Team == "Gen.G"), ["Place", "PlaceN"]] = "1"
+        r.loc[m & (r.Team == "Bilibili Gaming"), ["Place", "PlaceN"]] = "2"
     bad = re.compile(r"Play-In|Road to MSI|Showmatch|Regional|Qualif|Preseason|All Star|LPPL|Promotion|Rounds", re.I)
     r = r[~r.Name.str.contains(bad)]
     r["year"] = r.Date.str[:4].astype(int)
@@ -330,6 +334,8 @@ def mvps(s):
     if not os.path.exists(f):
         return pd.DataFrame()
     m = pd.read_csv(f)
+    if os.environ.get("VARIANT") == "geng_wins":   # the Finals MVP goes to Gen.G's mid laner in the what-if
+        m.loc[(m.league == "World Championship") & (m.year == 2026), "player"] = "Chovy"
     pts = CFG["trophy_points"]["awards"]
     intl = s[s.kind == "intl"]
     rows = []
@@ -368,7 +374,31 @@ def recognition(s, pool):
     pts = pd.concat([ap.groupby(["OverviewPage", "Link"]).pts.max().reset_index(), mv[["OverviewPage", "Link", "pts"]]])
     tot = pts.groupby("Link").pts.sum().reindex(pool).fillna(0)
     played = s[s.Page.isin(covered) & s.Link.isin(pool)].groupby("Link").Page.nunique().reindex(pool).fillna(0)
-    rate = tot / (played + 2)
+    # v13 (ay 18 Nov): the LCK held no All-Pro vote before 2020 and the LPL none before 2020, so a prime spent
+    # there counted nothing. Each regular-season split of a major league in a year with no vote gets a model
+    # All-Pro instead: the top three at each role by impact rating (1st 3, 2nd 2, 3rd 1), among players with at
+    # least half the role's most games. Real votes are used wherever they exist.
+    MAJOR = r"^(LCK|LPL|LEC|LCS|EU LCS|NA LCS|Champions|LMS|LTA North)/"
+    lg = lambda pg: pg.str.extract(MAJOR)[0].replace({"Champions": "LCK"}) + " " + pg.str.extract(r"(20\d\d)")[0]
+    voted = set(lg(pd.Series(sorted(covered))))
+    rs = s[(s.kind == "dom") & s.Page.str.match(MAJOR) & ~s.Page.str.contains("Playoff|Preseason|Cup|Road to|Regional|Qualifier|Finals|Promotion", regex=True)].copy()
+    rs = rs[~lg(rs.Page).isin(voted)]
+    rs = rs[rs.G >= rs.groupby(["Page", "role"]).G.transform("max") * 0.5]
+    rs["rk"] = rs.groupby(["Page", "role"]).a_impact.rank(ascending=False, method="first")
+    filled = rs[rs.rk <= 3].assign(pts=lambda d: 4 - d.rk)[["Page", "Link", "pts"]].rename(columns={"Page": "OverviewPage"})
+    tot = tot.add(filled.groupby("Link").pts.sum().reindex(pool).fillna(0), fill_value=0)
+    played = played + rs[rs.Link.isin(pool)].groupby("Link").Page.nunique().reindex(pool).fillna(0)
+    # v13: honours are counted in full, the way All-NBA selections are counted in a Hall of Fame case. A rate per
+    # split punished a long career: every late season with no vote watered down the ones he won at his peak.
+    if FUTURE_CFG:   # what-if seasons win the honours of the season they copy
+        l, base, sy = FUTURE_CFG["link"], int(FUTURE_CFG.get("from_year", 2026)), FUTURE_CFG.get("src_year")
+        allp = pd.concat([pts, filled])
+        allp["yr"] = allp.OverviewPage.str.extract(r"(20\d\d)")[0].astype(float)
+        mine = allp[allp.Link == l]
+        add = sum(mine[mine.yr == (sy or (base - 1 if i % 2 else base))].pts.sum() for i in range(len(FUTURE_CFG["worlds"])))
+        if l in tot.index:
+            tot[l] += add
+    rate = tot.copy()
     rate[played == 0] = np.nan
     return rate.fillna(rate.median()), tot, played
 
@@ -419,15 +449,18 @@ def add_future(s, T, fut):
     adjusted); trophies per season = his 2024-26 average from domestic play, plus the Worlds/MSI titles asked for,
     at his own average title credit."""
     l, base = fut["link"], int(fut.get("from_year", 2026))
-    src = {y: s[(s.Link == l) & (s.year == y)] for y in (base - 1, base)}
+    sy = fut.get("src_year")   # dream seasons: every future season copies one chosen year (his title year)
+    src = {y: s[(s.Link == l) & (s.year == y)] for y in {base - 1, base, sy or base}}
     mine = T[T.Link == l]
     credit = mine[mine.place == 1].credit.mean() if (mine.place == 1).any() else 1.0
     dom = mine[(mine.tier == "domestic") & mine.year.between(base - 2, base)].pts.sum() / 3
+    if fut.get("dream"):   # a title season at home: his best domestic year of the last three, not his average
+        dom = mine[(mine.tier == "domestic") & mine.year.between(base - 2, base)].groupby("year").pts.sum().max()
     tp = CFG["trophy_points"]
     add_s, add_t = [], []
     for i, w in enumerate(fut["worlds"]):
         y = base + 1 + i
-        r = src[base - 1 if i % 2 else base].copy()
+        r = src[sy or (base - 1 if i % 2 else base)].copy()
         r["year"] = y
         r["Page"] = r.Page + f" (future {y})"
         add_s.append(r)
@@ -542,6 +575,9 @@ def main():
     if os.path.exists(cf):
         cl = pd.read_csv(cf)
         cl["Link"] = cl.Link.map(redirect)
+        if os.environ.get("VARIANT") == "geng_wins":
+            m = cl.match == "2026 Season World Championship/Main Event_Finals_1"
+            cl.loc[m, "won"] = 1 - cl.loc[m, "won"]
         if os.environ.get("CUTOFF"):
             cl = cl[cl.year <= int(os.environ["CUTOFF"])]
         if os.environ.get("VARIANT") == "split_faker":
@@ -555,7 +591,7 @@ def main():
             extra = []
             for i, w in enumerate(FUTURE_CFG["worlds"]):
                 y = base + 1 + i
-                yy = base - 1 if i % 2 else base
+                yy = FUTURE_CFG.get("src_year") or (base - 1 if i % 2 else base)
                 r = mine[(mine.year == yy) & ~mine.Page.str.contains("World Championship")].copy()
                 if w and tyears:
                     r = pd.concat([r, mine[(mine.year == tyears[-1]) & mine.Page.str.contains("World Championship")]])
@@ -646,7 +682,7 @@ def main():
         if FUTURE_CFG:
             l, base = FUTURE_CFG["link"], int(FUTURE_CFG.get("from_year", 2026))
             mine = ps[ps.Link == l]
-            ps = pd.concat([ps] + [mine[mine.year == (base - 1 if i % 2 else base)].assign(year=base + 1 + i)
+            ps = pd.concat([ps] + [mine[mine.year == (FUTURE_CFG.get("src_year") or (base - 1 if i % 2 else base))].assign(year=base + 1 + i)
                                    for i in range(len(FUTURE_CFG["worlds"]))], ignore_index=True)
         ps["Link"] = ps.Link.map(redirect)
         if os.environ.get("VARIANT") == "split_faker":
@@ -660,7 +696,9 @@ def main():
             imp[l] = r.head(n).sum() / n
         P["impact_raw"] = pd.Series(imp).reindex(P.index).fillna(0)
         C["impact"] = percentile(P.impact_raw)
-    C["intangibles"] = percentile(C.recognition + C.team_lift)
+    # v13: recognition is honours only. The with/without half could not measure a player who never left his team
+    # (Faker got the pool median) and plus-minus (impact) now measures the same thing properly.
+    C["intangibles"] = C.recognition.copy()
     W = pd.Series(CFG["pillars"] if "pillars" in CFG else CFG["categories"], dtype=float)
     P["score"] = (C[W.index] * W).sum(axis=1) / W.sum()
     fk = ([l for l in pool if display(l) == CFG["pool"]["benchmark"]] or [P.score.idxmax()])[0]

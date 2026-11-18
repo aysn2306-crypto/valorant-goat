@@ -1,4 +1,4 @@
-# League #2 after Faker: script v4 (model v12, final)
+# League #2 after Faker: script v4 (model v13)
 
 18 Nov 2026. Same structure as v3, every number updated to model v12 (MODEL-CURRENT.md; v12 = career-level plus-minus, ay 19:14). Changes from v3:
 - the trophy slider twist is cut;
@@ -136,10 +136,10 @@ Timing:
 | Then number two is Keria. | Keria rises. |
 | And one more, because I had to. Split Faker's career down the middle. 2013 to 2019, and 2020 to now. Three world titles in each half. | GRAPHIC: Faker's face splits into two. |
 | So I split him into two players. | Hold. |
-| The young Faker alone would be the greatest of all time. Ahead of Knight, ahead of everyone. In three out of four reruns, he's number one. And the second half is still top fifteen. He did both. | GRAPHIC: Faker 2013 to 2019 lands at #1 (88.1, Knight 86.7), Faker 2020 to 2026 at #13. **[SILENCE]** |
+| The young Faker alone would be the greatest of all time. Ahead of Knight, ahead of everyone. In nineteen out of twenty reruns, he's number one. And the second half is still top fifteen. He did both. | GRAPHIC: Faker 2013 to 2019 lands at #1 (90.0, Knight 87.2), Faker 2020 to 2026 at #13. **[SILENCE]** |
 | Now run the model at the end of every year. Faker is number one in every single one since 2015. | GRAPHIC: ranking by year (17a), Faker's line flat across the top. |
 | The number two spot moves. Bang held it for six straight years. Then Deft, then Ruler. Then Chovy, twice. | Lines cross under Faker. |
-| And Knight? Sixth in 2023. Third. Fifth. And this year, second. | Knight's line lights cyan and climbs to #2. **[SILENCE]** |
+| And Knight? Seventh in 2023. Third. Fifth. And this year, second. | Knight's line lights cyan and climbs to #2. **[SILENCE]** |
 
 ## 7. The GOAT pyramid (9:40 to 11:00)
 
@@ -148,10 +148,10 @@ Timing:
 | VO | SCREEN |
 |---|---|
 | So here's the pyramid. Not a top ten. Tiers of greatness. | GRAPHIC: empty pyramid, five tiers. |
-| At the bottom, numbers thirty one to sixty two. Legends of their own regions. | Tier 5 fills: Scout, Doinb, Bengi, Perkz, Bjergsen, Jankos. |
-| Then the stars. The best player on a great team. | Tier 4 fills: Gumayusi, Caps, Deft, TheShy, Uzi. |
+| At the bottom, numbers thirty one to sixty two. Legends of their own regions. | Tier 5 fills: Doinb, Perkz, Bengi, Bjergsen, Jankos. |
+| Then the stars. The best player on a great team. | Tier 4 fills: Caps, Gumayusi, Deft, Uzi, TheShy, Scout. |
 | Now, the internet won't like this. Every all-time list from the last two years has Uzi and Bengi in its top ten. | Everything dims except Uzi (#31) and Bengi (#44). Small list cards pop beside them: esports.net 2025 (Bengi #2, Uzi #4), spilled.gg 2026 (Uzi #5, Bengi #9). Red Bull's list is unranked, so it isn't on screen. |
-| We have them at thirty and forty one. Uzi never won Worlds, and trophies are the biggest part of this model. Bengi won three, but his own numbers rank two hundred and forty seventh. Shotcalling, comms, being the voice in the room: the model can't see any of that. | Hold on the two faces. **[SILENCE]** |
+| We have them at twenty one and forty four. Uzi never won Worlds, and trophies are the biggest part of this model. Bengi won three, but his own numbers rank two hundred and forty seventh. Shotcalling, comms, being the voice in the room: the model can't see any of that. | Hold on the two faces. **[SILENCE]** |
 | Then the absolute top of League. | Tier 3 fills: Ruler, Keria, Bin, Viper. |
 | Then a tier of two, two points apart. | Two empty slots. **[SILENCE]** |
 | Chovy. | Chovy fills. |
@@ -168,11 +168,11 @@ Timing:
 | VO | SCREEN |
 |---|---|
 | What would it take for Knight to reach Faker's legacy? | GRAPHIC: Knight vs Faker, one row per part. |
-| Knight already beats Faker at skill, at big games, and at recognition. | Three rows light up for Knight. |
+| The model says Knight already beats Faker at skill, and at big games. | Two rows light up for Knight. |
 | Faker wins team impact and longevity. And winning. | Three rows light for Faker. The trophies row: Faker 100, Knight 46. **[SILENCE]** |
 | [NUMBERS ON HOLD: how many more titles, with future seasons simulated. ay asked to park this 16:57.] | |
 | Speaking of catching Faker. Gumayusi left T1 last year, and said this. | QUOTE FLASH: "If my goal was to become the best player in the world, I couldn't stay with T1 forever." Gumayusi, Daily Esports. |
-| Gumayusi is number twelve. Not even two thirds of Faker. | GRAPHIC: Gumayusi's dot, label 64% of Faker. |
+| Gumayusi is number thirteen. Not even two thirds of Faker. | GRAPHIC: Gumayusi's dot, label 63% of Faker. |
 | Yeah buddy. Long way to go. | Hold. |
 | Who's your number two? Let me know in the comments. | END CARD: "Not endorsed by Riot Games." |
 
@@ -183,11 +183,11 @@ Timing:
 | Claim | Number | Source |
 |---|---|---|
 | Pool | 527 players, 150+ games | draft_scores.csv |
-| Top 10 | Faker 92.6, Knight 72.9, Chovy 70.7, Ruler 68.1, Keria 66.7, Zeus 64.5, Canyon 64.4, Bin 63.3, Peanut 62.8, Viper 61.2 | draft_scores.csv |
-| Pyramid tiers | by rank: T1 #1; T2 #2 to 3; T3 #4 to 10 (Ruler, Keria, Bin, Viper); T4 #11 to 30 (Gumayusi #12, Caps #13, Deft #17, TheShy #21, Uzi #30); T5 #31 to 62 (Scout #31, Doinb #35, Bengi #41, Perkz #43, Bjergsen #56, Jankos #62) | MODEL-CURRENT.md |
+| Top 10 | Faker 94.5, Knight 73.4, Chovy 70.7, Ruler 68.5, Keria 66.9, Canyon 64.8, Zeus 64.5, Peanut 62.8, Bin 62.6, Viper 61.1 | draft_scores.csv |
+| Pyramid tiers | by rank: T1 #1; T2 #2 to 3; T3 #4 to 10 (Ruler, Keria, Bin #9, Viper); T4 #11 to 30 (Caps #11, Gumayusi #13, Deft #17, Uzi #21, TheShy #25, Scout #27); T5 #31 to 62 (Doinb #37, Perkz #41, Bengi #44, Bjergsen #51, Jankos #52) | MODEL-CURRENT.md |
 | 1,000 reruns | Faker #1 in 1,000; Knight #2 in 1,000 | shuffle_counts.csv |
-| International only | Faker 92.6, Keria 70.6, Knight 70.3, Zeus 67.4, Ruler 66.0 | whatif_intl_only.csv |
-| Two Fakers (even halves) | Faker 2013-19 88.1 (#1 in 768 of 1,000 reruns), Knight 86.7, Chovy 84.3 ... Faker 2020-26 69.6 (#13) | draft_scores_split_faker.csv |
+| International only | Faker 94.5, Keria 70.8, Knight 70.8, Zeus 67.3, Ruler 66.4 | whatif_intl_only.csv |
+| Two Fakers (even halves) | Faker 2013-19 90.0 (#1 in 951 of 1,000 reruns), Knight 87.2, Chovy 84.3 ... Faker 2020-26 69.8 (#13) | draft_scores_split_faker.csv |
 | Trophy points | Faker 1,509; Canyon 714, Ruler 705, Knight 695, Chovy 684; gap 795 | draft_scores.csv |
 | Trophy values | Worlds 100, MSI 56, First Stand 40, LCK 44, LPL 35, LEC about 12 | config/weights.yaml |
 | Hardest Worlds since 2016 | T1 2024 8.7 coin flips, BLG 2026 7.2 (research measure) | research/trophy-values-from-data.md |
@@ -197,9 +197,12 @@ Timing:
 | Clutch #1 | Faker (100), Bin 99, Gumayusi 90 | draft_scores.csv |
 | Team impact | Faker 100, Ruler 91, Doinb 87 (Chovy #8) | draft_scores.csv |
 | Category winners | big stage Keria; peak Knight 2026; skill Chovy (100) over Knight (99.9); titles with different teams Peanut 5; trophy cabinet Canyon | draft_scores.csv |
-| Knight vs Faker by part | trophies 46 vs 100, big stage + clutch 99 vs 94, skill 100 vs 79, team impact 76 vs 100, longevity 90 vs 100, recognition 78 vs 61 | draft_scores.csv |
-| Bengi | #41 | draft_scores.csv |
-| Gumayusi | #12, 59.1, 64% of Faker | draft_scores.csv |
+| Knight vs Faker by part | trophies 46 vs 100, big stage + clutch 99 vs 94, skill 100 vs 79, team impact 76 vs 100, longevity 90 vs 100, recognition 85 vs 88 | draft_scores.csv |
+| Bengi | #44 | draft_scores.csv |
+| Gen.G win Worlds 2026 (what-if) | Chovy #2 73.5, Ruler #3 71.0, Knight #4 70.4 | draft_scores_geng_wins.csv |
+| Dream seasons to pass Faker | Knight 3 (2029), Chovy 4 (2030) | dream_seasons.csv |
+| Year-end #2 | Bang 2016-21, Deft 2022, Ruler 2023, Chovy 2024-25, Knight 2026 (Knight 7, 3, 5, 2 in 2023-26) | score_by_year_all.csv |
+| Gumayusi | #13, 59.3, 63% of Faker | draft_scores.csv |
 
 ## Still to check before recording
 
