@@ -139,12 +139,12 @@ Timing:
 
 ## 7. The GOAT pyramid (9:40 to 11:00)
 
-*Tiers follow our ranking only, built from the bottom up. 17 example faces in circles, rank badge on each, small TIER labels. Spec in MODEL-CURRENT.md.*
+*Tiers follow our ranking only, built from the bottom up. 18 example faces in circles, rank badge on each, small TIER labels. Spec in MODEL-CURRENT.md.*
 
 | VO | SCREEN |
 |---|---|
 | So here's the pyramid. Not a top ten. Tiers of greatness. | GRAPHIC: empty pyramid, five tiers. |
-| At the bottom, numbers thirty two to sixty. Legends of their own regions. | Tier 5 fills: Scout, Perkz, Doinb, Bengi, Jankos. |
+| At the bottom, numbers thirty two to sixty one. Legends of their own regions. | Tier 5 fills: Scout, Perkz, Doinb, Bengi, Jankos, Bjergsen. |
 | Then the stars. The best player on a great team. | Tier 4 fills: Gumayusi, Caps, Deft, TheShy, Uzi. |
 | Now, the internet won't like this. Every all-time list from the last two years has Uzi and Bengi in its top ten. | Everything dims except Uzi (#31) and Bengi (#44). Small list cards pop beside them: esports.net 2025 (Bengi #2, Uzi #4), spilled.gg 2026 (Uzi #5, Bengi #9). Red Bull's list is unranked, so it isn't on screen. |
 | We have them at thirty one and forty four. Uzi never won Worlds, and trophies are the biggest part of this model. Bengi won three, but his own numbers rank two hundred and forty seventh. | Hold on the two faces. **[SILENCE]** |
@@ -180,7 +180,7 @@ Timing:
 |---|---|---|
 | Pool | 527 players, 150+ games | draft_scores.csv |
 | Top 10 | Faker 92.6, Knight 73.9, Chovy 72.4, Keria 69.0, Ruler 68.5, Zeus 66.0, Canyon 65.7, Bin 64.1, Peanut 64.1, Viper 63.1 | draft_scores.csv |
-| Pyramid tiers | by rank: T1 #1; T2 #2 to 3; T3 #4 to 10 (Keria, Ruler, Bin, Viper); T4 #11 to 31 (Gumayusi, Caps, Deft, TheShy, Uzi); T5 #32 to 60 (Scout, Perkz, Doinb, Bengi, Jankos) | MODEL-CURRENT.md |
+| Pyramid tiers | by rank: T1 #1; T2 #2 to 3; T3 #4 to 10 (Keria, Ruler, Bin, Viper); T4 #11 to 31 (Gumayusi, Caps, Deft, TheShy, Uzi); T5 #32 to 61 (Scout, Perkz, Doinb, Bengi, Jankos, Bjergsen) | MODEL-CURRENT.md |
 | 1,000 reruns | Faker #1 in 1,000; Knight #2 in 996 (Chovy in 4) | whatif.py |
 | International only | Faker 92.6, Keria 72.9, Knight 71.4, Zeus 68.8, Ruler 66.4 | whatif_intl_only.csv |
 | Two Fakers (even halves) | Knight 88.0, Faker 2013-19 87.3 (#2, #1 in 377 of 1,000 reruns), Chovy 86.4 ... Faker 2020-26 69.6 (#13) | draft_scores_split_faker.csv |

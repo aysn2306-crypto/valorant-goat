@@ -5,7 +5,7 @@ Scores file: `projects/lol-second-goat/data/csv/draft_scores.csv` (branch claude
 
 ## GOAT pyramid (ay 18 Nov 17:46, final design)
 
-Tiers follow the model's ranking only, never reputation. A few example faces per tier, sorted by rank. Uses the earlier circle design (round photos, rank badge, name under the photo), with a small "TIER N" label on each row. No percentages, no text beside the tiers, no next ten. 17 faces.
+Tiers follow the model's ranking only, never reputation. A few example faces per tier, sorted by rank. Uses the earlier circle design (round photos, rank badge, name under the photo), with a small "TIER N" label on each row. No percentages, no text beside the tiers, no next ten. 18 faces.
 
 | Tier | Ranks | Faces shown |
 |---|---|---|
@@ -13,7 +13,7 @@ Tiers follow the model's ranking only, never reputation. A few example faces per
 | 2 | #2 to #3 | Knight (#2), Chovy (#3) |
 | 3 | #4 to #10 | Keria (#4), Ruler (#5), Bin (#8), Viper (#10) |
 | 4 | #11 to #31 | Gumayusi (#11), Caps (#14), Deft (#18), TheShy (#25), Uzi (#31) |
-| 5 | #32 to #60 | Scout (#32), Perkz (#38), Doinb (#43), Bengi (#44), Jankos (#59) |
+| 5 | #32 to #61 | Scout (#32), Perkz (#38), Doinb (#43), Bengi (#44), Jankos (#59), Bjergsen (#61) |
 
 Faces picked for a spread of regions (ay 18:09: less LCK and old SKT heavy).
 
