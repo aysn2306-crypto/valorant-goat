@@ -12,6 +12,8 @@ const B: Box = { x0: 250, y0: 190, x1: 1700, y1: 820 };
 const seasons = (years: string) => { const y = years.split("-"); return Number(y[y.length - 1]) - Number(y[0]) + 1; };
 const PL = D.players;
 const r0 = (v: number) => Math.round(v).toString();
+// id, name, games, skill, big stage, teams won titles with, titles, worlds, % of Faker, international games
+type BoardRow = [string, string, number, number | null, number | null, number, number, number, number, number | null];
 
 // 1. Cold open: six world titles, nobody else more than three
 export const S1Worlds: React.FC = () => {
@@ -39,6 +41,29 @@ export const S1Worlds: React.FC = () => {
   );
 };
 
+// 3. Trophy cabinet: trophy points vs seasons as a pro (v11 trophy values). The next best is found from the data.
+export const S3Cabinet: React.FC = () => {
+  const xr: [number, number] = [0, 15.5], yr: [number, number] = [0, 1650];
+  const { X, Y } = scale(B, xr, yr);
+  const fk = P("faker");
+  const rest = PL.filter((p) => p.id !== "faker").sort((a, b) => b.trophyPts - a.trophyPts);
+  const named = rest.slice(0, 3);
+  const jx = (id: string) => (named.some((p) => p.id === id) ? 0 : (hash(id) - 0.5) * 0.7);
+  const sides: ("left" | "right" | "below")[] = ["left", "right", "below"];
+  const nb = named[0];
+  return (
+    <Stage title="THE TROPHY CABINET">
+      <Axes b={B} xr={xr} yr={yr} xt={[1, 3, 5, 7, 9, 11, 13, 15]} yt={[0, 400, 800, 1200, 1600]} xl="SEASONS AS A PRO" yl="TROPHY POINTS" />
+      {rest.map((p) => <Dot key={p.id} x={X(seasons(p.years) + jx(p.id))} y={Y(p.trophyPts)} r={8} color={heat(p.trophyPts / 650)} o={0.85} />)}
+      {named.map((p, i) => <Callout key={p.id} x={X(seasons(p.years))} y={Y(p.trophyPts)} name={p.name} value={Math.round(p.trophyPts).toLocaleString("en-US")} side={sides[i]} ring={20} />)}
+      <div style={{ position: "absolute", left: X(14) + 70, top: Y(fk.trophyPts), height: Y(nb.trophyPts) - Y(fk.trophyPts), borderLeft: "3px dashed rgba(237,239,242,0.8)" }} />
+      <Big x={X(14) + 86} y={(Y(fk.trophyPts) + Y(nb.trophyPts)) / 2 - 30} size={52}>+{Math.round(fk.trophyPts - nb.trophyPts).toLocaleString("en-US")}</Big>
+      <Face id="faker" x={X(seasons(fk.years))} y={Y(fk.trophyPts)} size={120} />
+      <Callout x={X(seasons(fk.years))} y={Y(fk.trophyPts)} name="Faker" value={Math.round(fk.trophyPts).toLocaleString("en-US")} side="left" ring={0} pad={68} color={C.gold} size={1.4} />
+    </Stage>
+  );
+};
+
 // 2. The debate: stacked Reddit and article screenshots
 const Shot: React.FC<{ src: string; x: number; y: number; w: number; rot: number }> = ({ src, x, y, w, rot }) => (
   <div style={{ position: "absolute", left: x, top: y, width: w, transform: `rotate(${rot}deg)`, borderRadius: 14, overflow: "hidden",
@@ -59,19 +84,21 @@ export const S2Debate: React.FC = () => (
 
 // 4. Big games and clutch: international games played vs the score
 export const S4BigStage: React.FC = () => {
-  const xr: [number, number] = [0, 380], yr: [number, number] = [55, 103];
+  // v11 / script v4: "Biggest stage: Keria" = the big stage board (c_big_stage, international and finals play), not the combined part
+  const xr: [number, number] = [0, 380], yr: [number, number] = [55, 104];
   const { X, Y } = scale(B, xr, yr);
-  const pts = PL.map((p) => ({ id: p.id, x: p.stats.intl_games ?? 0, y: (S.bigStage as Record<string, number>)[p.id] })).filter((d) => d.y !== undefined && d.y >= 55);
+  const pts = (S.board as BoardRow[]).map((r) => ({ id: r[0], x: r[9] ?? 0, y: r[4] ?? 0 })).filter((d) => d.y >= 55 && d.x > 0);
+  const at = (id: string) => pts.find((q) => q.id === id)!;
+  const kr = at("keria");
   return (
-    <Stage title="BIG GAMES AND CLUTCH">
-      <Axes b={B} xr={xr} yr={yr} xt={[0, 50, 100, 150, 200, 250, 300, 350]} yt={[60, 70, 80, 90, 100]} xl="INTERNATIONAL GAMES" yl="BIG GAMES SCORE" />
-      {pts.filter((d) => d.id !== "zeus").map((d) => <Star key={d.id} x={X(d.x)} y={Y(d.y)} r={11} color={heat((d.y - 55) / 45)} o={0.9} />)}
-      {([["knight", "right"], ["keria", "right"], ["faker", "above"]] as [string, "right" | "above"][]).map(([id, side]) => {
-        const d = pts.find((q) => q.id === id)!;
-        return <Callout key={id} x={X(d.x)} y={Y(d.y)} name={P(id).name} value={r0(d.y)} side={side} ring={id === "knight" ? 18 : 22} pad={id === "knight" ? 22 : undefined} />;
+    <Stage title="BIGGEST STAGE">
+      <Axes b={B} xr={xr} yr={yr} xt={[0, 50, 100, 150, 200, 250, 300, 350]} yt={[60, 70, 80, 90, 100]} xl="INTERNATIONAL GAMES" yl="BIG STAGE SCORE" />
+      {pts.filter((d) => d.id !== "keria").map((d) => <Star key={d.id} x={X(d.x)} y={Y(d.y)} r={11} color={heat((d.y - 55) / 45)} o={0.9} />)}
+      {([["zeus", "left"], ["knight", "below"], ["faker", "above"]] as [string, "left" | "below" | "above"][]).map(([id, side]) => {
+        const d = at(id); return <Callout key={id} x={X(d.x)} y={Y(d.y)} name={P(id).name} value={r0(d.y)} side={side} ring={20} />;
       })}
-      <Face id="zeus" x={X(169)} y={Y(100)} size={72} ring={C.text} glow="rgba(92,190,80,0.9)" />
-      <Callout x={X(169)} y={Y(100)} name="Zeus" value="100" side="left" ring={0} pad={42} size={1.25} />
+      <Face id="keria" x={X(kr.x)} y={Y(kr.y)} size={92} ring={C.cyan} glow={C.cyan} />
+      <Callout x={X(kr.x)} y={Y(kr.y)} name="Keria" value="100" side="right" ring={0} pad={52} color={C.cyan} size={1.25} />
     </Stage>
   );
 };
@@ -187,7 +214,7 @@ export const S8IntlOnly: React.FC = () => {
       <div style={{ position: "absolute", left: b.x0 + 22, top: b.y0 - 26, fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>SCORE</div>
       <div style={{ position: "absolute", left: b.x0 + 260, top: 160, display: "flex", alignItems: "center", gap: 16 }}>
         <Face id="faker" x={30} y={30} size={60} />
-        <div style={{ marginLeft: 70, fontFamily: F.body, fontWeight: 800, fontSize: 28, color: C.gold, whiteSpace: "nowrap" }}>FAKER STAYS #1 AT {r0(intl.faker)}</div>
+        <div style={{ marginLeft: 70, fontFamily: F.body, fontWeight: 800, fontSize: 28, color: C.gold, whiteSpace: "nowrap" }}>FAKER STAYS #1</div>
       </div>
       <Big x={XL} y={b.y1 + 14} size={38} align="center" w={400}>ALL TROPHIES</Big>
       <Big x={XR} y={b.y1 + 14} size={38} align="center" w={400}>INTERNATIONAL ONLY</Big>
@@ -224,6 +251,8 @@ export const S9TwoFakers: React.FC = () => {
   const rows = (S.split as [string, string, string, number][]).map(([link, name, years, s]) => ({ link, name, first: Number(years.slice(0, 4)), s }));
   const cut = (rows[9].s + rows[10].s) / 2; // between #10 and #11
   const knight = rows.find((r) => r.name === "Knight")!;
+  // Knight and Chovy both start in 2018 and sit 1.7 apart: spread them by hand so both rings read
+  const jx = (r: { link: string; first: number }) => r.first + (r.link === "Chovy" ? -0.15 : r.link === knight.link ? 0.4 : (hash(r.link) - 0.5) * 0.75);
   return (
     <Stage title="TWO FAKERS">
       <div style={{ position: "absolute", left: B.x0, top: B.y0 - 10, width: B.x1 - B.x0 + 30, height: Y(cut) - B.y0 + 10,
@@ -232,9 +261,11 @@ export const S9TwoFakers: React.FC = () => {
       <Big x={B.x1 + 20} y={Y(cut) - 50} size={36} align="right" w={200}>TOP 10</Big>
       <Axes b={B} xr={xr} yr={yr} xt={[2011, 2014, 2017, 2020, 2023, 2026]} yt={[20, 40, 60, 80]} xl="FIRST SEASON" yl="SCORE" xf={(v) => String(v)} />
       {rows.filter((r) => !r.name.startsWith("Faker")).map((r) => (
-        <Dot key={r.link} x={X(r.first + (hash(r.link) - 0.5) * 0.75)} y={Y(r.s)} r={7} color={heat((r.s - 20) / 62)} o={r.s > cut ? 1 : 0.8} />
+        <Dot key={r.link} x={X(jx(r))} y={Y(r.s)} r={7} color={heat((r.s - 20) / 62)} o={r.s > cut ? 1 : 0.8} />
       ))}
-      <Callout x={X(knight.first + (hash(knight.link) - 0.5) * 0.75)} y={Y(knight.s)} name="Knight" value="#1" side="right" ring={20} />
+      <Callout x={X(jx(knight))} y={Y(knight.s)} name="Knight" value="#1" side="right" ring={20} />
+      {(() => { const c = rows.find((r) => r.name === "Chovy")!; const i = rows.indexOf(c) + 1;
+        return <Callout x={X(jx(c))} y={Y(c.s)} name="Chovy" value={"#" + i} side="below" ring={20} />; })()}
       {rows.filter((r) => r.name.startsWith("Faker")).map((r) => (
         <React.Fragment key={r.link}>
           <Face id="faker" x={X(r.first)} y={Y(r.s)} size={76} />
@@ -249,40 +280,35 @@ export const S9TwoFakers: React.FC = () => {
   );
 };
 
-// 10. Finale: the GOAT pyramid on a % of Faker axis (v10), tiers cut where the gaps are:
-// Faker | Knight (3 points clear) | Keria, Chovy, Ruler | Zeus to Caps (then a 1.5 gap to Peanut).
+// 10. Finale: the GOAT pyramid (v11). Tiers are cut where the score gaps are: Faker | Knight, Chovy (3.4 clear of #4) |
+// Keria, Ruler (2.5 clear) | Zeus to Viper (1.7 clear of Gumayusi). Equal-height tiers; each face carries its % of Faker.
+const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler"], ["zeus", "canyon", "bin", "peanut", "viper"]];
 export const S10Pyramid: React.FC = () => {
-  const top = 170, base = 900, half = 720, cx = 1040;
-  const yr: [number, number] = [62, 100];
-  const Y = (v: number) => base - ((v - yr[0]) / (yr[1] - yr[0])) * (base - top);
+  const top = 170, base = 920, half = 760, cx = 960;
+  const cuts = [top, 430, 600, 750, base];
   const hw = (y: number) => ((y - top) / (base - top)) * half;
-  const tiers = [{ lo: 86, hi: 100, ids: ["faker"] }, { lo: 78.5, hi: 86, ids: ["knight"] }, { lo: 72.8, hi: 78.5, ids: ["keria", "chovy", "ruler"] },
-    { lo: 62, hi: 72.8, ids: ["zeus", "canyon", "bin", "gumayusi", "oner", "viper", "caps"] }];
   const fills = ["rgba(245,184,61,0.30)", "rgba(34,211,238,0.18)", "rgba(150,160,175,0.14)", "rgba(150,160,175,0.09)"];
-  const sizes = [130, 92, 72, 80], gaps = [0, 0, 190, 158];
+  const sizes = [140, 96, 84, 80], gaps = [0, 230, 230, 180];
   return (
     <Stage title="THE PYRAMID" glow="gold">
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
-        {tiers.map((t, i) => {
-          const y0 = Y(t.hi), y1 = Y(t.lo);
+        {TIERS.map((_, i) => {
+          const y0 = cuts[i], y1 = cuts[i + 1];
           return <polygon key={i} points={`${cx - hw(y0)},${y0} ${cx + hw(y0)},${y0} ${cx + hw(y1)},${y1} ${cx - hw(y1)},${y1}`} fill={fills[i]}
             stroke="rgba(237,239,242,0.55)" strokeWidth={2} />;
         })}
       </svg>
-      <div style={{ position: "absolute", left: 250 - 2, top: top - 20, width: 3, height: base - top + 20, background: "rgba(237,239,242,0.85)" }} />
-      {[65, 70, 75, 80, 85, 90, 95, 100].map((v) => <Big key={v} x={230} y={Y(v) - 26} size={42} align="right" w={140}>{v}%</Big>)}
-      <div style={{ position: "absolute", left: 272, top: top - 40, fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>% OF FAKER</div>
-      {tiers.map((t, i) => {
+      {TIERS.map((ids, i) => {
         const size = sizes[i];
-        const yc = i === 0 ? Y(92) : (Y(t.hi) + Y(t.lo)) / 2 - 14;
-        return t.ids.map((id, j) => {
-          const x = cx + (j - (t.ids.length - 1) / 2) * gaps[i];
+        const yc = i === 0 ? 330 : (cuts[i] + cuts[i + 1]) / 2 - 16;
+        return ids.map((id, j) => {
+          const x = cx + (j - (ids.length - 1) / 2) * gaps[i];
           return (
             <React.Fragment key={id}>
               <Face id={id} x={x} y={yc} size={size} ring={i === 0 ? C.gold : i === 1 ? C.cyan : "rgba(237,239,242,0.8)"} glow={i === 0 ? C.gold : i === 1 ? C.cyan : "rgba(0,0,0,0.6)"} />
-              <div style={{ position: "absolute", left: x - 100, width: 200, top: yc + size / 2 + 2, textAlign: "center", fontFamily: F.body, fontWeight: 800,
-                fontSize: i === 0 ? 28 : i === 1 ? 24 : 19, color: i === 0 ? C.gold : i === 1 ? C.cyan : C.text, whiteSpace: "nowrap", lineHeight: 1.1,
-                textShadow: "0 0 6px #0B0B0F" }}>{P(id).name.toUpperCase()}{i === 3 ? <br /> : " "}{i === 0 ? "" : r0(P(id).vsFaker) + "%"}</div>
+              <div style={{ position: "absolute", left: x - 110, width: 220, top: yc + size / 2 + 2, textAlign: "center", fontFamily: F.body, fontWeight: 800,
+                fontSize: i === 0 ? 30 : i === 1 ? 26 : 22, color: i === 0 ? C.gold : i === 1 ? C.cyan : C.text, whiteSpace: "nowrap", lineHeight: 1.1,
+                textShadow: "0 0 6px #0B0B0F" }}>{P(id).name.toUpperCase()} {i === 0 ? "" : r0(P(id).vsFaker) + "%"}</div>
             </React.Fragment>
           );
         });
@@ -291,43 +317,9 @@ export const S10Pyramid: React.FC = () => {
   );
 };
 
-type Need = [string, number, number, number]; // case, knight, faker, trophy points added
-const NEED = S.knightNeeds as Need[];
-const need = (c: string) => NEED.find((r) => r[0] === c)!;
-
-// 11. What Knight needs to pass Faker: more Worlds only (v10: +5 Worlds ties)
-export const S11KnightNeeds: React.FC = () => {
-  const xr: [number, number] = [-0.3, 5.4], yr: [number, number] = [70, 94];
-  const { X, Y } = scale(B, xr, yr);
-  const kn = ["now", "+1 Worlds", "+2 Worlds", "+3 Worlds", "+4 Worlds"].map((c) => need(c)[1]);
-  const fk = NEED[0][2];
-  const pts = kn.map((v, i) => `${X(i)},${Y(v)}`).join(" L ");
-  return (
-    <Stage title="WHAT KNIGHT NEEDS">
-      <Axes b={B} xr={xr} yr={yr} xt={[0, 1, 2, 3, 4, 5]} yt={[70, 75, 80, 85, 90]} xl="MORE WORLD TITLES" yl="SCORE" xf={(v) => (v === 0 ? "NOW" : "+" + v)} />
-      <div style={{ position: "absolute", left: B.x0, top: Y(fk), width: B.x1 - B.x0 - 60, borderTop: `4px dashed ${C.gold}`, filter: `drop-shadow(0 0 6px ${C.gold})` }} />
-      <Face id="faker" x={B.x1 + 10} y={Y(fk)} size={96} />
-      <Callout x={B.x1 + 10} y={Y(fk)} name="Faker" value={r0(fk)} side="above" ring={0} pad={50} color={C.gold} />
-      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
-        <path d={"M " + pts} stroke={C.cyan} strokeWidth={6} fill="none" style={{ filter: `drop-shadow(0 0 10px ${C.cyan})` }} />
-        <line x1={X(4)} y1={Y(kn[4])} x2={X(5)} y2={Y(fk)} stroke={C.cyan} strokeWidth={4} strokeDasharray="10 10" opacity={0.7} />
-        {kn.slice(0, 4).map((v, i) => <circle key={i} cx={X(i)} cy={Y(v)} r={12} fill={C.cyan} />)}
-        <circle cx={X(5)} cy={Y(fk)} r={14} fill="none" stroke={C.cyan} strokeWidth={4} />
-      </svg>
-      {kn.slice(0, 4).map((v, i) => <Big key={i} x={X(i) + 22} y={Y(v) + 4} size={52}>{r0(v)}</Big>)}
-      <Big x={X(5) + 20} y={Y(fk) + 30} size={40} align="center" w={200} color={C.cyan}>+5 TIES</Big>
-      {/* the gap today */}
-      <div style={{ position: "absolute", left: X(0), top: Y(fk), height: Y(kn[0]) - Y(fk) - 20, borderLeft: "3px dashed rgba(237,239,242,0.8)" }} />
-      <Big x={X(0) + 18} y={(Y(fk) + Y(kn[0])) / 2 - 30} size={52}>-{r0(fk - kn[0])}</Big>
-      <Face id="knight" x={X(4)} y={Y(kn[4])} size={96} ring={C.cyan} glow={C.cyan} />
-      <Callout x={X(4)} y={Y(kn[4])} name="Knight" value={r0(kn[4])} side="below" ring={0} pad={50} color={C.cyan} size={1.2} />
-    </Stage>
-  );
-};
-
-// 11a. Knight vs Faker, part by part (v10 parts and weights, MODEL-CURRENT 18 Nov 16:50)
-const PARTS: [string, number, number, number][] = [["TROPHIES", 40, 100, 43.9], ["BIG GAMES", 14, 87.5, 99.0], ["SKILL", 18, 77.6, 99.8],
-  ["TEAM IMPACT", 12, 100, 84.9], ["YEARS AT THE TOP", 9, 100, 89.8], ["RESPECT", 7, 61.2, 77.5]];
+// 11a. Knight vs Faker, part by part (v11 parts and weights, MODEL-CURRENT 18 Nov 17:20; "intangibles" is called Recognition on screen)
+const PARTS: [string, number, number, number][] = [["TROPHIES", 40, 100, 46.1], ["BIG GAMES", 14, 94.1, 98.9], ["SKILL", 18, 78.6, 99.9],
+  ["TEAM IMPACT", 12, 100, 84.6], ["YEARS AT THE TOP", 9, 100, 89.7], ["RECOGNITION", 7, 61.2, 77.5]];
 export const S11aKnightVsFaker: React.FC = () => {
   const b: Box = { x0: 620, y0: 210, x1: 1640, y1: 830 };
   const X = (v: number) => b.x0 + ((v - 30) / 72) * (b.x1 - b.x0);
@@ -374,43 +366,247 @@ export const S11aKnightVsFaker: React.FC = () => {
   );
 };
 
-// 11b. Paths to pass Faker: trophy points added vs Knight's score as % of Faker (v10, whatif_knight_needs.csv).
-// Every path sits on one line because only trophy points change; +5 Worlds is where the line meets Faker.
-const PATHS: [string, string, "above" | "below"][] = [["now", "NOW", "below"], ["+1 Worlds", "+1 WORLDS", "above"], ["+8 LPL", "+8 LPL", "below"],
-  ["+1 Worlds +4 LPL", "+1 WORLDS +4 LPL", "above"], ["+2 Worlds", "+2 WORLDS", "below"], ["+3 Worlds", "+3 WORLDS", "above"], ["+3 Worlds +1 MSI", "+3 WORLDS +1 MSI", "below"]];
-export const S11bKnightPaths: React.FC = () => {
-  const fk = NEED[0][2];
-  const pc = (v: number) => (v / fk) * 100;
-  const [, k0] = need("now"); const [, k4, , p4] = need("+4 Worlds");
-  const slope = (k4 - k0) / p4;
-  const tie = (fk - k0) / slope; // trophy points that tie Faker
-  const xr: [number, number] = [-30, 580], yr: [number, number] = [76, 102];
+// 12. Champion pool board (unweighted, research/champpool/pool_board.csv): champions played vs games played, whole pool.
+type PoolRow = [string, string, number, number, number, string]; // id/link, name, games, champions, comfort, signature
+export const S12ChampPool: React.FC = () => {
+  const xr: [number, number] = [0, 1700], yr: [number, number] = [0, 96];
   const { X, Y } = scale(B, xr, yr);
+  const rows = S.pool as PoolRow[];
+  const at = (n: string) => rows.find((r) => r[1] === n)!;
+  const named: [string, "left" | "right" | "above" | "below"][] = [["Flandre", "above"], ["Caps", "left"], ["Chovy", "below"], ["Knight", "right"], ["Ruler", "below"]];
+  const fk = at("Faker");
   return (
-    <Stage title="WHAT KNIGHT NEEDS">
-      <div style={{ position: "absolute", left: B.x0, top: B.y0 - 10, width: B.x1 - B.x0 + 30, height: Y(100) - B.y0 + 10,
-        background: "linear-gradient(180deg, rgba(92,190,80,0.2) 0%, rgba(92,190,80,0.04) 100%)" }} />
-      <Axes b={B} xr={xr} yr={yr} xt={[0, 100, 200, 300, 400, 500]} yt={[80, 85, 90, 95, 100]} xl="TROPHY POINTS ADDED" yl="KNIGHT, % OF FAKER" yf={(v) => v + "%"} />
-      <div style={{ position: "absolute", left: B.x0, top: Y(100), width: X(tie) - B.x0 - 50, borderTop: `4px dashed ${C.gold}`, filter: `drop-shadow(0 0 6px ${C.gold})` }} />
-      <Face id="faker" x={X(tie)} y={Y(100)} size={92} />
-      <Callout x={X(tie)} y={Y(100)} name="+5 Worlds = Faker" side="below" ring={0} pad={48} color={C.gold} />
-      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
-        <line x1={X(0)} y1={Y(pc(k0))} x2={X(tie)} y2={Y(100)} stroke="rgba(34,211,238,0.35)" strokeWidth={3} strokeDasharray="6 8" />
-      </svg>
-      {PATHS.map(([c, n, side]) => {
-        const [, s, , p] = need(c);
-        return (
-          <React.Fragment key={c}>
-            <Dot x={X(p)} y={Y(pc(s))} r={11} color={C.cyan} />
-            <div style={{ position: "absolute", left: X(p) - 150, width: 300, textAlign: "center", top: side === "above" ? Y(pc(s)) - 66 : Y(pc(s)) + 18, whiteSpace: "nowrap" }}>
-              <div style={{ fontFamily: F.body, fontWeight: 800, fontSize: 20, color: C.text }}>{n}</div>
-              <div style={{ fontFamily: F.body, fontWeight: 800, fontSize: 26, color: C.cyan, lineHeight: 1 }}>{r0(pc(s))}%</div>
-            </div>
-          </React.Fragment>
-        );
-      })}
-      <Face id="knight" x={X(p4)} y={Y(pc(k4))} size={84} ring={C.cyan} glow={C.cyan} />
-      <Callout x={X(p4)} y={Y(pc(k4))} name="+4 Worlds" value={r0(pc(k4)) + "%"} side="left" ring={0} pad={44} color={C.cyan} size={1.1} />
+    <Stage title="CHAMPION POOL">
+      <Axes b={B} xr={xr} yr={yr} xt={[0, 400, 800, 1200, 1600]} yt={[0, 20, 40, 60, 80]} xl="PRO GAMES PLAYED" yl="CHAMPIONS PLAYED" />
+      {rows.filter((r) => r[1] !== "Faker").map((r) => (
+        <Dot key={r[0]} x={X(r[2])} y={Y(r[3] + (hash(r[0]) - 0.5) * 0.8)} r={7} color={heat((r[3] - 15) / 65)} o={named.some(([n]) => n === r[1]) ? 1 : 0.75} />
+      ))}
+      {named.map(([n, side]) => { const r = at(n); return <Callout key={n} x={X(r[2])} y={Y(r[3])} name={n} value={String(r[3])} side={side} ring={20} />; })}
+      <Face id="faker" x={X(fk[2])} y={Y(fk[3])} size={110} />
+      <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={String(fk[3])} side="below" ring={0} pad={58} color={C.gold} size={1.3} />
     </Stage>
   );
 };
+
+
+// ---- Script v4 stills (model v11) ----
+const BOARD = S.board as BoardRow[];
+
+// 13. The trophy price list (MODEL-CURRENT v11: halfway blend of tradition and measured difficulty)
+const PRICES: [string, number][] = [["WORLDS", 100], ["MSI", 56], ["LCK TITLE", 44], ["FIRST STAND", 40], ["LPL TITLE", 35], ["LEC TITLE", 12]];
+export const S13PriceList: React.FC = () => {
+  const b: Box = { x0: 620, y0: 230, x1: 1640, y1: 830 };
+  const X = (v: number) => b.x0 + (v / 105) * (b.x1 - b.x0);
+  const Y = (i: number) => b.y0 + 45 + i * ((b.y1 - b.y0 - 90) / (PRICES.length - 1));
+  return (
+    <Stage title="WHAT A TROPHY IS WORTH">
+      <div style={{ position: "absolute", left: b.x0 - 2, top: b.y0 - 20, width: 3, height: b.y1 - b.y0 + 22, background: "rgba(237,239,242,0.85)" }} />
+      <div style={{ position: "absolute", left: b.x0 - 2, top: b.y1, width: b.x1 - b.x0 + 30, height: 3, background: "rgba(237,239,242,0.85)" }} />
+      {[0, 25, 50, 75, 100].map((v) => <Big key={v} x={X(v)} y={b.y1 + 12} size={40} align="center" w={160}>{v}</Big>)}
+      <div style={{ position: "absolute", left: b.x0, right: 1920 - b.x1, top: b.y1 + 70, display: "flex", justifyContent: "center", alignItems: "center", gap: 18,
+        fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>TROPHY POINTS
+        <svg width="70" height="40" viewBox="0 0 70 40"><path d="M70 20 L40 40 L40 28 L0 28 L0 12 L40 12 L40 0 Z" fill={C.text} /></svg></div>
+      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+        {PRICES.map(([, v], i) => (
+          <g key={i}>
+            <line x1={X(0)} x2={X(v)} y1={Y(i)} y2={Y(i)} stroke={i === 0 ? "rgba(245,184,61,0.6)" : "rgba(237,239,242,0.35)"} strokeWidth={6} strokeLinecap="round" />
+            <circle cx={X(v)} cy={Y(i)} r={i === 0 ? 20 : 15} fill={i === 0 ? C.gold : heat(v / 100)} style={{ filter: `drop-shadow(0 0 8px ${i === 0 ? C.gold : heat(v / 100)})` }} />
+          </g>
+        ))}
+      </svg>
+      {PRICES.map(([n, v], i) => (
+        <React.Fragment key={n}>
+          <div style={{ position: "absolute", left: b.x0 - 460, width: 430, textAlign: "right", top: Y(i) - 26, fontFamily: F.title, fontSize: 44, letterSpacing: 1,
+            color: i === 0 ? C.gold : C.text }}>{n}</div>
+          <div style={{ position: "absolute", left: X(v) + 32, top: Y(i) - 24, fontFamily: F.body, fontWeight: 800, fontSize: 38, color: i === 0 ? C.gold : C.text }}>{v}</div>
+        </React.Fragment>
+      ))}
+    </Stage>
+  );
+};
+
+// 14. Titles ranked by difficulty: coin flips in a row an elite team would need on the champion's real path (2016 on)
+type Ev = [string, string, string, number, number];
+export const S14Hardest: React.FC = () => {
+  const ev = (S.events as Ev[]).filter((e) => e[1] === "worlds" || e[1] === "msi");
+  const xr: [number, number] = [2015.5, 2026.8], yr: [number, number] = [0, 10];
+  const { X, Y } = scale(B, xr, yr);
+  const lit = (e: Ev) => e[1] === "worlds" && (e[3] === 2024 || e[3] === 2026);
+  const label = (e: Ev) => (e[3] === 2024 ? "T1 2024" : "BLG 2026");
+  return (
+    <Stage title="THE HARDEST TITLES">
+      <Axes b={B} xr={xr} yr={yr} xt={[2016, 2018, 2020, 2022, 2024, 2026]} yt={[0, 2, 4, 6, 8, 10]} xl="YEAR" yl="COIN FLIPS IN A ROW" xf={(v) => String(v)} />
+      {ev.filter((e) => !lit(e)).map((e) => e[1] === "worlds"
+        ? <Star key={e[0]} x={X(e[3] - 0.15)} y={Y(e[4])} r={14} color={heat(e[4] / 9)} o={0.95} />
+        : <Dot key={e[0]} x={X(e[3] + 0.15)} y={Y(e[4])} r={8} color="rgba(190,196,206,0.7)" />)}
+      {ev.filter(lit).map((e) => (
+        <React.Fragment key={e[0]}>
+          <Star x={X(e[3] - 0.15)} y={Y(e[4])} r={20} color={C.gold} />
+          <Callout x={X(e[3] - 0.15)} y={Y(e[4])} name={label(e)} value={e[4].toFixed(1)} side={e[3] === 2024 ? "left" : "right"} ring={28} color={C.gold} size={1.2} />
+        </React.Fragment>
+      ))}
+      <div style={{ position: "absolute", left: B.x1 - 330, top: B.y1 - 110, fontFamily: F.body, fontWeight: 800, fontSize: 24, color: C.text, lineHeight: 1.6 }}>
+        <span style={{ color: C.gold }}>★</span> WORLDS &nbsp;&nbsp; <span style={{ color: "rgba(190,196,206,0.9)" }}>●</span> MSI
+      </div>
+    </Stage>
+  );
+};
+
+// 15. Team impact: plus-minus wins added over a career (v11, data/csv/rapm_career.csv)
+type Imp = [string, string, number, number];
+export const S15Impact: React.FC = () => {
+  const rows = S.impact as Imp[];
+  const xr: [number, number] = [0, 1700], yr: [number, number] = [-40, 125];
+  const { X, Y } = scale(B, xr, yr);
+  const fk = rows.find((r) => r[0] === "faker")!;
+  const named: [string, "left" | "right" | "above" | "below"][] = [["ruler", "right"], ["chovy", "left"]];
+  return (
+    <Stage title="WHO MAKES THE TEAM WIN">
+      <Axes b={B} xr={xr} yr={yr} xt={[0, 400, 800, 1200, 1600]} yt={[-40, 0, 40, 80, 120]} xl="GAMES PLAYED" yl="WINS ADDED" />
+      <div style={{ position: "absolute", left: B.x0, top: Y(0), width: B.x1 - B.x0 + 30, borderTop: "2px dashed rgba(237,239,242,0.35)" }} />
+      {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={7} color={heat((r[3] + 20) / 90)} o={0.8} />)}
+      {named.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={20} />; })}
+      <Face id="faker" x={X(fk[2])} y={Y(fk[3])} size={110} />
+      <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={0} pad={62} color={C.gold} size={1.3} />
+    </Stage>
+  );
+};
+
+// 16. Clutch vs luck: best-of-five and best-of-three series won above what the team ratings expected, with the luck band
+// (2 standard deviations of pure coin flips: about the square root of the series played)
+type Cl = [string, string, number, number];
+export const S16Clutch: React.FC = () => {
+  const rows = S.clutch as Cl[];
+  const xr: [number, number] = [0, 260], yr: [number, number] = [-22, 30];
+  const { X, Y } = scale(B, xr, yr);
+  const band = Array.from({ length: 53 }, (_, i) => i * 5);
+  const up = band.map((n) => `${X(n)},${Y(Math.sqrt(n))}`).join(" ");
+  const dn = band.slice().reverse().map((n) => `${X(n)},${Y(-Math.sqrt(n))}`).join(" ");
+  const fk = rows.find((r) => r[0] === "faker")!;
+  const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["gumayusi", "left"]];
+  return (
+    <Stage title="CLUTCH OR LUCK">
+      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+        <polygon points={up + " " + dn} fill="rgba(150,160,175,0.16)" stroke="rgba(190,196,206,0.4)" strokeWidth={2} />
+      </svg>
+      <Big x={X(200)} y={Y(-11)} size={40} color="#9AA3B1" align="center" w={300}>LUCK</Big>
+      <Axes b={B} xr={xr} yr={yr} xt={[0, 50, 100, 150, 200, 250]} yt={[-20, -10, 0, 10, 20, 30]} xl="SERIES PLAYED" yl="SERIES WON ABOVE EXPECTED" yf={(v) => (v > 0 ? "+" + v : String(v))} />
+      {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 8) / 26)} o={r[3] > Math.sqrt(r[2]) ? 1 : 0.6} />)}
+      {named.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
+      <Face id="faker" x={X(fk[2])} y={Y(fk[3])} size={100} />
+      <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={0} pad={56} color={C.gold} size={1.3} />
+    </Stage>
+  );
+};
+
+// 17. The score card: six parts and their weights (v11). Recognition = All-Pro votes plus team record with and without him.
+const CARD: [string, number, string][] = [["TROPHIES", 40, C.gold], ["SKILL", 18, "#5CBE50"], ["BIG GAMES + CLUTCH", 14, "#22D3EE"],
+  ["TEAM IMPACT", 12, "#E8CD3A"], ["LONGEVITY", 9, "#F27828"], ["RECOGNITION", 7, "#C77DFF"]];
+export const S17ScoreCard: React.FC = () => {
+  const x0 = 160, x1 = 1760, y = 470, h = 120;
+  const W = (v: number) => (v / 100) * (x1 - x0);
+  let acc = 0;
+  return (
+    <Stage title="THE SCORE, OUT OF 100">
+      {CARD.map(([n, w, c], i) => {
+        const left = x0 + W(acc); acc += w;
+        const above = i % 2 === 0;
+        return (
+          <React.Fragment key={n}>
+            <div style={{ position: "absolute", left: left + 2, top: y, width: W(w) - 4, height: h, background: c, opacity: 0.9, borderRadius: 6,
+              boxShadow: `0 0 18px ${c}55` }} />
+            <div style={{ position: "absolute", left: left + 2, width: W(w) - 4, top: y + h / 2 - 34, textAlign: "center", fontFamily: F.title, fontSize: w >= 12 ? 56 : 44,
+              color: "#0B0B0F" }}>{w}%</div>
+            <div style={{ position: "absolute", left: left + W(w) / 2 - 200, width: 400, textAlign: "center", top: above ? y - 70 : y + h + 22,
+              fontFamily: F.title, fontSize: 36, letterSpacing: 1, color: c, whiteSpace: "nowrap" }}>{n}</div>
+          </React.Fragment>
+        );
+      })}
+      {/* a real scale under the card */}
+      <div style={{ position: "absolute", left: x0, top: 780, width: x1 - x0, height: 3, background: "rgba(237,239,242,0.85)" }} />
+      {[0, 20, 40, 60, 80, 100].map((v) => (
+        <React.Fragment key={v}>
+          <div style={{ position: "absolute", left: x0 + W(v) - 1, top: 772, width: 3, height: 18, background: "rgba(237,239,242,0.85)" }} />
+          <Big x={x0 + W(v)} y={796} size={40} align="center" w={140}>{v}</Big>
+        </React.Fragment>
+      ))}
+    </Stage>
+  );
+};
+
+// 18. Most skilled: skill part vs games (Chovy 100, Knight 99.9)
+export const S18Skill: React.FC = () => {
+  const pts = BOARD.filter((r) => r[3] !== null && (r[3] as number) >= 40).map((r) => ({ id: r[0], x: r[2], y: r[3] as number }));
+  const xr: [number, number] = [0, 1700], yr: [number, number] = [40, 104];
+  const { X, Y } = scale(B, xr, yr);
+  const at = (id: string) => pts.find((q) => q.id === id)!;
+  const ch = at("chovy");
+  return (
+    <Stage title="MOST SKILLED">
+      <Axes b={B} xr={xr} yr={yr} xt={[0, 400, 800, 1200, 1600]} yt={[40, 50, 60, 70, 80, 90, 100]} xl="GAMES PLAYED" yl="SKILL SCORE" />
+      {pts.filter((d) => d.id !== "chovy").map((d) => <Dot key={d.id} x={X(d.x)} y={Y(d.y)} r={7} color={heat((d.y - 40) / 60)} o={0.8} />)}
+      {([["knight", "right"], ["keria", "below"], ["faker", "below"]] as [string, "right" | "below"][]).map(([id, side]) => {
+        const d = at(id); return <Callout key={id} x={X(d.x)} y={Y(d.y)} name={P(id).name} value={d.y >= 99.5 ? d.y.toFixed(1) : r0(d.y)} side={side} ring={20} />;
+      })}
+      <Face id="chovy" x={X(ch.x)} y={Y(ch.y)} size={92} ring={"#5CBE50"} glow={"#5CBE50"} />
+      <Callout x={X(ch.x)} y={Y(ch.y)} name="Chovy" value="100" side="left" ring={0} pad={52} color={"#5CBE50"} size={1.25} />
+    </Stage>
+  );
+};
+
+// 19. Titles with different teams (Peanut 5)
+export const S19Teams: React.FC = () => {
+  const pts = BOARD.filter((r) => r[6] > 0);
+  const xr: [number, number] = [0, 21], yr: [number, number] = [0, 5.8];
+  const { X, Y } = scale(B, xr, yr);
+  const pn = pts.find((r) => r[0] === "peanut")!;
+  const named: [string, "left" | "right" | "above" | "below"][] = [["deft", "left"], ["mata", "right"], ["faker", "above"]];
+  const nx: Record<string, number> = { deft: -0.5, mata: 0.5, faker: 0 };
+  const px = (r: BoardRow) => r[6] + (r[0] in nx ? nx[r[0]] : (hash(r[0]) - 0.5) * 0.6);
+  const py = (r: BoardRow) => r[5] + (r[0] in nx ? 0 : (hash(r[0] + "y") - 0.5) * 0.3);
+  return (
+    <Stage title="TITLES WITH DIFFERENT TEAMS">
+      <Axes b={B} xr={xr} yr={yr} xt={[0, 4, 8, 12, 16, 20]} yt={[1, 2, 3, 4, 5]} xl="TITLES WON" yl="TEAMS" />
+      {pts.filter((r) => r[0] !== "peanut").map((r) => (
+        <Dot key={r[0]} x={X(px(r))} y={Y(py(r))} r={7} color={heat((r[5] - 1) / 3.5)} o={0.85} />
+      ))}
+      {named.map(([id, side]) => { const r = pts.find((q) => q[0] === id); if (!r) return null;
+        return <Callout key={id} x={X(px(r))} y={Y(py(r))} name={r[1]} value={String(r[5])} side={side} ring={18} />; })}
+      <Face id="peanut" x={X(pn[6])} y={Y(pn[5])} size={96} ring={"#5CBE50"} glow={"#5CBE50"} />
+      <Callout x={X(pn[6])} y={Y(pn[5])} name="Peanut" value="5 TEAMS" side="right" ring={0} pad={54} color={"#5CBE50"} size={1.25} />
+    </Stage>
+  );
+};
+
+// 20 and 21. The field: world titles vs % of Faker. Bengi (#44) and Gumayusi (#11) are lit; the model can't see shotcalling.
+const Field: React.FC<{ id: string; title: string; note?: React.ReactNode }> = ({ id, title, note }) => {
+  const xr: [number, number] = [-0.5, 6.6], yr: [number, number] = [15, 105];
+  const { X, Y } = scale(B, xr, yr);
+  const jx = (r: BoardRow) => (r[0] === id ? 0 : (hash(r[0]) - 0.5) * 0.6);
+  const me = BOARD.find((r) => r[0] === id)!;
+  const fk = BOARD.find((r) => r[0] === "faker")!;
+  return (
+    <Stage title={title}>
+      <Axes b={B} xr={xr} yr={yr} xt={[0, 1, 2, 3, 4, 5, 6]} yt={[20, 40, 60, 80, 100]} xl="WORLDS WON" yl="% OF FAKER" yf={(v) => v + "%"} />
+      {BOARD.filter((r) => r[0] !== id && r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[7] + jx(r))} y={Y(r[8])} r={7} color={heat((r[8] - 20) / 55)} o={0.75} />)}
+      <Face id="faker" x={X(6)} y={Y(100)} size={84} />
+      <Callout x={X(6)} y={Y(100)} name="Faker" side="left" ring={0} pad={48} color={C.gold} />
+      <Face id={id} x={X(me[7])} y={Y(me[8])} size={92} ring={C.cyan} glow={C.cyan} />
+      <Callout x={X(me[7])} y={Y(me[8])} name={me[1] + "  #" + P(id).rank} value={r0(me[8]) + "%"} side="right" ring={0} pad={52} color={C.cyan} size={1.25} />
+      {note}
+    </Stage>
+  );
+};
+export const S20Bengi: React.FC = () => (
+  <Field id="bengi" title="WHAT THE MODEL CAN'T SEE" note={
+    <div style={{ position: "absolute", left: 1180, top: 610, width: 520, fontFamily: F.body, fontWeight: 800, fontSize: 30, color: C.text, lineHeight: 1.3 }}>
+      SHOTCALLING, COMMS, THE VOICE IN THE ROOM</div>} />
+);
+export const S21Gumayusi: React.FC = () => (
+  <Field id="gumayusi" title="LONG WAY TO GO" note={
+    <div style={{ position: "absolute", left: 1010, top: 580, width: 680, padding: "22px 28px", background: "rgba(11,11,15,0.85)", borderLeft: `6px solid ${C.cyan}`,
+      fontFamily: F.body, fontWeight: 700, fontSize: 30, color: C.text, lineHeight: 1.35 }}>
+      "If my goal was to become the best player in the world, I couldn't stay with T1 forever."
+      <div style={{ marginTop: 12, fontSize: 22, color: "#9AA3B1" }}>GUMAYUSI, DAILY ESPORTS (TRANSLATED)</div>
+    </div>} />
+);
