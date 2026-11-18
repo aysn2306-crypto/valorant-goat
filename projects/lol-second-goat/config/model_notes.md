@@ -11,9 +11,11 @@ Tiers follow the model's ranking only, never reputation. A few example faces per
 |---|---|---|
 | 1 | #1 | Faker (#1) |
 | 2 | #2 to #3 | Knight (#2), Chovy (#3) |
-| 3 | #4 to #10 | Keria (#4), Ruler (#5), Zeus (#6), Canyon (#7) |
-| 4 | #11 to #31 | Gumayusi (#11), Oner (#12), Caps (#14), Deft (#18), Uzi (#31) |
-| 5 | #32 to #50 | Wolf (#33), Impact (#40), Mata (#41), Bengi (#44), CoreJJ (#47) |
+| 3 | #4 to #10 | Keria (#4), Ruler (#5), Bin (#8), Viper (#10) |
+| 4 | #11 to #31 | Gumayusi (#11), Caps (#14), Deft (#18), TheShy (#25), Uzi (#31) |
+| 5 | #32 to #60 | Scout (#32), Perkz (#38), Doinb (#43), Bengi (#44), Jankos (#59) |
+
+Faces picked for a spread of regions (ay 18:09: less LCK and old SKT heavy).
 
 Reveal: build from the bottom up. In tier 2, Chovy fills first, then a beat of silence, then Knight. Faker goes alone on top. Zoom in on Knight at #2, then an arrow draws from tier 2 up to tier 1 ("what would it take to get from here to here?") and leads into the outro.
 
