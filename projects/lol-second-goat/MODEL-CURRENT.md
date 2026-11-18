@@ -3,6 +3,19 @@
 **Version 11 (FINAL unless ay reopens), 18 Nov 2026, 17:20 London.** ay approved each change on cards: halfway trophy blend (16:58), LCK/LPL fix (17:09), keep trophies as share of Faker (17:09), count 2013-15 games (17:10). Owner: the model thread. If a number here differs from anything older (script, stills, notes), this file wins.
 Scores file: `projects/lol-second-goat/data/csv/draft_scores.csv` (branch claude/project-thread-a343zy). Video data: `video/src/data/league.json`. Regenerate this file with `python3 scoring/model_current.py`.
 
+## GOAT pyramid (final, ay chose 18 Nov 17:30)
+
+Tiers come from the biggest gaps in the v11 scores. Built from the bottom up, with rank numbers on the faces.
+
+| Tier | Players (rank) | Gap above |
+|---|---|---|
+| 1 | Faker (#1) | 18.7 down to Knight |
+| 2 | Knight (#2), Chovy (#3) | 3.4 down to Keria |
+| 3 | Keria (#4), Ruler (#5) | 2.5 down to Zeus |
+| 4 | Zeus (#6), Canyon (#7), Bin (#8), Peanut (#9), Viper (#10) | 1.7 down to #11 |
+
+Reveal: fill the base, then tier 3, then tier 2 with two empty slots. Chovy fills first, a beat of silence, then Knight, then Faker alone on top. Zoom in on Knight at #2, then an arrow draws from tier 2 up to tier 1 ("what would it take to get from here to here?") and leads into the outro.
+
 ## What changed
 **v11 (from 10.1):** trophy values = halfway blend of our values and measured title difficulty (region offsets and byes counted): Worlds 100, MSI 56, First Stand 40, LCK title 44, LPL 35, LEC (20 x strength + 13)/2, LCS (20 x strength + 8)/2; placings scaled the same. Every 2011-15 game result added (data/build_games_all.py), so Elo, clutch, team impact and title difficulty cover Faker's 2013-15. Trophies stay a share of Faker's total. On screen, call "intangibles" **Recognition** (All-Pro votes + team record with and without him). Note: LEC 2026 splits count at full value (no Season Finals that year); small.
 
