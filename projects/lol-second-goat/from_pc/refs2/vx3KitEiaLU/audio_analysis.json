@@ -1,0 +1,193 @@
+{
+ "clips": [
+  {
+   "file": "vx3KitEiaLU_biggap_top75_board_reveal_silence_10m05s.mp3",
+   "start": "10:05",
+   "label": "biggap_top75_board_reveal_silence",
+   "tempo_bpm": 83.4,
+   "beat_strength": 0.212,
+   "vocal_band_share_in_gaps": 0.125,
+   "vocal_band_share_all": 0.398,
+   "bass_share": 0.399,
+   "hi_share": 0.009
+  },
+  {
+   "file": "vx3KitEiaLU_normal_talk_over_graph_05m05s.mp3",
+   "start": "05:05",
+   "label": "normal_talk_over_graph",
+   "tempo_bpm": 83.4,
+   "beat_strength": 0.136,
+   "vocal_band_share_in_gaps": 0.162,
+   "vocal_band_share_all": 0.318,
+   "bass_share": 0.395,
+   "hi_share": 0.005
+  },
+  {
+   "file": "vx3KitEiaLU_music_switch_1_02m52s.mp3",
+   "start": "02:52",
+   "label": "music_switch_1",
+   "tempo_bpm": 73.8,
+   "beat_strength": 0.05,
+   "vocal_band_share_in_gaps": 0.081,
+   "vocal_band_share_all": 0.245,
+   "bass_share": 0.483,
+   "hi_share": 0.003
+  },
+  {
+   "file": "vx3KitEiaLU_music_switch_2_10m21s.mp3",
+   "start": "10:21",
+   "label": "music_switch_2",
+   "tempo_bpm": 83.4,
+   "beat_strength": 0.285,
+   "vocal_band_share_in_gaps": 0.402,
+   "vocal_band_share_all": 0.461,
+   "bass_share": 0.393,
+   "hi_share": 0.008
+  },
+  {
+   "file": "vx3KitEiaLU_music_switch_3_12m28s.mp3",
+   "start": "12:28",
+   "label": "music_switch_3",
+   "tempo_bpm": 61.5,
+   "beat_strength": 0.113,
+   "vocal_band_share_in_gaps": 0.292,
+   "vocal_band_share_all": 0.324,
+   "bass_share": 0.364,
+   "hi_share": 0.005
+  },
+  {
+   "file": "vx3KitEiaLU_music_switch_4_16m22s.mp3",
+   "start": "16:22",
+   "label": "music_switch_4",
+   "tempo_bpm": 60.1,
+   "beat_strength": 0.418,
+   "vocal_band_share_in_gaps": 0.423,
+   "vocal_band_share_all": 0.312,
+   "bass_share": 0.508,
+   "hi_share": 0.001
+  }
+ ],
+ "music_drops": [
+  {
+   "start": 108.0,
+   "end": 110.0,
+   "start_mmss": "01:48",
+   "dur_s": 2.0,
+   "bed_floor_db": -35.5,
+   "floor_in_drop_db": -59.1,
+   "whole_mix_silent": false,
+   "said_before": "general managers and team executives but even with all that basketball knowledge and experience there are bound to be entries that leave you baffled writers",
+   "said_around": "general managers and team executives but even with all that basketball knowledge and experience there are bound to be entries that leave you baffled writers for usa today sports created their own list of the greatest 75 players ever one writer voted for robert orry to be a"
+  },
+  {
+   "start": 253.5,
+   "end": 257.5,
+   "start_mmss": "04:13",
+   "dur_s": 4.0,
+   "bed_floor_db": -35.0,
+   "floor_in_drop_db": -52.0,
+   "whole_mix_silent": false,
+   "said_before": "finals mvps regular season mvps and championships are weighted slightly heavier than the other categories since you know those things are um",
+   "said_around": "every category is weighted the same finals mvps regular season mvps and championships are weighted slightly heavier than the other categories since you know those things are um pretty important i will assess every player in every category the top 20 players in each category will earn points the leader in each category will"
+  },
+  {
+   "start": 282.5,
+   "end": 284.5,
+   "start_mmss": "04:42",
+   "dur_s": 2.0,
+   "bed_floor_db": -37.5,
+   "floor_in_drop_db": -57.1,
+   "whole_mix_silent": false,
+   "said_before": "points and the top 75 points earners will be our top 75 list so with that out of the way let's get into this the first category we looked",
+   "said_around": "categories we will add up the total points and the top 75 points earners will be our top 75 list so with that out of the way let's get into this the first category we looked at was championships one and the obvious leader here is bill russell bill's right hand man john havlicek racked up the"
+  },
+  {
+   "start": 320.0,
+   "end": 321.0,
+   "start_mmss": "05:20",
+   "dur_s": 1.0,
+   "bed_floor_db": -37.0,
+   "floor_in_drop_db": -49.1,
+   "whole_mix_silent": false,
+   "said_before": "the top spot there's about oh i don't know a hundred percent chance that if the award existed when bill was playing he would have more than six anyways so",
+   "said_around": "and because of that i gave bill russell the top spot there's about oh i don't know a hundred percent chance that if the award existed when bill was playing he would have more than six anyways so second is michael jordan and third is lebron fun fact only five players in nba"
+  },
+  {
+   "start": 616.0,
+   "end": 621.0,
+   "start_mmss": "10:16",
+   "dur_s": 5.0,
+   "bed_floor_db": -32.7,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "players cracked the top 20 and who rounds out the top 75 nba players of all time",
+   "said_around": "categories so who came out on top which players cracked the top 20 and who rounds out the top 75 nba players of all time i mean who are we kidding [Applause]"
+  },
+  {
+   "start": 636.5,
+   "end": 639.0,
+   "start_mmss": "10:36",
+   "dur_s": 2.5,
+   "bed_floor_db": -32.9,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "[Music]",
+   "said_around": "[Music] with the top spot just like every other chart we've ever covered is michael jordan with a total score of 106"
+  },
+  {
+   "start": 724.5,
+   "end": 726.5,
+   "start_mmss": "12:04",
+   "dur_s": 2.0,
+   "bed_floor_db": -35.1,
+   "floor_in_drop_db": -55.2,
+   "whole_mix_silent": false,
+   "said_before": "and willis reed rounded out the top 20. now i'm not going to go into detail on each and every player but let's talk about some notable rankings kawhi",
+   "said_around": "paul at 17 and carl malone dirk nowitzki and willis reed rounded out the top 20. now i'm not going to go into detail on each and every player but let's talk about some notable rankings kawhi leonard finished at 22 with james harden just behind him at 24. giannis ranks 30th all time which would make him at"
+  },
+  {
+   "start": 766.5,
+   "end": 768.5,
+   "start_mmss": "12:46",
+   "dur_s": 2.0,
+   "bed_floor_db": -35.8,
+   "floor_in_drop_db": -57.2,
+   "whole_mix_silent": false,
+   "said_before": "year's lakers roster made this list five and dwight howard who would have been the sixth player to make this list just narrowly missed it some more",
+   "said_around": "year's lakers roster made this list five and dwight howard who would have been the sixth player to make this list just narrowly missed it some more interesting notes about this list the 1984 and 1996 draft classes both known as two of the best draft classes of all"
+  },
+  {
+   "start": 850.5,
+   "end": 853.0,
+   "start_mmss": "14:10",
+   "dur_s": 2.5,
+   "bed_floor_db": -37.9,
+   "floor_in_drop_db": -60.6,
+   "whole_mix_silent": false,
+   "said_before": "because luca doesn't even qualify for half of these categories yet and he still rose this high on this list but i want to make something clear this list",
+   "said_around": "because luca doesn't even qualify for half of these categories yet and he still rose this high on this list but i want to make something clear this list is far from perfect paul pierce is too low dwayne wade is too low he should be somewhere around 30. bob pettit's too"
+  }
+ ],
+ "music_switches": [
+  {
+   "t": "03:07",
+   "score": 1.57,
+   "median_score": 0.6
+  },
+  {
+   "t": "10:36",
+   "score": 2.23,
+   "median_score": 0.6
+  },
+  {
+   "t": "12:43",
+   "score": 1.44,
+   "median_score": 0.6
+  },
+  {
+   "t": "16:37",
+   "score": 2.62,
+   "median_score": 0.6
+  }
+ ]
+}

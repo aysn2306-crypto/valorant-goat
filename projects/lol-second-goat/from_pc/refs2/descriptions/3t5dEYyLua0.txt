@@ -1,0 +1,34 @@
+The math behind champion blindability
+---
+The math behind champion blindability: how safely can you lock in a champion before you know who you are facing?
+
+This video builds the idea from the ground up using two Mid laners, Ahri and Yasuo, as an example. You will learn the math behind who is blindable, who gets counterpicked, and what pro teams blind pick.
+
+Blog, old posts and the Champion Pool Designer: machineloling.com
+Website: coming once Riot approves it
+X: x.com/machineloling
+Reddit: reddit.com/u/machineLoLing
+Ko-fi: ko-fi.com/machineloling
+
+Chapters
+0:00 Intro
+0:48 What is blindability?
+1:29 Ahri's matchups as a bell curve
+3:03 How odds work
+3:23 Expected win rate: Ahri vs Mel
+4:50 The problem with game counts
+5:40 Spread, noise and true spread
+6:48 Yasuo's spread
+7:36 Ahri's counters
+7:57 How likely is a counterpick?
+9:14 Mastery and pool size
+10:15 Spread against the chance of a counter
+10:33 Matchups beyond your own lane
+11:42 Which roles matter
+12:59 The Mid map
+13:40 Who gets counterpicked
+14:36 Blindability against counterpicks
+15:25 Blindability by rank, and what the pros blind pick
+16:56 Wrap-up
+
+#LeagueOfLegends #LoL #Ahri #Yasuo #MidLane #MLoL #MachineLoLing

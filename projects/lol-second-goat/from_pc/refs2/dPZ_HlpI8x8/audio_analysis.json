@@ -1,0 +1,336 @@
+{
+ "clips": [
+  {
+   "file": "dPZ_HlpI8x8_iso_scatter_mj_outlier_22m03s.mp3",
+   "start": "22:03",
+   "label": "iso_scatter_mj_outlier",
+   "tempo_bpm": 66.3,
+   "beat_strength": 0.068,
+   "vocal_band_share_in_gaps": 0.352,
+   "vocal_band_share_all": 0.394,
+   "bass_share": 0.299,
+   "hi_share": 0.008
+  },
+  {
+   "file": "dPZ_HlpI8x8_timeline_arcs_11m45s.mp3",
+   "start": "11:45",
+   "label": "timeline_arcs",
+   "tempo_bpm": 123.0,
+   "beat_strength": 0.061,
+   "vocal_band_share_in_gaps": 0.328,
+   "vocal_band_share_all": 0.437,
+   "bass_share": 0.277,
+   "hi_share": 0.011
+  },
+  {
+   "file": "dPZ_HlpI8x8_normal_talk_over_graph_19m45s.mp3",
+   "start": "19:45",
+   "label": "normal_talk_over_graph",
+   "tempo_bpm": 123.0,
+   "beat_strength": 0.059,
+   "vocal_band_share_in_gaps": 0.326,
+   "vocal_band_share_all": 0.4,
+   "bass_share": 0.347,
+   "hi_share": 0.008
+  },
+  {
+   "file": "dPZ_HlpI8x8_music_switch_1_15m45s.mp3",
+   "start": "15:45",
+   "label": "music_switch_1",
+   "tempo_bpm": 71.8,
+   "beat_strength": 0.303,
+   "vocal_band_share_in_gaps": 0.965,
+   "vocal_band_share_all": 0.546,
+   "bass_share": 0.302,
+   "hi_share": 0.006
+  },
+  {
+   "file": "dPZ_HlpI8x8_music_switch_2_18m38s.mp3",
+   "start": "18:38",
+   "label": "music_switch_2",
+   "tempo_bpm": 112.3,
+   "beat_strength": 0.271,
+   "vocal_band_share_in_gaps": 0.324,
+   "vocal_band_share_all": 0.332,
+   "bass_share": 0.448,
+   "hi_share": 0.003
+  },
+  {
+   "file": "dPZ_HlpI8x8_music_switch_3_22m38s.mp3",
+   "start": "22:38",
+   "label": "music_switch_3",
+   "tempo_bpm": 95.7,
+   "beat_strength": 0.222,
+   "vocal_band_share_in_gaps": 0.297,
+   "vocal_band_share_all": 0.331,
+   "bass_share": 0.513,
+   "hi_share": 0.002
+  },
+  {
+   "file": "dPZ_HlpI8x8_music_switch_4_24m51s.mp3",
+   "start": "24:51",
+   "label": "music_switch_4",
+   "tempo_bpm": 172.3,
+   "beat_strength": 0.324,
+   "vocal_band_share_in_gaps": 0.651,
+   "vocal_band_share_all": 0.436,
+   "bass_share": 0.367,
+   "hi_share": 0.0
+  }
+ ],
+ "music_drops": [
+  {
+   "start": 78.5,
+   "end": 83.5,
+   "start_mmss": "01:18",
+   "dur_s": 5.0,
+   "bed_floor_db": -36.3,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "and some of y'all ain't going to like [Music]",
+   "said_around": "and some of y'all ain't going to like [Music] it today's video is sponsored by SeatGeek the NBA season is in full swing the MLB season is just around the corner your favorite artists are on tour and y'all are going to need some tickets now"
+  },
+  {
+   "start": 86.0,
+   "end": 89.5,
+   "start_mmss": "01:26",
+   "dur_s": 3.5,
+   "bed_floor_db": -37.5,
+   "floor_in_drop_db": -56.2,
+   "whole_mix_silent": false,
+   "said_before": "it today's video is sponsored by SeatGeek the NBA season is in full swing the MLB season is just around the corner",
+   "said_around": "it today's video is sponsored by SeatGeek the NBA season is in full swing the MLB season is just around the corner your favorite artists are on tour and y'all are going to need some tickets now you guys have used my promo code so much that SeatGeek wanted to hook you up with"
+  },
+  {
+   "start": 104.0,
+   "end": 106.0,
+   "start_mmss": "01:44",
+   "dur_s": 2.0,
+   "bed_floor_db": -42.4,
+   "floor_in_drop_db": -57.8,
+   "whole_mix_silent": false,
+   "said_before": "it's the best one yet for the rest of the season everyone who uses code Jimmy 10 will get 10% off any tickets on",
+   "said_around": "a new promo and a new special offer and it's the best one yet for the rest of the season everyone who uses code Jimmy 10 will get 10% off any tickets on SeatGeek whether you're new to the app or you've been using it for years like me code Jimmy 10 is good for 10% off any"
+  },
+  {
+   "start": 121.0,
+   "end": 123.0,
+   "start_mmss": "02:01",
+   "dur_s": 2.0,
+   "bed_floor_db": -45.3,
+   "floor_in_drop_db": -57.8,
+   "whole_mix_silent": false,
+   "said_before": "order on SeatGeek just get into the app find the best tickets for you by using their color-coded seating map punch in the promo code and you're done take",
+   "said_around": "order on SeatGeek just get into the app find the best tickets for you by using their color-coded seating map punch in the promo code and you're done take advantage of this deal while it's still around download the SeatGeek app and use code Jimmy 10 for 10% off any"
+  },
+  {
+   "start": 131.0,
+   "end": 136.0,
+   "start_mmss": "02:11",
+   "dur_s": 5.0,
+   "bed_floor_db": -46.1,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "around download the SeatGeek app and use code Jimmy 10 for 10% off any",
+   "said_around": "advantage of this deal while it's still around download the SeatGeek app and use code Jimmy 10 for 10% off any order we done with the 9s five simple words that have completely divided fans of the NBA I've seen wellth thought out video essays hard-hitting analysis"
+  },
+  {
+   "start": 172.5,
+   "end": 176.0,
+   "start_mmss": "02:52",
+   "dur_s": 3.5,
+   "bed_floor_db": -39.7,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "long-winded take on this whole [Music]",
+   "said_around": "so for whatever it's worth here is my long-winded take on this whole [Music] discussion"
+  },
+  {
+   "start": 223.5,
+   "end": 225.5,
+   "start_mmss": "03:43",
+   "dur_s": 2.0,
+   "bed_floor_db": -38.1,
+   "floor_in_drop_db": -88.1,
+   "whole_mix_silent": false,
+   "said_before": "games as if the footage was buried or lost and it's finally being Unearthed for the world to see it's been right here on YouTube for the past 15 years",
+   "said_around": "they're watching films of these old games as if the footage was buried or lost and it's finally being Unearthed for the world to see it's been right here on YouTube for the past 15 years you mean to tell me the same fans who chime in with a full-blown thesis on the goat debate never spared the time to even watch the games they were referring"
+  },
+  {
+   "start": 297.0,
+   "end": 300.0,
+   "start_mmss": "04:57",
+   "dur_s": 3.0,
+   "bed_floor_db": -41.7,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "course if Michael Jordan really had no left hand spoiler he",
+   "said_around": "be done with the 80s and '90s and of course if Michael Jordan really had no left hand spoiler he did now I have been an advocate for the"
+  },
+  {
+   "start": 456.0,
+   "end": 459.5,
+   "start_mmss": "07:36",
+   "dur_s": 3.5,
+   "bed_floor_db": -44.2,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "factored in to really understand why these players were not as skilled as the players of [Music]",
+   "said_around": "another layer to this that needs to be factored in to really understand why these players were not as skilled as the players of [Music] today now despite this being a very"
+  },
+  {
+   "start": 543.0,
+   "end": 545.0,
+   "start_mmss": "09:03",
+   "dur_s": 2.0,
+   "bed_floor_db": -34.3,
+   "floor_in_drop_db": -49.4,
+   "whole_mix_silent": false,
+   "said_before": "did too did here's some more clips of players is getting called for travels and Carries doing moves that are very typical and allowed in 2024 90% of the",
+   "said_around": "dble double dribble double dribble he did too did here's some more clips of players is getting called for travels and Carries doing moves that are very typical and allowed in 2024 90% of the moves you see today the very method most players generate their offense would be"
+  },
+  {
+   "start": 550.0,
+   "end": 552.0,
+   "start_mmss": "09:10",
+   "dur_s": 2.0,
+   "bed_floor_db": -33.9,
+   "floor_in_drop_db": -47.5,
+   "whole_mix_silent": false,
+   "said_before": "typical and allowed in 2024 90% of the moves you see today the very method most players generate their offense would be",
+   "said_around": "and Carries doing moves that are very typical and allowed in 2024 90% of the moves you see today the very method most players generate their offense would be called for some sort of violation 40 or 30 or even 20 years ago and this isn't just some copout or excuse as to why"
+  },
+  {
+   "start": 555.5,
+   "end": 557.0,
+   "start_mmss": "09:15",
+   "dur_s": 1.5,
+   "bed_floor_db": -34.2,
+   "floor_in_drop_db": -47.1,
+   "whole_mix_silent": false,
+   "said_before": "players generate their offense would be called for some sort of violation 40 or 30 or even 20 years ago and this isn't",
+   "said_around": "moves you see today the very method most players generate their offense would be called for some sort of violation 40 or 30 or even 20 years ago and this isn't just some copout or excuse as to why these players of the past weren't doing this stuff the rule changes are real"
+  },
+  {
+   "start": 574.5,
+   "end": 579.5,
+   "start_mmss": "09:34",
+   "dur_s": 5.0,
+   "bed_floor_db": -32.3,
+   "floor_in_drop_db": -99.1,
+   "whole_mix_silent": false,
+   "said_before": "looser players grew up and shaped their game around these looser rules and now they have free reign to let their basketball bag run wild but that's kind",
+   "said_around": "literally look them up the game got looser players grew up and shaped their game around these looser rules and now they have free reign to let their basketball bag run wild but that's kind of the point players of the past didn't grow up practicing 25-footers they didn't work on a dozen moves to create separation they played in offensive systems that focused on the team the"
+  },
+  {
+   "start": 640.0,
+   "end": 644.0,
+   "start_mmss": "10:40",
+   "dur_s": 4.0,
+   "bed_floor_db": -40.1,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "say the game was trash back then or that the superstars of these eras couldn't compete in today's [Music]",
+   "said_around": "product of that time but that's not to say the game was trash back then or that the superstars of these eras couldn't compete in today's [Music] League now as time goes by I think it's easy to forget just how long ago 1980"
+  },
+  {
+   "start": 810.5,
+   "end": 814.5,
+   "start_mmss": "13:30",
+   "dur_s": 4.0,
+   "bed_floor_db": -36.2,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "logic does not apply to the vast majority of the league throughout the 80s and '90s",
+   "said_around": "past would do just fine today this same logic does not apply to the vast majority of the league throughout the 80s and '90s [Music]"
+  },
+  {
+   "start": 948.5,
+   "end": 952.0,
+   "start_mmss": "15:48",
+   "dur_s": 3.5,
+   "bed_floor_db": -37.7,
+   "floor_in_drop_db": -85.4,
+   "whole_mix_silent": false,
+   "said_before": "objectively that this era was not trash and most players of this generation would do just fine in today's league but",
+   "said_around": "hypers skilled players began you can say objectively that this era was not trash and most players of this generation would do just fine in today's league but if that is the case then modern NBA fans are holding a ticking time bomb and they might not even know"
+  },
+  {
+   "start": 960.0,
+   "end": 963.5,
+   "start_mmss": "16:00",
+   "dur_s": 3.5,
+   "bed_floor_db": -36.7,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "are holding a ticking time bomb and they might not even know it",
+   "said_around": "are holding a ticking time bomb and they might not even know it [Music] when we are older and a new generation"
+  },
+  {
+   "start": 1066.0,
+   "end": 1072.5,
+   "start_mmss": "17:46",
+   "dur_s": 6.5,
+   "bed_floor_db": -34.3,
+   "floor_in_drop_db": -94.3,
+   "whole_mix_silent": false,
+   "said_before": "made up this is why I think it is so important to have genuine thought out discourse about the game if you're truly a fan of it but to all of the older fans",
+   "said_around": "numbers but their minds will already be made up this is why I think it is so important to have genuine thought out discourse about the game if you're truly a fan of it but to all of the older fans out there you kind of started this whole thing for years we heard y'all badmouth modern players saying the league is soft players today couldn't compete back then back in my day real men played the game"
+  },
+  {
+   "start": 1075.0,
+   "end": 1078.5,
+   "start_mmss": "17:55",
+   "dur_s": 3.5,
+   "bed_floor_db": -35.7,
+   "floor_in_drop_db": -56.9,
+   "whole_mix_silent": false,
+   "said_before": "out there you kind of started this whole thing for years we heard y'all badmouth modern players saying the league is soft players today couldn't compete back then",
+   "said_around": "out there you kind of started this whole thing for years we heard y'all badmouth modern players saying the league is soft players today couldn't compete back then back in my day real men played the game y'all cannot be mad that some fans are done with the ' 80s and '90s when y'all"
+  },
+  {
+   "start": 1131.0,
+   "end": 1134.5,
+   "start_mmss": "18:51",
+   "dur_s": 3.5,
+   "bed_floor_db": -37.3,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "to make that distinction in 20 years when some snot-nose brat tells me my glorious King was trash I'm not so",
+   "said_around": "good as it is today now will I be able to make that distinction in 20 years when some snot-nose brat tells me my glorious King was trash I'm not so [Music] sure"
+  },
+  {
+   "start": 1363.5,
+   "end": 1367.5,
+   "start_mmss": "22:43",
+   "dur_s": 4.0,
+   "bed_floor_db": -38.1,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "cannot believe we had to dig into the data to come to this",
+   "said_around": "Michael Jordan had a left hand and I cannot believe we had to dig into the data to come to this [Music] conclusion I think the overall idea that"
+  }
+ ],
+ "music_switches": [
+  {
+   "t": "16:00",
+   "score": 5.33,
+   "median_score": 0.61
+  },
+  {
+   "t": "18:53",
+   "score": 8.0,
+   "median_score": 0.61
+  },
+  {
+   "t": "22:53",
+   "score": 4.99,
+   "median_score": 0.61
+  },
+  {
+   "t": "25:06",
+   "score": 4.99,
+   "median_score": 0.61
+  }
+ ]
+}

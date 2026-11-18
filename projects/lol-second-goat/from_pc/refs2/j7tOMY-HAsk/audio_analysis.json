@@ -1,0 +1,105 @@
+{
+ "clips": [
+  {
+   "file": "j7tOMY-HAsk_favourable_zone_scatter_17m25s.mp3",
+   "start": "17:25",
+   "label": "favourable_zone_scatter",
+   "tempo_bpm": 129.2,
+   "beat_strength": 0.046,
+   "vocal_band_share_in_gaps": 0.362,
+   "vocal_band_share_all": 0.259,
+   "bass_share": 0.621,
+   "hi_share": 0.0
+  },
+  {
+   "file": "j7tOMY-HAsk_normal_talk_over_graph_02m45s.mp3",
+   "start": "02:45",
+   "label": "normal_talk_over_graph",
+   "tempo_bpm": 107.7,
+   "beat_strength": 0.039,
+   "vocal_band_share_in_gaps": 0.316,
+   "vocal_band_share_all": 0.216,
+   "bass_share": 0.655,
+   "hi_share": 0.0
+  },
+  {
+   "file": "j7tOMY-HAsk_music_switch_1_17m25s.mp3",
+   "start": "17:25",
+   "label": "music_switch_1",
+   "tempo_bpm": 129.2,
+   "beat_strength": 0.046,
+   "vocal_band_share_in_gaps": 0.362,
+   "vocal_band_share_all": 0.259,
+   "bass_share": 0.621,
+   "hi_share": 0.0
+  },
+  {
+   "file": "j7tOMY-HAsk_music_switch_2_20m45s.mp3",
+   "start": "20:45",
+   "label": "music_switch_2",
+   "tempo_bpm": 123.0,
+   "beat_strength": 0.131,
+   "vocal_band_share_in_gaps": 0.349,
+   "vocal_band_share_all": 0.326,
+   "bass_share": 0.568,
+   "hi_share": 0.0
+  },
+  {
+   "file": "j7tOMY-HAsk_music_switch_3_21m39s.mp3",
+   "start": "21:39",
+   "label": "music_switch_3",
+   "tempo_bpm": 107.7,
+   "beat_strength": 0.07,
+   "vocal_band_share_in_gaps": 0.316,
+   "vocal_band_share_all": 0.227,
+   "bass_share": 0.627,
+   "hi_share": 0.0
+  },
+  {
+   "file": "j7tOMY-HAsk_music_switch_4_22m24s.mp3",
+   "start": "22:24",
+   "label": "music_switch_4",
+   "tempo_bpm": 64.6,
+   "beat_strength": 0.147,
+   "vocal_band_share_in_gaps": 0.216,
+   "vocal_band_share_all": 0.241,
+   "bass_share": 0.649,
+   "hi_share": 0.0
+  }
+ ],
+ "music_drops": [
+  {
+   "start": 51.5,
+   "end": 54.0,
+   "start_mmss": "00:51",
+   "dur_s": 2.5,
+   "bed_floor_db": -38.5,
+   "floor_in_drop_db": -53.6,
+   "whole_mix_silent": false,
+   "said_before": "Who should pick first? [music]",
+   "said_around": "we all share about one simple question. Who should pick first? [music] Who should pick first? [music] It sounds like a simple question, and as a community we've devised a simple answer."
+  }
+ ],
+ "music_switches": [
+  {
+   "t": "17:40",
+   "score": 2.52,
+   "median_score": 0.72
+  },
+  {
+   "t": "21:00",
+   "score": 3.23,
+   "median_score": 0.72
+  },
+  {
+   "t": "21:54",
+   "score": 2.73,
+   "median_score": 0.72
+  },
+  {
+   "t": "22:39",
+   "score": 2.48,
+   "median_score": 0.72
+  }
+ ]
+}

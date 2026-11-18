@@ -1,0 +1,41 @@
+The math behind who should pick first in draft
+---
+The math behind pick order: who should pick first in champ select, and is "jungle or bot" really the answer?
+
+This video picks up where the last one left off and puts that rule to the test. You will learn why counting counters breaks down at real game counts, how blindable each role really is, why pick order should follow the champion and not the role, and what pro teams pick first.
+
+Blog, old posts and the Champion Pool Designer: machineloling.com
+Website: coming once Riot approves it
+X: x.com/machineloling
+Reddit: reddit.com/u/machineLoLing
+Ko-fi: ko-fi.com/machineloling
+
+Chapters
+0:00 Intro
+0:54 Jungle or bot?
+1:08 Last episode's two metrics
+1:39 Three gaps to fill
+2:04 More games, and Talon's zero counters
+2:32 Qiyana: counting counters against true spread
+3:48 How many games is enough? A coin flip
+4:40 95% intervals by game count
+5:11 Is Taliyah really a counter?
+5:50 How few games most matchups have
+7:17 Can we trust the bell curve?
+8:04 The normal distribution
+8:32 Quantile-quantile plots
+9:42 Every matchup, tested for normality
+10:12 Counting against true spread: Syndra
+10:33 Top, jungle, bot and support, in lane
+12:13 Matchups outside your lane
+13:27 A counter from any role: Kai'Sa
+14:03 Pool sizes, and combining the five chances
+15:48 The five roles compared
+16:02 Champion, not role
+16:54 Who gets blind picked in solo queue
+19:04 What the pros pick first
+20:07 Does a safe blind pick win?
+20:24 Wrap-up
+21:08 A word from me, and what's next
+
+#LeagueOfLegends #LoL #ChampSelect #MLoL #MachineLoLing

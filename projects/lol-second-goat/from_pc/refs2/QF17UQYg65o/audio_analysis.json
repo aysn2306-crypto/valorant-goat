@@ -1,0 +1,292 @@
+{
+ "clips": [
+  {
+   "file": "QF17UQYg65o_biggap_award_reveal_cade_mvp_music_cut_05m50s.mp3",
+   "start": "05:50",
+   "label": "biggap_award_reveal_cade_mvp_music_cut",
+   "tempo_bpm": 78.3,
+   "beat_strength": 0.05,
+   "vocal_band_share_in_gaps": 0.218,
+   "vocal_band_share_all": 0.308,
+   "bass_share": 0.379,
+   "hi_share": 0.014
+  },
+  {
+   "file": "QF17UQYg65o_photo_scatter_drift_13m41s.mp3",
+   "start": "13:41",
+   "label": "photo_scatter_drift",
+   "tempo_bpm": 80.7,
+   "beat_strength": 0.071,
+   "vocal_band_share_in_gaps": 0.397,
+   "vocal_band_share_all": 0.468,
+   "bass_share": 0.267,
+   "hi_share": 0.016
+  },
+  {
+   "file": "QF17UQYg65o_normal_talk_over_graph_11m25s.mp3",
+   "start": "11:25",
+   "label": "normal_talk_over_graph",
+   "tempo_bpm": 89.1,
+   "beat_strength": 0.07,
+   "vocal_band_share_in_gaps": 0.084,
+   "vocal_band_share_all": 0.214,
+   "bass_share": 0.427,
+   "hi_share": 0.009
+  },
+  {
+   "file": "QF17UQYg65o_music_switch_1_01m45s.mp3",
+   "start": "01:45",
+   "label": "music_switch_1",
+   "tempo_bpm": 107.7,
+   "beat_strength": 0.155,
+   "vocal_band_share_in_gaps": 0.139,
+   "vocal_band_share_all": 0.255,
+   "bass_share": 0.461,
+   "hi_share": 0.014
+  },
+  {
+   "file": "QF17UQYg65o_music_switch_2_02m57s.mp3",
+   "start": "02:57",
+   "label": "music_switch_2",
+   "tempo_bpm": 161.5,
+   "beat_strength": 0.215,
+   "vocal_band_share_in_gaps": 0.388,
+   "vocal_band_share_all": 0.738,
+   "bass_share": 0.089,
+   "hi_share": 0.017
+  },
+  {
+   "file": "QF17UQYg65o_music_switch_3_12m06s.mp3",
+   "start": "12:06",
+   "label": "music_switch_3",
+   "tempo_bpm": 143.6,
+   "beat_strength": 0.071,
+   "vocal_band_share_in_gaps": 0.094,
+   "vocal_band_share_all": 0.241,
+   "bass_share": 0.397,
+   "hi_share": 0.012
+  },
+  {
+   "file": "QF17UQYg65o_music_switch_4_16m59s.mp3",
+   "start": "16:59",
+   "label": "music_switch_4",
+   "tempo_bpm": 66.3,
+   "beat_strength": 0.193,
+   "vocal_band_share_in_gaps": 0.321,
+   "vocal_band_share_all": 0.211,
+   "bass_share": 0.674,
+   "hi_share": 0.001
+  }
+ ],
+ "music_drops": [
+  {
+   "start": 119.5,
+   "end": 122.5,
+   "start_mmss": "01:59",
+   "dur_s": 3.0,
+   "bed_floor_db": -34.6,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "find the rightful winners of the 2026 NBA season.",
+   "said_around": "create some other NBA awards [music] and find the rightful winners of the 2026 NBA season. Today's video is sponsored by DraftKings. The playoffs are here and right now you can get in on the action with DraftKings newest easy-to-play"
+  },
+  {
+   "start": 123.0,
+   "end": 126.0,
+   "start_mmss": "02:03",
+   "dur_s": 3.0,
+   "bed_floor_db": -35.0,
+   "floor_in_drop_db": -54.6,
+   "whole_mix_silent": false,
+   "said_before": "Today's video is sponsored by DraftKings. The playoffs are here and",
+   "said_around": "NBA season. Today's video is sponsored by DraftKings. The playoffs are here and right now you can get in on the action with DraftKings newest easy-to-play fantasy pick'em DraftKings pick six."
+  },
+  {
+   "start": 128.5,
+   "end": 131.0,
+   "start_mmss": "02:08",
+   "dur_s": 2.5,
+   "bed_floor_db": -35.0,
+   "floor_in_drop_db": -51.3,
+   "whole_mix_silent": false,
+   "said_before": "Today's video is sponsored by DraftKings. The playoffs are here and right now you can get in on the action with DraftKings newest easy-to-play fantasy pick'em DraftKings pick six.",
+   "said_around": "Today's video is sponsored by DraftKings. The playoffs are here and right now you can get in on the action with DraftKings newest easy-to-play fantasy pick'em DraftKings pick six. With DraftKings pick six, you're not just selecting players, you get to hand-pick how they'll perform. Pick at"
+  },
+  {
+   "start": 179.5,
+   "end": 182.5,
+   "start_mmss": "02:59",
+   "dur_s": 3.0,
+   "bed_floor_db": -47.9,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "Jimmy Highroller to claim your offer. That's promo code Jimmy Highroller only on DraftKings pick six.",
+   "said_around": "pick six app now and sign up with code Jimmy Highroller to claim your offer. That's promo code Jimmy Highroller only on DraftKings pick six. &gt;&gt; Jackson, no whistle, TURNOVER. BLACK ON THE DRIVE."
+  },
+  {
+   "start": 192.0,
+   "end": 196.0,
+   "start_mmss": "03:12",
+   "dur_s": 4.0,
+   "bed_floor_db": -47.7,
+   "floor_in_drop_db": -89.0,
+   "whole_mix_silent": false,
+   "said_before": "BLACK ON THE DRIVE. TAKE THAT WITH YOU.",
+   "said_around": "BLACK ON THE DRIVE. TAKE THAT WITH YOU. &gt;&gt; WHEN I FIRST SAW this play, I wasn't quite sure what I had just witnessed. In fact, the first time I saw this play wasn't from a clip, it was this photo."
+  },
+  {
+   "start": 196.5,
+   "end": 198.5,
+   "start_mmss": "03:16",
+   "dur_s": 2.0,
+   "bed_floor_db": -49.9,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "TAKE THAT WITH YOU. &gt;&gt; WHEN I FIRST SAW this play, I wasn't quite sure what I had just witnessed. In",
+   "said_around": "ON THE DRIVE. TAKE THAT WITH YOU. &gt;&gt; WHEN I FIRST SAW this play, I wasn't quite sure what I had just witnessed. In fact, the first time I saw this play wasn't from a clip, it was this photo. [music] Where there are so many bodies in this picture, it's hard to even tell"
+  },
+  {
+   "start": 234.0,
+   "end": 236.0,
+   "start_mmss": "03:54",
+   "dur_s": 2.0,
+   "bed_floor_db": -34.6,
+   "floor_in_drop_db": -89.1,
+   "whole_mix_silent": false,
+   "said_before": "dunk on the entire Grizzlies roster. But, we've got got lot of other awards to hand out here today. So, let's bring them out and see our nominees. Now, the",
+   "said_around": "year award goes to Anthony Black for his dunk on the entire Grizzlies roster. But, we've got got lot of other awards to hand out here today. So, let's bring them out and see our nominees. Now, the most coveted individual award, the NBA's MVP award, has been taken over and selfishly hoarded by international"
+  },
+  {
+   "start": 363.0,
+   "end": 365.5,
+   "start_mmss": "06:03",
+   "dur_s": 2.5,
+   "bed_floor_db": -32.4,
+   "floor_in_drop_db": -57.4,
+   "whole_mix_silent": false,
+   "said_before": "work is too strong to ignore. And for that, Cade Cunningham is our 2026 American MVP. Now, our next award is the",
+   "said_around": "games late in the season, the body of work is too strong to ignore. And for that, Cade Cunningham is our 2026 American MVP. Now, our next award is the Scotty Pippen Award for the best sidekick in the NBA this season. Named after a player who could have been a"
+  },
+  {
+   "start": 456.0,
+   "end": 458.5,
+   "start_mmss": "07:36",
+   "dur_s": 2.5,
+   "bed_floor_db": -34.8,
+   "floor_in_drop_db": -88.6,
+   "whole_mix_silent": false,
+   "said_before": "productive second option in the NBA. And for this, Jamal Murray is our 2026 sidekick of the year. The next award",
+   "said_around": "Nuggets as the most capable and productive second option in the NBA. And for this, Jamal Murray is our 2026 sidekick of the year. The next award we're handing out today is the 10th Man of the Year Award. Now, as the name suggests, it's similar to the Sixth Man"
+  },
+  {
+   "start": 551.5,
+   "end": 553.5,
+   "start_mmss": "09:11",
+   "dur_s": 2.0,
+   "bed_floor_db": -33.8,
+   "floor_in_drop_db": -48.7,
+   "whole_mix_silent": false,
+   "said_before": "impact he has on OKC, and you'll see a player that leaves his imprint on the game every time he touches the court. [music] One of the only players in the league",
+   "said_around": "and two assists a game. But look at the impact he has on OKC, and you'll see a player that leaves his imprint on the game every time he touches the court. [music] One of the only players in the league who can score zero points and be an absolute positive for his team on his limited 18 minutes a night. In fact,"
+  },
+  {
+   "start": 559.0,
+   "end": 561.0,
+   "start_mmss": "09:19",
+   "dur_s": 2.0,
+   "bed_floor_db": -33.8,
+   "floor_in_drop_db": -48.6,
+   "whole_mix_silent": false,
+   "said_before": "One of the only players in the league who can score zero points and be an absolute positive for his team on his limited 18 minutes a night. In fact,",
+   "said_around": "game every time he touches the court. [music] One of the only players in the league who can score zero points and be an absolute positive for his team on his limited 18 minutes a night. In fact, Caruso has a net on-off of plus eight this season, meaning [music] the Thunder are eight points better with him on the"
+  },
+  {
+   "start": 575.0,
+   "end": 577.0,
+   "start_mmss": "09:35",
+   "dur_s": 2.0,
+   "bed_floor_db": -37.5,
+   "floor_in_drop_db": -51.1,
+   "whole_mix_silent": false,
+   "said_before": "player this season, despite him being the tenth man in their rotation. He's an All-NBA caliber defender, a veteran",
+   "said_around": "court, and the highest of any bench player this season, despite him being the tenth man in their rotation. He's an All-NBA caliber defender, a veteran leader, the kind of player to lose a shoe mid-play and still find [music] a way to get the stop. And for that, Alex"
+  },
+  {
+   "start": 586.0,
+   "end": 588.0,
+   "start_mmss": "09:46",
+   "dur_s": 2.0,
+   "bed_floor_db": -36.4,
+   "floor_in_drop_db": -54.4,
+   "whole_mix_silent": false,
+   "said_before": "shoe mid-play and still find [music] a way to get the stop. And for that, Alex Caruso is our 2026 10th Man of the Year.",
+   "said_around": "leader, the kind of player to lose a shoe mid-play and still find [music] a way to get the stop. And for that, Alex Caruso is our 2026 10th Man of the Year. Now, the next award we are handing out today is the Prime James Harden One-Way Player Award for the best offensive player in the league this season. The"
+  },
+  {
+   "start": 753.0,
+   "end": 757.0,
+   "start_mmss": "12:33",
+   "dur_s": 4.0,
+   "bed_floor_db": -31.9,
+   "floor_in_drop_db": -97.8,
+   "whole_mix_silent": false,
+   "said_before": "defense. Jalen Brunson is a one-way [music] demon, and for that, he shall be rewarded as the one-way Player of the Year. The next award we're handing out",
+   "said_around": "difference between his offense and his defense. Jalen Brunson is a one-way [music] demon, and for that, he shall be rewarded as the one-way Player of the Year. The next award we're handing out today is the Kobe Bryant Get It Out the Net [music] Award for the player who is least likely to pass the ball once he gets it in his hands. And our nominees"
+  },
+  {
+   "start": 759.5,
+   "end": 761.5,
+   "start_mmss": "12:39",
+   "dur_s": 2.0,
+   "bed_floor_db": -33.0,
+   "floor_in_drop_db": -47.8,
+   "whole_mix_silent": false,
+   "said_before": "Year. The next award we're handing out today is the Kobe Bryant Get It Out the Net [music] Award for the player who is least likely to pass the ball once he",
+   "said_around": "rewarded as the one-way Player of the Year. The next award we're handing out today is the Kobe Bryant Get It Out the Net [music] Award for the player who is least likely to pass the ball once he gets it in his hands. And our nominees are Jalen Green, Kawhi Leonard, Dillon Brooks, Lauri Markkanen, Cam Thomas, and"
+  },
+  {
+   "start": 763.5,
+   "end": 765.5,
+   "start_mmss": "12:43",
+   "dur_s": 2.0,
+   "bed_floor_db": -36.0,
+   "floor_in_drop_db": -50.8,
+   "whole_mix_silent": false,
+   "said_before": "Net [music] Award for the player who is least likely to pass the ball once he gets it in his hands. And our nominees are Jalen Green, Kawhi Leonard, Dillon",
+   "said_around": "today is the Kobe Bryant Get It Out the Net [music] Award for the player who is least likely to pass the ball once he gets it in his hands. And our nominees are Jalen Green, Kawhi Leonard, Dillon Brooks, Lauri Markkanen, Cam Thomas, and Klay Thompson. It takes a special kind of confidence to truly believe the best"
+  },
+  {
+   "start": 911.0,
+   "end": 913.5,
+   "start_mmss": "15:11",
+   "dur_s": 2.5,
+   "bed_floor_db": -41.1,
+   "floor_in_drop_db": -85.0,
+   "whole_mix_silent": false,
+   "said_before": "no denying his status this year as the rightful winner of the 2026 Kobe Bryant get it out the net award. And for our",
+   "said_around": "continues to recover and integrate himself into a new offense. But there is no denying his status this year as the rightful winner of the 2026 Kobe Bryant get it out the net award. And for our last award, we have one of my favorites and that is the craziest statistical achievement of the season award. Unbelievable stat lines, box scores,"
+  }
+ ],
+ "music_switches": [
+  {
+   "t": "02:00",
+   "score": 2.06,
+   "median_score": 0.58
+  },
+  {
+   "t": "03:12",
+   "score": 2.35,
+   "median_score": 0.58
+  },
+  {
+   "t": "12:21",
+   "score": 2.02,
+   "median_score": 0.58
+  },
+  {
+   "t": "17:14",
+   "score": 2.42,
+   "median_score": 0.58
+  }
+ ]
+}

@@ -1,0 +1,204 @@
+{
+ "clips": [
+  {
+   "file": "VCIKek1f-Hs_biggap_warriors_399_music_cut_09m56s.mp3",
+   "start": "09:56",
+   "label": "biggap_warriors_399_music_cut",
+   "tempo_bpm": 92.3,
+   "beat_strength": 0.104,
+   "vocal_band_share_in_gaps": 0.342,
+   "vocal_band_share_all": 0.278,
+   "bass_share": 0.413,
+   "hi_share": 0.005
+  },
+  {
+   "file": "VCIKek1f-Hs_biggap_bill_russell_11_rings_06m27s.mp3",
+   "start": "06:27",
+   "label": "biggap_bill_russell_11_rings",
+   "tempo_bpm": 78.3,
+   "beat_strength": 0.077,
+   "vocal_band_share_in_gaps": 0.443,
+   "vocal_band_share_all": 0.459,
+   "bass_share": 0.286,
+   "hi_share": 0.008
+  },
+  {
+   "file": "VCIKek1f-Hs_drop_westbrook_03m10s.mp3",
+   "start": "03:10",
+   "label": "drop_westbrook",
+   "tempo_bpm": 60.1,
+   "beat_strength": 0.064,
+   "vocal_band_share_in_gaps": 0.434,
+   "vocal_band_share_all": 0.374,
+   "bass_share": 0.316,
+   "hi_share": 0.007
+  },
+  {
+   "file": "VCIKek1f-Hs_normal_talk_over_graph_01m45s.mp3",
+   "start": "01:45",
+   "label": "normal_talk_over_graph",
+   "tempo_bpm": 63.0,
+   "beat_strength": 0.066,
+   "vocal_band_share_in_gaps": 0.456,
+   "vocal_band_share_all": 0.433,
+   "bass_share": 0.358,
+   "hi_share": 0.005
+  },
+  {
+   "file": "VCIKek1f-Hs_music_switch_1_03m52s.mp3",
+   "start": "03:52",
+   "label": "music_switch_1",
+   "tempo_bpm": 161.5,
+   "beat_strength": 0.074,
+   "vocal_band_share_in_gaps": 0.52,
+   "vocal_band_share_all": 0.417,
+   "bass_share": 0.331,
+   "hi_share": 0.007
+  },
+  {
+   "file": "VCIKek1f-Hs_music_switch_2_08m41s.mp3",
+   "start": "08:41",
+   "label": "music_switch_2",
+   "tempo_bpm": 92.3,
+   "beat_strength": 0.084,
+   "vocal_band_share_in_gaps": 0.4,
+   "vocal_band_share_all": 0.347,
+   "bass_share": 0.406,
+   "hi_share": 0.005
+  },
+  {
+   "file": "VCIKek1f-Hs_music_switch_3_10m06s.mp3",
+   "start": "10:06",
+   "label": "music_switch_3",
+   "tempo_bpm": 107.7,
+   "beat_strength": 0.11,
+   "vocal_band_share_in_gaps": 0.384,
+   "vocal_band_share_all": 0.306,
+   "bass_share": 0.366,
+   "hi_share": 0.007
+  },
+  {
+   "file": "VCIKek1f-Hs_music_switch_4_13m12s.mp3",
+   "start": "13:12",
+   "label": "music_switch_4",
+   "tempo_bpm": 161.5,
+   "beat_strength": 0.604,
+   "vocal_band_share_in_gaps": 0.153,
+   "vocal_band_share_all": 0.092,
+   "bass_share": 0.54,
+   "hi_share": 0.002
+  }
+ ],
+ "music_drops": [
+  {
+   "start": 208.0,
+   "end": 212.0,
+   "start_mmss": "03:28",
+   "dur_s": 4.0,
+   "bed_floor_db": -38.5,
+   "floor_in_drop_db": -65.3,
+   "whole_mix_silent": false,
+   "said_before": "time he did it apparently it was less impressive and the third time he did it this past season he finished 10th and MVP voting 10th but regardless of how",
+   "said_around": "time he did it apparently it was less impressive and the third time he did it this past season he finished 10th and MVP voting 10th but regardless of how many times Russ gets a triple-double no matter how immune we become to it it is still an incredible feat but to"
+  },
+  {
+   "start": 401.5,
+   "end": 409.0,
+   "start_mmss": "06:41",
+   "dur_s": 7.5,
+   "bed_floor_db": -42.9,
+   "floor_in_drop_db": -66.9,
+   "whole_mix_silent": false,
+   "said_before": "and seventy nine playoff games that means on average MJ won a ring every thirty playoff games he played and then",
+   "said_around": "that he won six rings and only a hundred and seventy nine playoff games that means on average MJ won a ring every thirty playoff games he played and then there's Bill Russell very low and very right with eleven rings in only a hundred and sixty-five playoff games which is actually impossibly low and"
+  },
+  {
+   "start": 612.0,
+   "end": 616.5,
+   "start_mmss": "10:12",
+   "dur_s": 4.5,
+   "bed_floor_db": -33.3,
+   "floor_in_drop_db": -57.7,
+   "whole_mix_silent": false,
+   "said_before": "come nowhere near the success the Warriors had because since 2015 the Warriors have put up 399 wins",
+   "said_around": "but even the best teams in the league come nowhere near the success the Warriors had because since 2015 the Warriors have put up 399 wins nearly 100 more than the team with the second-most the difference between the Warriors and the Raptors is 92 wins the"
+  },
+  {
+   "start": 649.0,
+   "end": 651.0,
+   "start_mmss": "10:49",
+   "dur_s": 2.0,
+   "bed_floor_db": -39.4,
+   "floor_in_drop_db": -55.7,
+   "whole_mix_silent": false,
+   "said_before": "been vicious and unrelenting you can't help but to just feel bad for the guy and quite frankly I'm getting sick of it",
+   "said_around": "time lately the Dwight Howard head has been vicious and unrelenting you can't help but to just feel bad for the guy and quite frankly I'm getting sick of it the Dwight Howard disrespect must come to an end if you started watching the NBA in the last five years you probably"
+  },
+  {
+   "start": 674.5,
+   "end": 676.5,
+   "start_mmss": "11:14",
+   "dur_s": 2.0,
+   "bed_floor_db": -31.9,
+   "floor_in_drop_db": -44.8,
+   "whole_mix_silent": false,
+   "said_before": "Howard was a monster if you didn't get the privilege of watching this man in his prime do yourself a favor and you two-bit man's would give you 20 and 14 a",
+   "said_around": "Howard was a monster if you didn't get the privilege of watching this man in his prime do yourself a favor and you two-bit man's would give you 20 and 14 a night while being by far the best offensive player in the league and for a moment but just a moment he even"
+  },
+  {
+   "start": 793.5,
+   "end": 795.5,
+   "start_mmss": "13:13",
+   "dur_s": 2.0,
+   "bed_floor_db": -32.1,
+   "floor_in_drop_db": -44.9,
+   "whole_mix_silent": false,
+   "said_before": "enjoyed making this video this stuff right here statistics visuals things like that that's where I really get excited so let me know we all think and let me know down in the comments below",
+   "said_around": "enjoyed making this video this stuff right here statistics visuals things like that that's where I really get excited so let me know we all think and let me know down in the comments below which chart was the most interesting and which one blew you away the most be sure"
+  },
+  {
+   "start": 800.0,
+   "end": 802.0,
+   "start_mmss": "13:20",
+   "dur_s": 2.0,
+   "bed_floor_db": -32.7,
+   "floor_in_drop_db": -46.2,
+   "whole_mix_silent": false,
+   "said_before": "let me know down in the comments below which chart was the most interesting and which one blew you away the most be sure",
+   "said_around": "like that that's where I really get excited so let me know we all think and let me know down in the comments below which chart was the most interesting and which one blew you away the most be sure to subscribe to join high-roller nation and as always until next time"
+  },
+  {
+   "start": 802.5,
+   "end": 803.5,
+   "start_mmss": "13:22",
+   "dur_s": 1.0,
+   "bed_floor_db": -32.7,
+   "floor_in_drop_db": -45.3,
+   "whole_mix_silent": false,
+   "said_before": "which chart was the most interesting and which one blew you away the most be sure to subscribe to join high-roller nation and as always until next time",
+   "said_around": "let me know down in the comments below which chart was the most interesting and which one blew you away the most be sure to subscribe to join high-roller nation and as always until next time [Music]"
+  }
+ ],
+ "music_switches": [
+  {
+   "t": "04:07",
+   "score": 1.84,
+   "median_score": 0.66
+  },
+  {
+   "t": "08:56",
+   "score": 1.81,
+   "median_score": 0.66
+  },
+  {
+   "t": "10:21",
+   "score": 1.97,
+   "median_score": 0.66
+  },
+  {
+   "t": "13:27",
+   "score": 2.19,
+   "median_score": 0.66
+  }
+ ]
+}

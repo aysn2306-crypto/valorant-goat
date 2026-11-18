@@ -1,0 +1,116 @@
+{
+ "clips": [
+  {
+   "file": "3t5dEYyLua0_icon_bell_zones_13m15s.mp3",
+   "start": "13:15",
+   "label": "icon_bell_zones",
+   "tempo_bpm": 63.0,
+   "beat_strength": 0.051,
+   "vocal_band_share_in_gaps": 0.299,
+   "vocal_band_share_all": 0.368,
+   "bass_share": 0.463,
+   "hi_share": 0.0
+  },
+  {
+   "file": "3t5dEYyLua0_normal_talk_over_graph_02m05s.mp3",
+   "start": "02:05",
+   "label": "normal_talk_over_graph",
+   "tempo_bpm": 68.0,
+   "beat_strength": 0.048,
+   "vocal_band_share_in_gaps": 0.429,
+   "vocal_band_share_all": 0.358,
+   "bass_share": 0.495,
+   "hi_share": 0.0
+  },
+  {
+   "file": "3t5dEYyLua0_music_switch_1_05m17s.mp3",
+   "start": "05:17",
+   "label": "music_switch_1",
+   "tempo_bpm": 86.1,
+   "beat_strength": 0.097,
+   "vocal_band_share_in_gaps": 0.326,
+   "vocal_band_share_all": 0.335,
+   "bass_share": 0.496,
+   "hi_share": 0.0
+  },
+  {
+   "file": "3t5dEYyLua0_music_switch_2_07m26s.mp3",
+   "start": "07:26",
+   "label": "music_switch_2",
+   "tempo_bpm": 107.7,
+   "beat_strength": 0.113,
+   "vocal_band_share_in_gaps": 0.253,
+   "vocal_band_share_all": 0.281,
+   "bass_share": 0.523,
+   "hi_share": 0.0
+  },
+  {
+   "file": "3t5dEYyLua0_music_switch_3_10m36s.mp3",
+   "start": "10:36",
+   "label": "music_switch_3",
+   "tempo_bpm": 99.4,
+   "beat_strength": 0.082,
+   "vocal_band_share_in_gaps": 0.349,
+   "vocal_band_share_all": 0.337,
+   "bass_share": 0.529,
+   "hi_share": 0.0
+  },
+  {
+   "file": "3t5dEYyLua0_music_switch_4_17m16s.mp3",
+   "start": "17:16",
+   "label": "music_switch_4",
+   "tempo_bpm": 103.4,
+   "beat_strength": 0.121,
+   "vocal_band_share_in_gaps": 0.358,
+   "vocal_band_share_all": 0.426,
+   "bass_share": 0.462,
+   "hi_share": 0.0
+  }
+ ],
+ "music_drops": [
+  {
+   "start": 23.0,
+   "end": 25.0,
+   "start_mmss": "00:23",
+   "dur_s": 2.0,
+   "bed_floor_db": -76.3,
+   "floor_in_drop_db": -105.4,
+   "whole_mix_silent": false,
+   "said_before": "have a PhD and over 10 years of experience in bioinformatics, and today I'm going to show you the math behind blindability.",
+   "said_around": "data scientist behind Machine Lolling. I have a PhD and over 10 years of experience in bioinformatics, and today I'm going to show you the math behind blindability. &gt;&gt; [music]"
+  },
+  {
+   "start": 43.5,
+   "end": 53.5,
+   "start_mmss": "00:43",
+   "dur_s": 10.0,
+   "bed_floor_db": -24.5,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "[music]",
+   "said_around": "[music] &gt;&gt; I'm sure you've heard people say that such and such champion is blindable, and for most, [music] that just means that you could pick it early in the draft and it probably won't get countered. But I'd like to offer us a more concrete definition. &gt;&gt; [music]"
+  }
+ ],
+ "music_switches": [
+  {
+   "t": "05:32",
+   "score": 2.37,
+   "median_score": 0.65
+  },
+  {
+   "t": "07:41",
+   "score": 2.8,
+   "median_score": 0.65
+  },
+  {
+   "t": "10:51",
+   "score": 2.38,
+   "median_score": 0.65
+  },
+  {
+   "t": "17:31",
+   "score": 3.29,
+   "median_score": 0.65
+  }
+ ]
+}

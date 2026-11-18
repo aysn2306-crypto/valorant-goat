@@ -1,0 +1,558 @@
+[00:00] We all know the feeling. You've got the
+[00:02] first pick, no one will trade, you lock
+[00:04] in your favorite champion, and bam, it
+[00:06] gets countered. But what were the odds
+[00:08] that that was going to happen? If you'd
+[00:10] picked a different champion, could it
+[00:12] have been avoided? Hi, I'm Joseph, the
+[00:14] data scientist behind Machine Lolling. I
+[00:17] have a PhD and over 10 years of
+[00:18] experience in bioinformatics, and today
+[00:21] I'm going to show you the math behind
+[00:22] blindability.
+[00:26] &gt;&gt; [music]
+[00:36] [music]
+[00:48] &gt;&gt; I'm sure you've heard people say that
+[00:50] such and such champion is blindable, and
+[00:52] for most, [music] that just means that
+[00:53] you could pick it early in the draft and
+[00:55] it probably won't get countered. But I'd
+[00:56] like to offer us a more concrete
+[00:58] definition.
+[00:58] &gt;&gt; [music]
+[00:59] &gt;&gt; In simple terms, blindability is the
+[01:00] variability of a champion win rate based
+[01:02] on the opponents and teammates that are
+[01:04] in the game. If a champion is really
+[01:06] blindable, it doesn't care about what
+[01:07] other champions are in the game, it's
+[01:09] still going to perform its function. But
+[01:11] if it's not blindable, it's going to
+[01:12] care a lot. Different champions are
+[01:14] going to lead to very different
+[01:15] outcomes. To help us work through this,
+[01:17] I'm going to do a mid lane case study
+[01:19] between Ahri and Yasuo. Both are top
+[01:21] three picks, but Ahri is blindable and
+[01:24] Yasuo is not. I think it's pretty well
+[01:26] known in this case, but I want to show
+[01:27] you why it's the case. If you go to any
+[01:30] League of Legends statistic sites these
+[01:31] days, you can probably find what a
+[01:33] champion is good into and what they're
+[01:34] bad into. But what you probably haven't
+[01:36] seen is what happens if you stack all of
+[01:38] those matchups onto a histogram. This is
+[01:40] just a one-dimensional display we'll be
+[01:42] using to compare the win rates. When we
+[01:44] drop Ahri's into place, we can see that
+[01:45] she's really good against Azir
+[01:47] &gt;&gt; [music]
+[01:47] &gt;&gt; and really bad against Annie.
+[01:49] She wins more games than she loses, so
+[01:51] her average is around 50.8%.
+[01:53] But the big thing I want you to focus on
+[01:55] here is what happens when we fit a bell
+[01:56] curve to her champion pool. This will
+[01:58] allow us to get a measurement of spread.
+[02:00] &gt;&gt; [music]
+[02:00] &gt;&gt; Spread is going to be our statistical
+[02:02] way of distinguishing how far her good
+[02:03] match-ups are from her bad match-ups.
+[02:05] &gt;&gt; [music]
+[02:05] &gt;&gt; In this case, we're going to use the
+[02:07] standard deviation as our unit of
+[02:08] spread. And for Ahri, she has a standard
+[02:11] deviation of about 1.8%. This means if
+[02:14] this actually was a normal curve, which
+[02:15] I won't get into, but assuming it is, a
+[02:18] spread of 1.8% would mean that about 68%
+[02:20] of her match-ups are going to fall plus
+[02:22] or minus 1.8% of her average win rate.
+[02:25] That's pretty good. I mean, I can tell
+[02:27] you it's pretty good, but you don't know
+[02:28] that it's pretty good [music] yet, but
+[02:30] it is in fact pretty good. And we'll see
+[02:32] that when we compare it to Yasuo later.
+[02:34] But before we do that, we need to take
+[02:36] care of a few things. First of all, I
+[02:38] think this makes more sense to look at a
+[02:39] champion's blind ability irrespective of
+[02:41] their overall win rate. For reasons
+[02:43] we'll definitely get into in another
+[02:45] video, win rates are not necessarily
+[02:47] great at telling us just how powerful a
+[02:48] champion is. And the shifts can obscure
+[02:50] which champions Ahri loses to because
+[02:52] they're her counters, and which
+[02:54] champions she loses to because they're
+[02:55] just really strong right now. To wash
+[02:57] away the overall win rate of both
+[02:59] champions, we're going to need to
+[03:00] understand how odds work.
+[03:02] &gt;&gt; [music]
+[03:02] &gt;&gt; For example, if Ahri wins 2/3 of her
+[03:04] games, we would say she has 2:1 odds to
+[03:06] win any game that she's going to play.
+[03:08] That means she's going to get about 66.7
+[03:10] wins for every 100 games that she plays.
+[03:13] And the odds ratio is just the win rate,
+[03:15] 66.7 over 100 minus the win rate,
+[03:18] &gt;&gt; [music]
+[03:18] &gt;&gt; which ends up being 33.3, and that comes
+[03:21] out to two, which is the odds, 2:1.
+[03:23] &gt;&gt; [music]
+[03:24] &gt;&gt; Now, to compare two champions, let's
+[03:25] look at Ahri and Mel. Ahri is very
+[03:27] strong and Mel is very weak. Ahri wins
+[03:30] about 50.9 games per 100, where Mel only
+[03:33] wins 45.5.
+[03:34] Ahri's odd ratio is 1.04, and Mel's odd
+[03:37] ratio is only 0.83. If we want to see
+[03:40] what the expected outcome of these two
+[03:42] facing each other should be, we just
+[03:44] take the ratio of their odds ratios. We
+[03:46] would take Ahri's 1.04 over Mel's 0.83,
+[03:49] [music]
+[03:50] and that would give us an odds ratio of
+[03:51] 1.25 for Ahri facing Mel. [music]
+[03:54] If we want to convert back to win rate,
+[03:56] we just use our odds equation once
+[03:57] again. And that gives us about a 55.6%
+[04:01] expected win rate for Ahri facing off
+[04:03] against Mel. Because [snorts] again,
+[04:04] Ahri is strong and Mel is weak. But when
+[04:07] we look at the actual win rates between
+[04:08] Ahri and Mel, it's 51.5%
+[04:11] about 4.1% lower than we would expect
+[04:14] based on the champion win rates. When we
+[04:16] apply this correction to all of Ahri's
+[04:18] match-ups, we can see just how bad that
+[04:19] Mel match-up really is. It's the one
+[04:21] true counter, if we define counters as
+[04:23] being anything more than 2% below a
+[04:25] champion's expected win rate, which is
+[04:27] arbitrary and you can do it another way.
+[04:29] But for now, I just want you to
+[04:30] appreciate that Mel is the one real
+[04:32] counter.
+[04:33] &gt;&gt; [music]
+[04:33] &gt;&gt; And I'd also like you to note that
+[04:34] Ahri's spread has now fallen to 1.3%.
+[04:37] We're going to do one last small
+[04:38] adjustment where we factor in the play
+[04:40] rate of each champion in the meta. It's
+[04:42] going to shrink the curve a little bit
+[04:43] more, but the spread will still round to
+[04:45] 1.3%. And you might be thinking,
+[04:47] "Mission accomplished. We have measured
+[04:49] Ahri's spread." But we still have a
+[04:51] problem. And that problem is that the
+[04:53] number of games we have recorded for
+[04:55] Ahri affects what her spread is going to
+[04:57] be. Here's where I have to introduce you
+[04:58] to a concept you're probably not
+[05:00] familiar with. Spread is affected by
+[05:02] sample size. What that means for us is
+[05:04] that champions that get played more look
+[05:06] like they have lower spreads than
+[05:08] champions that [music] don't. As a
+[05:09] visual example, I'll sub-sample the Ahri
+[05:11] games that I'm using in this video. When
+[05:13] I only take 3% of them, or 9,000, Ahri's
+[05:16] spread becomes enormous.
+[05:18] &gt;&gt; [music]
+[05:18] &gt;&gt; As I sample more and more of her games,
+[05:20] her spread tightens, eventually
+[05:21] condensing to that 1.3% we saw before.
+[05:26] That leaves us with the question, would
+[05:28] the spread keep getting smaller if I
+[05:29] kept sampling more games? And moreover,
+[05:32] how do I compare Ahri, who's played a
+[05:33] lot, to Yasuo, who's played less? The
+[05:36] answer lies in understanding the nature
+[05:37] of the noise that's introduced in these
+[05:39] low sample sizes. You can think of the
+[05:41] spread we observe as a combination of
+[05:43] the true variability that Ahri has
+[05:45] combined with the noise. What we're
+[05:47] after is true spread, and what we have
+[05:49] is the observed spread. [music] So, if
+[05:51] we had some estimate for the noise, we'd
+[05:52] be able to calculate the true spread.
+[05:54] Fortunately, every one of Ahri's
+[05:56] match-ups is a binomial distribution.
+[05:58] This is because every one of her
+[06:00] match-ups only has two outcomes. [music]
+[06:02] Fortunately, the noise for a binomial
+[06:04] distribution depends only on the N. So,
+[06:06] if we have the number of samples, we
+[06:07] know exactly what the noise is going to
+[06:09] look like. This allows us to perfectly
+[06:11] estimate the noise for every one of her
+[06:13] match-ups. And that means once we know
+[06:15] what the noise is, we can simply
+[06:16] subtract the noise from the observed
+[06:18] spread to find the true spread.
+[06:21] Here's a plot of what the correction
+[06:22] looks like as we increase the number of
+[06:24] games we sample for Ahri.
+[06:25] &gt;&gt; [music]
+[06:25] &gt;&gt; You can see that even at low sample
+[06:27] rates, it's already honed in on what the
+[06:29] ultimate convergence point is going to
+[06:30] be. As we approach many hundreds of
+[06:32] thousands of games, the observed spread
+[06:34] and the noise corrected spread do
+[06:36] converge. That leaves Ahri with a true
+[06:38] spread of 1.1%. But, we still have no
+[06:41] idea what that means. First, let's start
+[06:43] out by comparing it to other mid laners.
+[06:46] A typical mid laner has a spread of
+[06:47] 1.8%. If we look at Yasuo, things get
+[06:50] even worse.
+[06:55] Yasuo has a spread of 2.2% with his best
+[06:58] match-up being Akshan and his worst
+[07:00] match-up being Azir. That means Yasuo's
+[07:02] spread is higher and he's less
+[07:04] blindable. But, I feel like this term is
+[07:06] still too abstract. The realistic
+[07:08] question is, when you queue up, how much
+[07:10] more likely are you to be countered if
+[07:12] you're playing Yasuo than if you're
+[07:13] playing Ahri? Let's dig into that
+[07:15] question. If we define being countered
+[07:17] as playing into a match-up that a
+[07:19] champion wins 2% less than we would
+[07:21] expect, only 3.8% of Ahri's match-ups
+[07:24] would fall into that range. Conversely,
+[07:26] Yasuo would have 17.8%
+[07:28] of his match-ups in that range. But,
+[07:30] match-ups in League of Legends are not
+[07:32] smooth curves. They're discrete, which
+[07:34] is a fancy word for saying they're made
+[07:35] up of individuals. So, how many
+[07:37] match-ups actually fall below 2% for
+[07:39] Ahri versus Yasuo? Ahri has just one,
+[07:42] Mal.
+[07:43] For Yasuo, there's a whole bunch.
+[07:48] Mal accounts for 1.4% of the meta at the
+[07:51] moment, where Yasuo's counters account
+[07:53] for a whopping 24% of all mids picked.
+[07:56] But, we can go even further. We can
+[07:58] estimate exactly how likely Yasuo is to
+[08:00] be countered with some basic probability
+[08:02] [music] theory. Let's assume that pools
+[08:04] are an assembly of random champions,
+[08:05] which as I know, a bit of a bad
+[08:07] assumption, but I think it's good enough
+[08:09] for this back-of-the-envelope
+[08:10] calculation. [music]
+[08:11] If this assumption hold, each opponent's
+[08:13] champion pool can be represented by a
+[08:15] number of pulls from a random champion
+[08:17] bag, where the odds of drawing a
+[08:19] champion from that bag are the current
+[08:21] play rates in the meta. In this case,
+[08:23] the probability of being countered would
+[08:24] be 1 minus the probability of not
+[08:26] drawing a counter
+[08:27] &gt;&gt; [music]
+[08:27] &gt;&gt; to the power of n. N is the number of
+[08:29] draws each opponent gets from the bag,
+[08:32] our metaphorical proxy for champion pool
+[08:34] size. But, to complete this calculation,
+[08:36] we do need an estimate for n, the
+[08:38] average person's champion pool size in
+[08:40] the mid lane. Unfortunately, this is a
+[08:42] place where my current access to Riot's
+[08:43] API is going to limit my answer. If and
+[08:46] when Riot decides to give me greater
+[08:47] access, I can bring you greater stats,
+[08:49] and I'll be able to answer this question
+[08:50] directly. But, for now, I'm going to
+[08:52] have to get creative and estimate. I'm
+[08:54] going to make another assumption, that a
+[08:56] player's distribution of mastery points
+[08:58] is indicative of their pool size. Now,
+[09:00] this is certainly imperfect. Players can
+[09:02] simply cycle what they play and have
+[09:03] small pools at any given time. But, I
+[09:05] think it's reasonable to assume that a
+[09:07] one trick will have a lot of mastery
+[09:08] stacked on one champion, where someone
+[09:10] who plays a lot more in their pool will
+[09:12] have lots of mastery on many champions.
+[09:14] &gt;&gt; [music]
+[09:15] &gt;&gt; This plot shows the share of mastery
+[09:16] that's covered by a person's top X
+[09:18] champions. So, if your most played
+[09:20] champion has 50% of your mastery points,
+[09:22] then at one, you would be at 50%. If
+[09:25] your next champion had 25%, then at two,
+[09:28] you'd be at 75%. We're going to
+[09:30] arbitrarily draw the line at 80%. We'll
+[09:32] consider pool size to be however many
+[09:34] champions it takes for a player to reach
+[09:36] 80% of their total mastery.
+[09:38] &gt;&gt; [music]
+[09:38] &gt;&gt; If we plot the number of champions that
+[09:40] it takes to cover 80% of a player's
+[09:41] mastery on its own plot, the mean number
+[09:44] of champions is seven. On average, mid
+[09:46] laners have 80% of their mastery on just
+[09:49] seven champions. When we plug that
+[09:51] estimate for pool size back into our
+[09:52] probability equation, we can see that if
+[09:55] you're blinding Yasuo, you're probably
+[09:57] getting countered 85% of the time. But,
+[09:59] if you're blinding Ahri, then
+[10:00] probability is only about 10%. We can
+[10:03] even look at the individual breakdown of
+[10:05] champions to see what Yasuo is most
+[10:06] likely facing when he gets countered. If
+[10:08] we look at Viktor and Yone alone,
+[10:10] there's a 30% chance that your opponent
+[10:12] plays one of those two.
+[10:15] If we do the same calculation for all
+[10:17] mid laners, we can see that for every
+[10:19] 0.1% spread that a mid laner's matchups
+[10:22] has, it adds approximately 4.7% chance
+[10:25] that they will be countered when they
+[10:26] lock it in blind. Because of the
+[10:28] discrete nature of this calculation,
+[10:29] there's some deviation from that line,
+[10:31] but all in all, it fits pretty well. So
+[10:33] far, we've only been focusing on in lane
+[10:35] matchups, and moreover, we haven't even
+[10:37] talked about synergies. I think many
+[10:39] players using stats websites put a lot
+[10:41] of emphasis into countering their own
+[10:43] lane, but don't think enough about the
+[10:44] other lanes and synergies they should
+[10:46] consider.
+[10:50] When we plot the spread of Ahri's
+[10:51] matchups against each other opponent's
+[10:53] role, a very interesting thing happens.
+[10:55] Her spread versus mid lane is by far the
+[10:57] largest, where her spread versus bot
+[10:59] lane is the lowest.
+[11:00] &gt;&gt; [music]
+[11:01] &gt;&gt; Let's recall again our definition for
+[11:02] blind ability. Blind ability was a
+[11:04] measure of how much champion cares if
+[11:06] other champions are in the game with
+[11:07] them. We've shown that spread is a
+[11:09] really good measure for that,
+[11:10] &gt;&gt; [music]
+[11:10] &gt;&gt; and now we see that most of Ahri's
+[11:12] spread is concentrated in the mid lane.
+[11:14] That means she cares a lot more about
+[11:16] what she's matching up with mid than she
+[11:18] cares about what she's matching up with
+[11:20] at the ADC position. If we look at her
+[11:22] synergy spreads, it tells us the same
+[11:23] thing, except about her teammates. This
+[11:26] is useful information for Ahri, for
+[11:27] sure, but I bet some of you see where
+[11:29] I'm going with this. If we were to not
+[11:31] just look at Ahri, but her entire role,
+[11:33] and then look at the spread interactions
+[11:35] versus other roles, we can tell which
+[11:37] roles care the most about which other
+[11:38] roles on the rift, both for opponents
+[11:41] and for teammates. Here, I'm showing
+[11:43] that in heat map form. Greener shades
+[11:45] indicate that champions care relatively
+[11:47] more about that matchup or synergy,
+[11:49] where red cares they mean relatively
+[11:51] less. The left heat map is matchups, and
+[11:53] the right heat map is synergies.
+[11:55] &gt;&gt; [music]
+[11:55] &gt;&gt; Mid lane cares predominantly about its
+[11:57] matchup in lane, but it also cares a lot
+[11:59] about the enemy jungler. Synergy-wise,
+[12:01] it cares most about its own jungler and
+[12:03] a bit about the bot lane. Top lane
+[12:06] always kind of makes me laugh. I've been
+[12:07] checking in on this for years, and it's
+[12:09] always shown the exact same thing, which
+[12:11] is that top laners really only care
+[12:13] about top lane and pretty much nothing
+[12:15] else. I think the stereotype is that top
+[12:17] lane is on an island, but it's actually
+[12:19] absolutely correct. Jungle is
+[12:21] interesting because for both matchups
+[12:23] and synergies, it cares holistically
+[12:25] about the entire team that it's facing
+[12:27] or with more than any other position. It
+[12:30] does have a special interest in playing
+[12:31] with its mid and against opposing mid,
+[12:34] as well as a direct matchup against the
+[12:35] opposing jungler, but it's by far the
+[12:38] most balanced role in terms of what it
+[12:39] cares about on the rift. Bot laners
+[12:41] basically only care about their matchup
+[12:43] in bot lane and the interaction they
+[12:44] have with their support. And finally,
+[12:46] supports care about their ADC,
+[12:48] obviously, but they also have a special
+[12:49] relationship with their own and the
+[12:51] opposing jungler. Taken together, I
+[12:53] think this gives us really good insight
+[12:55] into which positions care about which
+[12:57] other positions during the draft phase.
+[12:59] Okay, let's circle back to mid lane.
+[13:01] This time, I'm going to show you matchup
+[13:03] spread and synergy spread for mid lane
+[13:05] on the same plot. You'll notice that
+[13:07] there is some correlation. Champions
+[13:09] that tend to be good into any matchup
+[13:11] also tend to be good with any teammate,
+[13:13] but you'll notice that some champions do
+[13:14] deviate. For example, Malzahar doesn't
+[13:17] care so much about what teammates he's
+[13:18] with, but he really cares about the
+[13:20] matchups, which makes sense for what we
+[13:22] know about Malzahar. He counters some
+[13:24] champions very hard. So, I've shown you
+[13:26] which champions are safe to blind and
+[13:27] which are not safe to blind, but I'd
+[13:29] also like to look at what people think
+[13:31] is okay to blind. Now, Riot doesn't
+[13:33] share pick order, but I do know who's in
+[13:35] every game, and I do know when champions
+[13:38] are facing counter matchups versus good
+[13:39] matchups. If I plot how often champions
+[13:42] face good versus bad laning matchups, we
+[13:44] can see that Yasuo by far faces the most
+[13:47] counter matchups of any champion in mid
+[13:49] lane. There are a few reasons why this
+[13:50] could be the case. One could be the
+[13:52] Yasuo players don't care about picking
+[13:54] blind, even though it's not really that
+[13:56] healthy for them. Another could be that
+[13:58] they're not picking blind, they simply
+[13:59] pick into bad matchups not caring about
+[14:01] what that matchup is going to be.
+[14:03] Technically, we can't tell the
+[14:04] difference here. Even so, I do find it
+[14:06] interesting that the top champions that
+[14:08] end up with favorable matchups are a lot
+[14:10] of counter pick champions. Galio,
+[14:12] Taliyah, Vex, Lissandra. These champions
+[14:15] are generally locked in in response to
+[14:17] something else. And this data suggests
+[14:19] that's generally how they get used.
+[14:22] Conversely, Ahri more often than not is
+[14:24] in a negative match up, which means that
+[14:26] she's probably getting blinded a lot. I
+[14:28] think that makes a lot of sense. Ahri is
+[14:30] a well-known blind, and honestly, if
+[14:32] you're picking blind, you should
+[14:33] probably be picking Ahri. To see how
+[14:35] well this holds, let's add match up
+[14:37] consistency as a second access to this
+[14:39] plot. We now have a scatter plot,
+[14:40] [music] where in the bottom right are
+[14:42] counter picks that shouldn't be blinded
+[14:44] and aren't, and in the top left are
+[14:45] champions that can be blinded and are.
+[14:48] We see that most champions are actually
+[14:50] being used in ways that are appropriate.
+[14:52] The counter pick champions are facing
+[14:53] better match ups than they would
+[14:54] otherwise face, and the blindable
+[14:56] champions are facing slightly worse
+[14:57] match ups.
+[14:58] There are some exceptions, and Yasuo is
+[15:00] again one of them. He shouldn't be
+[15:02] blinded, but the data suggests that
+[15:04] &gt;&gt; [music]
+[15:04] &gt;&gt; likely Yasuo mains are blinding him all
+[15:06] the time. All in all, this means that
+[15:08] the community as a whole has a pretty
+[15:09] decent idea about which champions are
+[15:11] blindable. There are some exceptions
+[15:13] like Yasuo, but certain player bases are
+[15:15] we'll call it eccentric. I do also want
+[15:18] to address rank and mastery. My data is
+[15:20] a little thin here, and if I get faster
+[15:22] access, I'll be able to do a better job
+[15:23] later.
+[15:24] But for now, I can say that Ahri tends
+[15:26] to be mildly more blindable at higher
+[15:28] elos, while Yasuo tends to get less
+[15:30] blindable. I think both of these make
+[15:32] sense. And at a later time, when I've
+[15:34] accumulated more games, I'll try to
+[15:35] circle back and talk about this in
+[15:36] detail. Okay, before I leave you, I want
+[15:39] to talk about one more thing. I pulled
+[15:41] from Oracle Elixir all of the champions
+[15:43] in the 2026 pro scene that had above a
+[15:45] 1% play rate in mid. Essentially, I want
+[15:48] to see if pros follow the same logic
+[15:49] that solo players do. Now, obviously,
+[15:52] the pro meta is going to be different
+[15:53] than the solo queue meta.
+[15:55] &gt;&gt; [music]
+[15:55] &gt;&gt; The champions that are played are
+[15:56] different, how they interact might be a
+[15:58] little bit different, and I don't have
+[15:59] enough pro data from Oracle Elixir alone
+[16:01] to fully lock down all of those
+[16:03] differences. But we can just take a
+[16:05] gander and see if they match what our
+[16:06] data would predict. First, let's
+[16:08] identify all the champions above a 1%
+[16:10] play rate.
+[16:11] Then we can color them by how often they
+[16:13] get blinded in the pro scene. I'll get
+[16:15] rid of the synergy blindability access
+[16:16] because I assume in comp play, teams
+[16:18] will have an idea of how they want
+[16:20] drafts to unfold and instead I'll
+[16:22] replace it with our solo queue match up
+[16:23] consistency. Overall, we can see there's
+[16:26] some agreement. There are definitely
+[16:27] champions like Orianna and Ryze that we
+[16:29] think are blindable and pros do too, but
+[16:31] there are some that pros don't think are
+[16:33] blindable. Anivia, LeBlanc, and Twisted
+[16:35] Fate are used more as counter picks
+[16:37] where in solo queue they're considered
+[16:38] to be blindable. Some of the champions
+[16:40] we think are counter picks the pros do
+[16:42] too like Galio, Sylas, and Lissandra and
+[16:44] all in all I think there's reasonable
+[16:46] correlation here. And of course we don't
+[16:48] actually know if the pros are right or
+[16:49] wrong about what they're blinding. We
+[16:51] simply don't have the data, but in solo
+[16:53] queue we do have the data and now you
+[16:55] know how [music] to read it. I think
+[16:57] this is a good place to end our first
+[16:58] machine lulling educational series
+[17:00] video. All of the data will be available
+[17:02] for you to explore the moment that Riot
+[17:03] signs off letting me make it public, but
+[17:05] while I'm in that holding pattern I'll
+[17:07] try to keep circling back and making
+[17:08] videos to show more and more of it. I'll
+[17:10] release the blindability data for each
+[17:12] of the different positions in short form
+[17:14] videos
+[17:14] &gt;&gt; [music]
+[17:15] &gt;&gt; and once Riot approves my website will
+[17:17] appear here on the screen or in the
+[17:19] description or something like that.
+[17:20] &gt;&gt; [music]
+[17:21] &gt;&gt; You can also continue to see all of my
+[17:22] old blog posts as well as my champion
+[17:24] pool designer at machinlolling.com. But
+[17:27] for now, I hope you enjoyed the video
+[17:28] and I wish you the best of luck on the
+[17:30] rift.
+[17:35] &gt;&gt; [music]
+[17:41] [music]

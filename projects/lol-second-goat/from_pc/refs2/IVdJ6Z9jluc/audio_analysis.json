@@ -1,0 +1,347 @@
+{
+ "clips": [
+  {
+   "file": "IVdJ6Z9jluc_line_chart_overlay_10m17s.mp3",
+   "start": "10:17",
+   "label": "line_chart_overlay",
+   "tempo_bpm": 161.5,
+   "beat_strength": 0.072,
+   "vocal_band_share_in_gaps": 0.403,
+   "vocal_band_share_all": 0.361,
+   "bass_share": 0.349,
+   "hi_share": 0.003
+  },
+  {
+   "file": "IVdJ6Z9jluc_punchline_drop_02m12s.mp3",
+   "start": "02:12",
+   "label": "punchline_drop",
+   "tempo_bpm": 83.4,
+   "beat_strength": 0.085,
+   "vocal_band_share_in_gaps": 0.108,
+   "vocal_band_share_all": 0.255,
+   "bass_share": 0.423,
+   "hi_share": 0.004
+  },
+  {
+   "file": "IVdJ6Z9jluc_normal_talk_over_graph_05m05s.mp3",
+   "start": "05:05",
+   "label": "normal_talk_over_graph",
+   "tempo_bpm": 123.0,
+   "beat_strength": 0.063,
+   "vocal_band_share_in_gaps": 0.223,
+   "vocal_band_share_all": 0.266,
+   "bass_share": 0.425,
+   "hi_share": 0.005
+  },
+  {
+   "file": "IVdJ6Z9jluc_music_switch_1_08m57s.mp3",
+   "start": "08:57",
+   "label": "music_switch_1",
+   "tempo_bpm": 92.3,
+   "beat_strength": 0.086,
+   "vocal_band_share_in_gaps": 0.397,
+   "vocal_band_share_all": 0.378,
+   "bass_share": 0.381,
+   "hi_share": 0.003
+  },
+  {
+   "file": "IVdJ6Z9jluc_music_switch_2_11m27s.mp3",
+   "start": "11:27",
+   "label": "music_switch_2",
+   "tempo_bpm": 69.8,
+   "beat_strength": 0.133,
+   "vocal_band_share_in_gaps": 0.224,
+   "vocal_band_share_all": 0.231,
+   "bass_share": 0.477,
+   "hi_share": 0.003
+  },
+  {
+   "file": "IVdJ6Z9jluc_music_switch_3_14m00s.mp3",
+   "start": "14:00",
+   "label": "music_switch_3",
+   "tempo_bpm": 68.0,
+   "beat_strength": 0.133,
+   "vocal_band_share_in_gaps": 0.529,
+   "vocal_band_share_all": 0.423,
+   "bass_share": 0.421,
+   "hi_share": 0.001
+  },
+  {
+   "file": "IVdJ6Z9jluc_music_switch_4_14m43s.mp3",
+   "start": "14:43",
+   "label": "music_switch_4",
+   "tempo_bpm": 117.5,
+   "beat_strength": 0.228,
+   "vocal_band_share_in_gaps": 0.659,
+   "vocal_band_share_all": 0.534,
+   "bass_share": 0.367,
+   "hi_share": 0.001
+  }
+ ],
+ "music_drops": [
+  {
+   "start": 6.0,
+   "end": 12.0,
+   "start_mmss": "00:06",
+   "dur_s": 6.0,
+   "bed_floor_db": -31.7,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "to get the fresh 14 for the Lakers LeBron look out oh my lord it's never going to end",
+   "said_around": "to get the fresh 14 for the Lakers LeBron look out oh my lord it's never going to end is it LeBron's Reign Over the NBA I've just come to the conclusion that LeBron is hacked into the Matrix and has transcended aging LeBron is in his 19th"
+  },
+  {
+   "start": 58.5,
+   "end": 64.5,
+   "start_mmss": "00:58",
+   "dur_s": 6.0,
+   "bed_floor_db": -36.9,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "and if he isn't what would he need to do to truly once and for all be the goat",
+   "said_around": "greatest basketball player of all time and if he isn't what would he need to do to truly once and for all be the goat [Music] about 5 years ago I uploaded my first"
+  },
+  {
+   "start": 65.0,
+   "end": 66.0,
+   "start_mmss": "01:05",
+   "dur_s": 1.0,
+   "bed_floor_db": -38.3,
+   "floor_in_drop_db": -50.7,
+   "whole_mix_silent": false,
+   "said_before": "[Music]",
+   "said_around": "to truly once and for all be the goat [Music] about 5 years ago I uploaded my first basketball related video onto this"
+  },
+  {
+   "start": 66.5,
+   "end": 69.0,
+   "start_mmss": "01:06",
+   "dur_s": 2.5,
+   "bed_floor_db": -39.4,
+   "floor_in_drop_db": -69.3,
+   "whole_mix_silent": false,
+   "said_before": "[Music]",
+   "said_around": "[Music] about 5 years ago I uploaded my first basketball related video onto this channel the title of that video is"
+  },
+  {
+   "start": 136.5,
+   "end": 138.0,
+   "start_mmss": "02:16",
+   "dur_s": 1.5,
+   "bed_floor_db": -38.5,
+   "floor_in_drop_db": -51.5,
+   "whole_mix_silent": false,
+   "said_before": "topic is a bit redundant and ESPN already gives you a daily update on the goat debate anyways so no need for me to do it but I think it's time we actually",
+   "said_around": "opinion because I just feel like the topic is a bit redundant and ESPN already gives you a daily update on the goat debate anyways so no need for me to do it but I think it's time we actually discuss this because what LeBron is doing at this point in his career is"
+  },
+  {
+   "start": 139.5,
+   "end": 141.5,
+   "start_mmss": "02:19",
+   "dur_s": 2.0,
+   "bed_floor_db": -39.7,
+   "floor_in_drop_db": -52.1,
+   "whole_mix_silent": false,
+   "said_before": "already gives you a daily update on the goat debate anyways so no need for me to do it but I think it's time we actually discuss this because what LeBron is",
+   "said_around": "topic is a bit redundant and ESPN already gives you a daily update on the goat debate anyways so no need for me to do it but I think it's time we actually discuss this because what LeBron is doing at this point in his career is just absurd at the moment there are pretty much three different camps on the"
+  },
+  {
+   "start": 144.5,
+   "end": 146.5,
+   "start_mmss": "02:24",
+   "dur_s": 2.0,
+   "bed_floor_db": -42.8,
+   "floor_in_drop_db": -54.9,
+   "whole_mix_silent": false,
+   "said_before": "discuss this because what LeBron is doing at this point in his career is just absurd at the moment there are",
+   "said_around": "do it but I think it's time we actually discuss this because what LeBron is doing at this point in his career is just absurd at the moment there are pretty much three different camps on the whole goat debate people who think Michael Jordan is the goat people who"
+  },
+  {
+   "start": 156.0,
+   "end": 158.0,
+   "start_mmss": "02:36",
+   "dur_s": 2.0,
+   "bed_floor_db": -49.9,
+   "floor_in_drop_db": -63.0,
+   "whole_mix_silent": false,
+   "said_before": "whole goat debate people who think Michael Jordan is the goat people who think LeBron is the goat and people who are wrong I'm just joking of course but",
+   "said_around": "pretty much three different camps on the whole goat debate people who think Michael Jordan is the goat people who think LeBron is the goat and people who are wrong I'm just joking of course but not really I'd say about 75% of people fall into the MJ's the goat category about 20% of people fall into the"
+  },
+  {
+   "start": 175.0,
+   "end": 178.5,
+   "start_mmss": "02:55",
+   "dur_s": 3.5,
+   "bed_floor_db": -45.2,
+   "floor_in_drop_db": -60.2,
+   "whole_mix_silent": false,
+   "said_before": "these other fans believe the goats is Wilt or Kobe or Kareem there's not many of them but boy will they die on that",
+   "said_around": "fall into the other category usually these other fans believe the goats is Wilt or Kobe or Kareem there's not many of them but boy will they die on that Hill see the thing here is that a lot of the fans in MJ's Corner beli that he is and will forever be the goat but"
+  },
+  {
+   "start": 196.5,
+   "end": 198.5,
+   "start_mmss": "03:16",
+   "dur_s": 2.0,
+   "bed_floor_db": -39.3,
+   "floor_in_drop_db": -53.9,
+   "whole_mix_silent": false,
+   "said_before": "can use to distinguish the greatest player of all time no opinions no bias just the facts if LeBron somehow won",
+   "said_around": "to be some sort of objective metric we can use to distinguish the greatest player of all time no opinions no bias just the facts if LeBron somehow won four more championships and retired with eight Rings he'd undoubtedly be the goat"
+  },
+  {
+   "start": 212.5,
+   "end": 215.0,
+   "start_mmss": "03:32",
+   "dur_s": 2.5,
+   "bed_floor_db": -45.5,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "become the greatest ever but where does that threshold whyly and what would LeBron have to achieve to get",
+   "said_around": "right so there are paths for him to become the greatest ever but where does that threshold whyly and what would LeBron have to achieve to get there first let's just take a look at the basic numbers between Michael and"
+  },
+  {
+   "start": 216.5,
+   "end": 219.5,
+   "start_mmss": "03:36",
+   "dur_s": 3.0,
+   "bed_floor_db": -47.5,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "that threshold whyly and what would LeBron have to achieve to get",
+   "said_around": "become the greatest ever but where does that threshold whyly and what would LeBron have to achieve to get there first let's just take a look at the basic numbers between Michael and LeBron LeBron has more career points rebounds assists blocks more triple"
+  },
+  {
+   "start": 249.5,
+   "end": 251.5,
+   "start_mmss": "04:09",
+   "dur_s": 2.0,
+   "bed_floor_db": -38.5,
+   "floor_in_drop_db": -51.3,
+   "whole_mix_silent": false,
+   "said_before": "better scorer or rebounder or Defender or shooter than Jordan they just prove that LeBron's been good at these things for a very very long time these numbers",
+   "said_around": "numbers don't prove that LeBron's a better scorer or rebounder or Defender or shooter than Jordan they just prove that LeBron's been good at these things for a very very long time these numbers also show just how versatile LeBron is possibly his most valuable asset so"
+  },
+  {
+   "start": 282.5,
+   "end": 286.5,
+   "start_mmss": "04:42",
+   "dur_s": 4.0,
+   "bed_floor_db": -38.2,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "their finals records and you pretty much have a condensed version of most goat debates but there is so much more to unpack here so let's unpack",
+   "said_around": "people throw in a required comment about their finals records and you pretty much have a condensed version of most goat debates but there is so much more to unpack here so let's unpack it so y'all know how much I like Advanced stats they don't tell the full"
+  },
+  {
+   "start": 288.0,
+   "end": 290.5,
+   "start_mmss": "04:48",
+   "dur_s": 2.5,
+   "bed_floor_db": -42.0,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "unpack here so let's unpack it so y'all know how much I like",
+   "said_around": "debates but there is so much more to unpack here so let's unpack it so y'all know how much I like Advanced stats they don't tell the full story but if you know which ones to look for you can discover some nuances in a player's game that you won't get by just"
+  },
+  {
+   "start": 379.5,
+   "end": 382.5,
+   "start_mmss": "06:19",
+   "dur_s": 3.0,
+   "bed_floor_db": -40.2,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "necessarily about who is the better player it's about who is the greatest player we've got some more unpacking to",
+   "said_around": "LeBron but the goat debate isn't necessarily about who is the better player it's about who is the greatest player we've got some more unpacking to [Music] do now we cannot have a thorough goat debate without discussing the"
+  },
+  {
+   "start": 384.0,
+   "end": 387.0,
+   "start_mmss": "06:24",
+   "dur_s": 3.0,
+   "bed_floor_db": -40.8,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "player we've got some more unpacking to [Music]",
+   "said_around": "player it's about who is the greatest player we've got some more unpacking to [Music] do now we cannot have a thorough goat debate without discussing the accomplishments of each player numbers are cool and they have their purpose but"
+  },
+  {
+   "start": 497.5,
+   "end": 502.0,
+   "start_mmss": "08:17",
+   "dur_s": 4.5,
+   "bed_floor_db": -39.8,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "overwhelming that we'll have no choice but to concede that he is in fact the greatest player of all time which brings us to a real dilemma in this age-old",
+   "said_around": "and achievements may become so overwhelming that we'll have no choice but to concede that he is in fact the greatest player of all time which brings us to a real dilemma in this age-old debate the flame that burns twice as bright Burns half as long a great quote"
+  },
+  {
+   "start": 503.5,
+   "end": 506.0,
+   "start_mmss": "08:23",
+   "dur_s": 2.5,
+   "bed_floor_db": -41.1,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "us to a real dilemma in this age-old debate the flame that burns twice as",
+   "said_around": "greatest player of all time which brings us to a real dilemma in this age-old debate the flame that burns twice as bright Burns half as long a great quote by the ancient Chinese philosopher Lau"
+  },
+  {
+   "start": 692.5,
+   "end": 697.0,
+   "start_mmss": "11:32",
+   "dur_s": 4.5,
+   "bed_floor_db": -36.1,
+   "floor_in_drop_db": -62.8,
+   "whole_mix_silent": false,
+   "said_before": "still doing this in a couple years while still putting up all NBA numbers I really think it's going to be difficult to say that he's not the",
+   "said_around": "reel with moments like this if LeBron is still doing this in a couple years while still putting up all NBA numbers I really think it's going to be difficult to say that he's not the greatest player ever you know what I'm just going to say it while LeBron's Legacy is growing as"
+  },
+  {
+   "start": 698.0,
+   "end": 700.5,
+   "start_mmss": "11:38",
+   "dur_s": 2.5,
+   "bed_floor_db": -37.8,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "difficult to say that he's not the greatest player ever you know what I'm just going to say",
+   "said_around": "I really think it's going to be difficult to say that he's not the greatest player ever you know what I'm just going to say it while LeBron's Legacy is growing as he plays more seasons Michael's Legacy would have been slightly diminished if"
+  },
+  {
+   "start": 855.5,
+   "end": 858.0,
+   "start_mmss": "14:15",
+   "dur_s": 2.5,
+   "bed_floor_db": -38.4,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "is a necessary burden but unfortunately it's a burden that most fans won't bother to take",
+   "said_around": "unpacking of every small minute detail is a necessary burden but unfortunately it's a burden that most fans won't bother to take [Music] on at the moment I personally believe Michael Jordan is the greatest"
+  }
+ ],
+ "music_switches": [
+  {
+   "t": "09:12",
+   "score": 1.96,
+   "median_score": 0.63
+  },
+  {
+   "t": "11:42",
+   "score": 1.96,
+   "median_score": 0.63
+  },
+  {
+   "t": "14:15",
+   "score": 2.44,
+   "median_score": 0.63
+  },
+  {
+   "t": "14:58",
+   "score": 2.61,
+   "median_score": 0.63
+  }
+ ]
+}

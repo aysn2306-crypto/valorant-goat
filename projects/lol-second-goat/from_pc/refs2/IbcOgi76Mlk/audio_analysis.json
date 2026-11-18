@@ -1,0 +1,281 @@
+{
+ "clips": [
+  {
+   "file": "IbcOgi76Mlk_biggap_race_lines_highlight_09m05s.mp3",
+   "start": "09:05",
+   "label": "biggap_race_lines_highlight",
+   "tempo_bpm": 161.5,
+   "beat_strength": 0.052,
+   "vocal_band_share_in_gaps": 0.492,
+   "vocal_band_share_all": 0.376,
+   "bass_share": 0.299,
+   "hi_share": 0.023
+  },
+  {
+   "file": "IbcOgi76Mlk_normal_talk_over_graph_09m25s.mp3",
+   "start": "09:25",
+   "label": "normal_talk_over_graph",
+   "tempo_bpm": 64.6,
+   "beat_strength": 0.038,
+   "vocal_band_share_in_gaps": 0.221,
+   "vocal_band_share_all": 0.314,
+   "bass_share": 0.384,
+   "hi_share": 0.017
+  },
+  {
+   "file": "IbcOgi76Mlk_music_switch_1_00m45s.mp3",
+   "start": "00:45",
+   "label": "music_switch_1",
+   "tempo_bpm": 60.1,
+   "beat_strength": 0.125,
+   "vocal_band_share_in_gaps": 0.13,
+   "vocal_band_share_all": 0.221,
+   "bass_share": 0.571,
+   "hi_share": 0.006
+  },
+  {
+   "file": "IbcOgi76Mlk_music_switch_2_05m24s.mp3",
+   "start": "05:24",
+   "label": "music_switch_2",
+   "tempo_bpm": 60.1,
+   "beat_strength": 0.079,
+   "vocal_band_share_in_gaps": 0.389,
+   "vocal_band_share_all": 0.549,
+   "bass_share": 0.18,
+   "hi_share": 0.017
+  },
+  {
+   "file": "IbcOgi76Mlk_music_switch_3_07m01s.mp3",
+   "start": "07:01",
+   "label": "music_switch_3",
+   "tempo_bpm": 60.1,
+   "beat_strength": 0.076,
+   "vocal_band_share_in_gaps": 0.577,
+   "vocal_band_share_all": 0.637,
+   "bass_share": 0.166,
+   "hi_share": 0.005
+  },
+  {
+   "file": "IbcOgi76Mlk_music_switch_4_14m15s.mp3",
+   "start": "14:15",
+   "label": "music_switch_4",
+   "tempo_bpm": 92.3,
+   "beat_strength": 0.182,
+   "vocal_band_share_in_gaps": 0.6,
+   "vocal_band_share_all": 0.304,
+   "bass_share": 0.379,
+   "hi_share": 0.004
+  }
+ ],
+ "music_drops": [
+  {
+   "start": 26.0,
+   "end": 28.5,
+   "start_mmss": "00:26",
+   "dur_s": 2.5,
+   "bed_floor_db": -32.6,
+   "floor_in_drop_db": -90.4,
+   "whole_mix_silent": false,
+   "said_before": "evidence of the greatest [music] nights in NBA history by some of the greatest players in NBA history. Which begs the question, what the hell is Bam Adebayo",
+   "said_around": "basketball, a testament and historical evidence of the greatest [music] nights in NBA history by some of the greatest players in NBA history. Which begs the question, what the hell is Bam Adebayo doing here with a mind-boggling modern NBA record of 83 points? Well, this my"
+  },
+  {
+   "start": 29.0,
+   "end": 31.0,
+   "start_mmss": "00:29",
+   "dur_s": 2.0,
+   "bed_floor_db": -33.3,
+   "floor_in_drop_db": -80.3,
+   "whole_mix_silent": false,
+   "said_before": "in NBA history by some of the greatest players in NBA history. Which begs the question, what the hell is Bam Adebayo doing here with a mind-boggling modern",
+   "said_around": "evidence of the greatest [music] nights in NBA history by some of the greatest players in NBA history. Which begs the question, what the hell is Bam Adebayo doing here with a mind-boggling modern NBA record of 83 points? Well, this my friends is the result of quite possibly"
+  },
+  {
+   "start": 31.5,
+   "end": 33.5,
+   "start_mmss": "00:31",
+   "dur_s": 2.0,
+   "bed_floor_db": -32.4,
+   "floor_in_drop_db": -47.1,
+   "whole_mix_silent": false,
+   "said_before": "question, what the hell is Bam Adebayo doing here with a mind-boggling modern NBA record of 83 points? Well, this my",
+   "said_around": "players in NBA history. Which begs the question, what the hell is Bam Adebayo doing here with a mind-boggling modern NBA record of 83 points? Well, this my friends is the result of quite possibly the most egregious case of stat padding"
+  },
+  {
+   "start": 59.0,
+   "end": 61.5,
+   "start_mmss": "00:59",
+   "dur_s": 2.5,
+   "bed_floor_db": -38.0,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "",
+   "said_around": "games we may ever see. Today's video is sponsored by Arena Club. If you grew up collecting sports cards like me, searching for that one player, that one season, that one card"
+  },
+  {
+   "start": 97.5,
+   "end": 99.5,
+   "start_mmss": "01:37",
+   "dur_s": 2.0,
+   "bed_floor_db": -38.1,
+   "floor_in_drop_db": -78.8,
+   "whole_mix_silent": false,
+   "said_before": "times. Love the card you pulled? Flex it in your digital showroom for others to see. You can also put it up for auction or have the physical card shipped directly to you. The choice is yours. In",
+   "said_around": "boxes to hunt down, no grading wait times. Love the card you pulled? Flex it in your digital showroom for others to see. You can also put it up for auction or have the physical card shipped directly to you. The choice is yours. In fact, [music] we're going to rip a pack right now. This time I've got a ruby basketball pack lined up. Here's a sneak peek at some of the potential grails you"
+  },
+  {
+   "start": 111.0,
+   "end": 114.5,
+   "start_mmss": "01:51",
+   "dur_s": 3.5,
+   "bed_floor_db": -36.3,
+   "floor_in_drop_db": -92.5,
+   "whole_mix_silent": false,
+   "said_before": "peek at some of the potential grails you can hit out of the ruby packs. Open for something good today. Here we go, boys.",
+   "said_around": "basketball pack lined up. Here's a sneak peek at some of the potential grails you can hit out of the ruby packs. Open for something good today. Here we go, boys. There's no way. 09 LeBron tops gold numbered 510 out of 2009. This is literally the best card I've ever pulled"
+  },
+  {
+   "start": 116.0,
+   "end": 118.5,
+   "start_mmss": "01:56",
+   "dur_s": 2.5,
+   "bed_floor_db": -38.4,
+   "floor_in_drop_db": -85.8,
+   "whole_mix_silent": false,
+   "said_before": "There's no way. 09 LeBron tops gold numbered 510 out of 2009. This is",
+   "said_around": "something good today. Here we go, boys. There's no way. 09 LeBron tops gold numbered 510 out of 2009. This is literally the best card I've ever pulled out of a pack. [music] Now, like any card you pull from a slab pack, Arena Club instantly offers you"
+  },
+  {
+   "start": 151.0,
+   "end": 155.5,
+   "start_mmss": "02:31",
+   "dur_s": 4.5,
+   "bed_floor_db": -35.4,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "and using code J X M Y. That's arenaclub.com/jimmy, code J X M Y.",
+   "said_around": "going to arenaclub.com/jimmy and using code J X M Y. That's arenaclub.com/jimmy, code J X M Y. On Tuesday night in a game featuring the Washington Wizards and the Miami Heat with 1 minute and 46 seconds left in the fourth quarter, the Heat were up 146"
+  },
+  {
+   "start": 202.5,
+   "end": 210.0,
+   "start_mmss": "03:22",
+   "dur_s": 7.5,
+   "bed_floor_db": -39.5,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "Washington is now guarding him with their entire roster. And what started as a normal basketball game has now become a full-blown circus act.",
+   "said_around": "be at the free-throw line because Washington is now guarding him with their entire roster. And what started as a normal basketball game has now become a full-blown circus act. But, it didn't start this way. In just the first quarter of this game, Bam Adebayo had 31 points, the second most points [music] scored in the first quarter of a game in NBA history. By"
+  },
+  {
+   "start": 323.0,
+   "end": 325.5,
+   "start_mmss": "05:23",
+   "dur_s": 2.5,
+   "bed_floor_db": -40.5,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "negative consequences. How did Bam Adebayo drop the most points in modern NBA [music] history on a random Tuesday night in March?",
+   "said_around": "genuinely chase the record without any negative consequences. How did Bam Adebayo drop the most points in modern NBA [music] history on a random Tuesday night in March? &gt;&gt; Great respect to let him play. History of the NBA. Now three."
+  },
+  {
+   "start": 336.5,
+   "end": 340.0,
+   "start_mmss": "05:36",
+   "dur_s": 3.5,
+   "bed_floor_db": -33.5,
+   "floor_in_drop_db": -102.7,
+   "whole_mix_silent": false,
+   "said_before": "Now three. Bam. He gets fouled.",
+   "said_around": "History of the NBA. Now three. Bam. He gets fouled. &gt;&gt; By choosing option C, and infringing on the integrity of the game. In what could have been a celebrated, memorable, and ethical performance, Bam and the Heat"
+  },
+  {
+   "start": 340.5,
+   "end": 343.0,
+   "start_mmss": "05:40",
+   "dur_s": 2.5,
+   "bed_floor_db": -33.5,
+   "floor_in_drop_db": -100.0,
+   "whole_mix_silent": false,
+   "said_before": "He gets fouled. &gt;&gt; By choosing option C, and infringing on the integrity of the game. In what could",
+   "said_around": "Bam. He gets fouled. &gt;&gt; By choosing option C, and infringing on the integrity of the game. In what could have been a celebrated, memorable, and ethical performance, Bam and the Heat decided to go a different route. With"
+  },
+  {
+   "start": 432.0,
+   "end": 438.0,
+   "start_mmss": "07:12",
+   "dur_s": 6.0,
+   "bed_floor_db": -32.8,
+   "floor_in_drop_db": -94.2,
+   "whole_mix_silent": false,
+   "said_before": "modern scoring record stood [music] for so long and why no one can seem to match it despite a number of players getting close. Because Wait, I actually already",
+   "said_around": "are quickly discovering why Kobe's modern scoring record stood [music] for so long and why no one can seem to match it despite a number of players getting close. Because Wait, I actually already said this a week ago. Let me find the clip real quick. 100 points in a single game is possible, but the circumstances required to have such a game, to justify"
+  },
+  {
+   "start": 452.0,
+   "end": 455.0,
+   "start_mmss": "07:32",
+   "dur_s": 3.0,
+   "bed_floor_db": -38.1,
+   "floor_in_drop_db": -120.0,
+   "whole_mix_silent": false,
+   "said_before": "doing so without infringing on the integrity of the game, is so narrow that we may never see it happen again. Ah,",
+   "said_around": "one player taking that many shots and doing so without infringing on the integrity of the game, is so narrow that we may never see it happen again. Ah, that's right. The fallout for unapologetically chasing out Yeah, yeah, yeah. This is truly a definitive and timeless paradox of big performances."
+  },
+  {
+   "start": 456.0,
+   "end": 458.5,
+   "start_mmss": "07:36",
+   "dur_s": 2.5,
+   "bed_floor_db": -38.1,
+   "floor_in_drop_db": -87.8,
+   "whole_mix_silent": false,
+   "said_before": "we may never see it happen again. Ah, that's right. The fallout for unapologetically chasing out Yeah, yeah, yeah. This is truly a definitive and",
+   "said_around": "integrity of the game, is so narrow that we may never see it happen again. Ah, that's right. The fallout for unapologetically chasing out Yeah, yeah, yeah. This is truly a definitive and timeless paradox of big performances. Historic nights like this have become"
+  },
+  {
+   "start": 530.0,
+   "end": 535.5,
+   "start_mmss": "08:50",
+   "dur_s": 5.5,
+   "bed_floor_db": -32.2,
+   "floor_in_drop_db": -94.9,
+   "whole_mix_silent": false,
+   "said_before": "history, and the fifth most three-pointers attempted in a game. Oh, and he also broke the record for the most criticism received by a single player in one game. Now, if we ignore",
+   "said_around": "history, and the fifth most three-pointers attempted in a game. Oh, and he also broke the record for the most criticism received by a single player in one game. Now, if we ignore all context and what it took to get there, according to the game score metric, which takes all the good things a player does in the box score minus all the bad things and spits out a number"
+  },
+  {
+   "start": 889.0,
+   "end": 890.5,
+   "start_mmss": "14:49",
+   "dur_s": 1.5,
+   "bed_floor_db": -46.3,
+   "floor_in_drop_db": -60.6,
+   "whole_mix_silent": false,
+   "said_before": "",
+   "said_around": ""
+  }
+ ],
+ "music_switches": [
+  {
+   "t": "01:00",
+   "score": 3.42,
+   "median_score": 0.68
+  },
+  {
+   "t": "05:39",
+   "score": 2.6,
+   "median_score": 0.68
+  },
+  {
+   "t": "07:16",
+   "score": 2.42,
+   "median_score": 0.68
+  },
+  {
+   "t": "14:30",
+   "score": 2.17,
+   "median_score": 0.68
+  }
+ ]
+}
