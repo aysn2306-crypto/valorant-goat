@@ -81,13 +81,15 @@ const FairCoin: React.FC = () => {
   );
 };
 
-const Formula: React.FC<{ lines: string[] }> = ({ lines }) => {
+/** MachineLoLing formula board: the concept's name, then one line at a time, the last line in the accent. */
+const Formula: React.FC<{ lines: string[]; name?: string }> = ({ lines, name }) => {
   const f = useCurrentFrame();
   return (
     <Stage>
-      <div style={{ position: "absolute", left: 220, top: 300, display: "flex", flexDirection: "column", gap: 34 }}>
+      {name && <div style={{ position: "absolute", left: 220, top: 170, fontFamily: F.title, fontSize: 84, letterSpacing: 2, color: CREAM }}>{name}</div>}
+      <div style={{ position: "absolute", left: 220, top: name ? 340 : 300, display: "flex", flexDirection: "column", gap: 34 }}>
         {lines.map((l, i) => (
-          <div key={i} style={{ fontFamily: F.body, fontWeight: 600, fontSize: 64, color: i === lines.length - 1 ? C.cyan : C.text, opacity: f >= 8 + i * 40 ? 1 : 0 }}>{l}</div>
+          <div key={i} style={{ fontFamily: F.body, fontWeight: 600, fontSize: l.length > 44 ? 46 : 64, maxWidth: 1500, color: i === lines.length - 1 ? C.cyan : C.text, opacity: f >= 8 + i * 40 ? 1 : 0 }}>{l}</div>
         ))}
       </div>
     </Stage>
@@ -123,15 +125,15 @@ const TitlesNeeded: React.FC = () => {
     <Stage title="WORLDS NEEDED TO PASS FAKER">
       <div style={{ position: "absolute", left: 140, right: 140, top: 230, display: "flex", flexDirection: "column", gap: 34 }}>
         {NEED.map(([id, have, need], i) => {
-          const a = 10 + i * 24;
+          const a = 10 + i * 14;
           return (
             <div key={id} style={{ display: "flex", alignItems: "center", gap: 26, opacity: f >= a ? 1 : 0 }}>
               <Photo id={id} size={92} round ring={i === 0 ? C.cyan : "rgba(237,239,242,0.4)"} />
               <div style={{ width: 230, fontFamily: F.title, fontSize: 46, color: i === 0 ? C.cyan : C.text, letterSpacing: 1 }}>{id.toUpperCase()}</div>
               <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                {Array.from({ length: have + need }, (_, k) => <Cup key={k} filled={k < have} o={k < have || f >= a + 140 + k * 2 ? 1 : 0} />)}
+                {Array.from({ length: have + need }, (_, k) => <Cup key={k} filled={k < have} o={k < have || f >= a + 30 + k * 3 ? 1 : 0} />)}
               </div>
-              <div style={{ marginLeft: "auto", fontFamily: F.title, fontSize: 52, color: C.text, opacity: f >= a + 160 ? 1 : 0 }}>+{need}</div>
+              <div style={{ marginLeft: "auto", fontFamily: F.title, fontSize: 52, color: C.text, opacity: f >= a + 70 ? 1 : 0 }}>+{need}</div>
             </div>
           );
         })}
@@ -198,48 +200,55 @@ const ROWS: [string, V, number?][] = [
   ["My first version did the obvious thing. Add up trophies, add up stats, rank everyone.", mo("f1", <Formula lines={["score = trophies + stats", "rank everyone"]} />)],
   ["And it put Faker at number 14.", mo("w14", <Words text="FAKER: #14" sub="version 1" />)],
   ["That's obviously wrong. So the question is why.", mo("w14", <Words text="FAKER: #14" sub="version 1" />)],
-  ["It was averaging his whole career, rebuilding years and all.", mo("f2", <Formula lines={["average of every year  ✗", "best years + longevity  ✓"]} />)],
-  ["Nobody judges a great by their quiet years. So the model looks at each player's best years, and longevity gets its own score.", mo("f2", <Formula lines={["average of every year  ✗", "best years + longevity  ✓"]} />)],
+  ["It was averaging his whole career, rebuilding years and all.", mo("f2", <Formula name="PEAK, NOT AVERAGE" lines={["average of every year  ✗", "best years + longevity  ✓"]} />)],
+  ["Nobody judges a great by their quiet years. So the model looks at each player's best years, and longevity gets its own score.", mo("f2", <Formula name="PEAK, NOT AVERAGE" lines={["average of every year  ✗", "best years + longevity  ✓"]} />)],
   ["Next problem. LPL players looked like monsters.", still("S22Kills", "wipe")],
   ["Since 2016, an LPL game has had about three more kills in it than an LCK game. More fighting, more kills for everyone.", still("S22Kills", "wipe")],
-  ["So every stat is compared only against players in the same role, same league, same year.", mo("f3", <Formula lines={["compare against:", "same role · same league · same year"]} />)],
+  ["So every stat is compared only against players in the same role, same league, same year.", mo("f3", <Formula name="LEAGUE-ADJUSTED Z-SCORE" lines={["z = (stat − average) ÷ spread", "average and spread: same role · same league · same year"]} />)],
   ["Then there's who you're playing against. Stomping a bottom team is not the same as beating Gen.G.", ft("a stomp vs a close win over Gen.G")],
-  ["So I rated every team after every game since 2011, like chess ratings. Almost twenty six thousand games.", mo("elo", <Words text="25,987 GAMES" sub="every team rated after every game (Elo)" />)],
-  ["Against stronger teams, the same stat line counts for more.", mo("f4", <Formula lines={["same stat line", "× strength of the opponent"]} />)],
+  ["So I rated every team after every game since 2011, like chess ratings. Almost twenty six thousand games.", mo("elo", <Formula name="ELO RATING" lines={["rating gap → expected win chance", "win more than expected → rating goes up", "25,987 games, every team rated after every one", "used in: strength of schedule · title difficulty · clutch"]} />)],
+  ["Against stronger teams, the same stat line counts for more.", mo("f4", <Formula name="STRENGTH OF SCHEDULE" lines={["same stat line", "stronger opponent (higher Elo) → more credit"]} />)],
   ["Trophies are the biggest part of any GOAT case. But how much is an MSI worth next to a Worlds?", ft("a trophy lift")],
-  ["I worked it out from the brackets. For every title, how many coin flips in a row would a top team need to win it, against those exact opponents?", mo("f5", <Formula lines={["each series = a weighted coin flip", "title = coin flips in a row"]} />)],
+  ["I worked it out from the brackets. For every title, how many coin flips in a row would a top team need to win it, against those exact opponents?", mo("f5", <Formula name="TITLE DIFFICULTY" lines={["P(title) = p₁ × p₂ × … × pₙ   (each series from Elo)", "difficulty = coin flips in a row with the same odds"]} />)],
   ["T1's 2024 Worlds run was the hardest since 2016: almost nine coin flips in a row. BLG this year, second.", still("S14Hardest", "wipe")],
   ["So the price list is half tradition, half maths. Worlds 100. MSI 56. An LCK title 44, an LPL title 35.", still("S13PriceList", "rise")],
-  ["And five players lift a trophy. A support doesn't win less of a Worlds, so everyone on the team gets close to equal credit.", still("S24Credit", "rise")],
+  ["And five players lift a trophy. Basketball has Win Shares, which splits a team's wins between its players.", mo("ws", <Formula name="TITLE SHARES" lines={["like Win Shares: split each trophy between the five", "share = how far above his role he played, held to 0.85x–1.15x", "BLG, Worlds 2026: Knight 1.06 · Xun 1.03 · Bin 0.99 · Viper 0.98 · On 0.94", "Knight: 695 trophy points (672 if split equally) · still #2 either way"]} />)],
+  ["I do the same with titles. A support doesn't win less of a Worlds, so everyone on the team gets close to equal credit.", still("S24Credit", "rise")],
   ["Here's the part I find most interesting. Some players look clutch. They win every game five.", still("R6ClutchHist", "rise")],
   ["But flip a coin ten times and sometimes you get eight heads. That doesn't make the coin clutch.", mo("coin", <FairCoin />)],
   ["So the model asks how many more best of fives you won than the team ratings expected, across a whole career.", mo("coin", <FairCoin />)],
   ["The most clutch player in the data? Faker, about 25 more series won than expected. Just ahead of Bin.", still("S16Clutch", "wipe"), 1.5],
   ["Last piece. The simple version first: how does a team do with him, and without him?", still("SampleWithWithout", "rise")],
   ["Gen G won seventy seven percent of their games with Chovy. Sixty four without him. Ruler and Knight, about the same jump.", still("SampleWithWithout", "rise")],
-  ["But teams change more than one player at a time. So the model uses the grown up version, borrowed from basketball. Plus minus.", mo("pm", <Words text="PLUS MINUS" sub="borrowed from basketball" />)],
-  ["Every game, five players against five. Over twenty six thousand games, you can work out who makes their team win more than the lineup says it should.", mo("pm", <Words text="PLUS MINUS" sub="borrowed from basketball" />)],
-  ["It knows nothing about kills or trophies. Only who won.", mo("pm", <Words text="PLUS MINUS" sub="borrowed from basketball" />)],
+  ["But teams change more than one player at a time. So the model uses the grown up version, borrowed from basketball. Plus minus.", mo("pm", <Formula name="ADJUSTED PLUS-MINUS (RAPM)" lines={["each game: win or loss = 5 ratings − 5 ratings", "solve for all players at once, 25,987 games", "small samples are pulled toward zero (ridge)", "→ the Team impact part, 12% of the score"]} />)],
+  ["Every game, five players against five. Over twenty six thousand games, you can work out who makes their team win more than the lineup says it should.", mo("pm", <Formula name="ADJUSTED PLUS-MINUS (RAPM)" lines={["each game: win or loss = 5 ratings − 5 ratings", "solve for all players at once, 25,987 games", "small samples are pulled toward zero (ridge)", "→ the Team impact part, 12% of the score"]} />)],
+  ["It knows nothing about kills or trophies. Only who won.", mo("pm", <Formula name="ADJUSTED PLUS-MINUS (RAPM)" lines={["each game: win or loss = 5 ratings − 5 ratings", "solve for all players at once, 25,987 games", "small samples are pulled toward zero (ridge)", "→ the Team impact part, 12% of the score"]} />)],
   ["And it still puts Faker first, by a mile. Then Ruler.", still("S15Impact", "rise")],
   ["So how do you know a model like this is right?", still("S23AllPro", "cut")],
   ["I hid the All-Pro votes from it. Every year, the people who watch every game pick the best players at each position.", still("S23AllPro", "cut")],
   ["Then I asked the model to pick them. Picking at random gets it right 12% of the time. Just picking players from winning teams, 58%.", still("S23AllPro", "cut")],
   ["My model: 63%.", still("S23AllPro", "cut"), 1.5],
   ["The final score is out of 100, from six parts. Trophies are the biggest at 40%. Then skill, big games and clutch, team impact, longevity, and recognition: the All-Pro votes.", still("S17ScoreCard", "wipe")],
+  ["Every part is scored the same way. The middle player in the pool gets fifty, the best gets a hundred. For trophies, Faker is the hundred and everyone else is a share of him.", mo("parts", <Formula name="EACH PART, 0 TO 100" lines={["pool median = 50 · best player = 100", "trophies: Faker = 100, everyone else in proportion", "score = 40% trophies + 18% skill + 14% big games + 12% impact + 9% longevity + 7% recognition"]} />)],
   ["Before the final ranking, here's who wins each part.", mo("cats", <Words text="THE CATEGORIES" />)],
-  ["Best on the big stage, Worlds and MSI form: Keria.", still("R4BigStage", "rise")],
+  ["Big games is sixty percent Worlds and MSI form, forty percent clutch.", mo("big", <Formula name="BIG GAMES + CLUTCH (14%)" lines={["60% Worlds and MSI form", "40% best-of-five wins above Elo expectation"]} />)],
+  ["On the form half alone, best on the big stage: Keria.", still("R4BigStage", "rise")],
+  ["Skill uses a season rating, adjusted for the opponent and the region. Your best five years count for seventy percent, your single best year for thirty.", mo("skill", <Formula name="SKILL (18%)" lines={["season rating: opponent and region adjusted", "70% best 5 years + 30% best single year"]} />)],
   ["Best single season: Knight, this year.", mo("t1rise", <Mo.T1Rise />), 6.5],
   ["Most skilled: Chovy, by a hair over Knight.", still("SampleSkillSwarm", "rise")],
   ["Most titles with different teams: Peanut, with five.", still("R4TeamsTimeline", "wipe")],
+  ["Trophy points stack everything from before: the price list, how hard the title was, and his title share.", mo("tp", <Formula name="TROPHY POINTS (40%)" lines={["each title: price × difficulty (0.85x–1.15x) × title share", "summed over a whole career, placings included"]} />)],
   ["And the trophy cabinet. Canyon wins it, just ahead of Ruler and Knight.", still("R4CabinetStack", "wipe")],
   ["Oh, and here's Faker, by the way.", mo("climb", <Mo.T2Climb />), 3.5],
   ["1,509.", mo("climb", <Mo.T2Climb />), 8],
   ["More than double anyone else. So the real fight is for second.", mo("climb", <Mo.T2Climb />)],
+  ["Data people call this a Monte Carlo test.", mo("mc", <Formula name="MONTE CARLO RERUNS" lines={["1,000 runs", "every weight moved at random, up to 30% up or down", "count where each player finishes"]} />)],
   ["To test how solid this is, I ran the ranking a thousand times, each time shaking every weight up or down.", still("S7Reruns", "wipe")],
   ["Faker came first in all one thousand.", still("S7Reruns", "wipe")],
   ["And one name came second in every single one.", still("S7Reruns", "wipe"), 1.5],
   ["We'll get to who. First, a couple of things that could change the answer.", still("S7Reruns", "wipe")],
   ["One more, because I had to. Split Faker's career down the middle. 2013 to 2019, and 2020 to now. Three world titles in each half.", ft("Faker 2013 and Faker 2026, side by side")],
+  ["Same model, same weights. Only his games are split by year.", mo("split", <Formula name="TWO FAKERS" lines={["Faker 2013–19: 3 Worlds", "Faker 2020–26: 3 Worlds", "scored as two separate players against everyone else"]} />)],
   ["So I split him into two players.", still("S9TwoFakers", "cut")],
   ["The young Faker alone would be the greatest of all time. Ahead of Knight, ahead of everyone. In three out of four reruns, he's number one. And the second half is still top fifteen. He did both.", still("S9TwoFakers", "cut"), 1.5],
   ["Now run the model at the end of every year. Faker is number one in every single one since 2015.", still("SampleRaceBump", "wipe")],
@@ -259,10 +268,12 @@ const ROWS: [string, V, number?][] = [
   ["And none of those lists even have him. They were written before he won Worlds.", ft("Knight's face, the two list cards with no Knight")],
   ["And at the top, alone, Faker. Number two.", still("S10bPyramidArrow", "cut")],
   ["But what would it take to get from here... to here?", still("S10bPyramidArrow", "cut")],
+  ["Here is the whole score, part by part. The gap between them is 19.7 points. Trophies alone are 21.6. Everywhere else, Knight is slightly ahead.", mo("kvf", <Formula name="KNIGHT VS FAKER" lines={["Faker 92.6 = 40.0 + 13.2 + 14.1 + 12.0 + 9.0 + 4.3", "Knight 72.9 = 18.4 + 13.8 + 18.0 + 9.1 + 8.1 + 5.4", "trophies · big games · skill · impact · longevity · recognition", "gap 19.7 · trophies alone 21.6"]} />), 1.5],
   ["What would it take for Knight to reach Faker's legacy?", still("SampleKnightRadar", "cut")],
   ["Knight already beats Faker at skill, at big games, and at recognition.", still("SampleKnightRadar", "cut")],
   ["Faker wins team impact and longevity. And winning.", still("SampleKnightRadar", "cut"), 1.5],
-  ["To pass Faker on trophies alone, Knight would need seven more world titles.", mo("need", <TitlesNeeded />), 1],
+  ["So I gave him extra Worlds, one at a time, and rescored everyone after each one, Faker included, because trophies are a share of Faker's.", mo("needf", <Formula name="WORLDS NEEDED" lines={["add one Worlds title, rescore everyone", "repeat until his score passes Faker's", "Knight: +7 Worlds → 93.3 vs Faker 92.6"]} />)],
+  ["Seven more world titles. That's what it would take.", mo("need", <TitlesNeeded />), 3],
   ["Speaking of catching Faker. Gumayusi left T1 last year, and said this.", mo("quote", <Quote />), 1],
   ["Who's your number two? Let me know in the comments.", mo("end", <EndCard />), 2],
 ];
