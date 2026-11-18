@@ -550,6 +550,24 @@ def main():
     C["carry_pillar"] = percentile(C.team_carry + C.solo_carry)
     # skill (audit 18 Nov): peak and individual are the same yearly rating (Spearman 0.90), so one part, not two
     C["skill"] = percentile(0.7 * C.individual + 0.3 * C.peak)
+    # team impact (v10, ay 18 Nov): plus-minus over every game from 2016 on (scoring/rapm.py), best 5 seasons;
+    # a career that began before 2016 averages its covered seasons, so missing years don't count as zero
+    rf = os.path.join(CSV, "rapm_seasons.csv")
+    if os.path.exists(rf):
+        ps = pd.read_csv(rf)
+        ps = ps[ps.G >= 10].copy()
+        ps["Link"] = ps.Link.map(redirect)
+        if os.environ.get("VARIANT") == "split_faker":
+            m = ps.Link == "Faker"
+            ps.loc[m, "Link"] = np.where(ps.loc[m, "year"] <= 2016, "Faker 2013-16", "Faker 2017-26")
+        first = s.groupby("Link").year.min()
+        imp = {}
+        for l, dd in ps.groupby("Link"):
+            r = dd.r.sort_values(ascending=False)
+            n = min(5, len(r)) if first.get(l, 2016) < 2016 else 5
+            imp[l] = r.head(n).sum() / n
+        P["impact_raw"] = pd.Series(imp).reindex(P.index).fillna(0)
+        C["impact"] = percentile(P.impact_raw)
     C["intangibles"] = percentile(C.recognition + C.team_lift)
     W = pd.Series(CFG["pillars"] if "pillars" in CFG else CFG["categories"], dtype=float)
     P["score"] = (C[W.index] * W).sum(axis=1) / W.sum()

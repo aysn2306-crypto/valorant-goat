@@ -48,13 +48,14 @@ categories:               # sums to 100 (v4, 18 Nov). Trophies kept at 28; the s
   recognition: 4          # PROXY for intangibles: All-Pro / MVP votes per covered split
   team_lift: 2            # PROXY for intangibles: team win rate with vs without him
 
-pillars:                  # v9 (18 Nov, full audit): peak + individual merged into skill; sums to 100
+pillars:                  # v10 (18 Nov, ay chose): team impact replaces carry; sums to 100
   trophies: 40            # results, tiered, full value, x title difficulty, x role-fair credit
   big_stage_clutch: 14    # Worlds/MSI form (60%) + career best-of-five and game-5 wins above Elo expectation (40%)
-  skill: 22               # 70% best 5 years + 30% best single year of the season rating (opponent and region adjusted)
+  skill: 18               # 70% best 5 years + 30% best single year of the season rating (opponent and region adjusted)
+  impact: 12              # plus-minus (RAPM): does his team win more than its lineup predicts, best 5 seasons, 2016 on
   longevity: 9            # elite years, each capped at 0.4 above the line
-  carry_pillar: 8         # team carry + solo carry (ay: carrying a weak team counts)
   intangibles: 7          # PROXIES: All-Pro/MVP votes + team win rate with vs without him (median if never apart)
+  # carry_pillar is still computed and shown as a board in the video, unweighted
 
 pad_short_careers: true   # individual: a career under 5 years counts the missing years as average
 
