@@ -80,7 +80,7 @@ Timing:
 | Here's the part I find most interesting. Some players look clutch. They win every game five. | GRAPHIC: game fives won, a few players far ahead. |
 | But flip a coin ten times and sometimes you get eight heads. That doesn't make the coin clutch. | GRAPHIC: coin flips, then fifty lines, the band of luck. |
 | So the model asks how many more best of fives you won than the team ratings expected, across a whole career. | GRAPHIC: the band narrows as series count grows. |
-| The most clutch player in the data? Faker. | Faker's dot alone above the band. **[SILENCE]** |
+| The most clutch player in the data? Faker, about 25 more series won than expected. Just ahead of Bin. | Faker and Bin ringed above the band. **[SILENCE]** |
 
 ### 3.6 Who actually makes the team win?
 
@@ -108,7 +108,7 @@ Timing:
 | VO | SCREEN |
 |---|---|
 | Before the final ranking, here's who wins each part. | |
-| Biggest stage: Keria. | GRAPHIC: Keria lit in the field. |
+| Best on the big stage, Worlds and MSI form: Keria. | GRAPHIC: Keria lit in the field. |
 | Best single season: Knight, this year. | GRAPHIC: peak chart, Knight 2026 at the top. |
 | Most skilled: Chovy, by a hair over Knight. | GRAPHIC: skill board. |
 | Most titles with different teams: Peanut, with five. | GRAPHIC. |
