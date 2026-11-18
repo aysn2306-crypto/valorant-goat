@@ -3,19 +3,21 @@
 **Version 11 (FINAL unless ay reopens), 18 Nov 2026, 17:20 London.** ay approved each change on cards: halfway trophy blend (16:58), LCK/LPL fix (17:09), keep trophies as share of Faker (17:09), count 2013-15 games (17:10). Owner: the model thread. If a number here differs from anything older (script, stills, notes), this file wins.
 Scores file: `projects/lol-second-goat/data/csv/draft_scores.csv` (branch claude/project-thread-a343zy). Video data: `video/src/data/league.json`. Regenerate this file with `python3 scoring/model_current.py`.
 
-## GOAT pyramid (final, ay chose 18 Nov 17:30)
+## GOAT pyramid (tiers of greatness, ay 18 Nov 17:33)
 
-Tiers come from the biggest gaps in the v11 scores. Built from the bottom up, with rank numbers on the faces.
+The pyramid is tiers of greatness, not the top 10. It shows example players: the photo, a small rank badge, and just the name underneath (no percentages, ay 17:33). Each tier follows a rule taken from the model:
 
-| Tier | Players (rank) | Gap above |
-|---|---|---|
-| 1 | Faker (#1) | 18.7 down to Knight |
-| 2 | Knight (#2), Chovy (#3) | 3.4 down to Keria |
-| 3 | Keria (#4), Ruler (#5) | 2.5 down to Zeus |
-| 4 | Zeus (#6), Canyon (#7), Bin (#8), Peanut (#9), Viper (#10) | 1.7 down to #11 |
-| 5 (base) | Gumayusi (#11), Oner (#12), Kiin (#13), Caps (#14), Kanavi (#15), Xiaohu (#16) | 1.6 down to Meiko (#17) |
+| Tier | Meaning (ay) | Rule from the model | Faces |
+|---|---|---|---|
+| 1 | Faker | #1 | Faker (#1) |
+| 2 | Greatest who aren't Faker | #2 and #3, 3.4 gap below | Knight (#2), Chovy (#3) |
+| 3 | Absolute top of League | rest of the top 10 | Keria (#4), Ruler (#5), Zeus (#6), Canyon (#7), Bin (#8), Peanut (#9), Viper (#10) |
+| 4 | The star of a great team | #11 to #50 and individual skill in the top 60 | examples: Gumayusi (#11), Oner (#12), Kiin (#13), Caps (#14), Kanavi (#15), Deft (#18), TheShy (#25), Rookie (#29), Uzi (#31) |
+| 5 | Great role player on a great team | won Worlds, but individual skill outside the top 80 | examples: Wolf (#33), Impact (#40), Mata (#41), Bengi (#44), CoreJJ (#47), Imp (#74), Ambition (#76), MaRin (#85) |
 
-Tiers 1 to 4 are exactly the top 10. Reveal: fill the base (#16 up to #11), then tier 4 (#10 up to #6), then tier 3, then tier 2 with two empty slots. Chovy fills first, a beat of silence, then Knight, then Faker alone on top. Zoom in on Knight at #2, then an arrow draws from tier 2 up to tier 1 ("what would it take to get from here to here?") and leads into the outro.
+Bengi: 3 Worlds, individual skill rank 247. Wolf: 2 Worlds, skill rank 220. That is the role player tier in numbers.
+
+Reveal: build from the bottom up. Tier 5, then 4, then 3, then tier 2 with two empty slots: Chovy, a beat of silence, Knight. Faker alone on top. Zoom in on Knight at #2, then an arrow from tier 2 up to tier 1 ("what would it take to get from here to here?") into the outro.
 
 ## What changed
 **v11 (from 10.1):** trophy values = halfway blend of our values and measured title difficulty (region offsets and byes counted): Worlds 100, MSI 56, First Stand 40, LCK title 44, LPL 35, LEC (20 x strength + 13)/2, LCS (20 x strength + 8)/2; placings scaled the same. Every 2011-15 game result added (data/build_games_all.py), so Elo, clutch, team impact and title difficulty cover Faker's 2013-15. Trophies stay a share of Faker's total. On screen, call "intangibles" **Recognition** (All-Pro votes + team record with and without him). Note: LEC 2026 splits count at full value (no Season Finals that year); small.
