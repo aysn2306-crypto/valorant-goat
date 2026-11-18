@@ -47,3 +47,8 @@ _ids = sorted({r["player_id"] for r in _rb if 2016 <= int(r["year"]) <= 2026 and
 out["bump"] = [[i, next(r["name"] for r in _rb if r["player_id"] == i),
   [next((int(r["rank"]) for r in _rb if r["player_id"] == i and int(r["year"]) == y), None) for y in range(2016, 2027)]] for i in _ids]
 json.dump(out, open(root / "video/src/data/stills.json", "w"), indent=1)
+# with/without sample (ay 18:37 Jxmy ref): team record with him vs without, domestic, within 2 years of his stint
+_ww = {(r["player"], r["team"]): r for r in rows("with_without.csv")}
+out["withWithout"] = [[i, t, abbr, int(_ww[(p, t)]["with_W"]), int(_ww[(p, t)]["with_L"]), int(_ww[(p, t)]["without_W"]), int(_ww[(p, t)]["without_L"]), _ww[(p, t)]["without_years"]]
+  for i, p, t, abbr in [("knight", "Knight", "Bilibili Gaming", "BLG"), ("chovy", "Chovy", "Gen.G", "GEN.G"), ("ruler", "Ruler", "JD Gaming", "JDG"), ("faker", "Faker", "T1", "T1")]]
+json.dump(out, open(root / "video/src/data/stills.json", "w"), indent=1)

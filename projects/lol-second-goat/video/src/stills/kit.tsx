@@ -53,8 +53,8 @@ const ArrowU: React.FC<{ s?: number }> = ({ s = 1 }) => (
 /** Real x and y axes: white lines, condensed numbers, axis names with big direction arrows (which way is better). */
 export const Axes: React.FC<{
   b: Box; xr: [number, number]; yr: [number, number]; xt: number[]; yt: number[];
-  xl: string; yl: string; xf?: (v: number) => string; yf?: (v: number) => string; xFont?: number; yFont?: number;
-}> = ({ b, xr, yr, xt, yt, xl, yl, xf = (v) => v.toLocaleString("en-US"), yf = (v) => v.toLocaleString("en-US"), xFont = 40, yFont = 46 }) => {
+  xl: string; yl: string; xf?: (v: number) => string; yf?: (v: number) => string; xFont?: number; yFont?: number; xArrow?: boolean;
+}> = ({ b, xr, yr, xt, yt, xl, yl, xArrow = true, xf = (v) => v.toLocaleString("en-US"), yf = (v) => v.toLocaleString("en-US"), xFont = 40, yFont = 46 }) => {
   const { X, Y } = scale(b, xr, yr);
   return (
     <>
@@ -68,10 +68,10 @@ export const Axes: React.FC<{
         <div key={"x" + v} style={{ position: "absolute", left: X(v) - 80, width: 160, top: b.y1 + 12, textAlign: "center", fontFamily: F.title,
           fontSize: xFont, color: C.text }}>{xf(v)}</div>
       ))}
-      <div style={{ position: "absolute", left: b.x0, right: 1920 - b.x1, top: b.y1 + 22 + xFont * 1.25, display: "flex", justifyContent: "center", alignItems: "center", gap: 18 }}>
+      {xArrow && <div style={{ position: "absolute", left: b.x0, right: 1920 - b.x1, top: b.y1 + 22 + xFont * 1.25, display: "flex", justifyContent: "center", alignItems: "center", gap: 18 }}>
         <div style={{ fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>{xl}</div>
         <ArrowR />
-      </div>
+      </div>}
       <div style={{ position: "absolute", left: b.x0 + 22, top: b.y0 - 22, display: "flex", alignItems: "center", gap: 14 }}>
         <ArrowU />
         <div style={{ fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>{yl}</div>

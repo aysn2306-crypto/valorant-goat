@@ -882,3 +882,56 @@ export const SampleRaceBump: React.FC = () => {
     </Stage>
   );
 };
+
+// SAMPLE (ay 18:37, Jxmy "with and without" ref): team win % with him vs without him. research/with_without.csv
+// (domestic games, team's record within 2 years of his stint, Leaguepedia event totals). Keria left out: his "without"
+// years are the Faker-era T1, so it says nothing about him (League thread, 18:46).
+const yearsShort = (s: string) => {
+  const y = s.split(",").filter(Boolean).map(Number); const out: string[] = [];
+  for (let i = 0; i < y.length; ) { let j = i; while (j + 1 < y.length && y[j + 1] === y[j] + 1) j++;
+    out.push(j > i ? `${y[i]}-${String(y[j]).slice(2)}` : `${y[i]}`); i = j + 1; }
+  return out.join(" + ");
+};
+export const SampleWithWithout: React.FC = () => {
+  const b: Box = { x0: 270, y0: 250, x1: 1720, y1: 780 };
+  const { Y } = scale(b, [0, 1], [0, 100]);
+  const rows = S.withWithout as [string, string, string, number, number, number, number, string][];
+  const gw = (b.x1 - b.x0) / rows.length, bw = 112;
+  return (
+    <Stage title="WITH HIM VS WITHOUT HIM">
+      <div style={{ position: "absolute", left: 0, right: 0, top: 150, textAlign: "center", fontFamily: F.body, fontWeight: 800, fontSize: 22, letterSpacing: 1.5, color: "#8A94A3" }}>
+        DOMESTIC GAMES, TEAM'S RECORD WITHIN 2 YEARS OF HIS STINT</div>
+      <Axes b={b} xr={[0, 1]} yr={[0, 100]} xt={[]} yt={[0, 25, 50, 75, 100]} xl="" yl="TEAM WIN %" xArrow={false} yf={(v) => `${v}%`} />
+      {rows.map(([id, , abbr, wW, wL, oW, oL, yrs], i) => {
+        const cx = b.x0 + gw * (i + 0.5), xa = cx - bw - 10, xb = cx + 10;
+        const pw = (100 * wW) / (wW + wL), po = oW + oL ? (100 * oW) / (oW + oL) : null;
+        const lit = id === "knight", fk = id === "faker";
+        const colW = lit ? C.cyan : fk ? "rgba(245,184,61,0.55)" : "rgba(214,219,226,0.75)";
+        return (
+          <React.Fragment key={id}>
+            <div style={{ position: "absolute", left: xa, top: Y(pw), width: bw, height: b.y1 - Y(pw), background: colW, borderRadius: "14px 14px 0 0",
+              boxShadow: lit ? `0 0 26px rgba(34,211,238,0.45)` : undefined }} />
+            <Big x={xa + bw / 2} y={Y(pw) + 14} size={36} align="center" w={bw} color="#0B0B0F">{pw.toFixed(1)}%</Big>
+            <Face id={id} x={xa + bw / 2} y={Y(pw) - 58} size={96} ring={lit ? C.cyan : fk ? C.gold : "#E9ECF1"} glow={lit ? "rgba(34,211,238,0.6)" : "rgba(0,0,0,0.5)"} />
+            {po !== null ? (
+              <>
+                <div style={{ position: "absolute", left: xb, top: Y(po), width: bw, height: b.y1 - Y(po), background: "rgba(120,128,140,0.45)", borderRadius: "14px 14px 0 0" }} />
+                <Big x={xb + bw / 2} y={Y(po) + 14} size={36} align="center" w={bw} color={C.text}>{po.toFixed(1)}%</Big>
+                <div style={{ position: "absolute", left: xb + bw / 2 - 72, top: Y(po) - 92, width: 144, height: 60, borderRadius: "50%",
+                  border: `3px solid ${lit ? C.cyan : "rgba(237,239,242,0.7)"}`, display: "flex", alignItems: "center", justifyContent: "center",
+                  fontFamily: F.title, fontSize: 36, color: lit ? C.cyan : C.text }}>+{(pw - po).toFixed(1)}</div>
+              </>
+            ) : (
+              <div style={{ position: "absolute", left: xb - 10, width: bw + 20, top: b.y1 - 92, textAlign: "center", fontFamily: F.title, fontSize: 30, lineHeight: 1.05,
+                color: C.gold }}>0 GAMES<br />WITHOUT</div>
+            )}
+            <div style={{ position: "absolute", left: xa - 10, width: bw + 20, top: b.y1 + 10, textAlign: "center", fontFamily: F.body, fontWeight: 800, fontSize: 19, color: "#AEB6C2" }}>WITH</div>
+            <div style={{ position: "absolute", left: xb - 50, width: bw + 100, top: b.y1 + 10, textAlign: "center", fontFamily: F.body, fontWeight: 800, fontSize: 19, color: "#AEB6C2", lineHeight: 1.15, whiteSpace: "nowrap" }}>
+              WITHOUT{yrs ? <><br />{yearsShort(yrs)}</> : null}</div>
+            <Big x={cx} y={b.y1 + 66} size={42} align="center" w={gw} color={lit ? C.cyan : fk ? C.gold : C.text}>{P(id).name.toUpperCase()} · {abbr}</Big>
+          </React.Fragment>
+        );
+      })}
+    </Stage>
+  );
+};
