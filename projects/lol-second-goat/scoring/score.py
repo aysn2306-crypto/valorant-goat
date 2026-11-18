@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import features
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CFG = yaml.safe_load(open(os.path.join(ROOT, "config", "weights.yaml")))
+CFG = yaml.safe_load(open(os.environ.get("WEIGHTS") or os.path.join(ROOT, "config", "weights.yaml")))
 CSV = os.path.join(ROOT, "data", "csv")
 OUT = os.path.join(ROOT, "reports")
 
@@ -286,6 +286,10 @@ def titles(t, s, strength):
             reg = REGION[e.League]
             tier = "domestic"
             pts = bucket(tp["domestic"], int(e.PlaceN)) * strength.loc[e.year, reg] * (tp["domestic_cup"] if cup else 1.0)
+            mt = tp.get("measured_title", {})
+            if reg in mt:   # halfway blend (ay 18 Nov): our value and the measured difficulty, title = (20 x strength + measured) / 2
+                b, ours = tp.get("blend", 0.5), tp["domestic"][1] * strength.loc[e.year, reg]
+                pts *= (1 - b) + b * mt[reg] / ours
         else:
             continue
         if pts <= 0:
@@ -589,7 +593,7 @@ def main():
     P["title_teams"] = won.groupby("Link").org.nunique().reindex(pool).fillna(0).astype(int)
 
     C = pd.DataFrame(index=pool)
-    C["trophies"] = P.trophy_pts / P.trophy_pts.max() * 100
+    C["trophies"] = percentile(P.trophy_pts) if CFG.get("trophy_scale") == "linear" else P.trophy_pts / P.trophy_pts.max() * 100
     C["big_stage"] = percentile(P.big_stage_raw)
     C["peak"] = percentile(P.peak_raw)
     C["winning"] = percentile(P.win_raw)

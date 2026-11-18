@@ -1,0 +1,76 @@
+# League "2nd greatest after Faker": algorithm v3 carried over from the Valorant video. DRAFT, not approved by ay.
+approved: false
+version: 3
+
+pool:
+  min_games: 150          # major leagues + Worlds/MSI/First Stand, 2011 to Worlds 2026
+  benchmark: Faker        # ay 17 Nov: Faker is ranked like everyone else (no calibration)
+
+trophy_points:            # full value, no diminishing returns (ay's rule)
+  # key = best place in the bucket (3 = semifinal, 5 = quarterfinal, 9 = last 16)
+  worlds:      {1: 100, 2: 30, 3: 18, 5: 8, 9: 2.5}   # placings halved 18 Nov (weight audit): titles carry GOAT cases
+  msi:         {1: 62, 2: 18.6, 3: 11.2, 5: 5}          # v11 halfway blend: (50 + measured 73) / 2, places scaled the same
+  first_stand: {1: 53, 2: 15.9, 3: 9.5, 5: 4.2}       # v11 halfway blend: (25 + measured 80) / 2
+  msc:         {1: 15, 2: 4.5, 3: 2.5}
+  domestic:    {1: 20, 2: 5, 3: 2.5, 4: 0}      # times region strength that year
+  awards: {worlds_mvp: 15, msi_mvp: 8, first_stand_mvp: 5}   # Finals MVP or event MVP, full value
+  domestic_cup: 0.5
+  measured_title: {LEC: 27, LCS: 23}   # v11: measured title difficulty (Worlds = 100); LCK/LPL wait on ay
+  blend: 0.5                      # LCK Cup and LPL split titles from 2025 (several per year) count half
+  min_share_of_games: 0.5
+  early_worlds: {2011: 0.5, 2012: 0.75}  # 8 and 12 team events with thin fields
+
+# title credit: every starter on a title team gets close to the same share (every role matters; box scores
+# undervalue supports and junglers), nudged at most 15% by how far he played above his ROLE's level at that event.
+credit: {alpha: 0.15, min: 0.85, max: 1.15, shrink_games: 30}
+# lead: the wide, uncapped-style signal used only for solo carry (how far above his own teammates he played)
+lead: {alpha: 0.5, min: 0.5, max: 1.5, shrink_games: 10}
+
+impact:                   # per game, z-scored inside role + year
+  impact: [kda, kp, dpm, gold_share, low_deaths]
+  carry: [dpm, gold_share]
+  clean: [kda, low_deaths]
+  region_penalty_sd: 1.0  # domestic numbers lose (1 - region strength) standard deviations
+  shrink_games: 40
+
+categories:               # sums to 100 (v4, 18 Nov). Trophies kept at 28; the stat block split by the All-Pro fit
+  trophies: 35            # results, tiered, full value (ay's rule)
+  big_stage: 10           # Worlds/MSI form
+  peak: 10
+  longevity: 8
+  winning: 6
+  consistency: 4
+  laning: 7               # gold/CS/XP diff at 15: the strongest individual signal in the All-Pro fit
+  killing: 4
+  teamfight: 4
+  clean_play: 4
+  team_carry: 4           # gap to own teammates ("MVP of the team")
+  solo_carry: 4           # placement points earned above teammates ("carried them there")
+  vision: 1               # voters gave vision ~0 weight; kept small so supports get a board
+  recognition: 4          # PROXY for intangibles: All-Pro / MVP votes per covered split
+  team_lift: 2            # PROXY for intangibles: team win rate with vs without him
+
+pillars:                  # v10 (18 Nov, ay chose): team impact replaces carry; sums to 100
+  trophies: 40            # results, tiered, full value, x title difficulty, x role-fair credit
+  big_stage_clutch: 14    # Worlds/MSI form (60%) + career best-of-five and game-5 wins above Elo expectation (40%)
+  skill: 18               # 70% best 5 years + 30% best single year of the season rating (opponent and region adjusted)
+  impact: 12              # plus-minus (RAPM): does his team win more than its lineup predicts, best 5 seasons, 2016 on
+  longevity: 9            # elite years, each capped at 0.4 above the line
+  intangibles: 7          # PROXIES: All-Pro/MVP votes + team win rate with vs without him (median if never apart)
+  # carry_pillar is still computed and shown as a board in the video, unweighted
+
+pad_short_careers: true   # individual: a career under 5 years counts the missing years as average
+
+title_difficulty: [0.85, 1.15]   # ay's pick 18 Nov: each title x how strong the teams met were (ranked within tier)
+clutch_shrink: 25
+clutch_mode: total       # ay 18 Nov: career wins above expectation, not a per series rate (volume counts)
+
+robustness: {runs: 1000, max_weight_change: 0.30}
+longevity: {min_games: 20, min_impact: 0.2, result_year: 0.3, year_cap: 0.4}   # year_cap (ay 18 Nov): a monster year counts as one great year   # result_year: a year as a starter on a Worlds top-4 or domestic-final team counts at least this much   # an elite year: 20+ games at 0.2 SD above the role average, after shrinkage
+best_years: 5
+
+league_stats:             # new League sections (18 Nov), per game, z-scored inside role + year
+  laning: [gd15, csd15, xpd15]        # Oracle's Elixir, 2014 on (LPL laning from 2018)
+  killing: [kills_pm, dpm]
+  teamfight: [dshare, kp]
+  vision: [vis_pm, assists_pm]        # vision score from Leaguepedia / Oracle's Elixir where recorded
