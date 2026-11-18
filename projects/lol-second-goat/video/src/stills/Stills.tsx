@@ -282,8 +282,9 @@ export const S9TwoFakers: React.FC = () => {
 
 // 10. Finale: the GOAT pyramid (ay 18 Nov 17:46: back to round photos). Tiers follow our ranking only, sorted by rank
 // (MODEL-CURRENT commit 67d8ad3): round photo, small rank badge, name under it, a small "TIER n" per row, no percentages, no title.
-const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler", "zeus", "canyon"], ["gumayusi", "oner", "caps", "deft", "uzi"],
-  ["wolf", "impact", "mata", "bengi", "corejj"]];
+// ay 18:09: wider spread of regions (MODEL-CURRENT commit 789f9d7)
+const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler", "bin", "viper"], ["gumayusi", "caps", "deft", "theshy", "uzi"],
+  ["scout", "perkz", "doinb", "bengi", "jankos"]];
 const Pyramid: React.FC<{ focus?: boolean }> = ({ focus }) => {
   const top = 110, base = 948, half = 800, cx = 960;
   const cuts = [top, 330, 490, 640, 795, base];
