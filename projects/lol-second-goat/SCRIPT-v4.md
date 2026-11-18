@@ -144,7 +144,7 @@ Timing:
 | VO | SCREEN |
 |---|---|
 | So here's the pyramid. Not a top ten. Tiers of greatness. | GRAPHIC: empty pyramid, five tiers. |
-| At the bottom, numbers thirty two to sixty. Great players on great teams. Some won Worlds more than once. Bengi has three world titles. But his own numbers rank two hundred and forty seventh. | Tier 5 fills: Scout, Perkz, Doinb, Bengi, Jankos. |
+| At the bottom, numbers thirty two to sixty. Legends of their own regions. Bengi has three world titles. But his own numbers rank two hundred and forty seventh. | Tier 5 fills: Scout, Perkz, Doinb, Bengi, Jankos. |
 | Then the stars. The best player on a great team. | Tier 4 fills: Gumayusi, Caps, Deft, TheShy, Uzi. |
 | Then the absolute top of League. | Tier 3 fills: Keria, Ruler, Bin, Viper. |
 | Then a tier of two, a point and a half apart. | Two empty slots. **[SILENCE]** |
