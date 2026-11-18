@@ -228,7 +228,7 @@ const ROWS: [string, V, number?][] = [
   ["The All-Pro votes were hidden from it. Every year, the people who watch every game pick the best players at each position.", still("S23AllPro", "cut")],
   ["Then I asked the model to pick them. Picking at random gets it right 12% of the time. Just picking players from winning teams, 58%.", still("S23AllPro", "cut")],
   ["The model: 63%. Not bad for a spreadsheet.", still("S23AllPro", "cut"), 1.5],
-  ["The final score comes from six parts. Trophies. Skill. Big games and clutch. Team impact. Longevity. And recognition.", still("S17ScoreCard", "wipe")],
+  ["The final score comes from six parts. Trophies. Skill. Big games and clutch. Team impact. Longevity. And recognition.", mo("cards6", <Footage text="PENDING: six part cards, one flips in on each word" />)],
   ["Every part is scored the same way. Fifty is the middle of the pack. A hundred is the best there's ever been. For trophies, Faker is the hundred, and everyone else is a share of him.", mo("parts", <Formula name="EACH PART, 0 TO 100" lines={["pool median = 50 · best player = 100", "trophies: Faker = 100, everyone else in proportion"]} />)],
   ["Before the final ranking, here's who wins each part.", mo("cats", <Words text="THE CATEGORIES" />)],
   ["Big games mixes two things: form at Worlds and MSI, and clutch.", mo("big", <Formula name="BIG GAMES + CLUTCH" lines={["form at Worlds and MSI", "+ best-of-five wins above Elo expectation"]} />)],
