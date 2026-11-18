@@ -2,7 +2,7 @@
 - opponent strength per team at each event (opponent-adjusted stats, title difficulty)
 - clutch: best-of-five results and deciding games against what Elo expected
 
-Input: data/csv/games_2016on.csv (one row per player per game; GameId = <match>_<game number>).
+Input: data/csv/games_all.csv (2011 on, built by data/build_games_all.py) (one row per player per game; GameId = <match>_<game number>).
 Output: data/csv/event_opp.csv, data/csv/clutch.csv. Games before 2016 have no win flag, so they are not covered."""
 import os
 import numpy as np
@@ -14,7 +14,7 @@ K, CARRY, BASE = 24, 0.75, 1500     # Elo step per game; 25% pulled back to the 
 
 
 def team_games():
-    g = pd.read_csv(os.path.join(CSV, "games_2016on.csv"), usecols=["Page", "Team", "GameId", "Win", "Date"])
+    g = pd.read_csv(os.path.join(CSV, "games_all.csv"), usecols=["Page", "Team", "GameId", "Win", "Date"])
     g = g.dropna(subset=["Team", "GameId", "Date"]).drop_duplicates(["GameId", "Team"])
     g["win"] = (g.Win == "Yes").astype(int)
     two = g.groupby("GameId").Team.transform("size") == 2
@@ -67,7 +67,7 @@ def main():
     # deciding game 5: the last game of a 3-2 series
     last = m[m.match.isin(s[s.n == 5].match)].sort_values("game_no").groupby("match").last().reset_index()
     rows = []
-    pg = pd.read_csv(os.path.join(CSV, "games_2016on.csv"), usecols=["Link", "Team", "GameId"]).dropna()
+    pg = pd.read_csv(os.path.join(CSV, "games_all.csv"), usecols=["Link", "Team", "GameId"]).dropna()
     pg["match"] = pg.GameId.str.rsplit("_", n=1).str[0]
     roster = pg[pg.match.isin(s.match)].drop_duplicates(["match", "Team", "Link"])
     for r in s.itertuples():

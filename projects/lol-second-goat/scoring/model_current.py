@@ -18,6 +18,8 @@ sf = pd.read_csv(os.path.join(CSV, "draft_scores_split_faker.csv")).sort_values(
 sfm = sf.head(12)[["name", "score"]].round(1); sfm.insert(0, "Rank", range(1, 13))
 io = pd.read_csv(os.path.join(CSV, "whatif_intl_only.csv"))[["name", "score"]]
 kn = pd.read_csv(os.path.join(CSV, "whatif_knight_needs.csv")); fw = pd.read_csv(os.path.join(CSV, "whatif_four_worlds.csv"))
+import re as _re
+kn2 = (_re.search(r"Knight's finish across reruns: \{2: (\d+)", open("/tmp/claude-0/whatif.log").read()) or [0, "?"])[1] if os.path.exists("/tmp/claude-0/whatif.log") else "?"
 rk = P.score.rank(ascending=False).astype(int)
 notes = open(os.path.join(ROOT, "config", "model_notes.md")).read()
 doc = f"""{notes}
@@ -29,7 +31,7 @@ so **on screen show rank and % of Faker, not the raw score.**
 ## Top 16 with part scores
 {t.round(1).to_markdown(index=False)}
 
-Weight reruns (each weight moved up to 30%, 1,000 times): Faker #1 in 1,000, Knight #2 in 1,000.
+Weight reruns (each weight moved up to 30%, 1,000 times): Faker #1 in 1,000; Knight #2 in {kn2} (see whatif.py output).
 Players above 70: {(P.score > 70).sum()}. Caps #{rk[L('Caps')]} ({round(P.score[L('Caps')] / P.score.max() * 100)}% of Faker). Uzi #{rk[L('Uzi')]}. Bengi #{rk[L('Bengi')]}.
 
 ## Twists and what-ifs
@@ -39,11 +41,7 @@ Players above 70: {(P.score > 70).sum()}. Caps #{rk[L('Caps')]} ({round(P.score[
 {sfm.to_markdown(index=False)}
 Faker 2013-16 is #{int(sf.index[sf.name == 'Faker 2013-16'][0]) + 1} at {sf.score[sf.name == 'Faker 2013-16'].iloc[0]:.1f}.
 
-**What Knight needs** (only his trophies change, Faker wins nothing more; a lower bound, since titles would also lift his big stage):
-{kn.to_markdown(index=False)}
-
-**Four Worlds each** (one player at a time):
-{fw.to_markdown(index=False)}
+**What Knight or Gumayusi need to pass Faker:** on hold (ay 16:57). The old frozen-stats tables were wrong (they only added trophies) and are removed.
 
 **Ruler vs Chovy:** gap {gap('Ruler', 'Chovy', W['trophies']) / 100:+.1f} for Ruler at the current weights. Ruler passes Chovy once trophies are {cross}% or more of the score.
 

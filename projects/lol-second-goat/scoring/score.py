@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import features
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CFG = yaml.safe_load(open(os.path.join(ROOT, "config", "weights.yaml")))
+CFG = yaml.safe_load(open(os.environ.get("WEIGHTS") or os.path.join(ROOT, "config", "weights.yaml")))
 CSV = os.path.join(ROOT, "data", "csv")
 OUT = os.path.join(ROOT, "reports")
 
@@ -254,7 +254,13 @@ def titles(t, s, strength):
     path_mult = {}
     f = os.path.join(CSV, "event_opp.csv")
     if os.path.exists(f):
-        ev = pd.read_csv(f).set_index(["Page", "Team"]).opp_elo
+        eo = pd.read_csv(f)
+        # Worlds and MSI games sit on a "/Main Event" sub-page while results sit on the parent page:
+        # roll every sub-page up to its parent, games-weighted (bug fixed 18 Nov: Worlds titles were all left at 1.0)
+        eo["Page"] = eo.Page.str.replace(r"/Main Event$", "", regex=True)
+        eo["w"] = eo.opp_elo * eo.games
+        eo = eo.groupby(["Page", "Team"]).agg(w=("w", "sum"), games=("games", "sum"))
+        ev = eo.w / eo.games
         champs = r[pd.to_numeric(r.PlaceN, errors="coerce") == 1].copy()
         champs["opp"] = [ev.get((pg, tm), np.nan) for pg, tm in zip(champs.Page, champs.Team)]
         champs["grp"] = [INTL.get(l, "dom_" + REGION.get(l, "x")) for l in champs.League]
@@ -280,6 +286,10 @@ def titles(t, s, strength):
             reg = REGION[e.League]
             tier = "domestic"
             pts = bucket(tp["domestic"], int(e.PlaceN)) * strength.loc[e.year, reg] * (tp["domestic_cup"] if cup else 1.0)
+            mt = tp.get("measured_title", {})
+            if reg in mt:   # halfway blend (ay 18 Nov): our value and the measured difficulty, title = (20 x strength + measured) / 2
+                b, ours = tp.get("blend", 0.5), tp["domestic"][1] * strength.loc[e.year, reg]
+                pts *= (1 - b) + b * mt[reg] / ours
         else:
             continue
         if pts <= 0:
@@ -393,6 +403,44 @@ def percentile(x):
     return (50 + 50 * (x - med) / (top - med)).clip(lower=0)
 
 
+
+def add_future(s, T, fut):
+    """What-if (ay 18 Nov): play a player's next seasons at his current level, so every part moves with the titles.
+    fut = {"link": ..., "worlds": [1, 0, ...] one flag per future season, "msi": [...] optional}.
+    Each future season copies his 2025 and 2026 seasons in turn (stats, international games, opponents already
+    adjusted); trophies per season = his 2024-26 average from domestic play, plus the Worlds/MSI titles asked for,
+    at his own average title credit."""
+    l, base = fut["link"], int(fut.get("from_year", 2026))
+    src = {y: s[(s.Link == l) & (s.year == y)] for y in (base - 1, base)}
+    mine = T[T.Link == l]
+    credit = mine[mine.place == 1].credit.mean() if (mine.place == 1).any() else 1.0
+    dom = mine[(mine.tier == "domestic") & mine.year.between(base - 2, base)].pts.sum() / 3
+    tp = CFG["trophy_points"]
+    add_s, add_t = [], []
+    for i, w in enumerate(fut["worlds"]):
+        y = base + 1 + i
+        r = src[base - 1 if i % 2 else base].copy()
+        r["year"] = y
+        r["Page"] = r.Page + f" (future {y})"
+        add_s.append(r)
+        rows = [("domestic", dom, 1)]
+        if w:
+            rows.append(("worlds", tp["worlds"][1], 1))
+        if fut.get("msi") and fut["msi"][i]:
+            rows.append(("msi", tp["msi"][1], 1))
+        for tier, b, place in rows:
+            add_t.append(dict(Link=l, event=f"future {tier} {y}", page=f"future {tier} {y}", team="future", year=y, tier=tier,
+                              place=place, base=b, path=1.0, credit=credit, lead=credit, pts=b * (1 if tier == "domestic" else credit),
+                              G=0, mates=0.0, cast=0.0, carry_pts=0.0))
+    s = pd.concat([s] + add_s, ignore_index=True)
+    T = pd.concat([T, pd.DataFrame(add_t)], ignore_index=True)
+    # clutch and plus-minus: the same seasons copied (a Worlds-winning season copies his latest title season's series)
+    global FUTURE_CFG
+    FUTURE_CFG = dict(fut, credit=credit)
+    return s, T
+
+FUTURE_CFG = None
+
 def main():
     variant = os.environ.get("VARIANT", "")
     if os.environ.get("LONG_CAP"):
@@ -426,6 +474,9 @@ def main():
     for c in CFG.get("league_stats", {}):
         s["a_" + c] = s["z_" + c] - pen * (1 - s.strength)
     T = titles(t, s, strength)
+    FUT = json.load(open(os.environ["FUTURE"])) if os.environ.get("FUTURE") else None
+    if FUT:
+        s, T = add_future(s, T, FUT)
 
     games = s.groupby("Link").G.sum()
     pool = games[games >= CFG["pool"]["min_games"]].index
@@ -480,6 +531,21 @@ def main():
             m = cl.Link == "Faker"
             cl.loc[m, "Link"] = np.where(cl.loc[m, "year"] <= 2016, "Faker 2013-16", "Faker 2017-26")
         # Worlds/MSI/First Stand knockouts count double: the biggest best-of-fives in the game
+        if FUTURE_CFG:
+            l, base = FUTURE_CFG["link"], int(FUTURE_CFG.get("from_year", 2026))
+            mine = cl[cl.Link == l]
+            tyears = sorted(mine[mine.Page.str.contains("World Championship") & (mine.won == 1) & (mine.kind == "bo5")].year.unique())
+            extra = []
+            for i, w in enumerate(FUTURE_CFG["worlds"]):
+                y = base + 1 + i
+                yy = base - 1 if i % 2 else base
+                r = mine[(mine.year == yy) & ~mine.Page.str.contains("World Championship")].copy()
+                if w and tyears:
+                    r = pd.concat([r, mine[(mine.year == tyears[-1]) & mine.Page.str.contains("World Championship")]])
+                r["year"] = y; r["Page"] = r.Page + f" (future {y})"
+                if "match" in r: r["match"] = r["match"].astype(str) + f" f{y}"
+                extra.append(r)
+            cl = pd.concat([cl] + extra, ignore_index=True)
         cl["w"] = np.where(cl.Page.str.contains("World Championship|Mid-Season Invitational|First Stand", regex=True), 2.0, 1.0)
         cl["d"] = (cl.won - cl.exp) * cl.w
         g = cl.groupby("Link").agg(n=("w", "sum"), d=("d", "sum"))
@@ -527,7 +593,7 @@ def main():
     P["title_teams"] = won.groupby("Link").org.nunique().reindex(pool).fillna(0).astype(int)
 
     C = pd.DataFrame(index=pool)
-    C["trophies"] = P.trophy_pts / P.trophy_pts.max() * 100
+    C["trophies"] = percentile(P.trophy_pts) if CFG.get("trophy_scale") == "linear" else P.trophy_pts / P.trophy_pts.max() * 100
     C["big_stage"] = percentile(P.big_stage_raw)
     C["peak"] = percentile(P.peak_raw)
     C["winning"] = percentile(P.win_raw)
@@ -556,6 +622,11 @@ def main():
     if os.path.exists(rf):
         ps = pd.read_csv(rf)
         ps = ps[ps.G >= 10].copy()
+        if FUTURE_CFG:
+            l, base = FUTURE_CFG["link"], int(FUTURE_CFG.get("from_year", 2026))
+            mine = ps[ps.Link == l]
+            ps = pd.concat([ps] + [mine[mine.year == (base - 1 if i % 2 else base)].assign(year=base + 1 + i)
+                                   for i in range(len(FUTURE_CFG["worlds"]))], ignore_index=True)
         ps["Link"] = ps.Link.map(redirect)
         if os.environ.get("VARIANT") == "split_faker":
             m = ps.Link == "Faker"

@@ -2,7 +2,7 @@
 import sys, numpy as np, pandas as pd, scipy.sparse as sp
 from sklearn.linear_model import LogisticRegression
 sys.path.insert(0,'scoring'); import score
-g=pd.read_csv('data/csv/games_2016on.csv',usecols=['Page','Link','Role','Team','GameId','Win','Date'])
+g=pd.read_csv('data/csv/games_all.csv',usecols=['Page','Link','Role','Team','GameId','Win','Date'])
 g['Link']=[score.redirect(l) for l in g.Link]
 g['year']=g.Date.astype(str).str[:4].astype(int)
 g=g[g.Win.isin(['Yes','No'])]
