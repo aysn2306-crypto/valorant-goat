@@ -334,8 +334,18 @@ def percentile(x):
 
 
 def main():
-    t, s = load()
+    variant = os.environ.get("VARIANT", "")
+    if variant == "career_avg":
+        CFG["best_years"] = 0
+    cache = os.path.join(ROOT, "data", "raw", "loaded.pkl")
+    if os.environ.get("REUSE") and os.path.exists(cache):
+        t, s = pd.read_pickle(cache)
+    else:
+        t, s = load()
+        pd.to_pickle((t, s), cache)
     strength = region_strength(s)
+    if variant == "no_region":
+        strength[:] = 1.0
     s = zscores(s)
     pen = CFG["impact"]["region_penalty_sd"]
     st = np.array([strength.loc[y, r] if r in strength.columns else 1.0 for y, r in zip(s.year, s.region)])
@@ -446,7 +456,12 @@ def main():
         sc = (C.loc[R.index, W.index] * w).sum(axis=1)
         sweep.append((tw, R.name[sc.idxmax()], R.name[sc.sort_values().index[-2]]))
 
+    if variant:
+        P.to_csv(os.path.join(CSV, f"draft_scores_{variant}.csv"))
+        return
     P.to_csv(os.path.join(CSV, "draft_scores.csv"))
+    pd.DataFrame({"wins": wins, "seconds": seconds}).to_csv(os.path.join(CSV, "shuffle_counts.csv"))
+    pd.DataFrame(sweep, columns=["trophy_weight", "first", "second"]).to_csv(os.path.join(CSV, "trophy_sweep.csv"), index=False)
     T.to_csv(os.path.join(CSV, "title_credits.csv"), index=False)
     strength.round(2).to_csv(os.path.join(CSV, "region_strength.csv"))
     report(P, R, T, C, wins, seconds, sweep, strength, fk, s)
