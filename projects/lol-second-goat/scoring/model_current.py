@@ -15,7 +15,7 @@ def gap(a, b, tw):
     sc = (C * w).sum(axis=1); return sc[L(a)] - sc[L(b)]
 cross = next((tw for tw in range(30, 91) if gap("Ruler", "Chovy", tw) > 0), None)
 sf = pd.read_csv(os.path.join(CSV, "draft_scores_split_faker.csv")).sort_values("score", ascending=False).reset_index(drop=True)
-sfm = sf.head(12)[["name", "score"]].round(1); sfm.insert(0, "Rank", range(1, 13))
+sfm = sf.head(14)[["name", "score"]].round(1); sfm.insert(0, "Rank", range(1, 15))
 io = pd.read_csv(os.path.join(CSV, "whatif_intl_only.csv"))[["name", "score"]]
 kn = pd.read_csv(os.path.join(CSV, "whatif_knight_needs.csv")); fw = pd.read_csv(os.path.join(CSV, "whatif_four_worlds.csv"))
 import re as _re
@@ -37,9 +37,9 @@ Players above 70: {(P.score > 70).sum()}. Caps #{rk[L('Caps')]} ({round(P.score[
 ## Twists and what-ifs
 **International trophies only:** {', '.join(f"{r.name} {r.score}" for r in io.itertuples())}.
 
-**Two Fakers (2013-16 and 2017-26 as two players):** {(sf.score > 70).sum()} players above 70 in this version.
+**Two Fakers (2013-19 and 2020-26, even halves by years, 3 Worlds each; ay 17:23):** {(sf.score > 70).sum()} players above 70 in this version.
 {sfm.to_markdown(index=False)}
-Faker 2013-16 is #{int(sf.index[sf.name == 'Faker 2013-16'][0]) + 1} at {sf.score[sf.name == 'Faker 2013-16'].iloc[0]:.1f}.
+Faker 2020-26 is #{int(sf.index[sf.name == 'Faker 2020-26'][0]) + 1} at {sf.score[sf.name == 'Faker 2020-26'].iloc[0]:.1f}. Weight reruns in this version: #1 Knight 622, Faker 2013-19 377, Chovy 1.
 
 **What Knight or Gumayusi need to pass Faker:** on hold (ay 16:57). The old frozen-stats tables were wrong (they only added trophies) and are removed.
 

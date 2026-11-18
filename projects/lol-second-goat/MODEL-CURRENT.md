@@ -43,22 +43,24 @@ Players above 70: 3. Caps #14 (63% of Faker). Uzi #31. Bengi #44.
 ## Twists and what-ifs
 **International trophies only:** Faker 92.6, Keria 72.9, Knight 71.4, Zeus 68.8, Ruler 66.4, Gumayusi 66.4, Chovy 65.7, Oner 65.2, Bin 63.7, Canyon 62.5.
 
-**Two Fakers (2013-16 and 2017-26 as two players):** 13 players above 70 in this version.
+**Two Fakers (2013-19 and 2020-26, even halves by years, 3 Worlds each; ay 17:23):** 12 players above 70 in this version.
 |   Rank | name          |   score |
 |-------:|:--------------|--------:|
 |      1 | Knight        |    88   |
-|      2 | Chovy         |    86.3 |
-|      3 | Faker 2017-26 |    85.2 |
-|      4 | Ruler         |    82.7 |
-|      5 | Keria         |    81.2 |
-|      6 | Canyon        |    79.8 |
+|      2 | Faker 2013-19 |    87.3 |
+|      3 | Chovy         |    86.4 |
+|      4 | Ruler         |    82.8 |
+|      5 | Keria         |    81.3 |
+|      6 | Canyon        |    79.9 |
 |      7 | Zeus          |    77.5 |
-|      8 | Peanut        |    76.9 |
+|      8 | Peanut        |    77   |
 |      9 | Bin           |    75.4 |
-|     10 | Viper         |    74.3 |
+|     10 | Viper         |    74.4 |
 |     11 | Gumayusi      |    73.6 |
-|     12 | Faker 2013-16 |    72.7 |
-Faker 2013-16 is #12 at 72.7.
+|     12 | Oner          |    72.7 |
+|     13 | Faker 2020-26 |    69.6 |
+|     14 | Kiin          |    69.3 |
+Faker 2020-26 is #13 at 69.6. Weight reruns in this version: #1 Knight 622, Faker 2013-19 377, Chovy 1.
 
 **What Knight or Gumayusi need to pass Faker:** on hold (ay 16:57). The old frozen-stats tables were wrong (they only added trophies) and are removed.
 
