@@ -21,7 +21,7 @@ Data: Leaguepedia scoreboards, 303 tournaments, 25,987 games (approx.), 1,915 pl
 | 5 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 68.5 | 0.0% | 0.0% |
 | 6 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 66.0 | 0.0% | 0.0% |
 | 7 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 65.7 | 0.0% | 0.0% |
-| 8 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 64.1 | 0.0% | 0.0% |
+| 8 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 64.2 | 0.0% | 0.0% |
 | 9 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 64.1 | 0.0% | 0.0% |
 | 10 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 0 | 63.1 | 0.0% | 0.0% |
 | 11 | Gumayusi | Bot | LCK | 2021-2026 | 3 | 1 | 1 | 1 | 61.4 | 0.0% | 0.0% |
@@ -38,7 +38,7 @@ Benchmark: Faker score 92.6, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 |---|---|---|---|---|---|---|
 | Knight | 2 | 73.9 | 1 | 695 | 95 | 100 (2026) |
 | Viper | 10 | 63.1 | 2 | 554 | 79 | 73 (2026) |
-| Bin | 8 | 64.1 | 1 | 561 | 83 | 82 (2026) |
+| Bin | 8 | 64.2 | 1 | 561 | 83 | 82 (2026) |
 
 ## Tipping point (trophy weight -> #1 overall, then #2)
 
