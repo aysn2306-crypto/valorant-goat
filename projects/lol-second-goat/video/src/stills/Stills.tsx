@@ -308,3 +308,87 @@ export const S11KnightNeeds: React.FC = () => {
     </Stage>
   );
 };
+
+// 11a. Knight vs Faker, part by part (numbers from the ranking thread, 18 Nov 16:03)
+const PARTS: [string, number, number][] = [["TROPHIES", 100, 44], ["BIG GAMES", 81, 95], ["BEST SEASON", 77, 100], ["YEARS AT THE TOP", 79, 100],
+  ["SKILL", 78, 99], ["CARRYING", 73, 63], ["RESPECT", 61, 78]];
+export const S11aKnightVsFaker: React.FC = () => {
+  const b: Box = { x0: 560, y0: 210, x1: 1640, y1: 830 };
+  const X = (v: number) => b.x0 + ((v - 30) / 72) * (b.x1 - b.x0);
+  const Y = (i: number) => b.y0 + 40 + i * ((b.y1 - b.y0 - 70) / 6);
+  return (
+    <Stage title="KNIGHT VS FAKER">
+      <div style={{ position: "absolute", left: b.x0 - 2, top: b.y0 - 20, width: 3, height: b.y1 - b.y0 + 22, background: "rgba(237,239,242,0.85)" }} />
+      <div style={{ position: "absolute", left: b.x0 - 2, top: b.y1, width: b.x1 - b.x0 + 30, height: 3, background: "rgba(237,239,242,0.85)" }} />
+      {[40, 60, 80, 100].map((v) => <Big key={v} x={X(v)} y={b.y1 + 12} size={40} align="center" w={160}>{v}</Big>)}
+      <div style={{ position: "absolute", left: b.x0, right: 1920 - b.x1, top: b.y1 + 70, display: "flex", justifyContent: "center", alignItems: "center", gap: 18,
+        fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>PART SCORE
+        <svg width="70" height="40" viewBox="0 0 70 40"><path d="M70 20 L40 40 L40 28 L0 28 L0 12 L40 12 L40 0 Z" fill={C.text} /></svg></div>
+      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+        {PARTS.map(([, f, k], i) => {
+          const kWin = k > f;
+          return (
+            <g key={i}>
+              <line x1={X(f)} x2={X(k)} y1={Y(i)} y2={Y(i)} stroke={kWin ? "rgba(34,211,238,0.55)" : "rgba(245,184,61,0.55)"} strokeWidth={8} strokeLinecap="round" />
+              <circle cx={X(f)} cy={Y(i)} r={15} fill={C.gold} style={{ filter: `drop-shadow(0 0 8px ${C.gold})` }} />
+              <circle cx={X(k)} cy={Y(i)} r={15} fill={C.cyan} style={{ filter: `drop-shadow(0 0 8px ${C.cyan})` }} />
+            </g>
+          );
+        })}
+      </svg>
+      {PARTS.map(([n, f, k], i) => {
+        const kWin = k > f;
+        return (
+          <React.Fragment key={n}>
+            <div style={{ position: "absolute", left: b.x0 - 440, width: 410, textAlign: "right", top: Y(i) - 24, fontFamily: F.title, fontSize: 40, letterSpacing: 1,
+              color: kWin ? C.text : C.gold }}>{n}</div>
+            <div style={{ position: "absolute", left: X(Math.max(f, k)) + 26, top: Y(i) - 20, fontFamily: F.body, fontWeight: 800, fontSize: 30,
+              color: kWin ? C.cyan : C.gold, whiteSpace: "nowrap" }}>{kWin ? "+" + (k - f) : "-" + (f - k)}</div>
+          </React.Fragment>
+        );
+      })}
+      {/* legend: faces, top right */}
+      <Face id="knight" x={1590} y={150} size={70} ring={C.cyan} glow={C.cyan} />
+      <Big x={1640} y={128} size={36} color={C.cyan}>KNIGHT</Big>
+      <Face id="faker" x={1390} y={150} size={70} />
+      <Big x={1440} y={128} size={36} color={C.gold}>FAKER</Big>
+    </Stage>
+  );
+};
+
+// 11b. Paths to pass Faker: trophy points added vs Knight's score. Points are derived from each path's score
+// using the model's slope (+1 Worlds = about 106 points = +3.2 score), so they are approximate.
+const PATHS: [string, number, "left" | "right" | "above" | "below"][] = [["NOW", 74.9, "below"], ["+8 LPL", 78.3, "below"], ["+1 WORLDS", 78.1, "above"],
+  ["+1 WORLDS +4 LPL", 79.8, "below"], ["+2 WORLDS", 81.3, "above"], ["+2 WORLDS +4 LPL", 83.0, "below"], ["3 WORLDS", 84.5, "above"]];
+export const S11bKnightPaths: React.FC = () => {
+  const slope = (78.1 - 74.9) / 106;
+  const pts = (s: number) => (s - 74.9) / slope;
+  const xr: [number, number] = [-20, 360], yr: [number, number] = [72, 88];
+  const { X, Y } = scale(B, xr, yr);
+  const fk = 84.3;
+  return (
+    <Stage title="WHAT KNIGHT NEEDS">
+      <div style={{ position: "absolute", left: B.x0, top: B.y0 - 10, width: B.x1 - B.x0 + 30, height: Y(fk) - B.y0 + 10,
+        background: "linear-gradient(180deg, rgba(92,190,80,0.2) 0%, rgba(92,190,80,0.04) 100%)" }} />
+      <Axes b={B} xr={xr} yr={yr} xt={[0, 100, 200, 300]} yt={[72, 76, 80, 84, 88]} xl="TROPHY POINTS ADDED" yl="KNIGHT'S SCORE" />
+      <div style={{ position: "absolute", left: B.x0, top: Y(fk), width: B.x1 - B.x0 - 120, borderTop: `4px dashed ${C.gold}`, filter: `drop-shadow(0 0 6px ${C.gold})` }} />
+      <Face id="faker" x={B.x1 - 50} y={Y(fk)} size={92} />
+      <Callout x={B.x1 - 50} y={Y(fk)} name="Faker" value="84" side="below" ring={0} pad={48} color={C.gold} />
+      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+        <line x1={X(0)} y1={Y(74.9)} x2={X(pts(84.5))} y2={Y(84.5)} stroke="rgba(34,211,238,0.35)" strokeWidth={3} strokeDasharray="6 8" />
+      </svg>
+      {PATHS.filter(([n]) => n !== "3 WORLDS").map(([n, s, side]) => (
+        <React.Fragment key={n}>
+          <Dot x={X(pts(s))} y={Y(s)} r={11} color={C.cyan} />
+          <div style={{ position: "absolute", left: X(pts(s)) - 150, width: 300, textAlign: "center", top: side === "above" ? Y(s) - 66 : Y(s) + 18,
+            whiteSpace: "nowrap" }}>
+            <div style={{ fontFamily: F.body, fontWeight: 800, fontSize: 20, color: C.text }}>{n}</div>
+            <div style={{ fontFamily: F.body, fontWeight: 800, fontSize: 26, color: C.cyan, lineHeight: 1 }}>{s.toFixed(0)}</div>
+          </div>
+        </React.Fragment>
+      ))}
+      <Face id="knight" x={X(pts(84.5))} y={Y(84.5)} size={88} ring={C.cyan} glow={C.cyan} />
+      <Callout x={X(pts(84.5))} y={Y(84.5)} name="+3 Worlds" value="85" side="above" ring={0} pad={46} color={C.cyan} size={1.1} />
+    </Stage>
+  );
+};
