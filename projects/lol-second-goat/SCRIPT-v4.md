@@ -86,7 +86,9 @@ Timing:
 
 | VO | SCREEN |
 |---|---|
-| Last piece, borrowed from basketball. Plus minus. | GRAPHIC: a basketball box score, the +/- column lit. |
+| Last piece. The simple version first: how does a team do with him, and without him? | GRAPHIC: with and without bars (S-WithWithout): Knight, Chovy, Ruler. |
+| Gen G won seventy seven percent of their games with Chovy. Sixty four without him. Ruler and Knight, about the same jump. | Gaps circled: +12.6, +13.9, +12.4. |
+| But teams change more than one player at a time. So the model uses the grown up version, borrowed from basketball. Plus minus. | GRAPHIC: a basketball box score, the +/- column lit. |
 | Every game, five players against five. Over twenty six thousand games, you can work out who makes their team win more than the lineup says it should. | GRAPHIC: two teams of five dots, one dot glowing. |
 | It knows nothing about kills or trophies. Only who won. | Hold. |
 | And it still puts Faker first, by a mile. Then Ruler, then Chovy. | GRAPHIC: impact board, Faker far ahead, Ruler and Chovy next. |
