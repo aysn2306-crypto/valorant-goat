@@ -694,7 +694,7 @@ export const S24Credit: React.FC = () => {
           <div style={{ position: "absolute", left: Math.min(X(1), X(v)), top: Y(i) - 4, width: Math.abs(X(v) - X(1)), height: 8, background: "rgba(34,211,238,0.6)", borderRadius: 4 }} />
           <Face id={id} x={X(v)} y={Y(i)} size={70} ring={C.cyan} glow={"rgba(34,211,238,0.5)"} />
           <div style={{ position: "absolute", left: b.x0 - 360, width: 330, textAlign: "right", top: Y(i) - 26, fontFamily: F.title, fontSize: 44, color: C.text }}>{n.toUpperCase()}</div>
-          <div style={{ position: "absolute", left: X(v) + 46, top: Y(i) - 20, fontFamily: F.body, fontWeight: 800, fontSize: 30, color: C.cyan }}>{v.toFixed(2)}x</div>
+          <div style={{ position: "absolute", ...(v < 1 ? { left: X(v) - 166, width: 120, textAlign: "right" as const } : { left: X(v) + 46 }), top: Y(i) - 20, fontFamily: F.body, fontWeight: 800, fontSize: 30, color: C.cyan }}>{v.toFixed(2)}x</div>
         </React.Fragment>
       ))}
       <Big x={X(1.15) - 10} y={b.y0 - 50} size={30} align="right" w={600} color={C.cyan}>ALLOWED RANGE 0.85x TO 1.15x</Big>
