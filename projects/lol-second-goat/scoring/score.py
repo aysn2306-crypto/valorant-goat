@@ -448,7 +448,13 @@ def main():
     P["elite_years"] = yr[(yr.G >= LG["min_games"]) & (yr.imp_s >= LG["min_impact"])].groupby("Link").size().reindex(pool).fillna(0)
     # longevity as value above the elite line (CORP / Tennis Abstract): a monster year counts more than a barely elite one
     ok = yr[yr.G >= LG["min_games"]]
-    P["longevity_raw"] = (ok.imp_s - LG["min_impact"]).clip(lower=0).groupby(ok.Link).sum().reindex(pool).fillna(0)
+    above = (ok.imp_s - LG["min_impact"]).clip(lower=0)
+    # a year also counts as elite on results: starter on a Worlds top-4 or domestic-final team (weight audit 18 Nov)
+    rt = T[((T.tier == "worlds") & (T.place <= 4)) | ((T.tier == "domestic") & (T.place <= 2))]
+    ry = set(zip(rt.Link, rt.year))
+    res = np.array([(l, y) in ry for l, y in zip(ok.Link, ok.year)])
+    above = np.where(res, np.maximum(above, LG.get("result_year", 0.3)), above)
+    P["longevity_raw"] = pd.Series(above, index=ok.index).groupby(ok.Link).sum().reindex(pool).fillna(0)
     P["individual_raw"] = best_years(s[s.Link.isin(pool)], "a_impact", k)
     cf = os.path.join(CSV, "clutch.csv")
     if os.path.exists(cf):

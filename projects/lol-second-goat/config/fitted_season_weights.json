@@ -1,21 +1,21 @@
 {
  "weights": {
-  "kda": 0.3851,
-  "kp": 0.0917,
-  "dpm": 0.1502,
-  "gold_share": 0.0632,
-  "low_deaths": 0.0666,
-  "kills_pm": 0.3531,
-  "assists_pm": -0.1567,
-  "dshare": 0.2348,
-  "vis_pm": 0.0469,
-  "gd15": 0.6111,
-  "csd15": 0.1818,
-  "xpd15": 0.2687,
-  "gap": -0.0312,
-  "wr": 1.9309
+  "kda": -0.197,
+  "kp": 0.0925,
+  "dpm": -0.0465,
+  "gold_share": -0.0966,
+  "low_deaths": 0.3298,
+  "kills_pm": 0.4702,
+  "assists_pm": 0.2214,
+  "dshare": 0.2547,
+  "vis_pm": 0.0864,
+  "gd15": 0.4857,
+  "csd15": 0.1506,
+  "xpd15": 0.274,
+  "gap": 0.3453,
+  "wr": 1.9156
  },
- "intercept": -1.9353511954954206,
+ "intercept": -2.047635105507836,
  "n_player_splits": 3951,
  "note": "logistic fit of All-Pro selection on per-split stats (z inside role+year); wr = win rate inside the split"
 }
