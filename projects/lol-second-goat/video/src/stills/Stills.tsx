@@ -286,10 +286,10 @@ export const S9TwoFakers: React.FC = () => {
 const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler", "bin", "viper"], ["gumayusi", "caps", "deft", "theshy", "uzi"],
   ["scout", "perkz", "doinb", "bengi", "jankos"]];
 // 19a (ay 18:15): after tiers 5 and 4 fill, dim all but Uzi and Bengi and show where 2025/26 published lists put them
-// (research/model-vs-published-lists.md; only these three lists).
+// (research/model-vs-published-lists.md; esports.net and spilled.gg only, Red Bull dropped as unranked).
 const LISTS: Record<string, [string, string][]> = {
-  uzi: [["ESPORTS.NET 2025", "#4"], ["SPILLED.GG 2026", "#5"], ["RED BULL 2026", "LISTED"]],
-  bengi: [["ESPORTS.NET 2025", "#2"], ["SPILLED.GG 2026", "#9"], ["RED BULL 2026", "LISTED"]],
+  uzi: [["ESPORTS.NET 2025", "#4"], ["SPILLED.GG 2026", "#5"]],
+  bengi: [["ESPORTS.NET 2025", "#2"], ["SPILLED.GG 2026", "#9"]],
 };
 const Pyramid: React.FC<{ focus?: boolean; internet?: boolean }> = ({ focus, internet }) => {
   const top = 110, base = 948, half = 800, cx = 960;
@@ -335,7 +335,7 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean }> = ({ focus, int
         }))}
         {internet && Object.entries(LISTS).map(([id, rows]) => {
           const i = TIERS.findIndex((t) => t.includes(id)); const { x, y } = pos(i, TIERS[i].indexOf(id));
-          const cx0 = 1590, cy0 = id === "uzi" ? 450 : 640, cw = 300, ch = 136;
+          const cx0 = 1590, cy0 = id === "uzi" ? 450 : 640, cw = 300, ch = 104;
           // Uzi: straight line to the card; Bengi: elbow below the base so it never crosses Jankos.
           const pts = id === "uzi" ? `${x + 40},${y} ${cx0},${cy0 + ch / 2}` : `${x},${y + 66} ${x},${985} ${cx0 + 170},${985} ${cx0 + 170},${cy0 + ch}`;
           return (
