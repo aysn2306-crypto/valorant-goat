@@ -18,7 +18,11 @@ trophy_points:            # full value, no diminishing returns (ay's rule)
   min_share_of_games: 0.5
   early_worlds: {2011: 0.5, 2012: 0.75}  # 8 and 12 team events with thin fields
 
-credit: {alpha: 0.5, min: 0.5, max: 1.5, shrink_games: 10}
+# title credit: every starter on a title team gets close to the same share (every role matters; box scores
+# undervalue supports and junglers), nudged at most 15% by how far he played above his ROLE's level at that event.
+credit: {alpha: 0.15, min: 0.85, max: 1.15, shrink_games: 30}
+# lead: the wide, uncapped-style signal used only for solo carry (how far above his own teammates he played)
+lead: {alpha: 0.5, min: 0.5, max: 1.5, shrink_games: 10}
 
 impact:                   # per game, z-scored inside role + year
   impact: [kda, kp, dpm, gold_share, low_deaths]

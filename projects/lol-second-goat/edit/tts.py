@@ -1,5 +1,5 @@
 """Scratch narration with edge-tts (Microsoft neural voice), cached by text. ay re-records the real VO."""
-import hashlib, json, os, subprocess
+import hashlib, json, os, re, subprocess
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "video", "public", "vo")
 os.makedirs(OUT, exist_ok=True)
@@ -7,7 +7,18 @@ VOICE = os.environ.get("VO_VOICE", "en-GB-RyanNeural")
 RATE = os.environ.get("VO_RATE", "+6%")
 
 
+# how names are spoken (captions keep the written form): the scratch voice read "Gen.G" as "General G"
+SPOKEN = {"Gen.G": "Jen Jee", "T1": "T one", "BLG": "B L G", "LCK": "L C K", "LPL": "L P L", "LEC": "L E C", "LCS": "L C S"}
+
+
+def spoken(text):
+    for k, v in SPOKEN.items():
+        text = re.sub(r"(?<![\w.])" + re.escape(k) + r"(?![\w])", v, text)
+    return text
+
+
 def say(text):
+    text = spoken(text)
     key = hashlib.md5(f"{VOICE}|{RATE}|{text}".encode()).hexdigest()[:16]
     f = os.path.join(OUT, key + ".mp3")
     if not os.path.exists(f) or os.path.getsize(f) < 1000:

@@ -124,7 +124,7 @@ def region_strength(s):
     g["r2"] = [reg(y, b) for y, b in zip(g.year, g.TeamVs)]
     g = g.dropna(subset=["r1", "r2"])
     g = g[g.r1 != g.r2]
-    out = {}
+    out, field = {}, {}
     for y, d in g.groupby("year"):
         regs = sorted(set(d.r1) | set(d.r2))
         th = {r: 0.0 for r in regs}
@@ -136,11 +136,13 @@ def region_strength(s):
                 th[r] = np.log(wins / denom)
         best = max(th.values())
         out[y] = {r: 2 / (1 + np.exp(best - v)) for r, v in th.items()}
+        field[y] = {r: float(np.mean([1 / (1 + np.exp(th[o] - v)) for o in regs if o != r])) * 100 for r, v in th.items()}
     tab = pd.DataFrame(out).T.reindex(range(s.year.min(), s.year.max() + 1))
     tab = tab.ffill().bfill()
     for r in REGION.values():
         if r not in tab.columns:
             tab[r] = 0.5
+    pd.DataFrame(field).T.sort_index().round(1).to_csv(os.path.join(CSV, "region_vs_field.csv"))
     return tab.clip(0.2, 1.0)
 
 
@@ -224,6 +226,7 @@ def titles(t, s, strength):
     final_re = re.compile(r"Season Finals|Grand Finals|Season Playoffs|Championship", re.I)
     has_final = {(e.League, e.year) for e in r.itertuples() if final_re.search(e.Name) and e.League in REGION}
     rows = []
+    yr_imp = s.groupby(["Link", "year"]).apply(lambda d: wmean(d, "z_impact"), include_groups=False).to_dict()
     for _, e in r.iterrows():
         if e.League in INTL:
             tier = INTL[e.League]
@@ -256,9 +259,14 @@ def titles(t, s, strength):
             c = CFG["credit"]
             diff = shrink(imp[p.Link] - team_mean, p.G, c["shrink_games"]) if pd.notna(imp[p.Link]) else 0
             credit = float(np.clip(1 + c["alpha"] * diff, c["min"], c["max"]))
-            mates = imp[[l for l in per[per.G >= need].Link if l != p.Link]].mean()
+            c2 = CFG.get("lead", c)
+            diff2 = shrink(imp[p.Link] - team_mean, p.G, c2["shrink_games"]) if pd.notna(imp[p.Link]) else 0
+            lead = float(np.clip(1 + c2["alpha"] * diff2, c2["min"], c2["max"]))
+            # teammates' strength = their whole-year rating (one event is too noisy: BLG's stars look average
+            # in a 15-game Worlds box score, which wrongly made Knight a solo carrier)
+            mates = np.nanmean([yr_imp.get((l, e.year), np.nan) for l in per[per.G >= need].Link if l != p.Link] or [np.nan])
             rows.append(dict(Link=p.Link, event=e.Name, page=e.Page, team=e.Team, year=e.year, tier=tier,
-                             place=int(e.PlaceN), base=pts, credit=credit, pts=pts * credit, G=p.G,
+                             place=int(e.PlaceN), base=pts, credit=credit, lead=lead, pts=pts * credit, G=p.G,
                              mates=float(mates) if pd.notna(mates) else 0.0))
     return pd.DataFrame(rows)
 
@@ -396,7 +404,8 @@ def main():
     P["clean_raw"] = best_years(sp, "a_clean", k)
     for c in CFG.get("league_stats", {}):
         P[c + "_raw"] = best_years(sp[sp["z_" + c].notna()], "a_" + c, k).reindex(pool).fillna(0)
-    P["team_carry_raw"] = best_years(sp, "z_gap", k)
+    sp = sp.assign(z_gap_w=np.where(sp.z_gap > 0, sp.z_gap * np.clip(1 - sp.mates_impact.fillna(0), 0.25, 1.75), sp.z_gap))
+    P["team_carry_raw"] = best_years(sp, "z_gap_w", k)
     P["recognition_raw"], P["allpro_pts"], P["covered_splits"] = recognition(s, pool)
     P["team_lift_raw"] = team_lift(s, pool, strength)
     ev = s[s.Link.isin(pool) & (s.G >= 5)]
@@ -406,10 +415,11 @@ def main():
     if not M.empty:
         T = pd.concat([T, M], ignore_index=True)
     # solo carry: placement points earned above his own teammates, worth more when those teammates were weak
-    # (cast = their average impact at that event; a stacked roster like T1 2023-24 scales it down)
+    # (cast from teammates' whole-year ratings; a stacked roster gets none)
     T["mates"] = T.get("mates", pd.Series(0.0, index=T.index)).fillna(0)
-    T["cast"] = np.clip(1 - T.mates, 0.25, 1.75)
-    T["carry_pts"] = (T.base * (T.credit - 1)).clip(lower=0) * T.cast
+    T["cast"] = np.clip(1 - T.mates / 0.4, 0, 1.5)   # 1 = teammates at league average for their role-year, 0 = teammates 0.4 SD above (a strong roster gets no solo-carry credit)
+    T["lead"] = T.get("lead", T.credit).fillna(T.credit)
+    T["carry_pts"] = (T.base * (T.lead - 1)).clip(lower=0) * T.cast
     tp = T.groupby("Link").agg(trophy_pts=("pts", "sum"), raw_pts=("base", "sum"), solo_carry_pts=("carry_pts", "sum"))
     P = P.join(tp).fillna({"trophy_pts": 0, "raw_pts": 0, "solo_carry_pts": 0})
     P["mvps"] = T[T.tier == "award"].groupby("Link").size().reindex(pool).fillna(0).astype(int) if (T.tier == "award").any() else 0

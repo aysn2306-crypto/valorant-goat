@@ -20,7 +20,7 @@ export const Photo: React.FC<{ id: string; size: number; ring?: string; dim?: nu
     <div style={{ width: size, height: size, borderRadius: r, background: bg, overflow: "hidden", position: "relative",
       boxShadow: `inset 0 0 0 ${Math.max(1.5, size * 0.02)}px ${ring}`, filter: blur ? `blur(${blur}px)` : undefined, flexShrink: 0 }}>
       {p.photo ? (
-        <Img src={staticFile(p.photo)} style={{ position: "absolute", left: "-8%", width: "116%", bottom: -size * 0.02, objectFit: "cover" }} />
+        <Img src={staticFile(p.photo)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
       ) : (
         <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
           fontFamily: F.title, fontSize: size * 0.4, color: C.text }}>{p.name.slice(0, 2).toUpperCase()}</div>

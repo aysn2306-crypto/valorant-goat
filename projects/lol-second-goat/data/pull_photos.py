@@ -1,11 +1,13 @@
 """Player photos from Leaguepedia (lol.fandom.com, Players.Image = current profile photo) for the video.
 Writes video/public/players/<slug>.png|jpg and video/public/players/credits.csv (file page, for the credits list)."""
-import csv, json, os, re, sys, time, urllib.parse, urllib.request
+import csv, hashlib, json, os, re, sys, time, urllib.parse, urllib.request
 sys.path.insert(0, os.path.dirname(__file__))
 import cargo
 import pandas as pd
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "video", "public", "players")
+RAW = os.path.join(ROOT, "data", "raw", "photos")   # untouched downloads, one per exact Link; data/face_crop.py makes the tiles
+os.makedirs(RAW, exist_ok=True)
 os.makedirs(OUT, exist_ok=True)
 UA = {"User-Agent": "lol-research/0.1 (fan video research)"}
 
@@ -26,6 +28,8 @@ def main(extra):
         ids = [i for b in d["boards"].values() for i in b] + [i for rb in d["roleBoards"].values() for b in rb.values() for i in b]
         ids += [x[0] for w in d["worlds"] for x in w["players"]]
         links += [byid[i] for i in ids if i in byid]
+    T = pd.read_csv(os.path.join(ROOT, "data", "csv", "title_credits.csv"))
+    links += list(T[(T.tier == "worlds") & (T.place == 1)].Link)     # every world champion, pool or not
     links = list(dict.fromkeys(links))
     rows = []
     for i in range(0, len(links), 20):
@@ -53,12 +57,12 @@ def main(extra):
         ext = os.path.splitext(urllib.parse.urlparse(url).path)[1].lower() or ".png"
         if ext not in (".png", ".jpg", ".jpeg", ".webp"):
             ext = ".png"
-        f = os.path.join(OUT, slug(r["OverviewPage"]) + ext)
-        if not os.path.exists(f):
+        f = os.path.join(RAW, re.sub(r"[^A-Za-z0-9]+", "-", r["OverviewPage"]).strip("-") + "-" + hashlib.md5(r["OverviewPage"].encode()).hexdigest()[:6] + ext)
+        if True:
             open(f, "wb").write(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60).read())
             time.sleep(0.5)
         cred.append(dict(player=r["OverviewPage"], file=os.path.basename(f), team=r["Team"], source="https://lol.fandom.com/wiki/File:" + r["Image"].replace(" ", "_")))
-    with open(os.path.join(OUT, "credits.csv"), "w", newline="") as fh:
+    with open(os.path.join(RAW, "credits.csv"), "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=["player", "file", "team", "source"]); w.writeheader(); w.writerows(cred)
     print(len(cred), "photos of", len(links), "players")
 

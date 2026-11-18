@@ -110,6 +110,19 @@ def main():
         worlds.append(dict(year=int(yr), team=team, players=[[by[l]["id"] if l in by else slug(l), re.sub(r"\s*\(.*\)$", "", l),
                                                              rnd(c, 2)] for l, c in zip(d.Link, d.credit)]))
     worlds.sort(key=lambda x: x["year"])
+    # region of each champion team from its own domestic league results (Season 1-2 teams predate the leagues)
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from score import REGION
+    res = pd.read_csv(os.path.join(CSV, "results_top16.csv"), dtype=str).fillna("")
+    res = res[res.League.isin(REGION)]
+    res["reg"] = res.League.map(REGION)
+    res["year"] = res.Date.str[:4].astype(int)
+    early = {"Fnatic": "LEC", "Taipei Assassins": "LMS"}
+    for w in worlds:
+        d = res[res.Team == w["team"]]
+        d = d.iloc[(d.year - w["year"]).abs().argsort()] if len(d) else d
+        w["region"] = early.get(w["team"]) or (d.reg.iat[0] if len(d) else "")
+        w["regionColor"] = REGION_COLOR.get(w["region"], "#6B7685")
     rs = pd.read_csv(os.path.join(CSV, "region_strength.csv"), index_col=0)
     val = pd.read_csv(os.path.join(CSV, "validation_results.csv"))
     fw = json.load(open(os.path.join(ROOT, "config", "fitted_season_weights.json")))
