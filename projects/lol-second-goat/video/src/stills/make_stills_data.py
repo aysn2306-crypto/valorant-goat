@@ -41,3 +41,9 @@ out["blgCredit"] = [[by_link.get(r["Link"], r["Link"]), r["Link"].split(" (")[0]
   if r["page"] == "2026 Season World Championship" and r["team"] == "Bilibili Gaming"]
 json.dump(out, open(root / "video/src/data/stills.json", "w"), indent=1)
 print(json.dumps(out)[:1500])
+# bump chart sample (ay 18:32): all-time rank at the end of each year, 2016-2026, everyone who was top 10 in any of those years
+_rb = list(rows("rank_by_year.csv"))
+_ids = sorted({r["player_id"] for r in _rb if 2016 <= int(r["year"]) <= 2026 and int(r["rank"]) <= 10})
+out["bump"] = [[i, next(r["name"] for r in _rb if r["player_id"] == i),
+  [next((int(r["rank"]) for r in _rb if r["player_id"] == i and int(r["year"]) == y), None) for y in range(2016, 2027)]] for i in _ids]
+json.dump(out, open(root / "video/src/data/stills.json", "w"), indent=1)

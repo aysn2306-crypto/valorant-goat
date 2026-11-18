@@ -836,3 +836,49 @@ export const SampleSkillSwarm: React.FC = () => {
     </Stage>
   );
 };
+
+// SAMPLE (ay 18:32, wider chart forms): bump chart of the all-time rank at the end of each year (v11 rerun with data cut
+// at each year, research/rank_by_year.csv, 2016 on). Ranks below 10 dive under the axis (clipped). Knight lit, Faker faint.
+export const SampleRaceBump: React.FC = () => {
+  const b: Box = { x0: 250, y0: 220, x1: 1500, y1: 830 };
+  const xr: [number, number] = [2015.6, 2026.4], yr: [number, number] = [-10.6, -0.4];
+  const { X, Y } = scale(b, xr, yr);
+  const rows = S.bump as [string, string, (number | null)[]][];
+  const yrs = Array.from({ length: 11 }, (_, i) => 2016 + i);
+  const yOf = (r: number | null) => Y(-(r === null || r > 10 ? 12.5 : r));
+  const path = (rk: (number | null)[]) => {
+    let d = "";
+    for (let i = 0; i < rk.length - 1; i++) {
+      const a = rk[i], c = rk[i + 1];
+      if ((a === null || a > 10) && (c === null || c > 10)) continue;
+      const x0 = X(yrs[i]), x1 = X(yrs[i + 1]), y0 = yOf(a), y1 = yOf(c), m = (x0 + x1) / 2;
+      d += `M ${x0} ${y0} C ${m} ${y0}, ${m} ${y1}, ${x1} ${y1} `;
+    }
+    return d;
+  };
+  const style = (id: string) => id === "knight" ? { s: C.cyan, w: 7, o: 1 } : id === "faker" ? { s: C.gold, w: 5, o: 0.45 } : { s: "rgba(174,182,194,1)", w: 3, o: 0.28 };
+  const order = [...rows].sort((a, z) => (a[0] === "knight" ? 1 : a[0] === "faker" ? 0 : -1) - (z[0] === "knight" ? 1 : z[0] === "faker" ? 0 : -1));
+  const end = rows.filter((r) => r[2][10] !== null && (r[2][10] as number) <= 10).sort((a, z) => (a[2][10] as number) - (z[2][10] as number));
+  const kn = rows.find((r) => r[0] === "knight")![2];
+  return (
+    <Stage title="THE ALL-TIME RANKING, YEAR BY YEAR">
+      <Axes b={b} xr={xr} yr={yr} xt={[2016, 2018, 2020, 2022, 2024, 2026]} yt={[-1, -5, -10]} xl="END OF YEAR" yl="RANK"
+        xf={(v) => String(v)} yf={(v) => `#${-v}`} />
+      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+        <defs><clipPath id="bumpclip"><rect x={b.x0 + 2} y={b.y0 - 30} width={b.x1 - b.x0 + 60} height={b.y1 - b.y0 + 28} /></clipPath></defs>
+        <g clipPath="url(#bumpclip)">
+          {order.map(([id, , rk]) => { const st = style(id);
+            return <path key={id} d={path(rk)} fill="none" stroke={st.s} strokeWidth={st.w} strokeOpacity={st.o} strokeLinecap="round"
+              style={id === "knight" ? { filter: `drop-shadow(0 0 10px ${C.cyan})` } : undefined} />; })}
+        </g>
+        {kn.map((r, i) => r !== null && r <= 10 ? <circle key={i} cx={X(yrs[i])} cy={yOf(r)} r={11} fill={C.cyan} /> : null)}
+      </svg>
+      {kn.map((r, i) => r !== null && r <= 10 ? <Big key={"k" + i} x={X(yrs[i])} y={yOf(r) - 58} size={36} align="center" w={80} color={C.cyan}>#{r}</Big> : null)}
+      {end.map(([id, name, rk]) => (
+        <div key={id} style={{ position: "absolute", left: b.x1 + 34, top: yOf(rk[10]) - 18, fontFamily: F.body, fontWeight: 800, fontSize: id === "knight" ? 30 : 24,
+          color: id === "knight" ? C.cyan : id === "faker" ? C.gold : "#AEB6C2", whiteSpace: "nowrap", lineHeight: "36px" }}>{name.toUpperCase()}</div>
+      ))}
+      <Face id="knight" x={b.x1 + 250} y={yOf(2)} size={92} ring={C.cyan} glow="rgba(34,211,238,0.6)" />
+    </Stage>
+  );
+};
