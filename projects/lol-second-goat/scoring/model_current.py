@@ -19,7 +19,7 @@ sfm = sf.head(14)[["name", "score"]].round(1); sfm.insert(0, "Rank", range(1, 15
 io = pd.read_csv(os.path.join(CSV, "whatif_intl_only.csv"))[["name", "score"]]
 kn = pd.read_csv(os.path.join(CSV, "whatif_knight_needs.csv")); fw = pd.read_csv(os.path.join(CSV, "whatif_four_worlds.csv"))
 import re as _re
-kn2 = (_re.search(r"Knight's finish across reruns: \{2: (\d+)", open("/tmp/claude-0/whatif.log").read()) or [0, "?"])[1] if os.path.exists("/tmp/claude-0/whatif.log") else "?"
+kn2 = f"{int(pd.read_csv(os.path.join(ROOT, 'data', 'csv', 'shuffle_counts.csv'), index_col=0).seconds.get('Knight (Zhuo Ding)', 0)):,}"   # from the saved reruns, not a log file
 rk = P.score.rank(ascending=False).astype(int)
 notes = open(os.path.join(ROOT, "config", "model_notes.md")).read()
 doc = f"""{notes}

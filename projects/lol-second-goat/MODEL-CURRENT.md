@@ -61,7 +61,7 @@ so **on screen show rank and % of Faker, not the raw score.**
 |     15 | Xiaohu   | Mid     |    57.2 |           61 |        489.1 |        0 |            32.4 |                    78.3 |         71.2 |          76.7 |            80.9 |              57.3 |
 |     16 | Kanavi   | Jungle  |    56.7 |           60 |        401.1 |        0 |            26.6 |                    73   |         87.6 |          64.8 |            79.1 |              74.5 |
 
-Weight reruns (each weight moved up to 30%, 1,000 times): Faker #1 in 1,000; Knight #2 in 996 (see whatif.py output).
+Weight reruns (each weight moved up to 30%, 1,000 times): Faker #1 in 1,000; Knight #2 in 1,000 (see whatif.py output).
 Players above 70: 3. Caps #11 (63% of Faker). Uzi #21. Bengi #44.
 
 ## Twists and what-ifs
