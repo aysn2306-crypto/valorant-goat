@@ -1,5 +1,6 @@
 import React from "react";
-import { Composition } from "remotion";
+import { Composition, Still } from "remotion";
+import * as St from "./stills/Stills";
 import { FPS, H, W, loadFonts } from "./theme";
 import { OffsetProbe } from "./sample/OffsetProbe";
 import { TrophiesSample, TROPHIES_SAMPLE_FRAMES } from "./sample/TrophiesSample";
@@ -17,5 +18,8 @@ export const Root: React.FC = () => (
     <Composition id="TrophyTower" component={TrophyTower} durationInFrames={TOWER_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="TrophyDots" component={TrophyDots} durationInFrames={DOTS_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="Main" component={Main} durationInFrames={TOTAL} fps={FPS} width={W} height={H} defaultProps={{ captions: true, scratchTag: true }} />
+    {Object.entries(St).map(([k, Comp]) => (
+      <Still key={k} id={k} component={Comp as React.FC} width={W} height={H} />
+    ))}
   </>
 );
