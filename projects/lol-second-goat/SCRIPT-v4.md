@@ -152,12 +152,14 @@ Timing:
 | Knight. | Knight fills the slot. |
 | One world title. But the best single season ever recorded, by this model, near the top for years, and he just beat everyone. | FOOTAGE: Knight at Worlds 2026. |
 | And at the top, alone, Faker. | Faker at the peak. Gap to Knight shown. |
+| Number two. | Zoom in on Knight's face at #2. Hold. |
+| But what would it take to get from here... to here? | An arrow draws from tier 2 up to Faker's tier, then the camera follows it into section 8. |
 
 ## 8. What would it take? (11:00 to 12:00)
 
 | VO | SCREEN |
 |---|---|
-| So could Knight ever catch him? | GRAPHIC: Knight vs Faker, one row per part. |
+| What would it take for Knight to reach Faker's legacy? | GRAPHIC: Knight vs Faker, one row per part. |
 | Knight already beats Faker at skill, at big games, and at recognition. | Three rows light up for Knight. |
 | Faker wins team impact and longevity. And winning. | Three rows light for Faker. The trophies row: Faker 100, Knight 46. **[SILENCE]** |
 | [NUMBERS ON HOLD: how many more titles, with future seasons simulated. ay asked to park this 16:57.] | |
