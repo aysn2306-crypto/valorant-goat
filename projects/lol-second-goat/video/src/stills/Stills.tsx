@@ -800,3 +800,39 @@ export const SampleKnightRadar: React.FC = () => {
     </Stage>
   );
 };
+
+// SAMPLE (ay 18:32, wider chart forms): most skilled as a dot histogram of the whole pool (one dot = one player,
+// stacked by skill score), top 5 lit with faces, Faker as the gold benchmark. Same c_skill board as still 12.
+export const SampleSkillSwarm: React.FC = () => {
+  const b: Box = { x0: 240, y0: 300, x1: 1700, y1: 840 };
+  const xr: [number, number] = [20, 102], yr: [number, number] = [0, 26];
+  const { X, Y } = scale(b, xr, yr);
+  const rows = BOARD.filter((r) => r[3] !== null).map((r) => ({ id: r[0], v: r[3] as number })).sort((a, z) => a.v - z.v);
+  const stack: Record<number, number> = {};
+  const dots = rows.map((r) => { const bin = Math.floor(r.v); const k = (stack[bin] = (stack[bin] ?? -1) + 1); return { ...r, x: X(bin + 0.5), y: Y(k + 0.5) }; });
+  const top = [...dots].sort((a, z) => z.v - a.v).slice(0, 5).reverse();
+  const at = (id: string) => dots.find((d) => d.id === id)!;
+  const fk = at("faker");
+  return (
+    <Stage title="MOST SKILLED">
+      <Axes b={b} xr={xr} yr={yr} xt={[25, 50, 75, 100]} yt={[0, 10, 20]} xl="SKILL SCORE" yl="PLAYERS" />
+      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+        {dots.map((d) => <circle key={d.id} cx={d.x} cy={d.y} r={7.5} fill="rgba(174,182,194,0.42)" />)}
+        <circle cx={fk.x} cy={fk.y} r={9} fill={C.gold} style={{ filter: `drop-shadow(0 0 8px ${C.gold})` }} />
+        {top.map((d, i) => {
+          const fx = 1180 + i * 125, fy = 300;
+          return <g key={d.id}><line x1={fx} y1={fy + 50} x2={d.x} y2={d.y - 10} stroke="rgba(34,211,238,0.6)" strokeWidth={2} />
+            <circle cx={d.x} cy={d.y} r={9} fill={C.cyan} style={{ filter: `drop-shadow(0 0 8px ${C.cyan})` }} /></g>;
+        })}
+      </svg>
+      {top.map((d, i) => {
+        const fx = 1180 + i * 125, fy = 300;
+        return <React.Fragment key={"f" + d.id}>
+          <Face id={d.id} x={fx} y={fy} size={88} ring={C.cyan} glow="rgba(34,211,238,0.5)" />
+          <Big x={fx} y={fy - 96} size={30} align="center" w={140} color={C.cyan}>{P(d.id).name.toUpperCase()}</Big>
+        </React.Fragment>;
+      })}
+      <Big x={fk.x} y={fk.y - 64} size={32} align="center" w={200} color={C.gold}>FAKER</Big>
+    </Stage>
+  );
+};
