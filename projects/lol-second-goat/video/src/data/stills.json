@@ -1,610 +1,639 @@
 {
  "bigStage": {
-  "1xn": 47.4,
-  "2188": 49.0,
-  "369": 61.6,
-  "3z": 43.2,
-  "957": 46.4,
-  "add": 47.5,
-  "apa": 50.8,
-  "abbedagge": 52.2,
-  "able": 35.0,
-  "acorn": 47.4,
-  "adam": 49.8,
-  "adrian": 46.7,
-  "ahn": 42.0,
-  "aiming": 40.3,
-  "akaadian": 48.1,
-  "aki": 42.5,
-  "albis": 46.0,
-  "ale": 56.8,
-  "alex": 47.9,
-  "alphari": 58.6,
-  "altec": 50.1,
-  "aluka": 49.0,
-  "alvaro": 60.5,
-  "amazing": 59.4,
-  "amazingj": 45.5,
-  "ambition": 60.6,
-  "an": 45.7,
-  "andil": 50.1,
-  "angel": 48.2,
-  "apex": 52.7,
-  "aphromoo": 49.9,
-  "apollo": 42.8,
-  "armut": 53.0,
-  "arrow": 52.2,
-  "assum": 45.2,
-  "athena": 49.1,
-  "balls": 49.1,
-  "bang": 77.9,
-  "baolan": 48.6,
-  "bdd": 56.5,
-  "bebe": 40.5,
-  "beichuan": 58.7,
-  "beishang": 52.1,
-  "ben": 47.1,
-  "bengi": 74.5,
-  "berserker": 57.0,
-  "beryl": 64.5,
-  "betsy": 49.0,
-  "betty": 49.3,
-  "beyond": 48.4,
-  "bin": 91.3,
-  "biofrost": 70.4,
-  "biubiu": 47.3,
-  "bjergsen": 59.4,
-  "blaber": 50.5,
-  "blank": 71.6,
-  "bon0": 53.7,
-  "breathe": 64.9,
-  "breeze": 47.9,
-  "brokenblade": 68.3,
-  "broxah": 48.3,
-  "bulldog": 42.0,
-  "bugi": 48.4,
-  "burdol": 59.7,
-  "busio": 44.0,
-  "bvoy": 59.6,
-  "bwipo": 63.9,
-  "cold": 51.4,
-  "cabochard": 46.8,
-  "caliste": 47.4,
-  "candypanda": 47.4,
-  "canna": 55.0,
-  "canyon": 69.4,
-  "caps": 76.5,
-  "care": 39.5,
-  "carzzy": 57.9,
-  "chaser": 48.1,
-  "chei": 36.9,
-  "chieh": 39.0,
-  "chovy": 73.5,
-  "clear": 57.0,
-  "clearlove": 61.0,
-  "clid": 49.1,
-  "closer": 45.0,
-  "clozer": 40.2,
-  "coco": 50.9,
-  "cody-sun": 40.8,
-  "comp": 56.6,
-  "condi": 45.6,
-  "contractz": 49.1,
-  "cool": 52.5,
-  "cop": 49.0,
-  "corejj": 74.4,
-  "corn": 53.2,
-  "cpt-jack": 49.0,
-  "crash": 46.7,
-  "crazy": 53.7,
-  "creme": 31.2,
-  "crisp": 74.0,
-  "croco": 40.0,
-  "crown": 56.4,
-  "crownie": 39.7,
-  "crumbz": 47.2,
-  "cryin": 54.9,
-  "cuvee": 61.2,
-  "cube": 52.3,
-  "cuzz": 51.3,
-  "cyanide": 51.9,
-  "dade": 48.2,
-  "dandy": 56.9,
-  "dardoch": 40.5,
-  "darshan": 54.4,
-  "dee": 52.4,
-  "deft": 67.1,
-  "delight": 73.2,
-  "deokdam": 55.2,
-  "dhokla": 55.1,
-  "diable": 55.4,
-  "diamondprox": 49.9,
-  "dndn": 49.0,
-  "doggo": 51.7,
-  "doinb": 63.5,
-  "doran": 57.8,
-  "doublelift": 71.8,
-  "dove": 44.3,
-  "dread": 48.5,
-  "dreamer": 49.0,
-  "dudu": 43.8,
-  "duan": 49.0,
-  "duke": 63.9,
-  "duro": 46.1,
-  "dyrus": 44.6,
-  "easyhoon": 50.7,
-  "edward": 47.8,
-  "effort": 57.0,
-  "eimy": 49.0,
-  "elk": 74.4,
-  "ella": 48.3,
-  "elyoya": 63.8,
-  "erha": 65.6,
-  "exile": 45.2,
-  "expect": 67.9,
-  "expession": 50.3,
-  "eyla": 57.5,
-  "fate": 51.6,
-  "fbi": 50.8,
-  "febiven": 43.5,
-  "faker": 80.5,
-  "fearness": 49.0,
-  "feather": 51.5,
-  "fenix": 44.0,
-  "finn": 43.0,
-  "flakked": 46.0,
-  "flame": 46.3,
-  "flandre": 52.0,
-  "flawless": 66.4,
-  "fly": 46.6,
-  "fofo": 43.8,
-  "forge": 49.0,
-  "fredy122": 49.7,
-  "froggen": 47.7,
-  "fudge": 59.1,
-  "fury": 49.7,
-  "gala": 69.6,
-  "gbm": 47.9,
-  "gideon": 40.6,
-  "gate": 48.3,
-  "gemini": 43.1,
-  "ggoong": 50.8,
-  "ghost": 54.6,
+  "1xn": 48.8,
+  "2188": 49.2,
+  "369": 61.3,
+  "3z": 48.3,
+  "957": 50.1,
+  "add": 48.9,
+  "apa": 50.2,
+  "abbedagge": 49.0,
+  "able": 45.4,
+  "acorn": 47.6,
+  "adam": 48.7,
+  "adrian": 48.6,
+  "ahn": 47.3,
+  "aiming": 48.3,
+  "akaadian": 49.0,
+  "aki": 46.9,
+  "albis": 47.5,
+  "ale": 53.8,
+  "alex": 48.0,
+  "alphari": 53.7,
+  "altec": 49.5,
+  "aluka": 49.2,
+  "alvaro": 54.5,
+  "amazing": 51.2,
+  "amazingj": 48.1,
+  "ambition": 55.2,
+  "an": 47.4,
+  "andil": 49.5,
+  "angel": 49.2,
+  "apex": 50.3,
+  "aphromoo": 52.7,
+  "apollo": 47.9,
+  "armut": 51.4,
+  "arrow": 51.5,
+  "assum": 48.2,
+  "athena": 48.6,
+  "balls": 50.0,
+  "bang": 68.1,
+  "baolan": 50.2,
+  "bdd": 60.1,
+  "bebe": 48.2,
+  "beichuan": 52.9,
+  "beishang": 50.1,
+  "ben": 51.3,
+  "bengi": 58.8,
+  "berserker": 54.5,
+  "beryl": 63.2,
+  "betsy": 49.2,
+  "betty": 50.9,
+  "beyond": 49.2,
+  "bin": 96.5,
+  "biofrost": 57.4,
+  "biubiu": 48.9,
+  "bjergsen": 57.1,
+  "blaber": 52.3,
+  "blank": 60.1,
+  "bon0": 50.1,
+  "breathe": 59.9,
+  "breeze": 46.5,
+  "brokenblade": 68.4,
+  "broxah": 52.4,
+  "bulldog": 47.7,
+  "bugi": 50.0,
+  "burdol": 51.6,
+  "busio": 46.3,
+  "bvoy": 52.4,
+  "bwipo": 63.3,
+  "cold": 49.8,
+  "cabochard": 50.1,
+  "caliste": 49.7,
+  "candypanda": 47.6,
+  "canna": 57.2,
+  "canyon": 68.8,
+  "caps": 78.6,
+  "care": 45.7,
+  "carzzy": 55.0,
+  "chaser": 49.1,
+  "chei": 46.6,
+  "chieh": 46.6,
+  "chovy": 72.8,
+  "clear": 52.3,
+  "clearlove": 58.9,
+  "clid": 53.2,
+  "closer": 46.2,
+  "clozer": 46.9,
+  "coco": 49.6,
+  "cody-sun": 45.8,
+  "comp": 51.4,
+  "condi": 47.9,
+  "contractz": 51.5,
+  "cool": 52.7,
+  "cop": 49.2,
+  "corejj": 73.4,
+  "corn": 49.1,
+  "cpt-jack": 49.2,
+  "crash": 48.7,
+  "crazy": 50.1,
+  "creme": 37.0,
+  "crisp": 70.3,
+  "croco": 46.8,
+  "crown": 51.7,
+  "crownie": 46.3,
+  "crumbz": 47.4,
+  "cryin": 52.9,
+  "cuvee": 55.8,
+  "cube": 50.4,
+  "cuzz": 53.6,
+  "cyanide": 52.2,
+  "dade": 48.4,
+  "dandy": 59.5,
+  "dardoch": 46.8,
+  "darshan": 51.6,
+  "dee": 50.0,
+  "deft": 65.7,
+  "delight": 70.4,
+  "deokdam": 54.9,
+  "dhokla": 52.1,
+  "diable": 51.2,
+  "diamondprox": 50.2,
+  "dndn": 49.2,
+  "doggo": 58.5,
+  "doinb": 59.4,
+  "doran": 57.3,
+  "doublelift": 61.3,
+  "dove": 48.3,
+  "dread": 49.2,
+  "dreamer": 49.3,
+  "dudu": 48.1,
+  "duan": 49.3,
+  "duke": 57.5,
+  "duro": 45.9,
+  "dyrus": 44.8,
+  "easyhoon": 51.2,
+  "edward": 48.0,
+  "effort": 51.0,
+  "eimy": 49.2,
+  "elk": 73.8,
+  "ella": 49.2,
+  "elyoya": 59.8,
+  "erha": 54.5,
+  "exile": 48.4,
+  "expect": 57.1,
+  "expession": 50.5,
+  "eyla": 50.9,
+  "fate": 49.8,
+  "fbi": 48.6,
+  "febiven": 49.3,
+  "faker": 87.5,
+  "fearness": 49.2,
+  "feather": 49.9,
+  "fenix": 48.1,
+  "finn": 46.4,
+  "flakked": 49.0,
+  "flame": 50.2,
+  "flandre": 52.4,
+  "flawless": 53.5,
+  "fly": 48.6,
+  "fofo": 47.4,
+  "forge": 49.2,
+  "fredy122": 49.9,
+  "froggen": 50.7,
+  "fudge": 55.6,
+  "fury": 49.4,
+  "gala": 68.6,
+  "gbm": 49.1,
+  "gideon": 46.7,
+  "gate": 49.2,
+  "gemini": 45.4,
+  "ggoong": 51.0,
+  "ghost": 55.8,
   "gilius": 48.6,
-  "gimgoon": 51.9,
-  "godv": 49.0,
-  "gogoing": 54.6,
-  "gori": 56.6,
-  "gorilla": 54.2,
-  "guger": 49.0,
-  "gumayusi": 89.3,
-  "h4cker": 45.3,
-  "hoya": 42.0,
-  "hachani": 49.5,
-  "hai": 43.3,
-  "haichao": 47.3,
-  "hakuho": 42.6,
-  "hanabi": 51.7,
-  "hang": 39.5,
-  "hans-sama": 60.0,
-  "happy": 48.0,
-  "haro": 41.9,
-  "haru": 44.8,
-  "hauntzer": 53.5,
-  "helios": 49.0,
-  "hena": 49.2,
-  "heng": 59.8,
-  "hery": 50.4,
-  "hjarnan": 56.0,
-  "hongq": 46.4,
-  "hope": 51.1,
-  "huanfeng": 54.1,
-  "huhi": 59.9,
-  "humanoid": 59.1,
-  "huni": 58.4,
-  "hylissang": 58.2,
-  "iboy": 53.0,
-  "icon": 60.3,
-  "isma": 42.6,
-  "ian": 51.8,
-  "ice": 40.0,
-  "ignar": 66.2,
-  "ikssu": 47.9,
-  "imp": 69.0,
-  "impact": 54.4,
-  "insec": 49.0,
-  "inspired": 66.7,
-  "irrelevant": 39.9,
-  "isles": 56.6,
-  "iwandy": 53.0,
-  "jnx": 42.2,
-  "jackeylove": 52.6,
-  "jackies": 43.9,
-  "jankos": 59.4,
-  "jensen": 69.1,
-  "jesiz": 52.3,
-  "jiaqi": 51.6,
-  "jiejie": 53.2,
-  "jiizuke": 40.8,
-  "jinjiao": 46.4,
-  "jinoo": 47.3,
-  "jiwoo": 53.8,
-  "jojopyun": 47.9,
-  "josedeodo": 55.9,
-  "jun": 49.9,
-  "junjia": 45.8,
-  "junhao": 44.7,
-  "jwei": 47.2,
-  "k": 46.6,
-  "kryst4l": 47.4,
-  "kakao": 50.3,
-  "kael": 57.5,
-  "kaiser": 53.9,
-  "kaiwing": 46.5,
-  "kanavi": 74.0,
-  "karis": 57.5,
-  "karsa": 55.4,
-  "kasing": 47.8,
-  "keane": 46.4,
-  "keith": 49.0,
-  "kellin": 55.6,
-  "keria": 92.6,
-  "key": 52.6,
-  "khan": 67.0,
-  "kiwikid": 49.0,
-  "kid": 42.6,
-  "kiin": 67.6,
-  "kikis": 48.6,
-  "killua": 58.7,
-  "kingen": 64.8,
-  "kitties": 49.5,
-  "knight": 94.8,
-  "koala": 39.7,
-  "kobbe": 40.9,
-  "kold": 45.8,
-  "korol": 53.5,
-  "kramer": 50.0,
-  "krepo": 50.1,
-  "kuro": 43.4,
-  "kuzan": 47.0,
-  "kyeahoo": 43.1,
-  "limit": 42.8,
-  "labrov": 55.4,
-  "langx": 50.9,
-  "larssen": 54.7,
-  "lava": 54.6,
-  "leave": 44.5,
-  "lehends": 52.6,
-  "lemonnation": 52.5,
-  "letme": 45.2,
-  "ley": 49.0,
-  "leyan": 47.9,
-  "licorice": 49.5,
-  "life": 37.7,
-  "light": 75.3,
-  "lilv": 51.2,
-  "lindarang": 52.6,
-  "link": 49.0,
-  "lira": 44.9,
-  "loken": 48.2,
-  "loong": 48.8,
-  "looper": 58.3,
-  "lourlo": 44.1,
-  "loveling": 51.9,
-  "lucid": 42.5,
-  "lustboy": 48.5,
-  "lvmao": 60.8,
-  "lwx": 65.3,
-  "missing": 58.1,
-  "mmd": 55.0,
-  "maha": 48.4,
-  "marin": 52.2,
-  "madlife": 50.1,
-  "malrang": 53.7,
-  "maple": 56.3,
-  "mark": 51.2,
-  "mash": 49.0,
-  "massu": 44.7,
-  "mata": 48.8,
-  "matt-elento": 44.1,
-  "max": 48.4,
-  "maxlore": 51.6,
-  "meiko": 61.1,
-  "meteor": 50.8,
-  "meteos": 46.4,
-  "mickey": 51.2,
-  "mikyx": 54.0,
-  "ming": 69.0,
-  "mission": 43.6,
-  "mithy": 62.2,
-  "mlxg": 48.0,
-  "mole": 45.9,
-  "monki": 59.2,
-  "mor": 48.8,
-  "morgan": 55.5,
-  "morning": 42.2,
-  "mountain": 52.9,
-  "mouse": 60.6,
-  "mrrallez": 49.0,
-  "myrwn": 55.7,
-  "mystic": 44.4,
-  "nrated": 48.0,
-  "namei": 54.7,
-  "neon": 42.4,
-  "new": 48.5,
-  "ning": 49.5,
+  "gimgoon": 50.5,
+  "godv": 49.3,
+  "gogoing": 54.9,
+  "gori": 52.4,
+  "gorilla": 57.3,
+  "guger": 49.2,
+  "gumayusi": 91.7,
+  "h4cker": 48.5,
+  "hoya": 46.8,
+  "hachani": 49.4,
+  "hai": 44.2,
+  "haichao": 48.8,
+  "hakuho": 47.8,
+  "hanabi": 50.6,
+  "hang": 45.4,
+  "hans-sama": 59.9,
+  "happy": 49.1,
+  "haro": 48.0,
+  "haru": 50.0,
+  "hauntzer": 54.3,
+  "helios": 49.2,
+  "hena": 49.3,
+  "heng": 52.7,
+  "hery": 49.6,
+  "hjarnan": 52.4,
+  "hongq": 49.0,
+  "hope": 50.6,
+  "huanfeng": 52.5,
+  "huhi": 59.2,
+  "humanoid": 58.0,
+  "huni": 59.1,
+  "hylissang": 57.2,
+  "iboy": 54.9,
+  "icon": 52.9,
+  "isma": 47.7,
+  "ian": 49.8,
+  "ice": 46.8,
+  "ignar": 60.5,
+  "ikssu": 49.1,
+  "imp": 58.8,
+  "impact": 54.8,
+  "insec": 49.3,
+  "inspired": 65.7,
+  "irrelevant": 47.3,
+  "isles": 53.9,
+  "iwandy": 51.0,
+  "jnx": 47.9,
+  "jackeylove": 51.3,
+  "jackies": 48.0,
+  "jankos": 58.7,
+  "jensen": 65.9,
+  "jesiz": 49.7,
+  "jiaqi": 52.2,
+  "jiejie": 53.1,
+  "jiizuke": 47.3,
+  "jinjiao": 47.7,
+  "jinoo": 48.9,
+  "jiwoo": 50.7,
+  "jojopyun": 48.0,
+  "josedeodo": 53.1,
+  "jun": 51.1,
+  "junjia": 50.1,
+  "junhao": 48.1,
+  "jwei": 48.6,
+  "k": 46.7,
+  "kryst4l": 49.0,
+  "kakao": 49.1,
+  "kael": 57.2,
+  "kaiser": 53.2,
+  "kaiwing": 55.0,
+  "kanavi": 72.9,
+  "karis": 52.1,
+  "karsa": 57.4,
+  "kasing": 50.8,
+  "keane": 48.7,
+  "keith": 49.2,
+  "kellin": 54.3,
+  "keria": 94.8,
+  "key": 49.9,
+  "khan": 68.6,
+  "kiwikid": 49.2,
+  "kid": 48.1,
+  "kiin": 67.5,
+  "kikis": 47.5,
+  "killua": 51.3,
+  "kingen": 56.8,
+  "kitties": 49.7,
+  "knight": 99.0,
+  "koala": 43.8,
+  "kobbe": 47.9,
+  "kold": 47.1,
+  "korol": 55.5,
+  "kramer": 49.0,
+  "krepo": 50.3,
+  "kuro": 48.2,
+  "kuzan": 48.9,
+  "kyeahoo": 49.0,
+  "limit": 47.6,
+  "labrov": 53.6,
+  "langx": 51.2,
+  "larssen": 52.5,
+  "lava": 50.4,
+  "leave": 47.7,
+  "lehends": 54.1,
+  "lemonnation": 51.1,
+  "letme": 47.3,
+  "ley": 49.2,
+  "leyan": 49.2,
+  "licorice": 50.2,
+  "life": 45.3,
+  "light": 67.3,
+  "lilv": 49.9,
+  "lindarang": 49.9,
+  "link": 49.2,
+  "lira": 49.2,
+  "loken": 50.5,
+  "loong": 49.2,
+  "looper": 58.2,
+  "lourlo": 48.2,
+  "loveling": 52.1,
+  "lucid": 44.2,
+  "lustboy": 48.7,
+  "lvmao": 55.0,
+  "lwx": 59.3,
+  "missing": 57.0,
+  "mmd": 51.2,
+  "maha": 49.2,
+  "marin": 52.4,
+  "madlife": 50.4,
+  "malrang": 48.6,
+  "maple": 57.5,
+  "mark": 50.5,
+  "mash": 49.2,
+  "massu": 46.6,
+  "mata": 54.2,
+  "matt-elento": 48.2,
+  "max": 49.2,
+  "maxlore": 51.3,
+  "meiko": 60.9,
+  "meteor": 49.7,
+  "meteos": 48.5,
+  "mickey": 49.7,
+  "mikyx": 53.9,
+  "ming": 67.1,
+  "mission": 45.5,
+  "mithy": 52.5,
+  "mlxg": 50.9,
+  "mole": 48.6,
+  "monki": 52.6,
+  "mor": 47.9,
+  "morgan": 53.4,
+  "morning": 47.6,
+  "mountain": 54.4,
+  "mouse": 49.3,
+  "mrrallez": 49.2,
+  "myrwn": 49.7,
+  "mystic": 49.9,
+  "nrated": 48.2,
+  "namei": 50.9,
+  "neon": 47.6,
+  "new": 49.2,
+  "ning": 50.8,
   "ninja": 49.4,
-  "nisqy": 48.0,
-  "noah": 55.6,
-  "nuc": 37.5,
-  "nuclear": 35.6,
-  "nuguri": 61.2,
-  "nukeduck": 47.2,
-  "nyph": 48.8,
-  "on": 80.0,
-  "odoamne": 47.5,
-  "ohq": 49.0,
-  "olleh": 54.0,
-  "onfleek": 48.2,
-  "oner": 79.1,
-  "oscarinin": 41.1,
-  "pk": 43.1,
-  "palafox": 50.3,
-  "patrik": 37.8,
-  "pawn": 53.9,
-  "peanut": 71.6,
-  "perfect": 54.0,
-  "perkz": 81.2,
-  "peter": 56.3,
-  "peyz": 58.6,
-  "photic": 46.8,
-  "piglet": 49.3,
-  "pilot": 47.0,
-  "pleata": 49.2,
-  "pobelter": 50.4,
-  "pollu": 37.9,
-  "powerofevil": 63.4,
-  "ppgod": 34.8,
-  "pray": 54.1,
-  "prince": 44.5,
-  "promisq": 44.0,
-  "puff": 41.0,
-  "pyl": 52.5,
-  "pyosik": 67.4,
-  "qiuqiu": 52.3,
-  "quad": 45.4,
-  "quas": 49.0,
-  "quid": 64.4,
-  "raptor": 56.7,
-  "rascal": 37.0,
-  "ray": 42.8,
-  "razork": 47.9,
-  "reignover": 50.8,
-  "rekkles": 52.3,
-  "rest": 37.8,
-  "rich": 47.7,
-  "river": 57.3,
-  "road": 46.9,
-  "rookie": 63.2,
-  "route": 50.8,
-  "ruler": 75.3,
-  "ryu": 39.0,
-  "seraph": 46.5,
-  "soaz": 58.0,
-  "saint": 59.9,
-  "samd": 50.0,
-  "san": 51.1,
-  "sangyoon": 53.7,
-  "santorin": 58.9,
-  "score": 48.2,
-  "scout": 61.4,
-  "secret": 49.0,
-  "selfmade": 50.4,
-  "sencux": 44.8,
-  "seonghwan": 52.6,
-  "shad0w": 65.5,
-  "shanji": 51.5,
-  "shanks": 56.9,
-  "shaoye": 62.7,
-  "sheer": 38.1,
-  "sheo": 36.2,
-  "shiauc": 50.7,
-  "shiphtur": 49.0,
-  "shook": 41.8,
-  "showmaker": 61.4,
-  "shy": 49.5,
-  "siwoo": 45.6,
-  "skewmond": 69.1,
-  "smash": 45.5,
-  "smeb": 50.5,
-  "smlz": 55.3,
-  "smoothie": 37.0,
-  "sneaky": 45.0,
-  "snowflower": 51.2,
-  "sohwan": 49.0,
-  "sofm": 55.1,
-  "solo": 56.1,
-  "southwind": 44.8,
-  "space": 49.0,
-  "spica": 53.7,
-  "spirit": 49.7,
-  "sponge": 50.6,
-  "ssumday": 53.1,
-  "steeelback": 47.3,
-  "stixxay": 62.1,
-  "strive": 47.5,
-  "summit": 47.6,
-  "supa": 60.3,
-  "svenskeren": 48.7,
-  "sw0rd": 40.1,
-  "swift": 49.1,
-  "swordart": 57.7,
-  "sylvie": 49.0,
-  "tabzz": 46.9,
-  "tactical": 52.4,
-  "taeyoon": 56.4,
-  "taizan": 49.0,
-  "tangyuan": 62.4,
-  "targamas": 55.8,
-  "tarzan": 64.2,
-  "tbq": 47.6,
-  "teddy": 46.9,
-  "tempt": 53.7,
-  "thanatos": 34.5,
-  "theshy": 71.9,
-  "tian": 48.6,
-  "tore": 44.7,
-  "trace": 47.0,
-  "trick": 65.6,
-  "trymbi": 59.8,
-  "tusin": 42.4,
-  "twila": 49.6,
-  "ucal": 43.4,
-  "umti": 55.0,
-  "uniboy": 44.5,
-  "unified": 46.8,
-  "upset": 52.7,
-  "uzi": 68.6,
-  "v": 50.5,
-  "vampire": 55.4,
-  "vander": 46.3,
-  "vetheo": 34.4,
-  "vicla": 50.5,
-  "viper": 79.1,
-  "vizicsacsi": 47.2,
-  "vladi": 49.9,
-  "vsta": 48.1,
-  "vulcan": 41.0,
-  "wadid": 57.6,
-  "wako": 43.9,
-  "watch": 49.8,
-  "wayward": 44.8,
-  "wei": 67.8,
-  "weiwei": 38.4,
-  "westdoor": 44.1,
-  "wickd": 50.2,
-  "wildturtle": 55.5,
-  "willer": 49.9,
-  "wink": 42.2,
-  "wolf": 77.2,
-  "world6": 49.9,
-  "wraith": 45.7,
-  "wunder": 65.0,
-  "xpeke": 56.1,
-  "xerxe": 44.8,
-  "xiaohao": 55.3,
-  "xiaohu": 78.1,
-  "xiaolaohu": 45.4,
-  "xiaopeng": 49.6,
-  "xiaoxu": 50.9,
-  "xiyang": 57.0,
-  "xiye": 51.4,
-  "xmithie": 62.2,
-  "xpecial": 46.0,
-  "xun": 75.4,
-  "xx": 53.3,
-  "y4": 44.3,
-  "yagao": 57.5,
-  "yaharong": 48.9,
-  "yaoyao": 45.6,
-  "yellowstar": 54.9,
-  "yeon": 63.3,
-  "yike": 55.5,
-  "yoon": 49.7,
-  "ysera": 55.1,
-  "yuuki": 49.0,
-  "yuyanjia": 60.8,
-  "zwuji": 49.0,
-  "zdz": 58.0,
-  "zeka": 86.7,
-  "zero": 47.9,
-  "zest": 49.0,
+  "nisqy": 47.7,
+  "noah": 52.7,
+  "nuc": 45.0,
+  "nuclear": 46.6,
+  "nuguri": 59.7,
+  "nukeduck": 48.6,
+  "nyph": 49.0,
+  "on": 82.1,
+  "odoamne": 51.1,
+  "ohq": 49.2,
+  "olleh": 53.5,
+  "onfleek": 49.2,
+  "oner": 80.8,
+  "oscarinin": 44.0,
+  "pk": 46.4,
+  "palafox": 50.1,
+  "patrik": 45.9,
+  "pawn": 56.0,
+  "peanut": 70.8,
+  "perfect": 52.9,
+  "perkz": 75.7,
+  "peter": 53.3,
+  "peyz": 59.2,
+  "photic": 48.2,
+  "piglet": 52.3,
+  "pilot": 48.9,
+  "pleata": 49.3,
+  "pobelter": 46.0,
+  "pollu": 46.9,
+  "powerofevil": 57.0,
+  "ppgod": 44.0,
+  "pray": 57.2,
+  "prince": 48.2,
+  "promisq": 48.3,
+  "puff": 47.1,
+  "pyl": 49.1,
+  "pyosik": 61.4,
+  "qiuqiu": 49.9,
+  "quad": 48.9,
+  "quas": 49.2,
+  "quid": 58.2,
+  "raptor": 52.1,
+  "rascal": 46.5,
+  "ray": 50.0,
+  "razork": 49.0,
+  "reignover": 53.9,
+  "rekkles": 53.9,
+  "rest": 43.3,
+  "rich": 48.7,
+  "river": 53.8,
+  "road": 49.5,
+  "rookie": 63.1,
+  "route": 51.0,
+  "ruler": 75.1,
+  "ryu": 44.5,
+  "seraph": 48.8,
+  "soaz": 54.5,
+  "saint": 54.6,
+  "samd": 49.5,
+  "san": 51.3,
+  "sangyoon": 50.2,
+  "santorin": 52.2,
+  "score": 51.2,
+  "scout": 61.8,
+  "secret": 49.2,
+  "selfmade": 51.4,
+  "sencux": 47.8,
+  "seonghwan": 49.9,
+  "shad0w": 57.0,
+  "shanji": 50.0,
+  "shanks": 55.8,
+  "shaoye": 53.4,
+  "sheer": 46.2,
+  "sheo": 44.0,
+  "shiauc": 50.8,
+  "shiphtur": 49.2,
+  "shook": 48.7,
+  "showmaker": 62.6,
+  "shy": 49.7,
+  "siwoo": 48.5,
+  "skewmond": 62.9,
+  "smash": 47.9,
+  "smeb": 55.1,
+  "smlz": 50.9,
+  "smoothie": 44.7,
+  "sneaky": 50.3,
+  "snowflower": 49.7,
+  "sohwan": 49.2,
+  "sofm": 53.0,
+  "solo": 49.3,
+  "southwind": 48.5,
+  "space": 49.2,
+  "spica": 51.3,
+  "spirit": 50.3,
+  "sponge": 49.6,
+  "ssumday": 53.6,
+  "steeelback": 48.6,
+  "stixxay": 58.3,
+  "strive": 49.0,
+  "summit": 47.5,
+  "supa": 54.2,
+  "svenskeren": 49.3,
+  "sw0rd": 46.8,
+  "swift": 49.3,
+  "swordart": 55.3,
+  "sylvie": 49.2,
+  "tabzz": 47.1,
+  "tactical": 50.6,
+  "taeyoon": 51.5,
+  "taizan": 49.3,
+  "tangyuan": 53.0,
+  "targamas": 54.1,
+  "tarzan": 63.4,
+  "tbq": 47.8,
+  "teddy": 49.8,
+  "tempt": 50.1,
+  "thanatos": 44.1,
+  "theshy": 70.6,
+  "tian": 49.4,
+  "tore": 48.7,
+  "trace": 48.9,
+  "trick": 55.4,
+  "trymbi": 54.2,
+  "tusin": 47.7,
+  "twila": 49.4,
+  "ucal": 47.9,
+  "umti": 50.0,
+  "uniboy": 47.7,
+  "unified": 47.1,
+  "upset": 51.7,
+  "uzi": 70.2,
+  "v": 49.6,
+  "vampire": 54.7,
+  "vander": 50.8,
+  "vetheo": 45.7,
+  "vicla": 49.6,
+  "viper": 79.0,
+  "vizicsacsi": 49.3,
+  "vladi": 48.9,
+  "vsta": 49.9,
+  "vulcan": 43.8,
+  "wadid": 51.6,
+  "wako": 48.5,
+  "watch": 50.0,
+  "wayward": 46.4,
+  "wei": 65.5,
+  "weiwei": 44.5,
+  "westdoor": 45.8,
+  "wickd": 50.4,
+  "wildturtle": 51.7,
+  "willer": 49.8,
+  "wink": 47.6,
+  "wolf": 64.2,
+  "world6": 49.5,
+  "wraith": 49.3,
+  "wunder": 61.4,
+  "xpeke": 53.1,
+  "xerxe": 48.9,
+  "xiaohao": 51.1,
+  "xiaohu": 78.3,
+  "xiaolaohu": 48.6,
+  "xiaopeng": 49.4,
+  "xiaoxu": 49.3,
+  "xiyang": 51.1,
+  "xiye": 54.6,
+  "xmithie": 53.6,
+  "xpecial": 47.5,
+  "xun": 75.3,
+  "xx": 50.2,
+  "y4": 48.4,
+  "yagao": 54.6,
+  "yaharong": 49.2,
+  "yaoyao": 48.5,
+  "yellowstar": 53.8,
+  "yeon": 59.4,
+  "yike": 56.7,
+  "yoon": 49.4,
+  "ysera": 50.1,
+  "yuuki": 49.2,
+  "yuyanjia": 53.8,
+  "zwuji": 49.2,
+  "zdz": 52.1,
+  "zeka": 79.8,
+  "zero": 52.9,
+  "zest": 49.2,
   "zeus": 100.0,
-  "zeyzal": 57.3,
-  "zhuo": 40.6,
-  "zika": 36.8,
-  "ziv": 50.6,
-  "zoom": 57.9,
-  "zven": 56.1,
-  "zz1tai": 50.3
+  "zeyzal": 53.6,
+  "zhuo": 45.6,
+  "zika": 46.6,
+  "ziv": 50.2,
+  "zoom": 54.1,
+  "zven": 55.5,
+  "zz1tai": 50.5
  },
  "intl": [
   [
    "faker",
    "Faker",
-   84.3
+   91.5
   ],
   [
    "keria",
    "Keria",
-   74.1
+   72.1
   ],
   [
    "knight",
    "Knight",
-   72.5
-  ],
-  [
-   "chovy",
-   "Chovy",
-   69.9
+   70.4
   ],
   [
    "zeus",
    "Zeus",
-   68.7
+   67.5
   ],
   [
    "ruler",
    "Ruler",
-   64.9
-  ],
-  [
-   "bin",
-   "Bin",
-   62.6
-  ],
-  [
-   "oner",
-   "Oner",
-   62.5
+   66.3
   ],
   [
    "gumayusi",
    "Gumayusi",
-   61.6
+   65.4
   ],
   [
-   "viper",
-   "Viper",
-   61.4
+   "chovy",
+   "Chovy",
+   65.3
+  ],
+  [
+   "oner",
+   "Oner",
+   64.5
+  ],
+  [
+   "bin",
+   "Bin",
+   63.0
+  ],
+  [
+   "canyon",
+   "Canyon",
+   62.7
   ]
  ],
  "knightNeeds": [
   [
    "now",
-   74.9,
-   84.3
+   73.1,
+   91.5,
+   0.0
   ],
   [
    "+1 Worlds",
-   78.1,
-   84.3
+   76.8,
+   91.5,
+   106.0
+  ],
+  [
+   "+1 Worlds +4 LPL",
+   78.8,
+   91.5,
+   163.0
   ],
   [
    "+2 Worlds",
-   81.3,
-   84.3
-  ],
-  [
-   "+3 Worlds",
-   84.5,
-   84.3
+   80.5,
+   91.5,
+   212.0
   ],
   [
    "+2 Worlds +2 MSI",
-   84.6,
-   84.3
+   84.2,
+   91.5,
+   320.0
+  ],
+  [
+   "+3 Worlds",
+   84.1,
+   91.5,
+   318.0
+  ],
+  [
+   "+3 Worlds +1 MSI",
+   86.0,
+   91.5,
+   372.0
+  ],
+  [
+   "+4 Worlds",
+   87.8,
+   91.5,
+   425.0
+  ],
+  [
+   "+8 LPL",
+   77.1,
+   91.5,
+   114.0
   ]
  ],
  "split": [
@@ -612,7 +641,13 @@
    "Knight (Zhuo Ding)",
    "Knight",
    "2018-2026",
-   86.4
+   87.2
+  ],
+  [
+   "Faker 2017-26",
+   "Faker 2017-26",
+   "2017-2026",
+   85.2
   ],
   [
    "Keria",
@@ -621,28 +656,46 @@
    83.7
   ],
   [
-   "Chovy",
-   "Chovy",
-   "2018-2026",
-   83.2
-  ],
-  [
    "Ruler",
    "Ruler",
    "2016-2026",
-   78.0
+   82.3
+  ],
+  [
+   "Chovy",
+   "Chovy",
+   "2018-2026",
+   81.4
+  ],
+  [
+   "Canyon",
+   "Canyon",
+   "2019-2026",
+   78.5
   ],
   [
    "Zeus",
    "Zeus",
    "2021-2026",
-   77.7
+   78.3
   ],
   [
-   "Faker 2017-26",
-   "Faker 2017-26",
-   "2017-2026",
-   75.2
+   "Gumayusi",
+   "Gumayusi",
+   "2021-2026",
+   76.7
+  ],
+  [
+   "Bin (Chen Ze-Bin)",
+   "Bin",
+   "2020-2026",
+   75.6
+  ],
+  [
+   "Oner",
+   "Oner",
+   "2021-2026",
+   75.1
   ],
   [
    "Faker 2013-16",
@@ -651,184 +704,166 @@
    73.8
   ],
   [
-   "Canyon",
-   "Canyon",
-   "2019-2026",
-   73.4
-  ],
-  [
-   "Bin (Chen Ze-Bin)",
-   "Bin",
-   "2020-2026",
-   73.1
-  ],
-  [
-   "Oner",
-   "Oner",
-   "2021-2026",
-   71.3
+   "Caps",
+   "Caps",
+   "2017-2026",
+   73.5
   ],
   [
    "Viper (Park Do-hyeon)",
    "Viper",
    "2018-2026",
-   71.2
-  ],
-  [
-   "Gumayusi",
-   "Gumayusi",
-   "2021-2026",
-   70.9
-  ],
-  [
-   "Caps",
-   "Caps",
-   "2017-2026",
-   70.8
-  ],
-  [
-   "Bang",
-   "Bang",
-   "2012-2021",
-   67.7
-  ],
-  [
-   "Kiin",
-   "Kiin",
-   "2017-2026",
-   67.0
+   73.4
   ],
   [
    "Peanut",
    "Peanut",
    "2015-2025",
-   66.5
+   70.5
+  ],
+  [
+   "Xiaohu",
+   "Xiaohu",
+   "2015-2026",
+   67.9
+  ],
+  [
+   "Kiin",
+   "Kiin",
+   "2017-2026",
+   67.1
   ],
   [
    "Kanavi",
    "Kanavi",
    "2019-2026",
-   66.3
+   66.0
   ],
   [
-   "BeryL",
-   "BeryL",
-   "2019-2025",
-   65.1
-  ],
-  [
-   "Xiaohu",
-   "Xiaohu",
-   "2015-2026",
-   64.5
-  ],
-  [
-   "Meiko",
-   "Meiko",
-   "2015-2026",
-   63.0
+   "Bang",
+   "Bang",
+   "2012-2021",
+   64.1
   ],
   [
    "ON",
    "ON",
    "2021-2026",
-   60.8
+   64.0
   ],
   [
-   "TheShy",
-   "TheShy",
-   "2017-2026",
-   60.7
-  ],
-  [
-   "Zeka (Kim Geon-woo)",
-   "Zeka",
-   "2020-2026",
-   60.7
+   "Meiko",
+   "Meiko",
+   "2015-2026",
+   63.9
   ],
   [
    "Deft",
    "Deft",
    "2013-2024",
-   60.0
+   62.6
   ],
   [
-   "Ming (Shi Sen-Ming)",
-   "Ming",
-   "2017-2024",
-   59.2
+   "BeryL",
+   "BeryL",
+   "2019-2025",
+   62.6
   ],
   [
    "JackeyLove",
    "JackeyLove",
    "2018-2026",
-   59.1
+   62.5
+  ],
+  [
+   "TheShy",
+   "TheShy",
+   "2017-2026",
+   60.8
   ],
   [
    "Wolf (Lee Jae-wan)",
    "Wolf",
    "2013-2018",
-   58.9
-  ],
-  [
-   "Uzi (Jian Zi-Hao)",
-   "Uzi",
-   "2013-2023",
-   58.6
+   60.6
   ],
   [
    "369",
    "369",
    "2019-2026",
-   57.9
+   60.6
   ],
   [
-   "Rookie",
-   "Rookie",
-   "2014-2026",
-   57.8
+   "Ming (Shi Sen-Ming)",
+   "Ming",
+   "2017-2024",
+   60.4
   ],
   [
-   "Perkz",
-   "Perkz",
-   "2016-2024",
-   57.7
-  ],
-  [
-   "Delight",
-   "Delight",
-   "2021-2026",
-   56.9
-  ],
-  [
-   "Scout",
-   "Scout",
-   "2016-2026",
-   56.9
-  ],
-  [
-   "Xun",
-   "Xun",
-   "2021-2026",
-   55.9
-  ],
-  [
-   "Elk",
-   "Elk",
-   "2019-2026",
-   55.8
+   "Zeka (Kim Geon-woo)",
+   "Zeka",
+   "2020-2026",
+   60.4
   ],
   [
    "Doran (Choi Hyeon-jun)",
    "Doran",
    "2019-2026",
-   55.8
+   60.3
+  ],
+  [
+   "Perkz",
+   "Perkz",
+   "2016-2024",
+   58.5
+  ],
+  [
+   "Rookie",
+   "Rookie",
+   "2014-2026",
+   58.3
+  ],
+  [
+   "Scout",
+   "Scout",
+   "2016-2026",
+   58.0
+  ],
+  [
+   "Uzi (Jian Zi-Hao)",
+   "Uzi",
+   "2013-2023",
+   57.4
+  ],
+  [
+   "Xun",
+   "Xun",
+   "2021-2026",
+   57.3
   ],
   [
    "Khan",
    "Khan",
    "2014-2021",
-   55.7
+   56.6
+  ],
+  [
+   "Delight",
+   "Delight",
+   "2021-2026",
+   56.4
+  ],
+  [
+   "CoreJJ",
+   "CoreJJ",
+   "2014-2026",
+   56.4
+  ],
+  [
+   "Impact",
+   "Impact",
+   "2012-2026",
+   56.2
   ],
   [
    "Bengi",
@@ -837,46 +872,34 @@
    55.6
   ],
   [
-   "Nuguri",
-   "Nuguri",
-   "2019-2022",
-   55.3
-  ],
-  [
-   "CoreJJ",
-   "CoreJJ",
-   "2014-2026",
-   55.1
-  ],
-  [
-   "Bdd",
-   "Bdd",
-   "2016-2026",
-   54.7
-  ],
-  [
-   "Peyz",
-   "Peyz",
-   "2023-2026",
-   54.1
-  ],
-  [
-   "Impact",
-   "Impact",
-   "2012-2026",
-   54.1
-  ],
-  [
    "ShowMaker",
    "ShowMaker",
    "2019-2026",
-   53.8
+   55.4
+  ],
+  [
+   "Mikyx",
+   "Mikyx",
+   "2016-2026",
+   55.3
+  ],
+  [
+   "Elk",
+   "Elk",
+   "2019-2026",
+   54.0
   ],
   [
    "Lehends",
    "Lehends",
    "2018-2026",
-   53.8
+   53.9
+  ],
+  [
+   "Bdd",
+   "Bdd",
+   "2016-2026",
+   53.6
   ],
   [
    "Jankos",
@@ -885,68 +908,44 @@
    53.5
   ],
   [
-   "Mikyx",
-   "Mikyx",
-   "2016-2026",
-   52.9
-  ],
-  [
    "Doinb",
    "Doinb",
    "2015-2025",
-   52.8
+   53.4
   ],
   [
    "GALA",
    "GALA",
    "2019-2026",
-   52.1
-  ],
-  [
-   "MISSING",
-   "MISSING",
-   "2018-2026",
-   52.1
-  ],
-  [
-   "Tarzan (Lee Seung-yong)",
-   "Tarzan",
-   "2018-2026",
-   52.1
-  ],
-  [
-   "Bjergsen",
-   "Bjergsen",
-   "2013-2023",
-   51.9
-  ],
-  [
-   "Smeb",
-   "Smeb",
-   "2013-2020",
-   51.8
+   53.1
   ],
   [
    "Crisp",
    "Crisp",
    "2017-2026",
-   51.4
-  ],
-  [
-   "Wunder",
-   "Wunder",
-   "2016-2026",
-   51.4
-  ],
-  [
-   "Flandre",
-   "Flandre",
-   "2015-2026",
-   51.1
+   52.4
   ],
   [
    "Tian",
    "Tian",
+   "2018-2026",
+   52.1
+  ],
+  [
+   "Peyz",
+   "Peyz",
+   "2023-2026",
+   52.0
+  ],
+  [
+   "MISSING",
+   "MISSING",
+   "2018-2026",
+   51.0
+  ],
+  [
+   "Tarzan (Lee Seung-yong)",
+   "Tarzan",
    "2018-2026",
    50.9
   ],
@@ -954,48 +953,66 @@
    "PraY",
    "PraY",
    "2012-2019",
-   50.0
+   50.7
   ],
   [
-   "Clearlove",
-   "Clearlove",
-   "2012-2021",
-   49.7
+   "Mata",
+   "Mata",
+   "2013-2019",
+   50.7
+  ],
+  [
+   "Hans Sama",
+   "Hans Sama",
+   "2017-2026",
+   50.6
+  ],
+  [
+   "Wunder",
+   "Wunder",
+   "2016-2026",
+   50.6
+  ],
+  [
+   "Nuguri",
+   "Nuguri",
+   "2019-2022",
+   50.4
   ],
   [
    "Wei (Yan Yang-Wei)",
    "Wei",
    "2020-2026",
-   49.4
+   50.1
   ],
   [
-   "Hans Sama",
-   "Hans Sama",
-   "2017-2026",
-   49.2
+   "Clearlove",
+   "Clearlove",
+   "2012-2021",
+   49.8
   ],
   [
-   "Huni",
-   "Huni",
-   "2015-2022",
-   49.1
+   "Karsa",
+   "Karsa",
+   "2015-2025",
+   49.6
   ],
   [
-   "Doublelift",
-   "Doublelift",
-   "2011-2023",
-   48.7
+   "BrokenBlade",
+   "BrokenBlade",
+   "2019-2026",
+   49.0
   ],
   [
-   "Cuzz",
-   "Cuzz",
-   "2017-2026",
+   "Flandre",
+   "Flandre",
+   "2015-2026",
    48.6
   ],
   [
-   "Lwx",
-   "Lwx",
-   "2017-2024",
+   "Zven",
+   "Zven",
+   "2015-2026",
    48.5
   ],
   [
@@ -1005,1317 +1022,819 @@
    48.2
   ],
   [
-   "Karsa",
-   "Karsa",
-   "2015-2025",
-   48.0
+   "Bwipo",
+   "Bwipo",
+   "2018-2025",
+   48.2
+  ],
+  [
+   "Huni",
+   "Huni",
+   "2015-2022",
+   48.1
   ],
   [
    "Rekkles",
    "Rekkles",
    "2014-2026",
-   48.0
+   48.1
   ],
   [
-   "Ambition",
-   "Ambition",
-   "2012-2018",
-   47.7
+   "Bjergsen",
+   "Bjergsen",
+   "2013-2023",
+   47.9
   ],
   [
-   "Zven",
-   "Zven",
-   "2015-2026",
-   47.7
-  ],
-  [
-   "Mata",
-   "Mata",
+   "PawN",
+   "PawN",
    "2013-2019",
+   47.7
+  ],
+  [
+   "Smeb",
+   "Smeb",
+   "2013-2020",
    47.4
   ],
   [
-   "DanDy",
-   "DanDy",
-   "2012-2016",
-   47.4
-  ],
-  [
-   "BrokenBlade",
-   "BrokenBlade",
-   "2019-2026",
+   "Lwx",
+   "Lwx",
+   "2017-2024",
    47.2
-  ],
-  [
-   "Jensen",
-   "Jensen",
-   "2015-2024",
-   47.2
-  ],
-  [
-   "Bwipo",
-   "Bwipo",
-   "2018-2025",
-   47.1
   ],
   [
    "GorillA",
    "GorillA",
    "2013-2020",
-   46.8
+   47.2
   ],
   [
-   "SkewMond",
-   "SkewMond",
-   "2025-2026",
-   46.7
+   "Ambition",
+   "Ambition",
+   "2012-2018",
+   47.1
   ],
   [
-   "PawN",
-   "PawN",
-   "2013-2019",
-   46.6
+   "Doublelift",
+   "Doublelift",
+   "2011-2023",
+   46.5
   ],
   [
-   "Duke (Lee Ho-seong)",
-   "Duke",
-   "2014-2019",
-   46.4
-  ],
-  [
-   "Ning",
-   "Ning",
-   "2017-2023",
+   "Cuzz",
+   "Cuzz",
+   "2017-2026",
    46.3
   ],
   [
-   "Imp",
-   "Imp",
-   "2012-2019",
-   45.9
-  ],
-  [
-   "MaRin",
-   "MaRin",
-   "2013-2018",
-   45.9
-  ],
-  [
-   "Pyosik",
-   "Pyosik",
-   "2020-2026",
-   45.2
-  ],
-  [
-   "SwordArt",
-   "SwordArt",
-   "2013-2023",
-   44.9
-  ],
-  [
-   "Inspired",
-   "Inspired",
-   "2019-2026",
-   44.8
-  ],
-  [
-   "SOAZ",
-   "SOAZ",
-   "2011-2020",
-   44.5
-  ],
-  [
-   "Kingen",
-   "Kingen",
-   "2018-2026",
-   44.5
-  ],
-  [
-   "Canna",
-   "Canna",
-   "2020-2026",
-   44.3
-  ],
-  [
-   "Score",
-   "Score",
-   "2012-2019",
-   44.2
-  ],
-  [
-   "Maple (Huang Yi-Tang)",
-   "Maple",
-   "2013-2025",
-   44.2
-  ],
-  [
-   "Blaber",
-   "Blaber",
-   "2018-2026",
-   44.1
-  ],
-  [
-   "SofM",
-   "SofM",
-   "2016-2022",
-   44.0
-  ],
-  [
-   "Yike",
-   "Yike",
-   "2023-2026",
-   44.0
-  ],
-  [
-   "Ssumday",
-   "Ssumday",
-   "2013-2023",
-   43.9
-  ],
-  [
-   "Huhi",
-   "Huhi",
-   "2014-2026",
-   43.8
-  ],
-  [
-   "Baolan",
-   "Baolan",
-   "2016-2023",
-   43.7
-  ],
-  [
-   "Crown",
-   "Crown",
-   "2015-2020",
-   43.3
-  ],
-  [
-   "Aiming",
-   "Aiming",
-   "2018-2026",
-   43.3
-  ],
-  [
-   "Hauntzer",
-   "Hauntzer",
-   "2015-2023",
-   43.1
-  ],
-  [
-   "Alphari",
-   "Alphari",
-   "2017-2022",
-   43.0
-  ],
-  [
-   "Clid",
-   "Clid",
-   "2017-2023",
-   43.0
+   "Jensen",
+   "Jensen",
+   "2015-2024",
+   46.2
   ],
   [
    "Ghost (Jang Yong-jun)",
    "Ghost",
    "2016-2026",
-   42.8
+   45.8
   ],
   [
-   "Looper",
-   "Looper",
-   "2013-2017",
-   42.8
+   "Ning",
+   "Ning",
+   "2017-2023",
+   45.6
   ],
   [
-   "Teddy",
-   "Teddy",
-   "2017-2026",
-   42.6
-  ],
-  [
-   "Upset",
-   "Upset",
-   "2018-2026",
-   42.5
-  ],
-  [
-   "Zoom",
-   "Zoom",
-   "2018-2022",
-   42.2
-  ],
-  [
-   "Larssen",
-   "Larssen",
-   "2018-2025",
-   42.1
-  ],
-  [
-   "Light (Wang Guang-Yu)",
-   "Light",
-   "2018-2025",
-   42.0
-  ],
-  [
-   "PowerOfEvil",
-   "PowerOfEvil",
-   "2015-2022",
-   41.9
-  ],
-  [
-   "Elyoya",
-   "Elyoya",
-   "2021-2026",
-   41.8
-  ],
-  [
-   "Breathe",
-   "Breathe",
+   "Inspired",
+   "Inspired",
    "2019-2026",
-   41.8
+   45.3
+  ],
+  [
+   "DanDy",
+   "DanDy",
+   "2012-2016",
+   45.3
+  ],
+  [
+   "SwordArt",
+   "SwordArt",
+   "2013-2023",
+   44.7
+  ],
+  [
+   "Baolan",
+   "Baolan",
+   "2016-2023",
+   44.7
+  ],
+  [
+   "Maple (Huang Yi-Tang)",
+   "Maple",
+   "2013-2025",
+   43.7
+  ],
+  [
+   "Clid",
+   "Clid",
+   "2017-2023",
+   43.6
+  ],
+  [
+   "Yike",
+   "Yike",
+   "2023-2026",
+   43.3
+  ],
+  [
+   "Blaber",
+   "Blaber",
+   "2018-2026",
+   43.1
+  ],
+  [
+   "Canna",
+   "Canna",
+   "2020-2026",
+   43.0
+  ],
+  [
+   "Duke (Lee Ho-seong)",
+   "Duke",
+   "2014-2019",
+   42.8
+  ],
+  [
+   "MaRin",
+   "MaRin",
+   "2013-2018",
+   42.7
+  ],
+  [
+   "Score",
+   "Score",
+   "2012-2019",
+   42.7
+  ],
+  [
+   "Yagao",
+   "Yagao",
+   "2018-2024",
+   42.7
+  ],
+  [
+   "Pyosik",
+   "Pyosik",
+   "2020-2026",
+   42.3
   ],
   [
    "Hope (Wang Jie)",
    "Hope",
    "2018-2026",
+   42.2
+  ],
+  [
+   "Looper",
+   "Looper",
+   "2013-2017",
    41.5
   ],
   [
-   "Jiejie",
-   "Jiejie",
-   "2019-2026",
-   41.4
-  ],
-  [
-   "Trick",
-   "Trick",
-   "2014-2025",
-   41.1
-  ],
-  [
-   "Biofrost",
-   "Biofrost",
-   "2016-2023",
-   41.1
-  ],
-  [
-   "XPeke",
-   "XPeke",
-   "2011-2017",
-   41.1
-  ],
-  [
-   "Reignover",
-   "Reignover",
-   "2013-2018",
-   41.0
+   "Imp",
+   "Imp",
+   "2012-2019",
+   41.5
   ],
   [
    "Mlxg",
    "Mlxg",
    "2015-2018",
-   41.0
+   41.4
   ],
   [
-   "GimGoon",
-   "GimGoon",
-   "2013-2020",
-   40.9
-  ],
-  [
-   "YellOwStaR",
-   "YellOwStaR",
-   "2011-2016",
-   40.9
-  ],
-  [
-   "Yagao",
-   "Yagao",
-   "2018-2024",
-   40.7
-  ],
-  [
-   "Olleh",
-   "Olleh",
-   "2014-2024",
-   40.7
-  ],
-  [
-   "Killua",
-   "Killua",
-   "2018-2020",
-   40.7
-  ],
-  [
-   "Berserker (Kim Min-cheol)",
-   "Berserker",
-   "2022-2026",
-   40.5
+   "Kingen",
+   "Kingen",
+   "2018-2026",
+   41.3
   ],
   [
    "Kuro",
    "Kuro",
    "2013-2020",
-   40.5
+   41.3
   ],
   [
-   "Piglet",
-   "Piglet",
+   "SOAZ",
+   "SOAZ",
+   "2011-2020",
+   41.2
+  ],
+  [
+   "Jiejie",
+   "Jiejie",
+   "2019-2026",
+   41.1
+  ],
+  [
+   "Ssumday",
+   "Ssumday",
+   "2013-2023",
+   41.1
+  ],
+  [
+   "Aiming",
+   "Aiming",
+   "2018-2026",
+   40.8
+  ],
+  [
+   "Sneaky",
+   "Sneaky",
    "2013-2019",
+   40.6
+  ],
+  [
+   "Elyoya",
+   "Elyoya",
+   "2021-2026",
+   40.6
+  ],
+  [
+   "Teddy",
+   "Teddy",
+   "2017-2026",
+   40.4
+  ],
+  [
+   "Crown",
+   "Crown",
+   "2015-2020",
    40.3
   ],
   [
-   "Froggen",
-   "Froggen",
-   "2012-2020",
-   40.2
-  ],
-  [
-   "Gogoing",
-   "Gogoing",
-   "2013-2015",
-   40.1
-  ],
-  [
-   "Kaiser",
-   "Kaiser",
-   "2020-2024",
-   39.9
-  ],
-  [
-   "Humanoid",
-   "Humanoid",
-   "2019-2026",
-   39.7
-  ],
-  [
-   "Kael (Kim Jin-hong)",
-   "Kael",
-   "2022-2026",
-   39.6
-  ],
-  [
-   "Cabochard",
-   "Cabochard",
-   "2014-2024",
-   39.4
-  ],
-  [
-   "Shanks",
-   "Shanks",
-   "2021-2026",
-   39.4
-  ],
-  [
-   "Korol",
-   "Korol",
-   "2014-2017",
-   39.3
-  ],
-  [
-   "Summit",
-   "Summit",
-   "2019-2023",
-   38.9
-  ],
-  [
-   "Lucid (Choi Yong-hyeok)",
-   "Lucid",
+   "Duro",
+   "Duro",
    "2024-2026",
-   38.9
+   40.1
   ],
   [
    "Blank (Kang Sun-gu)",
    "Blank",
    "2015-2021",
+   40.0
+  ],
+  [
+   "Huhi",
+   "Huhi",
+   "2014-2026",
+   40.0
+  ],
+  [
+   "SkewMond",
+   "SkewMond",
+   "2025-2026",
+   39.8
+  ],
+  [
+   "Letme",
+   "Letme",
+   "2015-2018",
+   39.5
+  ],
+  [
+   "Humanoid",
+   "Humanoid",
+   "2019-2026",
+   39.0
+  ],
+  [
+   "Breathe",
+   "Breathe",
+   "2019-2026",
+   39.0
+  ],
+  [
+   "Light (Wang Guang-Yu)",
+   "Light",
+   "2018-2025",
+   39.0
+  ],
+  [
+   "Kael (Kim Jin-hong)",
+   "Kael",
+   "2022-2026",
    38.9
   ],
   [
-   "Meteos",
-   "Meteos",
-   "2013-2020",
-   38.8
-  ],
-  [
-   "Selfmade",
-   "Selfmade",
-   "2019-2022",
-   38.8
-  ],
-  [
-   "FoFo",
-   "FoFo",
-   "2016-2024",
-   38.7
-  ],
-  [
-   "Cryin",
-   "Cryin",
-   "2020-2024",
-   38.7
-  ],
-  [
-   "Yeon (Sean Sung)",
-   "Yeon",
-   "2022-2026",
-   38.7
-  ],
-  [
-   "Lira",
-   "Lira",
-   "2015-2025",
-   38.7
-  ],
-  [
-   "Max (Jeong Jong-bin)",
-   "Max",
-   "2014-2018",
-   38.6
-  ],
-  [
-   "Trymbi",
-   "Trymbi",
-   "2021-2026",
-   38.5
-  ],
-  [
-   "Spirit",
-   "Spirit",
-   "2013-2020",
-   38.4
-  ],
-  [
-   "CuVee",
-   "CuVee",
-   "2014-2020",
-   38.3
-  ],
-  [
-   "Xiye",
-   "Xiye",
-   "2014-2022",
-   38.3
-  ],
-  [
-   "IBoy",
-   "IBoy",
-   "2017-2023",
-   38.2
-  ],
-  [
    "Xmithie",
    "Xmithie",
    "2013-2020",
-   38.2
+   38.9
+  ],
+  [
+   "SofM",
+   "SofM",
+   "2016-2022",
+   38.8
   ],
   [
    "Svenskeren",
    "Svenskeren",
    "2013-2021",
-   38.1
+   38.7
   ],
   [
-   "Kellin",
-   "Kellin",
-   "2019-2026",
-   38.1
+   "Broxah",
+   "Broxah",
+   "2017-2021",
+   38.7
   ],
   [
-   "Betty",
-   "Betty",
-   "2017-2025",
-   38.1
+   "Alphari",
+   "Alphari",
+   "2017-2022",
+   38.5
   ],
   [
-   "Sneaky",
-   "Sneaky",
+   "CuVee",
+   "CuVee",
+   "2014-2020",
+   38.5
+  ],
+  [
+   "Shanks",
+   "Shanks",
+   "2021-2026",
+   38.5
+  ],
+  [
+   "Upset",
+   "Upset",
+   "2018-2026",
+   38.4
+  ],
+  [
+   "GimGoon",
+   "GimGoon",
+   "2013-2020",
+   38.3
+  ],
+  [
+   "Mithy",
+   "Mithy",
    "2013-2019",
-   38.0
+   38.2
+  ],
+  [
+   "Trick",
+   "Trick",
+   "2014-2025",
+   38.2
+  ],
+  [
+   "Berserker (Kim Min-cheol)",
+   "Berserker",
+   "2022-2026",
+   38.2
   ],
   [
    "Odoamne",
    "Odoamne",
    "2015-2024",
    38.0
-  ],
-  [
-   "Shanji",
-   "Shanji",
-   "2022-2025",
-   37.9
-  ],
-  [
-   "Saint (Kang Sung-in)",
-   "Saint",
-   "2025-2026",
-   37.8
-  ],
-  [
-   "Mystic",
-   "Mystic",
-   "2013-2020",
-   37.8
-  ],
-  [
-   "MadLife",
-   "MadLife",
-   "2012-2016",
-   37.7
-  ],
-  [
-   "Mithy",
-   "Mithy",
-   "2013-2019",
-   37.7
-  ],
-  [
-   "Kaiwing",
-   "Kaiwing",
-   "2016-2025",
-   37.7
-  ],
-  [
-   "Cool",
-   "Cool",
-   "2013-2018",
-   37.6
-  ],
-  [
-   "Diable",
-   "Diable",
-   "2025-2026",
-   37.6
-  ],
-  [
-   "Broxah",
-   "Broxah",
-   "2017-2021",
-   37.5
   ],
   [
    "Vulcan (Philippe Laflamme)",
    "Vulcan",
    "2018-2026",
-   37.5
+   37.8
+  ],
+  [
+   "Biofrost",
+   "Biofrost",
+   "2016-2023",
+   37.8
+  ],
+  [
+   "Korol",
+   "Korol",
+   "2014-2017",
+   37.6
+  ],
+  [
+   "Hauntzer",
+   "Hauntzer",
+   "2015-2023",
+   37.6
+  ],
+  [
+   "Betty",
+   "Betty",
+   "2017-2025",
+   37.6
   ],
   [
    "Creme",
    "Creme",
    "2021-2026",
+   37.5
+  ],
+  [
+   "MMD",
+   "MMD",
+   "2015-2018",
    37.4
   ],
   [
-   "Quid",
-   "Quid",
-   "2022-2026",
+   "Zoom",
+   "Zoom",
+   "2018-2022",
    37.4
   ],
   [
-   "Caliste",
-   "Caliste",
-   "2025-2026",
-   37.4
-  ],
-  [
-   "Smlz",
-   "Smlz",
-   "2014-2022",
-   37.4
-  ],
-  [
-   "FBI",
-   "FBI",
-   "2019-2026",
+   "Meteos",
+   "Meteos",
+   "2013-2020",
    37.3
+  ],
+  [
+   "Reignover",
+   "Reignover",
+   "2013-2018",
+   37.2
+  ],
+  [
+   "Mouse",
+   "Mouse",
+   "2015-2018",
+   37.1
   ],
   [
    "Mountain (Xue Zhao-Hong)",
    "Mountain",
    "2015-2019",
-   37.3
-  ],
-  [
-   "MMD",
-   "MMD",
-   "2015-2018",
-   37.2
-  ],
-  [
-   "Huanfeng",
-   "Huanfeng",
-   "2020-2024",
-   37.2
-  ],
-  [
-   "Zero (Yoon Kyung-sup)",
-   "Zero",
-   "2012-2018",
-   37.2
-  ],
-  [
-   "San (Guo Jun-Liang)",
-   "San",
-   "2013-2015",
    37.1
   ],
   [
-   "Letme",
-   "Letme",
-   "2015-2018",
-   36.9
+   "Larssen",
+   "Larssen",
+   "2018-2025",
+   37.1
   ],
   [
-   "Darshan",
-   "Darshan",
-   "2013-2022",
-   36.9
+   "IBoy",
+   "IBoy",
+   "2017-2023",
+   37.0
+  ],
+  [
+   "XPeke",
+   "XPeke",
+   "2011-2017",
+   36.8
+  ],
+  [
+   "FoFo",
+   "FoFo",
+   "2016-2024",
+   36.8
+  ],
+  [
+   "YellOwStaR",
+   "YellOwStaR",
+   "2011-2016",
+   36.7
+  ],
+  [
+   "Olleh",
+   "Olleh",
+   "2014-2024",
+   36.7
+  ],
+  [
+   "Labrov",
+   "Labrov",
+   "2020-2026",
+   36.7
+  ],
+  [
+   "Xiye",
+   "Xiye",
+   "2014-2022",
+   36.4
+  ],
+  [
+   "PowerOfEvil",
+   "PowerOfEvil",
+   "2015-2022",
+   36.3
+  ],
+  [
+   "Trymbi",
+   "Trymbi",
+   "2021-2026",
+   36.2
+  ],
+  [
+   "Mystic",
+   "Mystic",
+   "2013-2020",
+   36.2
+  ],
+  [
+   "LokeN",
+   "LokeN",
+   "2016-2021",
+   36.2
+  ],
+  [
+   "Gogoing",
+   "Gogoing",
+   "2013-2015",
+   36.2
+  ],
+  [
+   "Kellin",
+   "Kellin",
+   "2019-2026",
+   36.1
+  ],
+  [
+   "Yeon (Sean Sung)",
+   "Yeon",
+   "2022-2026",
+   36.1
+  ],
+  [
+   "Cryin",
+   "Cryin",
+   "2020-2024",
+   36.0
   ],
   [
    "Licorice",
    "Licorice",
    "2018-2025",
-   36.9
-  ],
-  [
-   "Doggo",
-   "Doggo",
-   "2021-2026",
-   36.9
-  ],
-  [
-   "Meteor",
-   "Meteor",
-   "2019-2024",
-   36.9
-  ],
-  [
-   "KaKAO",
-   "KaKAO",
-   "2012-2018",
-   36.9
-  ],
-  [
-   "ShiauC",
-   "ShiauC",
-   "2018-2026",
-   36.8
-  ],
-  [
-   "Aphromoo",
-   "Aphromoo",
-   "2013-2022",
-   36.7
-  ],
-  [
-   "Hachani",
-   "Hachani",
-   "2014-2017",
-   36.7
-  ],
-  [
-   "Razork",
-   "Razork",
-   "2020-2026",
-   36.7
-  ],
-  [
-   "Stixxay",
-   "Stixxay",
-   "2016-2023",
-   36.6
-  ],
-  [
-   "Duro",
-   "Duro",
-   "2024-2026",
-   36.6
-  ],
-  [
-   "Beishang",
-   "Beishang",
-   "2019-2025",
-   36.5
-  ],
-  [
-   "Labrov",
-   "Labrov",
-   "2020-2026",
-   36.5
-  ],
-  [
-   "Alvaro (\u00c1lvaro Fern\u00e1ndez)",
-   "Alvaro",
-   "2024-2026",
-   36.5
-  ],
-  [
-   "WildTurtle",
-   "WildTurtle",
-   "2013-2024",
-   36.4
+   35.8
   ],
   [
    "Cyanide",
    "Cyanide",
    "2011-2014",
-   36.4
-  ],
-  [
-   "Expect",
-   "Expect",
-   "2014-2020",
-   36.4
-  ],
-  [
-   "Santorin",
-   "Santorin",
-   "2015-2023",
-   36.3
-  ],
-  [
-   "Prince (Lee Chae-hwan)",
-   "Prince",
-   "2018-2024",
-   36.2
-  ],
-  [
-   "LokeN",
-   "LokeN",
-   "2016-2021",
-   36.2
-  ],
-  [
-   "Southwind",
-   "Southwind",
-   "2019-2023",
-   36.1
-  ],
-  [
-   "Vampire",
-   "Vampire",
-   "2024-2026",
-   36.1
-  ],
-  [
-   "Arrow",
-   "Arrow",
-   "2013-2022",
-   36.1
-  ],
-  [
-   "Armut",
-   "Armut",
-   "2021-2023",
-   36.0
-  ],
-  [
-   "Dade",
-   "Dade",
-   "2012-2016",
-   36.0
-  ],
-  [
-   "Weiwei",
-   "Weiwei",
-   "2019-2026",
-   35.9
-  ],
-  [
-   "River (Kim Dong-woo)",
-   "River",
-   "2019-2025",
-   35.9
-  ],
-  [
-   "Mouse",
-   "Mouse",
-   "2015-2018",
    35.8
   ],
   [
-   "Hakuho",
-   "Hakuho",
-   "2016-2020",
-   35.7
-  ],
-  [
-   "Ale",
-   "Ale",
-   "2019-2025",
-   35.7
-  ],
-  [
-   "HongQ",
-   "HongQ",
-   "2025-2026",
-   35.7
-  ],
-  [
-   "Flame",
-   "Flame",
-   "2012-2019",
-   35.7
-  ],
-  [
-   "Life",
-   "Life",
-   "2019-2026",
-   35.5
-  ],
-  [
-   "LvMao",
-   "LvMao",
-   "2017-2023",
-   35.5
-  ],
-  [
-   "Ignar",
-   "Ignar",
-   "2015-2026",
-   35.5
-  ],
-  [
-   "Deokdam",
-   "Deokdam",
-   "2020-2026",
-   35.5
-  ],
-  [
-   "Photic",
-   "Photic",
-   "2020-2026",
-   35.5
-  ],
-  [
-   "Shad0w",
-   "Shad0w",
-   "2020-2026",
-   35.4
-  ],
-  [
-   "Jojopyun",
-   "Jojopyun",
-   "2022-2026",
-   35.3
-  ],
-  [
-   "Mark (Ling Xu)",
-   "Mark",
-   "2019-2024",
-   35.3
-  ],
-  [
-   "Langx",
-   "Langx",
-   "2017-2021",
-   35.3
-  ],
-  [
-   "Targamas",
-   "Targamas",
-   "2018-2025",
-   35.3
-  ],
-  [
-   "Diamondprox",
-   "Diamondprox",
-   "2012-2016",
-   35.2
-  ],
-  [
-   "JiaQi",
-   "JiaQi",
-   "2025-2026",
-   35.2
-  ],
-  [
-   "Zika",
-   "Zika",
-   "2022-2026",
-   35.2
-  ],
-  [
-   "Wink",
-   "Wink",
-   "2019-2025",
-   35.2
-  ],
-  [
-   "Loong",
-   "Loong",
-   "2015-2018",
-   35.2
-  ],
-  [
-   "Maxlore",
-   "Maxlore",
-   "2016-2019",
-   35.2
-  ],
-  [
-   "Burdol",
-   "Burdol",
-   "2021-2026",
-   35.1
-  ],
-  [
-   "1xn",
-   "1xn",
-   "2023-2026",
-   35.1
-  ],
-  [
-   "Morgan",
-   "Morgan",
-   "2019-2026",
-   35.1
-  ],
-  [
-   "Tempt",
-   "Tempt",
-   "2016-2020",
-   35.1
-  ],
-  [
-   "TusiN",
-   "TusiN",
-   "2014-2020",
-   35.0
-  ],
-  [
-   "Ucal",
-   "Ucal",
-   "2018-2026",
-   35.0
-  ],
-  [
    "Hang",
    "Hang",
    "2020-2026",
-   35.0
+   35.7
   ],
   [
-   "Smash (Shin Geum-jae)",
-   "Smash",
-   "2025-2026",
-   35.0
-  ],
-  [
-   "Acorn",
-   "Acorn",
-   "2012-2016",
-   34.9
-  ],
-  [
-   "NaMei",
-   "NaMei",
-   "2013-2016",
-   34.9
-  ],
-  [
-   "LemonNation",
-   "LemonNation",
-   "2013-2018",
-   34.9
-  ],
-  [
-   "Angel (Xiang Tao)",
-   "Angel",
-   "2018-2026",
-   34.8
-  ],
-  [
-   "Zeyzal",
-   "Zeyzal",
-   "2018-2026",
-   34.8
-  ],
-  [
-   "Hjarnan",
-   "Hjarnan",
-   "2015-2019",
-   34.8
-  ],
-  [
-   "Key (Kim Han-gi)",
-   "Key",
-   "2016-2019",
-   34.7
-  ],
-  [
-   "JunJia",
-   "JunJia",
-   "2020-2026",
-   34.7
-  ],
-  [
-   "Rascal",
-   "Rascal",
-   "2017-2024",
-   34.7
-  ],
-  [
-   "Haru",
-   "Haru",
-   "2016-2022",
-   34.7
-  ],
-  [
-   "Fudge",
-   "Fudge",
-   "2021-2026",
-   34.6
-  ],
-  [
-   "Xiaohao",
-   "Xiaohao",
-   "2021-2026",
-   34.6
-  ],
-  [
-   "Hanabi (Su Chia-Hsiang)",
-   "Hanabi",
-   "2018-2022",
-   34.5
-  ],
-  [
-   "Effort",
-   "Effort",
-   "2018-2026",
-   34.5
-  ],
-  [
-   "Supa",
-   "Supa",
-   "2024-2026",
-   34.4
-  ],
-  [
-   "NRated",
-   "NRated",
-   "2013-2015",
-   34.4
-  ],
-  [
-   "GodV (Wei Zhen)",
-   "GodV",
-   "2014-2017",
-   34.4
-  ],
-  [
-   "Xerxe",
-   "Xerxe",
-   "2017-2023",
-   34.4
-  ],
-  [
-   "FEBIVEN",
-   "FEBIVEN",
-   "2015-2020",
-   34.4
-  ],
-  [
-   "DuDu (Lee Dong-ju)",
-   "DuDu",
-   "2020-2026",
-   34.4
-  ],
-  [
-   "Vizicsacsi",
-   "Vizicsacsi",
-   "2015-2022",
-   34.3
-  ],
-  [
-   "Jinoo",
-   "Jinoo",
-   "2016-2020",
-   34.3
-  ],
-  [
-   "An",
-   "An",
-   "2015-2019",
-   34.3
-  ],
-  [
-   "Kuzan",
-   "Kuzan",
-   "2015-2020",
-   34.3
-  ],
-  [
-   "Ziv (Chen Yi)",
-   "Ziv",
-   "2015-2021",
-   34.2
-  ],
-  [
-   "Vander",
-   "Vander",
-   "2014-2021",
-   34.2
-  ],
-  [
-   "Condi",
-   "Condi",
-   "2015-2019",
-   34.2
-  ],
-  [
-   "Beichuan",
-   "Beichuan",
-   "2021-2025",
-   34.1
+   "Kaiser",
+   "Kaiser",
+   "2020-2024",
+   35.6
   ],
   [
    "Busio",
    "Busio",
    "2023-2026",
-   34.1
+   35.6
   ],
   [
-   "Iwandy",
-   "Iwandy",
-   "2020-2024",
-   34.0
+   "Effort",
+   "Effort",
+   "2018-2026",
+   35.6
   ],
   [
-   "Zz1tai",
-   "Zz1tai",
-   "2012-2019",
-   34.0
-  ],
-  [
-   "Zhuo",
-   "Zhuo",
-   "2021-2026",
-   34.0
-  ],
-  [
-   "LoveLing",
-   "LoveLing",
-   "2013-2015",
-   34.0
-  ],
-  [
-   "Easyhoon",
-   "Easyhoon",
-   "2012-2018",
-   33.9
-  ],
-  [
-   "Jun (Yoon Se-jun)",
-   "Jun",
-   "2021-2026",
-   33.9
-  ],
-  [
-   "FATE (Yoo Su-hyeok)",
-   "FATE",
-   "2020-2024",
-   33.9
-  ],
-  [
-   "Thanatos (Park Seung-gyu)",
-   "Thanatos",
-   "2024-2026",
-   33.9
-  ],
-  [
-   "ICON",
-   "ICON",
-   "2016-2022",
-   33.8
-  ],
-  [
-   "Ohq",
-   "Ohq",
-   "2014-2017",
-   33.8
+   "Life",
+   "Life",
+   "2019-2026",
+   35.6
   ],
   [
    "BeBe (Chang Bo-Wei)",
    "BeBe",
    "2012-2017",
-   33.8
+   35.4
   ],
   [
-   "Kasing",
-   "Kasing",
-   "2014-2019",
-   33.8
+   "Piglet",
+   "Piglet",
+   "2013-2019",
+   35.4
+  ],
+  [
+   "FBI",
+   "FBI",
+   "2019-2026",
+   35.2
+  ],
+  [
+   "WildTurtle",
+   "WildTurtle",
+   "2013-2024",
+   35.2
+  ],
+  [
+   "Caliste",
+   "Caliste",
+   "2025-2026",
+   35.2
+  ],
+  [
+   "Kaiwing",
+   "Kaiwing",
+   "2016-2025",
+   34.9
+  ],
+  [
+   "Rascal",
+   "Rascal",
+   "2017-2024",
+   34.8
+  ],
+  [
+   "Deokdam",
+   "Deokdam",
+   "2020-2026",
+   34.8
+  ],
+  [
+   "Cpt Jack",
+   "Cpt Jack",
+   "2012-2016",
+   34.7
+  ],
+  [
+   "Aphromoo",
+   "Aphromoo",
+   "2013-2022",
+   34.7
+  ],
+  [
+   "LvMao",
+   "LvMao",
+   "2017-2023",
+   34.7
+  ],
+  [
+   "San (Guo Jun-Liang)",
+   "San",
+   "2013-2015",
+   34.6
+  ],
+  [
+   "Spirit",
+   "Spirit",
+   "2013-2020",
+   34.4
+  ],
+  [
+   "Weiwei",
+   "Weiwei",
+   "2019-2026",
+   34.4
+  ],
+  [
+   "Summit",
+   "Summit",
+   "2019-2023",
+   34.3
+  ],
+  [
+   "KaKAO",
+   "KaKAO",
+   "2012-2018",
+   34.3
+  ],
+  [
+   "Jojopyun",
+   "Jojopyun",
+   "2022-2026",
+   34.2
+  ],
+  [
+   "NaMei",
+   "NaMei",
+   "2013-2016",
+   34.2
+  ],
+  [
+   "Lucid (Choi Yong-hyeok)",
+   "Lucid",
+   "2024-2026",
+   34.2
+  ],
+  [
+   "JunJia",
+   "JunJia",
+   "2020-2026",
+   34.2
+  ],
+  [
+   "Mark (Ling Xu)",
+   "Mark",
+   "2019-2024",
+   34.2
+  ],
+  [
+   "Albis",
+   "Albis",
+   "2015-2018",
+   34.1
   ],
   [
    "Ben",
    "Ben",
    "2016-2020",
+   34.1
+  ],
+  [
+   "Nisqy",
+   "Nisqy",
+   "2017-2025",
+   34.0
+  ],
+  [
+   "Huanfeng",
+   "Huanfeng",
+   "2020-2024",
+   33.9
+  ],
+  [
+   "Ale",
+   "Ale",
+   "2019-2025",
+   33.9
+  ],
+  [
+   "Santorin",
+   "Santorin",
+   "2015-2023",
+   33.9
+  ],
+  [
+   "Cool",
+   "Cool",
+   "2013-2018",
    33.8
   ],
   [
-   "Quad",
-   "Quad",
-   "2020-2026",
+   "Killua",
+   "Killua",
+   "2018-2020",
    33.7
   ],
   [
-   "Dardoch",
-   "Dardoch",
-   "2016-2026",
+   "Prince (Lee Chae-hwan)",
+   "Prince",
+   "2018-2024",
    33.7
   ],
   [
-   "Amazing (Maurice St\u00fcckenschneider)",
-   "Amazing",
-   "2014-2019",
+   "Shanji",
+   "Shanji",
+   "2022-2025",
    33.6
   ],
   [
-   "Josedeodo",
-   "Josedeodo",
-   "2021-2026",
+   "Ignar",
+   "Ignar",
+   "2015-2026",
    33.6
   ],
   [
-   "Road (Yun Han-gil)",
-   "Road",
-   "2016-2019",
+   "Massu",
+   "Massu",
+   "2024-2026",
    33.6
   ],
   [
-   "Kramer",
-   "Kramer",
-   "2015-2021",
-   33.6
-  ],
-  [
-   "Jesiz",
-   "Jesiz",
-   "2014-2021",
-   33.6
-  ],
-  [
-   "Nisqy",
-   "Nisqy",
-   "2017-2025",
-   33.6
-  ],
-  [
-   "Yuyanjia",
-   "Yuyanjia",
-   "2020-2023",
+   "LoveLing",
+   "LoveLing",
+   "2013-2015",
    33.5
   ],
   [
-   "Crash",
-   "Crash",
-   "2016-2019",
+   "TusiN",
+   "TusiN",
+   "2014-2020",
+   33.5
+  ],
+  [
+   "Angel (Xiang Tao)",
+   "Angel",
+   "2018-2026",
    33.4
   ],
   [
-   "Leyan",
-   "Leyan",
-   "2019-2024",
+   "Doggo",
+   "Doggo",
+   "2021-2026",
    33.4
   ],
   [
@@ -2325,1047 +1844,1101 @@
    33.4
   ],
   [
-   "Coco",
-   "Coco",
-   "2013-2018",
+   "Zero (Yoon Kyung-sup)",
+   "Zero",
+   "2012-2018",
    33.4
   ],
   [
-   "Alex (Chen Yu-Ming)",
-   "Alex",
-   "2017-2019",
-   33.4
-  ],
-  [
-   "Space (Seon Ho-san)",
-   "Space",
-   "2012-2015",
+   "Stixxay",
+   "Stixxay",
+   "2016-2023",
    33.3
   ],
   [
-   "QiuQiu (Zhang Ming)",
-   "QiuQiu",
-   "2017-2024",
+   "Hachani",
+   "Hachani",
+   "2014-2017",
    33.2
   ],
   [
-   "H4cker",
-   "H4cker",
-   "2017-2024",
-   33.2
-  ],
-  [
-   "Jiizuke",
-   "Jiizuke",
-   "2018-2021",
-   33.2
-  ],
-  [
-   "Lustboy",
-   "Lustboy",
-   "2012-2015",
-   33.2
-  ],
-  [
-   "Shy",
-   "Shy",
-   "2012-2017",
-   33.1
-  ],
-  [
-   "Croco",
-   "Croco",
-   "2021-2026",
-   33.1
-  ],
-  [
-   "Junhao",
-   "Junhao",
-   "2025-2026",
-   33.1
-  ],
-  [
-   "UmTi",
-   "UmTi",
-   "2017-2025",
-   33.0
-  ],
-  [
-   "InSec",
-   "InSec",
-   "2012-2016",
-   33.0
-  ],
-  [
-   "Myrwn",
-   "Myrwn",
-   "2024-2026",
-   33.0
-  ],
-  [
-   "Abbedagge",
-   "Abbedagge",
-   "2019-2025",
-   33.0
-  ],
-  [
-   "Raptor (Jeon Eo-jin)",
-   "Raptor",
-   "2022-2026",
-   32.9
-  ],
-  [
-   "Erha",
-   "Erha",
-   "2025-2026",
-   32.9
-  ],
-  [
-   "Watch",
-   "Watch",
-   "2012-2015",
-   32.8
-  ],
-  [
-   "Tactical",
-   "Tactical",
+   "Razork",
+   "Razork",
    "2020-2026",
-   32.8
-  ],
-  [
-   "Massu",
-   "Massu",
-   "2024-2026",
-   32.7
+   33.2
   ],
   [
    "Ryu",
    "Ryu",
    "2012-2019",
-   32.7
+   33.2
   ],
   [
-   "Kid",
-   "Kid",
-   "2012-2018",
-   32.7
+   "Hanabi (Su Chia-Hsiang)",
+   "Hanabi",
+   "2018-2022",
+   33.2
   ],
   [
-   "Albis",
-   "Albis",
-   "2015-2018",
-   32.7
-  ],
-  [
-   "Crownie",
-   "Crownie",
-   "2019-2026",
-   32.7
-  ],
-  [
-   "Gori",
-   "Gori",
-   "2019-2023",
-   32.7
-  ],
-  [
-   "Peter (Jeong Yoon-su)",
-   "Peter",
-   "2022-2026",
-   32.6
-  ],
-  [
-   "Kikis",
-   "Kikis",
-   "2015-2019",
-   32.6
-  ],
-  [
-   "Rest",
-   "Rest",
-   "2017-2026",
-   32.6
-  ],
-  [
-   "Fenix",
-   "Fenix",
-   "2013-2020",
-   32.5
-  ],
-  [
-   "Lava",
-   "Lava",
-   "2017-2022",
-   32.4
-  ],
-  [
-   "Clozer",
-   "Clozer",
-   "2020-2026",
-   32.4
-  ],
-  [
-   "Wayward",
-   "Wayward",
-   "2022-2024",
-   32.4
-  ],
-  [
-   "SnowFlower",
-   "SnowFlower",
-   "2015-2022",
-   32.4
-  ],
-  [
-   "Cpt Jack",
-   "Cpt Jack",
-   "2012-2016",
-   32.4
-  ],
-  [
-   "Crazy (Kim Jae-hee)",
-   "Crazy",
-   "2016-2020",
-   32.3
-  ],
-  [
-   "Dyrus",
-   "Dyrus",
-   "2011-2015",
-   32.3
-  ],
-  [
-   "Ggoong",
-   "Ggoong",
-   "2013-2018",
-   32.3
-  ],
-  [
-   "Noah (Oh Hyeon-taek)",
-   "Noah",
-   "2021-2026",
-   32.2
-  ],
-  [
-   "Dread (Lee Jin-hyeok)",
-   "Dread",
+   "Selfmade",
+   "Selfmade",
    "2019-2022",
-   32.2
+   33.2
   ],
   [
-   "Flawless",
-   "Flawless",
-   "2016-2021",
-   32.2
-  ],
-  [
-   "Kobbe",
-   "Kobbe",
-   "2016-2023",
-   32.1
-  ],
-  [
-   "Cody Sun",
-   "Cody Sun",
-   "2017-2020",
-   32.1
-  ],
-  [
-   "Comp",
-   "Comp",
-   "2020-2024",
-   32.1
-  ],
-  [
-   "APA (Eain Stearns)",
-   "APA",
-   "2023-2026",
-   32.0
-  ],
-  [
-   "Zdz",
-   "Zdz",
+   "Morgan",
+   "Morgan",
    "2019-2026",
-   32.0
+   33.2
   ],
   [
-   "Westdoor",
-   "Westdoor",
-   "2014-2018",
-   32.0
+   "Quad",
+   "Quad",
+   "2020-2026",
+   33.2
+  ],
+  [
+   "Arrow",
+   "Arrow",
+   "2013-2022",
+   33.1
+  ],
+  [
+   "Quid",
+   "Quid",
+   "2022-2026",
+   33.1
+  ],
+  [
+   "MadLife",
+   "MadLife",
+   "2012-2016",
+   33.1
+  ],
+  [
+   "Alvaro (\u00c1lvaro Fern\u00e1ndez)",
+   "Alvaro",
+   "2024-2026",
+   33.0
+  ],
+  [
+   "Lira",
+   "Lira",
+   "2015-2025",
+   33.0
+  ],
+  [
+   "Fudge",
+   "Fudge",
+   "2021-2026",
+   33.0
+  ],
+  [
+   "Froggen",
+   "Froggen",
+   "2012-2020",
+   33.0
   ],
   [
    "Adrian (Adrian Ma)",
    "Adrian",
    "2015-2018",
-   32.0
+   32.9
   ],
   [
-   "Yoon",
-   "Yoon",
-   "2017-2019",
-   32.0
-  ],
-  [
-   "Balls",
-   "Balls",
-   "2013-2017",
-   32.0
-  ],
-  [
-   "Chaser",
-   "Chaser",
-   "2013-2017",
-   32.0
-  ],
-  [
-   "Rich (Lee Jae-won)",
-   "Rich",
-   "2019-2026",
-   32.0
-  ],
-  [
-   "Pobelter",
-   "Pobelter",
-   "2014-2021",
-   32.0
-  ],
-  [
-   "Expession",
-   "Expession",
-   "2012-2017",
-   31.9
-  ],
-  [
-   "Contractz",
-   "Contractz",
-   "2017-2026",
-   31.9
-  ],
-  [
-   "Wickd",
-   "Wickd",
-   "2012-2015",
-   31.9
-  ],
-  [
-   "Nukeduck",
-   "Nukeduck",
-   "2013-2023",
-   31.8
-  ],
-  [
-   "Willer",
-   "Willer",
-   "2021-2026",
-   31.8
-  ],
-  [
-   "AmazingJ",
-   "AmazingJ",
-   "2014-2019",
-   31.8
-  ],
-  [
-   "Fredy122",
-   "Fredy122",
-   "2013-2016",
-   31.7
-  ],
-  [
-   "HOYA",
-   "HOYA",
-   "2020-2026",
-   31.7
-  ],
-  [
-   "Krepo",
-   "Krepo",
-   "2012-2018",
-   31.7
-  ],
-  [
-   "Xiyang",
-   "Xiyang",
-   "2014-2019",
-   31.6
-  ],
-  [
-   "Athena",
-   "Athena",
-   "2016-2018",
-   31.6
-  ],
-  [
-   "Altec",
-   "Altec",
-   "2014-2020",
-   31.6
-  ],
-  [
-   "Tangyuan",
-   "Tangyuan",
-   "2023-2026",
-   31.6
-  ],
-  [
-   "COLD",
-   "COLD",
-   "2015-2022",
-   31.4
-  ],
-  [
-   "Cube (Dai Yi)",
-   "Cube",
-   "2019-2026",
-   31.4
-  ],
-  [
-   "Tore",
-   "Tore",
-   "2018-2021",
-   31.4
-  ],
-  [
-   "Xiaoxu",
-   "Xiaoxu",
-   "2023-2026",
-   31.4
-  ],
-  [
-   "Swift",
-   "Swift",
-   "2013-2018",
-   31.3
-  ],
-  [
-   "Ray",
-   "Ray",
-   "2015-2020",
-   31.3
-  ],
-  [
-   "Xx (Xiong Yu-Long)",
-   "Xx",
-   "2018-2020",
-   31.2
-  ],
-  [
-   "Isles",
-   "Isles",
-   "2022-2026",
-   31.2
-  ],
-  [
-   "PerfecT (Lee Seung-min)",
-   "PerfecT",
-   "2023-2026",
-   31.2
-  ],
-  [
-   "Closer (Can \u00c7elik)",
-   "Closer",
-   "2020-2025",
-   31.2
-  ],
-  [
-   "Fury (Lee Jin-yong)",
-   "Fury",
-   "2014-2018",
-   31.1
-  ],
-  [
-   "Morning",
-   "Morning",
-   "2014-2018",
-   31.1
-  ],
-  [
-   "Malrang",
-   "Malrang",
-   "2017-2025",
-   31.1
-  ],
-  [
-   "Corn (Lei Wen)",
-   "Corn",
-   "2014-2019",
-   31.1
-  ],
-  [
-   "Hai",
-   "Hai",
-   "2013-2018",
-   31.1
-  ],
-  [
-   "Haro",
-   "Haro",
-   "2018-2021",
-   31.0
-  ],
-  [
-   "Taeyoon (Kim Tae-yoon)",
-   "Taeyoon",
-   "2021-2026",
-   31.0
-  ],
-  [
-   "Beyond (Kim Kyu-seok)",
-   "Beyond",
-   "2016-2020",
-   31.0
-  ],
-  [
-   "SoHwan",
-   "SoHwan",
-   "2016-2020",
-   30.9
-  ],
-  [
-   "TrAce",
-   "TrAce",
-   "2013-2016",
-   30.9
-  ],
-  [
-   "Edward",
-   "Edward",
-   "2012-2016",
-   30.8
-  ],
-  [
-   "Bvoy",
-   "Bvoy",
-   "2019-2026",
-   30.7
-  ],
-  [
-   "Spica",
-   "Spica",
-   "2019-2024",
-   30.7
-  ],
-  [
-   "Tbq",
-   "Tbq",
-   "2014-2017",
-   30.7
-  ],
-  [
-   "Heng",
-   "Heng",
-   "2023-2026",
-   30.6
-  ],
-  [
-   "Ppgod",
-   "Ppgod",
-   "2020-2025",
-   30.6
-  ],
-  [
-   "Mission",
-   "Mission",
-   "2015-2022",
-   30.5
-  ],
-  [
-   "Pyl (Chen Bo)",
-   "Pyl",
-   "2014-2019",
-   30.5
-  ],
-  [
-   "Jinjiao",
-   "Jinjiao",
-   "2015-2024",
-   30.5
-  ],
-  [
-   "Yuuki (Hu Hao-Ming)",
-   "Yuuki",
-   "2018-2020",
-   30.4
-  ],
-  [
-   "Mole",
-   "Mole",
-   "2018-2023",
-   30.4
-  ],
-  [
-   "Solo (Colin Earnest)",
-   "Solo",
-   "2016-2023",
-   30.4
-  ],
-  [
-   "Clear (Song Hyeon-min)",
-   "Clear",
-   "2022-2026",
-   30.3
+   "River (Kim Dong-woo)",
+   "River",
+   "2019-2025",
+   32.9
   ],
   [
    "Dhokla",
    "Dhokla",
    "2018-2026",
-   30.3
+   32.9
   ],
   [
-   "Route",
-   "Route",
+   "Beishang",
+   "Beishang",
    "2019-2025",
-   30.3
+   32.9
   ],
   [
-   "Unified",
-   "Unified",
-   "2017-2022",
-   30.3
+   "Darshan",
+   "Darshan",
+   "2013-2022",
+   32.9
   ],
   [
-   "Gilius",
-   "Gilius",
+   "Saint (Kang Sung-in)",
+   "Saint",
+   "2025-2026",
+   32.8
+  ],
+  [
+   "Smlz",
+   "Smlz",
    "2014-2022",
-   30.2
+   32.7
   ],
   [
-   "Ikssu",
-   "Ikssu",
-   "2014-2020",
-   30.2
+   "An",
+   "An",
+   "2015-2019",
+   32.7
   ],
   [
-   "Dove",
-   "Dove",
-   "2019-2024",
-   30.2
+   "Hjarnan",
+   "Hjarnan",
+   "2015-2019",
+   32.7
   ],
   [
-   "Xpecial",
-   "Xpecial",
-   "2011-2017",
-   30.2
+   "Vander",
+   "Vander",
+   "2014-2021",
+   32.7
   ],
   [
-   "Pilot (Na Woo-hyung)",
-   "Pilot",
-   "2014-2018",
-   30.1
+   "FEBIVEN",
+   "FEBIVEN",
+   "2015-2020",
+   32.6
   ],
   [
-   "Pleata",
-   "Pleata",
-   "2021-2026",
-   30.1
+   "Condi",
+   "Condi",
+   "2015-2019",
+   32.6
   ],
   [
-   "Able",
-   "Able",
-   "2018-2024",
-   30.1
+   "Vizicsacsi",
+   "Vizicsacsi",
+   "2015-2022",
+   32.6
   ],
   [
-   "957",
-   "957",
-   "2016-2019",
-   30.1
+   "Jesiz",
+   "Jesiz",
+   "2014-2021",
+   32.6
   ],
   [
-   "Fearness",
-   "Fearness",
-   "2020-2023",
-   30.0
+   "Cabochard",
+   "Cabochard",
+   "2014-2024",
+   32.6
   ],
   [
-   "GuGer",
-   "GuGer",
-   "2015-2024",
-   30.0
+   "Zika",
+   "Zika",
+   "2022-2026",
+   32.5
   ],
   [
-   "Akaadian",
-   "Akaadian",
+   "Langx",
+   "Langx",
    "2017-2021",
-   30.0
+   32.5
   ],
   [
-   "Aluka",
-   "Aluka",
-   "2013-2015",
-   29.9
+   "Thanatos (Park Seung-gyu)",
+   "Thanatos",
+   "2024-2026",
+   32.3
   ],
   [
-   "Xiaolaohu",
-   "Xiaolaohu",
-   "2021-2024",
-   29.9
-  ],
-  [
-   "Mickey (Son Young-min)",
-   "Mickey",
-   "2014-2020",
-   29.9
-  ],
-  [
-   "Xiaopeng",
-   "Xiaopeng",
-   "2019-2022",
-   29.9
-  ],
-  [
-   "Patrik",
-   "Patrik",
+   "Targamas",
+   "Targamas",
    "2018-2025",
-   29.8
+   32.3
   ],
   [
-   "Duan",
-   "Duan",
-   "2016-2020",
-   29.8
+   "Zeyzal",
+   "Zeyzal",
+   "2018-2026",
+   32.3
   ],
   [
-   "Betsy",
-   "Betsy",
-   "2015-2018",
-   29.8
-  ],
-  [
-   "VicLa",
-   "VicLa",
-   "2022-2026",
-   29.8
-  ],
-  [
-   "Chei",
-   "Chei",
-   "2013-2017",
-   29.8
-  ],
-  [
-   "Jiwoo",
-   "Jiwoo",
+   "PerfecT (Lee Seung-min)",
+   "PerfecT",
    "2023-2026",
-   29.7
+   32.2
   ],
   [
-   "Quas",
-   "Quas",
-   "2014-2016",
-   29.7
-  ],
-  [
-   "Nyph",
-   "Nyph",
-   "2011-2015",
-   29.7
-  ],
-  [
-   "Koala (Lin Chih-Chiang)",
-   "Koala",
-   "2017-2022",
-   29.6
-  ],
-  [
-   "Monki",
-   "Monki",
-   "2024-2026",
-   29.6
-  ],
-  [
-   "Sheer",
-   "Sheer",
-   "2024-2026",
-   29.6
-  ],
-  [
-   "Mor",
-   "Mor",
-   "2013-2017",
-   29.6
-  ],
-  [
-   "Ahn",
-   "Ahn",
-   "2022-2026",
-   29.6
-  ],
-  [
-   "Lilv",
-   "Lilv",
-   "2016-2019",
-   29.3
-  ],
-  [
-   "Happy",
-   "Happy",
-   "2013-2017",
-   29.3
-  ],
-  [
-   "Sangyoon",
-   "Sangyoon",
-   "2015-2019",
-   29.3
-  ],
-  [
-   "Puff (Ding Wang)",
-   "Puff",
-   "2019-2022",
-   29.3
-  ],
-  [
-   "Haichao",
-   "Haichao",
-   "2022-2026",
-   29.2
-  ],
-  [
-   "GBM",
-   "GBM",
-   "2013-2017",
-   29.2
-  ],
-  [
-   "Irrelevant",
-   "Irrelevant",
-   "2022-2025",
-   29.2
-  ],
-  [
-   "SamD",
-   "SamD",
-   "2020-2026",
-   29.1
-  ],
-  [
-   "Kyeahoo",
-   "Kyeahoo",
-   "2023-2026",
-   29.1
-  ],
-  [
-   "OnFleek",
-   "OnFleek",
-   "2019-2022",
-   29.0
-  ],
-  [
-   "Dreamer",
-   "Dreamer",
-   "2015-2018",
-   29.0
-  ],
-  [
-   "Wraith",
-   "Wraith",
-   "2013-2018",
-   29.0
-  ],
-  [
-   "Sheo",
-   "Sheo",
-   "2023-2026",
-   29.0
-  ],
-  [
-   "Hena",
-   "Hena",
-   "2021-2026",
-   28.9
-  ],
-  [
-   "CandyPanda",
-   "CandyPanda",
-   "2011-2015",
-   28.9
-  ],
-  [
-   "JNX",
-   "JNX",
+   "Abbedagge",
+   "Abbedagge",
    "2019-2025",
-   28.9
+   32.2
   ],
   [
-   "Apex (Hsieh Chia-Wei)",
-   "Apex",
-   "2015-2019",
-   28.9
+   "Ppgod",
+   "Ppgod",
+   "2020-2025",
+   32.1
   ],
   [
-   "Ice (Yoon Sang-hoon)",
-   "Ice",
+   "Expect",
+   "Expect",
+   "2014-2020",
+   32.1
+  ],
+  [
+   "Ucal",
+   "Ucal",
+   "2018-2026",
+   32.1
+  ],
+  [
+   "Xerxe",
+   "Xerxe",
+   "2017-2023",
+   32.1
+  ],
+  [
+   "Supa",
+   "Supa",
+   "2024-2026",
+   32.1
+  ],
+  [
+   "Yuyanjia",
+   "Yuyanjia",
+   "2020-2023",
+   32.0
+  ],
+  [
+   "Amazing (Maurice St\u00fcckenschneider)",
+   "Amazing",
+   "2014-2019",
+   32.0
+  ],
+  [
+   "HongQ",
+   "HongQ",
+   "2025-2026",
+   32.0
+  ],
+  [
+   "Photic",
+   "Photic",
+   "2020-2026",
+   32.0
+  ],
+  [
+   "Westdoor",
+   "Westdoor",
+   "2014-2018",
+   31.9
+  ],
+  [
+   "Lustboy",
+   "Lustboy",
+   "2012-2015",
+   31.9
+  ],
+  [
+   "Watch",
+   "Watch",
+   "2012-2015",
+   31.9
+  ],
+  [
+   "Beichuan",
+   "Beichuan",
+   "2021-2025",
+   31.9
+  ],
+  [
+   "Armut",
+   "Armut",
+   "2021-2023",
+   31.9
+  ],
+  [
+   "Maxlore",
+   "Maxlore",
+   "2016-2019",
+   31.8
+  ],
+  [
+   "Morning",
+   "Morning",
+   "2014-2018",
+   31.8
+  ],
+  [
+   "Gori",
+   "Gori",
+   "2019-2023",
+   31.8
+  ],
+  [
+   "Croco",
+   "Croco",
+   "2021-2026",
+   31.7
+  ],
+  [
+   "Shy",
+   "Shy",
+   "2012-2017",
+   31.7
+  ],
+  [
+   "Max (Jeong Jong-bin)",
+   "Max",
+   "2014-2018",
+   31.6
+  ],
+  [
+   "Pobelter",
+   "Pobelter",
+   "2014-2021",
+   31.6
+  ],
+  [
+   "APA (Eain Stearns)",
+   "APA",
+   "2023-2026",
+   31.5
+  ],
+  [
+   "GodV (Wei Zhen)",
+   "GodV",
+   "2014-2017",
+   31.4
+  ],
+  [
+   "Myrwn",
+   "Myrwn",
+   "2024-2026",
+   31.4
+  ],
+  [
+   "Shad0w",
+   "Shad0w",
+   "2020-2026",
+   31.3
+  ],
+  [
+   "Ziv (Chen Yi)",
+   "Ziv",
+   "2015-2021",
+   31.3
+  ],
+  [
+   "Balls",
+   "Balls",
+   "2013-2017",
+   31.3
+  ],
+  [
+   "NRated",
+   "NRated",
+   "2013-2015",
+   31.2
+  ],
+  [
+   "Diamondprox",
+   "Diamondprox",
+   "2012-2016",
+   31.1
+  ],
+  [
+   "Zhuo",
+   "Zhuo",
+   "2021-2026",
+   31.1
+  ],
+  [
+   "InSec",
+   "InSec",
+   "2012-2016",
+   31.1
+  ],
+  [
+   "Smash (Shin Geum-jae)",
+   "Smash",
+   "2025-2026",
+   31.1
+  ],
+  [
+   "ShiauC",
+   "ShiauC",
+   "2018-2026",
+   31.0
+  ],
+  [
+   "Noah (Oh Hyeon-taek)",
+   "Noah",
+   "2021-2026",
+   31.0
+  ],
+  [
+   "Peter (Jeong Yoon-su)",
+   "Peter",
    "2022-2026",
-   28.8
+   31.0
+  ],
+  [
+   "Wink",
+   "Wink",
+   "2019-2025",
+   31.0
+  ],
+  [
+   "Dardoch",
+   "Dardoch",
+   "2016-2026",
+   30.9
+  ],
+  [
+   "Flame",
+   "Flame",
+   "2012-2019",
+   30.9
+  ],
+  [
+   "957",
+   "957",
+   "2016-2019",
+   30.9
+  ],
+  [
+   "TrAce",
+   "TrAce",
+   "2013-2016",
+   30.9
+  ],
+  [
+   "Jun (Yoon Se-jun)",
+   "Jun",
+   "2021-2026",
+   30.9
+  ],
+  [
+   "Dyrus",
+   "Dyrus",
+   "2011-2015",
+   30.9
+  ],
+  [
+   "Wayward",
+   "Wayward",
+   "2022-2024",
+   30.9
+  ],
+  [
+   "Jiizuke",
+   "Jiizuke",
+   "2018-2021",
+   30.8
+  ],
+  [
+   "Kramer",
+   "Kramer",
+   "2015-2021",
+   30.8
+  ],
+  [
+   "Kuzan",
+   "Kuzan",
+   "2015-2020",
+   30.8
+  ],
+  [
+   "Contractz",
+   "Contractz",
+   "2017-2026",
+   30.8
+  ],
+  [
+   "Acorn",
+   "Acorn",
+   "2012-2016",
+   30.7
+  ],
+  [
+   "Diable",
+   "Diable",
+   "2025-2026",
+   30.7
+  ],
+  [
+   "Meteor",
+   "Meteor",
+   "2019-2024",
+   30.7
+  ],
+  [
+   "LemonNation",
+   "LemonNation",
+   "2013-2018",
+   30.7
+  ],
+  [
+   "Rich (Lee Jae-won)",
+   "Rich",
+   "2019-2026",
+   30.6
+  ],
+  [
+   "Haru",
+   "Haru",
+   "2016-2022",
+   30.6
+  ],
+  [
+   "Burdol",
+   "Burdol",
+   "2021-2026",
+   30.6
+  ],
+  [
+   "UmTi",
+   "UmTi",
+   "2017-2025",
+   30.6
+  ],
+  [
+   "Tbq",
+   "Tbq",
+   "2014-2017",
+   30.5
+  ],
+  [
+   "Jinoo",
+   "Jinoo",
+   "2016-2020",
+   30.5
+  ],
+  [
+   "Kobbe",
+   "Kobbe",
+   "2016-2023",
+   30.4
+  ],
+  [
+   "Leyan",
+   "Leyan",
+   "2019-2024",
+   30.4
+  ],
+  [
+   "Wickd",
+   "Wickd",
+   "2012-2015",
+   30.4
+  ],
+  [
+   "Southwind",
+   "Southwind",
+   "2019-2023",
+   30.4
+  ],
+  [
+   "Vampire",
+   "Vampire",
+   "2024-2026",
+   30.4
   ],
   [
    "Chieh",
    "Chieh",
    "2014-2017",
-   28.8
+   30.3
   ],
   [
-   "Strive",
-   "Strive",
-   "2022-2023",
-   28.8
-  ],
-  [
-   "KRYST4L",
-   "KRYST4L",
-   "2015-2019",
-   28.7
-  ],
-  [
-   "GIDEON",
-   "GIDEON",
-   "2021-2026",
-   28.7
-  ],
-  [
-   "Bugi",
-   "Bugi",
-   "2018-2024",
-   28.7
-  ],
-  [
-   "Gate",
-   "Gate",
+   "Ray",
+   "Ray",
    "2015-2020",
-   28.6
+   30.3
   ],
   [
-   "Ley",
-   "Ley",
-   "2014-2020",
-   28.6
+   "Closer (Can \u00c7elik)",
+   "Closer",
+   "2020-2025",
+   30.3
   ],
   [
-   "Yaoyao",
-   "Yaoyao",
-   "2021-2026",
-   28.6
-  ],
-  [
-   "Hery",
-   "Hery",
-   "2022-2026",
-   28.6
-  ],
-  [
-   "Ella",
-   "Ella",
-   "2015-2017",
-   28.5
-  ],
-  [
-   "Helios (Shin Dong-jin)",
-   "Helios",
+   "Space (Seon Ho-san)",
+   "Space",
    "2012-2015",
-   28.5
+   30.3
   ],
   [
-   "Shiphtur",
-   "Shiphtur",
-   "2013-2016",
-   28.5
+   "Kid",
+   "Kid",
+   "2012-2018",
+   30.2
   ],
   [
-   "Palafox",
-   "Palafox",
+   "Hai",
+   "Hai",
+   "2013-2018",
+   30.2
+  ],
+  [
+   "H4cker",
+   "H4cker",
+   "2017-2024",
+   30.2
+  ],
+  [
+   "Nukeduck",
+   "Nukeduck",
+   "2013-2023",
+   30.2
+  ],
+  [
+   "Kikis",
+   "Kikis",
+   "2015-2019",
+   30.1
+  ],
+  [
+   "Josedeodo",
+   "Josedeodo",
    "2021-2026",
-   28.4
+   30.0
+  ],
+  [
+   "Xiaohao",
+   "Xiaohao",
+   "2021-2026",
+   30.0
+  ],
+  [
+   "Chei",
+   "Chei",
+   "2013-2017",
+   30.0
+  ],
+  [
+   "Alex (Chen Yu-Ming)",
+   "Alex",
+   "2017-2019",
+   30.0
+  ],
+  [
+   "Tactical",
+   "Tactical",
+   "2020-2026",
+   29.9
+  ],
+  [
+   "Iwandy",
+   "Iwandy",
+   "2020-2024",
+   29.9
+  ],
+  [
+   "1xn",
+   "1xn",
+   "2023-2026",
+   29.9
+  ],
+  [
+   "Easyhoon",
+   "Easyhoon",
+   "2012-2018",
+   29.9
+  ],
+  [
+   "AmazingJ",
+   "AmazingJ",
+   "2014-2019",
+   29.8
+  ],
+  [
+   "Cody Sun",
+   "Cody Sun",
+   "2017-2020",
+   29.8
+  ],
+  [
+   "Loong",
+   "Loong",
+   "2015-2018",
+   29.8
+  ],
+  [
+   "Clozer",
+   "Clozer",
+   "2020-2026",
+   29.7
+  ],
+  [
+   "Tempt",
+   "Tempt",
+   "2016-2020",
+   29.7
+  ],
+  [
+   "Road (Yun Han-gil)",
+   "Road",
+   "2016-2019",
+   29.7
+  ],
+  [
+   "Rest",
+   "Rest",
+   "2017-2026",
+   29.6
+  ],
+  [
+   "Zz1tai",
+   "Zz1tai",
+   "2012-2019",
+   29.6
+  ],
+  [
+   "JiaQi",
+   "JiaQi",
+   "2025-2026",
+   29.6
   ],
   [
    "Sw0rd",
    "Sw0rd",
    "2018-2022",
+   29.6
+  ],
+  [
+   "Coco",
+   "Coco",
+   "2013-2018",
+   29.5
+  ],
+  [
+   "Hakuho",
+   "Hakuho",
+   "2016-2020",
+   29.5
+  ],
+  [
+   "Key (Kim Han-gi)",
+   "Key",
+   "2016-2019",
+   29.5
+  ],
+  [
+   "Kasing",
+   "Kasing",
+   "2014-2019",
+   29.4
+  ],
+  [
+   "Dade",
+   "Dade",
+   "2012-2016",
+   29.4
+  ],
+  [
+   "Fenix",
+   "Fenix",
+   "2013-2020",
+   29.4
+  ],
+  [
+   "Raptor (Jeon Eo-jin)",
+   "Raptor",
+   "2022-2026",
+   29.4
+  ],
+  [
+   "Koala (Lin Chih-Chiang)",
+   "Koala",
+   "2017-2022",
+   29.3
+  ],
+  [
+   "Isles",
+   "Isles",
+   "2022-2026",
+   29.3
+  ],
+  [
+   "QiuQiu (Zhang Ming)",
+   "QiuQiu",
+   "2017-2024",
+   29.3
+  ],
+  [
+   "Expession",
+   "Expession",
+   "2012-2017",
+   29.2
+  ],
+  [
+   "HOYA",
+   "HOYA",
+   "2020-2026",
+   29.2
+  ],
+  [
+   "Pilot (Na Woo-hyung)",
+   "Pilot",
+   "2014-2018",
+   29.2
+  ],
+  [
+   "Flawless",
+   "Flawless",
+   "2016-2021",
+   29.1
+  ],
+  [
+   "Krepo",
+   "Krepo",
+   "2012-2018",
+   29.1
+  ],
+  [
+   "Dove",
+   "Dove",
+   "2019-2024",
+   29.0
+  ],
+  [
+   "Able",
+   "Able",
+   "2018-2024",
+   29.0
+  ],
+  [
+   "SnowFlower",
+   "SnowFlower",
+   "2015-2022",
+   28.8
+  ],
+  [
+   "Xx (Xiong Yu-Long)",
+   "Xx",
+   "2018-2020",
+   28.8
+  ],
+  [
+   "Ohq",
+   "Ohq",
+   "2014-2017",
+   28.7
+  ],
+  [
+   "VicLa",
+   "VicLa",
+   "2022-2026",
+   28.7
+  ],
+  [
+   "FATE (Yoo Su-hyeok)",
+   "FATE",
+   "2020-2024",
+   28.7
+  ],
+  [
+   "Altec",
+   "Altec",
+   "2014-2020",
+   28.7
+  ],
+  [
+   "Lilv",
+   "Lilv",
+   "2016-2019",
+   28.7
+  ],
+  [
+   "Cube (Dai Yi)",
+   "Cube",
+   "2019-2026",
+   28.6
+  ],
+  [
+   "Dread (Lee Jin-hyeok)",
+   "Dread",
+   "2019-2022",
+   28.6
+  ],
+  [
+   "Kyeahoo",
+   "Kyeahoo",
+   "2023-2026",
+   28.6
+  ],
+  [
+   "Erha",
+   "Erha",
+   "2025-2026",
+   28.6
+  ],
+  [
+   "Crownie",
+   "Crownie",
+   "2019-2026",
+   28.6
+  ],
+  [
+   "Tore",
+   "Tore",
+   "2018-2021",
+   28.6
+  ],
+  [
+   "Pyl (Chen Bo)",
+   "Pyl",
+   "2014-2019",
+   28.5
+  ],
+  [
+   "Siwoo",
+   "Siwoo",
+   "2025-2026",
+   28.5
+  ],
+  [
+   "Kitties",
+   "Kitties",
+   "2014-2016",
+   28.5
+  ],
+  [
+   "Yoon",
+   "Yoon",
+   "2017-2019",
+   28.5
+  ],
+  [
+   "Crash",
+   "Crash",
+   "2016-2019",
    28.4
   ],
   [
-   "Vetheo",
-   "Vetheo",
-   "2021-2024",
-   28.3
+   "Ahn",
+   "Ahn",
+   "2022-2026",
+   28.4
   ],
   [
-   "ADD",
-   "ADD",
-   "2016-2020",
-   28.3
+   "ICON",
+   "ICON",
+   "2016-2022",
+   28.4
   ],
   [
-   "World6",
-   "World6",
-   "2015-2019",
-   28.2
-  ],
-  [
-   "Adam (Adam Maanane)",
-   "Adam",
-   "2021-2025",
-   28.2
-  ],
-  [
-   "Shaoye",
-   "Shaoye",
-   "2024-2026",
-   28.2
-  ],
-  [
-   "V",
-   "V",
-   "2015-2017",
-   28.2
+   "Mission",
+   "Mission",
+   "2015-2022",
+   28.4
   ],
   [
    "Eyla",
    "Eyla",
    "2022-2025",
-   28.1
+   28.4
   ],
   [
-   "Secret (Park Ki-sun)",
-   "Secret",
-   "2015-2020",
-   28.0
+   "Helios (Shin Dong-jin)",
+   "Helios",
+   "2012-2015",
+   28.4
   ],
   [
-   "Link",
-   "Link",
-   "2013-2015",
-   28.0
+   "SoHwan",
+   "SoHwan",
+   "2016-2020",
+   28.3
   ],
   [
-   "Wako",
-   "Wako",
-   "2016-2025",
-   27.9
+   "Athena",
+   "Athena",
+   "2016-2018",
+   28.3
   ],
   [
-   "Leave",
-   "Leave",
+   "Jinjiao",
+   "Jinjiao",
+   "2015-2024",
+   28.3
+  ],
+  [
+   "Edward",
+   "Edward",
+   "2012-2016",
+   28.2
+  ],
+  [
+   "Xiyang",
+   "Xiyang",
+   "2014-2019",
+   28.2
+  ],
+  [
+   "Mor",
+   "Mor",
+   "2013-2017",
+   28.2
+  ],
+  [
+   "Clear (Song Hyeon-min)",
+   "Clear",
+   "2022-2026",
+   28.2
+  ],
+  [
+   "Oscarinin",
+   "Oscarinin",
    "2023-2026",
+   28.2
+  ],
+  [
+   "Spica",
+   "Spica",
+   "2019-2024",
+   28.2
+  ],
+  [
+   "Smoothie",
+   "Smoothie",
+   "2015-2021",
    27.9
   ],
   [
-   "Steeelback",
-   "Steeelback",
-   "2015-2020",
+   "Corn (Lei Wen)",
+   "Corn",
+   "2014-2019",
+   27.9
+  ],
+  [
+   "Chaser",
+   "Chaser",
+   "2013-2017",
+   27.9
+  ],
+  [
+   "Nyph",
+   "Nyph",
+   "2011-2015",
+   27.9
+  ],
+  [
+   "Willer",
+   "Willer",
+   "2021-2026",
    27.8
   ],
   [
-   "Jackies",
-   "Jackies",
-   "2024-2026",
-   27.8
-  ],
-  [
-   "Cop",
-   "Cop",
+   "Aluka",
+   "Aluka",
    "2013-2015",
+   27.8
+  ],
+  [
+   "Swift",
+   "Swift",
+   "2013-2018",
    27.8
   ],
   [
@@ -3375,406 +2948,872 @@
    27.8
   ],
   [
-   "KiWiKiD",
-   "KiWiKiD",
-   "2013-2016",
+   "Xpecial",
+   "Xpecial",
+   "2011-2017",
    27.8
   ],
   [
-   "Karis",
-   "Karis",
-   "2021-2026",
-   27.7
-  ],
-  [
-   "Forge",
-   "Forge",
-   "2019-2023",
-   27.7
-  ],
-  [
-   "Biubiu",
-   "Biubiu",
-   "2019-2023",
-   27.7
-  ],
-  [
-   "3z",
-   "3z",
+   "KRYST4L",
+   "KRYST4L",
    "2015-2019",
-   27.6
+   27.7
   ],
   [
-   "BuLLDoG (Lee Tae-young)",
-   "BuLLDoG",
+   "Lava",
+   "Lava",
+   "2017-2022",
+   27.7
+  ],
+  [
+   "Solo (Colin Earnest)",
+   "Solo",
+   "2016-2023",
+   27.7
+  ],
+  [
+   "Heng",
+   "Heng",
    "2023-2026",
+   27.7
+  ],
+  [
+   "Sheer",
+   "Sheer",
+   "2024-2026",
    27.6
   ],
   [
-   "Feather",
-   "Feather",
-   "2023-2026",
+   "Ley",
+   "Ley",
+   "2014-2020",
    27.6
   ],
   [
-   "Smoothie",
-   "Smoothie",
-   "2015-2021",
+   "Comp",
+   "Comp",
+   "2020-2024",
+   27.6
+  ],
+  [
+   "Monki",
+   "Monki",
+   "2024-2026",
    27.5
   ],
   [
    "Vladi",
    "Vladi",
    "2024-2026",
+   27.5
+  ],
+  [
+   "Crazy (Kim Jae-hee)",
+   "Crazy",
+   "2016-2020",
+   27.5
+  ],
+  [
+   "Unified",
+   "Unified",
+   "2017-2022",
    27.4
-  ],
-  [
-   "Keith",
-   "Keith",
-   "2015-2021",
-   27.4
-  ],
-  [
-   "SeongHwan",
-   "SeongHwan",
-   "2016-2019",
-   27.4
-  ],
-  [
-   "Bon0",
-   "Bon0",
-   "2018-2020",
-   27.3
-  ],
-  [
-   "K",
-   "K",
-   "2015-2019",
-   27.3
   ],
   [
    "Flakked",
    "Flakked",
    "2022-2026",
-   27.3
+   27.4
   ],
   [
-   "Assum",
-   "Assum",
-   "2022-2026",
-   27.3
+   "Yaoyao",
+   "Yaoyao",
+   "2021-2026",
+   27.4
   ],
   [
-   "Andil",
-   "Andil",
+   "Gilius",
+   "Gilius",
+   "2014-2022",
+   27.4
+  ],
+  [
+   "Patrik",
+   "Patrik",
+   "2018-2025",
+   27.4
+  ],
+  [
+   "Ggoong",
+   "Ggoong",
+   "2013-2018",
+   27.4
+  ],
+  [
+   "Sheo",
+   "Sheo",
    "2023-2026",
+   27.4
+  ],
+  [
+   "Xiaoxu",
+   "Xiaoxu",
+   "2023-2026",
+   27.3
+  ],
+  [
+   "Fury (Lee Jin-yong)",
+   "Fury",
+   "2014-2018",
+   27.3
+  ],
+  [
+   "Ella",
+   "Ella",
+   "2015-2017",
+   27.3
+  ],
+  [
+   "COLD",
+   "COLD",
+   "2015-2022",
+   27.3
+  ],
+  [
+   "Xiaolaohu",
+   "Xiaolaohu",
+   "2021-2024",
+   27.3
+  ],
+  [
+   "Irrelevant",
+   "Irrelevant",
+   "2022-2025",
+   27.3
+  ],
+  [
+   "Adam (Adam Maanane)",
+   "Adam",
+   "2021-2025",
    27.2
   ],
   [
-   "Crumbz",
-   "Crumbz",
-   "2012-2016",
+   "Beyond (Kim Kyu-seok)",
+   "Beyond",
+   "2016-2020",
    27.2
   ],
   [
-   "Wadid",
-   "Wadid",
-   "2017-2019",
-   27.2
-  ],
-  [
-   "Siwoo",
-   "Siwoo",
-   "2025-2026",
+   "Malrang",
+   "Malrang",
+   "2017-2025",
    27.1
+  ],
+  [
+   "Puff (Ding Wang)",
+   "Puff",
+   "2019-2022",
+   27.1
+  ],
+  [
+   "Shaoye",
+   "Shaoye",
+   "2024-2026",
+   27.1
+  ],
+  [
+   "CandyPanda",
+   "CandyPanda",
+   "2011-2015",
+   27.1
+  ],
+  [
+   "Junhao",
+   "Junhao",
+   "2025-2026",
+   27.0
+  ],
+  [
+   "DuDu (Lee Dong-ju)",
+   "DuDu",
+   "2020-2026",
+   27.0
+  ],
+  [
+   "Biubiu",
+   "Biubiu",
+   "2019-2023",
+   26.9
+  ],
+  [
+   "Quas",
+   "Quas",
+   "2014-2016",
+   26.9
+  ],
+  [
+   "Zdz",
+   "Zdz",
+   "2019-2026",
+   26.9
+  ],
+  [
+   "Apex (Hsieh Chia-Wei)",
+   "Apex",
+   "2015-2019",
+   26.8
+  ],
+  [
+   "Wraith",
+   "Wraith",
+   "2013-2018",
+   26.7
+  ],
+  [
+   "Vetheo",
+   "Vetheo",
+   "2021-2024",
+   26.7
+  ],
+  [
+   "Sangyoon",
+   "Sangyoon",
+   "2015-2019",
+   26.6
+  ],
+  [
+   "Ikssu",
+   "Ikssu",
+   "2014-2020",
+   26.6
+  ],
+  [
+   "Akaadian",
+   "Akaadian",
+   "2017-2021",
+   26.6
+  ],
+  [
+   "Bugi",
+   "Bugi",
+   "2018-2024",
+   26.6
+  ],
+  [
+   "Jiwoo",
+   "Jiwoo",
+   "2023-2026",
+   26.6
+  ],
+  [
+   "Strive",
+   "Strive",
+   "2022-2023",
+   26.5
+  ],
+  [
+   "Duan",
+   "Duan",
+   "2016-2020",
+   26.5
+  ],
+  [
+   "Taeyoon (Kim Tae-yoon)",
+   "Taeyoon",
+   "2021-2026",
+   26.5
+  ],
+  [
+   "Dreamer",
+   "Dreamer",
+   "2015-2018",
+   26.4
+  ],
+  [
+   "Yuuki (Hu Hao-Ming)",
+   "Yuuki",
+   "2018-2020",
+   26.4
+  ],
+  [
+   "Leave",
+   "Leave",
+   "2023-2026",
+   26.4
+  ],
+  [
+   "ADD",
+   "ADD",
+   "2016-2020",
+   26.4
+  ],
+  [
+   "Haro",
+   "Haro",
+   "2018-2021",
+   26.4
+  ],
+  [
+   "OnFleek",
+   "OnFleek",
+   "2019-2022",
+   26.4
+  ],
+  [
+   "Cop",
+   "Cop",
+   "2013-2015",
+   26.4
+  ],
+  [
+   "Kold",
+   "Kold",
+   "2015-2019",
+   26.4
+  ],
+  [
+   "SamD",
+   "SamD",
+   "2020-2026",
+   26.4
   ],
   [
    "PK",
    "PK",
    "2017-2020",
-   27.1
+   26.4
   ],
   [
-   "LIMIT (Dino Tot)",
-   "LIMIT",
+   "Mole",
+   "Mole",
+   "2018-2023",
+   26.4
+  ],
+  [
+   "Fearness",
+   "Fearness",
    "2020-2023",
-   27.0
+   26.3
   ],
   [
-   "Kold",
-   "Kold",
-   "2015-2019",
-   27.0
+   "Link",
+   "Link",
+   "2013-2015",
+   26.3
   ],
   [
-   "Apollo (Apollo Price)",
-   "Apollo",
-   "2014-2020",
-   26.8
-  ],
-  [
-   "Breeze",
-   "Breeze",
-   "2015-2019",
-   26.8
-  ],
-  [
-   "Oscarinin",
-   "Oscarinin",
-   "2023-2026",
-   26.8
-  ],
-  [
-   "Promisq",
-   "Promisq",
-   "2015-2022",
-   26.7
-  ],
-  [
-   "MrRallez",
-   "MrRallez",
-   "2014-2016",
-   26.7
-  ],
-  [
-   "ISMA",
-   "ISMA",
-   "2024-2026",
-   26.6
-  ],
-  [
-   "Jwei",
-   "Jwei",
-   "2021-2026",
-   26.6
-  ],
-  [
-   "Y4",
-   "Y4",
-   "2017-2021",
-   26.5
-  ],
-  [
-   "Twila",
-   "Twila",
-   "2019-2021",
-   26.4
-  ],
-  [
-   "Yaharong",
-   "Yaharong",
-   "2018-2022",
-   26.4
+   "Wadid",
+   "Wadid",
+   "2017-2019",
+   26.2
   ],
   [
    "Keane",
    "Keane",
    "2015-2018",
-   26.4
-  ],
-  [
-   "Zest (Hsieh Ming-Hsuan)",
-   "Zest",
-   "2016-2018",
-   26.4
-  ],
-  [
-   "ZWuJi",
-   "ZWuJi",
-   "2019-2021",
-   26.4
-  ],
-  [
-   "Shook",
-   "Shook",
-   "2014-2018",
-   26.3
-  ],
-  [
-   "Care",
-   "Care",
-   "2022-2026",
    26.2
   ],
   [
-   "Mash",
-   "Mash",
-   "2013-2020",
+   "Fredy122",
+   "Fredy122",
+   "2013-2016",
    26.2
   ],
   [
-   "Finn",
-   "Finn",
-   "2019-2024",
+   "GIDEON",
+   "GIDEON",
+   "2021-2026",
    26.1
   ],
   [
-   "Vsta",
-   "Vsta",
-   "2020-2022",
+   "Bon0",
+   "Bon0",
+   "2018-2020",
    26.1
   ],
   [
-   "Kitties",
-   "Kitties",
-   "2014-2016",
+   "ISMA",
+   "ISMA",
+   "2024-2026",
+   26.1
+  ],
+  [
+   "Bvoy",
+   "Bvoy",
+   "2019-2026",
    26.0
   ],
   [
-   "Aki (Mao An)",
-   "Aki",
-   "2019-2025",
-   26.0
-  ],
-  [
-   "Matt Elento",
-   "Matt Elento",
-   "2016-2018",
-   26.0
-  ],
-  [
-   "Taizan",
-   "Taizan",
-   "2016-2019",
+   "Jackies",
+   "Jackies",
+   "2024-2026",
    25.9
-  ],
-  [
-   "New",
-   "New",
-   "2018-2022",
-   25.8
-  ],
-  [
-   "Uniboy",
-   "Uniboy",
-   "2018-2023",
-   25.7
-  ],
-  [
-   "Neon (Mat\u00fa\u0161 Jakub\u010d\u00edk)",
-   "Neon",
-   "2018-2023",
-   25.7
-  ],
-  [
-   "Ninja",
-   "Ninja",
-   "2014-2017",
-   25.7
-  ],
-  [
-   "Dee",
-   "Dee",
-   "2015-2017",
-   25.7
-  ],
-  [
-   "Ian",
-   "Ian",
-   "2016-2019",
-   25.6
-  ],
-  [
-   "Sylvie",
-   "Sylvie",
-   "2022-2024",
-   25.6
-  ],
-  [
-   "Sencux",
-   "Sencux",
-   "2016-2019",
-   25.5
-  ],
-  [
-   "DnDn",
-   "DnDn",
-   "2022-2025",
-   25.4
-  ],
-  [
-   "Tabzz",
-   "Tabzz",
-   "2013-2017",
-   25.3
   ],
   [
    "Exile (Fabian Schubert)",
    "Exile",
    "2016-2019",
-   25.1
+   25.8
   ],
   [
-   "Eimy",
-   "Eimy",
-   "2015-2019",
-   25.1
+   "Xiaopeng",
+   "Xiaopeng",
+   "2019-2022",
+   25.8
   ],
   [
-   "Lindarang",
-   "Lindarang",
+   "SeongHwan",
+   "SeongHwan",
    "2016-2019",
+   25.8
+  ],
+  [
+   "Vsta",
+   "Vsta",
+   "2020-2022",
+   25.7
+  ],
+  [
+   "Pleata",
+   "Pleata",
+   "2021-2026",
+   25.6
+  ],
+  [
+   "GBM",
+   "GBM",
+   "2013-2017",
+   25.6
+  ],
+  [
+   "BuLLDoG (Lee Tae-young)",
+   "BuLLDoG",
+   "2023-2026",
+   25.6
+  ],
+  [
+   "Palafox",
+   "Palafox",
+   "2021-2026",
+   25.4
+  ],
+  [
+   "Twila",
+   "Twila",
+   "2019-2021",
+   25.4
+  ],
+  [
+   "V",
+   "V",
+   "2015-2017",
+   25.4
+  ],
+  [
+   "Care",
+   "Care",
+   "2022-2026",
+   25.4
+  ],
+  [
+   "Assum",
+   "Assum",
+   "2022-2026",
+   25.4
+  ],
+  [
+   "Hena",
+   "Hena",
+   "2021-2026",
+   25.3
+  ],
+  [
+   "Shook",
+   "Shook",
+   "2014-2018",
+   25.3
+  ],
+  [
+   "Neon (Mat\u00fa\u0161 Jakub\u010d\u00edk)",
+   "Neon",
+   "2018-2023",
+   25.3
+  ],
+  [
+   "Ice (Yoon Sang-hoon)",
+   "Ice",
+   "2022-2026",
+   25.2
+  ],
+  [
+   "3z",
+   "3z",
+   "2015-2019",
+   25.2
+  ],
+  [
+   "Feather",
+   "Feather",
+   "2023-2026",
+   25.2
+  ],
+  [
+   "Happy",
+   "Happy",
+   "2013-2017",
+   25.2
+  ],
+  [
+   "Dee",
+   "Dee",
+   "2015-2017",
+   25.2
+  ],
+  [
+   "Sencux",
+   "Sencux",
+   "2016-2019",
+   25.2
+  ],
+  [
+   "Andil",
+   "Andil",
+   "2023-2026",
+   25.1
+  ],
+  [
+   "Forge",
+   "Forge",
+   "2019-2023",
+   25.1
+  ],
+  [
+   "Steeelback",
+   "Steeelback",
+   "2015-2020",
    25.0
   ],
   [
-   "Gemini",
-   "Gemini",
-   "2017-2022",
+   "Tangyuan",
+   "Tangyuan",
+   "2023-2026",
+   25.0
+  ],
+  [
+   "Aki (Mao An)",
+   "Aki",
+   "2019-2025",
+   25.0
+  ],
+  [
+   "Ysera",
+   "Ysera",
+   "2015-2019",
    24.9
+  ],
+  [
+   "World6",
+   "World6",
+   "2015-2019",
+   24.9
+  ],
+  [
+   "GuGer",
+   "GuGer",
+   "2015-2024",
+   24.8
+  ],
+  [
+   "Ian",
+   "Ian",
+   "2016-2019",
+   24.8
+  ],
+  [
+   "Finn",
+   "Finn",
+   "2019-2024",
+   24.7
+  ],
+  [
+   "Mickey (Son Young-min)",
+   "Mickey",
+   "2014-2020",
+   24.7
+  ],
+  [
+   "LIMIT (Dino Tot)",
+   "LIMIT",
+   "2020-2023",
+   24.6
   ],
   [
    "SERAPH",
    "SERAPH",
    "2013-2017",
-   24.8
+   24.6
   ],
   [
-   "Sponge",
-   "Sponge",
-   "2024-2026",
-   24.7
+   "New",
+   "New",
+   "2018-2022",
+   24.5
   ],
   [
-   "Nuc",
-   "Nuc",
-   "2021-2026",
-   24.7
+   "ZWuJi",
+   "ZWuJi",
+   "2019-2021",
+   24.5
   ],
   [
-   "2188",
-   "2188",
-   "2016-2019",
+   "Eimy",
+   "Eimy",
+   "2015-2019",
    24.4
+  ],
+  [
+   "K",
+   "K",
+   "2015-2019",
+   24.4
+  ],
+  [
+   "Taizan",
+   "Taizan",
+   "2016-2019",
+   24.3
+  ],
+  [
+   "Betsy",
+   "Betsy",
+   "2015-2018",
+   24.3
+  ],
+  [
+   "Wako",
+   "Wako",
+   "2016-2025",
+   24.3
+  ],
+  [
+   "JNX",
+   "JNX",
+   "2019-2025",
+   24.2
   ],
   [
    "Nuclear",
    "Nuclear",
    "2015-2020",
-   24.2
+   24.1
   ],
   [
-   "Ysera",
-   "Ysera",
-   "2015-2019",
-   22.6
+   "Sylvie",
+   "Sylvie",
+   "2022-2024",
+   24.1
   ],
   [
-   "Lourlo",
-   "Lourlo",
-   "2016-2020",
-   22.3
+   "Zest (Hsieh Ming-Hsuan)",
+   "Zest",
+   "2016-2018",
+   24.1
+  ],
+  [
+   "Yaharong",
+   "Yaharong",
+   "2018-2022",
+   24.0
+  ],
+  [
+   "Jwei",
+   "Jwei",
+   "2021-2026",
+   24.0
+  ],
+  [
+   "Apollo (Apollo Price)",
+   "Apollo",
+   "2014-2020",
+   23.9
+  ],
+  [
+   "Ninja",
+   "Ninja",
+   "2014-2017",
+   23.9
+  ],
+  [
+   "Sponge",
+   "Sponge",
+   "2024-2026",
+   23.9
+  ],
+  [
+   "Uniboy",
+   "Uniboy",
+   "2018-2023",
+   23.9
+  ],
+  [
+   "Matt Elento",
+   "Matt Elento",
+   "2016-2018",
+   23.9
+  ],
+  [
+   "Route",
+   "Route",
+   "2019-2025",
+   23.9
+  ],
+  [
+   "Y4",
+   "Y4",
+   "2017-2021",
+   23.9
+  ],
+  [
+   "Keith",
+   "Keith",
+   "2015-2021",
+   23.8
   ],
   [
    "Pollu",
    "Pollu",
    "2024-2026",
-   21.5
+   23.8
+  ],
+  [
+   "MrRallez",
+   "MrRallez",
+   "2014-2016",
+   23.7
+  ],
+  [
+   "Crumbz",
+   "Crumbz",
+   "2012-2016",
+   23.7
+  ],
+  [
+   "DnDn",
+   "DnDn",
+   "2022-2025",
+   23.5
+  ],
+  [
+   "Lindarang",
+   "Lindarang",
+   "2016-2019",
+   23.4
+  ],
+  [
+   "Shiphtur",
+   "Shiphtur",
+   "2013-2016",
+   23.4
+  ],
+  [
+   "Haichao",
+   "Haichao",
+   "2022-2026",
+   23.4
+  ],
+  [
+   "Karis",
+   "Karis",
+   "2021-2026",
+   23.3
+  ],
+  [
+   "Mash",
+   "Mash",
+   "2013-2020",
+   23.3
+  ],
+  [
+   "Gate",
+   "Gate",
+   "2015-2020",
+   23.2
+  ],
+  [
+   "Hery",
+   "Hery",
+   "2022-2026",
+   23.1
+  ],
+  [
+   "Gemini",
+   "Gemini",
+   "2017-2022",
+   23.1
   ],
   [
    "MaHa",
    "MaHa",
    "2016-2018",
-   20.4
+   23.1
+  ],
+  [
+   "Secret (Park Ki-sun)",
+   "Secret",
+   "2015-2020",
+   22.8
+  ],
+  [
+   "Nuc",
+   "Nuc",
+   "2021-2026",
+   22.7
+  ],
+  [
+   "Breeze",
+   "Breeze",
+   "2015-2019",
+   22.6
+  ],
+  [
+   "Promisq",
+   "Promisq",
+   "2015-2022",
+   22.6
+  ],
+  [
+   "KiWiKiD",
+   "KiWiKiD",
+   "2013-2016",
+   22.5
+  ],
+  [
+   "Tabzz",
+   "Tabzz",
+   "2013-2017",
+   21.3
+  ],
+  [
+   "Lourlo",
+   "Lourlo",
+   "2016-2020",
+   21.1
+  ],
+  [
+   "2188",
+   "2188",
+   "2016-2019",
+   21.1
   ]
- ]
+ ],
+ "reruns": {
+  "faker": [
+   1000,
+   0
+  ],
+  "knight": [
+   0,
+   1000
+  ]
+ }
 }

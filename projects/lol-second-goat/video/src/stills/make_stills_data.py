@@ -7,8 +7,10 @@ def rows(n): return list(csv.DictReader(open(root / "data/csv" / n)))
 out = {}
 out["bigStage"] = {by_link[r["Link"]]: round(float(r["c_big_stage_clutch"]), 1) for r in rows("draft_scores.csv") if r["Link"] in by_link and r["c_big_stage_clutch"]}
 out["intl"] = [[by_link.get(r["Link"], r["Link"].lower()), r["name"], float(r["score"])] for r in rows("whatif_intl_only.csv")][:10]
-out["knightNeeds"] = [[r["case"], float(r["knight"]), float(r["faker"])] for r in rows("whatif_knight_needs.csv")]
+out["knightNeeds"] = [[r["case"], float(r["knight"]), float(r["faker"]), float(r["trophy_pts_added"])] for r in rows("whatif_knight_needs.csv")]
 split = rows("draft_scores_split_faker.csv"); split.sort(key=lambda r: -float(r["score"]))
 out["split"] = [[r["Link"], r["name"], r["years"], round(float(r["score"]), 1)] for r in split]
+sh = {by_link.get(r["Link"], r["Link"]): [int(r["wins"]), int(r["seconds"])] for r in rows("shuffle_counts.csv")}
+out["reruns"] = {k: v for k, v in sh.items() if v[0] or v[1]}
 json.dump(out, open(root / "video/src/data/stills.json", "w"), indent=1)
 print(json.dumps(out)[:1500])
