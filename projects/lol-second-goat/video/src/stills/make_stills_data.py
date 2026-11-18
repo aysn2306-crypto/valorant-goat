@@ -26,5 +26,18 @@ out["board"] = [[idof(r), r["name"], int(float(r["games"])), f(r["c_skill"]), f(
   int(float(r["worlds_titles"] or 0)), f(r["vs_faker"]), f(r["intl_games"])] for r in ds]
 ev = list(csv.DictReader(open("/mnt/project-files/lol-second-goat/research/data/event_values.csv")))
 out["events"] = [[r["Page"], r["tier"], r["champ"], int(r["year"]), round(float(r["bits"]), 2)] for r in ev if r["REF"] == "1700"]
+# kills per game by league and year (2016 on), and BLG's Worlds 2026 title credit
+from collections import defaultdict
+gk = defaultdict(lambda: [0, None, None])
+for r in rows("games_2016on.csv"):
+    pg = r["Page"]; rg = next((n for n in ("LCK", "LPL") if pg.startswith(n + "/")), None)
+    if not rg: continue
+    e = gk[r["GameId"]]; e[0] += int(float(r["Kills"] or 0)); e[1] = rg; e[2] = int(r["Date"][:4])
+ky = defaultdict(list)
+for k, rg, yr in gk.values(): ky[(rg, yr)].append(k)
+out["kills"] = {rg: {yr: round(sum(v) / len(v), 1) for (g2, yr), v in sorted(ky.items()) if g2 == rg} for rg in ("LCK", "LPL")}
+out["killsAll"] = {rg: round(sum(sum(v) for (g2, _), v in ky.items() if g2 == rg) / sum(len(v) for (g2, _), v in ky.items() if g2 == rg), 1) for rg in ("LCK", "LPL")}
+out["blgCredit"] = [[by_link.get(r["Link"], r["Link"]), r["Link"].split(" (")[0], round(float(r["credit"]), 3)] for r in rows("title_credits.csv")
+  if r["page"] == "2026 Season World Championship" and r["team"] == "Bilibili Gaming"]
 json.dump(out, open(root / "video/src/data/stills.json", "w"), indent=1)
 print(json.dumps(out)[:1500])

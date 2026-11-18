@@ -610,3 +610,94 @@ export const S21Gumayusi: React.FC = () => (
       <div style={{ marginTop: 12, fontSize: 22, color: "#9AA3B1" }}>GUMAYUSI, DAILY ESPORTS (TRANSLATED)</div>
     </div>} />
 );
+
+// 22. Not every league plays the same game: kills per game, LPL vs LCK, by year (games_2016on.csv)
+export const S22Kills: React.FC = () => {
+  const K = S.kills as Record<string, Record<string, number>>;
+  const all = S.killsAll as Record<string, number>;
+  const xr: [number, number] = [2015.6, 2026.6], yr: [number, number] = [16, 32];
+  const { X, Y } = scale(B, xr, yr);
+  const col: Record<string, string> = { LPL: "#E8392B", LCK: "#4F8DF5" };
+  const line = (rg: string) => Object.entries(K[rg]).map(([y, v]) => `${X(Number(y))},${Y(v)}`).join(" L ");
+  return (
+    <Stage title="MORE FIGHTING IN THE LPL">
+      <Axes b={B} xr={xr} yr={yr} xt={[2016, 2018, 2020, 2022, 2024, 2026]} yt={[16, 20, 24, 28, 32]} xl="YEAR" yl="KILLS PER GAME" xf={(v) => String(v)} />
+      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+        {["LCK", "LPL"].map((rg) => (
+          <g key={rg} style={{ filter: `drop-shadow(0 0 8px ${col[rg]})` }}>
+            <path d={"M " + line(rg)} stroke={col[rg]} strokeWidth={6} fill="none" />
+            {Object.entries(K[rg]).map(([y, v]) => <circle key={y} cx={X(Number(y))} cy={Y(v)} r={8} fill={col[rg]} />)}
+          </g>
+        ))}
+      </svg>
+      {["LPL", "LCK"].map((rg) => (
+        <div key={rg} style={{ position: "absolute", left: rg === "LPL" ? 420 : 900, top: rg === "LPL" ? Y(29.5) : Y(19), whiteSpace: "nowrap" }}>
+          <div style={{ fontFamily: F.title, fontSize: 52, letterSpacing: 1, color: col[rg] }}>{rg}</div>
+          <div style={{ fontFamily: F.body, fontWeight: 800, fontSize: 30, color: C.text }}>{all[rg]} A GAME</div>
+        </div>
+      ))}
+    </Stage>
+  );
+};
+
+// 23. Does it work? Picking each year's first-team All-Pros on held-out 2022-26 (validate.py)
+const TEST: [string, number][] = [["PICKING AT RANDOM", 12], ["PICKING WINNERS", 58], ["MY MODEL", 63]];
+export const S23AllPro: React.FC = () => {
+  const b: Box = { x0: 620, y0: 300, x1: 1640, y1: 760 };
+  const X = (v: number) => b.x0 + (v / 100) * (b.x1 - b.x0);
+  const Y = (i: number) => b.y0 + 60 + i * 140;
+  return (
+    <Stage title="DOES IT WORK?">
+      <div style={{ position: "absolute", left: b.x0 - 2, top: b.y0 - 20, width: 3, height: b.y1 - b.y0 + 22, background: "rgba(237,239,242,0.85)" }} />
+      <div style={{ position: "absolute", left: b.x0 - 2, top: b.y1, width: b.x1 - b.x0 + 30, height: 3, background: "rgba(237,239,242,0.85)" }} />
+      {[0, 25, 50, 75, 100].map((v) => <Big key={v} x={X(v)} y={b.y1 + 12} size={40} align="center" w={160}>{v}%</Big>)}
+      <div style={{ position: "absolute", left: b.x0, right: 1920 - b.x1, top: b.y1 + 70, display: "flex", justifyContent: "center", alignItems: "center", gap: 18,
+        fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>ALL-PROS PICKED RIGHT
+        <svg width="70" height="40" viewBox="0 0 70 40"><path d="M70 20 L40 40 L40 28 L0 28 L0 12 L40 12 L40 0 Z" fill={C.text} /></svg></div>
+      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+        {TEST.map(([, v], i) => (
+          <g key={i}>
+            <line x1={X(0)} x2={X(v)} y1={Y(i)} y2={Y(i)} stroke={i === 2 ? "rgba(92,190,80,0.6)" : "rgba(237,239,242,0.3)"} strokeWidth={6} strokeLinecap="round" />
+            <circle cx={X(v)} cy={Y(i)} r={i === 2 ? 22 : 15} fill={i === 2 ? "#5CBE50" : heat(v / 100)} style={{ filter: `drop-shadow(0 0 10px ${i === 2 ? "#5CBE50" : heat(v / 100)})` }} />
+          </g>
+        ))}
+      </svg>
+      {TEST.map(([n, v], i) => (
+        <React.Fragment key={n}>
+          <div style={{ position: "absolute", left: b.x0 - 560, width: 530, textAlign: "right", top: Y(i) - 26, fontFamily: F.title, fontSize: 46, letterSpacing: 1,
+            color: i === 2 ? "#5CBE50" : C.text }}>{n}</div>
+          <div style={{ position: "absolute", left: X(v) + 36, top: Y(i) - 30, fontFamily: F.body, fontWeight: 800, fontSize: i === 2 ? 52 : 40, color: i === 2 ? "#5CBE50" : C.text }}>{v}%</div>
+        </React.Fragment>
+      ))}
+    </Stage>
+  );
+};
+
+// 24. Five players lift a trophy: BLG's Worlds 2026 credit per starter, inside the 0.85 to 1.15 band (title_credits.csv)
+export const S24Credit: React.FC = () => {
+  const rows = (S.blgCredit as [string, string, number][]).slice().sort((a, b) => b[2] - a[2]);
+  const b: Box = { x0: 520, y0: 230, x1: 1640, y1: 820 };
+  const X = (v: number) => b.x0 + ((v - 0.8) / 0.4) * (b.x1 - b.x0);
+  const Y = (i: number) => b.y0 + 60 + i * ((b.y1 - b.y0 - 110) / 4);
+  return (
+    <Stage title="FIVE PLAYERS LIFT A TROPHY">
+      <div style={{ position: "absolute", left: X(0.85), top: b.y0 - 10, width: X(1.15) - X(0.85), height: b.y1 - b.y0 + 10, background: "rgba(34,211,238,0.10)",
+        borderLeft: "2px dashed rgba(34,211,238,0.5)", borderRight: "2px dashed rgba(34,211,238,0.5)" }} />
+      <div style={{ position: "absolute", left: X(1) - 1, top: b.y0 - 10, width: 2, height: b.y1 - b.y0 + 10, background: "rgba(237,239,242,0.35)" }} />
+      <div style={{ position: "absolute", left: b.x0 - 2, top: b.y1, width: b.x1 - b.x0 + 30, height: 3, background: "rgba(237,239,242,0.85)" }} />
+      {[0.8, 0.9, 1, 1.1, 1.2].map((v) => <Big key={v} x={X(v)} y={b.y1 + 12} size={40} align="center" w={160}>{v.toFixed(1)}x</Big>)}
+      <div style={{ position: "absolute", left: b.x0, right: 1920 - b.x1, top: b.y1 + 70, display: "flex", justifyContent: "center", alignItems: "center", gap: 18,
+        fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>SHARE OF THE TITLE
+        <svg width="70" height="40" viewBox="0 0 70 40"><path d="M70 20 L40 40 L40 28 L0 28 L0 12 L40 12 L40 0 Z" fill={C.text} /></svg></div>
+      {rows.map(([id, n, v], i) => (
+        <React.Fragment key={id}>
+          <div style={{ position: "absolute", left: Math.min(X(1), X(v)), top: Y(i) - 4, width: Math.abs(X(v) - X(1)), height: 8, background: "rgba(34,211,238,0.6)", borderRadius: 4 }} />
+          <Face id={id} x={X(v)} y={Y(i)} size={70} ring={C.cyan} glow={"rgba(34,211,238,0.5)"} />
+          <div style={{ position: "absolute", left: b.x0 - 360, width: 330, textAlign: "right", top: Y(i) - 26, fontFamily: F.title, fontSize: 44, color: C.text }}>{n.toUpperCase()}</div>
+          <div style={{ position: "absolute", left: X(v) + 46, top: Y(i) - 20, fontFamily: F.body, fontWeight: 800, fontSize: 30, color: C.cyan }}>{v.toFixed(2)}x</div>
+        </React.Fragment>
+      ))}
+      <Big x={X(1.15) - 10} y={b.y0 - 50} size={30} align="right" w={600} color={C.cyan}>ALLOWED RANGE 0.85x TO 1.15x</Big>
+    </Stage>
+  );
+};
