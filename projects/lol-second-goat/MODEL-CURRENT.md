@@ -90,6 +90,9 @@ Knight with 6 Worlds (+5): 90.4, passes Faker 88.5. Lower bound: extra titles wo
 **Ruler vs Chovy:** Chovy ahead by 4.0. Ruler wins trophies, Chovy wins skill, carry and intangibles. Ruler passes Chovy only when trophies are 60%+ of the score. Present as a real debate.
 
 ## Known limits (say them on screen)
-- Bengi and other setup junglers: box scores can't see them (Bengi around #60).
+- Bengi and other setup junglers: box scores can't see them (Bengi #55; 4 junglers in the top 30).
+- Uzi (Hall of Legends) is #26: the Hall honours impact and fame, we weight titles at 40%. Worth a line in the script.
+
+Research thread rechecked v9 at 16:22 and signed off.
 - Best of five data starts 2016, so Faker's 2013 to 2015 series aren't in clutch.
 - Intangibles are proxies (All-Pro votes, team record with and without).
