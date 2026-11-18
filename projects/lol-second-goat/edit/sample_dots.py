@@ -7,6 +7,7 @@ LINES = [
     "The nominees: Knight, Canyon, Gumayusi and Ruler.",
     "And the winner is Ruler. Only one world title, but nobody in the race has more trophy points.",
     "Oh, and here's Faker, by the way.",
+    "1,154.",
 ]
 out = []
 for t in LINES:

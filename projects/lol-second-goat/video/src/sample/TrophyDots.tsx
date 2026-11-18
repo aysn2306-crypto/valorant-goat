@@ -29,6 +29,7 @@ const DOTS = ALL.filter((p) => p.id !== "faker").map((p) => ({ id: p.id, name: p
 }
 const FAKER = Math.round(ALL.find((p) => p.id === "faker")!.raw.trophies);
 const X_FAKER = 1100;
+const RULER = ALL.find((p) => p.id === "ruler")!.raw.trophies;
 // colour by value: red (nothing won) to orange, yellow, green (top of the pack); gold is kept for Faker
 const STOPS: [number, number[]][] = [[0, [232, 57, 43]], [150, [242, 120, 40]], [330, [232, 205, 58]], [500, [92, 190, 80]]];
 const heat = (v: number) => {
@@ -41,10 +42,10 @@ const NOMINEES = ["knight", "canyon", "gumayusi", "ruler"];
 const SIDE = ["keria", "bin", "oner", "zeus", "chovy"];
 
 // timeline from the scratch VO lengths
-const GAPS = [15, 30, 8, 10];
+const GAPS = [15, 30, 8, 10, 0];
 const starts: number[] = [];
 let t = 0;
-vo.forEach((l, i) => { t += GAPS[i]; starts.push(t); t += Math.round(l.sec * 30); });
+vo.slice(0, 4).forEach((l, i) => { t += GAPS[i]; starts.push(t); t += Math.round(l.sec * 30); });
 const at = (line: number, word: string) => {
   const text = vo[line].text;
   return starts[line] + Math.round((text.indexOf(word) / text.length) * vo[line].sec * 30 * 0.92);
@@ -59,10 +60,13 @@ const T = {
   land: 0,
   zoomOut: 0,
 };
-const CLIMB = 150;
+// Jxmy 8 charts (Warriors 399): fast climb ~3.5 s, music cuts as the number is said, 3 s of silence, then a slow zoom out
+const CLIMB = 105;
 T.land = T.climb + CLIMB;
-T.zoomOut = T.land + 50;
-export const DOTS_FRAMES = T.zoomOut + 60 + 90;
+T.musicCut = T.land;
+starts.push(T.land + 2);
+T.zoomOut = T.land + 90;
+export const DOTS_FRAMES = T.zoomOut + 75 + 120;
 
 // view: the value range [lo, hi] maps to screen y [880, 230]
 const Y_LO = 840, Y_HI = 230;
@@ -71,9 +75,12 @@ const view = (f: number): [number, number] => {
   const zi = interpolate(f, [T.zoomIn, T.zoomIn + 40], [0, 1], { ...clamp, easing: ease });
   // slow start, fast middle, slow arrival: the climb should feel long
   const cl = interpolate(f, [T.climb, T.land], [0, 1], { ...clamp, easing: (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2) });
-  const zo = interpolate(f, [T.zoomOut, T.zoomOut + 45], [0, 1], { ...clamp, easing: ease });
+  const zo = interpolate(f, [T.zoomOut, T.zoomOut + 75], [0, 1], { ...clamp, easing: ease });
   let lo = interpolate(zi, [0, 1], [0, 375]);
   let hi = interpolate(zi, [0, 1], [640, 375 + SPAN_IN]);
+  // slow push in while the pack is talked about, so the hold never sits dead still
+  const push = interpolate(f, [T.zoomIn + 40, T.climb], [0, 1], clamp);
+  lo += 14 * push; hi -= 14 * push;
   const top = FAKER + 45;
   lo += cl * (top - SPAN_IN - 375);
   hi += cl * (top - (375 + SPAN_IN));
@@ -87,7 +94,7 @@ export const TrophyDots: React.FC = () => {
   const [lo, hi] = view(f);
   const y = (v: number) => Y_LO + ((v - lo) / (hi - lo)) * (Y_HI - Y_LO);
   const span = hi - lo;
-  const step = span < 260 ? 50 : span < 700 ? 100 : 200;
+  const step = span < 260 ? 25 : span < 700 ? 100 : 200;
   const grid: number[] = [];
   for (let g = Math.ceil(lo / step) * step; g <= hi + 1; g += step) grid.push(g);
 
@@ -97,14 +104,15 @@ export const TrophyDots: React.FC = () => {
   const fakerLabel = interpolate(f, [T.land - 4, T.land + 6], [0, 1], clamp);
 
   return (
-    <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 45%, #1C1A22 0%, #0D0C10 70%, #060507 100%)", overflow: "hidden" }}>
-      {/* faint values down the middle, like the reference star fields */}
+    <AbsoluteFill style={{ background: "radial-gradient(ellipse at 30% 45%, rgba(40,58,92,0.55) 0%, rgba(0,0,0,0) 55%), radial-gradient(ellipse at 72% 55%, rgba(92,34,40,0.55) 0%, rgba(0,0,0,0) 55%), #0B0B0F", overflow: "hidden" }}>
+      {/* axis: white line and big condensed numbers on the left, as in Jxmy's climbs (8 charts, 10:02 to 10:18) */}
+      <div style={{ position: "absolute", left: 190, top: 150, width: 3, height: Y_LO - 150 + 30, background: "rgba(237,239,242,0.85)", opacity: fadeIn }} />
       {grid.map((g) => {
         const gy = y(g);
-        if (gy < 150 || gy > 900) return null;
+        if (gy < 140 || gy > Y_LO + 20) return null;
         return (
-          <div key={g} style={{ position: "absolute", left: 860, width: 200, top: gy - 22, textAlign: "center", fontFamily: F.title, fontSize: 40,
-            color: "rgba(237,239,242,0.13)", fontVariantNumeric: "tabular-nums", opacity: fadeIn }}>{g.toLocaleString("en-US")}</div>
+          <div key={g} style={{ position: "absolute", left: 40, width: 130, top: gy - 30, textAlign: "right", fontFamily: F.title, fontSize: 52,
+            color: C.text, fontVariantNumeric: "tabular-nums", opacity: fadeIn }}>{g.toLocaleString("en-US")}</div>
         );
       })}
 
@@ -126,6 +134,10 @@ export const TrophyDots: React.FC = () => {
               boxShadow: `0 0 ${r}px ${heat(d.v)}`, opacity: op }} />
             {labelO > 0 && (
               <>
+                {win && (
+                  <div style={{ position: "absolute", left: d.x - 60, top: dy - 62, width: 300, height: 124, borderRadius: "50%",
+                    border: "3px solid rgba(255,255,255,0.9)", opacity: labelO * interpolate(f, [T.winner, T.winner + 10], [0, 1], clamp) * (1 - out) }} />
+                )}
                 <div style={{ position: "absolute", left: d.x - 28, top: dy - 28, width: 56, height: 56, borderRadius: 28,
                   border: `3px solid ${win ? C.cyan : "rgba(255,255,255,0.9)"}`, opacity: labelO, transform: `scale(${ringS})` }} />
                 <div style={{ position: "absolute", left: d.x + 36, top: dy - 34, opacity: labelO, whiteSpace: "nowrap" }}>
@@ -159,6 +171,19 @@ export const TrophyDots: React.FC = () => {
         );
       })()}
 
+      {/* the gap, after the zoom out (Jxmy: "92 wins between Warriors and the 2nd best team") */}
+      {(() => {
+        const o = interpolate(f, [T.zoomOut + 80, T.zoomOut + 95], [0, 1], clamp);
+        if (o <= 0) return null;
+        const a = y(FAKER), b = y(RULER);
+        return (
+          <div style={{ position: "absolute", left: 1500, top: a, height: b - a, borderLeft: "3px dashed rgba(237,239,242,0.8)", opacity: o }}>
+            <div style={{ position: "absolute", left: 24, top: (b - a) / 2 - 60, width: 360, fontFamily: F.body, fontWeight: 700, fontSize: 38,
+              color: C.text, lineHeight: 1.25 }}>{(FAKER - Math.round(RULER)).toLocaleString("en-US")} points between Faker and the next best</div>
+          </div>
+        );
+      })()}
+
       {/* title, top centre */}
       <div style={{ position: "absolute", left: 0, right: 0, top: 46, textAlign: "center", opacity: fadeIn * (1 - 0.0 * focus) }}>
         <div style={{ fontFamily: F.title, fontSize: 84, letterSpacing: 2, color: "#ECE6D2", textShadow: "0 0 18px rgba(236,230,210,0.35)" }}>THE TROPHY CABINET</div>
@@ -172,7 +197,14 @@ export const TrophyDots: React.FC = () => {
       {vo.map((l, i) => (
         <Sequence key={i} from={starts[i]} layout="none"><Audio src={staticFile(l.src)} /></Sequence>
       ))}
-      {/* music bed is a placeholder slot: the track gets picked from the reference study (instrumental only) */}
+      {/* instrumental bed (YouTube Audio Library, Let It Ride by Anno Domini Beats), low under the voice like MachineLoLing;
+          it plays through the climb and cuts on the number, then 3 s of silence, then comes back for the zoom out (Jxmy 8 charts 10:12) */}
+      <Audio src={staticFile("music/let-it-ride.mp3")} startFrom={330} volume={(fr) => {
+        const talking = vo.some((l, i) => fr >= starts[i] - 4 && fr <= starts[i] + l.sec * 30 + 4);
+        const base = talking ? 0.05 : 0.08;
+        const env = interpolate(fr, [0, 25, T.land - 2, T.land, T.land + 95, T.land + 140, DOTS_FRAMES - 30, DOTS_FRAMES], [0, 1, 1, 0, 0, 1, 1, 0], clamp);
+        return base * env;
+      }} />
     </AbsoluteFill>
   );
 };
