@@ -935,3 +935,171 @@ export const SampleWithWithout: React.FC = () => {
     </Stage>
   );
 };
+
+// ---------- Round 4 shapes (ay 18:52: vary the chart types; with/without bars were "a breath of fresh air") ----------
+const Cup: React.FC<{ x: number; y: number; s: number; color: string; glow?: boolean }> = ({ x, y, s, color, glow }) => (
+  <svg style={{ position: "absolute", left: x - s / 2, top: y - s / 2, filter: glow ? `drop-shadow(0 0 8px ${color})` : undefined }} width={s} height={s} viewBox="0 0 64 64">
+    <path d="M16 6 H48 V20 C48 32 40 38 32 38 C24 38 16 32 16 20 Z M16 10 H6 V16 C6 24 12 28 18 28 M48 10 H58 V16 C58 24 52 28 46 28" fill="none" stroke={color} strokeWidth={5} strokeLinejoin="round" />
+    <path d="M16 6 H48 V20 C48 32 40 38 32 38 C24 38 16 32 16 20 Z" fill={color} />
+    <rect x={28} y={38} width={8} height={12} fill={color} /><rect x={18} y={50} width={28} height={8} rx={2} fill={color} />
+  </svg>
+);
+
+// 10 (round 4). Biggest stage as towers: the big stage board (c_big_stage), top 5, faces on top, average pro line.
+export const R4BigStage: React.FC = () => {
+  const b: Box = { x0: 300, y0: 250, x1: 1640, y1: 800 };
+  const { Y } = scale(b, [0, 1], [0, 108]);
+  const top = (S.board as BoardRow[]).filter((r) => r[4] !== null).sort((a, z) => (z[4] as number) - (a[4] as number)).slice(0, 5);
+  const pad = 120, gw = (b.x1 - b.x0 - pad) / top.length, bw = 130;
+  return (
+    <Stage title="BIGGEST STAGE">
+      <Axes b={b} xr={[0, 1]} yr={[0, 108]} xt={[]} yt={[0, 25, 50, 75, 100]} xl="" yl="SCORE" xArrow={false} />
+      <div style={{ position: "absolute", left: b.x0, width: b.x1 - b.x0 + 30, top: Y(50), borderTop: "3px dashed rgba(237,239,242,0.45)" }} />
+      <div style={{ position: "absolute", left: b.x1 - 210, top: Y(50) + 8, fontFamily: F.body, fontWeight: 800, fontSize: 20, color: "#AEB6C2", letterSpacing: 1 }}>AVERAGE PRO</div>
+      {top.map((r, i) => {
+        const v = r[4] as number, x = b.x0 + pad + gw * (i + 0.5) - bw / 2, kn = r[0] === "knight", first = i === 0;
+        const col = first ? C.cyan : "rgba(214,219,226,0.72)";
+        return (
+          <React.Fragment key={r[0]}>
+            <div style={{ position: "absolute", left: x, top: Y(v), width: bw, height: b.y1 - Y(v), background: col, borderRadius: "16px 16px 0 0",
+              boxShadow: first ? "0 0 26px rgba(34,211,238,0.45)" : undefined }} />
+            <Big x={x + bw / 2} y={Y(v) + 16} size={44} align="center" w={bw} color="#0B0B0F">{r0(v)}</Big>
+            <Face id={r[0]} x={x + bw / 2} y={Y(v) - 64} size={104} ring={first ? C.cyan : "#E9ECF1"} glow={first ? "rgba(34,211,238,0.6)" : "rgba(0,0,0,0.5)"} />
+            <Big x={x + bw / 2} y={b.y1 + 16} size={40} align="center" w={gw} color={first || kn ? C.cyan : C.text}>{r[1].toUpperCase()}</Big>
+          </React.Fragment>
+        );
+      })}
+    </Stage>
+  );
+};
+
+// 13 (round 4). Titles with different teams as a timeline: one row per player, a pill per team, a cup per title.
+export const R4TeamsTimeline: React.FC = () => {
+  const rows = S.titleTimeline as [string, [number, string][]][];
+  const b: Box = { x0: 420, y0: 230, x1: 1620, y1: 830 };
+  const xr: [number, number] = [2012.4, 2026.6];
+  const { X } = scale(b, xr, [0, 1]);
+  const pitch = (b.y1 - b.y0) / rows.length;
+  return (
+    <Stage title="TITLES WITH DIFFERENT TEAMS">
+      <Axes b={b} xr={xr} yr={[0, 1]} xt={[2014, 2016, 2018, 2020, 2022, 2024, 2026]} yt={[]} xl="YEAR" yl="" xf={(v) => String(v)} />
+      {rows.map(([id, ts], i) => {
+        const cy = b.y0 + pitch * (i + 0.5), kn = id === "knight";
+        const orgs: { org: string; y0: number; y1: number; per: Record<number, number> }[] = [];
+        ts.forEach(([y, o]) => { let g = orgs.find((q) => q.org === o); if (!g) { g = { org: o, y0: y, y1: y, per: {} }; orgs.push(g); }
+          g.y1 = Math.max(g.y1, y); g.per[y] = (g.per[y] ?? 0) + 1; });
+        return (
+          <React.Fragment key={id}>
+            <Face id={id} x={b.x0 - 200} y={cy - 6} size={96} ring={kn ? C.cyan : "#E9ECF1"} glow={kn ? "rgba(34,211,238,0.6)" : "rgba(0,0,0,0.5)"} />
+            <Big x={b.x0 - 200} y={cy + 44} size={30} align="center" w={200} color={kn ? C.cyan : C.text}>{P(id).name.toUpperCase()}</Big>
+            {orgs.map((g) => {
+              const x0 = X(g.y0) - 34, x1 = X(g.y1) + 34;
+              return (
+                <React.Fragment key={g.org}>
+                  <div style={{ position: "absolute", left: x0, top: cy - 40, width: x1 - x0, height: 64, borderRadius: 32,
+                    background: kn ? "rgba(34,211,238,0.18)" : "rgba(214,219,226,0.10)", border: `3px solid ${kn ? C.cyan : "rgba(214,219,226,0.6)"}` }} />
+                  {Object.entries(g.per).map(([y, n]) => (
+                    <React.Fragment key={y}>
+                      <Cup x={X(Number(y))} y={cy - 8} s={38} color={kn ? C.cyan : C.text} />
+                      {n > 1 && <div style={{ position: "absolute", left: X(Number(y)) + 14, top: cy - 14, fontFamily: F.title, fontSize: 22, color: kn ? C.cyan : C.text,
+                        textShadow: "0 0 4px #0B0B0F, 0 0 4px #0B0B0F" }}>×{n}</div>}
+                    </React.Fragment>
+                  ))}
+                  <div style={{ position: "absolute", left: (x0 + x1) / 2 - 60, width: 120, top: cy + 28, textAlign: "center", fontFamily: F.body, fontWeight: 800, fontSize: 20,
+                    color: kn ? C.cyan : "#AEB6C2", letterSpacing: 1 }}>{g.org}</div>
+                </React.Fragment>
+              );
+            })}
+            <Big x={b.x1 + 60} y={cy - 30} size={52} color={kn ? C.cyan : C.text} w={260}>{orgs.length} TEAMS</Big>
+          </React.Fragment>
+        );
+      })}
+    </Stage>
+  );
+};
+
+// 14 (round 4). The trophy cabinet as stacked bars: trophy points by competition, top 8 (title_credits pts, sums = trophy_pts).
+export const R4CabinetStack: React.FC = () => {
+  const rows = (S.cabinetStack as (string | number)[][]).map((r) => [r[0], r[1], r[2], r[3], r[4]] as [string, number, number, number, number]);
+  const totals = Object.fromEntries((S.cabinetStack as (string | number)[][]).map((r) => [r[0], r[5] as number]));
+  const b: Box = { x0: 400, y0: 270, x1: 1700, y1: 840 };
+  const xr: [number, number] = [0, 1600];
+  const { X } = scale(b, xr, [0, 1]);
+  const segs = [{ n: "WORLDS", c: C.gold }, { n: "MSI", c: "#E9E2CC" }, { n: "DOMESTIC", c: "#6F8199" }, { n: "OTHER", c: "#3E4756" }];
+  const pitch = (b.y1 - b.y0) / rows.length, bh = 44;
+  return (
+    <Stage title="THE TROPHY CABINET">
+      <Axes b={b} xr={xr} yr={[0, 1]} xt={[0, 400, 800, 1200, 1600]} yt={[]} xl="TROPHY POINTS" yl="" />
+      <div style={{ position: "absolute", left: b.x0, top: 175, display: "flex", gap: 34 }}>
+        {segs.map((s) => <div key={s.n} style={{ display: "flex", alignItems: "center", gap: 10, fontFamily: F.body, fontWeight: 800, fontSize: 22, color: C.text, letterSpacing: 1 }}>
+          <div style={{ width: 26, height: 26, borderRadius: 6, background: s.c }} />{s.n}</div>)}
+      </div>
+      {rows.map(([id, ...v], i) => {
+        const cy = b.y0 + pitch * (i + 0.5); let acc = 0; const tot = v.reduce((a, z) => a + z, 0), kn = id === "knight";
+        return (
+          <React.Fragment key={id}>
+            <Face id={id} x={b.x0 - 52} y={cy} size={58} ring={kn ? C.cyan : id === "faker" ? C.gold : "#E9ECF1"} glow="rgba(0,0,0,0.5)" />
+            <Big x={b.x0 - 96} y={cy - 22} size={36} align="right" w={300} color={kn ? C.cyan : C.text}>{P(id).name.toUpperCase()}</Big>
+            {v.map((w, k) => { const x0 = X(acc); acc += w;
+              return <div key={k} style={{ position: "absolute", left: x0 + (k ? 2 : 0), top: cy - bh / 2, width: Math.max(0, X(acc) - x0 - (k ? 2 : 0)), height: bh, background: segs[k].c,
+                borderRadius: k === 3 || (k < 3 && v.slice(k + 1).every((z) => z === 0)) ? "0 6px 6px 0" : 0 }} />; })}
+            <Big x={X(tot) + 16} y={cy - 24} size={40} w={200} color={kn ? C.cyan : C.text}>{totals[id].toLocaleString("en-US")}</Big>
+          </React.Fragment>
+        );
+      })}
+    </Stage>
+  );
+};
+
+// 23 (round 4). World titles as a unit chart: one cup per world title, everyone with 2 or more.
+export const R4WorldCups: React.FC = () => {
+  const rows = (S.board as BoardRow[]).filter((r) => r[7] >= 2).sort((a, z) => z[7] - a[7] || z[8] - a[8]);
+  const top = 250, pitch = Math.min(110, 600 / rows.length);
+  return (
+    <Stage title="WORLD TITLES">
+      {rows.map((r, i) => {
+        const cy = top + pitch * (i + 0.5), fk = r[0] === "faker";
+        return (
+          <React.Fragment key={r[0]}>
+            <Face id={r[0]} x={820} y={cy} size={Math.min(84, pitch - 14)} ring={fk ? C.gold : "#E9ECF1"} glow={fk ? C.gold : "rgba(0,0,0,0.5)"} />
+            <Big x={760} y={cy - 22} size={36} align="right" w={300} color={fk ? C.gold : C.text}>{r[1].toUpperCase()}</Big>
+            {Array.from({ length: r[7] }, (_, k) => <Cup key={k} x={920 + k * 110} y={cy} s={Math.min(72, pitch - 20)} color={fk ? C.gold : "#D6DBE2"} glow={fk} />)}
+            <Big x={920 + r[7] * 110 - 20} y={cy - 26} size={48} w={100} color={fk ? C.gold : C.text}>{r[7]}</Big>
+          </React.Fragment>
+        );
+      })}
+    </Stage>
+  );
+};
+
+// 22 (round 4). Champion pool as a lollipop: most champions played, top 7 plus Knight, with each one's signature pick.
+export const R4ChampPool: React.FC = () => {
+  const all = S.pool as PoolRow[];
+  const top = [...all].sort((a, z) => z[3] - a[3]).slice(0, 7);
+  const kn = all.find((r) => r[0] === "knight")!;
+  const rows = top.some((r) => r[0] === "knight") ? top : [...top, kn];
+  const b: Box = { x0: 520, y0: 230, x1: 1560, y1: 860 };
+  const xr: [number, number] = [0, 100];
+  const { X } = scale(b, xr, [0, 1]);
+  const pitch = (b.y1 - b.y0) / rows.length;
+  return (
+    <Stage title="CHAMPION POOL">
+      <Axes b={b} xr={xr} yr={[0, 1]} xt={[0, 25, 50, 75, 100]} yt={[]} xl="CHAMPIONS PLAYED" yl="" />
+      {rows.map((r, i) => {
+        const cy = b.y0 + pitch * (i + 0.5), k = r[0] === "knight", f = r[0] === "faker", col = k ? C.cyan : f ? C.gold : "rgba(214,219,226,0.75)";
+        return (
+          <React.Fragment key={r[0]}>
+            {k && i === rows.length - 1 && <div style={{ position: "absolute", left: b.x0 - 300, width: b.x1 - b.x0 + 330, top: cy - pitch / 2, borderTop: "2px dashed rgba(237,239,242,0.25)" }} />}
+            <div style={{ position: "absolute", left: b.x0, top: cy - 3, width: X(r[3]) - b.x0, height: 6, background: col, borderRadius: 3 }} />
+            {k || f ? <Face id={r[0]} x={X(r[3])} y={cy} size={Math.min(70, pitch - 8)} ring={col} glow={k ? "rgba(34,211,238,0.6)" : C.gold} />
+              : <div style={{ position: "absolute", left: X(r[3]) - 14, top: cy - 14, width: 28, height: 28, borderRadius: 14, background: col }} />}
+            <Big x={b.x0 - 24} y={cy - 24} size={38} align="right" w={300} color={k ? C.cyan : f ? C.gold : C.text}>{r[1].toUpperCase()}</Big>
+            <Big x={X(r[3]) + (k || f ? 50 : 30)} y={cy - 24} size={40} w={80} color={k ? C.cyan : f ? C.gold : C.text}>{r[3]}</Big>
+            <div style={{ position: "absolute", left: X(r[3]) + (k || f ? 130 : 110), top: cy - 14, fontFamily: F.body, fontWeight: 800, fontSize: 22, color: "#AEB6C2", whiteSpace: "nowrap" }}>
+              MOST PLAYED: {r[5].toUpperCase()}</div>
+          </React.Fragment>
+        );
+      })}
+    </Stage>
+  );
+};

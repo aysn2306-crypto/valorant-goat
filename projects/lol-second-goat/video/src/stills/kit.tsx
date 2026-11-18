@@ -72,10 +72,10 @@ export const Axes: React.FC<{
         <div style={{ fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>{xl}</div>
         <ArrowR />
       </div>}
-      <div style={{ position: "absolute", left: b.x0 + 22, top: b.y0 - 22, display: "flex", alignItems: "center", gap: 14 }}>
+      {yl && <div style={{ position: "absolute", left: b.x0 + 22, top: b.y0 - 22, display: "flex", alignItems: "center", gap: 14 }}>
         <ArrowU />
         <div style={{ fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>{yl}</div>
-      </div>
+      </div>}
     </>
   );
 };

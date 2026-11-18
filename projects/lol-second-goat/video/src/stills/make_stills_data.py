@@ -52,3 +52,18 @@ _ww = {(r["player"], r["team"]): r for r in rows("with_without.csv")}
 out["withWithout"] = [[i, t, abbr, int(_ww[(p, t)]["with_W"]), int(_ww[(p, t)]["with_L"]), int(_ww[(p, t)]["without_W"]), int(_ww[(p, t)]["without_L"]), _ww[(p, t)]["without_years"]]
   for i, p, t, abbr in [("knight", "Knight", "Bilibili Gaming", "BLG"), ("chovy", "Chovy", "Gen.G", "GEN.G"), ("ruler", "Ruler", "JD Gaming", "JDG")]]
 json.dump(out, open(root / "video/src/data/stills.json", "w"), indent=1)
+# round 4 shapes (ay 18:52: vary the chart types)
+_tc = list(rows("title_credits.csv"))
+_ds = {r["Link"]: r for r in rows("draft_scores.csv")}
+_top = sorted(_ds.values(), key=lambda r: -float(r["trophy_pts"] or 0))[:8]
+def _tier(link, tiers): return round(sum(float(r["pts"]) for r in _tc if r["Link"] == link and r["tier"] in tiers))
+out["cabinetStack"] = [[by_link.get(r["Link"], r["Link"].lower()), _tier(r["Link"], ["worlds"]), _tier(r["Link"], ["msi"]), _tier(r["Link"], ["domestic"]),
+  _tier(r["Link"], ["first_stand", "msc", "award"]), round(float(r["trophy_pts"]))] for r in _top]
+ORG = {"ROX Tigers": "ROX", "SK Telecom T1": "SKT", "Kingzone DragonX": "KZ", "Gen.G": "GEN", "Samsung Galaxy": "GEN", "Hanwha Life Esports": "HLE",
+  "Samsung Blue": "SSB", "EDward Gaming": "EDG", "KT Rolster": "KT", "DRX": "DRX", "MVP Ozone": "SSW", "Samsung White": "SSW", "Royal Never Give Up": "RNG",
+  "Top Esports": "TES", "JD Gaming": "JDG", "Bilibili Gaming": "BLG"}
+out["titleTimeline"] = []
+for pid, link in [("peanut", "Peanut"), ("deft", "Deft"), ("mata", "Mata"), ("knight", "Knight (Zhuo Ding)")]:
+  ts = sorted([(int(r["year"]), ORG.get(r["team"], r["team"])) for r in _tc if r["Link"] == link and r["place"] == "1" and r["tier"] != "award"])
+  out["titleTimeline"].append([pid, ts])
+json.dump(out, open(root / "video/src/data/stills.json", "w"), indent=1)
