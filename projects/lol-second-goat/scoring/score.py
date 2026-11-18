@@ -353,6 +353,8 @@ def recognition(s, pool):
     f = os.path.join(CSV, "individual_achievements.csv")
     a = pd.read_csv(f, dtype=str).fillna("")
     a["Link"] = [redirect(l) for l in a.Player]
+    # major leagues only: academy and minor region picks (LCK CL, LTA South) have no games behind them here (audit 18 Nov)
+    a = a[a.OverviewPage.str.match(r"^(LCK|LPL|LEC|LCS|EU LCS|NA LCS|Champions|LMS|LTA North)/")]
     if os.environ.get("CUTOFF"):
         a = a[a.OverviewPage.str.extract(r"(20\d\d)")[0].astype(float).fillna(0) <= int(os.environ["CUTOFF"])]
     if os.environ.get("VARIANT") == "split_faker":
@@ -654,7 +656,7 @@ def main():
         imp = {}
         for l, dd in ps.groupby("Link"):
             r = dd.r.sort_values(ascending=False)
-            n = min(5, len(r)) if first.get(l, 2016) < 2016 else 5
+            n = 5   # rapm_seasons covers 2011 on, so every career is measured the same way (audit 18 Nov)
             imp[l] = r.head(n).sum() / n
         P["impact_raw"] = pd.Series(imp).reindex(P.index).fillna(0)
         C["impact"] = percentile(P.impact_raw)
