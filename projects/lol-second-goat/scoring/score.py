@@ -378,7 +378,7 @@ def team_lift(s, pool, strength):
             diffs.append(w_.W.sum() / w_.G.sum() - wo.W.sum() / wo.G.sum()); ws.append(min(w_.G.sum(), wo.G.sum()))
         out[l] = shrink(np.average(diffs, weights=ws), sum(ws), 40) if diffs else np.nan
     r = pd.Series(out)
-    return r.fillna(0)
+    return r.fillna(r.median())   # never played without his team (Faker): no evidence either way, so the pool median
 
 
 def percentile(x):
@@ -395,6 +395,10 @@ def percentile(x):
 
 def main():
     variant = os.environ.get("VARIANT", "")
+    if os.environ.get("LONG_CAP"):
+        CFG["longevity"]["year_cap"] = float(os.environ["LONG_CAP"])
+    if os.environ.get("CLUTCH_MODE"):
+        CFG["clutch_mode"] = os.environ["CLUTCH_MODE"]
     if variant == "career_avg":
         CFG["best_years"] = 0
     cache = os.path.join(ROOT, "data", "raw", "loaded.pkl")
@@ -445,7 +449,7 @@ def main():
             return shrink(d_all.groupby("Link").apply(lambda d: wmean(d, col), include_groups=False), d_all.groupby("Link").G.sum(), kk)
         y = d_all.groupby(["Link", "year"]).apply(lambda d: pd.Series({"v": wmean(d, col), "G": d.G.sum()}), include_groups=False).reset_index()
         y["v"] = shrink(y.v.fillna(0), y.G, kk)
-        if pad:   # missing years count as average (0): sustained form, not one hot event
+        if pad or CFG.get("pad_short_careers"):   # missing years count as average (0): sustained form, not one hot event
             return y.groupby("Link").v.apply(lambda v: v.nlargest(N).sum() / N)
         return y.groupby("Link").v.apply(lambda v: v.nlargest(N).mean())
 
@@ -464,6 +468,8 @@ def main():
     ry = set(zip(rt.Link, rt.year))
     res = np.array([(l, y) in ry for l, y in zip(ok.Link, ok.year)])
     above = np.where(res, np.maximum(above, LG.get("result_year", 0.3)), above)
+    if LG.get("year_cap"):   # a monster year counts as one great year, not three ordinary ones (ay 18 Nov)
+        above = np.minimum(above, LG["year_cap"])
     P["longevity_raw"] = pd.Series(above, index=ok.index).groupby(ok.Link).sum().reindex(pool).fillna(0)
     P["individual_raw"] = best_years(s[s.Link.isin(pool)], "a_impact", k)
     cf = os.path.join(CSV, "clutch.csv")
@@ -477,7 +483,10 @@ def main():
         cl["w"] = np.where(cl.Page.str.contains("World Championship|Mid-Season Invitational|First Stand", regex=True), 2.0, 1.0)
         cl["d"] = (cl.won - cl.exp) * cl.w
         g = cl.groupby("Link").agg(n=("w", "sum"), d=("d", "sum"))
-        P["clutch_raw"] = (g.d / (g.n + CFG.get("clutch_shrink", 25))).reindex(pool)
+        if CFG.get("clutch_mode") == "total":   # wins above expectation over a whole career, not a per-series rate
+            P["clutch_raw"] = g.d.reindex(pool)
+        else:
+            P["clutch_raw"] = (g.d / (g.n + CFG.get("clutch_shrink", 25))).reindex(pool)
         P["clutch_n"] = g.n.reindex(pool).fillna(0).astype(int)
     else:
         P["clutch_raw"], P["clutch_n"] = np.nan, 0
@@ -539,6 +548,8 @@ def main():
     # counted four or five times under different names. Every board is still shown in the video, unweighted.
     C["big_stage_clutch"] = percentile(0.6 * C.big_stage + 0.4 * C.clutch)
     C["carry_pillar"] = percentile(C.team_carry + C.solo_carry)
+    # skill (audit 18 Nov): peak and individual are the same yearly rating (Spearman 0.90), so one part, not two
+    C["skill"] = percentile(0.7 * C.individual + 0.3 * C.peak)
     C["intangibles"] = percentile(C.recognition + C.team_lift)
     W = pd.Series(CFG["pillars"] if "pillars" in CFG else CFG["categories"], dtype=float)
     P["score"] = (C[W.index] * W).sum(axis=1) / W.sum()

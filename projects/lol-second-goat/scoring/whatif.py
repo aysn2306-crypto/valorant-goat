@@ -27,11 +27,15 @@ kt = T[(T.Link == KN) & (T.tier == "worlds") & (T.place == 1)].pts.iloc[-1]
 km = T[(T.Link == KN) & (T.tier == "msi") & (T.place == 1)].pts
 km = km.iloc[-1] if len(km) else 50 * 1.06
 rows = []
-for label, add in [("now", 0), ("+1 Worlds", kt), ("+2 Worlds", 2 * kt), ("+3 Worlds", 3 * kt), ("+2 Worlds +2 MSI", 2 * kt + 2 * km)]:
+kl = T[(T.Link == KN) & (T.tier == "domestic") & (T.place == 1)].pts
+kl = float(kl.iloc[-4:].mean()) if len(kl) else 20.0   # his recent domestic title value
+paths = [("now", 0), ("+1 Worlds", kt), ("+1 Worlds +4 LPL", kt + 4 * kl), ("+2 Worlds", 2 * kt), ("+2 Worlds +2 MSI", 2 * kt + 2 * km),
+         ("+3 Worlds", 3 * kt), ("+3 Worlds +1 MSI", 3 * kt + km), ("+4 Worlds", 4 * kt), ("+8 LPL", 8 * kl)]
+for label, add in paths:
     p = P.trophy_pts.copy(); p[KN] += add
     sc = score(p)
-    rows.append((label, round(sc[KN], 1), round(sc["Faker"], 1)))
-k = pd.DataFrame(rows, columns=["case", "knight", "faker"])
+    rows.append((label, round(sc[KN], 1), round(sc["Faker"], 1), round(add)))
+k = pd.DataFrame(rows, columns=["case", "knight", "faker", "trophy_pts_added"])
 print("\nWhat Knight needs (Faker wins nothing more):\n", k.to_string(index=False))
 k.to_csv(os.path.join(CSV, "whatif_knight_needs.csv"), index=False)
 
@@ -43,3 +47,15 @@ for _ in range(CFG["robustness"]["runs"]):
     pos.append((o.index(KN) + 1, P.name[o[1]]))
 pos = pd.DataFrame(pos, columns=["knight_rank", "second"])
 print("\nKnight's finish across reruns:", pos.knight_rank.value_counts().to_dict(), "| #2:", pos.second.value_counts().to_dict())
+
+# ay's "four Worlds" parallel: each contender given enough Worlds titles to reach four (a Worlds worth what Knight's was)
+rows = []
+for nm in ["Knight", "Chovy", "Keria", "Ruler", "Viper", "Zeus", "Gumayusi", "Oner", "Bin", "Canyon", "Caps"]:
+    l = P.index[P.name == nm][0]
+    need = max(0, 4 - int(P.loc[l, "worlds_titles"]))
+    p = P.trophy_pts.copy(); p[l] += need * kt
+    sc = score(p)
+    rows.append((nm, int(P.loc[l, "worlds_titles"]), need, round(P.score[l], 1), round(sc[l], 1), round(sc["Faker"], 1)))
+f = pd.DataFrame(rows, columns=["player", "worlds_now", "worlds_added", "score_now", "score_with_4", "faker"]).sort_values("score_with_4", ascending=False)
+print("\nWith four Worlds titles each (one at a time, Faker wins nothing more):\n", f.to_string(index=False))
+f.to_csv(os.path.join(CSV, "whatif_four_worlds.csv"), index=False)
