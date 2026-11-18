@@ -280,71 +280,58 @@ export const S9TwoFakers: React.FC = () => {
   );
 };
 
-// 10. Finale: the GOAT pyramid (ay 18 Nov 17:38, after Jxmy's basketball pyramid, refs/jxmy-pyramid-reference.png):
-// cutout photos sitting on each row and slightly overlapping, a small "TIER n" above each row, a small rank badge and the
-// name under each photo, no percentages, no players outside the pyramid. Players from MODEL-CURRENT (commit 756e968).
-const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler", "zeus", "canyon", "gumayusi", "oner"],
-  ["bin", "peanut", "viper", "caps", "deft", "theshy", "rookie", "uzi"], ["meiko", "bang", "wolf", "impact", "mata", "bengi", "corejj"]];
-const OPAQUE = new Set(["corejj"]); // no cutout on file yet (photo has its own background): shown in a ring for now
+// 10. Finale: the GOAT pyramid (ay 18 Nov 17:46: back to round photos). Tiers follow our ranking only, sorted by rank
+// (MODEL-CURRENT commit 67d8ad3): round photo, small rank badge, name under it, a small "TIER n" per row, no percentages, no title.
+const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler", "zeus", "canyon"], ["gumayusi", "oner", "caps", "deft", "uzi"],
+  ["wolf", "impact", "mata", "bengi", "corejj"]];
 const Pyramid: React.FC<{ focus?: boolean }> = ({ focus }) => {
-  const apex = 70, base = 948, half = 840, cx = 1060;
-  const rows = TIERS.length, bandH = (base - apex) / rows;
-  const rowY = (i: number) => apex + bandH * (i + 1); // row line (photos sit on it)
-  const hw = (y: number) => ((y - apex) / (base - apex)) * half;
-  const size = [158, 142, 132, 128, 130], step = [0, 150, 122, 122, 150];
-  const pos = (i: number, j: number) => ({ x: cx + (j - (TIERS[i].length - 1) / 2) * step[i], y: rowY(i) });
+  const top = 110, base = 948, half = 800, cx = 960;
+  const cuts = [top, 330, 490, 640, 795, base];
+  const hw = (y: number) => ((y - top) / (base - top)) * half;
+  const fills = ["rgba(245,184,61,0.30)", "rgba(34,211,238,0.18)", "rgba(150,160,175,0.15)", "rgba(150,160,175,0.10)", "rgba(150,160,175,0.06)"];
+  const sizes = [112, 86, 74, 68, 68], gaps = [0, 230, 190, 175, 175];
+  const pos = (i: number, j: number) => ({ x: cx + (j - (TIERS[i].length - 1) / 2) * gaps[i], y: i === 0 ? 236 : cuts[i] + 34 + sizes[i] / 2 });
   const kn = pos(1, 0), fk = pos(0, 0);
   const lit = (id: string) => !focus || id === "knight" || id === "faker";
   return (
     <Stage glow="gold">
-      <AbsoluteFill style={{ transform: focus ? "scale(1.5)" : undefined, transformOrigin: `${kn.x + 60}px ${apex + 30}px` }}>
+      <AbsoluteFill style={{ transform: focus ? "scale(1.45)" : undefined, transformOrigin: `${kn.x + 80}px ${top + 20}px` }}>
         <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
-          <defs>
-            <linearGradient id="pyr" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="rgba(245,184,61,0.22)" /><stop offset="1" stopColor="rgba(190,196,206,0.10)" />
-            </linearGradient>
-          </defs>
-          <polygon points={`${cx},${apex} ${cx + half},${base} ${cx - half},${base}`} fill="url(#pyr)" stroke="rgba(237,239,242,0.5)" strokeWidth={2} />
-          {TIERS.map((_, i) => i < rows - 1 && (
-            <line key={i} x1={cx - hw(rowY(i))} x2={cx + hw(rowY(i))} y1={rowY(i)} y2={rowY(i)} stroke="rgba(237,239,242,0.45)" strokeWidth={2} />
-          ))}
+          {TIERS.map((_, i) => {
+            const y0 = cuts[i], y1 = cuts[i + 1];
+            return <polygon key={i} points={`${cx - hw(y0)},${y0} ${cx + hw(y0)},${y0} ${cx + hw(y1)},${y1} ${cx - hw(y1)},${y1}`} fill={fills[i]}
+              stroke="rgba(237,239,242,0.55)" strokeWidth={2} opacity={focus && i > 1 ? 0.35 : 1} />;
+          })}
         </svg>
         {TIERS.map((_, i) => (
-          <div key={"t" + i} style={{ position: "absolute", left: cx - 100, width: 200, top: i === 0 ? rowY(0) - size[0] - 30 : rowY(i) - bandH + 4, textAlign: "center", fontFamily: F.title,
-            fontSize: 24, letterSpacing: 1.5, color: i === 0 ? C.gold : "#C9CFD8", opacity: focus && i > 1 ? 0.3 : 1, zIndex: 1 }}>TIER {i + 1}</div>
+          <div key={"t" + i} style={{ position: "absolute", left: i === 0 ? cx - 100 : cx - hw(cuts[i] + 30) + 18, width: 200, top: i === 0 ? top - 36 : cuts[i] + 14,
+            textAlign: i === 0 ? "center" : "left", fontFamily: F.title,
+            fontSize: 22, letterSpacing: 1.5, color: i === 0 ? C.gold : i === 1 ? C.cyan : "#AEB6C2", opacity: focus && i > 1 ? 0.3 : 1 }}>TIER {i + 1}</div>
         ))}
         {TIERS.map((ids, i) => ids.map((id, j) => {
-          const z = size[i]; const { x, y } = pos(i, j);
+          const size = sizes[i]; const { x, y } = pos(i, j);
           const ring = i === 0 ? C.gold : i === 1 ? C.cyan : "#E9ECF1";
           return (
-            <div key={id} style={{ position: "absolute", left: x - z / 2, top: y - z, width: z, height: z, opacity: lit(id) ? 1 : 0.22,
-              filter: lit(id) ? `drop-shadow(0 6px 10px rgba(0,0,0,0.6))${i < 2 && focus ? ` drop-shadow(0 0 16px ${ring})` : ""}` : "grayscale(1)", zIndex: 2 + j % 2 }}>
-              {OPAQUE.has(id)
-                ? <Img src={staticFile(P(id).photo!)} style={{ position: "absolute", left: z * 0.14, top: z * 0.16, width: z * 0.72, height: z * 0.72, borderRadius: z, objectFit: "cover",
-                    boxShadow: `inset 0 0 0 3px ${ring}`, border: `3px solid ${ring}` }} />
-                : <Img src={staticFile(P(id).photo!)} style={{ width: z, height: z, objectFit: "cover", display: "block" }} />}
-              <div style={{ position: "absolute", left: "50%", transform: "translateX(-50%)", bottom: 4, padding: "1px 8px", borderRadius: 6, background: "rgba(11,11,15,0.82)",
-                fontFamily: F.body, fontWeight: 800, fontSize: i === 0 ? 22 : 16, color: i === 0 ? C.gold : i === 1 ? C.cyan : C.text, whiteSpace: "nowrap" }}>{P(id).name.toUpperCase()}</div>
-              <div style={{ position: "absolute", right: z * 0.1, top: z * 0.04, minWidth: 24, padding: "0 6px", height: 24, borderRadius: 12, background: ring, color: "#0B0B0F",
-                fontFamily: F.title, fontSize: 17, display: "flex", alignItems: "center", justifyContent: "center" }}>#{P(id).rank}</div>
+            <div key={id} style={{ opacity: lit(id) ? 1 : 0.25, filter: lit(id) ? undefined : "grayscale(1)" }}>
+              <Face id={id} x={x} y={y} size={size} ring={i < 2 ? ring : "rgba(237,239,242,0.8)"} glow={i === 0 ? C.gold : i === 1 ? C.cyan : "rgba(0,0,0,0.6)"} />
+              <div style={{ position: "absolute", left: x + size * 0.26, top: y - size * 0.64, minWidth: 26, padding: "0 6px", height: Math.max(22, size * 0.3), borderRadius: 12,
+                background: ring, color: "#0B0B0F", fontFamily: F.title, fontSize: Math.max(17, size * 0.23),
+                display: "flex", alignItems: "center", justifyContent: "center" }}>#{P(id).rank}</div>
+              <div style={{ position: "absolute", left: x - 100, width: 200, top: y + size / 2 + 2, textAlign: "center", fontFamily: F.body, fontWeight: 800,
+                fontSize: i === 0 ? 28 : i === 1 ? 24 : 20, color: i === 0 ? C.gold : i === 1 ? C.cyan : C.text, whiteSpace: "nowrap", lineHeight: 1.1,
+                textShadow: "0 0 6px #0B0B0F" }}>{P(id).name.toUpperCase()}</div>
             </div>
           );
         }))}
-        {!focus && (
-          <div style={{ position: "absolute", left: 90, top: 120, fontFamily: F.title, lineHeight: 0.95, color: C.gold, textShadow: "0 0 18px rgba(245,184,61,0.35)" }}>
-            <div style={{ fontSize: 92, letterSpacing: 2 }}>G.O.A.T</div>
-            <div style={{ fontSize: 46, letterSpacing: 2, color: CREAM }}>LEAGUE PYRAMID</div>
-          </div>
-        )}
         {focus && (
           <>
-            <svg style={{ position: "absolute", inset: 0, zIndex: 5 }} width={1920} height={1080}>
+            <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
               <defs><marker id="ah" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill={C.text} /></marker></defs>
-              <path d={`M ${kn.x - 40} ${kn.y - 150} C ${kn.x - 110} ${kn.y - 220}, ${fk.x - 160} ${fk.y - 60}, ${fk.x - 86} ${fk.y - 80}`} stroke={C.text} strokeWidth={5}
+              <path d={`M ${kn.x - 30} ${kn.y - 50} C ${kn.x - 100} ${kn.y - 130}, ${fk.x - 150} ${fk.y + 40}, ${fk.x - 72} ${fk.y + 10}`} stroke={C.text} strokeWidth={5}
                 fill="none" strokeDasharray="14 10" markerEnd="url(#ah)" style={{ filter: "drop-shadow(0 0 6px rgba(255,255,255,0.6))" }} />
             </svg>
-            <div style={{ position: "absolute", left: kn.x - 480, top: (kn.y + fk.y) / 2 - 150, width: 300, textAlign: "right", fontFamily: F.title, fontSize: 40,
-              letterSpacing: 1, color: CREAM, lineHeight: 1.05, textShadow: "0 0 12px #0B0B0F", zIndex: 5 }}>WHAT WOULD IT TAKE?</div>
+            <div style={{ position: "absolute", left: kn.x - 470, top: (kn.y + fk.y) / 2 - 60, width: 300, textAlign: "right", fontFamily: F.title, fontSize: 40,
+              letterSpacing: 1, color: CREAM, lineHeight: 1.05, textShadow: "0 0 12px #0B0B0F" }}>WHAT WOULD IT TAKE?</div>
           </>
         )}
       </AbsoluteFill>
