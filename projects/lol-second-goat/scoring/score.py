@@ -163,12 +163,15 @@ def zscores(s, use_rating=True):
     s["low_deaths"] = -(s.D / s.Min.fillna(s.G * 32))
     s["kills_pm"] = s.K / s.Min.fillna(s.G * 32)
     s["assists_pm"] = s.A / s.Min.fillna(s.G * 32)
+    # each stat is measured against the same role, year AND league (LPL games are faster and bloodier than LCK games,
+    # so pooling leagues inflated LPL kill and damage numbers); region strength then handles the leagues' level
+    s["grp"] = s.region if CFG.get("z_by_league", True) else "all"
     ref = s[s.G >= 3]
     for m in METRICS:
-        g = ref.groupby(["role", "year"])
+        g = ref.groupby(["role", "year", "grp"])
         mu = g.apply(lambda d: np.average(d[m].dropna(), weights=d.loc[d[m].notna(), "G"]) if d[m].notna().any() else np.nan, include_groups=False)
         sd = g[m].std()
-        key = list(zip(s.role, s.year))
+        key = list(zip(s.role, s.year, s.grp))
         s["z_" + m] = (s[m].values - mu.reindex(key).values) / sd.reindex(key).values
     s["z_gold_share"] = s.z_gold_share.fillna(s.z_cs_share)   # early games without gold: CS share stands in
     for name, cols in [("impact", CFG["impact"]["impact"]), ("carry", CFG["impact"]["carry"]), ("clean", CFG["impact"]["clean"])]:
@@ -188,9 +191,9 @@ def zscores(s, use_rating=True):
         w = json.load(open(f))["weights"]
         r = sum(w[c] * s["z_" + c].fillna(0).clip(-4, 4) for c in RATING_FEATS)
         ref = s.G >= 3
-        mu = r[ref].groupby([s.role[ref], s.year[ref]]).mean()
-        sd = r[ref].groupby([s.role[ref], s.year[ref]]).std()
-        key = list(zip(s.role, s.year))
+        mu = r[ref].groupby([s.role[ref], s.year[ref], s.grp[ref]]).mean()
+        sd = r[ref].groupby([s.role[ref], s.year[ref], s.grp[ref]]).std()
+        key = list(zip(s.role, s.year, s.grp))
         s["z_impact_v3"] = s.z_impact
         s["z_impact"] = (r.values - mu.reindex(key).values) / sd.reindex(key).values
         zi = s.z_impact.fillna(0) * s.G
@@ -374,7 +377,15 @@ def team_lift(s, pool, strength):
 
 
 def percentile(x):
-    return x.rank(pct=True) * 100
+    """Category score. Percentiles squash every elite player to 99-100, so the gaps at the top vanish; the default
+    is now a linear scale: pool median = 50, the best player = 100 (below the median it keeps going down, floor 0)."""
+    if CFG.get("scale", "linear") == "percentile":
+        return x.rank(pct=True) * 100
+    x = x.astype(float)
+    med, top = x.median(), x.max()
+    if not np.isfinite(top) or top == med:
+        return x.rank(pct=True) * 100
+    return (50 + 50 * (x - med) / (top - med)).clip(lower=0)
 
 
 def main():
