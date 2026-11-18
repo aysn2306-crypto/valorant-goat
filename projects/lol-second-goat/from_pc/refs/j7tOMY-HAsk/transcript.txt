@@ -1,0 +1,715 @@
+[00m00s] You're in champ select as a Nocturne
+[00m02s] main picking third.
+[00m03s] Your support is showing Nami. She's
+[00m05s] picking first and looks like she wants
+[00m06s] to swap.
+[00m08s] You're a team player, so you do, and you
+[00m09s] lock in Nocturne.
+[00m11s] But did you just throw the draft?
+[00m13s] Jungle and bot pick first. That's the
+[00m15s] solo queue narrative.
+[00m17s] It's even a pro narrative in most metas.
+[00m19s] In worlds this year, 68% of first picks
+[00m21s] are bot or jungle. 20% of those jungle
+[00m24s] picks are Nocturne.
+[00m25s] So it can't be wrong, right?
+[00m27s] We can't as a community and as an entire
+[00m29s] pro scene be completely convinced of
+[00m31s] something that's just wrong, could we?
+[00m33s] Hi, I'm Joseph, the data scientist
+[00m35s] behind machine lolling. I have a PhD in
+[00m38s] 10 years of experience in
+[00m39s] bioinformatics, and today I'm going to
+[00m41s] unpack the complicated narratives that
+[00m43s] we all share about one simple question.
+[00m45s] Who should pick first?
+[00m47s] [music]
+[00m54s] Who should pick first? [music] It sounds
+[00m56s] like a simple question, and as a
+[00m58s] community we've devised a simple answer.
+[01m00s] [music] Jungle or bot.
+[01m02s] The logic follows that mid and top and
+[01m03s] support all have two important of
+[01m05s] matchups to be risk pick [music] blind.
+[01m08s] Concept we discussed in last episode
+[01m10s] allow us to put that to the test.
+[01m12s] We literally define blind ability,
+[01m14s] which simply put is how much a champion
+[01m16s] cares about other champions that are in
+[01m17s] the game.
+[01m19s] And I left you with [music] two metrics.
+[01m21s] True spread, which is simply the spread
+[01m23s] minus the noise,
+[01m25s] and a weighted count where we simply
+[01m27s] count up the number of champions that
+[01m29s] are below a certain threshold and then
+[01m31s] weight them by their play rate.
+[01m33s] And when we plot the two against each
+[01m34s] other, they look like this.
+[01m39s] To answer our core question of who
+[01m40s] should pick first, there are three main
+[01m42s] gaps we need to address. [music]
+[01m44s] First, we need to determine which of
+[01m46s] these two metrics is ideal for assessing
+[01m48s] blind ability.
+[01m50s] Second is that we need to assess the
+[01m51s] blind ability of other lanes, top,
+[01m53s] jungle, bot, and support.
+[01m56s] And then finally, we need to assess how
+[01m58s] cross role matchups, such as support's
+[02m01s] with the enemy jungler, can [music]
+[02m02s] affect blind ability.
+[02m04s] To start with, I'm going to make our
+[02m06s] data set a little more robust.
+[02m08s] As noted by some in the comments, Talon
+[02m10s] has zero counters. [music]
+[02m12s] That's not because he really has zero
+[02m13s] counters, it's just because we don't
+[02m15s] have enough data piled into Talon yet.
+[02m17s] I'm going to increase the number of
+[02m18s] games in our data set from 4 million
+[02m20s] games across six patches to 6.7 million
+[02m23s] games across 10 patches. [music]
+[02m25s] This helps smooth down some of the
+[02m26s] stochasticity in this plot.
+[02m28s] There's a lot of movement, but we can
+[02m30s] still see some outliers from the line.
+[02m32s] [music] To drill down to see what's
+[02m33s] happening, let's take one of the
+[02m35s] outliers, Kiana, as an example.
+[02m40s] I'll plot her true spread in white. And
+[02m42s] as a reminder, true spread squared
+[02m44s] equals the measured spread squared minus
+[02m45s] noise squared.
+[02m47s] And the true spread gives us a nice
+[02m49s] metric for how far away her best
+[02m50s] matchups are from her worst matchups.
+[02m53s] If we define a counter as any matchup
+[02m55s] that is less than 2% below expected, if
+[02m58s] we sum the tail of the [music] true
+[02m59s] spread, we should expect about 3.75% of
+[03m02s] Kiana's matchups to fall in this range.
+[03m05s] But when we actually count and sum the
+[03m07s] matchups that reside there, Vex and
+[03m09s] Taliyah, we find that is only about
+[03m11s] 2.43% of the picks.
+[03m14s] There could be two main reasons for this
+[03m16s] discrepancy.
+[03m17s] The first is that true spread smooths
+[03m19s] over individual play rates.
+[03m22s] So individual champions with large play
+[03m23s] rates in the tail might not fully be
+[03m25s] accounted for by summing under the
+[03m26s] curve.
+[03m28s] The second possible explanation is that
+[03m30s] champion win rates are far less stable
+[03m32s] than you think.
+[03m33s] I think there's something you all need
+[03m35s] to see.
+[03m37s] I want you to keep in mind as you watch
+[03m38s] this next part that though Vex and
+[03m40s] Taliyah are 3.3% and 2.6% [music] below
+[03m43s] expected, that's only based on 2,800 and
+[03m46s] 1,400 games.
+[03m49s] But how many games is enough for a
+[03m50s] measurement to become reliable? A
+[03m52s] thousand? 10,000?
+[03m55s] To find out, we can reduce this problem
+[03m57s] to what it is, a coin flip.
+[03m59s] Matchups in League of Legends, like
+[04m01s] coins, have two possible outcomes.
+[04m04s] And any given match-up has a probability
+[04m06s] that's usually slightly above or below
+[04m08s] 50%.
+[04m09s] For this example, we'll just use a coin
+[04m11s] that is weighted to exactly 50%.
+[04m14s] means if we flip the coin enough times,
+[04m16s] [music] the average of all of the
+[04m17s] measurements should be 50%.
+[04m20s] Let's flip it 100,000 times and average
+[04m23s] as we do it.
+[04m24s] At low sample sizes, it fluctuates a
+[04m26s] great deal [music] until finally
+[04m27s] settling near its actual probability of
+[04m30s] 50%.
+[04m32s] Let's repeat this 100 more times.
+[04m34s] [music] Now we can clearly see just how
+[04m36s] much the measurement error decreases as
+[04m38s] the number of games increase.
+[04m40s] Doing this an infinite number of times
+[04m42s] would give us our probability curve.
+[04m44s] And from there, we could draw intervals
+[04m45s] in between which 95% of our measurements
+[04m48s] would fall.
+[04m49s] At 1,000 games, 95% of our measurements
+[04m51s] would fall between 53.1 and 46.9%.
+[04m56s] At 10,000 games, that interval still
+[04m58s] only drops to plus or minus 1%.
+[05m01s] At 50,000 games, it's plus or minus
+[05m03s] 0.44%.
+[05m05s] You're probably noticing these intervals
+[05m06s] are pretty big when we're defining a
+[05m08s] counter as 2% below expected.
+[05m11s] If we were to draw the 95% confidence
+[05m13s] interval for Keanu versus Taliyah,
+[05m15s] [music] the top of the interval is
+[05m16s] actually above zero, while the bottom is
+[05m18s] 5% below expected.
+[05m20s] Let's look at this another way.
+[05m23s] If we measure 100 games of Keanu versus
+[05m25s] Taliyah and find that it has an average
+[05m26s] of -2.56,
+[05m28s] the white curve shows the probability of
+[05m30s] where the true mean of this match-up
+[05m31s] [music] actually falls.
+[05m35s] At 1,400 games, it doesn't look much
+[05m36s] better.
+[05m38s] It's not until 2,100 games that we're
+[05m39s] 95% confident that Taliyah is actually a
+[05m42s] [music] counter.
+[05m44s] If you've ever wondered why on analytics
+[05m46s] a champion can be a counter one patch
+[05m47s] and not the next, this is it.
+[05m50s] And it's not just a Keanu problem.
+[05m52s] Our data set has 6.7 million games.
+[05m55s] This is a histogram showing the
+[05m57s] distribution of how many games we have
+[05m58s] for each match-up in our data set.
+[06m01s] We showed that we need 10,000 games of a
+[06m03s] single match-up to be measured before
+[06m04s] we're 95% sure that the true mean falls
+[06m06s] within plus or minus 1%.
+[06m09s] But look how many matchups fall below
+[06m11s] 10,000. 85%.
+[06m15s] And we have approximately 2.5 times more
+[06m18s] games that are played in all non-Chinese
+[06m20s] servers at [music] Emerald Plus in a
+[06m22s] single patch.
+[06m23s] For the number of Emerald Plus games on
+[06m25s] a single patch, only 1% of the listed
+[06m28s] matchups are going to have confidence
+[06m29s] intervals tighter than plus or minus 1%.
+[06m32s] This is enormously important to
+[06m34s] understand because for the weighted
+[06m36s] counting method to work, we need to be
+[06m37s] able to reliably say that an individual
+[06m39s] matchup is indeed a counter.
+[06m42s] In order to be certain, we would need to
+[06m44s] sum approximately 28 patches or 78.5
+[06m46s] [music]
+[06m47s] million games to get 95% of our matchups
+[06m50s] over that threshold.
+[06m52s] And this is just for champions with
+[06m53s] above [music] a 0.5% play rate in their
+[06m55s] role.
+[06m56s] Rare champions will fare even worse.
+[06m59s] So it's clear, counting matchups below a
+[07m01s] threshold is simply not viable.
+[07m04s] And as an [music] aside, the next time
+[07m05s] you sort your favorite statistics
+[07m07s] websites to just Diamond or Master Plus,
+[07m10s] know that what you're seeing is probably
+[07m11s] just noise. You're far better off trying
+[07m13s] to expand your data set as much as
+[07m15s] possible.
+[07m17s] So as we've seen, it's just too
+[07m18s] unreliable to count which champions are
+[07m20s] counters because of their error.
+[07m23s] But what about summing under the tail of
+[07m25s] the true spread curve?
+[07m27s] True spread is more reliable at lower
+[07m28s] game counts because it aggregates the
+[07m30s] signal and subtracts the noise across
+[07m32s] all matchups rather than trying to
+[07m33s] predict individuals.
+[07m35s] But the true spread method does rely on
+[07m37s] the assumption that our data is normal.
+[07m39s] And in the last episode, I flippantly
+[07m41s] remarked that it probably isn't.
+[07m44s] Then while I was about 15 slides deep
+[07m46s] into trying to make empirical Bayesian
+[07m47s] correction accessible to you, I thought,
+[07m49s] wow, it would be really nice if the
+[07m51s] distributions of these matchups were
+[07m52s] normal so I could just use the true
+[07m54s] spread.
+[07m55s] So I checked it and then I checked it
+[07m56s] again.
+[07m57s] And what I found pleasantly surprised
+[07m59s] me.
+[08m00s] So let's dive in here and check our data
+[08m02s] for normality together.
+[08m04s] As an aside, we'll need to discuss in
+[08m05s] more detail what the normal distribution
+[08m07s] is and why it's basically a stats cheat
+[08m10s] code.
+[08m11s] It shows up everywhere because whenever
+[08m12s] a lot of small random things add
+[08m14s] together, the total lands in this shape.
+[08m17s] Our coin flips did exactly that.
+[08m20s] And here's the cheat code. A normal
+[08m22s] curve is completely described by two
+[08m23s] numbers, its center and its spread.
+[08m26s] If you know those two, you know
+[08m27s] everything.
+[08m28s] But we can only use it if our data is
+[08m30s] actually normal.
+[08m32s] To test this, we'll use something many
+[08m34s] of you have seen before in intro stats
+[08m35s] courses, a quantile-quantile plot.
+[08m38s] A quantile divides a range such that
+[08m40s] there's an equal probability of being on
+[08m42s] either side.
+[08m43s] We could divide it into any number of
+[08m45s] pieces, 12, 21, 100. As long as each
+[08m48s] piece holds an equal share of the area,
+[08m50s] the cuts are still quantiles.
+[08m52s] In this case, we'll make 43, one for
+[08m54s] every matchup Keana has, [music] and put
+[08m56s] a dot in the middle of each quantile.
+[08m59s] Shown as dots on the number line, you
+[09m01s] can see how 43 points of data would look
+[09m03s] if they were normally distributed.
+[09m05s] Now, let's look at Keana's actual
+[09m07s] matchup distribution.
+[09m09s] We can match the points one for one to
+[09m10s] our normally distributed points [music]
+[09m12s] and then plot to see how much Keana's
+[09m14s] matchups diverge from a normal
+[09m15s] distribution.
+[09m17s] If Keana was perfectly normal, we would
+[09m19s] expect to see a straight line.
+[09m21s] The line isn't perfectly straight, but
+[09m23s] is it good enough?
+[09m24s] I'll add a faint blue region that shows
+[09m26s] where a normal set of matchups would
+[09m28s] land 95% of the time once error is
+[09m30s] accounted for.
+[09m31s] And lo and behold, [music]
+[09m33s] Keana's line runs right through it.
+[09m35s] A few points touch the edge, but even a
+[09m37s] truly normal curve does that most of the
+[09m39s] time. So by eye, her matchups look
+[09m41s] normal.
+[09m43s] But 43 points is on the low side for
+[09m44s] determining normality.
+[09m46s] For a better test, we can aggregate all
+[09m48s] matchups from all champions above a 0.5%
+[09m50s] play rate from each roll and then run it
+[09m52s] again.
+[09m54s] It looks good.
+[09m56s] I'll also add another test for normality
+[09m58s] for good measure, the Shapiro-Wilk,
+[10m00s] another one you've probably seen in
+[10m01s] intro stats.
+[10m03s] I won't go into detail on it, but it
+[10m04s] does corroborate what we see with our
+[10m06s] quantile-quantile plots.
+[10m08s] So it is safe to treat champion matchups
+[10m10s] as a normal distribution.
+[10m12s] If we can compare calculating Syndra's
+[10m14s] probability of being countered by
+[10m15s] counting versus summing under the tail
+[10m17s] of the true spread, we can see just how
+[10m19s] much more stable it is.
+[10m21s] Counting systemically overestimates the
+[10m23s] chance of a counter because the added
+[10m24s] noise leads to artificial outliers.
+[10m27s] Summing under the tail doesn't suffer as
+[10m29s] much from this problem.
+[10m30s] And thus we have our metric.
+[10m33s] Now it is finally time. Let us talk
+[10m35s] about lanes other than the mid lane.
+[10m39s] We will start with top lane.
+[10m41s] I do want to first draw your attention
+[10m43s] to two things. Like in the mid lane,
+[10m45s] these are only for in lane counters, not
+[10m47s] out of lane counters like cross lane
+[10m48s] counters. [music]
+[10m50s] And we're using a log scale, not a
+[10m51s] linear scale, to try to divide some of
+[10m53s] the bunches up and make them more
+[10m54s] visible.
+[10m55s] The main thing to note here is that
+[10m57s] there is some separation between
+[10m58s] champions like Rumble and champions like
+[11m00s] Mundo and Vayne.
+[11m02s] A 95% chance to be countered in lane
+[11m04s] versus a 65% chance to be countered in
+[11m06s] lane is a real difference, and all of
+[11m09s] the other laners kind of fill in between
+[11m10s] the two.
+[11m12s] Gragas is a real outlier here, and I've
+[11m13s] classified him as a lane neutralizer in
+[11m15s] the past because of his flexibility.
+[11m18s] In the jungle we see pro stables leading
+[11m19s] the way. [music] Lee Sin, Vi, Jarvan,
+[11m22s] Xin Zhao all perform very well on in
+[11m24s] lane blindability.
+[11m27s] And the exact champions you expect to be
+[11m28s] very counterable are very counterable.
+[11m31s] Silas, Malphite, Lillia, Rammus, these
+[11m34s] are all known to be game dependent
+[11m35s] champions.
+[11m37s] I think bot lane's quite interesting
+[11m38s] because a lot of people consider ADCs to
+[11m40s] all be the same, but there are clear
+[11m42s] standouts in blindability.
+[11m45s] Ashe and Lucian are in a class of their
+[11m46s] own, while niche champions like Smolder
+[11m48s] and Kalista and Twitch are about 60%
+[11m51s] more likely to see a counter in lane.
+[11m54s] And at support [music]
+[11m55s] we have Pantheon, Nami, Thresh, and Bard
+[11m57s] leading the way.
+[11m58s] And as you would expect, Yuumi's there
+[12m00s] bringing up the rear.
+[12m02s] When we put all the roles on the same
+[12m04s] axis to compare, the answer looks pretty
+[12m06s] clear.
+[12m07s] Jungle is by far the most blindable.
+[12m10s] But this assessment isn't quite fair.
+[12m13s] So it's time to talk about cross-role
+[12m14s] matchups.
+[12m17s] If we return to the heat map I showed
+[12m19s] you at the end of last episode, you can
+[12m20s] see that Jungle cares the least about
+[12m22s] its positional matchup and more about
+[12m24s] its five lane opponents. This makes a
+[12m26s] lot of sense. The other laners spend
+[12m28s] time in lane and junglers don't
+[12m29s] necessarily have to interact with each
+[12m31s] other.
+[12m32s] And I want you to remember that we're
+[12m33s] ultimately using spread as the measure
+[12m35s] for how much champions care about other
+[12m37s] champions in the game.
+[12m39s] So when we see for instance that top
+[12m40s] lane has most of its spread locked into
+[12m42s] its lane matchup,
+[12m43s] we can say that top laners are much more
+[12m45s] dependent on their own lane matchup than
+[12m46s] they are on any other roles matchup.
+[12m49s] But this heat map isn't ideal for
+[12m50s] comparing across the different roles,
+[12m52s] only within them.
+[12m54s] So let's instead convert to a stacked
+[12m56s] bar display of the true spread.
+[12m58s] The striped bars are the lane matchups.
+[13m00s] [music]
+[13m02s] We can see that 70% of the Jungle role's
+[13m04s] total spread is cross-role, [music]
+[13m06s] distributed across top, mid, bot, and
+[13m07s] support.
+[13m09s] That's why junglers on average care less
+[13m10s] about their lane matchup.
+[13m12s] But the other roles to varying extent
+[13m14s] all care more about their matchups in
+[13m16s] lane than they do about their cross-role
+[13m17s] matchups.
+[13m19s] Let's now reorder by the true spread
+[13m20s] summed across all lanes.
+[13m23s] The bot role has the lowest total spread
+[13m25s] followed by Jungle.
+[13m27s] I think true spread on its own is an
+[13m29s] ideal metric, but I know that people
+[13m30s] like to get their percentages. So let's
+[13m32s] convert this back into likelihood that a
+[13m34s] champion will be countered by any of the
+[13m36s] opposing five positions.
+[13m38s] Getting the total probability involves a
+[13m40s] bit of math, so let's break this down.
+[13m42s] We'll use Kaisa as an example for this
+[13m44s] section.
+[13m45s] We'll start with what we've been
+[13m46s] discussing this whole video, summing the
+[13m48s] area under the tails.
+[13m50s] We can do this for each role
+[13m51s] individually. [music]
+[13m53s] Each one represents the probability that
+[13m55s] Kaisa will be countered by the opposing
+[13m56s] player of that role.
+[13m58s] Note that for now we're assuming that
+[14m00s] each opposing role has a champion pool
+[14m01s] size of one.
+[14m03s] So we need to do two things. [music]
+[14m05s] Like in the last video, we need to
+[14m07s] estimate an account for the average
+[14m08s] champion pool size at each role. [music]
+[14m11s] And secondly, we need to combine the
+[14m12s] five probabilities together to determine
+[14m14s] the probability that at least one of the
+[14m15s] roles has a counter in their champion
+[14m17s] pool.
+[14m19s] The estimated champion pool sizes for
+[14m20s] each role are listed at the bottom.
+[14m23s] The calculation for these numbers can be
+[14m25s] found in our last video, The Math of
+[14m27s] Blindability, if you'd like a detailed
+[14m29s] explanation.
+[14m30s] Let's visualize how the probability of
+[14m32s] being countered changes as the champion
+[14m34s] pool size increases.
+[14m36s] The dotted lines mark the average
+[14m38s] champion pool size [music] for each
+[14m39s] role,
+[14m40s] and the intersection with the curve is
+[14m42s] the probability of being countered by
+[14m43s] that role.
+[14m45s] Great.
+[14m46s] But how do we add them up?
+[14m48s] Well, they're probabilities, so we're
+[14m49s] going to need to multiply.
+[14m51s] But take note, we're multiplying the
+[14m53s] probability that we won't [music] be
+[14m54s] countered.
+[14m56s] That's because there's only one outcome
+[14m57s] that leads to us not being countered,
+[15m00s] and that outcome requires every single
+[15m02s] opposing role to not have a champion in
+[15m04s] their pool that counters us.
+[15m06s] Conversely, there are many outcomes that
+[15m08s] lead to us being countered.
+[15m10s] There could be one or two or three or
+[15m12s] more opponents with counters in their
+[15m13s] pools.
+[15m15s] Summing up all of those scenarios is
+[15m16s] possible, but it's much easier just to
+[15m18s] calculate the odds of not being
+[15m20s] countered.
+[15m21s] If we multiply those values together, we
+[15m23s] have a chance of 32.2% that none of the
+[15m25s] opposing five roles have a single
+[15m27s] counter for Kai's.
+[15m28s] That means there's a 68% chance that
+[15m30s] Kai's does end up getting countered.
+[15m32s] If we repeat this process for all other
+[15m34s] bot lane champions and then average them
+[15m36s] together, we end up with 66%.
+[15m39s] On the left, you can see the gray line
+[15m40s] showing all of the individual bot lane
+[15m42s] champions and their aggregate chance of
+[15m44s] being countered, and the orange line
+[15m46s] shows the average.
+[15m49s] When we compare all five roles, you can
+[15m50s] see that indeed bot and jungle are the
+[15m53s] most blindable. [music]
+[15m55s] But you might be thinking, wow, that was
+[15m56s] a lot of math just to end up proving the
+[15m58s] exact thing that we all thought at the
+[16m00s] beginning of the video.
+[16m02s] But [music]
+[16m03s] this is the part where I'm going to tell
+[16m04s] you that it's not actually true.
+[16m07s] Bot and jungle picking first really is a
+[16m10s] terrible rule,
+[16m11s] and the reason is staring us right in
+[16m13s] the face.
+[16m14s] The average [music] difference in
+[16m15s] counterability between the different
+[16m17s] roles is only 16 %.
+[16m19s] But the difference within the roles is
+[16m21s] absolutely massive. [music] You can pick
+[16m23s] Lee Sin every single game and not get
+[16m25s] hard countered. Lucian as well.
+[16m27s] Remember that example from the
+[16m28s] beginning? Nami is way more blindable
+[16m31s] than Nocturne, even though he's a
+[16m33s] jungler and she's a support.
+[16m35s] When we aggregate all the dots from all
+[16m37s] of the roles together, it becomes very
+[16m39s] clear.
+[16m40s] Counter depends on the champion, not the
+[16m43s] role.
+[16m45s] So the next time someone asks to swap,
+[16m46s] [music]
+[16m47s] consider what you're going to play and
+[16m49s] what they're going to play before you
+[16m51s] consider just what roles you both have.
+[16m54s] All right, let's zoom out.
+[16m56s] I would like to show you which roles
+[16m57s] actually pick first in solo queue and
+[16m59s] what the results are, but unfortunately
+[17m01s] the data isn't available from Riot's
+[17m03s] API. [music] It would be cool at some
+[17m05s] point as a community to all report what
+[17m08s] our drafts look like, so maybe we could
+[17m09s] aggregate some data together as a fun
+[17m11s] project. [music] But for now, we'll just
+[17m13s] have to draw some inferences.
+[17m15s] While I can't see pick order from solo
+[17m16s] queue, I can see which games are
+[17m18s] favorable or unfavorable for the
+[17m20s] champions in them.
+[17m22s] If a champion finds itself in a
+[17m23s] favorable game, they've either been used
+[17m25s] as a counter pick or the opposing team
+[17m27s] has counter picked themselves.
+[17m29s] Conversely, if they're in an unfavorable
+[17m31s] game, they've either picked blind and
+[17m33s] gotten counter picked or they picked
+[17m35s] into a counter pick because they don't
+[17m36s] know or they don't care.
+[17m38s] So on this plot, [music] the Y axis is
+[17m40s] still the chance of being countered by 2
+[17m42s] % or more, but the X axis is how
+[17m44s] favorable the game is.
+[17m46s] So Jace isn't actually very blindable
+[17m48s] and finds himself in terrible games most
+[17m50s] likely because players think that he's
+[17m51s] blindable. And relative to other tops,
+[17m53s] he is, but tops just aren't as blindable
+[17m56s] as a whole.
+[17m57s] Conversely, Renekton finds himself in
+[17m59s] very favorable games despite not being
+[18m01s] very blindable.
+[18m03s] So while I was pretty emphatic in my
+[18m04s] conclusion about picking based on
+[18m06s] champions, if any role has a case for
+[18m09s] always picking last, it's probably
+[18m10s] [music] top.
+[18m11s] If you're not named Gragas, you're
+[18m13s] probably getting punished.
+[18m15s] In jungle, we can see the champs like
+[18m16s] Lillia and Rengar are being used as
+[18m18s] counter picks, while champions like
+[18m19s] Cho'Gath, Yi, and Nasus, who are super
+[18m21s] not blindable, [music]
+[18m22s] are just being run out there
+[18m23s] willy-nilly.
+[18m25s] In mid lane, Zed, Veigar, and Malzahar
+[18m27s] are all being picked blind too often,
+[18m29s] while Galio, Zilean, and Aurelion Sol
+[18m31s] are being properly used [music] as
+[18m32s] counters.
+[18m33s] In bot lane, Sivir and Corki are being
+[18m35s] used as counters, while people are
+[18m37s] blinding Kalista, Samira, Mel,
+[18m38s] Seraphine, and constantly getting
+[18m40s] punished for it. [music] At support,
+[18m42s] Poppy, Braum, Zilean, Alistar, Camille,
+[18m44s] and others are being used as counters,
+[18m46s] while Yuumi, Nautilus, and Lux are being
+[18m48s] picked blind when they probably
+[18m49s] shouldn't.
+[18m50s] Again, we are inferring the champions
+[18m53s] are being picked blind here, but a lot
+[18m55s] of these champions do fit my priors on
+[18m57s] who would be getting run out blind.
+[18m59s] So I don't think it's too much of a
+[19m01s] stretch to say that Yuumi mains are the
+[19m02s] architects of their own destruction.
+[19m05s] All right, let's look at pro [music]
+[19m06s] play where we do have information on
+[19m08s] pick order and see what they're up to.
+[19m10s] This year in pro play, they decoupled
+[19m11s] [music] first pick from side, so we'll
+[19m13s] just be labeling picks by number and not
+[19m14s] by color.
+[19m16s] We can see on average in 2026 jungle and
+[19m18s] bot were picked pretty early, but mid
+[19m20s] lane also made a strong appearance at
+[19m21s] that first pick.
+[19m23s] In Worlds, jungle has been predominantly
+[19m25s] the first pick, [music] but people that
+[19m26s] know more about this than me tell me
+[19m28s] that it's all meta-dependent, but it's
+[19m30s] still pretty interesting to see.
+[19m32s] If we look at spread and chance of
+[19m33s] counter, we can see that pros do [music]
+[19m35s] pick low spread, lower counter
+[19m37s] probability champions earlier in the
+[19m38s] draft,
+[19m40s] and then they pick higher spread, less
+[19m41s] blindable champions later.
+[19m43s] I think this is a good place to note
+[19m45s] that blindability is not some universal
+[19m46s] good that some champions have and some
+[19m48s] champions don't.
+[19m50s] Non-blindable champions can counter far
+[19m52s] harder than blindable ones can because
+[19m54s] their spread is bigger. [music] Their
+[19m56s] worse matchups might be really bad, but
+[19m58s] that means their best matchups are
+[19m59s] really, really good. [music] So you
+[20m01s] shouldn't be picking blindable champions
+[20m02s] on last pick. If you're picking Ari on
+[20m04s] R5, you're probably doing something
+[20m06s] wrong.
+[20m08s] Now this last plot's a bit trickier, but
+[20m10s] it's the win rate gained by picking
+[20m12s] blindable champions at different points
+[20m13s] in the draft.
+[20m15s] The error bars are large here, but
+[20m16s] generally speaking, both sides seem to
+[20m18s] be benefiting from playing blindable
+[20m20s] champions early and [music] less
+[20m21s] blindable champions later, as we would
+[20m23s] predict.
+[20m24s] All right. So, in total, you should take
+[20m26s] away from this that picks should be
+[20m28s] based on champion blindability and not
+[20m30s] positional blindability.
+[20m32s] That you should have both blindable and
+[20m34s] high spread champions in your pool.
+[20m37s] And that you should be picking the low
+[20m38s] spread champions early and the high
+[20m40s] spread champions as the draft [music]
+[20m42s] goes on.
+[20m43s] So, I hope you enjoyed the video. Um I
+[20m45s] am still waiting on Riot's approval to
+[20m47s] release the actual website where you can
+[20m49s] browse all this data. Uh but I hope you
+[20m52s] enjoyed seeing all of the plots and I
+[20m53s] hope these things help you on the Rift.
+[20m56s] And here are all my links and my socials
+[20m58s] and stuff.
+[21m05s] [music]
+[21m08s] So, hi everybody. Uh I just wanted to
+[21m11s] put this outside in the flow of the
+[21m12s] video, but I have a couple things I
+[21m13s] wanted to get to. First, I want to thank
+[21m16s] everyone for the really beautiful and
+[21m18s] encouraging comments.
+[21m19s] This has been a labor of love for me for
+[21m21s] a number of years and to get it in front
+[21m23s] of people and have them think that it's
+[21m25s] as cool as I do uh was was really
+[21m27s] something special.
+[21m28s] Um
+[21m30s] I wanted to tell you the purpose for
+[21m31s] these videos, the goal. Now more than
+[21m34s] ever, I feel like there's so much data
+[21m36s] that we have with League of Legends.
+[21m37s] [music] Uh you see it in stat sites, you
+[21m40s] see it on the console, you see it in
+[21m42s] videos. But
+[21m44s] as much data as being dumped on us, I
+[21m46s] feel like our ability to process and
+[21m48s] understand it has lagged behind. So,
+[21m50s] this [music] series is going to be
+[21m52s] dedicated to trying to really dig in and
+[21m55s] understand what we're doing with the
+[21m56s] data and why we're doing it with the
+[21m58s] data in a way that can uh
+[22m01s] Oh my.
+[22m03s] My cat's in the background. Um [music]
+[22m04s] in a way that will allow us to apply it
+[22m06s] to our games in the future um [music]
+[22m09s] and really get more out of League of
+[22m10s] Legends and uh
+[22m12s] think about it in our spare time and our
+[22m13s] lunch breaks and and come up with very
+[22m16s] cool new things about the meta.
+[22m18s] Um so yeah. And and I think I'll be
+[22m20s] dropping videos here [music] every two
+[22m23s] weeks, maybe three weeks. This was a lot
+[22m25s] to get out in two weeks, so I might go
+[22m26s] to a three week schedule. But uh as we
+[22m28s] go forward, we'll look at neural nets,
+[22m30s] we'll look at other basic statistical uh
+[22m32s] concepts applied to things. Um yeah, all
+[22m35s] kinds of stuff.
+[22m37s] So I really look forward to it. I I hope
+[22m38s] you enjoyed the video and I'll see you
+[22m40s] next time.
