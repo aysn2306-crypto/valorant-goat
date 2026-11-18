@@ -243,8 +243,8 @@ export const S8IntlOnly: React.FC = () => {
   );
 };
 
-// 9. Twist three: split Faker in two. The whole pool is shown (ay 18 Nov: "why so few dots?"). v10: Knight #1, Faker 2017-26 #2,
-// Faker 2013-16 #11, just under the top 10 line. Labels show rank.
+// 9. Twist three: split Faker in two (ay: even halves, 2013-19 and 2020-26, three Worlds each). Whole pool shown.
+// Labels show rank; the left-hand Faker gets his label on the right.
 export const S9TwoFakers: React.FC = () => {
   const xr: [number, number] = [2010.5, 2026.5], yr: [number, number] = [15, 92];
   const { X, Y } = scale(B, xr, yr);
