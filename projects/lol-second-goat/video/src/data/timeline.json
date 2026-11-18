@@ -1,6 +1,6 @@
 {
 "fps": 30,
-"total": 26467,
+"total": 26602,
 "beats": [
 {
 "id": "b000",
@@ -188,7 +188,7 @@
 "scene": "timeline",
 "chapter": "The data",
 "start": 3645,
-"dur": 530,
+"dur": 558,
 "props": {
 "title": "Every world champion",
 "sub": "2011 to 2026",
@@ -200,8 +200,8 @@
 "id": "b009",
 "scene": "line",
 "chapter": "The data",
-"start": 4175,
-"dur": 888,
+"start": 4203,
+"dur": 914,
 "props": {
 "title": "How strong is each region?",
 "sub": "from head-to-head games at Worlds, MSI and First Stand; best region each year = 1.0",
@@ -489,7 +489,7 @@
 "id": "b010",
 "scene": "numbers",
 "chapter": "The data",
-"start": 5063,
+"start": 5117,
 "dur": 404,
 "props": {
 "title": "Who made the list",
@@ -511,7 +511,7 @@
 "id": "b011",
 "scene": "chapter",
 "chapter": "The formula",
-"start": 5467,
+"start": 5521,
 "dur": 84,
 "props": {
 "n": 3,
@@ -524,7 +524,7 @@
 "id": "b012",
 "scene": "formula",
 "chapter": "The formula",
-"start": 5551,
+"start": 5605,
 "dur": 717,
 "props": {
 "title": "Trophy points",
@@ -558,7 +558,7 @@
 "id": "b013",
 "scene": "hbars",
 "chapter": "The formula",
-"start": 6268,
+"start": 6322,
 "dur": 776,
 "props": {
 "title": "Carry share: Worlds 2026, Bilibili Gaming",
@@ -612,7 +612,7 @@
 "id": "b014",
 "scene": "hbars",
 "chapter": "The formula",
-"start": 7044,
+"start": 7098,
 "dur": 957,
 "props": {
 "title": "Which stats do the experts reward?",
@@ -681,7 +681,7 @@
 "id": "b015",
 "scene": "formula",
 "chapter": "The formula",
-"start": 8001,
+"start": 8055,
 "dur": 838,
 "props": {
 "title": "Fifteen categories",
@@ -711,7 +711,7 @@
 "id": "b016",
 "scene": "rankshift",
 "chapter": "The formula",
-"start": 8839,
+"start": 8893,
 "dur": 829,
 "props": {
 "title": "My first ranking was wrong",
@@ -846,7 +846,7 @@
 "id": "b017",
 "scene": "chapter",
 "chapter": "Is it accurate?",
-"start": 9668,
+"start": 9722,
 "dur": 84,
 "props": {
 "n": 4,
@@ -859,8 +859,8 @@
 "id": "b018",
 "scene": "hbars",
 "chapter": "Is it accurate?",
-"start": 9752,
-"dur": 999,
+"start": 9806,
+"dur": 1017,
 "props": {
 "title": "Does it pick the same players as the voters?",
 "sub": "held-out seasons 2022 to 2026, never used to fit the model; % of roles where our #1 = the 1st-team All-Pro",
@@ -895,7 +895,7 @@
 "id": "b019",
 "scene": "formula",
 "chapter": "Is it accurate?",
-"start": 10751,
+"start": 10823,
 "dur": 878,
 "props": {
 "title": "What the model can't see",
@@ -924,7 +924,7 @@
 "id": "b020",
 "scene": "card",
 "chapter": "Is it accurate?",
-"start": 11629,
+"start": 11701,
 "dur": 660,
 "props": {
 "id": "bengi",
@@ -959,7 +959,7 @@
 "id": "b021",
 "scene": "chapter",
 "chapter": "Categories",
-"start": 12289,
+"start": 12361,
 "dur": 84,
 "props": {
 "n": 5,
@@ -972,7 +972,7 @@
 "id": "b022",
 "scene": "field",
 "chapter": "Category 1 / 15 \u00b7 Trophies",
-"start": 12373,
+"start": 12445,
 "dur": 722,
 "props": {
 "cat": "trophies",
@@ -1000,7 +1000,7 @@
 "id": "b023",
 "scene": "field",
 "chapter": "Category 2 / 15 \u00b7 Big stage",
-"start": 13095,
+"start": 13167,
 "dur": 527,
 "props": {
 "cat": "big_stage",
@@ -1028,7 +1028,7 @@
 "id": "b024",
 "scene": "field",
 "chapter": "Category 3 / 15 \u00b7 Peak",
-"start": 13622,
+"start": 13694,
 "dur": 541,
 "props": {
 "cat": "peak",
@@ -1056,7 +1056,7 @@
 "id": "b025",
 "scene": "field",
 "chapter": "Category 4 / 15 \u00b7 Longevity",
-"start": 14163,
+"start": 14235,
 "dur": 376,
 "props": {
 "cat": "longevity",
@@ -1084,7 +1084,7 @@
 "id": "b026",
 "scene": "field",
 "chapter": "Category 5 / 15 \u00b7 Winning",
-"start": 14539,
+"start": 14611,
 "dur": 463,
 "props": {
 "cat": "winning",
@@ -1112,7 +1112,7 @@
 "id": "b027",
 "scene": "field",
 "chapter": "Category 6 / 15 \u00b7 Laning",
-"start": 15002,
+"start": 15074,
 "dur": 544,
 "props": {
 "cat": "laning",
@@ -1140,7 +1140,7 @@
 "id": "b028",
 "scene": "field",
 "chapter": "Category 7 / 15 \u00b7 Killing",
-"start": 15546,
+"start": 15618,
 "dur": 407,
 "props": {
 "cat": "killing",
@@ -1168,7 +1168,7 @@
 "id": "b029",
 "scene": "field",
 "chapter": "Category 8 / 15 \u00b7 Teamfighting",
-"start": 15953,
+"start": 16025,
 "dur": 457,
 "props": {
 "cat": "teamfight",
@@ -1196,7 +1196,7 @@
 "id": "b030",
 "scene": "field",
 "chapter": "Category 9 / 15 \u00b7 Vision",
-"start": 16410,
+"start": 16482,
 "dur": 628,
 "props": {
 "cat": "vision",
@@ -1225,7 +1225,7 @@
 "id": "b031",
 "scene": "field",
 "chapter": "Category 10 / 15 \u00b7 Team carry",
-"start": 17038,
+"start": 17110,
 "dur": 457,
 "props": {
 "cat": "team_carry",
@@ -1253,7 +1253,7 @@
 "id": "b032",
 "scene": "field",
 "chapter": "Category 11 / 15 \u00b7 Solo carry",
-"start": 17495,
+"start": 17567,
 "dur": 799,
 "props": {
 "cat": "solo_carry",
@@ -1281,7 +1281,7 @@
 "id": "b033",
 "scene": "field",
 "chapter": "Category 12 / 15 \u00b7 Clean play",
-"start": 18294,
+"start": 18366,
 "dur": 484,
 "props": {
 "cat": "clean_play",
@@ -1309,7 +1309,7 @@
 "id": "b034",
 "scene": "field",
 "chapter": "Category 13 / 15 \u00b7 Consistency",
-"start": 18778,
+"start": 18850,
 "dur": 428,
 "props": {
 "cat": "consistency",
@@ -1337,7 +1337,7 @@
 "id": "b035",
 "scene": "field",
 "chapter": "Category 14 / 15 \u00b7 Recognition",
-"start": 19206,
+"start": 19278,
 "dur": 810,
 "props": {
 "cat": "recognition",
@@ -1365,7 +1365,7 @@
 "id": "b036",
 "scene": "field",
 "chapter": "Category 15 / 15 \u00b7 Team lift",
-"start": 20016,
+"start": 20088,
 "dur": 598,
 "props": {
 "cat": "team_lift",
@@ -1393,7 +1393,7 @@
 "id": "b037",
 "scene": "chapter",
 "chapter": "Twists",
-"start": 20614,
+"start": 20686,
 "dur": 84,
 "props": {
 "n": 6,
@@ -1406,7 +1406,7 @@
 "id": "b038",
 "scene": "slider",
 "chapter": "Twists",
-"start": 20698,
+"start": 20770,
 "dur": 719,
 "props": {
 "from": 0,
@@ -1420,8 +1420,8 @@
 "id": "b039",
 "scene": "scatter",
 "chapter": "Twists",
-"start": 21417,
-"dur": 626,
+"start": 21489,
+"dur": 689,
 "props": {
 "title": "Most decorated vs most dominant",
 "sub": "every player: trophy score vs individual categories",
@@ -1434,702 +1434,702 @@
 {
 "id": "knight",
 "x": 99.7,
-"y": 57.2
+"y": 75.6
 },
 {
 "id": "keria",
 "x": 95.2,
-"y": 63.5
+"y": 79.7
 },
 {
 "id": "ruler",
 "x": 96.5,
-"y": 57.5
+"y": 75.8
 },
 {
 "id": "chovy",
 "x": 98.4,
-"y": 49.8
+"y": 70.6
 },
 {
 "id": "viper",
 "x": 96.0,
-"y": 35.6
+"y": 59.7
 },
 {
 "id": "canyon",
 "x": 86.7,
-"y": 49.5
+"y": 70.4
 },
 {
 "id": "kanavi",
 "x": 96.0,
-"y": 31.4
+"y": 56.0
 },
 {
 "id": "zeus",
 "x": 89.3,
-"y": 48.4
+"y": 69.6
 },
 {
 "id": "meiko",
 "x": 94.1,
-"y": 34.4
+"y": 58.7
 },
 {
 "id": "bin",
 "x": 85.8,
-"y": 46.7
+"y": 68.3
 },
 {
 "id": "kiin",
 "x": 94.9,
-"y": 32.0
+"y": 56.6
 },
 {
 "id": "peanut",
 "x": 89.9,
-"y": 36.6
+"y": 60.5
 },
 {
 "id": "uzi",
 "x": 95.9,
-"y": 34.7
+"y": 58.9
 },
 {
 "id": "khan",
 "x": 93.8,
-"y": 26.7
+"y": 51.7
 },
 {
 "id": "rookie",
 "x": 93.2,
-"y": 23.8
+"y": 48.8
 },
 {
 "id": "caps",
 "x": 78.9,
-"y": 46.5
+"y": 68.2
 },
 {
 "id": "beryl",
 "x": 89.7,
-"y": 32.5
+"y": 57.0
 },
 {
 "id": "oner",
 "x": 82.5,
-"y": 47.0
+"y": 68.6
 },
 {
 "id": "bang",
 "x": 89.8,
-"y": 41.8
+"y": 64.7
 },
 {
 "id": "scout",
 "x": 93.7,
-"y": 23.0
+"y": 48.0
 },
 {
 "id": "deft",
 "x": 90.3,
-"y": 28.0
+"y": 52.9
 },
 {
 "id": "theshy",
 "x": 87.4,
-"y": 26.8
+"y": 51.8
 },
 {
 "id": "lehends",
 "x": 92.6,
-"y": 20.4
+"y": 45.2
 },
 {
 "id": "smeb",
 "x": 94.8,
-"y": 17.7
+"y": 42.1
 },
 {
 "id": "zeka",
 "x": 89.3,
-"y": 23.4
+"y": 48.4
 },
 {
 "id": "ming",
 "x": 88.0,
-"y": 25.5
+"y": 50.5
 },
 {
 "id": "showmaker",
 "x": 86.4,
-"y": 25.5
+"y": 50.5
 },
 {
 "id": "bdd",
 "x": 91.4,
-"y": 20.9
+"y": 45.7
 },
 {
 "id": "xiaohu",
 "x": 82.3,
-"y": 35.6
+"y": 59.7
 },
 {
 "id": "369",
 "x": 85.2,
-"y": 27.5
+"y": 52.4
 },
 {
 "id": "corejj",
 "x": 81.1,
-"y": 28.8
+"y": 53.7
 },
 {
 "id": "peyz",
 "x": 90.2,
-"y": 20.6
+"y": 45.4
 },
 {
 "id": "huni",
 "x": 85.0,
-"y": 20.7
+"y": 45.5
 },
 {
 "id": "jackeylove",
 "x": 79.7,
-"y": 29.2
+"y": 54.0
 },
 {
 "id": "tian",
 "x": 86.7,
-"y": 22.4
+"y": 47.3
 },
 {
 "id": "karsa",
 "x": 87.1,
-"y": 19.0
+"y": 43.6
 },
 {
 "id": "flandre",
 "x": 89.6,
-"y": 16.1
+"y": 40.1
 },
 {
 "id": "nuguri",
 "x": 92.2,
-"y": 13.8
+"y": 37.1
 },
 {
 "id": "gala",
 "x": 87.2,
-"y": 19.6
+"y": 44.3
 },
 {
 "id": "bjergsen",
 "x": 89.5,
-"y": 12.1
+"y": 34.8
 },
 {
 "id": "rekkles",
 "x": 85.7,
-"y": 19.8
+"y": 44.5
 },
 {
 "id": "doinb",
 "x": 88.0,
-"y": 13.6
+"y": 36.9
 },
 {
 "id": "missing",
 "x": 86.7,
-"y": 14.0
+"y": 37.4
 },
 {
 "id": "elk",
 "x": 85.1,
-"y": 20.6
+"y": 45.4
 },
 {
 "id": "perkz",
 "x": 73.9,
-"y": 30.0
+"y": 54.8
 },
 {
 "id": "xun",
 "x": 82.4,
-"y": 28.4
+"y": 53.3
 },
 {
 "id": "jensen",
 "x": 83.8,
-"y": 15.4
+"y": 39.2
 },
 {
 "id": "tarzan",
 "x": 84.0,
-"y": 13.9
+"y": 37.3
 },
 {
 "id": "jankos",
 "x": 76.6,
-"y": 24.6
+"y": 49.6
 },
 {
 "id": "dandy",
 "x": 84.4,
-"y": 14.1
+"y": 37.5
 },
 {
 "id": "on",
 "x": 68.7,
-"y": 30.2
+"y": 55.0
 },
 {
 "id": "gumayusi",
 "x": 65.0,
-"y": 45.3
+"y": 67.3
 },
 {
 "id": "pray",
 "x": 79.3,
-"y": 22.9
+"y": 47.9
 },
 {
 "id": "score",
 "x": 87.8,
-"y": 8.7
+"y": 29.5
 },
 {
 "id": "marin",
 "x": 82.0,
-"y": 18.0
+"y": 42.4
 },
 {
 "id": "ssumday",
 "x": 85.4,
-"y": 8.3
+"y": 28.8
 },
 {
 "id": "gogoing",
 "x": 84.7,
-"y": 8.7
+"y": 29.5
 },
 {
 "id": "zven",
 "x": 77.1,
-"y": 16.0
+"y": 40.0
 },
 {
 "id": "clearlove",
 "x": 85.5,
-"y": 14.8
+"y": 38.5
 },
 {
 "id": "doran",
 "x": 75.4,
-"y": 24.2
+"y": 49.2
 },
 {
 "id": "aiming",
 "x": 84.8,
-"y": 3.4
+"y": 18.4
 },
 {
 "id": "wei",
 "x": 74.9,
-"y": 20.1
+"y": 44.8
 },
 {
 "id": "canna",
 "x": 82.0,
-"y": 11.1
+"y": 33.3
 },
 {
 "id": "lwx",
 "x": 79.5,
-"y": 13.1
+"y": 36.2
 },
 {
 "id": "doublelift",
 "x": 78.1,
-"y": 13.6
+"y": 36.9
 },
 {
 "id": "wunder",
 "x": 71.7,
-"y": 23.1
+"y": 48.1
 },
 {
 "id": "cuzz",
 "x": 80.0,
-"y": 12.4
+"y": 35.2
 },
 {
 "id": "gorilla",
 "x": 76.3,
-"y": 19.9
+"y": 44.6
 },
 {
 "id": "blaber",
 "x": 78.6,
-"y": 7.4
+"y": 27.2
 },
 {
 "id": "yike",
 "x": 73.6,
-"y": 11.4
+"y": 33.8
 },
 {
 "id": "reignover",
 "x": 78.0,
-"y": 7.6
+"y": 27.6
 },
 {
 "id": "teddy",
 "x": 83.4,
-"y": 9.4
+"y": 30.7
 },
 {
 "id": "crisp",
 "x": 66.4,
-"y": 22.7
+"y": 47.6
 },
 {
 "id": "brokenblade",
 "x": 71.3,
-"y": 19.3
+"y": 43.9
 },
 {
 "id": "upset",
 "x": 82.0,
-"y": 3.5
+"y": 18.7
 },
 {
 "id": "maple",
 "x": 78.8,
-"y": 14.9
+"y": 38.6
 },
 {
 "id": "fofo",
 "x": 85.4,
-"y": 1.8
+"y": 13.4
 },
 {
 "id": "mikyx",
 "x": 66.9,
-"y": 22.5
+"y": 47.4
 },
 {
 "id": "impact",
 "x": 65.8,
-"y": 25.0
+"y": 50.0
 },
 {
 "id": "duke",
 "x": 76.0,
-"y": 11.9
+"y": 34.5
 },
 {
 "id": "pyosik",
 "x": 72.9,
-"y": 12.6
+"y": 35.5
 },
 {
 "id": "ning",
 "x": 70.9,
-"y": 15.4
+"y": 39.2
 },
 {
 "id": "clid",
 "x": 72.9,
-"y": 14.6
+"y": 38.2
 },
 {
 "id": "sofm",
 "x": 84.4,
-"y": 5.6
+"y": 23.7
 },
 {
 "id": "zoom",
 "x": 77.7,
-"y": 5.8
+"y": 24.1
 },
 {
 "id": "froggen",
 "x": 83.6,
-"y": 4.5
+"y": 21.2
 },
 {
 "id": "life",
 "x": 81.0,
-"y": 7.0
+"y": 26.5
 },
 {
 "id": "delight",
 "x": 68.7,
-"y": 17.9
+"y": 42.3
 },
 {
 "id": "swordart",
 "x": 72.8,
-"y": 16.2
+"y": 40.2
 },
 {
 "id": "yellowstar",
 "x": 67.8,
-"y": 15.5
+"y": 39.4
 },
 {
 "id": "hauntzer",
 "x": 73.2,
-"y": 5.1
+"y": 22.6
 },
 {
 "id": "skewmond",
 "x": 75.3,
-"y": 10.3
+"y": 32.1
 },
 {
 "id": "piglet",
 "x": 70.1,
-"y": 16.3
+"y": 40.4
 },
 {
 "id": "hylissang",
 "x": 62.9,
-"y": 15.9
+"y": 39.9
 },
 {
 "id": "mystic",
 "x": 78.7,
-"y": 6.6
+"y": 25.7
 },
 {
 "id": "bwipo",
 "x": 63.1,
-"y": 18.4
+"y": 42.9
 },
 {
 "id": "imp",
 "x": 72.2,
-"y": 12.0
+"y": 34.6
 },
 {
 "id": "looper",
 "x": 63.3,
-"y": 16.7
+"y": 40.9
 },
 {
 "id": "creme",
 "x": 74.0,
-"y": 10.0
+"y": 31.6
 },
 {
 "id": "iboy",
 "x": 75.2,
-"y": 3.7
+"y": 19.2
 },
 {
 "id": "meteos",
 "x": 70.9,
-"y": 7.1
+"y": 26.6
 },
 {
 "id": "wolf",
 "x": 63.1,
-"y": 35.1
+"y": 59.2
 },
 {
 "id": "korol",
 "x": 69.2,
-"y": 10.4
+"y": 32.2
 },
 {
 "id": "hans-sama",
 "x": 63.2,
-"y": 16.1
+"y": 40.1
 },
 {
 "id": "pawn",
 "x": 65.3,
-"y": 14.3
+"y": 37.8
 },
 {
 "id": "larssen",
 "x": 74.3,
-"y": 4.7
+"y": 21.7
 },
 {
 "id": "kaiser",
 "x": 70.2,
-"y": 5.1
+"y": 22.6
 },
 {
 "id": "mata",
 "x": 61.2,
-"y": 19.1
+"y": 43.7
 },
 {
 "id": "selfmade",
 "x": 74.9,
-"y": 3.1
+"y": 17.6
 },
 {
 "id": "xiye",
 "x": 74.2,
-"y": 6.3
+"y": 25.1
 },
 {
 "id": "cool",
 "x": 68.2,
-"y": 7.3
+"y": 27.0
 },
 {
 "id": "ambition",
 "x": 71.1,
-"y": 11.9
+"y": 34.5
 },
 {
 "id": "broxah",
 "x": 60.1,
-"y": 15.0
+"y": 38.7
 },
 {
 "id": "xpeke",
 "x": 68.5,
-"y": 12.9
+"y": 35.9
 },
 {
 "id": "spirit",
 "x": 74.4,
-"y": 7.9
+"y": 28.1
 },
 {
 "id": "inspired",
 "x": 60.2,
-"y": 13.3
+"y": 36.5
 },
 {
 "id": "cabochard",
 "x": 72.8,
-"y": 0.8
+"y": 8.9
 },
 {
 "id": "flame",
 "x": 77.1,
-"y": 2.4
+"y": 15.5
 },
 {
 "id": "odoamne",
 "x": 65.1,
-"y": 8.4
+"y": 29.0
 },
 {
 "id": "kael",
 "x": 64.3,
-"y": 6.3
+"y": 25.1
 },
 {
 "id": "powerofevil",
 "x": 70.2,
-"y": 3.6
+"y": 19.0
 },
 {
 "id": "sneaky",
 "x": 61.1,
-"y": 11.5
+"y": 33.9
 },
 {
 "id": "san",
 "x": 73.0,
-"y": 6.4
+"y": 25.3
 },
 {
 "id": "breathe",
 "x": 70.4,
-"y": 7.8
+"y": 27.9
 },
 {
 "id": "mlxg",
 "x": 61.6,
-"y": 12.6
+"y": 35.5
 },
 {
 "id": "kellin",
 "x": 73.7,
-"y": 2.6
+"y": 16.1
 },
 {
 "id": "madlife",
 "x": 70.7,
-"y": 6.8
+"y": 26.1
 },
 {
 "id": "zero",
 "x": 66.5,
-"y": 7.2
+"y": 26.8
 },
 {
 "id": "shanks",
 "x": 68.2,
-"y": 5.6
+"y": 23.7
 },
 {
 "id": "olleh",
 "x": 63.6,
-"y": 4.6
+"y": 21.4
 },
 {
 "id": "mountain",
 "x": 61.0,
-"y": 5.9
+"y": 24.3
 },
 {
 "id": "hope",
 "x": 68.1,
-"y": 9.0
+"y": 30.0
 },
 {
 "id": "quid",
 "x": 66.9,
-"y": 3.4
+"y": 18.4
 },
 {
 "id": "zika",
 "x": 67.5,
-"y": 3.9
+"y": 19.7
 },
 {
 "id": "light",
 "x": 65.0,
-"y": 8.9
+"y": 29.8
 },
 {
 "id": "bengi",
 "x": 51.8,
-"y": 26.6
+"y": 51.6
 },
 {
 "id": "vander",
 "x": 63.7,
-"y": 5.3
+"y": 23.0
 },
 {
 "id": "alphari",
 "x": 65.3,
-"y": 3.8
+"y": 19.5
 },
 {
 "id": "photic",
 "x": 66.5,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "killua",
 "x": 72.0,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "meteor",
@@ -2139,127 +2139,127 @@
 {
 "id": "huanfeng",
 "x": 68.8,
-"y": 4.9
+"y": 22.1
 },
 {
 "id": "febiven",
 "x": 58.5,
-"y": 5.6
+"y": 23.7
 },
 {
 "id": "beishang",
 "x": 69.5,
-"y": 0.3
+"y": 5.5
 },
 {
 "id": "loken",
 "x": 64.9,
-"y": 4.6
+"y": 21.4
 },
 {
 "id": "smlz",
 "x": 68.0,
-"y": 0.5
+"y": 7.1
 },
 {
 "id": "svenskeren",
 "x": 55.3,
-"y": 9.8
+"y": 31.3
 },
 {
 "id": "haru",
 "x": 68.0,
-"y": 1.0
+"y": 10.0
 },
 {
 "id": "doggo",
 "x": 63.4,
-"y": 5.3
+"y": 23.0
 },
 {
 "id": "prince",
 "x": 64.4,
-"y": 0.6
+"y": 7.7
 },
 {
 "id": "busio",
 "x": 54.6,
-"y": 7.7
+"y": 27.7
 },
 {
 "id": "ale",
 "x": 65.4,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "targamas",
 "x": 57.8,
-"y": 5.4
+"y": 23.2
 },
 {
 "id": "soaz",
 "x": 52.4,
-"y": 14.2
+"y": 37.7
 },
 {
 "id": "betty",
 "x": 64.5,
-"y": 8.1
+"y": 28.5
 },
 {
 "id": "trick",
 "x": 59.1,
-"y": 6.3
+"y": 25.1
 },
 {
 "id": "summit",
 "x": 67.2,
-"y": 0.5
+"y": 7.1
 },
 {
 "id": "lira",
 "x": 61.1,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "trymbi",
 "x": 55.0,
-"y": 5.3
+"y": 23.0
 },
 {
 "id": "easyhoon",
 "x": 63.4,
-"y": 1.6
+"y": 12.6
 },
 {
 "id": "huhi",
 "x": 56.9,
-"y": 6.2
+"y": 24.9
 },
 {
 "id": "shy",
 "x": 63.5,
-"y": 5.7
+"y": 23.9
 },
 {
 "id": "kingen",
 "x": 68.8,
-"y": 8.4
+"y": 29.0
 },
 {
 "id": "ghost",
 "x": 48.9,
-"y": 18.2
+"y": 42.7
 },
 {
 "id": "croco",
 "x": 66.6,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "weiwei",
 "x": 69.3,
-"y": 3.6
+"y": 19.0
 },
 {
 "id": "leyan",
@@ -2269,12 +2269,12 @@
 {
 "id": "kasing",
 "x": 59.0,
-"y": 1.2
+"y": 11.0
 },
 {
 "id": "road",
 "x": 63.0,
-"y": 0.7
+"y": 8.4
 },
 {
 "id": "max",
@@ -2284,12 +2284,12 @@
 {
 "id": "humanoid",
 "x": 56.3,
-"y": 10.1
+"y": 31.8
 },
 {
 "id": "baolan",
 "x": 61.7,
-"y": 11.6
+"y": 34.1
 },
 {
 "id": "shanji",
@@ -2299,12 +2299,12 @@
 {
 "id": "vulcan",
 "x": 58.2,
-"y": 6.4
+"y": 25.3
 },
 {
 "id": "kaiwing",
 "x": 62.6,
-"y": 6.0
+"y": 24.5
 },
 {
 "id": "wink",
@@ -2314,87 +2314,87 @@
 {
 "id": "jiejie",
 "x": 65.5,
-"y": 8.7
+"y": 29.5
 },
 {
 "id": "namei",
 "x": 59.8,
-"y": 5.5
+"y": 23.5
 },
 {
 "id": "hongq",
 "x": 61.3,
-"y": 3.7
+"y": 19.2
 },
 {
 "id": "loveling",
 "x": 55.0,
-"y": 7.3
+"y": 27.0
 },
 {
 "id": "langx",
 "x": 61.8,
-"y": 1.4
+"y": 11.8
 },
 {
 "id": "jun",
 "x": 56.2,
-"y": 2.0
+"y": 14.1
 },
 {
 "id": "xerxe",
 "x": 59.1,
-"y": 1.9
+"y": 13.8
 },
 {
 "id": "ben",
 "x": 54.6,
-"y": 6.2
+"y": 24.9
 },
 {
 "id": "dardoch",
 "x": 60.1,
-"y": 0.3
+"y": 5.5
 },
 {
 "id": "caliste",
 "x": 56.5,
-"y": 4.7
+"y": 21.7
 },
 {
 "id": "kakao",
 "x": 59.9,
-"y": 3.8
+"y": 19.5
 },
 {
 "id": "diamondprox",
 "x": 62.4,
-"y": 4.3
+"y": 20.7
 },
 {
 "id": "angel",
 "x": 62.5,
-"y": 4.2
+"y": 20.5
 },
 {
 "id": "aphromoo",
 "x": 47.1,
-"y": 5.7
+"y": 23.9
 },
 {
 "id": "licorice",
 "x": 49.6,
-"y": 4.9
+"y": 22.1
 },
 {
 "id": "tusin",
 "x": 63.1,
-"y": 2.3
+"y": 15.2
 },
 {
 "id": "rascal",
 "x": 57.1,
-"y": 6.2
+"y": 24.9
 },
 {
 "id": "xiaohao",
@@ -2404,57 +2404,57 @@
 {
 "id": "arrow",
 "x": 55.7,
-"y": 4.9
+"y": 22.1
 },
 {
 "id": "fenix",
 "x": 59.3,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "crown",
 "x": 54.8,
-"y": 9.6
+"y": 31.0
 },
 {
 "id": "rich",
 "x": 58.2,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "stixxay",
 "x": 45.8,
-"y": 5.9
+"y": 24.3
 },
 {
 "id": "southwind",
 "x": 62.1,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "biofrost",
 "x": 50.5,
-"y": 4.7
+"y": 21.7
 },
 {
 "id": "deokdam",
 "x": 48.1,
-"y": 6.2
+"y": 24.9
 },
 {
 "id": "saint",
 "x": 57.0,
-"y": 4.5
+"y": 21.2
 },
 {
 "id": "duro",
 "x": 52.2,
-"y": 12.1
+"y": 34.8
 },
 {
 "id": "shiauc",
 "x": 56.5,
-"y": 1.8
+"y": 13.4
 },
 {
 "id": "h4cker",
@@ -2464,32 +2464,32 @@
 {
 "id": "mark",
 "x": 50.9,
-"y": 2.2
+"y": 14.8
 },
 {
 "id": "cryin",
 "x": 56.5,
-"y": 5.1
+"y": 22.6
 },
 {
 "id": "cuvee",
 "x": 51.2,
-"y": 16.1
+"y": 40.1
 },
 {
 "id": "zz1tai",
 "x": 60.3,
-"y": 2.9
+"y": 17.0
 },
 {
 "id": "kuro",
 "x": 55.2,
-"y": 10.3
+"y": 32.1
 },
 {
 "id": "quad",
 "x": 50.5,
-"y": 4.4
+"y": 21.0
 },
 {
 "id": "1xn",
@@ -2499,7 +2499,7 @@
 {
 "id": "coco",
 "x": 57.3,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "hakuho",
@@ -2514,37 +2514,37 @@
 {
 "id": "hachani",
 "x": 55.4,
-"y": 2.9
+"y": 17.0
 },
 {
 "id": "hjarnan",
 "x": 54.5,
-"y": 3.7
+"y": 19.2
 },
 {
 "id": "ggoong",
 "x": 54.2,
-"y": 2.4
+"y": 15.5
 },
 {
 "id": "zeyzal",
 "x": 50.6,
-"y": 4.4
+"y": 21.0
 },
 {
 "id": "lvmao",
 "x": 50.7,
-"y": 4.8
+"y": 21.9
 },
 {
 "id": "iwandy",
 "x": 55.8,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "josedeodo",
 "x": 45.8,
-"y": 3.5
+"y": 18.7
 },
 {
 "id": "fate",
@@ -2554,37 +2554,37 @@
 {
 "id": "gimgoon",
 "x": 56.0,
-"y": 6.1
+"y": 24.7
 },
 {
 "id": "elyoya",
 "x": 41.7,
-"y": 9.9
+"y": 31.5
 },
 {
 "id": "expect",
 "x": 48.3,
-"y": 5.5
+"y": 23.5
 },
 {
 "id": "lemonnation",
 "x": 45.7,
-"y": 5.0
+"y": 22.4
 },
 {
 "id": "an",
 "x": 46.5,
-"y": 5.8
+"y": 24.1
 },
 {
 "id": "shad0w",
 "x": 56.3,
-"y": 1.3
+"y": 11.4
 },
 {
 "id": "ucal",
 "x": 56.6,
-"y": 1.9
+"y": 13.8
 },
 {
 "id": "yoon",
@@ -2594,12 +2594,12 @@
 {
 "id": "clozer",
 "x": 55.3,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "space",
 "x": 54.3,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "sheer",
@@ -2609,97 +2609,97 @@
 {
 "id": "cyanide",
 "x": 42.4,
-"y": 9.4
+"y": 30.7
 },
 {
 "id": "hang",
 "x": 46.6,
-"y": 5.3
+"y": 23.0
 },
 {
 "id": "berserker",
 "x": 38.9,
-"y": 7.1
+"y": 26.6
 },
 {
 "id": "ray",
 "x": 54.6,
-"y": 1.9
+"y": 13.8
 },
 {
 "id": "ignar",
 "x": 45.6,
-"y": 4.6
+"y": 21.4
 },
 {
 "id": "razork",
 "x": 50.0,
-"y": 3.9
+"y": 19.7
 },
 {
 "id": "kid",
 "x": 52.0,
-"y": 2.6
+"y": 16.1
 },
 {
 "id": "raptor",
 "x": 57.7,
-"y": 0.7
+"y": 8.4
 },
 {
 "id": "beichuan",
 "x": 52.5,
-"y": 1.7
+"y": 13.0
 },
 {
 "id": "balls",
 "x": 37.1,
-"y": 4.6
+"y": 21.4
 },
 {
 "id": "yagao",
 "x": 49.8,
-"y": 11.9
+"y": 34.5
 },
 {
 "id": "ziv",
 "x": 48.7,
-"y": 5.9
+"y": 24.3
 },
 {
 "id": "zhuo",
 "x": 52.8,
-"y": 1.0
+"y": 10.0
 },
 {
 "id": "expession",
 "x": 47.4,
-"y": 3.0
+"y": 17.3
 },
 {
 "id": "burdol",
 "x": 54.5,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "dade",
 "x": 42.5,
-"y": 8.6
+"y": 29.3
 },
 {
 "id": "fudge",
 "x": 43.7,
-"y": 5.1
+"y": 22.6
 },
 {
 "id": "vizicsacsi",
 "x": 42.4,
-"y": 2.5
+"y": 15.8
 },
 {
 "id": "maxlore",
 "x": 45.1,
-"y": 1.5
+"y": 12.2
 },
 {
 "id": "dudu",
@@ -2719,12 +2719,12 @@
 {
 "id": "contractz",
 "x": 44.2,
-"y": 3.7
+"y": 19.2
 },
 {
 "id": "crash",
 "x": 50.9,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "xiaolaohu",
@@ -2734,12 +2734,12 @@
 {
 "id": "comp",
 "x": 40.3,
-"y": 2.5
+"y": 15.8
 },
 {
 "id": "cpt-jack",
 "x": 57.2,
-"y": 1.5
+"y": 12.2
 },
 {
 "id": "tempt",
@@ -2749,12 +2749,12 @@
 {
 "id": "effort",
 "x": 44.1,
-"y": 4.3
+"y": 20.7
 },
 {
 "id": "fredy122",
 "x": 40.4,
-"y": 1.1
+"y": 10.5
 },
 {
 "id": "ohq",
@@ -2764,17 +2764,17 @@
 {
 "id": "morgan",
 "x": 46.5,
-"y": 3.8
+"y": 19.5
 },
 {
 "id": "morning",
 "x": 44.5,
-"y": 1.0
+"y": 10.0
 },
 {
 "id": "apa",
 "x": 41.7,
-"y": 3.1
+"y": 17.6
 },
 {
 "id": "qiuqiu",
@@ -2784,12 +2784,12 @@
 {
 "id": "clear",
 "x": 47.9,
-"y": 0.7
+"y": 8.4
 },
 {
 "id": "noah",
 "x": 38.8,
-"y": 2.8
+"y": 16.7
 },
 {
 "id": "kuzan",
@@ -2799,22 +2799,22 @@
 {
 "id": "thanatos",
 "x": 47.2,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "kramer",
 "x": 51.8,
-"y": 2.1
+"y": 14.5
 },
 {
 "id": "kobbe",
 "x": 38.3,
-"y": 2.3
+"y": 15.2
 },
 {
 "id": "insec",
 "x": 51.1,
-"y": 6.3
+"y": 25.1
 },
 {
 "id": "able",
@@ -2829,22 +2829,22 @@
 {
 "id": "ryu",
 "x": 41.4,
-"y": 4.9
+"y": 22.1
 },
 {
 "id": "swift",
 "x": 50.0,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "smash",
 "x": 58.5,
-"y": 1.3
+"y": 11.4
 },
 {
 "id": "nrated",
 "x": 45.7,
-"y": 1.9
+"y": 13.8
 },
 {
 "id": "vetheo",
@@ -2854,62 +2854,62 @@
 {
 "id": "carzzy",
 "x": 36.8,
-"y": 6.5
+"y": 25.5
 },
 {
 "id": "cody-sun",
 "x": 43.9,
-"y": 1.6
+"y": 12.6
 },
 {
 "id": "ppgod",
 "x": 43.1,
-"y": 0.3
+"y": 5.5
 },
 {
 "id": "alex",
 "x": 42.2,
-"y": 0.6
+"y": 7.7
 },
 {
 "id": "jiaqi",
 "x": 49.3,
-"y": 3.5
+"y": 18.7
 },
 {
 "id": "crownie",
 "x": 50.5,
-"y": 0.5
+"y": 7.1
 },
 {
 "id": "albis",
 "x": 35.4,
-"y": 5.6
+"y": 23.7
 },
 {
 "id": "vampire",
 "x": 38.0,
-"y": 1.4
+"y": 11.8
 },
 {
 "id": "jesiz",
 "x": 39.6,
-"y": 2.6
+"y": 16.1
 },
 {
 "id": "tactical",
 "x": 38.6,
-"y": 1.9
+"y": 13.8
 },
 {
 "id": "nukeduck",
 "x": 42.6,
-"y": 2.3
+"y": 15.2
 },
 {
 "id": "yeon",
 "x": 36.7,
-"y": 4.8
+"y": 21.9
 },
 {
 "id": "tangyuan",
@@ -2919,12 +2919,12 @@
 {
 "id": "dove",
 "x": 43.4,
-"y": 0.2
+"y": 4.5
 },
 {
 "id": "lucid",
 "x": 42.1,
-"y": 1.9
+"y": 13.8
 },
 {
 "id": "loong",
@@ -2939,22 +2939,22 @@
 {
 "id": "haro",
 "x": 53.2,
-"y": 1.7
+"y": 13.0
 },
 {
 "id": "santorin",
 "x": 43.0,
-"y": 3.9
+"y": 19.7
 },
 {
 "id": "darshan",
 "x": 38.9,
-"y": 4.9
+"y": 22.1
 },
 {
 "id": "godv",
 "x": 45.3,
-"y": 1.6
+"y": 12.6
 },
 {
 "id": "key",
@@ -2964,17 +2964,17 @@
 {
 "id": "xiaoxu",
 "x": 41.5,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "diable",
 "x": 45.8,
-"y": 0.6
+"y": 7.7
 },
 {
 "id": "bebe",
 "x": 35.2,
-"y": 7.4
+"y": 27.2
 },
 {
 "id": "dread",
@@ -2984,32 +2984,32 @@
 {
 "id": "fbi",
 "x": 40.5,
-"y": 4.1
+"y": 20.2
 },
 {
 "id": "watch",
 "x": 40.9,
-"y": 6.7
+"y": 25.9
 },
 {
 "id": "957",
 "x": 34.5,
-"y": 5.3
+"y": 23.0
 },
 {
 "id": "wildturtle",
 "x": 35.3,
-"y": 7.5
+"y": 27.4
 },
 {
 "id": "junjia",
 "x": 42.8,
-"y": 5.0
+"y": 22.4
 },
 {
 "id": "patrik",
 "x": 44.2,
-"y": 0.7
+"y": 8.4
 },
 {
 "id": "lava",
@@ -3019,12 +3019,12 @@
 {
 "id": "icon",
 "x": 42.9,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "river",
 "x": 37.1,
-"y": 3.9
+"y": 19.7
 },
 {
 "id": "crazy",
@@ -3034,17 +3034,17 @@
 {
 "id": "mmd",
 "x": 41.0,
-"y": 5.5
+"y": 23.5
 },
 {
 "id": "perfect",
 "x": 40.2,
-"y": 4.1
+"y": 20.2
 },
 {
 "id": "chieh",
 "x": 35.9,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "ahn",
@@ -3054,42 +3054,42 @@
 {
 "id": "adrian",
 "x": 35.3,
-"y": 0.6
+"y": 7.7
 },
 {
 "id": "jiizuke",
 "x": 43.3,
-"y": 1.0
+"y": 10.0
 },
 {
 "id": "letme",
 "x": 37.5,
-"y": 9.0
+"y": 30.0
 },
 {
 "id": "leave",
 "x": 45.1,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "xx",
 "x": 43.6,
-"y": 0.3
+"y": 5.5
 },
 {
 "id": "rest",
 "x": 36.3,
-"y": 2.6
+"y": 16.1
 },
 {
 "id": "mithy",
 "x": 30.3,
-"y": 9.1
+"y": 30.2
 },
 {
 "id": "supa",
 "x": 40.2,
-"y": 4.3
+"y": 20.7
 },
 {
 "id": "sohwan",
@@ -3099,12 +3099,12 @@
 {
 "id": "athena",
 "x": 52.1,
-"y": 0.6
+"y": 7.7
 },
 {
 "id": "lustboy",
 "x": 37.8,
-"y": 4.8
+"y": 21.9
 },
 {
 "id": "trace",
@@ -3114,22 +3114,22 @@
 {
 "id": "krepo",
 "x": 40.6,
-"y": 3.1
+"y": 17.6
 },
 {
 "id": "guger",
 "x": 41.9,
-"y": 0.1
+"y": 3.2
 },
 {
 "id": "edward",
 "x": 37.2,
-"y": 2.3
+"y": 15.2
 },
 {
 "id": "xiyang",
 "x": 36.8,
-"y": 0.3
+"y": 5.5
 },
 {
 "id": "beyond",
@@ -3149,12 +3149,12 @@
 {
 "id": "nisqy",
 "x": 36.2,
-"y": 3.9
+"y": 19.7
 },
 {
 "id": "closer",
 "x": 26.2,
-"y": 2.1
+"y": 14.5
 },
 {
 "id": "mole",
@@ -3169,7 +3169,7 @@
 {
 "id": "wayward",
 "x": 41.5,
-"y": 1.4
+"y": 11.8
 },
 {
 "id": "snowflower",
@@ -3179,47 +3179,47 @@
 {
 "id": "peter",
 "x": 42.4,
-"y": 4.0
+"y": 20.0
 },
 {
 "id": "ice",
 "x": 35.6,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "cube",
 "x": 39.2,
-"y": 0.1
+"y": 3.2
 },
 {
 "id": "monki",
 "x": 44.3,
-"y": 0.2
+"y": 4.5
 },
 {
 "id": "kikis",
 "x": 37.1,
-"y": 1.9
+"y": 13.8
 },
 {
 "id": "jinjiao",
 "x": 43.5,
-"y": 0.6
+"y": 7.7
 },
 {
 "id": "hanabi",
 "x": 40.4,
-"y": 5.2
+"y": 22.8
 },
 {
 "id": "siwoo",
 "x": 38.7,
-"y": 1.2
+"y": 11.0
 },
 {
 "id": "abbedagge",
 "x": 34.2,
-"y": 2.2
+"y": 14.8
 },
 {
 "id": "chaser",
@@ -3229,17 +3229,17 @@
 {
 "id": "dyrus",
 "x": 32.0,
-"y": 7.1
+"y": 26.6
 },
 {
 "id": "spica",
 "x": 32.8,
-"y": 1.2
+"y": 11.0
 },
 {
 "id": "armut",
 "x": 36.6,
-"y": 4.7
+"y": 21.7
 },
 {
 "id": "samd",
@@ -3259,12 +3259,12 @@
 {
 "id": "wickd",
 "x": 30.6,
-"y": 3.6
+"y": 19.0
 },
 {
 "id": "myrwn",
 "x": 32.1,
-"y": 3.5
+"y": 18.7
 },
 {
 "id": "cold",
@@ -3274,22 +3274,22 @@
 {
 "id": "bugi",
 "x": 41.2,
-"y": 1.0
+"y": 10.0
 },
 {
 "id": "vsta",
 "x": 42.1,
-"y": 1.6
+"y": 12.6
 },
 {
 "id": "aluka",
 "x": 35.0,
-"y": 2.4
+"y": 15.5
 },
 {
 "id": "blank",
 "x": 36.8,
-"y": 12.5
+"y": 35.4
 },
 {
 "id": "pilot",
@@ -3309,17 +3309,17 @@
 {
 "id": "isles",
 "x": 30.1,
-"y": 4.1
+"y": 20.2
 },
 {
 "id": "xmithie",
 "x": 22.8,
-"y": 11.4
+"y": 33.8
 },
 {
 "id": "labrov",
 "x": 24.7,
-"y": 9.1
+"y": 30.2
 },
 {
 "id": "haichao",
@@ -3329,7 +3329,7 @@
 {
 "id": "kitties",
 "x": 32.2,
-"y": 1.3
+"y": 11.4
 },
 {
 "id": "mickey",
@@ -3339,7 +3339,7 @@
 {
 "id": "alvaro",
 "x": 27.4,
-"y": 4.1
+"y": 20.2
 },
 {
 "id": "kryst4l",
@@ -3349,17 +3349,17 @@
 {
 "id": "happy",
 "x": 39.7,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "puff",
 "x": 34.6,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "massu",
 "x": 26.9,
-"y": 4.7
+"y": 21.7
 },
 {
 "id": "hery",
@@ -3369,17 +3369,17 @@
 {
 "id": "gori",
 "x": 34.7,
-"y": 0.5
+"y": 7.1
 },
 {
 "id": "amazingj",
 "x": 33.5,
-"y": 1.5
+"y": 12.2
 },
 {
 "id": "mouse",
 "x": 35.1,
-"y": 3.2
+"y": 17.9
 },
 {
 "id": "yuuki",
@@ -3394,32 +3394,32 @@
 {
 "id": "pobelter",
 "x": 28.5,
-"y": 4.1
+"y": 20.2
 },
 {
 "id": "bvoy",
 "x": 33.3,
-"y": 0.1
+"y": 3.2
 },
 {
 "id": "quas",
 "x": 32.9,
-"y": 0.2
+"y": 4.5
 },
 {
 "id": "tore",
 "x": 40.3,
-"y": 1.1
+"y": 10.5
 },
 {
 "id": "altec",
 "x": 31.9,
-"y": 0.2
+"y": 4.5
 },
 {
 "id": "yuyanjia",
 "x": 35.0,
-"y": 5.0
+"y": 22.4
 },
 {
 "id": "jiwoo",
@@ -3429,12 +3429,12 @@
 {
 "id": "erha",
 "x": 36.7,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "flawless",
 "x": 33.3,
-"y": 1.0
+"y": 10.0
 },
 {
 "id": "bulldog",
@@ -3444,17 +3444,17 @@
 {
 "id": "adam",
 "x": 24.9,
-"y": 1.5
+"y": 12.2
 },
 {
 "id": "acorn",
 "x": 29.0,
-"y": 5.8
+"y": 24.1
 },
 {
 "id": "hai",
 "x": 26.5,
-"y": 3.7
+"y": 19.2
 },
 {
 "id": "irrelevant",
@@ -3479,7 +3479,7 @@
 {
 "id": "vicla",
 "x": 29.9,
-"y": 0.7
+"y": 8.4
 },
 {
 "id": "taeyoon",
@@ -3494,32 +3494,32 @@
 {
 "id": "sheo",
 "x": 27.7,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "tbq",
 "x": 30.1,
-"y": 1.6
+"y": 12.6
 },
 {
 "id": "nuc",
 "x": 31.3,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "sw0rd",
 "x": 36.3,
-"y": 1.6
+"y": 12.6
 },
 {
 "id": "route",
 "x": 35.8,
-"y": 1.4
+"y": 11.8
 },
 {
 "id": "vladi",
 "x": 28.5,
-"y": 1.8
+"y": 13.4
 },
 {
 "id": "jnx",
@@ -3539,22 +3539,22 @@
 {
 "id": "mission",
 "x": 32.9,
-"y": 1.2
+"y": 11.0
 },
 {
 "id": "v",
 "x": 28.5,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "pyl",
 "x": 26.0,
-"y": 1.6
+"y": 12.6
 },
 {
 "id": "amazing",
 "x": 22.0,
-"y": 5.8
+"y": 24.1
 },
 {
 "id": "forge",
@@ -3564,17 +3564,17 @@
 {
 "id": "dreamer",
 "x": 27.8,
-"y": 0.1
+"y": 3.2
 },
 {
 "id": "gilius",
 "x": 30.6,
-"y": 0.4
+"y": 6.3
 },
 {
 "id": "condi",
 "x": 23.7,
-"y": 3.8
+"y": 19.5
 },
 {
 "id": "gate",
@@ -3589,7 +3589,7 @@
 {
 "id": "shook",
 "x": 23.7,
-"y": 1.2
+"y": 11.0
 },
 {
 "id": "aki",
@@ -3604,42 +3604,42 @@
 {
 "id": "helios",
 "x": 27.6,
-"y": 1.7
+"y": 13.0
 },
 {
 "id": "umti",
 "x": 29.3,
-"y": 1.7
+"y": 13.0
 },
 {
 "id": "jojopyun",
 "x": 17.1,
-"y": 4.4
+"y": 21.0
 },
 {
 "id": "lilv",
 "x": 30.9,
-"y": 1.0
+"y": 10.0
 },
 {
 "id": "westdoor",
 "x": 22.1,
-"y": 4.8
+"y": 21.9
 },
 {
 "id": "karis",
 "x": 26.1,
-"y": 0.2
+"y": 4.5
 },
 {
 "id": "akaadian",
 "x": 30.7,
-"y": 0.3
+"y": 5.5
 },
 {
 "id": "palafox",
 "x": 19.8,
-"y": 1.8
+"y": 13.4
 },
 {
 "id": "strive",
@@ -3654,17 +3654,17 @@
 {
 "id": "flakked",
 "x": 25.5,
-"y": 2.3
+"y": 15.2
 },
 {
 "id": "smoothie",
 "x": 22.7,
-"y": 2.6
+"y": 16.1
 },
 {
 "id": "xpecial",
 "x": 26.5,
-"y": 3.6
+"y": 19.0
 },
 {
 "id": "sponge",
@@ -3679,17 +3679,17 @@
 {
 "id": "malrang",
 "x": 26.6,
-"y": 1.6
+"y": 12.6
 },
 {
 "id": "fly",
 "x": 26.2,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "kyeahoo",
 "x": 23.9,
-"y": 2.5
+"y": 15.8
 },
 {
 "id": "neon",
@@ -3704,7 +3704,7 @@
 {
 "id": "apex",
 "x": 20.0,
-"y": 0.3
+"y": 5.5
 },
 {
 "id": "biubiu",
@@ -3714,7 +3714,7 @@
 {
 "id": "dhokla",
 "x": 17.1,
-"y": 6.3
+"y": 25.1
 },
 {
 "id": "ley",
@@ -3724,12 +3724,12 @@
 {
 "id": "koala",
 "x": 25.0,
-"y": 2.4
+"y": 15.5
 },
 {
 "id": "eyla",
 "x": 21.8,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "yaoyao",
@@ -3744,12 +3744,12 @@
 {
 "id": "wako",
 "x": 23.3,
-"y": 1.3
+"y": 11.4
 },
 {
 "id": "willer",
 "x": 27.4,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "betsy",
@@ -3764,12 +3764,12 @@
 {
 "id": "candypanda",
 "x": 25.3,
-"y": 1.5
+"y": 12.2
 },
 {
 "id": "nyph",
 "x": 25.6,
-"y": 1.7
+"y": 13.0
 },
 {
 "id": "keith",
@@ -3784,12 +3784,12 @@
 {
 "id": "mor",
 "x": 21.7,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "limit",
 "x": 27.8,
-"y": 0.1
+"y": 3.2
 },
 {
 "id": "sylvie",
@@ -3829,7 +3829,7 @@
 {
 "id": "solo",
 "x": 23.0,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "shiphtur",
@@ -3839,12 +3839,12 @@
 {
 "id": "link",
 "x": 24.0,
-"y": 0.2
+"y": 4.5
 },
 {
 "id": "oscarinin",
 "x": 18.2,
-"y": 2.3
+"y": 15.2
 },
 {
 "id": "keane",
@@ -3889,12 +3889,12 @@
 {
 "id": "steeelback",
 "x": 20.0,
-"y": 1.4
+"y": 11.8
 },
 {
 "id": "corn",
 "x": 19.9,
-"y": 2.7
+"y": 16.4
 },
 {
 "id": "ella",
@@ -3914,7 +3914,7 @@
 {
 "id": "3z",
 "x": 16.4,
-"y": 0.5
+"y": 7.1
 },
 {
 "id": "mrrallez",
@@ -3924,12 +3924,12 @@
 {
 "id": "exile",
 "x": 19.4,
-"y": 0.3
+"y": 5.5
 },
 {
 "id": "k",
 "x": 13.6,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "zwuji",
@@ -3944,7 +3944,7 @@
 {
 "id": "finn",
 "x": 23.2,
-"y": 0.6
+"y": 7.7
 },
 {
 "id": "seraph",
@@ -3954,32 +3954,32 @@
 {
 "id": "yaharong",
 "x": 23.7,
-"y": 0.5
+"y": 7.1
 },
 {
 "id": "tabzz",
 "x": 18.3,
-"y": 2.1
+"y": 14.5
 },
 {
 "id": "unified",
 "x": 19.4,
-"y": 1.5
+"y": 12.2
 },
 {
 "id": "taizan",
 "x": 17.7,
-"y": 0.1
+"y": 3.2
 },
 {
 "id": "crumbz",
 "x": 20.1,
-"y": 0.3
+"y": 5.5
 },
 {
 "id": "mash",
 "x": 17.6,
-"y": 0.3
+"y": 5.5
 },
 {
 "id": "eimy",
@@ -3989,12 +3989,12 @@
 {
 "id": "dee",
 "x": 12.2,
-"y": 0.1
+"y": 3.2
 },
 {
 "id": "pk",
 "x": 14.6,
-"y": 1.1
+"y": 10.5
 },
 {
 "id": "zest",
@@ -4004,7 +4004,7 @@
 {
 "id": "nuclear",
 "x": 15.8,
-"y": 1.2
+"y": 11.0
 },
 {
 "id": "lourlo",
@@ -4014,7 +4014,7 @@
 {
 "id": "kold",
 "x": 12.9,
-"y": 1.1
+"y": 10.5
 },
 {
 "id": "maha",
@@ -4024,12 +4024,12 @@
 {
 "id": "uniboy",
 "x": 15.8,
-"y": 1.5
+"y": 12.2
 },
 {
 "id": "breeze",
 "x": 11.9,
-"y": 0.9
+"y": 9.5
 },
 {
 "id": "2188",
@@ -4044,22 +4044,22 @@
 {
 "id": "sencux",
 "x": 11.4,
-"y": 0.5
+"y": 7.1
 },
 {
 "id": "wadid",
 "x": 12.1,
-"y": 2.6
+"y": 16.1
 },
 {
 "id": "ysera",
 "x": 5.8,
-"y": 0.8
+"y": 8.9
 },
 {
 "id": "gemini",
 "x": 8.0,
-"y": 0.7
+"y": 8.4
 }
 ],
 "named": [
@@ -4072,14 +4072,14 @@
 "viper"
 ],
 "xLabel": "individual categories (average percentile)",
-"yLabel": "trophy score",
+"yLabel": "trophy score (square-root scale)",
 "xr": [
-0,
-100
+5,
+108
 ],
 "yr": [
 0,
-100
+125
 ],
 "tNamed": [
 167,
@@ -4092,7 +4092,7 @@
 ],
 "quad": [
 "trophies, quiet stats",
-"the complete package",
+"",
 "",
 "dominant, fewer trophies"
 ]
@@ -4102,7 +4102,7 @@
 "id": "b040",
 "scene": "rankshift",
 "chapter": "Twists",
-"start": 22043,
+"start": 22178,
 "dur": 557,
 "props": {
 "title": "Switch off region strength",
@@ -4219,7 +4219,7 @@
 "id": "b041",
 "scene": "chapter",
 "chapter": "The countdown",
-"start": 22600,
+"start": 22735,
 "dur": 84,
 "props": {
 "n": 7,
@@ -4232,7 +4232,7 @@
 "id": "b042",
 "scene": "top5",
 "chapter": "The countdown",
-"start": 22684,
+"start": 22819,
 "dur": 390,
 "props": {
 "title": "Just missed out",
@@ -4286,7 +4286,7 @@
 "id": "b043",
 "scene": "card",
 "chapter": "The countdown",
-"start": 23074,
+"start": 23209,
 "dur": 502,
 "props": {
 "id": "chovy",
@@ -4317,7 +4317,7 @@
 "id": "b044",
 "scene": "card",
 "chapter": "The countdown",
-"start": 23576,
+"start": 23711,
 "dur": 482,
 "props": {
 "id": "ruler",
@@ -4348,7 +4348,7 @@
 "id": "b045",
 "scene": "card",
 "chapter": "The countdown",
-"start": 24058,
+"start": 24193,
 "dur": 555,
 "props": {
 "id": "keria",
@@ -4379,7 +4379,7 @@
 "id": "b046",
 "scene": "chapter",
 "chapter": "The reveal",
-"start": 24613,
+"start": 24748,
 "dur": 84,
 "props": {
 "n": 8,
@@ -4392,7 +4392,7 @@
 "id": "b047",
 "scene": "card",
 "chapter": "The reveal",
-"start": 24697,
+"start": 24832,
 "dur": 789,
 "props": {
 "id": "knight",
@@ -4429,7 +4429,7 @@
 "id": "b048",
 "scene": "breakdown",
 "chapter": "The reveal",
-"start": 25486,
+"start": 25621,
 "dur": 425,
 "props": {
 "title": "Knight vs Faker",
@@ -4482,7 +4482,7 @@
 "id": "b049",
 "scene": "hbars",
 "chapter": "Close",
-"start": 25911,
+"start": 26046,
 "dur": 224,
 "props": {
 "title": "Where the new champions landed",
@@ -4520,7 +4520,7 @@
 "id": "b050",
 "scene": "statement",
 "chapter": "Close",
-"start": 26135,
+"start": 26270,
 "dur": 243,
 "props": {
 "text": "WHO'S YOUR #2?",
@@ -4532,7 +4532,7 @@
 "id": "b051",
 "scene": "statement",
 "chapter": "Close",
-"start": 26378,
+"start": 26513,
 "dur": 89,
 "props": {
 "text": "Not endorsed by Riot Games.",
@@ -4677,867 +4677,867 @@
 },
 {
 "start": 3762,
-"dur": 260,
-"audio": "vo/5175bf7b43bf32c6.mp3",
-"text": "Korea won seven in a row from 2013. China broke through in 2018, and since then it has been a two-region fight.",
+"dur": 288,
+"audio": "vo/eda7560ed4d049a6.mp3",
+"text": "Korea won five in a row from 2013 to 2017. China broke through in 2018, and since then it has been a two-region fight.",
 "beat": 8
 },
 {
-"start": 4031,
+"start": 4059,
 "dur": 130,
 "audio": "vo/8d9f2f2a4808444a.mp3",
 "text": "That matters, because a title from a strong region is harder to win.",
 "beat": 8
 },
 {
-"start": 4183,
+"start": 4211,
 "dur": 174,
 "audio": "vo/25c3964474537e53.mp3",
 "text": "So I measured region strength from the only games where regions actually meet: international events.",
 "beat": 9
 },
 {
-"start": 4366,
+"start": 4394,
 "dur": 145,
 "audio": "vo/2430ef2fee09cf0d.mp3",
 "text": "Every cross-region game goes into a rating, like chess Elo for regions.",
 "beat": 9
 },
 {
-"start": 4520,
+"start": 4548,
 "dur": 297,
 "audio": "vo/91f4cd1fd33c9df9.mp3",
 "text": "Korea and China sit at the top most years. Europe peaked around 2018 to 2020. North America has mostly sat near the bottom.",
 "beat": 9
 },
 {
-"start": 4826,
-"dur": 223,
-"audio": "vo/e9c24a7898274f5a.mp3",
-"text": "A domestic title is multiplied by that number. An LCK title is worth about twice an LCS one.",
+"start": 4854,
+"dur": 249,
+"audio": "vo/1e227305c9e5737f.mp3",
+"text": "A domestic title is multiplied by that number. Most years, an LCK title is worth at least twice an LCS one.",
 "beat": 9
 },
 {
-"start": 5071,
+"start": 5125,
 "dur": 261,
 "audio": "vo/9c4b3e2d755e537d.mp3",
 "text": "To make the list you need at least 150 games in a major league or at an international. That leaves 527 players.",
 "beat": 10
 },
 {
-"start": 5341,
+"start": 5395,
 "dur": 112,
 "audio": "vo/c62aa8832a6cde62.mp3",
 "text": "Fewer games than that and a hot streak looks like greatness.",
 "beat": 10
 },
 {
-"start": 5559,
+"start": 5613,
 "dur": 276,
 "audio": "vo/0f47ad5fb55e5682.mp3",
 "text": "First, trophies. A Worlds title is worth 100 points. Making the final is 60, semis 35.",
 "beat": 12
 },
 {
-"start": 5844,
+"start": 5898,
 "dur": 150,
 "audio": "vo/2d6a030956196820.mp3",
 "text": "MSI is worth half of Worlds. First Stand half again.",
 "beat": 12
 },
 {
-"start": 6003,
+"start": 6057,
 "dur": 138,
 "audio": "vo/81958b0ea2d1f7ba.mp3",
 "text": "A domestic title is 20, times the strength of that region in that year.",
 "beat": 12
 },
 {
-"start": 6150,
+"start": 6204,
 "dur": 104,
 "audio": "vo/0ba956afb914f118.mp3",
 "text": "And a Finals MVP adds a bonus on top.",
 "beat": 12
 },
 {
-"start": 6276,
+"start": 6330,
 "dur": 227,
 "audio": "vo/10838c55a937002b.mp3",
 "text": "Then comes the carry share. Every player on a winning team gets credit between half and one and a half times the points.",
 "beat": 13
 },
 {
-"start": 6512,
+"start": 6566,
 "dur": 229,
 "audio": "vo/2d645093a24e8776.mp3",
 "text": "For Worlds 2026, Knight gets 1.50 times, so his title is worth 150 points.",
 "beat": 13
 },
 {
-"start": 6750,
+"start": 6804,
 "dur": 156,
 "audio": "vo/58b6a80d49dbb7f8.mp3",
 "text": "ON gets 0.64. Same trophy, different share.",
 "beat": 13
 },
 {
-"start": 6915,
+"start": 6969,
 "dur": 115,
 "audio": "vo/c31b1ceee9b0654d.mp3",
 "text": "That is how the model tells carrying a team from being carried.",
 "beat": 13
 },
 {
-"start": 7052,
+"start": 7106,
 "dur": 207,
 "audio": "vo/0d1734676bf59f23.mp3",
 "text": "Next, the stats. I didn't want to pick the stat weights by gut feeling, so I let the experts pick them.",
 "beat": 14
 },
 {
-"start": 7268,
+"start": 7322,
 "dur": 205,
 "audio": "vo/50e110f4260f82bd.mp3",
 "text": "Every split, casters, coaches and journalists vote for the All-Pro teams: the best player in each role.",
 "beat": 14
 },
 {
-"start": 7482,
+"start": 7536,
 "dur": 320,
 "audio": "vo/0b8a82ad48ad1e77.mp3",
 "text": "I fed the model every split's stats and the votes, and asked which numbers predict who gets picked. The answer: your lead in lane at 15 minutes, your KDA and your kills.",
 "beat": 14
 },
 {
-"start": 7811,
+"start": 7865,
 "dur": 176,
 "audio": "vo/a37fbef869c81f9b.mp3",
 "text": "Those learned weights turn every season into one rating, which feeds most of the categories you'll see.",
 "beat": 14
 },
 {
-"start": 8009,
+"start": 8063,
 "dur": 229,
 "audio": "vo/b8360c8823352687.mp3",
 "text": "All of that lands in fifteen categories. Trophies are the biggest at 28 percent, then big stage form and peak.",
 "beat": 15
 },
 {
-"start": 8247,
+"start": 8301,
 "dur": 174,
 "audio": "vo/a717e5816a3ecad6.mp3",
 "text": "Then the parts of the game: laning, killing, teamfighting, vision, clean play.",
 "beat": 15
 },
 {
-"start": 8430,
+"start": 8484,
 "dur": 202,
 "audio": "vo/a578cc199a61468f.mp3",
 "text": "And the League stuff: who carried their team, who carried a weak team, and two proxies for the things stats can't see.",
 "beat": 15
 },
 {
-"start": 8641,
+"start": 8695,
 "dur": 184,
 "audio": "vo/3234a29c73403f78.mp3",
 "text": "Each category ranks all the players from 0 to 100, and the final score is the weighted average.",
 "beat": 15
 },
 {
-"start": 8847,
+"start": 8901,
 "dur": 141,
 "audio": "vo/26aa0ba0ed03b103.mp3",
 "text": "And my first ranking was wrong. Faker came out 3rd.",
 "beat": 16
 },
 {
-"start": 8997,
+"start": 9051,
 "dur": 169,
 "audio": "vo/cc00ee28a6543551.mp3",
 "text": "The problem was averages. Every year after his peak pulled his average down.",
 "beat": 16
 },
 {
-"start": 9175,
+"start": 9229,
 "dur": 165,
 "audio": "vo/ad61d5ca6bc8833d.mp3",
 "text": "So a player who stayed great for thirteen years looked worse than one who retired at his best.",
 "beat": 16
 },
 {
-"start": 9349,
+"start": 9403,
 "dur": 305,
 "audio": "vo/2f86ebdbce427fce.mp3",
 "text": "The fix: big stage, winning and stat categories use each player's best five years. Longevity gets its own category, so a long career is never punished.",
 "beat": 16
 },
 {
-"start": 9760,
+"start": 9814,
 "dur": 156,
 "audio": "vo/37a0d09c89bc02b2.mp3",
 "text": "So is any of this right? I tested it on seasons the model never saw.",
 "beat": 18
 },
 {
-"start": 9925,
+"start": 9979,
 "dur": 343,
 "audio": "vo/3f050a242136fd63.mp3",
 "text": "I trained it on 2015 to 2021, then asked it to pick the first-team All-Pro in every role from 2022 to 2026. Picking at random gets about 12 percent.",
 "beat": 18
 },
 {
-"start": 10277,
+"start": 10331,
 "dur": 231,
 "audio": "vo/5e3081f5e9a8ee7a.mp3",
 "text": "My first formula got 38. Just picking the player from the best team gets 57, because voters love winners.",
 "beat": 18
 },
 {
-"start": 10517,
-"dur": 220,
-"audio": "vo/c11012f2f7330477.mp3",
-"text": "The final model gets 63 percent, and the player it picks lands somewhere on the All-Pro teams 75 percent of the time.",
+"start": 10571,
+"dur": 238,
+"audio": "vo/cc08263d7ed0c3d1.mp3",
+"text": "The final model gets 63 percent, and its top three in each role match the voters' three All-Pro picks 75 percent of the time.",
 "beat": 18
 },
 {
-"start": 10759,
+"start": 10831,
 "dur": 110,
 "audio": "vo/dab8e433bbf369f8.mp3",
 "text": "It is not perfect, and here is where it is blind.",
 "beat": 19
 },
 {
-"start": 10878,
+"start": 10950,
 "dur": 248,
 "audio": "vo/586276653a9f250c.mp3",
 "text": "Shotcalling and comms. Nobody publishes who makes the calls, so I can only use proxies, and I'll show you those at the end.",
 "beat": 19
 },
 {
-"start": 11135,
+"start": 11207,
 "dur": 100,
 "audio": "vo/9f095739825a375b.mp3",
 "text": "Champion pool and what a player brings to the draft.",
 "beat": 19
 },
 {
-"start": 11244,
+"start": 11316,
 "dur": 186,
 "audio": "vo/1997385071493a91.mp3",
 "text": "Team strength is only partly fixed by carry share. Being on a great team still helps.",
 "beat": 19
 },
 {
-"start": 11439,
+"start": 11511,
 "dur": 176,
 "audio": "vo/645ab314a8b99841.mp3",
 "text": "And the early seasons have thin data. The numbers are better from 2014 on.",
 "beat": 19
 },
 {
-"start": 11637,
+"start": 11709,
 "dur": 156,
 "audio": "vo/3fbcdb0dc07ba4a2.mp3",
 "text": "The best example is Bengi. Three Worlds titles next to Faker.",
 "beat": 20
 },
 {
-"start": 11802,
+"start": 11874,
 "dur": 199,
 "audio": "vo/d62db0f8b2c30b44.mp3",
 "text": "But his box score is quiet: few kills and no lane leads, because his job was enabling everyone else.",
 "beat": 20
 },
 {
-"start": 12010,
+"start": 12082,
 "dur": 265,
 "audio": "vo/c28a4a2ddbca74d2.mp3",
 "text": "So the model has him at 137th. If you think that's too low, you're probably right, and that's exactly what stats can't see.",
 "beat": 20
 },
 {
-"start": 12381,
+"start": 12453,
 "dur": 186,
 "audio": "vo/428c1b06aa79b31b.mp3",
 "text": "Category one, the resume. Faker is so far ahead that the chart needs a log scale.",
 "beat": 22
 },
 {
-"start": 12576,
+"start": 12648,
 "dur": 238,
 "audio": "vo/a28c62621a6f0e5c.mp3",
 "text": "Behind him: Chovy, Knight, Ruler, and in second, Keria, with 3 Worlds titles and a big carry share in each.",
 "beat": 22
 },
 {
-"start": 12823,
+"start": 12895,
 "dur": 232,
 "audio": "vo/6a2c33ca7757915c.mp3",
 "text": "First is Faker with 1,267 points. Nobody is within 460 of him.",
 "beat": 22
 },
 {
-"start": 13103,
+"start": 13175,
 "dur": 147,
 "audio": "vo/39a076b52cbc56aa.mp3",
 "text": "Big stage. Who plays their best when the whole world is watching?",
 "beat": 23
 },
 {
-"start": 13259,
+"start": 13331,
 "dur": 94,
 "audio": "vo/531ea951e7244135.mp3",
 "text": "Zeus, Meiko, then Knight.",
 "beat": 23
 },
 {
-"start": 13362,
+"start": 13434,
 "dur": 220,
 "audio": "vo/fa56d57b007be958.mp3",
 "text": "Second is Uzi, and first, Keria. The best international form over five years in the data.",
 "beat": 23
 },
 {
-"start": 13630,
+"start": 13702,
 "dur": 170,
 "audio": "vo/4d97ef0c795e8aa9.mp3",
 "text": "Peak. The single best year anyone has had, compared to their own role that year.",
 "beat": 24
 },
 {
-"start": 13809,
+"start": 13881,
 "dur": 112,
 "audio": "vo/1b89875054930ac4.mp3",
 "text": "BeryL, Nuguri, Smeb, Lehends.",
 "beat": 24
 },
 {
-"start": 13930,
+"start": 14002,
 "dur": 193,
 "audio": "vo/c8f959a39c4e99c0.mp3",
 "text": "And number one is Knight in 2026. The best season in fifteen years of data.",
 "beat": 24
 },
 {
-"start": 14171,
+"start": 14243,
 "dur": 120,
 "audio": "vo/103890f81da610c6.mp3",
 "text": "Longevity. How many years were you elite?",
 "beat": 25
 },
 {
-"start": 14300,
+"start": 14372,
 "dur": 108,
 "audio": "vo/b068023a58c3d5c4.mp3",
 "text": "Scout, Chovy, Kiin, Knight.",
 "beat": 25
 },
 {
-"start": 14417,
+"start": 14489,
 "dur": 82,
 "audio": "vo/b2c69c2db85bb24c.mp3",
 "text": "Ruler leads with 9 elite years.",
 "beat": 25
 },
 {
-"start": 14547,
+"start": 14619,
 "dur": 144,
 "audio": "vo/686be421f03d4bec.mp3",
 "text": "Winning. Win rate, scaled by how strong the league was.",
 "beat": 26
 },
 {
-"start": 14700,
+"start": 14772,
 "dur": 107,
 "audio": "vo/dd99a3e394e463fb.mp3",
 "text": "Peanut, Ruler, Canyon, Faker.",
 "beat": 26
 },
 {
-"start": 14816,
+"start": 14888,
 "dur": 146,
 "audio": "vo/881d5b6e7ce57957.mp3",
 "text": "And Chovy on top, winning 69.2 percent of his games.",
 "beat": 26
 },
 {
-"start": 15010,
+"start": 15082,
 "dur": 158,
 "audio": "vo/75963820ed7ea4dc.mp3",
 "text": "Laning. How far ahead of the opposite laner you are at fifteen minutes.",
 "beat": 27
 },
 {
-"start": 15177,
+"start": 15249,
 "dur": 103,
 "audio": "vo/ca53b232315c6e54.mp3",
 "text": "Bin, Chovy, Knight, SofM.",
 "beat": 27
 },
 {
-"start": 15289,
+"start": 15361,
 "dur": 217,
 "audio": "vo/71409cf0cd0b9f75.mp3",
 "text": "And the best laner in League history, by this measure: TheShy, +551 gold at fifteen on average.",
 "beat": 27
 },
 {
-"start": 15554,
+"start": 15626,
 "dur": 162,
 "audio": "vo/7a3fbc01c5e5149d.mp3",
 "text": "Killing. Who finds the most kills and puts out the most damage for their role?",
 "beat": 28
 },
 {
-"start": 15725,
+"start": 15797,
 "dur": 112,
 "audio": "vo/d70e19d38f83162d.mp3",
 "text": "Rookie, Uzi, Kanavi, Knight.",
 "beat": 28
 },
 {
-"start": 15846,
+"start": 15918,
 "dur": 67,
 "audio": "vo/88d0fc999ef64092.mp3",
 "text": "First, TheShy.",
 "beat": 28
 },
 {
-"start": 15961,
+"start": 16033,
 "dur": 192,
 "audio": "vo/8947b0d77da8a77d.mp3",
 "text": "Teamfighting. Your share of the team's damage, and how many of the team's kills you were part of.",
 "beat": 29
 },
 {
-"start": 16162,
+"start": 16234,
 "dur": 114,
 "audio": "vo/380bb77445f5570e.mp3",
 "text": "Froggen, Knight, Doinb, Uzi.",
 "beat": 29
 },
 {
-"start": 16285,
+"start": 16357,
 "dur": 85,
 "audio": "vo/36a9a1c6d4fd4791.mp3",
 "text": "And the best teamfighter: Elk.",
 "beat": 29
 },
 {
-"start": 16418,
+"start": 16490,
 "dur": 186,
 "audio": "vo/5c9b656af704f134.mp3",
 "text": "Vision and supporting. This one is supports only, ranked on vision score and assists.",
 "beat": 30
 },
 {
-"start": 16613,
+"start": 16685,
 "dur": 107,
 "audio": "vo/1f97a559295cff96.mp3",
 "text": "Mikyx, Mata, Ming, Meiko.",
 "beat": 30
 },
 {
-"start": 16729,
+"start": 16801,
 "dur": 269,
 "audio": "vo/d6eac035ebc1a067.mp3",
 "text": "Number one: Baolan. Voters barely reward vision, so it carries only one point of weight. But somebody has to ward.",
 "beat": 30
 },
 {
-"start": 17046,
+"start": 17118,
 "dur": 165,
 "audio": "vo/d45819e1e3a48de9.mp3",
 "text": "MVP of the team. How far above his own teammates did a player rate?",
 "beat": 31
 },
 {
-"start": 17220,
+"start": 17292,
 "dur": 119,
 "audio": "vo/83e4523b9516e223.mp3",
 "text": "Uzi, Kanavi, Bjergsen, Froggen.",
 "beat": 31
 },
 {
-"start": 17348,
+"start": 17420,
 "dur": 107,
 "audio": "vo/242a6663ace31510.mp3",
 "text": "And the clearest number one on his own team: Knight.",
 "beat": 31
 },
 {
-"start": 17503,
+"start": 17575,
 "dur": 180,
 "audio": "vo/cd93be15e03562bb.mp3",
 "text": "Solo carry. This is the one for players who dragged a team further than it had any right to go.",
 "beat": 32
 },
 {
-"start": 17692,
+"start": 17764,
 "dur": 217,
 "audio": "vo/a614f07a24a1bcd2.mp3",
 "text": "Trophy points you earned above your teammates, worth more when those teammates were weaker. A stacked roster gets less.",
 "beat": 32
 },
 {
-"start": 17918,
+"start": 17990,
 "dur": 107,
 "audio": "vo/d4785c1219c28836.mp3",
 "text": "Huni, Chovy, Keria, Knight.",
 "beat": 32
 },
 {
-"start": 18034,
+"start": 18106,
 "dur": 220,
 "audio": "vo/ca0b43b4687ace8d.mp3",
 "text": "And first, Uzi. If you ever said someone carried their team to a final, this is the chart that proves it.",
 "beat": 32
 },
 {
-"start": 18302,
+"start": 18374,
 "dur": 135,
 "audio": "vo/d901aaaff40fc980.mp3",
 "text": "Clean play. KDA and how rarely you die.",
 "beat": 33
 },
 {
-"start": 18446,
+"start": 18518,
 "dur": 121,
 "audio": "vo/40ad5c1b7db44151.mp3",
 "text": "Bdd, Rekkles, Knight, ShowMaker.",
 "beat": 33
 },
 {
-"start": 18576,
+"start": 18648,
 "dur": 162,
 "audio": "vo/4b98d53604cc565b.mp3",
 "text": "Cleanest player in League history: Chovy, with a KDA of 5.67.",
 "beat": 33
 },
 {
-"start": 18786,
+"start": 18858,
 "dur": 155,
 "audio": "vo/632062a468ed6cdb.mp3",
 "text": "Consistency. In how many events did you play above your role's average?",
 "beat": 34
 },
 {
-"start": 18950,
+"start": 19022,
 "dur": 112,
 "audio": "vo/dedada1ec423b1a9.mp3",
 "text": "Froggen, Viper, Kanavi, Knight.",
 "beat": 34
 },
 {
-"start": 19071,
+"start": 19143,
 "dur": 95,
 "audio": "vo/4b04748de9d46693.mp3",
 "text": "Chovy: 94 percent of the time.",
 "beat": 34
 },
 {
-"start": 19214,
+"start": 19286,
 "dur": 309,
 "audio": "vo/98da00cf00f93f39.mp3",
 "text": "Now the intangibles. Shotcalling, comms, leadership. There's no stat for them, so I used two proxies, and I'm labelling them as proxies.",
 "beat": 35
 },
 {
-"start": 19532,
+"start": 19604,
 "dur": 281,
 "audio": "vo/3cdaad2938484368.mp3",
 "text": "The first is what the voters saw: All-Pro and MVP votes, per split. If you make everyone around you better, the people watching usually notice.",
 "beat": 35
 },
 {
-"start": 19822,
+"start": 19894,
 "dur": 154,
 "audio": "vo/6acb4ac678bc1cde.mp3",
 "text": "Rekkles, Caps, Canyon, Keria, and Chovy on top.",
 "beat": 35
 },
 {
-"start": 20024,
+"start": 20096,
 "dur": 225,
 "audio": "vo/32e509124d98b8fb.mp3",
 "text": "The second proxy: does the team win more when you're on it? Same team, two years either side, with and without you.",
 "beat": 36
 },
 {
-"start": 20258,
+"start": 20330,
 "dur": 133,
 "audio": "vo/341aafe22fe56dbc.mp3",
 "text": "Zest, Dhokla, Ambition, MMD, DanDy.",
 "beat": 36
 },
 {
-"start": 20400,
+"start": 20472,
 "dur": 174,
 "audio": "vo/80702d43dcb32613.mp3",
 "text": "It's noisy, rosters change five players at once, so it only carries two points of weight.",
 "beat": 36
 },
 {
-"start": 20706,
+"start": 20778,
 "dur": 122,
 "audio": "vo/32f92530cbca5243.mp3",
 "text": "Twist one. What if trophies counted for less?",
 "beat": 38
 },
 {
-"start": 20837,
+"start": 20909,
 "dur": 167,
 "audio": "vo/ae4ab5614aed38e4.mp3",
 "text": "At zero, with trophies switched off completely, the best player in League history is Knight.",
 "beat": 38
 },
 {
-"start": 21013,
+"start": 21085,
 "dur": 117,
 "audio": "vo/48cf212e028125b6.mp3",
 "text": "Turn trophies up and Faker takes over at 15 percent.",
 "beat": 38
 },
 {
-"start": 21139,
+"start": 21211,
 "dur": 264,
 "audio": "vo/5a70f6c202810988.mp3",
 "text": "I use 28. So Faker's crown needs trophies to count for at least 15 percent. Below that, it's Knight's.",
 "beat": 38
 },
 {
-"start": 21425,
+"start": 21497,
 "dur": 150,
 "audio": "vo/3fc2a23ffac34508.mp3",
 "text": "Twist two. Trophies against individual play, for every player.",
 "beat": 39
 },
 {
-"start": 21584,
+"start": 21656,
 "dur": 141,
 "audio": "vo/dc9471df1d4b6d7f.mp3",
 "text": "Most decorated: Faker, Ruler, Keria, Canyon.",
 "beat": 39
 },
 {
-"start": 21734,
+"start": 21806,
 "dur": 143,
 "audio": "vo/8209218d2c55ff4b.mp3",
 "text": "Most dominant on the stats: Knight, Chovy, Ruler, Viper.",
 "beat": 39
 },
 {
-"start": 21886,
-"dur": 143,
-"audio": "vo/be004d1b074a4063.mp3",
-"text": "Only one player sits alone in the top right corner. Faker.",
+"start": 21958,
+"dur": 206,
+"audio": "vo/ec291f14d7912c47.mp3",
+"text": "Faker is alone at the top on trophies. But on individual play alone, four players rate higher than him.",
 "beat": 39
 },
 {
-"start": 22051,
+"start": 22186,
 "dur": 130,
 "audio": "vo/2628f260bbf13592.mp3",
 "text": "Twist three. What if every region counted the same?",
 "beat": 40
 },
 {
-"start": 22190,
+"start": 22325,
 "dur": 180,
 "audio": "vo/9f655232dcb0f058.mp3",
 "text": "Bjergsen jumps from 41st to 18th. That's the price of playing in Europe.",
 "beat": 40
 },
 {
-"start": 22379,
+"start": 22514,
 "dur": 207,
 "audio": "vo/13b64b4056d14eba.mp3",
 "text": "But the top of the list barely moves. The best players won the hardest leagues and the international events too.",
 "beat": 40
 },
 {
-"start": 22692,
+"start": 22827,
 "dur": 68,
 "audio": "vo/e80b3e9017e98c37.mp3",
 "text": "tenth, Meiko.",
 "beat": 42
 },
 {
-"start": 22769,
+"start": 22904,
 "dur": 66,
 "audio": "vo/fe4b9fcb0aeb171c.mp3",
 "text": "Ninth, Zeus.",
 "beat": 42
 },
 {
-"start": 22844,
+"start": 22979,
 "dur": 66,
 "audio": "vo/bf25e590dc6b7940.mp3",
 "text": "Eighth, Kanavi.",
 "beat": 42
 },
 {
-"start": 22919,
+"start": 23054,
 "dur": 69,
 "audio": "vo/a50b8994b37ec5b8.mp3",
 "text": "Seventh, Canyon.",
 "beat": 42
 },
 {
-"start": 22997,
+"start": 23132,
 "dur": 63,
 "audio": "vo/da1fef3b4fa58b2a.mp3",
 "text": "And sixth, Viper.",
 "beat": 42
 },
 {
-"start": 23082,
+"start": 23217,
 "dur": 96,
 "audio": "vo/ec51d189e0d4fde3.mp3",
 "text": "Number five. Chovy.",
 "beat": 43
 },
 {
-"start": 23187,
+"start": 23322,
 "dur": 138,
 "audio": "vo/afea7dfb1d77420c.mp3",
 "text": "0 Worlds, 2 MSI, 7 domestic titles.",
 "beat": 43
 },
 {
-"start": 23334,
+"start": 23469,
 "dur": 139,
 "audio": "vo/1f055c165203eca6.mp3",
 "text": "His best categories: winning, consistency, clean play.",
 "beat": 43
 },
 {
-"start": 23482,
+"start": 23617,
 "dur": 80,
 "audio": "vo/211e76a19f0260b5.mp3",
 "text": "A score of 85.1.",
 "beat": 43
 },
 {
-"start": 23584,
+"start": 23719,
 "dur": 93,
 "audio": "vo/521305d5bd4cb7f2.mp3",
 "text": "Number four. Ruler.",
 "beat": 44
 },
 {
-"start": 23686,
+"start": 23821,
 "dur": 130,
 "audio": "vo/f876d4609d3661c1.mp3",
 "text": "1 Worlds, 2 MSI, 6 domestic titles.",
 "beat": 44
 },
 {
-"start": 23825,
+"start": 23960,
 "dur": 139,
 "audio": "vo/2dc6118f1130e01b.mp3",
 "text": "His best categories: longevity, winning, consistency.",
 "beat": 44
 },
 {
-"start": 23973,
+"start": 24108,
 "dur": 71,
 "audio": "vo/f2d7d695e6d97e47.mp3",
 "text": "85.5.",
 "beat": 44
 },
 {
-"start": 24066,
+"start": 24201,
 "dur": 95,
 "audio": "vo/028179dba8c3587b.mp3",
 "text": "Number three. Keria.",
 "beat": 45
 },
 {
-"start": 24170,
+"start": 24305,
 "dur": 137,
 "audio": "vo/8d0765473afc24f5.mp3",
 "text": "3 Worlds, 0 MSI, 1 domestic titles.",
 "beat": 45
 },
 {
-"start": 24316,
+"start": 24451,
 "dur": 140,
 "audio": "vo/d78a93ffaab66c37.mp3",
 "text": "His best categories: big stage, recognition, solo carry.",
 "beat": 45
 },
 {
-"start": 24465,
+"start": 24600,
 "dur": 134,
 "audio": "vo/ec8cf36de25fd0ba.mp3",
 "text": "86.3, and only 1.1 points off second.",
 "beat": 45
 },
 {
-"start": 24705,
+"start": 24840,
 "dur": 125,
 "audio": "vo/0d4fea6f2fb2263d.mp3",
 "text": "So who is number two? One Worlds title.",
 "beat": 47
 },
 {
-"start": 24839,
+"start": 24974,
 "dur": 145,
 "audio": "vo/017e8de0a4af5a27.mp3",
 "text": "Top of the pool in peak, team carry, longevity, consistency.",
 "beat": 47
 },
 {
-"start": 24993,
+"start": 25128,
 "dur": 258,
 "audio": "vo/d2c5af9948316e9a.mp3",
 "text": "I shuffled every weight by up to thirty percent, a thousand times. This player came second in 99.3 percent of them.",
 "beat": 47
 },
 {
-"start": 25260,
+"start": 25395,
 "dur": 82,
 "audio": "vo/3b2d7a0580ec721a.mp3",
 "text": "Score: 87.4.",
 "beat": 47
 },
 {
-"start": 25351,
+"start": 25486,
 "dur": 121,
 "audio": "vo/1e9dff72c80933ad.mp3",
 "text": "The second greatest League of Legends player of all time is Knight.",
 "beat": 47
 },
 {
-"start": 25494,
+"start": 25629,
 "dur": 114,
 "audio": "vo/f97d91c0bda45976.mp3",
 "text": "And here's the gap to Faker: 6.7 points.",
 "beat": 48
 },
 {
-"start": 25617,
+"start": 25752,
 "dur": 122,
 "audio": "vo/4743ab1872de233e.mp3",
 "text": "Knight matches or beats him in 12 of the fifteen categories.",
 "beat": 48
 },
 {
-"start": 25748,
+"start": 25883,
 "dur": 149,
 "audio": "vo/0fe00626fa9a3441.mp3",
 "text": "But trophies are worth the most, and nobody comes close to six Worlds titles.",
 "beat": 48
 },
 {
-"start": 25919,
+"start": 26054,
 "dur": 202,
 "audio": "vo/77b7e64624477c42.mp3",
 "text": "And the world champions we started with: Knight is 2nd. Viper is 6th. Bin is 11th.",
 "beat": 49
 },
 {
-"start": 26143,
+"start": 26278,
 "dur": 195,
 "audio": "vo/932f5e3550c05567.mp3",
 "text": "That's what the data says. Now tell me what it got wrong. Who's your number two?",
@@ -5582,522 +5582,522 @@
 },
 {
 "src": "sfx/whoosh.mp3",
-"at": 5465,
+"at": 5519,
 "vol": 0.35
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 8995,
+"at": 9049,
 "vol": 0.4
 },
 {
 "src": "sfx/whoosh.mp3",
-"at": 9347,
+"at": 9401,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh.mp3",
-"at": 9666,
+"at": 9720,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh.mp3",
-"at": 12287,
+"at": 12359,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 12371,
+"at": 12443,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 12574,
+"at": 12646,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 12599,
+"at": 12671,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 12624,
+"at": 12696,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 12649,
+"at": 12721,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 12831,
+"at": 12903,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 13093,
+"at": 13165,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 13257,
+"at": 13329,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 13282,
+"at": 13354,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 13307,
+"at": 13379,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 13332,
+"at": 13404,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 13370,
+"at": 13442,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 13620,
+"at": 13692,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 13807,
+"at": 13879,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 13832,
+"at": 13904,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 13857,
+"at": 13929,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 13882,
+"at": 13954,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 13938,
+"at": 14010,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 14161,
+"at": 14233,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 14298,
+"at": 14370,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 14323,
+"at": 14395,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 14348,
+"at": 14420,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 14373,
+"at": 14445,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 14425,
+"at": 14497,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 14537,
+"at": 14609,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 14698,
+"at": 14770,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 14723,
+"at": 14795,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 14748,
+"at": 14820,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 14773,
+"at": 14845,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 14824,
+"at": 14896,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 15000,
+"at": 15072,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 15175,
+"at": 15247,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 15200,
+"at": 15272,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 15225,
-"vol": 0.28
-},
-{
-"src": "sfx/pop.mp3",
-"at": 15250,
-"vol": 0.28
-},
-{
-"src": "sfx/impact-bass-1.mp3",
 "at": 15297,
-"vol": 0.35
-},
-{
-"src": "sfx/whoosh-short.mp3",
-"at": 15544,
-"vol": 0.3
-},
-{
-"src": "sfx/pop.mp3",
-"at": 15723,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 15748,
-"vol": 0.28
-},
-{
-"src": "sfx/pop.mp3",
-"at": 15773,
-"vol": 0.28
-},
-{
-"src": "sfx/pop.mp3",
-"at": 15798,
+"at": 15322,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 15854,
+"at": 15369,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 15951,
+"at": 15616,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 16160,
+"at": 15795,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 16185,
+"at": 15820,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 16210,
+"at": 15845,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 16235,
+"at": 15870,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 16293,
+"at": 15926,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 16408,
+"at": 16023,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 16611,
+"at": 16232,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 16636,
+"at": 16257,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 16661,
+"at": 16282,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 16686,
+"at": 16307,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 16737,
+"at": 16365,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 17036,
+"at": 16480,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 17218,
+"at": 16683,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 17243,
+"at": 16708,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 17268,
+"at": 16733,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 17293,
+"at": 16758,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 17356,
+"at": 16809,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 17493,
+"at": 17108,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 17916,
+"at": 17290,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 17941,
+"at": 17315,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 17966,
+"at": 17340,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 17991,
+"at": 17365,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 18042,
+"at": 17428,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 18292,
+"at": 17565,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 18444,
+"at": 17988,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 18469,
+"at": 18013,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 18494,
+"at": 18038,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 18519,
+"at": 18063,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 18584,
+"at": 18114,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 18776,
+"at": 18364,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 18948,
+"at": 18516,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 18973,
+"at": 18541,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 18998,
+"at": 18566,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 19023,
+"at": 18591,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 19079,
+"at": 18656,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 19204,
+"at": 18848,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 19530,
+"at": 19020,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 19555,
+"at": 19045,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 19580,
+"at": 19070,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 19605,
+"at": 19095,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 19830,
+"at": 19151,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh-short.mp3",
-"at": 20014,
+"at": 19276,
 "vol": 0.3
 },
 {
 "src": "sfx/pop.mp3",
-"at": 20256,
+"at": 19602,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 20281,
+"at": 19627,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 20306,
+"at": 19652,
 "vol": 0.28
 },
 {
 "src": "sfx/pop.mp3",
-"at": 20331,
+"at": 19677,
 "vol": 0.28
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 20408,
+"at": 19902,
+"vol": 0.35
+},
+{
+"src": "sfx/whoosh-short.mp3",
+"at": 20086,
+"vol": 0.3
+},
+{
+"src": "sfx/pop.mp3",
+"at": 20328,
+"vol": 0.28
+},
+{
+"src": "sfx/pop.mp3",
+"at": 20353,
+"vol": 0.28
+},
+{
+"src": "sfx/pop.mp3",
+"at": 20378,
+"vol": 0.28
+},
+{
+"src": "sfx/pop.mp3",
+"at": 20403,
+"vol": 0.28
+},
+{
+"src": "sfx/impact-bass-1.mp3",
+"at": 20480,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh.mp3",
-"at": 20612,
+"at": 20684,
 "vol": 0.35
 },
 {
 "src": "sfx/riser.mp3",
-"at": 21011,
+"at": 21083,
 "vol": 0.3
 },
 {
 "src": "sfx/whoosh.mp3",
-"at": 22188,
+"at": 22323,
 "vol": 0.35
 },
 {
 "src": "sfx/whoosh.mp3",
-"at": 22598,
+"at": 22733,
 "vol": 0.35
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 23080,
+"at": 23215,
 "vol": 0.35
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 23582,
+"at": 23717,
 "vol": 0.35
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 24064,
+"at": 24199,
 "vol": 0.35
 },
 {
 "src": "sfx/riser.mp3",
-"at": 24611,
+"at": 24746,
 "vol": 0.35
 },
 {
 "src": "sfx/impact-bass-1.mp3",
-"at": 25349,
+"at": 25484,
 "vol": 0.6
 }
 ],

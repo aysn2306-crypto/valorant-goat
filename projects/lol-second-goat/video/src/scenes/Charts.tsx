@@ -100,7 +100,7 @@ export const HBars: React.FC<{ title: string; sub?: string; bars: { label: strin
 export const Scatter: React.FC<{ title: string; sub?: string; pts: { id: string; x: number; y: number }[]; named: string[]; xLabel: string; yLabel: string;
   tNamed?: number[]; chapter?: string; quad?: [string, string, string, string]; xr: [number, number]; yr: [number, number] }> = ({ title, sub, pts, named, xLabel, yLabel, tNamed = [], chapter, quad, xr, yr }) => {
   const f = useCurrentFrame();
-  const L = 260, R = 1700, T = 220, B = 900;
+  const L = 260, R = 1700, T = 220, B = 860;
   const X = (x: number) => L + ((x - xr[0]) / (xr[1] - xr[0])) * (R - L);
   const Y = (y: number) => B - ((y - yr[0]) / (yr[1] - yr[0])) * (B - T);
   const g = prog(f, 0, 12);
@@ -113,26 +113,47 @@ export const Scatter: React.FC<{ title: string; sub?: string; pts: { id: string;
       <div style={{ position: "absolute", left: L, width: R - L, top: B + 24, textAlign: "center", fontFamily: F.body, fontSize: 24, color: C.muted }}>{xLabel} →</div>
       <div style={{ position: "absolute", left: L - 70, top: (T + B) / 2, transform: "translate(-50%,-50%) rotate(-90deg)", fontFamily: F.body, fontSize: 24, color: C.muted, whiteSpace: "nowrap" }}>{yLabel} →</div>
       {quad && quad.map((q, i) => (
-        <div key={i} style={{ position: "absolute", left: i % 2 ? R - 420 : L + 20, top: i < 2 ? T - 34 : B - 40, width: 400, textAlign: i % 2 ? "right" : "left",
+        <div key={i} style={{ position: "absolute", left: i % 2 ? R - 440 : L + 20, top: i < 2 ? T + 14 : B - 40, width: 400, textAlign: i % 2 ? "right" : "left",
           fontFamily: F.body, fontSize: 21, color: C.muted, opacity: g }}>{q}</div>
       ))}
-      {pts.filter((p) => !named.includes(p.id)).map((p, i) => {
+      {pts.filter((p) => !named.includes(p.id) && p.x >= xr[0] && p.x <= xr[1]).map((p, i) => {
         const o = prog(f, 6 + (i % 40), 14 + (i % 40));
         return <div key={p.id} style={{ position: "absolute", left: X(p.x) - 6, top: Y(p.y) - 6, width: 12, height: 12, borderRadius: 6, background: "#6B7685", opacity: 0.5 * o }} />;
       })}
-      {named.map((id, i) => {
-        const p = pts.find((q) => q.id === id);
-        if (!p) return null;
-        const at = tNamed[i] ?? 50 + i * 8;
-        if (f < at) return null;
-        const s = pop(f, at);
-        return (
-          <div key={id} style={{ position: "absolute", left: X(p.x) - 36, top: Y(p.y) - 36, transform: `scale(${s})` }}>
-            <Photo id={id} size={72} ring={i === 0 ? C.gold : C.cyan} />
-            <div style={{ position: "absolute", top: 76, left: -40, width: 152, textAlign: "center", fontFamily: F.body, fontWeight: 600, fontSize: 21, color: C.text }}>{P(id).name}</div>
-          </div>
-        );
-      })}
+      {(() => {
+        // place photos near their dot, then push apart so names never overlap; a leader line keeps the true position
+        const pos = named.map((id) => { const p = pts.find((q) => q.id === id); return p ? { id, x0: X(p.x), y0: Y(p.y), x: X(p.x), y: Y(p.y) } : null; })
+          .filter(Boolean) as { id: string; x0: number; y0: number; x: number; y: number }[];
+        for (let it = 0; it < 200; it++) {
+          for (let a = 0; a < pos.length; a++) for (let b = a + 1; b < pos.length; b++) {
+            const dx = pos[b].x - pos[a].x, dy = pos[b].y - pos[a].y;
+            const ox = 150 - Math.abs(dx), oy = 118 - Math.abs(dy);
+            if (ox > 0 && oy > 0) {
+              if (ox < oy) { const m = (ox / 2 + 1) * (dx >= 0 ? 1 : -1); pos[a].x -= m; pos[b].x += m; }
+              else { const m = (oy / 2 + 1) * (dy >= 0 ? 1 : -1); pos[a].y -= m; pos[b].y += m; }
+            }
+          }
+          for (const q of pos) { q.x = Math.min(R - 40, Math.max(L + 40, q.x)); q.y = Math.min(B - 70, Math.max(T + 40, q.y)); }
+        }
+        return pos.map((q) => {
+          const i = named.indexOf(q.id);
+          const at = tNamed[i] ?? 50 + i * 8;
+          if (f < at) return null;
+          const s = pop(f, at);
+          const dx = q.x - q.x0, dy = q.y - q.y0, len = Math.hypot(dx, dy);
+          return (
+            <React.Fragment key={q.id}>
+              <div style={{ position: "absolute", left: q.x0 - 7, top: q.y0 - 7, width: 14, height: 14, borderRadius: 7, background: i === 0 ? C.gold : C.cyan, opacity: s }} />
+              {len > 30 && <div style={{ position: "absolute", left: q.x0, top: q.y0, width: len, height: 2, background: "#4A5568", transformOrigin: "0 0",
+                transform: `rotate(${Math.atan2(dy, dx)}rad)`, opacity: s }} />}
+              <div style={{ position: "absolute", left: q.x - 36, top: q.y - 36, transform: `scale(${s})` }}>
+                <Photo id={q.id} size={72} ring={i === 0 ? C.gold : C.cyan} />
+                <div style={{ position: "absolute", top: 76, left: -40, width: 152, textAlign: "center", fontFamily: F.body, fontWeight: 600, fontSize: 21, color: C.text }}>{P(q.id).name}</div>
+              </div>
+            </React.Fragment>
+          );
+        });
+      })()}
     </Frame>
   );
 };

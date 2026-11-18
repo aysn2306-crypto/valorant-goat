@@ -148,12 +148,14 @@ export const PlayerCard: React.FC<{ id: string; rank: number; lines: { k: string
         <div style={{ position: "absolute", left: 140, right: 140, top: 680, height: 200, display: "flex", gap: 14, alignItems: "flex-end" }}>
           {Object.keys(D.meta.weights).map((c, i) => {
             const v = p.cats[c] ?? 0;
+            const weakest = Object.keys(D.meta.weights).reduce((a, b) => ((p.cats[a] ?? 0) <= (p.cats[b] ?? 0) ? a : b));
+            const col = c === weakest ? C.red : v >= 99 ? accent : "#5F6977";
             const g = prog(f, profileAt + i * 2, profileAt + i * 2 + 16);
             return (
               <div key={c} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-                <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: 20, color: v >= 95 ? accent : C.text, opacity: g }}>{Math.round(v * g)}</div>
+                <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: 20, color: col === "#5F6977" ? C.text : col, opacity: g }}>{Math.round(v * g)}</div>
                 <div style={{ width: "70%", height: 100, background: "#1F2631", borderRadius: 4, position: "relative", overflow: "hidden" }}>
-                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: `${v * g}%`, background: v >= 95 ? accent : "#4A5361" }} />
+                  <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: `${v * g}%`, background: col }} />
                 </div>
                 <div style={{ fontFamily: F.body, fontSize: 15, color: C.muted, textAlign: "center", height: 38, lineHeight: 1.15 }}>{CAT_SHORT[c] ?? c}</div>
               </div>

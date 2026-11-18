@@ -61,11 +61,11 @@ Four. A support is compared to supports, a 2014 jungler to 2014 junglers, and a 
 
 Here is every world champion since season one.
 
-Korea won seven in a row from 2013. China broke through in 2018, and since then it has been a two-region fight.
+Korea won five in a row from 2013 to 2017. China broke through in 2018, and since then it has been a two-region fight.
 
 That matters, because a title from a strong region is harder to win.
 
-*[2:19, on screen: line]*
+*[2:20, on screen: line]*
 
 So I measured region strength from the only games where regions actually meet: international events.
 
@@ -73,9 +73,9 @@ Every cross-region game goes into a rating, like chess Elo for regions.
 
 Korea and China sit at the top most years. Europe peaked around 2018 to 2020. North America has mostly sat near the bottom.
 
-A domestic title is multiplied by that number. An LCK title is worth about twice an LCS one.
+A domestic title is multiplied by that number. Most years, an LCK title is worth at least twice an LCS one.
 
-*[2:48, on screen: numbers]*
+*[2:50, on screen: numbers]*
 
 To make the list you need at least 150 games in a major league or at an international. That leaves 527 players.
 
@@ -84,7 +84,7 @@ Fewer games than that and a hot streak looks like greatness.
 
 ## The formula
 
-*[3:05, on screen: formula]*
+*[3:06, on screen: formula]*
 
 First, trophies. A Worlds title is worth 100 points. Making the final is 60, semis 35.
 
@@ -94,7 +94,7 @@ A domestic title is 20, times the strength of that region in that year.
 
 And a Finals MVP adds a bonus on top.
 
-*[3:28, on screen: hbars]*
+*[3:30, on screen: hbars]*
 
 Then comes the carry share. Every player on a winning team gets credit between half and one and a half times the points.
 
@@ -104,7 +104,7 @@ ON gets 0.64. Same trophy, different share.
 
 That is how the model tells carrying a team from being carried.
 
-*[3:54, on screen: hbars]*
+*[3:56, on screen: hbars]*
 
 Next, the stats. I didn't want to pick the stat weights by gut feeling, so I let the experts pick them.
 
@@ -114,7 +114,7 @@ I fed the model every split's stats and the votes, and asked which numbers predi
 
 Those learned weights turn every season into one rating, which feeds most of the categories you'll see.
 
-*[4:26, on screen: formula]*
+*[4:28, on screen: formula]*
 
 All of that lands in fifteen categories. Trophies are the biggest at 28 percent, then big stage form and peak.
 
@@ -124,7 +124,7 @@ And the League stuff: who carried their team, who carried a weak team, and two p
 
 Each category ranks all the players from 0 to 100, and the final score is the weighted average.
 
-*[4:54, on screen: rankshift]*
+*[4:56, on screen: rankshift]*
 
 And my first ranking was wrong. Faker came out 3rd.
 
@@ -137,7 +137,7 @@ The fix: big stage, winning and stat categories use each player's best five year
 
 ## Is it accurate?
 
-*[5:25, on screen: hbars]*
+*[5:26, on screen: hbars]*
 
 So is any of this right? I tested it on seasons the model never saw.
 
@@ -145,9 +145,9 @@ I trained it on 2015 to 2021, then asked it to pick the first-team All-Pro in ev
 
 My first formula got 38. Just picking the player from the best team gets 57, because voters love winners.
 
-The final model gets 63 percent, and the player it picks lands somewhere on the All-Pro teams 75 percent of the time.
+The final model gets 63 percent, and its top three in each role match the voters' three All-Pro picks 75 percent of the time.
 
-*[5:58, on screen: formula]*
+*[6:00, on screen: formula]*
 
 It is not perfect, and here is where it is blind.
 
@@ -159,7 +159,7 @@ Team strength is only partly fixed by carry share. Being on a great team still h
 
 And the early seasons have thin data. The numbers are better from 2014 on.
 
-*[6:27, on screen: card]*
+*[6:30, on screen: card]*
 
 The best example is Bengi. Three Worlds titles next to Faker.
 
@@ -173,7 +173,7 @@ So the model has him at 137th. If you think that's too low, you're probably righ
 
 ## Category 1 / 15
 
-*[6:52, on screen: field]*
+*[6:54, on screen: field]*
 
 Category one, the resume. Faker is so far ahead that the chart needs a log scale.
 
@@ -184,7 +184,7 @@ First is Faker with 1,267 points. Nobody is within 460 of him.
 
 ## Category 2 / 15
 
-*[7:16, on screen: field]*
+*[7:18, on screen: field]*
 
 Big stage. Who plays their best when the whole world is watching?
 
@@ -195,7 +195,7 @@ Second is Uzi, and first, Keria. The best international form over five years in 
 
 ## Category 3 / 15
 
-*[7:34, on screen: field]*
+*[7:36, on screen: field]*
 
 Peak. The single best year anyone has had, compared to their own role that year.
 
@@ -206,7 +206,7 @@ And number one is Knight in 2026. The best season in fifteen years of data.
 
 ## Category 4 / 15
 
-*[7:52, on screen: field]*
+*[7:54, on screen: field]*
 
 Longevity. How many years were you elite?
 
@@ -217,7 +217,7 @@ Ruler leads with 9 elite years.
 
 ## Category 5 / 15
 
-*[8:04, on screen: field]*
+*[8:07, on screen: field]*
 
 Winning. Win rate, scaled by how strong the league was.
 
@@ -228,7 +228,7 @@ And Chovy on top, winning 69.2 percent of his games.
 
 ## Category 6 / 15
 
-*[8:20, on screen: field]*
+*[8:22, on screen: field]*
 
 Laning. How far ahead of the opposite laner you are at fifteen minutes.
 
@@ -239,7 +239,7 @@ And the best laner in League history, by this measure: TheShy, +551 gold at fift
 
 ## Category 7 / 15
 
-*[8:38, on screen: field]*
+*[8:40, on screen: field]*
 
 Killing. Who finds the most kills and puts out the most damage for their role?
 
@@ -250,7 +250,7 @@ First, TheShy.
 
 ## Category 8 / 15
 
-*[8:51, on screen: field]*
+*[8:54, on screen: field]*
 
 Teamfighting. Your share of the team's damage, and how many of the team's kills you were part of.
 
@@ -261,7 +261,7 @@ And the best teamfighter: Elk.
 
 ## Category 9 / 15
 
-*[9:07, on screen: field]*
+*[9:09, on screen: field]*
 
 Vision and supporting. This one is supports only, ranked on vision score and assists.
 
@@ -272,7 +272,7 @@ Number one: Baolan. Voters barely reward vision, so it carries only one point of
 
 ## Category 10 / 15
 
-*[9:27, on screen: field]*
+*[9:30, on screen: field]*
 
 MVP of the team. How far above his own teammates did a player rate?
 
@@ -283,7 +283,7 @@ And the clearest number one on his own team: Knight.
 
 ## Category 11 / 15
 
-*[9:43, on screen: field]*
+*[9:45, on screen: field]*
 
 Solo carry. This is the one for players who dragged a team further than it had any right to go.
 
@@ -296,7 +296,7 @@ And first, Uzi. If you ever said someone carried their team to a final, this is 
 
 ## Category 12 / 15
 
-*[10:09, on screen: field]*
+*[10:12, on screen: field]*
 
 Clean play. KDA and how rarely you die.
 
@@ -307,7 +307,7 @@ Cleanest player in League history: Chovy, with a KDA of 5.67.
 
 ## Category 13 / 15
 
-*[10:25, on screen: field]*
+*[10:28, on screen: field]*
 
 Consistency. In how many events did you play above your role's average?
 
@@ -318,7 +318,7 @@ Chovy: 94 percent of the time.
 
 ## Category 14 / 15
 
-*[10:40, on screen: field]*
+*[10:42, on screen: field]*
 
 Now the intangibles. Shotcalling, comms, leadership. There's no stat for them, so I used two proxies, and I'm labelling them as proxies.
 
@@ -329,7 +329,7 @@ Rekkles, Caps, Canyon, Keria, and Chovy on top.
 
 ## Category 15 / 15
 
-*[11:07, on screen: field]*
+*[11:09, on screen: field]*
 
 The second proxy: does the team win more when you're on it? Same team, two years either side, with and without you.
 
@@ -340,7 +340,7 @@ It's noisy, rosters change five players at once, so it only carries two points o
 
 ## Twists
 
-*[11:29, on screen: slider]*
+*[11:32, on screen: slider]*
 
 Twist one. What if trophies counted for less?
 
@@ -350,7 +350,7 @@ Turn trophies up and Faker takes over at 15 percent.
 
 I use 28. So Faker's crown needs trophies to count for at least 15 percent. Below that, it's Knight's.
 
-*[11:53, on screen: scatter]*
+*[11:56, on screen: scatter]*
 
 Twist two. Trophies against individual play, for every player.
 
@@ -358,9 +358,9 @@ Most decorated: Faker, Ruler, Keria, Canyon.
 
 Most dominant on the stats: Knight, Chovy, Ruler, Viper.
 
-Only one player sits alone in the top right corner. Faker.
+Faker is alone at the top on trophies. But on individual play alone, four players rate higher than him.
 
-*[12:14, on screen: rankshift]*
+*[12:19, on screen: rankshift]*
 
 Twist three. What if every region counted the same?
 
@@ -371,7 +371,7 @@ But the top of the list barely moves. The best players won the hardest leagues a
 
 ## The countdown
 
-*[12:36, on screen: top5]*
+*[12:40, on screen: top5]*
 
 tenth, Meiko.
 
@@ -383,7 +383,7 @@ Seventh, Canyon.
 
 And sixth, Viper.
 
-*[12:49, on screen: card]*
+*[12:53, on screen: card]*
 
 Number five. Chovy.
 
@@ -393,7 +393,7 @@ His best categories: winning, consistency, clean play.
 
 A score of 85.1.
 
-*[13:05, on screen: card]*
+*[13:10, on screen: card]*
 
 Number four. Ruler.
 
@@ -403,7 +403,7 @@ His best categories: longevity, winning, consistency.
 
 85.5.
 
-*[13:21, on screen: card]*
+*[13:26, on screen: card]*
 
 Number three. Keria.
 
@@ -416,7 +416,7 @@ His best categories: big stage, recognition, solo carry.
 
 ## The reveal
 
-*[13:43, on screen: card]*
+*[13:47, on screen: card]*
 
 So who is number two? One Worlds title.
 
@@ -428,7 +428,7 @@ Score: 87.4.
 
 The second greatest League of Legends player of all time is Knight.
 
-*[14:09, on screen: breakdown]*
+*[14:14, on screen: breakdown]*
 
 And here's the gap to Faker: 6.7 points.
 
@@ -439,11 +439,11 @@ But trophies are worth the most, and nobody comes close to six Worlds titles.
 
 ## Close
 
-*[14:23, on screen: hbars]*
+*[14:28, on screen: hbars]*
 
 And the world champions we started with: Knight is 2nd. Viper is 6th. Bin is 11th.
 
-*[14:31, on screen: statement]*
+*[14:35, on screen: statement]*
 
 That's what the data says. Now tell me what it got wrong. Who's your number two?
 

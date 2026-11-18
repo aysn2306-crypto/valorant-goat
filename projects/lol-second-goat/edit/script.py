@@ -118,7 +118,7 @@ CH = "The data"
 beat("chapter", dict(n=2, name="The data", line="Fifteen seasons of pro League.", field="dark"), [], chapter=CH, tail=50, sfx=[("whoosh.mp3", 0, 0.35)])
 beat("timeline", dict(title="Every world champion", sub="2011 to 2026", t0="@0", step=7),
      ["Here is every world champion since season one.",
-      "Korea won seven in a row from 2013. China broke through in 2018, and since then it has been a two-region fight.",
+      "Korea won five in a row from 2013 to 2017. China broke through in 2018, and since then it has been a two-region fight.",
       "That matters, because a title from a strong region is harder to win."], chapter=CH)
 rs = D["regionStrength"]
 yrs = sorted(int(y) for y in rs)
@@ -131,7 +131,7 @@ beat("line", dict(title="How strong is each region?", sub="from head-to-head gam
      ["So I measured region strength from the only games where regions actually meet: international events.",
       "Every cross-region game goes into a rating, like chess Elo for regions.",
       "Korea and China sit at the top most years. Europe peaked around 2018 to 2020. North America has mostly sat near the bottom.",
-      "A domestic title is multiplied by that number. An LCK title is worth about twice an LCS one."], chapter=CH)
+      "A domestic title is multiplied by that number. Most years, an LCK title is worth at least twice an LCS one."], chapter=CH)
 beat("numbers", dict(title="Who made the list", items=[
     dict(v=D["meta"]["pool"], label=f"players with {D['meta']['minGames']}+ games", at="@0"),
     dict(v=D["meta"]["minGames"], label="minimum games", at="@0+14")]),
@@ -212,7 +212,7 @@ beat("hbars", dict(title="Does it pick the same players as the voters?", sub="he
      ["So is any of this right? I tested it on seasons the model never saw.",
       f"I trained it on 2015 to 2021, then asked it to pick the first-team All-Pro in every role from 2022 to 2026. Picking at random gets about {round(chance)} percent.",
       f"My first formula got {round(val('m_v3_impact') * 100)}. Just picking the player from the best team gets {round(val('m_win_only') * 100)}, because voters love winners.",
-      f"The final model gets {round(val('m_fitted') * 100)} percent, and the player it picks lands somewhere on the All-Pro teams {round(val('m_fitted', key='all_pro_overlap') * 100)} percent of the time."],
+      f"The final model gets {round(val('m_fitted') * 100)} percent, and its top three in each role match the voters' three All-Pro picks {round(val('m_fitted', key='all_pro_overlap') * 100)} percent of the time."],
      chapter=CH)
 beat("formula", dict(title="What the model can't see", sub="honest blind spots", lines=[
     dict(t="[[Shotcalling and comms]]: no public data. Proxy only.", at="@1"),
@@ -352,18 +352,18 @@ beat("slider", {"from": 0, "to": 40, "t0": "@1", "t1": "@3", "real": int(W["trop
       f"I use {int(W['trophies'])}. So Faker's crown needs trophies to count for at least {faker_from} percent. Below that, it's {nm(first_low)}'s."],
      chapter=CH, sfx=[("riser.mp3", "@2", 0.3)])
 sc = [dict(id=p["id"], x=round(sum(p["cats"][c] for c in ["big_stage", "peak", "winning", "laning", "killing", "teamfight", "team_carry", "clean_play", "consistency"]) / 9, 1),
-           y=round(p["cats"]["trophies"], 1)) for p in D["players"]]
+           y=round(10 * p["cats"]["trophies"] ** 0.5, 1)) for p in D["players"]]
 dec = sorted(D["players"], key=lambda p: -(p["rawPts"] or 0))[:5]
 dom = sorted(sc, key=lambda q: -q["x"])[:5]
 named = list(dict.fromkeys([FAKER] + [d["id"] for d in dec[:4]] + [d["id"] for d in dom[:4]]))
 beat("scatter", dict(title="Most decorated vs most dominant", sub="every player: trophy score vs individual categories", pts=sc, named=named,
-                     xLabel="individual categories (average percentile)", yLabel="trophy score", xr=[0, 100], yr=[0, 100],
+                     xLabel="individual categories (average percentile)", yLabel="trophy score (square-root scale)", xr=[5, 108], yr=[0, 125],
                      tNamed=[f"@1+{4 * i}" if named[i] in [d['id'] for d in dec] else f"@2+{4 * i}" for i in range(len(named))],
-                     quad=["trophies, quiet stats", "the complete package", "", "dominant, fewer trophies"]),
+                     quad=["trophies, quiet stats", "", "", "dominant, fewer trophies"]),
      ["Twist two. Trophies against individual play, for every player.",
       f"Most decorated: {', '.join(nm(d['id']) for d in dec[:4])}.",
       f"Most dominant on the stats: {', '.join(nm(d['id']) for d in dom[:4])}.",
-      f"Only one player sits alone in the top right corner. Faker."], chapter=CH)
+      "Faker is alone at the top on trophies. But on individual play alone, four players rate higher than him."], chapter=CH)
 nr = D["variants"].get("no_region")
 if nr:
     west = [i for i in ["caps", "rekkles", "perkz", "bjergsen", "jankos", "doublelift"] if i in P]

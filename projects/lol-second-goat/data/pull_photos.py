@@ -20,6 +20,12 @@ def main(extra):
     for c in [c for c in P.columns if c.startswith("c_")]:
         links += list(P.sort_values(c, ascending=False).index[:6])
     links += [l for l in P.index if re.sub(r"\s*\(.*\)$", "", l) in extra]
+    J = os.path.join(ROOT, "video", "src", "data", "league.json")
+    if os.path.exists(J):
+        d = json.load(open(J)); byid = {p["id"]: p["link"] for p in d["players"]}
+        ids = [i for b in d["boards"].values() for i in b] + [i for rb in d["roleBoards"].values() for b in rb.values() for i in b]
+        ids += [x[0] for w in d["worlds"] for x in w["players"]]
+        links += [byid[i] for i in ids if i in byid]
     links = list(dict.fromkeys(links))
     rows = []
     for i in range(0, len(links), 20):
