@@ -879,6 +879,11 @@ export const SampleRaceBump: React.FC = () => {
           color: id === "knight" ? C.cyan : id === "faker" ? C.gold : "#AEB6C2", whiteSpace: "nowrap", lineHeight: "36px" }}>{name.toUpperCase()}</div>
       ))}
       <Face id="knight" x={b.x1 + 250} y={yOf(2)} size={92} ring={C.cyan} glow="rgba(34,211,238,0.6)" />
+      {/* #2 holders on their lines (script v4 VO, 19:00): Bang 2016-22, Ruler 2023, Chovy 2024-25, then Knight */}
+      {([["BANG", 2019], ["RULER", 2023], ["CHOVY", 2024.5]] as [string, number][]).map(([n, yv]) => (
+        <div key={n} style={{ position: "absolute", left: X(yv) - 80, width: 160, top: yOf(2) - 40, textAlign: "center", fontFamily: F.body, fontWeight: 800, fontSize: 24,
+          color: "#D6DBE2", letterSpacing: 1, textShadow: "0 0 6px #0B0B0F, 0 0 6px #0B0B0F" }}>{n}</div>
+      ))}
     </Stage>
   );
 };
