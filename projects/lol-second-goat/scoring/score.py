@@ -245,6 +245,8 @@ def titles(t, s, strength):
     bad = re.compile(r"Play-In|Road to MSI|Showmatch|Regional|Qualif|Preseason|All Star|LPPL|Promotion|Rounds", re.I)
     r = r[~r.Name.str.contains(bad)]
     r["year"] = r.Date.str[:4].astype(int)
+    if os.environ.get("CUTOFF"):
+        r = r[r.year <= int(os.environ["CUTOFF"])]
     tp = CFG["trophy_points"]
     # leagues that crown several split champions a year plus one season champion (LEC 2023+, LPL 2025+, LCK Cup):
     # the season title counts in full, the split titles at half
@@ -351,6 +353,8 @@ def recognition(s, pool):
     f = os.path.join(CSV, "individual_achievements.csv")
     a = pd.read_csv(f, dtype=str).fillna("")
     a["Link"] = [redirect(l) for l in a.Player]
+    if os.environ.get("CUTOFF"):
+        a = a[a.OverviewPage.str.extract(r"(20\d\d)")[0].astype(float).fillna(0) <= int(os.environ["CUTOFF"])]
     if os.environ.get("VARIANT") == "split_faker":
         yr = a.OverviewPage.str.extract(r"(20\d\d)")[0].astype(float)
         m = a.Link == "Faker"
@@ -457,6 +461,10 @@ def main():
     else:
         t, s = load()
         pd.to_pickle((t, s), cache)
+    CUT = int(os.environ["CUTOFF"]) if os.environ.get("CUTOFF") else None
+    if CUT:   # career so far: everything as it stood at the end of year CUT (rank race, ay 18 Nov)
+        s = s[s.year <= CUT].copy()
+        variant = variant or f"cut{CUT}"
     if variant == "split_faker":
         # ay's twist: Faker's career as two players, split into even halves by years (ay 18 Nov 17:23):
         # 2013-19 (Worlds 2013, 2015, 2016) and 2020-26 (Worlds 2023, 2024, 2025)
@@ -477,6 +485,8 @@ def main():
     for c in CFG.get("league_stats", {}):
         s["a_" + c] = s["z_" + c] - pen * (1 - s.strength)
     T = titles(t, s, strength)
+    if CUT:
+        T = T[T.year <= CUT]
     FUT = json.load(open(os.environ["FUTURE"])) if os.environ.get("FUTURE") else None
     if FUT:
         s, T = add_future(s, T, FUT)
@@ -530,6 +540,8 @@ def main():
     if os.path.exists(cf):
         cl = pd.read_csv(cf)
         cl["Link"] = cl.Link.map(redirect)
+        if os.environ.get("CUTOFF"):
+            cl = cl[cl.year <= int(os.environ["CUTOFF"])]
         if os.environ.get("VARIANT") == "split_faker":
             m = cl.Link == "Faker"
             cl.loc[m, "Link"] = np.where(cl.loc[m, "year"] <= FS, FA, FB)
@@ -574,6 +586,8 @@ def main():
     P["consistency_raw"] = ((cons.up + 2) / (cons.n + 4)).reindex(pool)   # shrink toward 50%
     M = mvps(s)
     if not M.empty:
+        if os.environ.get("CUTOFF"):
+            M = M[M.year <= int(os.environ["CUTOFF"])]
         T = pd.concat([T, M], ignore_index=True)
     # solo carry: placement points earned above his own teammates, worth more when those teammates were weak
     # (cast from teammates' whole-year ratings; a stacked roster gets none)
@@ -625,6 +639,8 @@ def main():
     if os.path.exists(rf):
         ps = pd.read_csv(rf)
         ps = ps[ps.G >= 10].copy()
+        if os.environ.get("CUTOFF"):
+            ps = ps[ps.year <= int(os.environ["CUTOFF"])]
         if FUTURE_CFG:
             l, base = FUTURE_CFG["link"], int(FUTURE_CFG.get("from_year", 2026))
             mine = ps[ps.Link == l]
