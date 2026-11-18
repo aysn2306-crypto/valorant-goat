@@ -146,7 +146,7 @@ Timing:
 | So here's the pyramid. Not a top ten. Tiers of greatness. | GRAPHIC: empty pyramid, five tiers. |
 | At the bottom, numbers thirty two to sixty. Legends of their own regions. | Tier 5 fills: Scout, Perkz, Doinb, Bengi, Jankos. |
 | Then the stars. The best player on a great team. | Tier 4 fills: Gumayusi, Caps, Deft, TheShy, Uzi. |
-| Now, the internet won't like this. Every all-time list from the last two years has Uzi and Bengi in its top ten. | Everything dims except Uzi (#31) and Bengi (#44). Small list cards pop beside them: esports.net 2025 (Bengi #2, Uzi #4), spilled.gg 2026 (Uzi #5, Bengi #9), Red Bull 2026 (both listed). |
+| Now, the internet won't like this. Every all-time list from the last two years has Uzi and Bengi in its top ten. | Everything dims except Uzi (#31) and Bengi (#44). Small list cards pop beside them: esports.net 2025 (Bengi #2, Uzi #4), spilled.gg 2026 (Uzi #5, Bengi #9). Red Bull's list is unranked, so it isn't on screen. |
 | We have them at thirty one and forty four. Uzi never won Worlds, and trophies are the biggest part of this model. Bengi won three, but his own numbers rank two hundred and forty seventh. | Hold on the two faces. **[SILENCE]** |
 | Then the absolute top of League. | Tier 3 fills: Keria, Ruler, Bin, Viper. |
 | Then a tier of two, a point and a half apart. | Two empty slots. **[SILENCE]** |
@@ -154,7 +154,7 @@ Timing:
 | And second greatest of all time... | Hold. |
 | Knight. | Knight fills the slot. |
 | One world title. But the best single season ever recorded, by this model, near the top for years, and he just beat everyone. | FOOTAGE: Knight at Worlds 2026. |
-| And none of those lists even have him. They were written before he won Worlds. | Knight's face, the three list cards with no Knight on them. |
+| And none of those lists even have him. They were written before he won Worlds. | Knight's face, the two list cards with no Knight on them. |
 | And at the top, alone, Faker. | Faker at the peak. Gap to Knight shown. |
 | Number two. | Zoom in on Knight's face at #2. Hold. |
 | But what would it take to get from here... to here? | An arrow draws from tier 2 up to Faker's tier, then the camera follows it into section 8. |
