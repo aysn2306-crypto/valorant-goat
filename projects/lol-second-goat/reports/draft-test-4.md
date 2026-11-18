@@ -30,7 +30,7 @@ Data: Leaguepedia scoreboards, 303 tournaments, 25,987 games (approx.), 1,915 pl
 | 14 | Gumayusi | Bot | LCK | 2021-2026 | 3 | 1 | 1 | 1 | 59.3 | 0.0% | 0.0% |
 | 15 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 58.2 | 0.0% | 0.0% |
 
-Benchmark: Faker score 84.3, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 77, peak 76, winning 99, longevity 79, carry 79, clean_play 70, consistency 78, laning 74, killing 90, teamfight 64, vision 72, team_carry 63, solo_carry 75, recognition 70, team_lift 50, clutch 76, title_teams 90, individual 78, big_stage_clutch 80, carry_pillar 73, intangibles 60
+Benchmark: Faker score 84.3, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 77, peak 76, winning 99, longevity 79, carry 79, clean_play 70, consistency 78, laning 74, killing 90, teamfight 64, vision 72, team_carry 63, solo_carry 75, recognition 70, team_lift 50, clutch 76, title_teams 60, individual 78, big_stage_clutch 80, carry_pillar 73, intangibles 60
 
 ## Players ay named
 
@@ -98,7 +98,7 @@ Benchmark: Faker score 84.3, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 **clutch**: Wolf 100, Zeka 96, Bengi 95, Biofrost 92, Blank 92
 
-**title_teams**: Peanut 100, Impact 100, Mata 100, Faker 90, Deft 90
+**title_teams**: Peanut 100, Deft 90, Mata 90, Knight 80, Viper 80
 
 **individual**: Chovy 100, Knight 99, Keria 96, Zeus 90, Kanavi 88
 

@@ -496,7 +496,13 @@ def main():
     for tier in ["worlds", "msi", "first_stand", "domestic"]:
         P[tier + "_titles"] = T[(T.tier == tier) & (T.place == 1)].groupby("Link").size().reindex(pool).fillna(0).astype(int)
     won = T[(T.place == 1) & (T.tier != "award")]
-    P["title_teams"] = won.groupby("Link").team.nunique().reindex(pool).fillna(0).astype(int)
+    # count organisations, not team names (SK Telecom T1 = T1; MVP Ozone, Samsung White/Blue/Galaxy = Gen.G; ...)
+    org = {"SK Telecom T1": "T1", "SK Telecom T1 2": "T1", "SK Telecom T1 K": "T1", "MVP Ozone": "Gen.G",
+           "Samsung White": "Gen.G", "Samsung Blue": "Gen.G", "Samsung Galaxy": "Gen.G", "Longzhu Gaming": "Kingzone",
+           "Kingzone DragonX": "Kingzone", "DAMWON Gaming": "DWG", "DWG KIA": "DWG", "KT Rolster Arrows": "KT Rolster",
+           "Azubu Frost": "CJ", "Team WE": "WE"}
+    won = won.assign(org=won.team.map(lambda t: org.get(t, t)))
+    P["title_teams"] = won.groupby("Link").org.nunique().reindex(pool).fillna(0).astype(int)
 
     C = pd.DataFrame(index=pool)
     C["trophies"] = P.trophy_pts / P.trophy_pts.max() * 100
