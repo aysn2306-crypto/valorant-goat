@@ -1,0 +1,16 @@
+t,mmss,type,dur_s,excess_over_bed_db,level_vs_voice_db,moment,said,low,high,flat,sweep,rise,corr,clip,screen_tile,clip,screen_tile
+67.56,01:07.6,other,0.15,14.7,-9.9,footage / talk,,0.9,0.0,0.001,-1139,11.1,0.47,R4_XtNi7A08_sfx01_01m07s6_other.mp3,sheets_2s/R4_XtNi7A08_2s_01m04s.jpg tile 2,R4_XtNi7A08_sfx01_01m07s6_other.mp3,sheets_2s/R4_XtNi7A08_2s_01m04s.jpg tile 2
+94.98,01:35.0,other,0.01,6.2,-9.8,footage / talk,,0.0,0.18,0.114,0,-4.0,-0.31,,,,
+138.03,02:18.0,other,0.05,8.9,-16.0,footage / talk,,0.0,0.18,0.172,239,0.9,0.13,R4_XtNi7A08_sfx02_02m18s0_other.mp3,sheets_2s/R4_XtNi7A08_2s_02m08s.jpg tile 6,R4_XtNi7A08_sfx02_02m18s0_other.mp3,sheets_2s/R4_XtNi7A08_2s_02m08s.jpg tile 6
+138.63,02:18.6,other,0.12,20.7,-13.9,footage / talk,,0.88,0.0,0.002,-1181,-2.2,-0.01,R4_XtNi7A08_sfx03_02m18s6_other.mp3,sheets_2s/R4_XtNi7A08_2s_02m08s.jpg tile 6,R4_XtNi7A08_sfx03_02m18s6_other.mp3,sheets_2s/R4_XtNi7A08_2s_02m08s.jpg tile 6
+145.16,02:25.2,other,0.02,11.5,-13.5,footage / talk,,0.0,0.3,0.176,0,0.8,0.21,R4_XtNi7A08_sfx04_02m25s2_other.mp3,sheets_2s/R4_XtNi7A08_2s_02m08s.jpg tile 9,R4_XtNi7A08_sfx04_02m25s2_other.mp3,sheets_2s/R4_XtNi7A08_2s_02m08s.jpg tile 9
+159.87,02:39.9,other,0.07,18.2,-13.0,footage / talk,,0.89,0.0,0.002,-1080,10.8,0.11,R4_XtNi7A08_sfx05_02m39s9_other.mp3,sheets_2s/R4_XtNi7A08_2s_02m08s.jpg tile 16,R4_XtNi7A08_sfx05_02m39s9_other.mp3,sheets_2s/R4_XtNi7A08_2s_02m08s.jpg tile 16
+171.76,02:51.8,other,0.08,22.0,-15.0,footage / talk,,0.97,0.0,9.317,-487,-6.5,-0.16,R4_XtNi7A08_sfx06_02m51s8_other.mp3,sheets_2s/R4_XtNi7A08_2s_02m40s.jpg tile 6,R4_XtNi7A08_sfx06_02m51s8_other.mp3,sheets_2s/R4_XtNi7A08_2s_02m40s.jpg tile 6
+201.0,03:21.0,other,0.05,7.9,-18.9,footage / talk,,0.0,0.0,0.001,-246,1.2,0.0,R4_XtNi7A08_sfx07_03m21s0_other.mp3,sheets_2s/R4_XtNi7A08_2s_03m12s.jpg tile 5,R4_XtNi7A08_sfx07_03m21s0_other.mp3,sheets_2s/R4_XtNi7A08_2s_03m12s.jpg tile 5
+265.96,04:26.0,other,0.22,6.6,-22.6,graph g3_star_scatter_mpg_vs_epm,,0.0,0.0,0.001,-357,2.6,0.11,,,,
+296.54,04:56.5,other,0.16,6.0,-22.9,graph g3_star_scatter_mpg_vs_epm,,0.0,0.0,0.0,33,-7.3,-0.34,,,,
+353.57,05:53.6,other,0.03,5.6,-20.3,footage / talk,,0.02,0.01,0.003,-673,-0.8,-0.13,,,,
+455.51,07:35.5,other,0.05,4.8,-19.8,footage / talk,,0.0,0.0,0.001,-6,0.5,-0.44,,,,
+509.77,08:29.8,hit / low thump,0.17,5.8,-18.3,graph g5_ranked_list_scroll,,0.48,0.02,0.013,-510,-3.9,-0.41,R4_XtNi7A08_sfx08_08m29s8_hit.mp3,sheets_2s/R4_XtNi7A08_2s_08m00s.jpg tile 15,R4_XtNi7A08_sfx08_08m29s8_hit.mp3,sheets_2s/R4_XtNi7A08_2s_08m00s.jpg tile 15
+596.08,09:56.1,hit / low thump,0.12,9.4,-14.6,footage / talk,,0.82,0.0,0.001,-459,-2.5,0.02,R4_XtNi7A08_sfx09_09m56s1_hit.mp3,sheets_2s/R4_XtNi7A08_2s_09m36s.jpg tile 11,R4_XtNi7A08_sfx09_09m56s1_hit.mp3,sheets_2s/R4_XtNi7A08_2s_09m36s.jpg tile 11
+605.75,10:05.8,hit / low thump,0.1,4.3,-17.7,footage / talk,,0.77,0.01,0.008,-780,4.1,0.14,R4_XtNi7A08_sfx10_10m05s8_hit.mp3,sheets_2s/R4_XtNi7A08_2s_09m36s.jpg tile 15,R4_XtNi7A08_sfx10_10m05s8_hit.mp3,sheets_2s/R4_XtNi7A08_2s_09m36s.jpg tile 15
