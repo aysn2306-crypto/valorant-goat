@@ -285,7 +285,13 @@ export const S9TwoFakers: React.FC = () => {
 // ay 18:09: wider spread of regions (MODEL-CURRENT commit 789f9d7)
 const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler", "bin", "viper"], ["gumayusi", "caps", "deft", "theshy", "uzi"],
   ["scout", "perkz", "doinb", "bengi", "jankos"]];
-const Pyramid: React.FC<{ focus?: boolean }> = ({ focus }) => {
+// 19a (ay 18:15): after tiers 5 and 4 fill, dim all but Uzi and Bengi and show where 2025/26 published lists put them
+// (research/model-vs-published-lists.md; only these three lists).
+const LISTS: Record<string, [string, string][]> = {
+  uzi: [["ESPORTS.NET 2025", "#4"], ["SPILLED.GG 2026", "#5"], ["RED BULL 2026", "LISTED"]],
+  bengi: [["ESPORTS.NET 2025", "#2"], ["SPILLED.GG 2026", "#9"], ["RED BULL 2026", "LISTED"]],
+};
+const Pyramid: React.FC<{ focus?: boolean; internet?: boolean }> = ({ focus, internet }) => {
   const top = 110, base = 948, half = 800, cx = 960;
   const cuts = [top, 330, 490, 640, 795, base];
   const hw = (y: number) => ((y - top) / (base - top)) * half;
@@ -293,7 +299,8 @@ const Pyramid: React.FC<{ focus?: boolean }> = ({ focus }) => {
   const sizes = [112, 86, 74, 68, 68], gaps = [0, 230, 190, 175, 175];
   const pos = (i: number, j: number) => ({ x: cx + (j - (TIERS[i].length - 1) / 2) * gaps[i], y: i === 0 ? 236 : cuts[i] + 34 + sizes[i] / 2 });
   const kn = pos(1, 0), fk = pos(0, 0);
-  const lit = (id: string) => !focus || id === "knight" || id === "faker";
+  const lit = (id: string) => (internet ? id in LISTS : !focus || id === "knight" || id === "faker");
+  const hidden = (i: number) => internet && i < 3;
   return (
     <Stage glow="gold">
       <AbsoluteFill style={{ transform: focus ? "scale(1.45)" : undefined, transformOrigin: `${kn.x + 80}px ${top + 20}px` }}>
@@ -301,17 +308,19 @@ const Pyramid: React.FC<{ focus?: boolean }> = ({ focus }) => {
           {TIERS.map((_, i) => {
             const y0 = cuts[i], y1 = cuts[i + 1];
             return <polygon key={i} points={`${cx - hw(y0)},${y0} ${cx + hw(y0)},${y0} ${cx + hw(y1)},${y1} ${cx - hw(y1)},${y1}`} fill={fills[i]}
-              stroke="rgba(237,239,242,0.55)" strokeWidth={2} opacity={focus && i > 1 ? 0.35 : 1} />;
+              stroke="rgba(237,239,242,0.55)" strokeWidth={2} opacity={(focus && i > 1) || (internet && i < 3) ? 0.35 : 1} />;
           })}
         </svg>
         {TIERS.map((_, i) => (
           <div key={"t" + i} style={{ position: "absolute", left: i === 0 ? cx - 100 : cx - hw(cuts[i] + 30) + 18, width: 200, top: i === 0 ? top - 36 : cuts[i] + 14,
             textAlign: i === 0 ? "center" : "left", fontFamily: F.title,
-            fontSize: 22, letterSpacing: 1.5, color: i === 0 ? C.gold : i === 1 ? C.cyan : "#AEB6C2", opacity: focus && i > 1 ? 0.3 : 1 }}>TIER {i + 1}</div>
+            fontSize: 22, letterSpacing: 1.5, color: i === 0 ? C.gold : i === 1 ? C.cyan : "#AEB6C2", opacity: (focus && i > 1) || (internet && i < 3) ? 0.3 : 1 }}>TIER {i + 1}</div>
         ))}
         {TIERS.map((ids, i) => ids.map((id, j) => {
           const size = sizes[i]; const { x, y } = pos(i, j);
           const ring = i === 0 ? C.gold : i === 1 ? C.cyan : "#E9ECF1";
+          if (hidden(i)) return <div key={id} style={{ position: "absolute", left: x - size / 2, top: y - size / 2, width: size, height: size, borderRadius: size,
+            border: "3px dashed rgba(237,239,242,0.25)" }} />;
           return (
             <div key={id} style={{ opacity: lit(id) ? 1 : 0.25, filter: lit(id) ? undefined : "grayscale(1)" }}>
               <Face id={id} x={x} y={y} size={size} ring={i < 2 ? ring : "rgba(237,239,242,0.8)"} glow={i === 0 ? C.gold : i === 1 ? C.cyan : "rgba(0,0,0,0.6)"} />
@@ -324,6 +333,28 @@ const Pyramid: React.FC<{ focus?: boolean }> = ({ focus }) => {
             </div>
           );
         }))}
+        {internet && Object.entries(LISTS).map(([id, rows]) => {
+          const i = TIERS.findIndex((t) => t.includes(id)); const { x, y } = pos(i, TIERS[i].indexOf(id));
+          const cx0 = 1590, cy0 = id === "uzi" ? 450 : 640, cw = 300, ch = 136;
+          // Uzi: straight line to the card; Bengi: elbow below the base so it never crosses Jankos.
+          const pts = id === "uzi" ? `${x + 40},${y} ${cx0},${cy0 + ch / 2}` : `${x},${y + 66} ${x},${985} ${cx0 + 170},${985} ${cx0 + 170},${cy0 + ch}`;
+          return (
+            <React.Fragment key={"c" + id}>
+              <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+                <polyline points={pts} fill="none" stroke="rgba(237,239,242,0.7)" strokeWidth={2} />
+              </svg>
+              <div style={{ position: "absolute", left: cx0, top: cy0, width: cw, height: ch, boxSizing: "border-box", padding: "12px 16px", background: "rgba(11,11,15,0.92)", border: "2px solid rgba(237,239,242,0.6)",
+                borderRadius: 10, boxShadow: "0 10px 30px rgba(0,0,0,0.6)" }}>
+                {rows.map(([n, v]) => (
+                  <div key={n} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: F.body, fontWeight: 800, lineHeight: 1.45 }}>
+                    <span style={{ fontSize: 20, color: "#AEB6C2" }}>{n}</span>
+                    <span style={{ fontSize: v === "LISTED" ? 20 : 28, color: C.text }}>{v}</span>
+                  </div>
+                ))}
+              </div>
+            </React.Fragment>
+          );
+        })}
         {focus && (
           <>
             <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
@@ -341,6 +372,7 @@ const Pyramid: React.FC<{ focus?: boolean }> = ({ focus }) => {
 };
 export const S10Pyramid: React.FC = () => <Pyramid />;
 export const S10bPyramidArrow: React.FC = () => <Pyramid focus />;
+export const S10aPyramidInternet: React.FC = () => <Pyramid internet />;
 
 // 11a. Knight vs Faker, part by part (v11 parts and weights, MODEL-CURRENT 18 Nov 17:20; "intangibles" is called Recognition on screen)
 const PARTS: [string, number, number, number][] = [["TROPHIES", 40, 100, 46.1], ["BIG GAMES", 14, 94.1, 98.9], ["SKILL", 18, 78.6, 99.9],
