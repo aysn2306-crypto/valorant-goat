@@ -1,6 +1,7 @@
 import React from "react";
 import { Composition, Still } from "remotion";
 import * as St from "./stills/Stills";
+import * as Mo from "./motion/Tests";
 import { FPS, H, W, loadFonts } from "./theme";
 import { OffsetProbe } from "./sample/OffsetProbe";
 import { TrophiesSample, TROPHIES_SAMPLE_FRAMES } from "./sample/TrophiesSample";
@@ -18,6 +19,10 @@ export const Root: React.FC = () => (
     <Composition id="TrophyTower" component={TrophyTower} durationInFrames={TOWER_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="TrophyDots" component={TrophyDots} durationInFrames={DOTS_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="Main" component={Main} durationInFrames={TOTAL} fps={FPS} width={W} height={H} defaultProps={{ captions: true, scratchTag: true }} />
+    <Composition id="T1Rise" component={Mo.T1Rise} durationInFrames={Mo.T1_RISE} fps={FPS} width={W} height={H} />
+    <Composition id="T2Climb" component={Mo.T2Climb} durationInFrames={Mo.T2_CLIMB} fps={FPS} width={W} height={H} />
+    <Composition id="T3Count" component={Mo.T3Count} durationInFrames={Mo.T3_COUNT} fps={FPS} width={W} height={H} />
+    <Composition id="T4Spot" component={Mo.T4Spot} durationInFrames={Mo.T4_SPOT} fps={FPS} width={W} height={H} />
     {Object.entries(St).map(([k, Comp]) => (
       <Still key={k} id={k} component={Comp as React.FC} width={W} height={H} />
     ))}
