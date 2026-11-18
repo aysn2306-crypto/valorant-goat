@@ -20,6 +20,8 @@ Faces picked for a spread of regions (ay 18:09: less LCK and old SKT heavy).
 Reveal: build from the bottom up. In tier 2, Chovy fills first, then a beat of silence, then Knight. Faker goes alone on top. Zoom in on Knight at #2, then an arrow draws from tier 2 up to tier 1 ("what would it take to get from here to here?") and leads into the outro.
 
 ## What changed
+**v11.1 (audit fixes, 18 Nov 19:15):** Recognition counts major-league All-Pro votes only (academy and minor-league picks such as LCK CL and LTA South used to add points). Team impact averages the best 5 plus-minus seasons for everyone (data now covers 2011 on). Scores move by 0.01 to 0.02 at most in the top 12, and no rank changes in the top 80.
+
 **v11 (from 10.1):** trophy values = halfway blend of our values and measured title difficulty (region offsets and byes counted): Worlds 100, MSI 56, First Stand 40, LCK title 44, LPL 35, LEC (20 x strength + 13)/2, LCS (20 x strength + 8)/2; placings scaled the same. Every 2011-15 game result added (data/build_games_all.py), so Elo, clutch, team impact and title difficulty cover Faker's 2013-15. Trophies stay a share of Faker's total. On screen, call "intangibles" **Recognition** (All-Pro votes + team record with and without him). Note: LEC 2026 splits count at full value (no Season Finals that year); small.
 
 **v10.1:** bug fix. The harder-path bonus (0.85x to 1.15x by opponent strength) was never applied to Worlds titles from 2017 on (their games sit on a "/Main Event" page). Now applied: BLG 2026 x1.08, T1 2024 x1.14, T1 2023 x1.11, DWG 2020 x0.86. Knight unchanged at 73.1, Keria 70.1 to 70.7, Chovy and Ruler down slightly.
@@ -36,22 +38,22 @@ so **on screen show rank and % of Faker, not the raw score.**
 ## Top 16 with part scores
 |   Rank | Player   | Role    |   Score |   % of Faker |   Trophy pts |   Worlds |   trophies (40) |   big stage clutch (14) |   skill (18) |   impact (12) |   longevity (9) |   intangibles (7) |
 |-------:|:---------|:--------|--------:|-------------:|-------------:|---------:|----------------:|------------------------:|-------------:|--------------:|----------------:|------------------:|
-|      1 | Faker    | Mid     |    92.6 |          100 |       1509   |        6 |           100   |                    94.1 |         78.6 |         100   |           100   |              61.2 |
-|      2 | Knight   | Mid     |    73.9 |           80 |        695.5 |        1 |            46.1 |                    98.9 |         99.9 |          84.6 |            89.7 |              77.5 |
+|      1 | Faker    | Mid     |    92.6 |          100 |       1509   |        6 |           100   |                    94.1 |         78.6 |         100   |           100   |              61.3 |
+|      2 | Knight   | Mid     |    73.9 |           80 |        695.5 |        1 |            46.1 |                    98.9 |         99.9 |          84.7 |            89.7 |              77.6 |
 |      3 | Chovy    | Mid     |    72.4 |           78 |        684.3 |        0 |            45.3 |                    73   |        100   |          91.4 |            89.7 |             100   |
-|      4 | Keria    | Support |    69   |           74 |        613.7 |        3 |            40.7 |                    94.9 |         95.3 |          81.4 |            78.3 |              77.5 |
+|      4 | Keria    | Support |    69   |           74 |        613.7 |        3 |            40.7 |                    94.9 |         95.3 |          81.5 |            78.3 |              77.5 |
 |      5 | Ruler    | Bot     |    68.5 |           74 |        705.3 |        1 |            46.7 |                    75.4 |         80.9 |          94.3 |            88.5 |              76.8 |
-|      6 | Zeus     | Top     |    66   |           71 |        582.9 |        2 |            38.6 |                   100   |         91.1 |          80.1 |            68.5 |              62.5 |
+|      6 | Zeus     | Top     |    66   |           71 |        582.9 |        2 |            38.6 |                   100   |         91.1 |          80.2 |            68.5 |              62.5 |
 |      7 | Canyon   | Jungle  |    65.7 |           71 |        714.2 |        1 |            47.3 |                    69.1 |         78.6 |          89.1 |            79.1 |              72.8 |
-|      8 | Bin      | Top     |    64.1 |           69 |        561.3 |        1 |            37.2 |                    96.4 |         79.3 |          81   |            74.4 |              72.6 |
-|      9 | Peanut   | Jungle  |    64.1 |           69 |        628.8 |        0 |            41.7 |                    71.4 |         76.4 |          87.2 |            87   |              77.6 |
-|     10 | Viper    | Bot     |    63.1 |           68 |        553.9 |        2 |            36.7 |                    79   |         80.2 |          83.1 |            83.4 |              77.3 |
-|     11 | Gumayusi | Bot     |    61.4 |           66 |        620.9 |        3 |            41.1 |                    91.8 |         69.8 |          78.4 |            71.3 |              52.2 |
+|      8 | Bin      | Top     |    64.2 |           69 |        561.3 |        1 |            37.2 |                    96.4 |         79.3 |          81.1 |            74.4 |              72.7 |
+|      9 | Peanut   | Jungle  |    64.1 |           69 |        628.8 |        0 |            41.7 |                    71.4 |         76.4 |          87.3 |            87   |              77.7 |
+|     10 | Viper    | Bot     |    63.1 |           68 |        553.9 |        2 |            36.7 |                    79   |         80.2 |          83.1 |            83.4 |              77.4 |
+|     11 | Gumayusi | Bot     |    61.4 |           66 |        620.9 |        3 |            41.1 |                    91.8 |         69.8 |          78.5 |            71.3 |              52.2 |
 |     12 | Oner     | Jungle  |    61.3 |           66 |        571.5 |        3 |            37.9 |                    80.9 |         80.8 |          84   |            72.2 |              53   |
-|     13 | Kiin     | Top     |    60   |           65 |        440.9 |        0 |            29.2 |                    67.7 |         90.3 |          86.4 |            84.3 |              66.3 |
-|     14 | Caps     | Mid     |    58.7 |           63 |        455.1 |        0 |            30.2 |                    78.8 |         77.8 |          74.8 |            81.8 |              75   |
-|     15 | Kanavi   | Jungle  |    58.6 |           63 |        401.1 |        0 |            26.6 |                    73   |         87.6 |          77.9 |            79.1 |              78.3 |
-|     16 | Xiaohu   | Mid     |    57.9 |           63 |        489.1 |        0 |            32.4 |                    78.3 |         71.2 |          76.3 |            80.9 |              67.9 |
+|     13 | Kiin     | Top     |    60   |           65 |        440.9 |        0 |            29.2 |                    67.7 |         90.3 |          86.4 |            84.3 |              66.4 |
+|     14 | Caps     | Mid     |    58.7 |           63 |        455.1 |        0 |            30.2 |                    78.8 |         77.8 |          74.9 |            81.8 |              75   |
+|     15 | Kanavi   | Jungle  |    58.6 |           63 |        401.1 |        0 |            26.6 |                    73   |         87.6 |          78   |            79.1 |              78.3 |
+|     16 | Xiaohu   | Mid     |    58   |           63 |        489.1 |        0 |            32.4 |                    78.3 |         71.2 |          76.4 |            80.9 |              68   |
 
 Weight reruns (each weight moved up to 30%, 1,000 times): Faker #1 in 1,000; Knight #2 in 996 (see whatif.py output).
 Players above 70: 3. Caps #14 (63% of Faker). Uzi #31. Bengi #44.
