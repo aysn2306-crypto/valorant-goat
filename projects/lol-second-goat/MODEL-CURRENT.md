@@ -13,8 +13,9 @@ Tiers come from the biggest gaps in the v11 scores. Built from the bottom up, wi
 | 2 | Knight (#2), Chovy (#3) | 3.4 down to Keria |
 | 3 | Keria (#4), Ruler (#5) | 2.5 down to Zeus |
 | 4 | Zeus (#6), Canyon (#7), Bin (#8), Peanut (#9), Viper (#10) | 1.7 down to #11 |
+| 5 (base) | Gumayusi (#11), Oner (#12), Kiin (#13), Caps (#14), Kanavi (#15), Xiaohu (#16) | 1.6 down to Meiko (#17) |
 
-Reveal: fill the base, then tier 3, then tier 2 with two empty slots. Chovy fills first, a beat of silence, then Knight, then Faker alone on top. Zoom in on Knight at #2, then an arrow draws from tier 2 up to tier 1 ("what would it take to get from here to here?") and leads into the outro.
+Tiers 1 to 4 are exactly the top 10. Reveal: fill the base (#16 up to #11), then tier 4 (#10 up to #6), then tier 3, then tier 2 with two empty slots. Chovy fills first, a beat of silence, then Knight, then Faker alone on top. Zoom in on Knight at #2, then an arrow draws from tier 2 up to tier 1 ("what would it take to get from here to here?") and leads into the outro.
 
 ## What changed
 **v11 (from 10.1):** trophy values = halfway blend of our values and measured title difficulty (region offsets and byes counted): Worlds 100, MSI 56, First Stand 40, LCK title 44, LPL 35, LEC (20 x strength + 13)/2, LCS (20 x strength + 8)/2; placings scaled the same. Every 2011-15 game result added (data/build_games_all.py), so Elo, clutch, team impact and title difficulty cover Faker's 2013-15. Trophies stay a share of Faker's total. On screen, call "intangibles" **Recognition** (All-Pro votes + team record with and without him). Note: LEC 2026 splits count at full value (no Season Finals that year); small.

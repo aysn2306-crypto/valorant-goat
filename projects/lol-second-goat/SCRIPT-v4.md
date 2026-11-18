@@ -144,7 +144,8 @@ Timing:
 | VO | SCREEN |
 |---|---|
 | So here's the pyramid. Every tier break is a real gap in the scores. | GRAPHIC: empty pyramid. |
-| The base: Zeus, Canyon, Bin, Peanut, Viper. | Five faces fill the base. |
+| The base. Xiaohu, Kanavi, Caps, Kiin, Oner, Gumayusi. Elite for years, numbers sixteen to eleven. | Six faces fill the base, rank numbers on each. |
+| Then the top ten. Viper, Peanut, Bin, Canyon, Zeus. | Five faces fill the next tier, #10 up to #6. |
 | Then Keria and Ruler. | Next tier, two faces. |
 | Then a tier of two, a point and a half apart. | Two empty slots. **[SILENCE]** |
 | Chovy. | Chovy fills. |
@@ -176,7 +177,7 @@ Timing:
 |---|---|---|
 | Pool | 527 players, 150+ games | draft_scores.csv |
 | Top 10 | Faker 92.6, Knight 73.9, Chovy 72.4, Keria 69.0, Ruler 68.5, Zeus 66.0, Canyon 65.7, Bin 64.1, Peanut 64.1, Viper 63.1 | draft_scores.csv |
-| Pyramid gaps | Faker, 18.7 gap; Knight, Chovy; 3.4 gap; Keria, Ruler; 2.5 gap; Zeus, Canyon, Bin, Peanut, Viper; then 1.7 gap | draft_scores.csv |
+| Pyramid gaps | Faker, 18.7 gap; Knight, Chovy; 3.4 gap; Keria, Ruler; 2.5 gap; Zeus, Canyon, Bin, Peanut, Viper; 1.7 gap; Gumayusi, Oner, Kiin, Caps, Kanavi, Xiaohu; then 1.6 gap | draft_scores.csv |
 | 1,000 reruns | Faker #1 in 1,000; Knight #2 in 996 (Chovy in 4) | whatif.py |
 | International only | Faker 92.6, Keria 72.9, Knight 71.4, Zeus 68.8, Ruler 66.4 | whatif_intl_only.csv |
 | Two Fakers (even halves) | Knight 88.0, Faker 2013-19 87.3 (#2, #1 in 377 of 1,000 reruns), Chovy 86.4 ... Faker 2020-26 69.6 (#13) | draft_scores_split_faker.csv |
