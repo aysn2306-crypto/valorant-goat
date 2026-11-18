@@ -758,3 +758,45 @@ export const S24Credit: React.FC = () => {
     </Stage>
   );
 };
+
+// SAMPLE (ay 18:32, wider chart forms): Knight vs Faker as a radar, same v11 PARTS as still 20. Each part is 0 to 100,
+// pool median 50 (dashed ring), so the shapes are on one honest scale from 0.
+export const SampleKnightRadar: React.FC = () => {
+  const cx = 820, cy = 545, R = 300;
+  const ang = (i: number) => ((-90 + 60 * i) * Math.PI) / 180;
+  const pt = (i: number, v: number) => [cx + Math.cos(ang(i)) * R * v / 100, cy + Math.sin(ang(i)) * R * v / 100];
+  const poly = (k: 2 | 3) => PARTS.map((p, i) => pt(i, p[k]).join(",")).join(" ");
+  const label = (i: number) => {
+    const [x, y] = pt(i, 100); const c = Math.cos(ang(i)), s = Math.sin(ang(i));
+    const align: "left" | "right" | "center" = Math.abs(c) < 0.1 ? "center" : c > 0 ? "left" : "right";
+    return { x: x + c * 34, y: y + s * 34 - (s < -0.9 ? 52 : s > 0.9 ? 0 : 24), align };
+  };
+  const [kx, ky] = pt(0, PARTS[0][3]), [fx, fy] = pt(0, 100);
+  return (
+    <Stage title="KNIGHT VS FAKER" glow="split">
+      <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
+        {[25, 50, 75, 100].map((v) => (
+          <polygon key={v} points={PARTS.map((_, i) => pt(i, v).join(",")).join(" ")} fill="none"
+            stroke={v === 50 ? "rgba(237,239,242,0.55)" : "rgba(237,239,242,0.16)"} strokeWidth={v === 100 ? 2.5 : 2} strokeDasharray={v === 50 ? "10 8" : undefined} />
+        ))}
+        {PARTS.map((_, i) => { const [x, y] = pt(i, 100); return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="rgba(237,239,242,0.35)" strokeWidth={2} />; })}
+        <polygon points={poly(2)} fill="rgba(245,184,61,0.10)" stroke={C.gold} strokeWidth={4} strokeLinejoin="round" />
+        <polygon points={poly(3)} fill="rgba(34,211,238,0.20)" stroke={C.cyan} strokeWidth={5} strokeLinejoin="round" style={{ filter: `drop-shadow(0 0 10px ${C.cyan})` }} />
+        {PARTS.map((p, i) => { const [x, y] = pt(i, p[3]); return <circle key={"k" + i} cx={x} cy={y} r={9} fill={C.cyan} />; })}
+        {PARTS.map((p, i) => { const [x, y] = pt(i, p[2]); return <circle key={"f" + i} cx={x} cy={y} r={8} fill={C.gold} />; })}
+      </svg>
+      {[25, 50, 75].map((v) => { const a = (150 * Math.PI) / 180; const r = R * v / 100 * Math.cos(Math.PI / 6) + (v === 100 ? 34 : -6);
+        return <Big key={v} x={cx + Math.cos(a) * r} y={cy + Math.sin(a) * r - 16} size={26} color="#8A94A3" align="center" w={80}>{v}</Big>; })}
+      <div style={{ position: "absolute", left: cx + Math.cos((150 * Math.PI) / 180) * 124 + 28, top: cy + Math.sin((150 * Math.PI) / 180) * 124 - 10,
+        fontFamily: F.body, fontWeight: 800, fontSize: 18, color: "#AEB6C2", letterSpacing: 1 }}>AVERAGE PRO</div>
+      {PARTS.map(([n], i) => { const l = label(i); return <Big key={n} x={l.x} y={l.y} size={38} align={l.align} w={420}
+        color={PARTS[i][3] > PARTS[i][2] ? C.cyan : C.gold}>{n}</Big>; })}
+      <Big x={kx + 14} y={ky + 8} size={44} color={C.cyan} w={200}>{r0(PARTS[0][3])}</Big>
+      <Big x={fx - 20} y={fy - 44} size={44} align="right" color={C.gold} w={200}>100</Big>
+      <Face id="faker" x={1560} y={400} size={140} ring={C.gold} glow={C.gold} />
+      <Big x={1560} y={480} size={48} align="center" color={C.gold} w={300}>#1 FAKER</Big>
+      <Face id="knight" x={1560} y={680} size={140} ring={C.cyan} glow={C.cyan} />
+      <Big x={1560} y={760} size={48} align="center" color={C.cyan} w={300}>#2 KNIGHT</Big>
+    </Stage>
+  );
+};
