@@ -320,7 +320,8 @@ def mvps(s):
     intl = s[s.kind == "intl"]
     rows = []
     for a in m.itertuples():
-        cand = intl[(intl.year == a.year) & (intl.League == a.league) & (intl.Link.map(display).str.lower() == a.player.lower())]
+        nm = intl.Link.map(display).str.lower().str.replace(r" 20\d\d-\d\d$", "", regex=True)
+        cand = intl[(intl.year == a.year) & (intl.League == a.league) & (nm == a.player.lower())]
         if cand.empty:
             print("MVP not matched:", a)
             continue
@@ -338,6 +339,10 @@ def recognition(s, pool):
     f = os.path.join(CSV, "individual_achievements.csv")
     a = pd.read_csv(f, dtype=str).fillna("")
     a["Link"] = [redirect(l) for l in a.Player]
+    if os.environ.get("VARIANT") == "split_faker":
+        yr = a.OverviewPage.str.extract(r"(20\d\d)")[0].astype(float)
+        m = a.Link == "Faker"
+        a.loc[m, "Link"] = np.where(yr[m] <= 2016, "Faker 2013-16", "Faker 2017-26")
     tier = {"All Pro Team": 3, "1st All-Pro Team": 3, "2nd All Pro Team": 2, "2nd All-Pro Team": 2, "3rd All Pro Team": 1, "3rd All-Pro Team": 1}
     ap = a[a.Display.isin(tier)].assign(pts=lambda d: d.Display.map(tier))
     covered = set(ap.OverviewPage)
@@ -398,6 +403,11 @@ def main():
     else:
         t, s = load()
         pd.to_pickle((t, s), cache)
+    if variant == "split_faker":
+        # ay's twist: Faker's two careers as two players (2013-16: three Worlds; 2017 on: three Worlds)
+        s = s.copy()
+        m = s.Link == "Faker"
+        s.loc[m, "Link"] = np.where(s.loc[m, "year"] <= 2016, "Faker 2013-16", "Faker 2017-26")
     strength = region_strength(s)
     if variant == "no_region":
         strength[:] = 1.0
@@ -460,6 +470,9 @@ def main():
     if os.path.exists(cf):
         cl = pd.read_csv(cf)
         cl["Link"] = cl.Link.map(redirect)
+        if os.environ.get("VARIANT") == "split_faker":
+            m = cl.Link == "Faker"
+            cl.loc[m, "Link"] = np.where(cl.loc[m, "year"] <= 2016, "Faker 2013-16", "Faker 2017-26")
         # Worlds/MSI/First Stand knockouts count double: the biggest best-of-fives in the game
         cl["w"] = np.where(cl.Page.str.contains("World Championship|Mid-Season Invitational|First Stand", regex=True), 2.0, 1.0)
         cl["d"] = (cl.won - cl.exp) * cl.w
@@ -529,7 +542,7 @@ def main():
     C["intangibles"] = percentile(C.recognition + C.team_lift)
     W = pd.Series(CFG["pillars"] if "pillars" in CFG else CFG["categories"], dtype=float)
     P["score"] = (C[W.index] * W).sum(axis=1) / W.sum()
-    fk = [l for l in pool if display(l) == CFG["pool"]["benchmark"]][0]
+    fk = ([l for l in pool if display(l) == CFG["pool"]["benchmark"]] or [P.score.idxmax()])[0]
     P["vs_faker"] = P.score / P.loc[fk, "score"] * 100
     P = P.join(C.add_prefix("c_"))
     P["decorated"] = P.raw_pts
@@ -553,6 +566,8 @@ def main():
         sweep.append((tw, R.name[sc.idxmax()], R.name[sc.sort_values().index[-2]]))
 
     if variant:
+        if variant == "split_faker":
+            print("shuffle #1:", wins[wins > 0].sort_values(ascending=False).to_dict(), "#2:", seconds[seconds > 0].sort_values(ascending=False).to_dict())
         P.to_csv(os.path.join(CSV, f"draft_scores_{variant}.csv"))
         return
     P.to_csv(os.path.join(CSV, "draft_scores.csv"))
