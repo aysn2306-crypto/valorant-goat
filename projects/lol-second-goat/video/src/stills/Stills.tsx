@@ -197,7 +197,7 @@ export const S7Reruns: React.FC = () => {
 // axis zooms on the chase (labels show rank, not raw score, per MODEL-CURRENT).
 export const S8IntlOnly: React.FC = () => {
   const b: Box = { x0: 380, y0: 250, x1: 1500, y1: 820 };
-  const yr: [number, number] = [64, 74];
+  const yr: [number, number] = [62, 74];
   const Y = (v: number) => b.y1 - ((v - yr[0]) / (yr[1] - yr[0])) * (b.y1 - b.y0);
   const XL = b.x0 + 330, XR = b.x1 - 300;
   const intlRows = S.intl as [string, string, number][];
@@ -210,7 +210,7 @@ export const S8IntlOnly: React.FC = () => {
     <Stage title="INTERNATIONAL TROPHIES ONLY">
       <div style={{ position: "absolute", left: b.x0 - 2, top: b.y0 - 20, width: 3, height: b.y1 - b.y0 + 22, background: "rgba(237,239,242,0.85)" }} />
       <div style={{ position: "absolute", left: b.x0 - 2, top: b.y1, width: b.x1 - b.x0 + 30, height: 3, background: "rgba(237,239,242,0.85)" }} />
-      {[64, 66, 68, 70, 72, 74].map((v) => <Big key={v} x={b.x0 - 20} y={Y(v) - 28} size={46} align="right" w={120}>{v}</Big>)}
+      {[62, 64, 66, 68, 70, 72, 74].map((v) => <Big key={v} x={b.x0 - 20} y={Y(v) - 28} size={46} align="right" w={120}>{v}</Big>)}
       <div style={{ position: "absolute", left: b.x0 + 22, top: b.y0 - 26, fontFamily: F.title, fontSize: 40, letterSpacing: 1.5, color: C.text }}>SCORE</div>
       <div style={{ position: "absolute", left: b.x0 + 260, top: 160, display: "flex", alignItems: "center", gap: 16 }}>
         <Face id="faker" x={30} y={30} size={60} />
@@ -232,7 +232,8 @@ export const S8IntlOnly: React.FC = () => {
           fontSize: 25, color: lab(id), whiteSpace: "nowrap" }}>{P(id).name.toUpperCase()} #{P(id).rank}</div>
       ))}
       {ids.filter((id) => id !== "keria").map((id) => (
-        <div key={"r" + id} style={{ position: "absolute", left: XR + 22, top: Y(intl[id]) - 17, fontFamily: F.body, fontWeight: 800, fontSize: 25,
+        <div key={"r" + id} style={{ position: "absolute", left: XR + (id === "knight" && Math.abs(intl.knight - intl.keria) < 1 ? 50 : 22),
+          top: Y(intl[id]) + (id === "knight" && Math.abs(intl.knight - intl.keria) < 1 ? 14 : -17), fontFamily: F.body, fontWeight: 800, fontSize: 25,
           color: lab(id), whiteSpace: "nowrap" }}>#{rankR[id]} {P(id).name.toUpperCase()}</div>
       ))}
       <Face id="keria" x={XR} y={Y(intl.keria)} size={76} ring={C.cyan} glow={C.cyan} />
@@ -263,7 +264,7 @@ export const S9TwoFakers: React.FC = () => {
       {rows.filter((r) => !r.name.startsWith("Faker")).map((r) => (
         <Dot key={r.link} x={X(jx(r))} y={Y(r.s)} r={7} color={heat((r.s - 20) / 62)} o={r.s > cut ? 1 : 0.8} />
       ))}
-      <Callout x={X(jx(knight))} y={Y(knight.s)} name="Knight" value="#1" side="right" ring={20} />
+      <Callout x={X(jx(knight))} y={Y(knight.s)} name="Knight" value={"#" + (rows.indexOf(knight) + 1)} side="right" ring={20} />
       {(() => { const c = rows.find((r) => r.name === "Chovy")!; const i = rows.indexOf(c) + 1;
         return <Callout x={X(jx(c))} y={Y(c.s)} name="Chovy" value={"#" + i} side="below" ring={20} />; })()}
       {rows.filter((r) => r.name.startsWith("Faker")).map((r) => (
@@ -283,8 +284,8 @@ export const S9TwoFakers: React.FC = () => {
 // 10. Finale: the GOAT pyramid (ay 18 Nov 17:46: back to round photos). Tiers follow our ranking only, sorted by rank
 // (MODEL-CURRENT commit 67d8ad3): round photo, small rank badge, name under it, a small "TIER n" per row, no percentages, no title.
 // ay 18:09: wider spread of regions (MODEL-CURRENT commit 789f9d7)
-const TIERS = [["faker"], ["knight", "chovy"], ["keria", "ruler", "bin", "viper"], ["gumayusi", "caps", "deft", "theshy", "uzi"],
-  ["scout", "perkz", "doinb", "bengi", "jankos", "bjergsen"]];
+const TIERS = [["faker"], ["knight", "chovy"], ["ruler", "keria", "bin", "viper"], ["gumayusi", "caps", "deft", "theshy", "uzi"],
+  ["scout", "doinb", "bengi", "perkz", "bjergsen", "jankos"]]; // v12 rank order
 // 19a (ay 18:15): after tiers 5 and 4 fill, dim all but Uzi and Bengi and show where 2025/26 published lists put them
 // (research/model-vs-published-lists.md; esports.net and spilled.gg only, Red Bull dropped as unranked).
 const LISTS: Record<string, [string, string][]> = {
@@ -376,7 +377,7 @@ export const S10aPyramidInternet: React.FC = () => <Pyramid internet />;
 
 // 11a. Knight vs Faker, part by part (v11 parts and weights, MODEL-CURRENT 18 Nov 17:20; "intangibles" is called Recognition on screen)
 const PARTS: [string, number, number, number][] = [["TROPHIES", 40, 100, 46.1], ["BIG GAMES", 14, 94.1, 98.9], ["SKILL", 18, 78.6, 99.9],
-  ["TEAM IMPACT", 12, 100, 84.6], ["YEARS AT THE TOP", 9, 100, 89.7], ["RECOGNITION", 7, 61.2, 77.5]];
+  ["TEAM IMPACT", 12, 100, 75.9], ["YEARS AT THE TOP", 9, 100, 89.7], ["RECOGNITION", 7, 61.3, 77.6]]; // v12
 export const S11aKnightVsFaker: React.FC = () => {
   const b: Box = { x0: 620, y0: 210, x1: 1640, y1: 830 };
   const X = (v: number) => b.x0 + ((v - 30) / 72) * (b.x1 - b.x0);
@@ -879,8 +880,8 @@ export const SampleRaceBump: React.FC = () => {
           color: id === "knight" ? C.cyan : id === "faker" ? C.gold : "#AEB6C2", whiteSpace: "nowrap", lineHeight: "36px" }}>{name.toUpperCase()}</div>
       ))}
       <Face id="knight" x={b.x1 + 250} y={yOf(2)} size={92} ring={C.cyan} glow="rgba(34,211,238,0.6)" />
-      {/* #2 holders on their lines (script v4 VO, 19:00): Bang 2016-22, Ruler 2023, Chovy 2024-25, then Knight */}
-      {([["BANG", 2019], ["RULER", 2023], ["CHOVY", 2024.5]] as [string, number][]).map(([n, yv]) => (
+      {/* #2 holders on their lines (v12): Bang 2016-21, Deft 2022, Ruler 2023, Chovy 2024-25, then Knight */}
+      {([["BANG", 2018.5], ["DEFT", 2022], ["RULER", 2023], ["CHOVY", 2024.5]] as [string, number][]).map(([n, yv]) => (
         <div key={n} style={{ position: "absolute", left: X(yv) - 80, width: 160, top: yOf(2) - 40, textAlign: "center", fontFamily: F.body, fontWeight: 800, fontSize: 24,
           color: "#D6DBE2", letterSpacing: 1, textShadow: "0 0 6px #0B0B0F, 0 0 6px #0B0B0F" }}>{n}</div>
       ))}
