@@ -268,3 +268,66 @@ export const FlipCounter: React.FC<{ at: number; end: number; max?: number }> = 
     </AbsoluteFill>
   );
 };
+
+// ArticlePage: from Jxmy's article/research pages (video-research/jxmy-graphics/videos/E-F0qcmdWRA/graphs/
+//   x03_article-page_research-abstract-highlight): a plain document page, the camera pushes in on the paragraph that
+//   matters, the key line gets a marker highlight. Ours is our own page (our words, no site branding).
+export const ArticlePage: React.FC<{ title: string; kicker: string; before: string; mark: string; after: string; markAt: number }> = (p) => {
+  const f = useCurrentFrame();
+  const push = interpolate(f, [0, 70], [0, 1], { ...clamp, easing: Easing.bezier(0.45, 0, 0.55, 1) });
+  const s = 1 + 0.55 * push;
+  const m = interpolate(f, [p.markAt, p.markAt + 12], [0, 100], { ...clamp, easing: easeOut });
+  return (
+    <AbsoluteFill style={{ background: "#E9E6DE", overflow: "hidden" }}>
+      <div style={{ position: "absolute", left: 360, top: 330, width: 1200, transform: `scale(${s})`, transformOrigin: "50% 70%", color: "#2A2C30", fontFamily: "Inter" }}>
+        <div style={{ fontSize: 22, fontWeight: 600, letterSpacing: 2, color: "#7A7D84", textTransform: "uppercase" }}>{p.kicker}</div>
+        <div style={{ fontSize: 64, fontWeight: 700, margin: "10px 0 26px" }}>{p.title}</div>
+        <div style={{ height: 2, background: "#C9C5BB", marginBottom: 30 }} />
+        <div style={{ fontSize: 34, lineHeight: 1.6, fontWeight: 400 }}>
+          {p.before}{" "}
+          <span style={{ backgroundImage: `linear-gradient(90deg, ${TEAL} ${m}%, transparent ${m}%)`, padding: "0 4px" }}>{p.mark}</span>
+          {" "}{p.after}
+        </div>
+      </div>
+      <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.42) 100%)" }} />
+    </AbsoluteFill>
+  );
+};
+
+// EchoLenses: from Jxmy's echo title then lenses (XMaPrXzclaQ/graphs/x10_echo-title_statistics-accomplishments-echo-text-and-lenses):
+//   a word with faint outlined copies stacked above and below it over the shot, then a row of round lenses, each
+//   holding its own shot and name.
+export const EchoLenses: React.FC<{ word: string; bg: string; lenses: { src: string; label: string }[]; lensAt: number }> = ({ word, bg, lenses, lensAt }) => {
+  const f = useCurrentFrame();
+  const spread = interpolate(f, [0, 14], [0, 1], { ...clamp, easing: easeOut });
+  if (f < lensAt) {
+    return (
+      <AbsoluteFill>
+        <StandIn src={bg} focus={[50, 35]} />
+        <AbsoluteFill style={{ background: "rgba(10,12,16,0.45)" }} />
+        {[-3, -2, -1, 1, 2, 3].map((k) => (
+          <div key={k} style={{ position: "absolute", left: 0, right: 0, top: 470 + k * 74 * spread, textAlign: "center", fontFamily: BEBAS, fontSize: 120, letterSpacing: 8,
+            color: "transparent", WebkitTextStroke: `2px rgba(242,242,238,${0.7 - Math.abs(k) * 0.16})` }}>{word}</div>
+        ))}
+        <div style={{ position: "absolute", left: 0, right: 0, top: 470, textAlign: "center", fontFamily: BEBAS, fontSize: 120, letterSpacing: 8, color: INK }}>{word}</div>
+      </AbsoluteFill>
+    );
+  }
+  const d = 270, gap = 26, x0 = (1920 - (lenses.length * d + (lenses.length - 1) * gap)) / 2;
+  return (
+    <AbsoluteFill style={{ background: "#121418" }}>
+      {lenses.map((l, i) => {
+        const o = interpolate(f, [lensAt + i * 3, lensAt + i * 3 + 8], [0, 1], { ...clamp, easing: easeOut });
+        return (
+          <div key={l.label} style={{ position: "absolute", left: x0 + i * (d + gap), top: 540 - d / 2, width: d, height: d, borderRadius: "50%", overflow: "hidden",
+            border: `6px solid #2C3038`, boxShadow: "inset 0 0 0 2px rgba(255,255,255,0.08)", opacity: o, transform: `scale(${0.8 + 0.2 * o})` }}>
+            <Img src={staticFile(l.src)} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 30%" }} />
+            <AbsoluteFill style={{ background: "rgba(10,12,16,0.35)", alignItems: "center", justifyContent: "center" }}>
+              <div style={{ fontFamily: BEBAS, fontSize: 38, letterSpacing: 2, color: INK, textAlign: "center", lineHeight: 1 }}>{l.label}</div>
+            </AbsoluteFill>
+          </div>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};

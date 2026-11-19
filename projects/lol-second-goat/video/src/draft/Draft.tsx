@@ -79,16 +79,17 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["24", (c) => <HardestBars cues={{ rise: 4, t1: at(c, W("24", "hardest")), blg: at(c, W("24", "bog")) }} />],
   // Jxmy close-up bar list, camera row to row, then pull back (style map 2:31); LEC left off (ay 19 Nov)
   ["25", (c) => <PriceClimb cues={[at(c, W("25", "worlds")), at(c, W("25", "msi")), at(c, W("25", "lck")), at(c, W("25", "lck")) + 30, at(c, W("25", "lpl"))]} out={at(c, W("25", "35"))} />],
-  ["26", (c) => <MLBoard title="Five players lift a trophy" label="Win Shares, from basketball:" def="split a team's wins between its players" defAt={at(c, W("26", "winshares"))} lines={[
-    { text: "Here: split each title between the five", at: at(c, W("26", "splits")), accent: true }]}
-    side={<SideBars caption="BLG, Worlds 2026: share of the title" rows={[["knight", "Knight", 1.061], ["xun", "Xun", 1.027], ["bin", "Bin", 0.988], ["viper", "Viper", 0.983], ["on", "ON", 0.941]].map(([id, n, v], i) => (
-      { face: id as string, label: n as string, value: `${(v as number).toFixed(2)}x`, frac: ((v as number) - 0.8) / 0.4, color: i === 0 ? TEAL : "#8E97A3", at: at(c, W("26", "lift")) + i * 6 }))} />} sideAt={at(c, W("26", "lift"))} />],
-  // ay 19 Nov: one trophy split five ways (Jxmy pie between photos); cues from the line start, since line 27 is being re-recorded
+  // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
+  ["26", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-lifts-trophy-w24-a.jpg" focus={[55, 35]} /></AbsoluteFill>],
+  ["26@basketball", (c) => <Ov.ArticlePage kicker="Basketball stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
+    before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did on the floor. Two players on the same team can end up with very different shares." />],
   ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, L("27").start + 0.4), shares: at(c, L("27").start + 1.6), caption: at(c, L("27").start + 3.0) }} />],
   ["28", still("S16Clutch", "wipe")], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
   ["32", (c) => <WithWithout cues={{ withAt: at(c, W("33", "77")), withoutAt: at(c, W("33", "64")), diffAt: at(c, W("33", "13")), doubtAt: at(c, W("33", "not")) }} />],
   ["34", anchored(<Sm.SPlusMinus voice={false} />, Sm.PM_T0)],
-  ["36", () => <Words text="ONLY WHO WON" />],
+  // Jxmy verdict words over the shot (style map 4:04)
+  ["36", (c) => <AbsoluteFill><Ov.StandIn src="_local/ruler-fists-up-w26-sf.jpg" focus={[50, 30]} />
+    <Ov.VerdictWord size={230} words={[{ text: "NO KILLS", at: at(c, W("36", "kills")) }, { text: "NO TROPHIES", at: at(c, W("36", "trophies")) }, { text: "ONLY WHO WON", at: at(c, W("36", "only")), accent: true }]} /></AbsoluteFill>],
   ["37", anchored(<Cl.SClimb voice={false} />, Cl.CLIMB_T0)], // Jxmy camera climb to Faker (samples-v14)
   // Jxmy percent stack (jxmy-graphs XMaPrXzclaQ g08), with 100 picks lit on the right
   ["38", (c) => <PercentStack header="HOW MANY ALL-PRO PICKS COME OUT RIGHT" rows={[
@@ -105,19 +106,15 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
       { v: 50, label: "middle of the pack", color: "#8E97A3", at: at(c, W("43", "50")) },
       { v: 100, label: "Faker 100", color: C.gold, face: "faker", at: at(c, W("43", "faker")) },
       { v: 46, label: "Knight 46", color: TEAL, face: "knight", at: at(c, W("43", "share")), up: false }]} />} sideAt={at(c, W("43", "50"))} />],
-  ["44", () => <Words text="THE CATEGORIES" />],
-  ["45", (c) => <MLBoard title="Big games" lines={[
-    { text: "Form at Worlds and MSI", at: at(c, W("45", "worlds")) },
-    { text: "+ clutch: series won above what Elo expected", at: at(c, W("45", "clutch")), accent: true }]}
-    side={<SideBars caption="Big games and clutch, 0 to 100" rows={[
-      { face: "knight", label: "Knight", value: "99", frac: 0.989, color: TEAL, at: at(c, W("45", "clutch")) },
-      { face: "faker", label: "Faker", value: "94", frac: 0.941, color: C.gold, at: at(c, W("45", "clutch")) + 8 }]} />} sideAt={at(c, W("45", "worlds"))} />],
+  // Jxmy echo title, then a lens per part (style map 5:06); action photos stand in for footage
+  ["44", (c) => <Ov.EchoLenses word="WHO WINS EACH PART" bg="_local/faker-holds-trophy-w24.jpg" lensAt={at(c, W("44", "here"))} lenses={[
+    { src: "_local/faker-kkoma-lift-trophy-w24.jpg", label: "TROPHIES" }, { src: "_local/chovy-hand-on-mouse-w26-sf.jpg", label: "SKILL" },
+    { src: "_local/ruler-fists-up-w26-sf.jpg", label: "BIG GAMES" }, { src: "_local/keria-shouting-calls-w24-final.jpg", label: "TEAM IMPACT" },
+    { src: "_local/peanut-competes-msi23.jpg", label: "LONGEVITY" }, { src: "_local/knight-mvp-trophy-w26-final.jpg", label: "RECOGNITION" }]} />],
+  // Jxmy chapter titles over footage (style map 5:10, 5:18)
+  ["45", (c) => <AbsoluteFill><Ov.StandIn src="_local/ruler-fists-up-w26-sf.jpg" focus={[50, 30]} /><Ov.ChapterTitle text="BIG GAMES" at={6} /></AbsoluteFill>],
   ["46", still("R4BigStage", "rise")],
-  ["47", (c) => <MLBoard title="Skill" lines={[
-    { text: "A season rating, adjusted for the opponent and the region", at: at(c, W("47", "adjusted")) },
-    { text: "Your best 5 years", at: at(c, W("47", "best")) },
-    { text: "+ your single best year", at: at(c, W("47", "single")), accent: true }]} />],
-  // Jxmy ranked list that scrolls up to #1 (jxmy-graphs eatF7QHwga4 g02), lands on Knight as he is named
+  ["47", (c) => <AbsoluteFill><Ov.StandIn src="_local/chovy-hand-on-mouse-w26-sf.jpg" focus={[50, 35]} /><Ov.ChapterTitle text="SKILL" at={6} /></AbsoluteFill>],
   ["48", (c) => { const kn = at(c, W("48", "knight")); return <SeasonList n={8} cues={{ scroll0: 2, scroll1: kn - 2, spot: kn }} />; }],
   // Jxmy two-player board (jxmy-graphs GPH4nK5sQ-8 g01): Chovy vs Knight, the skill score "by a hair" last
   ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, W("49", "hair")) }} rows={[
