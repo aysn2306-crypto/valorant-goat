@@ -1,3 +1,4 @@
+import * as Cl from "./samples/Climb";
 import React from "react";
 import { Composition, Still } from "remotion";
 import * as St from "./stills/Stills";
@@ -24,6 +25,8 @@ export const Root: React.FC = () => (
     <Composition id="Main" component={Main} durationInFrames={TOTAL} fps={FPS} width={W} height={H} defaultProps={{ captions: true, scratchTag: true }} />
     <Composition id="Draft" component={Draft} durationInFrames={DRAFT_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="SCards" component={Sm.SCards} durationInFrames={Sm.CARDS_FRAMES} fps={FPS} width={W} height={H} />
+    <Composition id="SClimb" component={Cl.SClimb} durationInFrames={Cl.CLIMB_FRAMES} fps={FPS} width={W} height={H} />
+    <Composition id="SPyramidCam" component={Sm.SPyramidCam} durationInFrames={Sm.PYRC_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="SElo" component={Sm.SElo} durationInFrames={Sm.ELO_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="SPlusMinus" component={Sm.SPlusMinus} durationInFrames={Sm.PM_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="SPyramid" component={Sm.SPyramid} durationInFrames={Sm.PYR_FRAMES} fps={FPS} width={W} height={H} />

@@ -149,9 +149,9 @@ export const WithWithout: React.FC<{ cues: { withAt: number; withoutAt: number; 
   return (
     <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 45%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 55%), #18243A" }}>
       <div style={{ position: "absolute", left: 0, right: 0, top: 70, display: "flex", justifyContent: "center" }}>
-        <div style={{ background: "#D9D3C2", padding: "10px 46px", fontFamily: F.title, fontSize: 58, letterSpacing: 2.5, color: "#1C1D22" }}>WITH HIM VS WITHOUT HIM</div>
+        <div style={{ background: "#D9D3C2", padding: "10px 46px", fontFamily: F.title, fontSize: 58, letterSpacing: 2.5, color: "#1C1D22" }}>WITH VS WITHOUT</div>
       </div>
-      <div style={{ position: "absolute", left: 0, right: 0, top: 168, textAlign: "center", fontFamily: F.body, fontWeight: 700, fontSize: 22, letterSpacing: 1.5, color: "#AEB6C2" }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 196, textAlign: "center", fontFamily: F.body, fontWeight: 700, fontSize: 26, letterSpacing: 1.5, color: "#AEB6C2" }}>
         GEN.G, DOMESTIC GAMES, WITHIN 2 YEARS OF HIS STINT</div>
       <svg width={1920} height={1080} style={{ position: "absolute" }}>
         <line x1={360} x2={1180} y1={y1} y2={y1} stroke="rgba(237,239,242,0.85)" strokeWidth={3} />

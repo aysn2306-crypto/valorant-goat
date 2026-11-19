@@ -335,7 +335,8 @@ export const PYR_A = [L("64").start - 0.3, L("66").end + 0.6] as const, PYR_B = 
 const PA = Math.round((PYR_A[1] - PYR_A[0]) * FPS);
 export const PYR_FRAMES = PA + Math.round((PYR_B[1] - PYR_B[0]) * FPS);
 
-const PyramidScene: React.FC<{ fill: (tier: number, j: number) => number; pulse: Record<string, number>; zoomAt?: number; tierIn: number }> = ({ fill, pulse, zoomAt, tierIn }) => {
+type Cam = { x: number; y: number; s: number; label?: string; labelO?: number };
+const PyramidScene: React.FC<{ fill: (tier: number, j: number) => number; pulse: Record<string, number>; zoomAt?: number; tierIn: number; cam?: Cam }> = ({ fill, pulse, zoomAt, tierIn, cam }) => {
   const f = useCurrentFrame();
   const top = 120, base = 1000, half = 860, cx = 1060;
   const cuts = [top, 300, 460, 620, 800, base];
@@ -347,19 +348,21 @@ const PyramidScene: React.FC<{ fill: (tier: number, j: number) => number; pulse:
   const z = zoomAt === undefined ? 0 : interpolate(f, [zoomAt, zoomAt + 75], [0, 1], { ...clamp, easing: inOut });
   return (
     <AbsoluteFill style={{ background: "#0D0F14", overflow: "hidden" }}>
-      <AbsoluteFill style={{ transform: `scale(${1 + 0.75 * z})`, transformOrigin: `${kn.x}px ${kn.y}px` }}>
+      <AbsoluteFill style={cam ? { transform: `translate(960px, 540px) scale(${cam.s}) translate(${-cam.x}px, ${-cam.y}px)`, transformOrigin: "0 0" }
+        : { transform: `scale(${1 + 0.75 * z})`, transformOrigin: `${kn.x}px ${kn.y}px` }}>
         <AbsoluteFill style={{ background: "radial-gradient(ellipse at 55% 40%, rgba(70,80,100,0.35) 0%, rgba(0,0,0,0) 60%)" }} />
-        <svg width={1920} height={1080} style={{ position: "absolute" }}>
+        <svg width={1920} height={1080} style={{ position: "absolute", overflow: "visible" }}>
           <defs>
             <linearGradient id="band" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#3B4352" /><stop offset="1" stopColor="#262C37" /></linearGradient>
           </defs>
+          {cam && <rect x={-2000} y={base} width={6000} height={1400} fill="#151920" />}
           {TIERS_V13.map((_, i) => {
             const y0 = cuts[i] + (i ? 6 : 0), y1 = cuts[i + 1];
             return <polygon key={i} points={`${cx - hw(y0)},${y0} ${cx + hw(y0)},${y0} ${cx + hw(y1)},${y1} ${cx - hw(y1)},${y1}`} fill="url(#band)" stroke="rgba(237,239,242,0.18)" strokeWidth={2} />;
           })}
         </svg>
         {TIERS_V13.map((_, i) => {
-          const o = interpolate(f, [tierIn + (4 - i) * 3, tierIn + (4 - i) * 3 + 5], [0, 1], clamp);
+          const o = interpolate(f, [tierIn + (4 - i) * 3, tierIn + (4 - i) * 3 + 5], [0, 1], clamp) * (cam ? interpolate(cam.s, [1, 1.3], [1, 0], clamp) : 1);
           const ym = i === 0 ? cuts[1] - 40 : (cuts[i] + cuts[i + 1]) / 2 - 16;
           return <div key={"t" + i} style={{ position: "absolute", left: cx - hw(ym) - 230, width: 200, top: ym, textAlign: "right", fontFamily: F.title,
             fontSize: 24, letterSpacing: 2, color: i === 0 ? C.gold : "#C9CFD8", opacity: o }}>TIER {i + 1}</div>;
@@ -399,6 +402,8 @@ const PyramidScene: React.FC<{ fill: (tier: number, j: number) => number; pulse:
           <div style={{ fontFamily: F.title, fontSize: 52, letterSpacing: 8, color: C.gold }}>PYRAMID</div>
         </div>
       </AbsoluteFill>
+      {cam?.label && <div style={{ position: "absolute", left: 70, top: 56, fontFamily: F.title, fontSize: 96, letterSpacing: 4, color: cam.label === "TIER 1" ? C.gold : "#E9ECF1",
+        opacity: cam.labelO ?? 1, textShadow: "0 0 18px #0B0B0F" }}>{cam.label}</div>}
     </AbsoluteFill>
   );
 };
@@ -421,6 +426,63 @@ export const SPyramid: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
       <Sequence from={PA - 6} durationInFrames={12} layout="none">
         <div style={{ position: "absolute", left: 40, bottom: 30, fontFamily: F.body, fontSize: 22, color: "#4A5361" }}>(sample skips the Uzi and Bengi part)</div>
       </Sequence>
+    </AbsoluteFill>
+  );
+};
+
+// ---------------------------------------------------------------- 4b. one pyramid, camera tier by tier (ay, 19 Nov 15:48)
+// "zoom in on the tier and make that cover the whole screen, then slide up to the next tier, and zoom out at the end".
+// Runs on the voiceover clock from line 64 to the end of line 74; the draft shows it at 64 and again at 69 (the Uzi and
+// Bengi cards play over line 68 in between), so the camera picks up exactly where the story is.
+export const PYRC_T0 = PYR_A[0], PYRC_T1 = L("74").end + 0.3;
+export const PYRC_FRAMES = Math.round((PYRC_T1 - PYRC_T0) * FPS);
+export const SPyramidCam: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
+  const f = useCurrentFrame();
+  const a = at(PYRC_T0);
+  const cuts = [120, 300, 460, 620, 800, 1000], figH = [150, 150, 150, 168, 186];
+  // the tier's floor sits at screen y 900, so the tier and its players fill the frame
+  const tierView = (i: number, s: number, x = 1060) => ({ x, y: cuts[i + 1] - 360 / s, s });
+  const FULL = { x: 1000, y: 540, s: 1 };
+  // [frame, view, label]
+  const keys: [number, { x: number; y: number; s: number }, string][] = [
+    [0, FULL, ""],
+    [a(W("65", "bottom")) - 6, FULL, ""],
+    [a(W("65", "bottom")) + 20, tierView(4, 2.4, 810), "TIER 5"],
+    [a(W("65", "bjergsen")) - 12, tierView(4, 2.4, 810), "TIER 5"],
+    [a(W("65", "bjergsen")) + 8, tierView(4, 2.4, 1310), "TIER 5"],
+    [a(W("66", "tier")) - 6, tierView(4, 2.4, 1310), "TIER 5"],
+    [a(W("66", "tier")) + 20, tierView(3, 2.4, 760), "TIER 4"],
+    [a(W("66", "highest")), tierView(3, 2.4, 760), "TIER 4"],
+    [a(W("66", "highest")) + 30, tierView(3, 2.4, 1360), "TIER 4"],
+    [a(W("67", "uzi")) - 10, tierView(3, 2.4, 1360), "TIER 4"],
+    [a(W("67", "uzi")) + 14, { x: 1060, y: 700, s: 1.45 }, ""],
+    [a(W("69", "tear")) - 10, { x: 1060, y: 700, s: 1.45 }, ""],
+    [a(W("69", "tear")) + 14, tierView(2, 2.2), "TIER 3"],
+    [a(W("70", "tier")) - 6, tierView(2, 2.2), "TIER 3"],
+    [a(W("70", "tier")) + 20, tierView(1, 2.6), "TIER 2"],
+    [a(L("74").end) - 75, tierView(1, 2.6), "TIER 2"],
+    [a(L("74").end), FULL, ""],
+  ];
+  let k = 0; while (k < keys.length - 2 && f >= keys[k + 1][0]) k++;
+  const [f0, v0, l0] = keys[k], [f1, v1, l1] = keys[k + 1];
+  const e = f1 > f0 ? interpolate(f, [f0, f1], [0, 1], { ...clamp, easing: inOut }) : 1;
+  const lerp = (p: number, q: number) => p + (q - p) * e;
+  const label = e < 0.5 ? l0 : l1;
+  const labelO = l0 === l1 ? 1 : Math.abs(e - 0.5) * 2;
+  const cam = { x: lerp(v0.x, v1.x), y: lerp(v0.y, v1.y), s: lerp(v0.s, v1.s), label, labelO };
+  const fill = (i: number, j: number) => {
+    if (i === 4) return a(W("65", "bottom")) + 20 + j * 7;
+    if (i === 3) return a(W("66", "tier")) + 20 + j * 6;
+    if (i === 2) return a(W("69", "tear")) + 14 + j * 6;
+    if (i === 1) return j === 0 ? a(W("71", "chovy")) : a(W("71", "knight"));
+    return Infinity;
+  };
+  const pulse = { perkz: a(W("65", "parks")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")),
+    uzi: a(W("67", "uzi")) + 14, bengi: a(W("67", "benji")), knight: a(W("71", "second")) };
+  return (
+    <AbsoluteFill>
+      <PyramidScene fill={fill} pulse={pulse} tierIn={a(W("64", "tears"))} cam={cam} />
+      {voice && <Voice from={PYRC_T0} to={PYRC_T1} />}
     </AbsoluteFill>
   );
 };

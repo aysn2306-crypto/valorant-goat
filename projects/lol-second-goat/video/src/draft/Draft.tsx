@@ -7,8 +7,9 @@ import { C, F } from "../theme";
 import * as St from "../stills/Stills";
 import * as Mo from "../motion/Tests";
 import * as Sm from "../samples/Samples";
-import { Build, Count527, FairCoin, Footage, Formula, Quote, Words } from "../rough/RoughCut";
+import { Build, Count527, Footage, Formula, Quote, Words } from "../rough/RoughCut";
 import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWithout } from "./Boards";
+import { TrophySplit } from "./TrophySplit";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { L, VO_DURATION, W } from "../data/vo";
 
@@ -69,10 +70,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { text: "Here: split each title between the five", at: at(c, W("26", "splits")), accent: true }]}
     side={<SideBars caption="BLG, Worlds 2026: share of the title" rows={[["knight", "Knight", 1.061], ["xun", "Xun", 1.027], ["bin", "Bin", 0.988], ["viper", "Viper", 0.983], ["on", "ON", 0.941]].map(([id, n, v], i) => (
       { face: id as string, label: n as string, value: `${(v as number).toFixed(2)}x`, frac: ((v as number) - 0.8) / 0.4, color: i === 0 ? TEAL : "#8E97A3", at: at(c, W("26", "lift")) + i * 6 }))} />} sideAt={at(c, W("26", "lift"))} />],
-  ["27", still("S24Credit", "rise")],
-  ["28", still("R6ClutchHist", "rise")],
-  ["29", () => <FairCoin />],
-  ["31", still("S16Clutch", "wipe")],
+  // ay 19 Nov: one trophy split five ways (Jxmy pie between photos); cues from the line start, since line 27 is being re-recorded
+  ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, L("27").start + 0.4), shares: at(c, L("27").start + 1.6), caption: at(c, L("27").start + 3.0) }} />],
+  ["28", still("S16Clutch", "wipe")], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
   ["32", (c) => <WithWithout cues={{ withAt: at(c, W("33", "77")), withoutAt: at(c, W("33", "64")), diffAt: at(c, W("33", "13")), doubtAt: at(c, W("33", "not")) }} />],
   ["34", anchored(<Sm.SPlusMinus voice={false} />, Sm.PM_T0)],
   ["36", () => <Words text="ONLY WHO WON" />],
@@ -99,7 +99,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { text: "A season rating, adjusted for the opponent and the region", at: at(c, W("47", "adjusted")) },
     { text: "Your best 5 years", at: at(c, W("47", "best")) },
     { text: "+ your single best year", at: at(c, W("47", "single")), accent: true }]} />],
-  ["48", () => <Mo.T1Rise />],
+  ["48", (c) => { const kn = at(c, W("48", "knight")); return <Mo.T1Rise map={[[0, kn - 2, kn + 60], [0, 176, 236]]} />; }],
   ["49", still("SampleSkillSwarm", "rise")],
   ["50", still("R4TeamsTimeline", "wipe")],
   ["51", (c) => <MLBoard title="Trophy score" lines={[

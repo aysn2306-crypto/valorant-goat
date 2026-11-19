@@ -34,8 +34,10 @@ const DrawRing: React.FC<{ x: number; y: number; r: number; t: number; color?: s
 
 // ---------- Test 1: MachineLoLing build (dots on the x axis, y axis appears, dots rise), then Jxmy ring on one player ----------
 export const T1_RISE = 270;
-export const T1Rise: React.FC = () => {
-  const f = useCurrentFrame();
+export const T1Rise: React.FC<{ map?: [number[], number[]] }> = ({ map }) => {
+  const f0 = useCurrentFrame();
+  // optional time map (draft): squeezes the build so the ring lands on the spoken name instead of being cut off
+  const f = map ? interpolate(f0, map[0], map[1], { extrapolateLeft: "clamp", extrapolateRight: "extend" }) : f0;
   const B: Box = { x0: 250, y0: 190, x1: 1700, y1: 820 };
   const xr: [number, number] = [-0.5, 11.5], yr: [number, number] = [40, 104];
   const { X, Y } = scale(B, xr, yr);

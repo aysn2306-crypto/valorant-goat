@@ -451,7 +451,7 @@ export const S12ChampPool: React.FC = () => {
 const BOARD = S.board as BoardRow[];
 
 // 13. The trophy price list (MODEL-CURRENT v11: halfway blend of tradition and measured difficulty)
-const PRICES: [string, number][] = [["WORLDS", 100], ["MSI", 56], ["LCK TITLE", 44], ["FIRST STAND", 40], ["LPL TITLE", 35], ["LEC TITLE", 12]];
+const PRICES: [string, number][] = [["WORLDS", 100], ["MSI", 56], ["LCK TITLE", 44], ["FIRST STAND", 40], ["LPL TITLE", 35]];
 export const S13PriceList: React.FC = () => {
   const b: Box = { x0: 620, y0: 230, x1: 1640, y1: 830 };
   const X = (v: number) => b.x0 + (v / 105) * (b.x1 - b.x0);
