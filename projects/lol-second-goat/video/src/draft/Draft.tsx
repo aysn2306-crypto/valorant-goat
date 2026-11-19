@@ -18,6 +18,7 @@ import { KillsLine } from "./KillsLine";
 import { HardestBars, PriceClimb } from "./Bars";
 import { Concrete } from "../samples/Climb";
 import { PercentStack } from "./PercentStack";
+import { PillBars, StackedLines, TitleList } from "./Lists";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { L, VO_DURATION, W } from "../data/vo";
 
@@ -98,14 +99,12 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { icon: "model", label: "THE MODEL", pct: 63, at: at(c, W("41", "63")), accent: true }]}
     cues={{ votes: at(c, W("39", "all")), hide: at(c, W("40", "model")), ask: at(c, W("40", "If")) }} />],
   ["42@final", anchored(<Sm.SCards voice={false} />, Sm.CARDS_T0)],
-  ["43", (c) => <MLBoard title="Every part, 0 to 100" lines={[
-    { text: "50 = the middle of the pack", at: at(c, W("43", "50")) },
-    { text: "100 = the best there's ever been", at: at(c, W("43", "100")) },
-    { face: "faker", text: "Trophies: Faker is the 100", at: at(c, W("43", "trophies")), accent: true }]}
-    side={<SideScale axis="Trophies part, 0 to 100" marks={[
-      { v: 50, label: "middle of the pack", color: "#8E97A3", at: at(c, W("43", "50")) },
-      { v: 100, label: "Faker 100", color: C.gold, face: "faker", at: at(c, W("43", "faker")) },
-      { v: 46, label: "Knight 46", color: TEAL, face: "knight", at: at(c, W("43", "share")), up: false }]} />} sideAt={at(c, W("43", "50"))} />],
+  // Jxmy small stacked text card (jxmy-graphics l38FEWdJnhg x03, style map 4:56)
+  ["43", (c) => <StackedLines lines={[
+    { text: "50 = MIDDLE OF THE PACK", at: at(c, W("43", "50")) },
+    { text: "100 = THE BEST EVER", at: at(c, W("43", "100")) },
+    { text: "TROPHIES: FAKER = 100", at: at(c, W("43", "faker")), accent: true, gap: 50 },
+    { text: "EVERYONE ELSE = A SHARE OF HIM", at: at(c, W("43", "everyone")) }]} />],
   // Jxmy echo title, then a lens per part (style map 5:06); action photos stand in for footage
   ["44", (c) => <Ov.EchoLenses word="WHO WINS EACH PART" bg="_local/faker-holds-trophy-w24.jpg" lensAt={at(c, W("44", "here"))} lenses={[
     { src: "_local/faker-kkoma-lift-trophy-w24.jpg", label: "TROPHIES" }, { src: "_local/chovy-hand-on-mouse-w26-sf.jpg", label: "SKILL" },
@@ -113,7 +112,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { src: "_local/peanut-competes-msi23.jpg", label: "LONGEVITY" }, { src: "_local/knight-mvp-trophy-w26-final.jpg", label: "RECOGNITION" }]} />],
   // Jxmy chapter titles over footage (style map 5:10, 5:18)
   ["45", (c) => <AbsoluteFill><Ov.StandIn src="_local/ruler-fists-up-w26-sf.jpg" focus={[50, 30]} /><Ov.ChapterTitle text="BIG GAMES" at={6} /></AbsoluteFill>],
-  ["46", still("R4BigStage", "rise")],
+  // Jxmy pill bars with the players at the foot (jxmy-graphs eatF7QHwga4 g08, style map 5:15); v14 big-stage half alone
+  ["46", (c) => <PillBars cues={{ rise: 4, lit: at(c, W("46", "carrier")), side: at(c, W("46", "stage")) }} />],
   ["47", (c) => <AbsoluteFill><Ov.StandIn src="_local/chovy-hand-on-mouse-w26-sf.jpg" focus={[50, 35]} /><Ov.ChapterTitle text="SKILL" at={6} /></AbsoluteFill>],
   ["48", (c) => { const kn = at(c, W("48", "knight")); return <SeasonList n={8} cues={{ scroll0: 2, scroll1: kn - 2, spot: kn }} />; }],
   // Jxmy two-player board (jxmy-graphs GPH4nK5sQ-8 g01): Chovy vs Knight, the skill score "by a hair" last
@@ -124,7 +124,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { label: "DEATHS A GAME", l: "1.69", r: "1.94", better: "l" },
     { label: "WIN RATE", l: "69.2%", r: "66.9%", better: "l" },
     { label: "SKILL SCORE", l: "100", r: "99.9", better: "l", big: true }]} />],
-  ["50", still("R4TeamsTimeline", "wipe")],
+  // Jxmy year list with drawn arrows (jxmy-graphs GPH4nK5sQ-8 g09, style map 5:36)
+  ["50", (c) => <TitleList cues={{ rows: 2, arrows: at(c, W("50", "different")), count: at(c, W("50", "5")) }} />],
   ["51", (c) => <MLBoard title="Trophy score" lines={[
     { text: "Each title = price × how hard × his share", at: at(c, W("51", "stack")) },
     { text: "Worlds 100 · MSI 56 · LCK 44 · LPL 35", at: at(c, W("51", "price")), dim: true },
