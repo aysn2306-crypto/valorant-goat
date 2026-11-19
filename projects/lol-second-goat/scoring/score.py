@@ -552,7 +552,13 @@ def main():
             return y.groupby("Link").v.apply(lambda v: v.nlargest(N).sum() / N)
         return y.groupby("Link").v.apply(lambda v: v.nlargest(N).mean())
 
-    P["big_stage_raw"] = best_years(s[s.Link.isin(pool) & (s.kind == "intl")], "z_impact", 15, pad=True).reindex(pool).fillna(0)
+    bs = s[s.Link.isin(pool) & (s.kind == "intl")].assign(big=lambda d: d.z_impact)
+    if os.environ.get("BIG_DOM"):   # what-if (ay 19 Nov): domestic playoffs and finals count as big games too, at a lower weight
+        dp = s[s.Link.isin(pool) & (s.kind == "dom") & (s.IsPlayoffs.astype(str) == "1")].copy()
+        dp["big"] = dp.a_impact          # region-adjusted, as every domestic rating is
+        dp["G"] = dp.G * float(os.environ["BIG_DOM"])
+        bs = pd.concat([bs, dp], ignore_index=True)
+    P["big_stage_raw"] = best_years(bs, "big", 15, pad=True).reindex(pool).fillna(0)
     yr = s[s.Link.isin(pool)].groupby(["Link", "year"]).apply(lambda d: pd.Series({"imp": wmean(d, "a_impact"), "G": d.G.sum()}), include_groups=False).reset_index()
     yr["imp_s"] = shrink(yr.imp.fillna(0), yr.G, k)
     best = yr.loc[yr.groupby("Link").imp_s.idxmax()].set_index("Link")
