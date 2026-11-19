@@ -14,6 +14,7 @@ import { TrophySplit } from "./TrophySplit";
 import { SeasonList } from "./SeasonList";
 import { HeadToHead } from "./HeadToHead";
 import * as Ov from "./Overlays";
+import { KillsLine } from "./KillsLine";
 import { Concrete } from "../samples/Climb";
 import { PercentStack } from "./PercentStack";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
@@ -47,7 +48,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // Jxmy verdict word over the shot: #14, then WRONG (style map 0:58)
   ["11", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-mvp-award-w24-final.jpg" focus={[50, 30]} />
     <Ov.VerdictWord words={[{ text: "FAKER #14", at: at(c, W("11", "14th")) }, { text: "WRONG", at: at(c, W("13", "wrong")) }]} /></AbsoluteFill>],
-  ["14", (c) => <MLBoard title="Peak, not average" lines={[
+  // Jxmy handwritten note over the shot (style map 1:08); photo stands in for a rebuild-year game
+  ["14", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-holds-trophy-w24.jpg" focus={[60, 25]} />
+    <Ov.Note text="HIS REBUILDING YEARS" aside="(COUNTED THE SAME)" at={at(c, W("14", "rebuilding"))} asideAt={at(c, W("14", "everything"))} x={170} y={120} to={[1040, 260]} /></AbsoluteFill>],
+  ["15", (c) => <MLBoard title="Peak, not average" lines={[
     { text: "Version 1: the average of every year", at: at(c, W("14", "averaging")) },
     { face: "faker", text: "Faker in version 1: #14", at: at(c, W("14", "rebuilding")), dim: true },
     { text: "Now: his best years, and longevity on its own", at: at(c, W("15", "best")) },
@@ -55,7 +59,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     side={<SideBars caption="Faker's all-time rank" rows={[
       { label: "Average of every year", value: "#14", frac: 0.3, color: "#8E97A3", at: at(c, W("14", "career")) },
       { label: "Best years + longevity", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "longevity")) }]} />} sideAt={at(c, W("14", "career"))} />],
-  ["16", still("S22Kills", "wipe")],
+  // Jxmy line chart (style map 1:22)
+  ["16", (c) => <KillsLine cues={{ lck: at(c, L("16").start + 0.3), lpl: at(c, W("16", "lpl")), gap: at(c, W("17", "3")) }} />],
   ["18", (c) => <MLBoard title="Only against your own league" lines={[
     { text: "score = (stat − league average) ÷ league spread", at: at(c, W("18", "compares")) },
     { text: "LPL mids against LPL mids", at: at(c, W("18", "lpl")) },

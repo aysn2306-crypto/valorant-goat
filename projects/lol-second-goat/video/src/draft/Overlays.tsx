@@ -179,3 +179,29 @@ export const VerdictWord: React.FC<{ words: { text: string; at: number; accent?:
 /** a text card that cuts to a big number at `at` */
 export const CardThenNumber: React.FC<{ text: string; value: string; unit: string; at: number }> = ({ text, value, unit, at }) =>
   useCurrentFrame() < at ? <TextCard text={text} /> : <BigNumber value={value} unit={unit} />;
+
+// Note: from Jxmy's small handwritten note over footage (E-F0qcmdWRA/graphs/x01_text-over-footage_handwritten-doesnt-work):
+//   a short note near the subject with a hand-drawn arrow to it, then a smaller aside under it a beat later.
+export const Note: React.FC<{ text: string; aside?: string; at: number; asideAt?: number; x: number; y: number; to: [number, number] }> = ({ text, aside, at, asideAt, x, y, to }) => {
+  const f = useCurrentFrame();
+  const o = interpolate(f, [at, at + 4], [0, 1], clamp);
+  const draw = interpolate(f, [at + 3, at + 13], [0, 1], { ...clamp, easing: easeOut });
+  const ao = asideAt === undefined ? 0 : interpolate(f, [asideAt, asideAt + 4], [0, 1], clamp);
+  const sx = x + text.length * 33 + 24, sy = y + 44; // arrow starts just after the note
+  const mx = (sx + to[0]) / 2, my = Math.min(sy, to[1]) - 70;
+  const len = Math.hypot(to[0] - sx, to[1] - sy) * 1.3;
+  const ang = Math.atan2(to[1] - my, to[0] - mx);
+  const head = (d: number) => `${to[0] - 26 * Math.cos(ang + d)},${to[1] - 26 * Math.sin(ang + d)}`;
+  const shade = "0 3px 0 rgba(0,0,0,0.45)";
+  return (
+    <>
+      <div style={{ position: "absolute", left: x, top: y, fontFamily: BEBAS, fontSize: 76, letterSpacing: 2, color: INK, opacity: o, textShadow: shade, whiteSpace: "nowrap" }}>{text}</div>
+      {aside && <div style={{ position: "absolute", left: x + 6, top: y + 86, fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: TEAL, opacity: ao, textShadow: shade }}>{aside}</div>}
+      <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
+        <path d={`M ${sx} ${sy} Q ${mx} ${my} ${to[0]} ${to[1]}`} fill="none" stroke={INK} strokeWidth={6} strokeLinecap="round"
+          strokeDasharray={len} strokeDashoffset={len * (1 - draw)} style={{ filter: "drop-shadow(0 2px 0 rgba(0,0,0,0.45))" }} />
+        <path d={`M ${head(-0.5)} L ${to[0]} ${to[1]} L ${head(0.5)}`} fill="none" stroke={INK} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round" opacity={draw > 0.95 ? 1 : 0} />
+      </svg>
+    </>
+  );
+};
