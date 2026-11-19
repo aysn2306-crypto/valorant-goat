@@ -408,7 +408,7 @@ export const SPyramid: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const fill = (i: number, j: number) => {
     if (i === 4) return a(W("65", "bottom")) + j * 7;           // "At the bottom"
     if (i === 3) return a(W("66", "tier")) + j * 6;           // "tier 4"
-    if (i === 2) return b(W("69", "3")) + j * 6;          // "tier 3"
+    if (i === 2) return b(W("69", "tear") + 0.4) + j * 6;          // "tier 3"
     if (i === 1) return j === 0 ? b(W("71", "chovy")) : b(W("71", "knight")); // Chovy, then Knight on his name
     return Infinity;                                 // Faker's slot stays for later in the video
   };

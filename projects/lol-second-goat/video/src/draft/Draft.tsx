@@ -119,7 +119,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["67", still("S10aPyramidInternet")],
   ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, W("68", "also"))} stamp={{ text: "GLAZED?", at: at(c, W("68", "glazed")), card: 0 }} cards={[
     { id: "uzi", sub: "#21 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }, { text: "MECHANICS", at: at(c, W("68", "mechanical")) }] },
-    { id: "bengi", sub: "#44 ALL TIME", flipAt: at(c, W("68", "benji")), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shotcalling")) }] },
+    { id: "bengi", sub: "#44 ALL TIME", flipAt: at(c, W("68", "benji")), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
   ]} />],
   ["69", anchored(<Sm.SPyramid voice={false} />, Sm.PYR_B[0], Math.round((Sm.PYR_A[1] - Sm.PYR_A[0]) * FPS))],
   ["75", ft("Knight's face; two all-time list cards with no Knight on them")],
@@ -132,7 +132,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["84", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, W("85", "15"))]} />],
   ["86", still("S10bPyramidArrow")],
   ["88", still("SampleKnightRadar")],
-  ["92", (c) => <DreamSeasons cues={[at(c, W("93", "2029") - 66 / FPS), at(c, W("93", "four") - 88 / FPS)]} />],
+  ["92", (c) => <DreamSeasons cues={[at(c, W("93", "2029") - 66 / FPS), at(c, W("93", "4") - 88 / FPS)]} />],
   ["94", () => <Quote />],
 ];
 
