@@ -145,3 +145,37 @@ export const CommentPile: React.FC<{ cues: { from: number; to: number; focus: { 
     </AbsoluteFill>
   );
 };
+
+// TextCard + BigNumber: from Jxmy's small words on black (video-research/jxmy-graphics/videos/XyihDTdpF8w/graphs/
+//   x02_text-card_small-word-on-black) and his big number card (WyYOm44eQyI/graphs/x04_big-number_100-points-serif):
+//   a hard cut to a plain ground, one short line in the middle; for the number, the number big with a tiny unit
+//   under it. Nothing moves; the cut is the effect.
+export const TextCard: React.FC<{ text: string }> = ({ text }) => (
+  <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+    <div style={{ fontFamily: BEBAS, fontSize: 64, letterSpacing: 4, color: INK }}>{text}</div>
+  </AbsoluteFill>
+);
+export const BigNumber: React.FC<{ value: string; unit: string }> = ({ value, unit }) => (
+  <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+    <div style={{ fontFamily: BEBAS, fontSize: 300, lineHeight: 0.9, color: INK }}>{value}</div>
+    <div style={{ fontFamily: BEBAS, fontSize: 40, letterSpacing: 8, color: "#9BA3AE", marginTop: 6 }}>{unit}</div>
+  </AbsoluteFill>
+);
+
+// VerdictWord: from Jxmy's verdict words (E-F0qcmdWRA/graphs/x17_verdict-word_myth-to-true-swap): one word in the
+//   middle of the shot, cut in on its word, then swapped for the verdict on a hard cut.
+export const VerdictWord: React.FC<{ words: { text: string; at: number; accent?: boolean }[]; size?: number }> = ({ words, size = 300 }) => {
+  const f = useCurrentFrame();
+  const cur = [...words].reverse().find((w) => f >= w.at);
+  if (!cur) return null;
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+      <div style={{ fontFamily: BEBAS, fontSize: size, lineHeight: 1, letterSpacing: 6, color: cur.accent ? TEAL : INK,
+        textShadow: "0 4px 0 rgba(0,0,0,0.35)" }}>{cur.text}</div>
+    </AbsoluteFill>
+  );
+};
+
+/** a text card that cuts to a big number at `at` */
+export const CardThenNumber: React.FC<{ text: string; value: string; unit: string; at: number }> = ({ text, value, unit, at }) =>
+  useCurrentFrame() < at ? <TextCard text={text} /> : <BigNumber value={value} unit={unit} />;

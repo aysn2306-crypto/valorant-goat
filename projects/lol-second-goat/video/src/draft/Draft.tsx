@@ -42,8 +42,11 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["4", (c) => <AbsoluteFill><Ov.StandIn src="_local/bin-knight-celebrate-w26-final.jpg" focus={[55, 35]} /><Ov.BigWord text="WHO IS #2?" at={at(c, W("4", "who"))} /></AbsoluteFill>],
   ["5", (c) => <AbsoluteFill><Concrete /><Ov.CommentPile cues={{ from: 2, to: at(c, W("5", "answers")),
     focus: [{ id: "keria", at: at(c, W("6", "ker")) }, { id: "chovy", at: at(c, W("7", "chovy")) }], all: at(c, W("9", "everyone")) }} /></AbsoluteFill>],
-  ["10", () => <Count527 />],
-  ["11", () => <Words text="FAKER: #14" sub="version 1" />],
+  // Jxmy text card, then his big number card on the number (style map 0:44)
+  ["10", (c) => <AbsoluteFill><Concrete /><Ov.CardThenNumber text="SO I BUILT A MODEL" value="527" unit="PLAYERS" at={at(c, W("10", "527"))} /></AbsoluteFill>],
+  // Jxmy verdict word over the shot: #14, then WRONG (style map 0:58)
+  ["11", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-mvp-award-w24-final.jpg" focus={[50, 30]} />
+    <Ov.VerdictWord words={[{ text: "FAKER #14", at: at(c, W("11", "14th")) }, { text: "WRONG", at: at(c, W("13", "wrong")) }]} /></AbsoluteFill>],
   ["14", (c) => <MLBoard title="Peak, not average" lines={[
     { text: "Version 1: the average of every year", at: at(c, W("14", "averaging")) },
     { face: "faker", text: "Faker in version 1: #14", at: at(c, W("14", "rebuilding")), dim: true },
