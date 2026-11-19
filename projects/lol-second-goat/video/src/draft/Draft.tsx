@@ -19,6 +19,7 @@ import { HardestBars, PriceClimb } from "./Bars";
 import { Concrete } from "../samples/Climb";
 import { PercentStack } from "./PercentStack";
 import { PillBars, StackedLines, TitleList } from "./Lists";
+import { QuoteSubtitle, RecordCounter, StatBanner } from "./Banners";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { L, VO_DURATION, W } from "../data/vo";
 
@@ -138,7 +139,24 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     return <><Sequence durationInFrames={Math.max(1, beat)} layout="none"><Freeze frame={K}><Mo.T2Climb /></Freeze></Sequence>
       <Sequence from={beat - K} layout="none"><FromFrame k={K}><Mo.T2Climb /></FromFrame></Sequence></>;
   }],
-  ["56", (c) => <MonteCarlo cues={[at(c, W("57", "rolls")), at(c, W("60", "thousand")), at(c, W("61", "first"))]} />],
+  // Jxmy angled stat banner over footage (jxmy-graphics XyihDTdpF8w x07, style map 5:57); v14 trophy points
+  ["55", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-holds-trophy-w24.jpg" focus={[50, 45]} />
+    <StatBanner at={2} cells={[
+      { label: "FAKER'S TROPHY POINTS", value: "1,509", at: at(c, W("55", "more")) },
+      { label: "NEXT BEST (CANYON)", value: "714", at: at(c, W("55", "than")) },
+      { label: "TIMES AS MANY", value: "2.1X", at: at(c, W("55", "double")), accent: true }]} /></AbsoluteFill>],
+  ["56", (c) => <MonteCarlo cues={[at(c, W("57", "rolls")), at(c, W("60", "thousand")), at(c, L("60").end)]} />],
+  // Jxmy article page (jxmy-graphics XyihDTdpF8w x08, style map 6:11): our own page, the line marked as it is said
+  ["57@monte", (c) => <Ov.ArticlePage kicker="How to test a ranking" title="The Monte Carlo test"
+    before="Rerun the whole thing many times, and each time roll the choices it rests on at random."
+    mark="Named after the casino, because it runs on luck." after="If an answer holds across a thousand rolls, it was never the luck."
+    markAt={at(c, W("57", "named"))} />],
+  ["58", (c) => <MonteCarlo cues={[at(c, W("57", "rolls")), at(c, W("60", "thousand")), at(c, L("60").end)]} />],
+  // Jxmy record card (jxmy-graphs 4lbvnNVGd-I g06, style map 6:32)
+  ["61", (c) => <RecordCounter cues={{ first: at(c, W("61", "faker")), second: at(c, W("62", "one")) }} />],
+  // Jxmy quote subtitle over footage (jxmy-graphics 3hZ6Su5PVnI x02, style map 6:42)
+  ["63", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-lifts-trophy-w24-wide.jpg" focus={[50, 40]} />
+    <QuoteSubtitle lines={[{ text: "Who is it?", at: at(c, W("63", "who")) }, { text: "We'll get there.", at: at(c, W("63", "we")) }]} /></AbsoluteFill>],
   ["64", anchored(<Sm.SPyramidCam voice={false} />, Sm.PYRC_T0)], // one pyramid, tier by tier (ay 19 Nov)
   ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, W("68", "also"))} stamp={{ text: "GLAZED?", at: at(c, W("68", "glazed")), card: 0 }} cards={[
     { id: "uzi", sub: "#21 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }, { text: "MECHANICS", at: at(c, W("68", "mechanical")) }] },
