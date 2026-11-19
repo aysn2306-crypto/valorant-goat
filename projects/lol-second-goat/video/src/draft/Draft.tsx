@@ -13,6 +13,7 @@ import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWi
 import { TrophySplit } from "./TrophySplit";
 import { SeasonList } from "./SeasonList";
 import { HeadToHead } from "./HeadToHead";
+import { PercentStack } from "./PercentStack";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { L, VO_DURATION, W } from "../data/vo";
 
@@ -80,7 +81,12 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["34", anchored(<Sm.SPlusMinus voice={false} />, Sm.PM_T0)],
   ["36", () => <Words text="ONLY WHO WON" />],
   ["37", anchored(<Cl.SClimb voice={false} />, Cl.CLIMB_T0)], // Jxmy camera climb to Faker (samples-v14)
-  ["38", (c) => <AllProTest cues={[at(c, W("40", "random")), at(c, W("40", "winning")), at(c, W("41", "63"))]} />],
+  // Jxmy percent stack (jxmy-graphs XMaPrXzclaQ g08), with 100 picks lit on the right
+  ["38", (c) => <PercentStack header="HOW MANY ALL-PRO PICKS COME OUT RIGHT" rows={[
+    { icon: "dice", label: "PICK AT RANDOM", pct: 12, at: at(c, W("40", "random")) },
+    { icon: "trophy", label: "PICK FROM THE WINNING TEAMS", pct: 58, at: at(c, W("40", "winning")) },
+    { icon: "model", label: "THE MODEL", pct: 63, at: at(c, W("41", "63")), accent: true }]}
+    cues={{ votes: at(c, W("39", "all")), hide: at(c, W("40", "model")), ask: at(c, W("40", "If")) }} />],
   ["42@final", anchored(<Sm.SCards voice={false} />, Sm.CARDS_T0)],
   ["43", (c) => <MLBoard title="Every part, 0 to 100" lines={[
     { text: "50 = the middle of the pack", at: at(c, W("43", "50")) },
