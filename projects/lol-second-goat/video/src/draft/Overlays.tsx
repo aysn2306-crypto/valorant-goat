@@ -84,3 +84,64 @@ export const STextRing: React.FC = () => (
       { text: "SIX WORLD TITLES", at: 10 }, { text: "TWO MSI TITLES", at: 40 }, { text: "ONE TEAM SINCE 2013", at: 70 }]} />
   </AbsoluteFill>
 );
+
+// BigWord: from Jxmy's giant word over footage (video-research/jxmy-graphics/videos/GPH4nK5sQ-8/graphs/
+//   x05_word-cutout_win-word-filled-with-footage): one huge word, light and see-through, cut in over the shot and held.
+export const BigWord: React.FC<{ text: string; at: number; y?: number; size?: number }> = ({ text, at, y = 600, size = 440 }) => {
+  const f = useCurrentFrame();
+  const o = interpolate(f, [at, at + 4], [0, 1], clamp);
+  const s = interpolate(f, [at, at + 10, at + 120], [1.08, 1.0, 0.97], { ...clamp, easing: easeOut });
+  return (
+    <div style={{ position: "absolute", left: 0, right: 0, top: y - size / 2, textAlign: "center", fontFamily: BEBAS, fontSize: size, lineHeight: 1,
+      letterSpacing: 6, color: INK, opacity: 0.84 * o, transform: `scale(${s})`, whiteSpace: "nowrap" }}>{text}</div>
+  );
+};
+
+// CommentPile: from Jxmy's comment bubbles (video-research/jxmy-graphics/videos/WyYOm44eQyI/graphs/
+//   x02_comment-bubbles_article-highlight-then-comments-pile): white bubbles with a small avatar and a name line, popping
+//   in one after another until they pile up across the frame. Ours are written by us to stand for the debate, so the
+//   avatars and names are blank (no real users). Then the bubble being talked about comes forward and the rest dim.
+const TAKES: { text: string; x: number; y: number; id?: string }[] = [
+  { text: "keria. best support ever, not close", x: 90, y: 90, id: "keria" },
+  { text: "chovy's mechanics are on another level", x: 930, y: 150, id: "chovy" },
+  { text: "uzi. no worlds but nobody played adc like him", x: 60, y: 290 },
+  { text: "ruler is #2 and nobody talks about it", x: 1010, y: 350 },
+  { text: "rookie in 2014 was unreal", x: 150, y: 490 },
+  { text: "knight after THIS worlds??", x: 1000, y: 550 },
+  { text: "bengi has 3 rings, just saying", x: 1060, y: 750 },
+  { text: "deft. the longevity alone", x: 80, y: 690 },
+  { text: "caps carried the whole west", x: 200, y: 880 },
+  { text: "theshy peak > everyone's peak", x: 960, y: 930 },
+];
+
+const Bubble: React.FC<{ text: string; o: number; dim: number; lift: number }> = ({ text, o, dim, lift }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: 16, padding: "16px 28px 16px 16px", background: INK, borderRadius: 40, opacity: o * (1 - 0.6 * dim),
+    transform: `scale(${(0.85 + 0.15 * o) * (1 + 0.1 * lift)})`, transformOrigin: "0% 50%", boxShadow: lift ? `0 0 0 ${4 * lift}px ${TEAL}` : undefined }}>
+    <div style={{ width: 62, height: 62, borderRadius: 31, background: "#9BA3AE", flex: "none" }} />
+    <div>
+      <div style={{ width: 90, height: 10, borderRadius: 5, background: "#C4C9CF", marginBottom: 8 }} />
+      <div style={{ fontFamily: "Inter", fontWeight: 600, fontSize: 38, color: "#1B1E25", whiteSpace: "nowrap" }}>{text}</div>
+    </div>
+  </div>
+);
+
+/** cues (frames in the scene): pile from..to, then the bubble with that id comes forward at each focus cue; all relight at `all` */
+export const CommentPile: React.FC<{ cues: { from: number; to: number; focus: { id: string; at: number }[]; all: number } }> = ({ cues }) => {
+  const f = useCurrentFrame();
+  const step = (cues.to - cues.from) / (TAKES.length - 1);
+  const cur = [...cues.focus].reverse().find((c) => f >= c.at && f < cues.all);
+  const k = cur ? interpolate(f, [cur.at, cur.at + 8], [0, 1], { ...clamp, easing: easeOut }) : 0;
+  return (
+    <AbsoluteFill>
+      {TAKES.map((t, i) => {
+        const o = interpolate(f, [cues.from + i * step, cues.from + i * step + 5], [0, 1], { ...clamp, easing: easeOut });
+        const me = cur && cur.id === t.id;
+        return (
+          <div key={t.text} style={{ position: "absolute", left: t.x, top: t.y, zIndex: me ? 2 : 1 }}>
+            <Bubble text={t.text} o={o} dim={cur && !me ? k : 0} lift={me ? k : 0} />
+          </div>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};

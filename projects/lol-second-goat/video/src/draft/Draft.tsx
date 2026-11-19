@@ -13,6 +13,8 @@ import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWi
 import { TrophySplit } from "./TrophySplit";
 import { SeasonList } from "./SeasonList";
 import { HeadToHead } from "./HeadToHead";
+import * as Ov from "./Overlays";
+import { Concrete } from "../samples/Climb";
 import { PercentStack } from "./PercentStack";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { L, VO_DURATION, W } from "../data/vo";
@@ -36,8 +38,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["1", ft("BLG lift the Worlds trophy")],
   ["2", ft("Knight close up. Lower third: KNIGHT, FINALS MVP 2026")],
   ["3", ft("Faker, slow motion")],
-  ["4", () => <Words text={"WHO IS #2\nAFTER FAKER?"} black />],
-  ["5", still("S2Debate")],
+  // ay 19 Nov style map: Jxmy giant word over footage, then his comment-bubble pile (photo stands in for footage)
+  ["4", (c) => <AbsoluteFill><Ov.StandIn src="_local/bin-knight-celebrate-w26-final.jpg" focus={[55, 35]} /><Ov.BigWord text="WHO IS #2?" at={at(c, W("4", "who"))} /></AbsoluteFill>],
+  ["5", (c) => <AbsoluteFill><Concrete /><Ov.CommentPile cues={{ from: 2, to: at(c, W("5", "answers")),
+    focus: [{ id: "keria", at: at(c, W("6", "ker")) }, { id: "chovy", at: at(c, W("7", "chovy")) }], all: at(c, W("9", "everyone")) }} /></AbsoluteFill>],
   ["10", () => <Count527 />],
   ["11", () => <Words text="FAKER: #14" sub="version 1" />],
   ["14", (c) => <MLBoard title="Peak, not average" lines={[
