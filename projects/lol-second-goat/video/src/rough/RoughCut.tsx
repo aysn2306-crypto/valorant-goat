@@ -12,14 +12,14 @@ import { CREAM, Stage } from "../stills/kit";
 const FPS = 30;
 
 // ---------- small scene parts ----------
-const Footage: React.FC<{ text: string }> = ({ text }) => (
+export const Footage: React.FC<{ text: string }> = ({ text }) => (
   <AbsoluteFill style={{ background: "#1A1D22", alignItems: "center", justifyContent: "center" }}>
     <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: 30, letterSpacing: 4, color: "#5D6573" }}>FOOTAGE</div>
     <div style={{ fontFamily: F.body, fontSize: 40, color: "#9AA3B2", marginTop: 14, maxWidth: 1300, textAlign: "center" }}>{text}</div>
   </AbsoluteFill>
 );
 
-const Words: React.FC<{ text: string; sub?: string; black?: boolean }> = ({ text, sub, black }) => {
+export const Words: React.FC<{ text: string; sub?: string; black?: boolean }> = ({ text, sub, black }) => {
   const f = useCurrentFrame();
   return (
     <AbsoluteFill style={{ background: black ? "#000" : "#0B0B0F", alignItems: "center", justifyContent: "center" }}>
@@ -31,7 +31,7 @@ const Words: React.FC<{ text: string; sub?: string; black?: boolean }> = ({ text
 
 /** A finished v12 panel, entered by hard cut. "wipe" draws it left to right (lines, scatters), "rise" bottom up
  *  (bars, pyramid, lists), "cut" holds still. A barely visible push keeps long holds alive (ANIMATION.md C, 20 px/s). */
-const Build: React.FC<{ C: React.FC; mode?: "wipe" | "rise" | "cut"; dur: number }> = ({ C: Comp, mode = "cut", dur }) => {
+export const Build: React.FC<{ C: React.FC; mode?: "wipe" | "rise" | "cut"; dur: number }> = ({ C: Comp, mode = "cut", dur }) => {
   const f = useCurrentFrame();
   const t = prog(f, 6, 6 + 40);
   const clip = mode === "wipe" ? `inset(0 ${(1 - t) * 100}% 0 0)` : mode === "rise" ? `inset(${(1 - t) * 100}% 0 0 0)` : undefined;
@@ -52,7 +52,7 @@ const WALKS = Array.from({ length: 60 }, (_, k) => {
   for (let n = 1; n <= 400; n++) { h += r() < 0.5 ? 1 : 0; pts.push(h / n); }
   return pts;
 });
-const FairCoin: React.FC = () => {
+export const FairCoin: React.FC = () => {
   const f = useCurrentFrame();
   const x0 = 260, x1 = 1700, y0 = 200, y1 = 820;
   const X = (n: number) => x0 + (Math.log(n) / Math.log(400)) * (x1 - x0);
@@ -82,7 +82,7 @@ const FairCoin: React.FC = () => {
 };
 
 /** MachineLoLing formula board: the concept's name, then one line at a time, the last line in the accent. */
-const Formula: React.FC<{ lines: string[]; name?: string }> = ({ lines, name }) => {
+export const Formula: React.FC<{ lines: string[]; name?: string }> = ({ lines, name }) => {
   const f = useCurrentFrame();
   return (
     <Stage>
@@ -96,7 +96,7 @@ const Formula: React.FC<{ lines: string[]; name?: string }> = ({ lines, name }) 
   );
 };
 
-const Count527: React.FC = () => {
+export const Count527: React.FC = () => {
   const f = useCurrentFrame();
   const n = Math.round(527 * prog(f, 10, 100));
   const r = rnd(5);
@@ -143,7 +143,7 @@ const TitlesNeeded: React.FC = () => {
   );
 };
 
-const Quote: React.FC = () => {
+export const Quote: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <Stage>
@@ -158,7 +158,7 @@ const Quote: React.FC = () => {
   );
 };
 
-const EndCard: React.FC = () => (
+export const EndCard: React.FC = () => (
   <AbsoluteFill style={{ background: "#0B0B0F", alignItems: "center", justifyContent: "center", gap: 30 }}>
     <div style={{ fontFamily: F.title, fontSize: 110, color: CREAM }}>WHO'S YOUR #2?</div>
     <div style={{ fontFamily: F.body, fontSize: 28, color: C.muted }}>Not endorsed by Riot Games.</div>
@@ -166,7 +166,7 @@ const EndCard: React.FC = () => (
 );
 
 /** Pyramid built bottom up: everything above `top` (px) stays hidden; tier 2 can show Chovy's half only. */
-const Pyr: React.FC<{ top: number; chovyOnly?: boolean }> = ({ top, chovyOnly }) => {
+export const Pyr: React.FC<{ top: number; chovyOnly?: boolean }> = ({ top, chovyOnly }) => {
   const clip = chovyOnly
     ? `polygon(0 489px, 960px 489px, 960px 321px, 1920px 321px, 1920px 1080px, 0 1080px)`
     : `inset(${top}px 0 0 0)`;

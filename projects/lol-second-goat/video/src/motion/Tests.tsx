@@ -126,7 +126,7 @@ export const T2Climb: React.FC = () => {
         return <Tag key={id} x={x} y={y} name={q.name.toUpperCase()} value={String(Math.round(q.raw.trophies))} o={1} side={side[id]} pad={20 * s + 6} s={s} />; })}
       {(() => { const x = sx(xs(seasons(fk.years))), y = sy(FK); const sz = 120 * s; return (<>
         <div style={{ position: "absolute", left: x - sz / 2, top: y - sz / 2, filter: `drop-shadow(0 0 ${24 * s}px ${C.gold})` }}><Photo id="faker" size={sz} round ring={C.gold} /></div>
-        <Tag x={x} y={y} name="FAKER" value={Math.round(FK).toLocaleString("en-US")} o={1} color={C.gold} side="left" pad={sz / 2 + 10} s={1.5 * s} />
+        <Tag x={x} y={y} name="FAKER, TROPHY SCORE" value={Math.round(FK).toLocaleString("en-US")} o={1} color={C.gold} side="left" pad={sz / 2 + 10} s={1.5 * s} />
       </>); })()}
       {gap > 0 && (() => { const x = sx(xs(seasons(fk.years))) + 50, a = sy(FK), b = sy(rulerV); return (
         <div style={{ position: "absolute", left: x, top: a, height: b - a, borderLeft: "3px dashed rgba(237,239,242,0.8)", opacity: gap }}>

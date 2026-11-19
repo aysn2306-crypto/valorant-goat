@@ -11,6 +11,7 @@ import { AbsoluteFill, Audio, Easing, Img, interpolate, Sequence, staticFile, us
 import { C, F } from "../theme";
 import { P } from "../lib/data";
 import { CREAM } from "../stills/kit";
+import { L, W } from "../data/vo";
 
 const FPS = 30;
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -24,13 +25,13 @@ const Voice: React.FC<{ from: number; to: number }> = ({ from, to }) => (
   <Audio src={VO} startFrom={Math.round(from * FPS)} endAt={Math.round(to * FPS)} />
 );
 
-const Vignette: React.FC<{ bg: string }> = ({ bg }) => (
+export const Vignette: React.FC<{ bg: string }> = ({ bg }) => (
   <AbsoluteFill style={{ background: `radial-gradient(ellipse at 50% 45%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 55%), ${bg}` }}>
     <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.6) 100%)" }} />
   </AbsoluteFill>
 );
 
-const Cutout: React.FC<{ id: string; w: number; h: number }> = ({ id, w, h }) => {
+export const Cutout: React.FC<{ id: string; w: number; h: number }> = ({ id, w, h }) => {
   const p = P(id);
   return p.photo ? <Img src={staticFile(p.photo)} style={{ position: "absolute", left: 0, bottom: 0, width: w, height: h, objectFit: "cover", objectPosition: "50% 0%" }} /> : null;
 };
@@ -52,7 +53,7 @@ const PARTS: { name: string; icon: string; id: string }[] = [
   { name: "LONGEVITY", icon: "years", id: "deft" },
   { name: "RECOGNITION", icon: "medal", id: "caps" },
 ];
-const RED = "#C9412F", BLUE = "#3B78C4", YEL = "#F1C232";
+export const RED = "#C9412F", BLUE = "#3B78C4", YEL = "#F1C232";
 
 const PartCard: React.FC<{ part: (typeof PARTS)[number]; w: number; h: number }> = ({ part, w, h }) => {
   const pad = 14, frameW = w - pad * 2, plateH = 104, photoH = h - pad * 2 - plateH - 10;
@@ -82,7 +83,7 @@ const CardBack: React.FC<{ w: number; h: number }> = ({ w, h }) => (
   <div style={{ width: w, height: h, borderRadius: 6, background: `repeating-linear-gradient(45deg, ${BLUE} 0 14px, #2F64A8 14px 28px)`, border: `10px solid ${RED}` }} />
 );
 /** 8-frame flip, back to front, starting 15% too big and settling (cards/f_0746_000 -> f_0746_250 -> f_0747_250). */
-const Flip: React.FC<{ startAt: number; children: React.ReactNode; w: number; h: number }> = ({ startAt, children, w, h }) => {
+export const Flip: React.FC<{ startAt: number; children: React.ReactNode; w: number; h: number }> = ({ startAt, children, w, h }) => {
   const f = useCurrentFrame() - startAt;
   if (f < 0) return null;
   const rot = interpolate(f, [0, 8], [180, 0], { ...clamp, easing: easeOut });
@@ -96,7 +97,7 @@ const Flip: React.FC<{ startAt: number; children: React.ReactNode; w: number; h:
     </div>
   );
 };
-const TitleBar: React.FC<{ text: string; inAt: number; top?: number }> = ({ text, inAt, top = 60 }) => {
+export const TitleBar: React.FC<{ text: string; inAt: number; top?: number }> = ({ text, inAt, top = 60 }) => {
   const f = useCurrentFrame();
   const y = interpolate(f, [inAt, inAt + 7], [-40, 0], { ...clamp, easing: easeOut });
   return f < inAt ? null : (
@@ -139,16 +140,16 @@ const TraitPanel: React.FC<{ part: (typeof PARTS)[number]; w: number; startAt: n
   );
 };
 
-export const CARDS_T0 = 292.6, CARDS_T1 = 307.9;
+export const CARDS_T0 = W("42", "6") - 3.6, CARDS_T1 = L("42").end + 1.2;
 export const CARDS_FRAMES = Math.round((CARDS_T1 - CARDS_T0) * FPS);
-const CARD_WORDS = [296.95, 298.87, 299.78, 302.42, 304.02, 305.62]; // trophies, skill, big (games), team, longevity, recognition
+const CARD_WORDS = ["trophies", "skill", "big", "team", "longevity", "recognition"].map((w) => W("42", w)); // trophies, skill, big (games), team, longevity, recognition
 export const SCards: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const A = at(CARDS_T0);
   const w = 272, h = 430, gap = 30, x0 = (1920 - (6 * w + 5 * gap)) / 2;
   return (
     <AbsoluteFill>
       <Vignette bg="#18243A" />
-      <TitleBar text="ONE SCORE, SIX PARTS" inAt={A(296.19)} top={95} />
+      <TitleBar text="ONE SCORE, SIX PARTS" inAt={A(W("42", "6"))} top={95} />
       {PARTS.map((p, i) => (
         <React.Fragment key={p.name}>
           <div style={{ position: "absolute", left: x0 + i * (w + gap), top: 250 }}>
@@ -166,17 +167,18 @@ export const SCards: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
 
 // ---------------------------------------------------------------- 2. Elo towers
 const LINE = "#8FF0EC";
-export const ELO_T0 = 104.6, ELO_T1 = 119.3;
+export const ELO_T0 = L("20").start - 0.4, ELO_T1 = L("20").end + 0.5;
+const E = { chess: W("20", "chess"), same: W("20", "same"), win: W("20", "win"), points: W("20", "points"), beat: W("20", "beat"), way: W("20", "way"), take2: W("20", "take", 1), lot: W("20", "lot"), n26: W("20", "26"), games: W("20", "games") };
 export const ELO_FRAMES = Math.round((ELO_T1 - ELO_T0) * FPS);
 export const SElo: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const f = useCurrentFrame();
   const A = at(ELO_T0);
   const ground = 860, k = 0.34, tw = 230, xl = 610, xr = 1310 - tw;
-  const grow = interpolate(f, [A(106.93), A(106.93) + 18], [0, 1], { ...clamp, easing: easeOut });
+  const grow = interpolate(f, [A(E.chess), A(E.chess) + 18], [0, 1], { ...clamp, easing: easeOut });
   // ratings over time: equal start, +16 to the left after the first win, then reset to 1300 v 1700 and the underdog takes 29
-  const g1 = interpolate(f, [A(111.93), A(111.93) + 18], [0, 16], { ...clamp, easing: inOut });
-  const m = interpolate(f, [A(114.03), A(114.03) + 15], [0, 1], { ...clamp, easing: inOut });
-  const g2 = interpolate(f, [A(115.0), A(115.0) + 18], [0, 29], { ...clamp, easing: inOut });
+  const g1 = interpolate(f, [A(E.points), A(E.points) + 18], [0, 16], { ...clamp, easing: inOut });
+  const m = interpolate(f, [A(E.way), A(E.way) + 15], [0, 1], { ...clamp, easing: inOut });
+  const g2 = interpolate(f, [A(E.take2), A(E.take2) + 18], [0, 29], { ...clamp, easing: inOut });
   const L = (1500 + g1) * (1 - m) + (1300 + g2) * m;
   const R = (1500 - g1) * (1 - m) + (1700 - g2) * m;
   const lineDraw = interpolate(f, [0, 14], [0, 1], { ...clamp, easing: easeOut });
@@ -193,7 +195,7 @@ export const SElo: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
       <text x={x + tw / 2} y={ground + 62} textAnchor="middle" fill={LINE} fontFamily="Inter" fontWeight={400} fontSize={40} letterSpacing={3}>{name}</text>
     </g>
   );
-  const games = Math.round(interpolate(f, [A(116.73), A(117.95)], [0, 26000], clamp));
+  const games = Math.round(interpolate(f, [A(E.n26), A(E.games)], [0, 26000], clamp));
   const gain = (a: number, txt: string, x: number, y: number) => {
     const o = interpolate(f, [a, a + 6], [0, 1], clamp);
     return o > 0 ? <text x={x} y={y} fill={LINE} opacity={o} fontFamily="Inter" fontWeight={600} fontSize={56}>{txt}</text> : null;
@@ -204,19 +206,19 @@ export const SElo: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
         <line x1={960 - 860 * lineDraw} x2={960 + 860 * lineDraw} y1={ground} y2={ground} stroke={LINE} strokeWidth={3} />
         <Tower x={xl} v={L} name={m > 0.5 ? "UNDERDOG" : "TEAM A"} />
         <Tower x={xr} v={R} name={m > 0.5 ? "FAVOURITE" : "TEAM B"} />
-        {f >= A(110.17) && f < A(111.39) && (
-          <g opacity={interpolate(f, [A(110.17), A(110.17) + 6], [0, 1], clamp)}>
+        {f >= A(E.same) && f < A(E.win) && (
+          <g opacity={interpolate(f, [A(E.same), A(E.same) + 6], [0, 1], clamp)}>
             <path d={`M${xl},${ground - 1500 * k - 110} h${xr + tw - xl}`} stroke={LINE} strokeWidth={2} strokeDasharray="10 10" />
             <text x={960} y={ground - 1500 * k - 128} textAnchor="middle" fill={LINE} fontFamily="Inter" fontWeight={400} fontSize={36} letterSpacing={3}>EVERYONE STARTS AT 1500</text>
           </g>
         )}
-        {f >= A(111.39) && f < A(114.03) && <text x={xl + tw / 2} y={ground - 1520 * k - 110} textAnchor="middle" fill={LINE} fontFamily="Inter" fontWeight={700} fontSize={44} letterSpacing={4}>WIN</text>}
-        {flow(A(111.93), 16)}
-        {f < A(114.03) && gain(A(112.6), "+16", xl - 150, ground - 1516 * k + 20)}
-        {f >= A(114.6) && <text x={xl + tw / 2} y={ground - 1329 * k - 110} textAnchor="middle" fill={LINE} fontFamily="Inter" fontWeight={700} fontSize={44} letterSpacing={4}>UPSET</text>}
-        {flow(A(115.0), 29)}
-        {gain(A(115.7), "+29", xl - 150, ground - 1329 * k + 20)}
-        {f >= A(116.73) && (
+        {f >= A(E.win) && f < A(E.way) && <text x={xl + tw / 2} y={ground - 1520 * k - 110} textAnchor="middle" fill={LINE} fontFamily="Inter" fontWeight={700} fontSize={44} letterSpacing={4}>WIN</text>}
+        {flow(A(E.points), 16)}
+        {f < A(E.way) && gain(A(E.beat), "+16", xl - 150, ground - 1516 * k + 20)}
+        {f >= A(E.take2 - 0.3) && <text x={xl + tw / 2} y={ground - 1329 * k - 110} textAnchor="middle" fill={LINE} fontFamily="Inter" fontWeight={700} fontSize={44} letterSpacing={4}>UPSET</text>}
+        {flow(A(E.take2), 29)}
+        {gain(A(E.lot), "+29", xl - 150, ground - 1329 * k + 20)}
+        {f >= A(E.n26) && (
           <text x={1880} y={1040} textAnchor="end" fill={LINE} fontFamily="Inter" fontWeight={300} fontSize={40} letterSpacing={2}>GAMES RATED  {games.toLocaleString("en-US")}</text>
         )}
       </svg>
@@ -227,7 +229,8 @@ export const SElo: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
 };
 
 // ---------------------------------------------------------------- 3. plus-minus lineup grid
-export const PM_T0 = 226.1, PM_T1 = 243.7;
+export const PM_T0 = L("34").start - 0.25, PM_T1 = L("35").end + 1.0;
+const PMW = { plus: W("34", "plus") - 0.15, who: W("34", "who"), change: W("34", "change"), solve: W("35", "who"), five: W("35", "5"), n26: W("35", "26"), games: W("35", "games") };
 export const PM_FRAMES = Math.round((PM_T1 - PM_T0) * FPS);
 // Illustrative games: Chovy's team (left) v opponents (right); 0 = Chovy, other numbers = other players. Not real lineups.
 const GAMES: { l: number[]; r: number[]; w: boolean }[] = [
@@ -251,13 +254,13 @@ export const SPlusMinus: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const f = useCurrentFrame();
   const A = at(PM_T0);
   // part 1: one lineup, Chovy goes out, a replacement comes in, then two more change
-  const p1 = f < A(233.6);
-  const swapOut = interpolate(f, [A(227.32), A(227.32) + 10], [0, 1], { ...clamp, easing: inOut });
-  const more = f >= A(228.82);
+  const p1 = f < A(PMW.plus);
+  const swapOut = interpolate(f, [A(PMW.who), A(PMW.who) + 10], [0, 1], { ...clamp, easing: inOut });
+  const more = f >= A(PMW.change);
   // part 2: the grid
-  const solve = f >= A(240.19);
-  const rows = GAMES.map((g, i) => ({ ...g, t: A(235.9) + i * 5 }));
-  const games = Math.round(interpolate(f, [A(237.79), A(238.99)], [7, 26000], clamp));
+  const solve = f >= A(PMW.solve);
+  const rows = GAMES.map((g, i) => ({ ...g, t: A(PMW.five) + i * 5 }));
+  const games = Math.round(interpolate(f, [A(PMW.n26), A(PMW.games)], [7, 26000], clamp));
   const size = 66;
   return (
     <AbsoluteFill>
@@ -303,13 +306,13 @@ export const SPlusMinus: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
               </div>
             );
           })}
-          {f >= A(237.79) && (
+          {f >= A(PMW.n26) && (
             <div style={{ position: "absolute", left: 120, top: 950, fontFamily: F.title, fontSize: 44, letterSpacing: 1.5, color: C.text }}>
               GAMES IN THE EQUATION  <span style={{ color: C.cyan }}>{games.toLocaleString("en-US")}</span></div>
           )}
           {solve && (
             <div style={{ position: "absolute", right: 120, top: 380, width: 420, padding: "34px 30px", border: `3px solid ${C.cyan}`, borderRadius: 14,
-              opacity: interpolate(f, [A(240.19), A(240.19) + 6], [0, 1], clamp), textAlign: "center" }}>
+              opacity: interpolate(f, [A(PMW.solve), A(PMW.solve) + 6], [0, 1], clamp), textAlign: "center" }}>
               <div style={{ fontFamily: F.body, fontSize: 30, color: C.muted }}>solve for one player</div>
               <div style={{ fontFamily: F.title, fontSize: 84, color: C.cyan, marginTop: 6 }}>CHOVY = ?</div>
               <div style={{ fontFamily: F.body, fontSize: 28, color: C.text, marginTop: 8 }}>wins added beyond the lineup</div>
@@ -328,7 +331,7 @@ export const SPlusMinus: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
 const BOXED = new Set(["jankos", "cabochard", "cyanide", "lilballz", "shushei"]);
 const TIERS_V13 = [["faker"], ["chovy", "knight"], ["ruler", "keria", "bin", "viper"], ["caps", "gumayusi", "deft", "uzi", "theshy", "scout"],
   ["doinb", "perkz", "bengi", "bjergsen", "jankos"]];
-export const PYR_A = [416.9, 438.0] as const, PYR_B = [493.2, 525.0] as const;
+export const PYR_A = [L("64").start - 0.3, L("66").end + 0.6] as const, PYR_B = [L("69").start - 0.2, L("74").end + 0.2] as const;
 const PA = Math.round((PYR_A[1] - PYR_A[0]) * FPS);
 export const PYR_FRAMES = PA + Math.round((PYR_B[1] - PYR_B[0]) * FPS);
 
@@ -403,16 +406,16 @@ export const SPyramid: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const a = at(PYR_A[0]);
   const b = (t: number) => PA + Math.round((t - PYR_B[0]) * FPS);
   const fill = (i: number, j: number) => {
-    if (i === 4) return a(422.56) + j * 7;           // "At the bottom"
-    if (i === 3) return a(432.83) + j * 6;           // "tier 4"
-    if (i === 2) return b(494.13) + j * 6;          // "tier 3"
-    if (i === 1) return j === 0 ? b(510.71) : b(514.27); // Chovy, then Knight on his name
+    if (i === 4) return a(W("65", "bottom")) + j * 7;           // "At the bottom"
+    if (i === 3) return a(W("66", "tier")) + j * 6;           // "tier 4"
+    if (i === 2) return b(W("69", "3")) + j * 6;          // "tier 3"
+    if (i === 1) return j === 0 ? b(W("71", "chovy")) : b(W("71", "knight")); // Chovy, then Knight on his name
     return Infinity;                                 // Faker's slot stays for later in the video
   };
-  const pulse = { perkz: a(428.83), bjergsen: a(429.29), jankos: a(429.81), caps: a(433.83), knight: b(511.66) };
+  const pulse = { perkz: a(W("65", "parks")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")), knight: b(W("71", "second")) };
   return (
     <AbsoluteFill>
-      <PyramidScene fill={fill} pulse={pulse} zoomAt={b(514.9)} tierIn={a(418.57)} />
+      <PyramidScene fill={fill} pulse={pulse} zoomAt={b(W("71", "knight") + 0.6)} tierIn={a(W("64", "tears"))} />
       {voice && <Sequence durationInFrames={PA}><Voice from={PYR_A[0]} to={PYR_A[1]} /></Sequence>}
       {voice && <Sequence from={PA}><Voice from={PYR_B[0]} to={PYR_B[1]} /></Sequence>}
       <Sequence from={PA - 6} durationInFrames={12} layout="none">
