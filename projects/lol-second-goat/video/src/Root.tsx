@@ -9,6 +9,7 @@ import { Main, TOTAL } from "./Main";
 import { TrophyTower, TOWER_FRAMES } from "./sample/TrophyTower";
 import { TrophyDots, DOTS_FRAMES } from "./sample/TrophyDots";
 import { RoughCut, ROUGH_TOTAL } from "./rough/RoughCut";
+import * as Sm from "./samples/Samples";
 
 loadFonts();
 
@@ -20,6 +21,10 @@ export const Root: React.FC = () => (
     <Composition id="TrophyTower" component={TrophyTower} durationInFrames={TOWER_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="TrophyDots" component={TrophyDots} durationInFrames={DOTS_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="Main" component={Main} durationInFrames={TOTAL} fps={FPS} width={W} height={H} defaultProps={{ captions: true, scratchTag: true }} />
+    <Composition id="SCards" component={Sm.SCards} durationInFrames={Sm.CARDS_FRAMES} fps={FPS} width={W} height={H} />
+    <Composition id="SElo" component={Sm.SElo} durationInFrames={Sm.ELO_FRAMES} fps={FPS} width={W} height={H} />
+    <Composition id="SPlusMinus" component={Sm.SPlusMinus} durationInFrames={Sm.PM_FRAMES} fps={FPS} width={W} height={H} />
+    <Composition id="SPyramid" component={Sm.SPyramid} durationInFrames={Sm.PYR_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="RoughCut" component={RoughCut} durationInFrames={ROUGH_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="T1Rise" component={Mo.T1Rise} durationInFrames={Mo.T1_RISE} fps={FPS} width={W} height={H} />
     <Composition id="T2Climb" component={Mo.T2Climb} durationInFrames={Mo.T2_CLIMB} fps={FPS} width={W} height={H} />
