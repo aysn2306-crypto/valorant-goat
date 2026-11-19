@@ -535,21 +535,21 @@ export const S15Impact: React.FC = () => {
 type Cl = [string, string, number, number];
 export const S16Clutch: React.FC = () => {
   const rows = S.clutch as Cl[];
-  const xr: [number, number] = [0, 260], yr: [number, number] = [-22, 30];
+  const xr: [number, number] = [0, 140], yr: [number, number] = [-10, 18]; // v14 plain series won above expected (clutch_v14_unweighted.csv)
   const { X, Y } = scale(B, xr, yr);
-  const band = Array.from({ length: 53 }, (_, i) => i * 5);
+  const band = Array.from({ length: 29 }, (_, i) => i * 5);
   const up = band.map((n) => `${X(n)},${Y(Math.sqrt(n))}`).join(" ");
   const dn = band.slice().reverse().map((n) => `${X(n)},${Y(-Math.sqrt(n))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
-  const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["gumayusi", "left"]];
+  const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["knight", "left"]];
   return (
     <Stage title="CLUTCH OR LUCK">
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
         <polygon points={up + " " + dn} fill="rgba(150,160,175,0.16)" stroke="rgba(190,196,206,0.4)" strokeWidth={2} />
       </svg>
-      <Big x={X(200)} y={Y(-11)} size={40} color="#9AA3B1" align="center" w={300}>LUCK</Big>
-      <Axes b={B} xr={xr} yr={yr} xt={[0, 50, 100, 150, 200, 250]} yt={[-20, -10, 0, 10, 20, 30]} xl="SERIES PLAYED" yl="SERIES WON ABOVE EXPECTED" yf={(v) => (v > 0 ? "+" + v : String(v))} />
-      {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 8) / 26)} o={r[3] > Math.sqrt(r[2]) ? 1 : 0.6} />)}
+      <Big x={X(110)} y={Y(-6)} size={40} color="#9AA3B1" align="center" w={300}>LUCK</Big>
+      <Axes b={B} xr={xr} yr={yr} xt={[0, 20, 40, 60, 80, 100, 120, 140]} yt={[-10, -5, 0, 5, 10, 15]} xl="BEST OF FIVES PLAYED" yl="SERIES WON ABOVE EXPECTED" yf={(v) => (v > 0 ? "+" + v : String(v))} />
+      {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 7) / 21)} o={r[3] > Math.sqrt(r[2]) ? 1 : 0.6} />)}
       {named.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
       <Face id="faker" x={X(fk[2])} y={Y(fk[3])} size={100} />
       <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={0} pad={56} color={C.gold} size={1.3} />
