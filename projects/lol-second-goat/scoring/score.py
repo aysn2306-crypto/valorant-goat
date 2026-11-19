@@ -553,11 +553,23 @@ def main():
         return y.groupby("Link").v.apply(lambda v: v.nlargest(N).mean())
 
     bs = s[s.Link.isin(pool) & (s.kind == "intl")].assign(big=lambda d: d.z_impact)
-    if os.environ.get("BIG_DOM"):   # what-if (ay 19 Nov): domestic playoffs and finals count as big games too, at a lower weight
+    # v14 (ay 19 Nov): domestic playoffs and finals in every region are big games too. Each game counts by what the
+    # model already says that title is worth next to a Worlds title (LCK split about 0.44, LPL 0.30, LEC/LCS about
+    # 0.1), so no weight is picked by hand. Ratings are region-adjusted, as every domestic rating is.
+    if os.environ.get("BIG_DOM", "title") != "off":
+        dt = T[(T.tier == "domestic") & (T.place == 1)].drop_duplicates("page")
+        wpage = (dt.base / dt.path / CFG["trophy_points"]["worlds"][1]).groupby(dt.page).first()
         dp = s[s.Link.isin(pool) & (s.kind == "dom") & (s.IsPlayoffs.astype(str) == "1")].copy()
-        dp["big"] = dp.a_impact          # region-adjusted, as every domestic rating is
-        dp["G"] = dp.G * float(os.environ["BIG_DOM"])
-        bs = pd.concat([bs, dp], ignore_index=True)
+        fixed = os.environ.get("BIG_DOM", "title")
+        if fixed != "title":
+            w = pd.Series(float(fixed), index=dp.index)
+        else:
+            w = dp.Page.str.replace(r" \(future \d+\)$", "", regex=True).map(wpage)   # a dream season copies its real page
+            ry = dp.region + dp.year.astype(str)
+            w = w.fillna(w.groupby(ry).transform("median")).fillna(w.median())   # play-ins: that league's value that year
+        dp["big"] = dp.a_impact
+        dp["G"] = dp.G * w.values
+        bs = pd.concat([bs, dp[dp.G > 0]], ignore_index=True)
     P["big_stage_raw"] = best_years(bs, "big", 15, pad=True).reindex(pool).fillna(0)
     yr = s[s.Link.isin(pool)].groupby(["Link", "year"]).apply(lambda d: pd.Series({"imp": wmean(d, "a_impact"), "G": d.G.sum()}), include_groups=False).reset_index()
     yr["imp_s"] = shrink(yr.imp.fillna(0), yr.G, k)

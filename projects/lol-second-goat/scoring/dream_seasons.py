@@ -10,7 +10,7 @@ W = pd.Series(yaml.safe_load(open(os.path.join(ROOT, "config", "weights.yaml")))
 base = pd.read_csv(os.path.join(CSV, "draft_scores.csv"), index_col=0)
 rows = []
 for who, l in [("knight", "Knight (Zhuo Ding)"), ("chovy", "Chovy")]:
-    for k in range(0, 9):
+    for k in range(0, 6):
         f = os.path.join(CSV, f"draft_scores_dream_{who}_{k}.csv")
         P = base if k == 0 else (pd.read_csv(f, index_col=0) if os.path.exists(f) else None)
         if P is None:
