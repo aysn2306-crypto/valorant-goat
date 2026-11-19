@@ -16,9 +16,9 @@ const easeOut = Easing.bezier(0.16, 1, 0.3, 1);
 const BEBAS = "Bebas Neue";
 const INK = "#F2F2EE";
 
-/** Grey concrete ground like Jxmy's: flat mid grey, fine grain, soft blotches, darker edges */
+/** Our ground (ay 19 Nov: Jxmy styles made in our look): Jxmy-style textured ground in our dark slate, fine grain, soft blotches, darker edges */
 export const Concrete: React.FC = () => (
-  <AbsoluteFill style={{ background: "#3A3C3A" }}>
+  <AbsoluteFill style={{ background: "#1B1E25" }}>
     <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
       <filter id="blot"><feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves={3} seed={4} />
         <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 -0.08" /></filter>

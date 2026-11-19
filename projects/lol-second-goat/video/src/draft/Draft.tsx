@@ -11,6 +11,7 @@ import * as Sm from "../samples/Samples";
 import { Build, Count527, Footage, Formula, Quote, Words } from "../rough/RoughCut";
 import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWithout } from "./Boards";
 import { TrophySplit } from "./TrophySplit";
+import { SeasonList } from "./SeasonList";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { L, VO_DURATION, W } from "../data/vo";
 
@@ -100,7 +101,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { text: "A season rating, adjusted for the opponent and the region", at: at(c, W("47", "adjusted")) },
     { text: "Your best 5 years", at: at(c, W("47", "best")) },
     { text: "+ your single best year", at: at(c, W("47", "single")), accent: true }]} />],
-  ["48", (c) => { const kn = at(c, W("48", "knight")); return <Mo.T1Rise map={[[0, kn - 2, kn + 60], [0, 176, 236]]} />; }],
+  // Jxmy ranked list that scrolls up to #1 (jxmy-graphs eatF7QHwga4 g02), lands on Knight as he is named
+  ["48", (c) => { const kn = at(c, W("48", "knight")); return <SeasonList n={8} cues={{ scroll0: 2, scroll1: kn - 2, spot: kn }} />; }],
   ["49", still("SampleSkillSwarm", "rise")],
   ["50", still("R4TeamsTimeline", "wipe")],
   ["51", (c) => <MLBoard title="Trophy score" lines={[

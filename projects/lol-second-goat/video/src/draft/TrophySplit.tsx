@@ -44,7 +44,7 @@ export const TrophySplit: React.FC<{ cues: { photos: number; pie: number; shares
           if (e <= s.a0) return null;
           const [x0, y0] = pt(s.a0, R), [x1, y1] = pt(e, R);
           const large = e - s.a0 > 180 ? 1 : 0;
-          return <path key={s.id} d={`M${cx},${cy} L${x0},${y0} A${R},${R} 0 ${large} 1 ${x1},${y1} Z`} fill={s.i === 0 ? TEAL : SLICE[s.i % 2]} stroke="#3A3C3A" strokeWidth={4} />;
+          return <path key={s.id} d={`M${cx},${cy} L${x0},${y0} A${R},${R} 0 ${large} 1 ${x1},${y1} Z`} fill={s.i === 0 ? TEAL : SLICE[s.i % 2]} stroke="#1B1E25" strokeWidth={4} />;
         })}
         {/* arrows from each slice to its player */}
         {slices.map((s) => {
