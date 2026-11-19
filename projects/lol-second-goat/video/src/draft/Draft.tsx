@@ -6,6 +6,7 @@ import { AbsoluteFill, Audio, Freeze, Sequence, staticFile, useCurrentFrame } fr
 import { C, F } from "../theme";
 import * as St from "../stills/Stills";
 import * as Mo from "../motion/Tests";
+import * as Cl from "../samples/Climb";
 import * as Sm from "../samples/Samples";
 import { Build, Count527, Footage, Formula, Quote, Words } from "../rough/RoughCut";
 import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWithout } from "./Boards";
@@ -76,7 +77,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["32", (c) => <WithWithout cues={{ withAt: at(c, W("33", "77")), withoutAt: at(c, W("33", "64")), diffAt: at(c, W("33", "13")), doubtAt: at(c, W("33", "not")) }} />],
   ["34", anchored(<Sm.SPlusMinus voice={false} />, Sm.PM_T0)],
   ["36", () => <Words text="ONLY WHO WON" />],
-  ["37", still("S15Impact", "rise")],
+  ["37", anchored(<Cl.SClimb voice={false} />, Cl.CLIMB_T0)], // Jxmy camera climb to Faker (samples-v14)
   ["38", (c) => <AllProTest cues={[at(c, W("40", "random")), at(c, W("40", "winning")), at(c, W("41", "63"))]} />],
   ["42@final", anchored(<Sm.SCards voice={false} />, Sm.CARDS_T0)],
   ["43", (c) => <MLBoard title="Every part, 0 to 100" lines={[
@@ -115,13 +116,12 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
       <Sequence from={beat - K} layout="none"><FromFrame k={K}><Mo.T2Climb /></FromFrame></Sequence></>;
   }],
   ["56", (c) => <MonteCarlo cues={[at(c, W("57", "rolls")), at(c, W("60", "thousand")), at(c, W("61", "first"))]} />],
-  ["64", anchored(<Sm.SPyramid voice={false} />, Sm.PYR_A[0])],
-  ["67", still("S10aPyramidInternet")],
+  ["64", anchored(<Sm.SPyramidCam voice={false} />, Sm.PYRC_T0)], // one pyramid, tier by tier (ay 19 Nov)
   ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, W("68", "also"))} stamp={{ text: "GLAZED?", at: at(c, W("68", "glazed")), card: 0 }} cards={[
     { id: "uzi", sub: "#21 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }, { text: "MECHANICS", at: at(c, W("68", "mechanical")) }] },
     { id: "bengi", sub: "#44 ALL TIME", flipAt: at(c, W("68", "benji")), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
   ]} />],
-  ["69", anchored(<Sm.SPyramid voice={false} />, Sm.PYR_B[0], Math.round((Sm.PYR_A[1] - Sm.PYR_A[0]) * FPS))],
+  ["69", anchored(<Sm.SPyramidCam voice={false} />, Sm.PYRC_T0)],
   ["75", ft("Knight's face; two all-time list cards with no Knight on them")],
   ["76", () => <Words text="TWO TWISTS" />],
   ["77", (c) => <PyramidTwist states={[{ at: 0, order: ORDER_2026, label: "2026" }, { at: at(c, W("77", "2025")), order: ORDER_2025, label: "END OF 2025" }]} />],
