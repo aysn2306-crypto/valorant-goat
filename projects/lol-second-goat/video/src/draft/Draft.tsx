@@ -61,26 +61,25 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
       { label: "Best years + longevity", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "longevity")) }]} />} sideAt={at(c, W("14", "career"))} />],
   // Jxmy line chart (style map 1:22)
   ["16", (c) => <KillsLine cues={{ lck: at(c, L("16").start + 0.3), lpl: at(c, W("16", "lpl")), gap: at(c, W("17", "3")) }} />],
-  ["18", (c) => <MLBoard title="Only against your own league" lines={[
-    { text: "score = (stat − league average) ÷ league spread", at: at(c, W("18", "compares")) },
-    { text: "LPL mids against LPL mids", at: at(c, W("18", "lpl")) },
-    { text: "same year, same role", at: at(c, W("18", "same")), accent: true }]}
-    side={<SideBars caption="Kills per game, 2016 to 2026" rows={[
-      { label: "LPL", value: "26.6", frac: 26.6 / 30, color: "#E8392B", at: at(c, W("18", "lpl")) },
-      { label: "LCK", value: "23.6", frac: 23.6 / 30, color: "#4F8DF5", at: at(c, W("18", "lpl")) + 10 }]} />} sideAt={at(c, W("18", "lpl"))} />],
+  // Jxmy highlighted page, then big text sliding past (style map 1:34)
+  ["18", (c) => <Ov.TextReveal before="So now the model only compares you to" mark="your own league," after="the same year and the same role."
+    markAt={at(c, W("18", "compares"))} scroll="LPL MIDS AGAINST LPL MIDS" scrollAt={at(c, W("18", "lpl"))} scrollEnd={at(c, L("18").end + 0.3)} />],
   ["19", ft("a stomp, then a close win over Gen.G")],
   ["20", anchored(<Sm.SElo voice={false} />, Sm.ELO_T0)],
   ["21", (c) => <MLBoard title="Stronger teams count more" lines={[
     { text: "Same stat line", at: at(c, W("21", "same")) },
     { text: "Better opponent, more credit", at: at(c, W("21", "counts")), accent: true }]}
     side={<SideTowers at={at(c, W("21", "same"))} at2={at(c, W("21", "counts"))} />} sideAt={at(c, W("21", "same"))} />],
-  ["22", ft("a trophy lift")],
+  // Jxmy chapter title over footage (style map 2:07); photo stands in for a trophy lift
+  ["22", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-kkoma-lift-trophy-w24.jpg" focus={[50, 30]} /><Ov.ChapterTitle text="TROPHIES" at={at(c, L("22").start + 0.2)} /></AbsoluteFill>],
   ["23", (c) => <MLBoard title="How hard was the title?" lines={[
     { text: "Each series: a win chance from Elo", at: at(c, W("23", "brackets")) },
     { text: "Title chance = p1 × p2 × … × pn", at: at(c, W("23", "every")) },
     { text: "Difficulty = coin flips in a row", at: at(c, W("23", "coin")), accent: true }]}
     side={<SideCoins n={9} at={at(c, W("23", "coin"))} label="T1, Worlds 2024: about nine in a row" />} sideAt={at(c, W("23", "coin"))} />],
-  ["24", still("S14Hardest", "wipe")],
+  // Jxmy number typed over footage (style map 2:13): T1 2024 = 8.69 flips (stills.json events), 2^8.69 = 413; then the hardest-titles bars on "BLG"
+  ["24", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-lifts-trophy-w24-wide.jpg" focus={[50, 35]} /><Ov.TypedNumber text="1 IN 413" at={at(c, W("24", "9"))} sub="ABOUT NINE COIN FLIPS IN A ROW (8.7)" subAt={at(c, W("24", "row"))} /></AbsoluteFill>],
+  ["24@bog", still("S14Hardest", "wipe")],
   ["25", still("S13PriceList", "rise")],
   ["26", (c) => <MLBoard title="Five players lift a trophy" label="Win Shares, from basketball:" def="split a team's wins between its players" defAt={at(c, W("26", "winshares"))} lines={[
     { text: "Here: split each title between the five", at: at(c, W("26", "splits")), accent: true }]}

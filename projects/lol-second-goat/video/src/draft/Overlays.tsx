@@ -205,3 +205,53 @@ export const Note: React.FC<{ text: string; aside?: string; at: number; asideAt?
     </>
   );
 };
+
+// TextReveal: from Jxmy's highlighted page then big scrolling text (video-research/jxmy-graphics/videos/Rlyp8PLqFS0/
+//   graphs/x04_text-reveal_highlighted-quote-then-big-text-scroll): a pale page, soft dark edges, the key words get a
+//   marker highlight; then a hard cut to the same page with one big line sliding right to left.
+export const TextReveal: React.FC<{ before: string; mark: string; after: string; markAt: number; scroll: string; scrollAt: number; scrollEnd: number }> = (p) => {
+  const f = useCurrentFrame();
+  const m = interpolate(f, [p.markAt, p.markAt + 10], [0, 100], { ...clamp, easing: easeOut });
+  const big = f >= p.scrollAt;
+  const x = interpolate(f, [p.scrollAt, p.scrollEnd], [1500, -2600], clamp);
+  return (
+    <AbsoluteFill style={{ background: "#E9E6DE" }}>
+      {!big ? (
+        <div style={{ position: "absolute", left: 140, right: 140, top: 430, fontFamily: "Inter", fontWeight: 500, fontSize: 52, lineHeight: 1.5, color: "#2A2C30" }}>
+          {p.before}{" "}
+          <span style={{ backgroundImage: `linear-gradient(90deg, ${TEAL} ${m}%, transparent ${m}%)`, padding: "0 6px" }}>{p.mark}</span>
+          {" "}{p.after}
+        </div>
+      ) : (
+        <div style={{ position: "absolute", left: x, top: 440, fontFamily: "Inter", fontWeight: 600, fontSize: 170, color: "#2A2C30", whiteSpace: "nowrap" }}>{p.scroll}</div>
+      )}
+      <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.42) 100%)" }} />
+    </AbsoluteFill>
+  );
+};
+
+// ChapterTitle: from Jxmy's chapter titles over footage (eatF7QHwga4/graphs/x04_title-over-footage_impact-chapter-title):
+//   the shot darkens a little, one word types on letter by letter in the middle, holds, cut.
+export const ChapterTitle: React.FC<{ text: string; at: number }> = ({ text, at }) => {
+  const f = useCurrentFrame();
+  const n = Math.floor(interpolate(f, [at, at + text.length * 2], [0, text.length], clamp));
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", background: "rgba(10,12,16,0.35)" }}>
+      <div style={{ fontFamily: BEBAS, fontSize: 200, letterSpacing: 24, color: INK, textShadow: "0 4px 0 rgba(0,0,0,0.4)", minHeight: 200 }}>{text.slice(0, n)}</div>
+    </AbsoluteFill>
+  );
+};
+
+// TypedNumber: from Jxmy's number typed over footage (E-F0qcmdWRA/graphs/x10_big-number-over-footage_0.002-percent-over-player):
+//   a number types on character by character in the accent over the shot and holds.
+export const TypedNumber: React.FC<{ text: string; at: number; sub?: string; subAt?: number }> = ({ text, at, sub, subAt }) => {
+  const f = useCurrentFrame();
+  const n = Math.floor(interpolate(f, [at, at + text.length * 2.5], [0, text.length], clamp));
+  const so = subAt === undefined ? 0 : interpolate(f, [subAt, subAt + 5], [0, 1], clamp);
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", background: `radial-gradient(ellipse at 50% 50%, rgba(10,12,16,${0.55 * Math.min(1, n)}) 0%, rgba(10,12,16,0) 60%)` }}>
+      <div style={{ fontFamily: BEBAS, fontSize: 260, lineHeight: 1, color: TEAL, textShadow: "0 5px 0 rgba(0,0,0,0.45)", minHeight: 260 }}>{text.slice(0, n)}</div>
+      {sub && <div style={{ fontFamily: BEBAS, fontSize: 56, letterSpacing: 4, color: INK, opacity: so, textShadow: "0 3px 0 rgba(0,0,0,0.45)" }}>{sub}</div>}
+    </AbsoluteFill>
+  );
+};
