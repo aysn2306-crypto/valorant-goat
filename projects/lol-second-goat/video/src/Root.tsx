@@ -1,6 +1,7 @@
 import * as Cl from "./samples/Climb";
 import React from "react";
 import { Composition, Still } from "remotion";
+import * as Ov from "./draft/Overlays";
 import * as St from "./stills/Stills";
 import * as Mo from "./motion/Tests";
 import { FPS, H, W, loadFonts } from "./theme";
@@ -17,6 +18,8 @@ loadFonts();
 
 export const Root: React.FC = () => (
   <>
+    <Composition id="SNameTag" component={Ov.SNameTag} durationInFrames={Ov.NAMETAG_FRAMES} fps={FPS} width={W} height={H} />
+    <Composition id="STextRing" component={Ov.STextRing} durationInFrames={Ov.RING_FRAMES} fps={FPS} width={W} height={H} />
     <Composition id="OffsetProbe" component={OffsetProbe} durationInFrames={150} fps={FPS} width={640} height={360} />
     <Composition id="TrophiesSample" component={TrophiesSample} durationInFrames={TROPHIES_SAMPLE_FRAMES} fps={FPS} width={W} height={H}
       defaultProps={{ showVo: true }} />
