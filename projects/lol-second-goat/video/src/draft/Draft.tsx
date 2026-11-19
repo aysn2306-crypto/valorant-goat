@@ -2,18 +2,22 @@
 // voiceover-timing.json). A scene starts on its line and holds until the next scene's line. Footage cards stand in for
 // broadcast clips; no music (ay picks the track); the outro is a placeholder until ay records it.
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
+import { AbsoluteFill, Audio, Freeze, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { C, F } from "../theme";
 import * as St from "../stills/Stills";
 import * as Mo from "../motion/Tests";
 import * as Sm from "../samples/Samples";
 import { Build, Count527, FairCoin, Footage, Formula, Quote, Words } from "../rough/RoughCut";
+import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWithout } from "./Boards";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { L, VO_DURATION, W } from "../data/vo";
 
 const FPS = 30;
 const LEAD = 4; // seconds before the voice: the broadcast call goes here
 const OUTRO = 8;
+const TEAL = "#3FD0B5";
+/** renders its child only from frame k on (so a clip can join mid-way at a set frame) */
+const FromFrame: React.FC<{ k: number; children: React.ReactNode }> = ({ k, children }) => (useCurrentFrame() >= k ? <>{children}</> : null);
 const fr = (s: number) => Math.round(s * FPS);
 
 type Ctx = { t0: number; dur: number };
@@ -31,39 +35,85 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["5", still("S2Debate")],
   ["10", () => <Count527 />],
   ["11", () => <Words text="FAKER: #14" sub="version 1" />],
-  ["14", () => <Formula name="PEAK, NOT AVERAGE" lines={["every year averaged  ✗", "best years + longevity  ✓"]} />],
+  ["14", (c) => <MLBoard title="Peak, not average" lines={[
+    { text: "Version 1: the average of every year", at: at(c, W("14", "averaging")) },
+    { face: "faker", text: "Faker in version 1: #14", at: at(c, W("14", "rebuilding")), dim: true },
+    { text: "Now: his best years, and longevity on its own", at: at(c, W("15", "best")) },
+    { face: "faker", text: "Faker now: #1", at: at(c, W("15", "longevity")), accent: true }]}
+    side={<SideBars caption="Faker's all-time rank" rows={[
+      { label: "Average of every year", value: "#14", frac: 0.3, color: "#8E97A3", at: at(c, W("14", "career")) },
+      { label: "Best years + longevity", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "longevity")) }]} />} sideAt={at(c, W("14", "career"))} />],
   ["16", still("S22Kills", "wipe")],
-  ["18", () => <Formula name="OWN LEAGUE ONLY" lines={["LPL mids against LPL mids", "same year · same role"]} />],
+  ["18", (c) => <MLBoard title="Only against your own league" lines={[
+    { text: "score = (stat − league average) ÷ league spread", at: at(c, W("18", "compares")) },
+    { text: "LPL mids against LPL mids", at: at(c, W("18", "lpl")) },
+    { text: "same year, same role", at: at(c, W("18", "same")), accent: true }]}
+    side={<SideBars caption="Kills per game, 2016 to 2026" rows={[
+      { label: "LPL", value: "26.6", frac: 26.6 / 30, color: "#E8392B", at: at(c, W("18", "lpl")) },
+      { label: "LCK", value: "23.6", frac: 23.6 / 30, color: "#4F8DF5", at: at(c, W("18", "lpl")) + 10 }]} />} sideAt={at(c, W("18", "lpl"))} />],
   ["19", ft("a stomp, then a close win over Gen.G")],
   ["20", anchored(<Sm.SElo voice={false} />, Sm.ELO_T0)],
-  ["21", () => <Formula name="STRONGER TEAMS COUNT MORE" lines={["same stat line", "better opponent → more credit"]} />],
+  ["21", (c) => <MLBoard title="Stronger teams count more" lines={[
+    { text: "Same stat line", at: at(c, W("21", "same")) },
+    { text: "Better opponent, more credit", at: at(c, W("21", "counts")), accent: true }]}
+    side={<SideTowers at={at(c, W("21", "same"))} at2={at(c, W("21", "counts"))} />} sideAt={at(c, W("21", "same"))} />],
   ["22", ft("a trophy lift")],
-  ["23", () => <Formula name="HOW HARD WAS THE TITLE?" lines={["coin flips in a row", "a top team needs to win that bracket"]} />],
+  ["23", (c) => <MLBoard title="How hard was the title?" lines={[
+    { text: "Each series: a win chance from Elo", at: at(c, W("23", "brackets")) },
+    { text: "Title chance = p1 × p2 × … × pn", at: at(c, W("23", "every")) },
+    { text: "Difficulty = coin flips in a row", at: at(c, W("23", "coin")), accent: true }]}
+    side={<SideCoins n={9} at={at(c, W("23", "coin"))} label="T1, Worlds 2024: about nine in a row" />} sideAt={at(c, W("23", "coin"))} />],
   ["24", still("S14Hardest", "wipe")],
   ["25", still("S13PriceList", "rise")],
-  ["26", () => <Formula name="TITLE SHARES" lines={["like Win Shares in basketball", "split each trophy between the five"]} />],
+  ["26", (c) => <MLBoard title="Five players lift a trophy" label="Win Shares, from basketball:" def="split a team's wins between its players" defAt={at(c, W("26", "winshares"))} lines={[
+    { text: "Here: split each title between the five", at: at(c, W("26", "splits")), accent: true }]}
+    side={<SideBars caption="BLG, Worlds 2026: share of the title" rows={[["knight", "Knight", 1.061], ["xun", "Xun", 1.027], ["bin", "Bin", 0.988], ["viper", "Viper", 0.983], ["on", "ON", 0.941]].map(([id, n, v], i) => (
+      { face: id as string, label: n as string, value: `${(v as number).toFixed(2)}x`, frac: ((v as number) - 0.8) / 0.4, color: i === 0 ? TEAL : "#8E97A3", at: at(c, W("26", "lift")) + i * 6 }))} />} sideAt={at(c, W("26", "lift"))} />],
   ["27", still("S24Credit", "rise")],
   ["28", still("R6ClutchHist", "rise")],
   ["29", () => <FairCoin />],
   ["31", still("S16Clutch", "wipe")],
-  ["32", still("SampleWithWithout", "rise")],
+  ["32", (c) => <WithWithout cues={{ withAt: at(c, W("33", "77")), withoutAt: at(c, W("33", "64")), diffAt: at(c, W("33", "13")), doubtAt: at(c, W("33", "not")) }} />],
   ["34", anchored(<Sm.SPlusMinus voice={false} />, Sm.PM_T0)],
   ["36", () => <Words text="ONLY WHO WON" />],
   ["37", still("S15Impact", "rise")],
-  ["38", still("S23AllPro")],
+  ["38", (c) => <AllProTest cues={[at(c, W("40", "random")), at(c, W("40", "winning")), at(c, W("41", "63"))]} />],
   ["42@final", anchored(<Sm.SCards voice={false} />, Sm.CARDS_T0)],
-  ["43", () => <Formula name="EVERY PART, 0 TO 100" lines={["50 = middle of the pack", "100 = the best there's been"]} />],
+  ["43", (c) => <MLBoard title="Every part, 0 to 100" lines={[
+    { text: "50 = the middle of the pack", at: at(c, W("43", "50")) },
+    { text: "100 = the best there's ever been", at: at(c, W("43", "100")) },
+    { face: "faker", text: "Trophies: Faker is the 100", at: at(c, W("43", "trophies")), accent: true }]}
+    side={<SideScale axis="Trophies part, 0 to 100" marks={[
+      { v: 50, label: "middle of the pack", color: "#8E97A3", at: at(c, W("43", "50")) },
+      { v: 100, label: "Faker 100", color: C.gold, face: "faker", at: at(c, W("43", "faker")) },
+      { v: 46, label: "Knight 46", color: TEAL, face: "knight", at: at(c, W("43", "share")), up: false }]} />} sideAt={at(c, W("43", "50"))} />],
   ["44", () => <Words text="THE CATEGORIES" />],
-  ["45", () => <Formula name="BIG GAMES" lines={["form at Worlds and MSI", "+ clutch"]} />],
+  ["45", (c) => <MLBoard title="Big games" lines={[
+    { text: "Form at Worlds and MSI", at: at(c, W("45", "worlds")) },
+    { text: "+ clutch: series won above what Elo expected", at: at(c, W("45", "clutch")), accent: true }]}
+    side={<SideBars caption="Big games and clutch, 0 to 100" rows={[
+      { face: "knight", label: "Knight", value: "99", frac: 0.989, color: TEAL, at: at(c, W("45", "clutch")) },
+      { face: "faker", label: "Faker", value: "94", frac: 0.941, color: C.gold, at: at(c, W("45", "clutch")) + 8 }]} />} sideAt={at(c, W("45", "worlds"))} />],
   ["46", still("R4BigStage", "rise")],
-  ["47", () => <Formula name="SKILL" lines={["season rating, opponent and region adjusted", "best 5 years + best single year"]} />],
+  ["47", (c) => <MLBoard title="Skill" lines={[
+    { text: "A season rating, adjusted for the opponent and the region", at: at(c, W("47", "adjusted")) },
+    { text: "Your best 5 years", at: at(c, W("47", "best")) },
+    { text: "+ your single best year", at: at(c, W("47", "single")), accent: true }]} />],
   ["48", () => <Mo.T1Rise />],
   ["49", still("SampleSkillSwarm", "rise")],
   ["50", still("R4TeamsTimeline", "wipe")],
-  ["51", () => <Formula name="TROPHY SCORE" lines={["price × how hard × his share", "added up over a career"]} />],
-  ["52", still("R4CabinetStack", "wipe")],
-  // T2Climb holds 2 s, then climbs: the climb starts in the silent beat after "by the way"
-  ["53", anchored(<Mo.T2Climb />, L("53").end + 0.1, 60)],
+  ["51", (c) => <MLBoard title="Trophy score" lines={[
+    { text: "Each title = price × how hard × his share", at: at(c, W("51", "stack")) },
+    { text: "Worlds 100 · MSI 56 · LCK 44 · LPL 35", at: at(c, W("51", "price")), dim: true },
+    { text: "Added up over a whole career", at: at(c, W("51", "share")), accent: true }]} />],
+  // The cabinet without Faker in view (Canyon, Ruler, Knight named), held still until the silent beat after
+  // "by the way", then T2Climb's camera climbs to Faker's trophy score (ay 01:32). Faker's bar is never shown early.
+  ["52", (c) => {
+    const K = 86; // T2Climb frame where the camera shows Canyon, Ruler and Knight (around 700 points)
+    const beat = fr(L("53").end + 0.1 - c.t0);
+    return <><Sequence durationInFrames={Math.max(1, beat)} layout="none"><Freeze frame={K}><Mo.T2Climb /></Freeze></Sequence>
+      <Sequence from={beat - K} layout="none"><FromFrame k={K}><Mo.T2Climb /></FromFrame></Sequence></>;
+  }],
   ["56", (c) => <MonteCarlo cues={[at(c, W("57", "rolls")), at(c, W("60", "thousand")), at(c, W("61", "first"))]} />],
   ["64", anchored(<Sm.SPyramid voice={false} />, Sm.PYR_A[0])],
   ["67", still("S10aPyramidInternet")],
