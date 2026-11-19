@@ -80,9 +80,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // Jxmy gold-bar ranking in our look (style map 2:22): T1 2024 = 8.7 flips, BLG 2026 second (stills.json events)
   ["24", (c) => <HardestBars cues={{ rise: 4, t1: at(c, W("24", "hardest")), blg: at(c, W("24", "blg")) }} />],
   // Jxmy close-up bar list, camera row to row, then pull back (style map 2:31); LEC left off (ay 19 Nov)
-  ["25", (c) => <PriceClimb cues={[at(c, W("25", "worlds")), at(c, W("25", "messiah")), at(c, W("25", "so", 1)), at(c, W("25", "so", 1)) + 9, at(c, W("25", "so", 1)) + 18]} out={at(c, L("25").end) + 8} />],
+  ["25", (c) => <PriceClimb cues={[at(c, W("25", "worlds")), at(c, W("25", "messiah")), at(c, W("25", "so", 1)), at(c, W("25", "so", 1)) + 6, at(c, W("25", "so", 1)) + 12]} out={at(c, W("25", "so", 1)) + 14} />],
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
-  ["26", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-lifts-trophy-w24-a.jpg" focus={[55, 35]} /></AbsoluteFill>],
+  ["26@players", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-lifts-trophy-w24-a.jpg" focus={[55, 35]} /></AbsoluteFill>],
   ["26@basketball", (c) => <Ov.ArticlePage kicker="Basketball stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did on the floor. Two players on the same team can end up with very different shares." />],
   ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, L("27").start + 0.4), shares: at(c, L("27").start + 1.6), caption: at(c, L("27").start + 3.0) }} />],

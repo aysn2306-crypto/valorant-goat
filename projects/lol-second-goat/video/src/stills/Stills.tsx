@@ -541,7 +541,7 @@ export const S16Clutch: React.FC = () => {
   const up = band.map((n) => `${X(n)},${Y(Math.sqrt(n))}`).join(" ");
   const dn = band.slice().reverse().map((n) => `${X(n)},${Y(-Math.sqrt(n))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
-  const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["knight", "left"]];
+  const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["knight", "below"]];
   return (
     <Stage title="CLUTCH OR LUCK">
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
