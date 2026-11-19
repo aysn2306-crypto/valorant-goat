@@ -44,7 +44,7 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
 
   // camera: centre (data units) and zoom; 1 = tight on the pack
   const climb0 = A(W("37", "faker")), climb1 = climb0 + 48;
-  const out0 = A(W("37", "then")) - 4, out1 = out0 + 30;
+  const out0 = A(W("37", "ruler")) - 4, out1 = out0 + 30;
   const kUp = interpolate(f, [climb0, climb1], [0, 1], { ...clamp, easing: inOut });
   const kOut = interpolate(f, [out0, out1], [0, 1], { ...clamp, easing: inOut });
   const cy = 40 + kUp * (300 - 40) + kOut * (140 - 300);

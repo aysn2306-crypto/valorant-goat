@@ -168,7 +168,7 @@ export const SCards: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
 // ---------------------------------------------------------------- 2. Elo towers
 const LINE = "#8FF0EC";
 export const ELO_T0 = L("20").start - 0.4, ELO_T1 = L("20").end + 0.5;
-const E = { chess: W("20", "chess"), same: W("20", "same"), win: W("20", "win"), points: W("20", "points"), beat: W("20", "beat"), way: W("20", "way"), take2: W("20", "take", 1), lot: W("20", "lot"), n26: W("20", "26"), games: W("20", "games") };
+const E = { chess: W("19", "chess"), same: W("20", "same"), win: W("20", "win"), points: W("20", "points"), beat: W("20", "beat"), way: W("20", "way"), take2: W("20", "take", 1), lot: W("20", "lot"), n26: W("20", "26"), games: W("20", "games") };
 export const ELO_FRAMES = Math.round((ELO_T1 - ELO_T0) * FPS);
 export const SElo: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const f = useCurrentFrame();
@@ -413,11 +413,11 @@ export const SPyramid: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const fill = (i: number, j: number) => {
     if (i === 4) return a(W("65", "bottom")) + j * 7;           // "At the bottom"
     if (i === 3) return a(W("66", "tier")) + j * 6;           // "tier 4"
-    if (i === 2) return b(W("69", "tear") + 0.4) + j * 6;          // "tier 3"
+    if (i === 2) return b(W("69", "tier") + 0.4) + j * 6;          // "tier 3"
     if (i === 1) return j === 0 ? b(W("71", "chovy")) : b(W("71", "knight")); // Chovy, then Knight on his name
     return Infinity;                                 // Faker's slot stays for later in the video
   };
-  const pulse = { perkz: a(W("65", "parks")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")), knight: b(W("71", "second")) };
+  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")), knight: b(W("71", "2nd")) };
   return (
     <AbsoluteFill>
       <PyramidScene fill={fill} pulse={pulse} zoomAt={b(W("71", "knight") + 0.6)} tierIn={a(W("64", "tears"))} />
@@ -456,8 +456,8 @@ export const SPyramidCam: React.FC<{ voice?: boolean }> = ({ voice = true }) => 
     [a(W("66", "highest")) + 30, tierView(3, 2.4, 1360), "TIER 4"],
     [a(W("67", "uzi")) - 10, tierView(3, 2.4, 1360), "TIER 4"],
     [a(W("67", "uzi")) + 14, { x: 1060, y: 700, s: 1.45 }, ""],
-    [a(W("69", "tear")) - 10, { x: 1060, y: 700, s: 1.45 }, ""],
-    [a(W("69", "tear")) + 14, tierView(2, 2.2), "TIER 3"],
+    [a(W("69", "tier")) - 10, { x: 1060, y: 700, s: 1.45 }, ""],
+    [a(W("69", "tier")) + 14, tierView(2, 2.2), "TIER 3"],
     [a(W("70", "tier")) - 6, tierView(2, 2.2), "TIER 3"],
     [a(W("70", "tier")) + 20, tierView(1, 2.6), "TIER 2"],
     [a(L("74").end) - 75, tierView(1, 2.6), "TIER 2"],
@@ -473,12 +473,12 @@ export const SPyramidCam: React.FC<{ voice?: boolean }> = ({ voice = true }) => 
   const fill = (i: number, j: number) => {
     if (i === 4) return a(W("65", "bottom")) + 20 + j * 7;
     if (i === 3) return a(W("66", "tier")) + 20 + j * 6;
-    if (i === 2) return a(W("69", "tear")) + 14 + j * 6;
+    if (i === 2) return a(W("69", "tier")) + 14 + j * 6;
     if (i === 1) return j === 0 ? a(W("71", "chovy")) : a(W("71", "knight"));
     return Infinity;
   };
-  const pulse = { perkz: a(W("65", "parks")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")),
-    uzi: a(W("67", "uzi")) + 14, bengi: a(W("67", "benji")), knight: a(W("71", "second")) };
+  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")),
+    uzi: a(W("67", "uzi")) + 14, bengi: a(W("67", "benji")), knight: a(W("71", "2nd")) };
   return (
     <AbsoluteFill>
       <PyramidScene fill={fill} pulse={pulse} tierIn={a(W("64", "tears"))} cam={cam} />

@@ -40,28 +40,28 @@ const at = (c: Ctx, t: number) => fr(t - c.t0);
 
 const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["1", ft("BLG lift the Worlds trophy")],
-  ["2", ft("Knight close up. Lower third: KNIGHT, FINALS MVP 2026")],
+  ["1@knight", ft("Knight close up. Lower third: KNIGHT, FINALS MVP 2026")],
   ["3", ft("Faker, slow motion")],
   // ay 19 Nov style map: Jxmy giant word over footage, then his comment-bubble pile (photo stands in for footage)
-  ["4", (c) => <AbsoluteFill><Ov.StandIn src="_local/bin-knight-celebrate-w26-final.jpg" focus={[55, 35]} /><Ov.BigWord text="WHO IS #2?" at={at(c, W("4", "who"))} /></AbsoluteFill>],
+  ["3@who", (c) => <AbsoluteFill><Ov.StandIn src="_local/bin-knight-celebrate-w26-final.jpg" focus={[55, 35]} /><Ov.BigWord text="WHO IS #2?" at={4} /></AbsoluteFill>],
   ["5", (c) => <AbsoluteFill><Concrete /><Ov.CommentPile cues={{ from: 2, to: at(c, W("5", "answers")),
-    focus: [{ id: "keria", at: at(c, W("6", "ker")) }, { id: "chovy", at: at(c, W("7", "chovy")) }], all: at(c, W("9", "everyone")) }} /></AbsoluteFill>],
+    focus: [{ id: "keria", at: at(c, W("6", "carrier")) }, { id: "chovy", at: at(c, W("7", "chovy")) }], all: at(c, W("9", "everyone")) }} /></AbsoluteFill>],
   // Jxmy text card, then his big number card on the number (style map 0:44)
   ["10", (c) => <AbsoluteFill><Concrete /><Ov.CardThenNumber text="SO I BUILT A MODEL" value="527" unit="PLAYERS" at={at(c, W("10", "527"))} /></AbsoluteFill>],
   // Jxmy verdict word over the shot: #14, then WRONG (style map 0:58)
   ["11", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-mvp-award-w24-final.jpg" focus={[50, 30]} />
-    <Ov.VerdictWord words={[{ text: "FAKER #14", at: at(c, W("11", "14th")) }, { text: "WRONG", at: at(c, W("13", "wrong")) }]} /></AbsoluteFill>],
+    <Ov.VerdictWord words={[{ text: "WRONG", at: at(c, W("11", "wrong")) }, { text: "FAKER #14", at: at(c, W("11", "14th")) }]} /></AbsoluteFill>],
   // Jxmy handwritten note over the shot (style map 1:08); photo stands in for a rebuild-year game
-  ["14", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-holds-trophy-w24.jpg" focus={[60, 25]} />
-    <Ov.Note text="HIS REBUILDING YEARS" aside="(COUNTED THE SAME)" at={at(c, W("14", "rebuilding"))} asideAt={at(c, W("14", "everything"))} x={170} y={120} to={[1040, 260]} /></AbsoluteFill>],
+  ["13", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-holds-trophy-w24.jpg" focus={[60, 25]} />
+    <Ov.Note text="HIS WHOLE CAREER, AVERAGED" aside="(EACH TITLE WORTH LESS)" at={at(c, W("13", "averaging"))} asideAt={at(c, W("13", "less"))} x={170} y={120} to={[1040, 260]} /></AbsoluteFill>],
   ["15", (c) => <MLBoard title="Peak, not average" lines={[
-    { text: "Version 1: the average of every year", at: at(c, W("14", "averaging")) },
-    { face: "faker", text: "Faker in version 1: #14", at: at(c, W("14", "rebuilding")), dim: true },
+    { text: "Version 1: the average of every year", at: 4 },
+    { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },
     { text: "Now: his best years, and longevity on its own", at: at(c, W("15", "best")) },
     { face: "faker", text: "Faker now: #1", at: at(c, W("15", "longevity")), accent: true }]}
     side={<SideBars caption="Faker's all-time rank" rows={[
-      { label: "Average of every year", value: "#14", frac: 0.3, color: "#8E97A3", at: at(c, W("14", "career")) },
-      { label: "Best years + longevity", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "longevity")) }]} />} sideAt={at(c, W("14", "career"))} />],
+      { label: "Average of every year", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
+      { label: "Best years + longevity", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "longevity")) }]} />} sideAt={10} />],
   // Jxmy line chart (style map 1:22)
   ["16", (c) => <KillsLine cues={{ lck: at(c, L("16").start + 0.3), lpl: at(c, W("16", "lpl")), gap: at(c, W("17", "3")) }} />],
   // Jxmy highlighted page, then big text sliding past (style map 1:34)
@@ -78,9 +78,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // Jxmy number over footage as a running count (style map 2:13): each extra coin flip doubles the odds
   ["23", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-lifts-trophy-w24-wide.jpg" focus={[50, 35]} /><Ov.FlipCounter at={at(c, W("23", "coin"))} end={at(c, W("23", "opponents"))} /></AbsoluteFill>],
   // Jxmy gold-bar ranking in our look (style map 2:22): T1 2024 = 8.7 flips, BLG 2026 second (stills.json events)
-  ["24", (c) => <HardestBars cues={{ rise: 4, t1: at(c, W("24", "hardest")), blg: at(c, W("24", "bog")) }} />],
+  ["24", (c) => <HardestBars cues={{ rise: 4, t1: at(c, W("24", "hardest")), blg: at(c, W("24", "blg")) }} />],
   // Jxmy close-up bar list, camera row to row, then pull back (style map 2:31); LEC left off (ay 19 Nov)
-  ["25", (c) => <PriceClimb cues={[at(c, W("25", "worlds")), at(c, W("25", "msi")), at(c, W("25", "lck")), at(c, W("25", "lck")) + 30, at(c, W("25", "lpl"))]} out={at(c, W("25", "35"))} />],
+  ["25", (c) => <PriceClimb cues={[at(c, W("25", "worlds")), at(c, W("25", "messiah")), at(c, W("25", "so", 1)), at(c, W("25", "so", 1)) + 9, at(c, W("25", "so", 1)) + 18]} out={at(c, L("25").end) + 8} />],
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
   ["26", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-lifts-trophy-w24-a.jpg" focus={[55, 35]} /></AbsoluteFill>],
   ["26@basketball", (c) => <Ov.ArticlePage kicker="Basketball stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
@@ -118,7 +118,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["47", (c) => <AbsoluteFill><Ov.StandIn src="_local/chovy-hand-on-mouse-w26-sf.jpg" focus={[50, 35]} /><Ov.ChapterTitle text="SKILL" at={6} /></AbsoluteFill>],
   ["48", (c) => { const kn = at(c, W("48", "knight")); return <SeasonList n={8} cues={{ scroll0: 2, scroll1: kn - 2, spot: kn }} />; }],
   // Jxmy two-player board (jxmy-graphs GPH4nK5sQ-8 g01): Chovy vs Knight, the skill score "by a hair" last
-  ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, W("49", "hair")) }} rows={[
+  ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, W("49", "ahead")) }} rows={[
     { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
     { label: "GOLD AHEAD AT 15 MIN", l: "+339", r: "+451", better: "r" },
     { label: "KDA", l: "5.67", r: "5.77", better: "r" },
@@ -129,11 +129,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["50", (c) => <TitleList cues={{ rows: 2, arrows: at(c, W("50", "different")), count: at(c, W("50", "5")) }} />],
   ["51", (c) => <MLBoard title="Trophy score" lines={[
     { text: "Each title = price × how hard × his share", at: at(c, W("51", "stack")) },
-    { text: "Worlds 100 · MSI 56 · LCK 44 · LPL 35", at: at(c, W("51", "price")), dim: true },
     { text: "Added up over a whole career", at: at(c, W("51", "share")), accent: true }]} />],
   // The cabinet without Faker in view (Canyon, Ruler, Knight named), held still until the silent beat after
   // "by the way", then T2Climb's camera climbs to Faker's trophy score (ay 01:32). Faker's bar is never shown early.
-  ["52", (c) => {
+  ["51@ended", (c) => {
     const K = 86; // T2Climb frame where the camera shows Canyon, Ruler and Knight (around 700 points)
     const beat = fr(L("53").end + 0.1 - c.t0);
     return <><Sequence durationInFrames={Math.max(1, beat)} layout="none"><Freeze frame={K}><Mo.T2Climb /></Freeze></Sequence>
@@ -153,27 +152,27 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     markAt={at(c, W("57", "named"))} />],
   ["58", (c) => <MonteCarlo cues={[at(c, W("57", "rolls")), at(c, W("60", "thousand")), at(c, L("60").end)]} />],
   // Jxmy record card (jxmy-graphs 4lbvnNVGd-I g06, style map 6:32)
-  ["61", (c) => <RecordCounter cues={{ first: at(c, W("61", "faker")), second: at(c, W("62", "one")) }} />],
+  ["61", (c) => <RecordCounter cues={{ first: at(c, W("61", "faker")), second: at(c, W("61", "one")) }} />],
   // Jxmy quote subtitle over footage (jxmy-graphics 3hZ6Su5PVnI x02, style map 6:42)
   ["63", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-lifts-trophy-w24-wide.jpg" focus={[50, 40]} />
     <QuoteSubtitle lines={[{ text: "Who is it?", at: at(c, W("63", "who")) }, { text: "We'll get there.", at: at(c, W("63", "we")) }]} /></AbsoluteFill>],
   ["64", anchored(<Sm.SPyramidCam voice={false} />, Sm.PYRC_T0)], // one pyramid, tier by tier (ay 19 Nov)
-  ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, W("68", "also"))} stamp={{ text: "GLAZED?", at: at(c, W("68", "glazed")), card: 0 }} cards={[
-    { id: "uzi", sub: "#21 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }, { text: "MECHANICS", at: at(c, W("68", "mechanical")) }] },
+  ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, W("68", "also"))} stamp={{ text: "GLAZED?", at: at(c, W("68", "bit")) + 12, card: 0 }} cards={[
+    { id: "uzi", sub: "#21 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
     { id: "bengi", sub: "#44 ALL TIME", flipAt: at(c, W("68", "benji")), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
   ]} />],
   ["69", anchored(<Sm.SPyramidCam voice={false} />, Sm.PYRC_T0)],
   ["75", ft("Knight's face; two all-time list cards with no Knight on them")],
   ["76", () => <Words text="TWO TWISTS" />],
   ["77", (c) => <PyramidTwist states={[{ at: 0, order: ORDER_2026, label: "2026" }, { at: at(c, W("77", "2025")), order: ORDER_2025, label: "END OF 2025" }]} />],
-  ["79", ft("Worlds 2026 final, BLG vs Gen.G, Knight and Chovy face to face")],
-  ["80", (c) => <PyramidTwist glowIds={["knight", "chovy"]} states={[{ at: 0, order: ORDER_2025, label: "END OF 2025" }, { at: at(c, W("80", "fifth")), order: ORDER_2026, label: "2026" },
+  ["78@but", ft("Worlds 2026 final, BLG vs Gen.G, Knight and Chovy face to face")],
+  ["80", (c) => <PyramidTwist glowIds={["knight", "chovy"]} states={[{ at: 0, order: ORDER_2025, label: "END OF 2025" }, { at: at(c, W("80", "2nd")), order: ORDER_2026, label: "2026" },
     { at: at(c, W("81", "gen")), order: ORDER_GENG, label: "IF GEN.G\nHAD WON" }]} />],
   ["82", ft("Faker 2013 and Faker 2026, side by side")],
-  ["84", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, W("85", "15"))]} />],
+  ["82@treats", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, W("85", "15"))]} />],
   ["86", still("S10bPyramidArrow")],
   ["88", still("SampleKnightRadar")],
-  ["92", (c) => <DreamSeasons cues={[at(c, W("93", "2029") - 66 / FPS), at(c, W("93", "4") - 88 / FPS)]} />],
+  ["92", (c) => <DreamSeasons cues={[at(c, W("93", "titles") - 66 / FPS), at(c, W("93", "four") - 88 / FPS)]} />],
   ["94", () => <Quote />],
 ];
 
