@@ -12,6 +12,7 @@ import { Build, Count527, Footage, Formula, Quote, Words } from "../rough/RoughC
 import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWithout } from "./Boards";
 import { TrophySplit } from "./TrophySplit";
 import { SeasonList } from "./SeasonList";
+import { HeadToHead } from "./HeadToHead";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { L, VO_DURATION, W } from "../data/vo";
 
@@ -103,7 +104,14 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { text: "+ your single best year", at: at(c, W("47", "single")), accent: true }]} />],
   // Jxmy ranked list that scrolls up to #1 (jxmy-graphs eatF7QHwga4 g02), lands on Knight as he is named
   ["48", (c) => { const kn = at(c, W("48", "knight")); return <SeasonList n={8} cues={{ scroll0: 2, scroll1: kn - 2, spot: kn }} />; }],
-  ["49", still("SampleSkillSwarm", "rise")],
+  // Jxmy two-player board (jxmy-graphs GPH4nK5sQ-8 g01): Chovy vs Knight, the skill score "by a hair" last
+  ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, W("49", "hair")) }} rows={[
+    { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
+    { label: "GOLD AHEAD AT 15 MIN", l: "+339", r: "+451", better: "r" },
+    { label: "KDA", l: "5.67", r: "5.77", better: "r" },
+    { label: "DEATHS A GAME", l: "1.69", r: "1.94", better: "l" },
+    { label: "WIN RATE", l: "69.2%", r: "66.9%", better: "l" },
+    { label: "SKILL SCORE", l: "100", r: "99.9", better: "l", big: true }]} />],
   ["50", still("R4TeamsTimeline", "wipe")],
   ["51", (c) => <MLBoard title="Trophy score" lines={[
     { text: "Each title = price × how hard × his share", at: at(c, W("51", "stack")) },
