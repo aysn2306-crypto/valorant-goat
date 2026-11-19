@@ -255,3 +255,16 @@ export const TypedNumber: React.FC<{ text: string; at: number; sub?: string; sub
     </AbsoluteFill>
   );
 };
+
+/** Jxmy's number over footage, as a running count: 1 flip = 1 in 2 ... n flips = 1 in 2^n, stepping from `at` to `end` */
+export const FlipCounter: React.FC<{ at: number; end: number; max?: number }> = ({ at, end, max = 9 }) => {
+  const f = useCurrentFrame();
+  if (f < at) return null;
+  const n = Math.max(1, Math.min(max, 1 + Math.floor(interpolate(f, [at, end], [0, max], clamp))));
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", background: "radial-gradient(ellipse at 50% 50%, rgba(10,12,16,0.55) 0%, rgba(10,12,16,0) 60%)" }}>
+      <div style={{ fontFamily: BEBAS, fontSize: 260, lineHeight: 1, color: TEAL, textShadow: "0 5px 0 rgba(0,0,0,0.45)" }}>1 IN {(2 ** n).toLocaleString("en-GB")}</div>
+      <div style={{ fontFamily: BEBAS, fontSize: 56, letterSpacing: 4, color: INK, textShadow: "0 3px 0 rgba(0,0,0,0.45)" }}>{n} COIN {n === 1 ? "FLIP" : "FLIPS"} IN A ROW</div>
+    </AbsoluteFill>
+  );
+};

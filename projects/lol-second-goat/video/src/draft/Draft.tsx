@@ -15,6 +15,7 @@ import { SeasonList } from "./SeasonList";
 import { HeadToHead } from "./HeadToHead";
 import * as Ov from "./Overlays";
 import { KillsLine } from "./KillsLine";
+import { HardestBars, PriceClimb } from "./Bars";
 import { Concrete } from "../samples/Climb";
 import { PercentStack } from "./PercentStack";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
@@ -72,15 +73,12 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     side={<SideTowers at={at(c, W("21", "same"))} at2={at(c, W("21", "counts"))} />} sideAt={at(c, W("21", "same"))} />],
   // Jxmy chapter title over footage (style map 2:07); photo stands in for a trophy lift
   ["22", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-kkoma-lift-trophy-w24.jpg" focus={[50, 30]} /><Ov.ChapterTitle text="TROPHIES" at={at(c, L("22").start + 0.2)} /></AbsoluteFill>],
-  ["23", (c) => <MLBoard title="How hard was the title?" lines={[
-    { text: "Each series: a win chance from Elo", at: at(c, W("23", "brackets")) },
-    { text: "Title chance = p1 × p2 × … × pn", at: at(c, W("23", "every")) },
-    { text: "Difficulty = coin flips in a row", at: at(c, W("23", "coin")), accent: true }]}
-    side={<SideCoins n={9} at={at(c, W("23", "coin"))} label="T1, Worlds 2024: about nine in a row" />} sideAt={at(c, W("23", "coin"))} />],
-  // Jxmy number typed over footage (style map 2:13): T1 2024 = 8.69 flips (stills.json events), 2^8.69 = 413; then the hardest-titles bars on "BLG"
-  ["24", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-lifts-trophy-w24-wide.jpg" focus={[50, 35]} /><Ov.TypedNumber text="1 IN 413" at={at(c, W("24", "9"))} sub="ABOUT NINE COIN FLIPS IN A ROW (8.7)" subAt={at(c, W("24", "row"))} /></AbsoluteFill>],
-  ["24@bog", still("S14Hardest", "wipe")],
-  ["25", still("S13PriceList", "rise")],
+  // Jxmy number over footage as a running count (style map 2:13): each extra coin flip doubles the odds
+  ["23", (c) => <AbsoluteFill><Ov.StandIn src="_local/faker-lifts-trophy-w24-wide.jpg" focus={[50, 35]} /><Ov.FlipCounter at={at(c, W("23", "coin"))} end={at(c, W("23", "opponents"))} /></AbsoluteFill>],
+  // Jxmy gold-bar ranking in our look (style map 2:22): T1 2024 = 8.7 flips, BLG 2026 second (stills.json events)
+  ["24", (c) => <HardestBars cues={{ rise: 4, t1: at(c, W("24", "hardest")), blg: at(c, W("24", "bog")) }} />],
+  // Jxmy close-up bar list, camera row to row, then pull back (style map 2:31); LEC left off (ay 19 Nov)
+  ["25", (c) => <PriceClimb cues={[at(c, W("25", "worlds")), at(c, W("25", "msi")), at(c, W("25", "lck")), at(c, W("25", "lck")) + 30, at(c, W("25", "lpl"))]} out={at(c, W("25", "35"))} />],
   ["26", (c) => <MLBoard title="Five players lift a trophy" label="Win Shares, from basketball:" def="split a team's wins between its players" defAt={at(c, W("26", "winshares"))} lines={[
     { text: "Here: split each title between the five", at: at(c, W("26", "splits")), accent: true }]}
     side={<SideBars caption="BLG, Worlds 2026: share of the title" rows={[["knight", "Knight", 1.061], ["xun", "Xun", 1.027], ["bin", "Bin", 0.988], ["viper", "Viper", 0.983], ["on", "ON", 0.941]].map(([id, n, v], i) => (
