@@ -71,22 +71,24 @@ export const AveragedCups: React.FC<{ dropAt: number; cutAt: number }> = ({ drop
 // rating itself (the one the best-season list ranks), straight from the season dump, so a rerun only needs the json.
 const SEASONS: [number, number][] = (FS as unknown as { seasons: [number, number, number][] }).seasons.map(([y, r]) => [y, r]);
 const GOLD = "#E8B04B";
-export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; avgAt: number; dragAt: number }> = ({ barAt, cupsAt, avgAt, dragAt }) => {
+// ay 20 Nov 20:01: every bar is on the graph first (on "on top of that"), then on "averaging" a dashed line draws
+// through them at his career average, labelled HIS AVERAGE; on "dragging" the seasons under it turn coral.
+export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; barsAt?: number; avgAt: number; dragAt: number }> = ({ barAt, cupsAt, barsAt: barsAt0, avgAt, dragAt }) => {
+  const barsAt = barsAt0 ?? avgAt;
   const f = useCurrentFrame();
   const tO = interpolate(f, [0, 8], [0, 1], clamp);
   const fill = interpolate(f, [barAt, barAt + 22], [0, 1], { ...clamp, easing: easeOut });
-  const up = interpolate(f, [avgAt, avgAt + 18], [0, 1], { ...clamp, easing: inOut });
+  const up = interpolate(f, [barsAt, barsAt + 18], [0, 1], { ...clamp, easing: inOut });
   const BX0 = 160, BX1 = 1760, BW = BX1 - BX0, TW = BW * 0.28;
   const by = interpolate(up, [0, 1], [450, 170]), bh = interpolate(up, [0, 1], [150, 90]);
   // season chart: ratings can go below zero (an average player is 0), so bars grow up or down from a zero line
   const X0 = 220, X1 = 1700, step = (X1 - X0) / SEASONS.length, bw = step * 0.6;
-  const vals = SEASONS.map(([, r]) => r), MAXV = Math.max(...vals), MINV = Math.min(0, ...vals);
+  const vals = SEASONS.map(([, r]) => r), MAXV = 100, MINV = 0;
   const YT = 510, YB = 880, Y = (v: number) => YT + (YB - YT) * (MAXV - v) / (MAXV - MINV), Y0 = Y(0);
-  const avg = vals.reduce((a, r) => a + r, 0) / vals.length, best = SEASONS.find(([, r]) => r === MAXV)![0];
-  const chartO = interpolate(f, [avgAt + 6, avgAt + 16], [0, 1], clamp);
-  const drop = interpolate(f, [avgAt + 22, avgAt + 44], [0, 1], { ...clamp, easing: inOut });
-  const peakY = Y(MAXV), avgY = Y(avg);
-  const lineY = peakY + (avgY - peakY) * drop;
+  const avg = vals.reduce((a, r) => a + r, 0) / vals.length, bestYear = SEASONS.find(([, r]) => r === Math.max(...vals))![0];
+  const chartO = interpolate(f, [barsAt + 6, barsAt + 16], [0, 1], clamp);
+  const draw = interpolate(f, [avgAt, avgAt + 24], [0, 1], { ...clamp, easing: inOut });
+  const best = Math.max(...vals), peakY = Y(best), lineY = Y(avg);
   const drag = interpolate(f, [dragAt, dragAt + 10], [0, 1], clamp);
   return (
     <AbsoluteFill>
@@ -101,21 +103,22 @@ export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; avgAt: numb
       <div style={{ position: "absolute", left: BX0, top: by + bh + 14, opacity: fill, fontFamily: BEBAS, fontSize: interpolate(up, [0, 1], [56, 40]), color: GOLD, letterSpacing: 2 }}>TROPHIES 28%</div>
       <div style={{ position: "absolute", right: 1920 - BX1, top: by + bh + 14, opacity: fill, fontFamily: BEBAS, fontSize: interpolate(up, [0, 1], [56, 40]), color: MUTE, letterSpacing: 2 }}>EVERYTHING ELSE 72%</div>
       {chartO > 0 && <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: chartO }}>
-        <text x={X0 - 20} y={YT - 64} fontFamily={BEBAS} fontSize={34} fill={MUTE} letterSpacing={2}>HIS RATING, EVERY SEASON</text>
+        <text x={X0 - 20} y={YT - 64} fontFamily={BEBAS} fontSize={34} fill={MUTE} letterSpacing={2}>EACH SEASON: HIS STATS BETTER THAN __% OF PROS</text>
+        {[0, 50, 100].map((v) => <text key={v} x={X0 - 34} y={Y(v) + 10} textAnchor="end" fontFamily={BEBAS} fontSize={28} fill={MUTE}>{v}%</text>)}
         <line x1={X0 - 20} x2={X1} y1={Y0} y2={Y0} stroke={INK} strokeOpacity={0.6} strokeWidth={3} />
         {SEASONS.map(([y, r], i) => {
           const x = X0 + i * step + (step - bw) / 2;
-          const grow = interpolate(f, [avgAt + 6 + i * 1.5, avgAt + 18 + i * 1.5], [0, 1], { ...clamp, easing: easeOut });
+          const grow = interpolate(f, [barsAt + 6 + i * 1.5, barsAt + 18 + i * 1.5], [0, 1], { ...clamp, easing: easeOut });
           const top = Math.min(Y0, Y0 + (Y(r) - Y0) * grow), h = Math.abs(Y(r) - Y0) * grow;
           const low = r < avg;
           return <g key={y}>
-            <rect x={x} y={top} width={bw} height={h} fill={low && drag > 0.5 ? BAD : y === best ? TEAL : "#6B7178"} />
+            <rect x={x} y={top} width={bw} height={h} fill={low && drag > 0.5 ? BAD : y === bestYear ? TEAL : "#6B7178"} />
             <text x={x + bw / 2} y={Math.max(Y0, Y(r)) + 40} textAnchor="middle" fontFamily={BEBAS} fontSize={30} fill={MUTE}>{"'" + String(y).slice(2)}</text>
           </g>;
         })}
-        {drop > 0 && <line x1={X0 - 20} x2={X1} y1={lineY} y2={lineY} stroke={INK} strokeWidth={3} strokeDasharray="14 10" />}
-        {drop > 0 && <text x={X1 + 18} y={lineY + 12} fontFamily={BEBAS} fontSize={34} fill={INK}>AVERAGE</text>}
-        <text x={X0 + SEASONS.findIndex(([y]) => y === best) * step + step / 2} y={peakY - 16} textAnchor="middle" fontFamily={BEBAS} fontSize={30} fill={TEAL}>BEST</text>
+        {draw > 0 && <line x1={X0 - 20} x2={X0 - 20 + (X1 - X0 + 20) * draw} y1={lineY} y2={lineY} stroke={INK} strokeWidth={4} strokeDasharray="14 10" />}
+        {draw > 0.95 && <text x={X1 + 18} y={lineY + 12} fontFamily={BEBAS} fontSize={34} fill={INK}>HIS AVERAGE</text>}
+        <text x={X0 + SEASONS.findIndex(([y]) => y === bestYear) * step + step / 2} y={peakY - 16} textAnchor="middle" fontFamily={BEBAS} fontSize={30} fill={TEAL}>BEST</text>
       </svg>}
     </AbsoluteFill>
   );

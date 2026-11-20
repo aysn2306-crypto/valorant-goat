@@ -587,8 +587,10 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
   const up = band.map((n) => `${X(n)},${Y(Math.min(yr[1], Math.sqrt(n)))}`).join(" ");
   const dn = band.slice().reverse().map((n) => `${X(n)},${Y(Math.max(yr[0], -Math.sqrt(n)))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
+  // LOCKED (ay 20 Nov, again 20:04): the walk goes through THREE tiers: bottom named, MIDDLE named (around expected), top named
+  const middle: [string, "left" | "right" | "above" | "below"][] = [["ruler", "below"], ["rookie", "above"], ["doran", "left"], ["impact", "right"]]; // line 30b
   const named: [string, "left" | "right" | "above" | "below"][] = [["on", "below"], ["zeus", "below"], ["gumayusi", "above"], ["knight", "right"], ["bin", "above"]]; // line 31 (19:36): On, Zeus, Gumayusi, Knight, Bin
-  const keys: CamKey[] = walk ? [{ at: walk.bottom, x: X(70), y: Y(-5.5), s: 1.75 }, { at: walk.mid, x: X(62), y: Y(0.5), s: 1.12 },
+  const keys: CamKey[] = walk ? [{ at: walk.bottom, x: X(70), y: Y(-5.5), s: 1.75 }, { at: walk.mid, x: X(76), y: Y(0), s: 1.7 },
     { at: walk.top, x: X(88), y: Y(10.5), s: 1.6 }, ...(walk.out ? [{ at: walk.out, x: 960, y: 540, s: 1 }] : [])] : [];
   const cam = walk ? camAt(fr0, keys) : undefined;
   const midLit = walk ? Math.min(1, Math.max(0, (fr0 - walk.mid - 10) / 10)) * (fr0 < walk.top ? 1 : Math.max(0, 1 - (fr0 - walk.top) / 10)) : 0;
@@ -605,6 +607,8 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
       {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 7) / 21)} o={r[3] > Math.sqrt(r[2]) ? 1 : 0.6} />)}
       <Dot x={X(fk[2])} y={Y(fk[3])} r={6} color={heat((fk[3] + 7) / 21)} o={1} />{/* Faker's dot is there from the start; "yup" circles it */}
       {chokeShown && chokers.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={r0(r[3])} side={side} ring={18} color="#E06A5A" />; })}
+      {middle.filter(([id]) => nameAt[id] !== undefined && fr0 >= nameAt[id] && fr0 < (walk?.top ?? 1e9)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!;
+        return <Callout key={"m" + id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={(r[3] > 0 ? "+" : "") + r[3].toFixed(1)} side={side} ring={14} color="#F2F2EE" />; })}
       {named.filter(([id]) => fr0 >= (nameAt[id] ?? reveal)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
       {shown && <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={22} pad={20} color={C.gold} size={1.3} />}
     </Stage>
@@ -833,8 +837,10 @@ export const SampleKnightRadar: React.FC<{ gapAt?: number }> = ({ gapAt }) => {
   };
   const [kx, ky] = pt(0, PARTS[0][3]), [fx, fy] = pt(0, 100);
   return (
-    <Stage title="KNIGHT VS FAKER" glow="split">
+    <Stage glow="split">
      <AbsoluteFill style={{ transform: `translateY(${70 * zke}px) scale(${1 + 0.6 * zke})`, transformOrigin: `${cx}px ${cy - 220}px` }}>
+      {/* ay 20 Nov 20:01: the title zooms with the graph */}
+      <div style={{ position: "absolute", left: 0, right: 0, top: 40, textAlign: "center", fontFamily: F.title, fontSize: 80, letterSpacing: 2, color: CREAM, textShadow: "0 0 18px rgba(236,230,210,0.35)" }}>KNIGHT VS FAKER</div>
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
         {[25, 50, 75, 100].map((v) => (
           <polygon key={v} points={PARTS.map((_, i) => pt(i, v).join(",")).join(" ")} fill="none"

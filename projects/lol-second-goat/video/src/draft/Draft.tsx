@@ -11,6 +11,7 @@ import * as Sm from "../samples/Samples";
 import { Build, Count527, Footage, Formula, Quote, Words } from "../rough/RoughCut";
 import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWithout } from "./Boards";
 import { TeamRoles } from "./TeamRoles";
+import { PMLedger } from "./PMLedger";
 import { TrophySplit } from "./TrophySplit";
 import { TitleShare } from "./TitleShare";
 import { SeasonList } from "./SeasonList";
@@ -101,7 +102,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // Jxmy handwritten note over the shot (style map 1:08); photo stands in for a rebuild-year game
   // ay 20 Nov: show his titles getting cut down by the averaging
   ["13", (c) => <TrophyWeight barAt={at(c, WA("13", ["trophies", "main"]))} cupsAt={at(c, WA("13", ["six", "barely", "worlds"]))}
-    avgAt={at(c, W("13", "averaging"))} dragAt={at(c, WA("13", ["dragging", "later", "down"]))} />], // script 16:05: trophy weight too small + averaging
+    barsAt={at(c, WA("13", ["top", "that"]))} avgAt={at(c, W("13", "averaging"))} dragAt={at(c, WA("13", ["dragging", "later", "down"]))} />], // script 16:05: trophy weight too small + averaging
   ["15", (c) => <MLBoard title="Peak, not average" lines={[
     { text: "Version 1: the average of every year", at: 4 },
     { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },
@@ -145,12 +146,16 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     // "all the way up here" pans to the clutch players, "yup" names Faker
     const rv = at(c, WA("31", ["yup"])), ch = at(c, WA("30", ["creme", "bottom"]));
     return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} walk={{ bottom: at(c, WA("30", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
-      nameAt={Object.fromEntries(["on", "zeus", "gumayusi", "knight", "bin"].map((id) => [id, at(c, id === "on" ? WE("31", "on") : WA("31", [id === "gumayusi" ? "guma" : id]))]))} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
+      nameAt={Object.fromEntries([...["on", "zeus", "gumayusi", "knight", "bin"].map((id) => [id, at(c, id === "on" ? WE("31", "on") : WA("31", [id === "gumayusi" ? "guma" : id]))]),
+        ...["ruler", "rookie", "doran", "impact"].map((id) => [id, at(c, WA("30b", [id]))])])} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
   // ay 20 Nov: the old with/without graph with all three players back (only Chovy is talked about)
   ["32", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
   // ay 20 Nov: from the Chovy graph straight to the wins-added graph, held the whole time, then the climb to Faker
   // ay 20 Nov (draft 7): the "when he's out, who comes in" explainer back, then the wins-added graph, then the climb
   ["34", anchored(<Sm.SPlusMinus voice={false} />, Sm.PM_T0)],
+  // ay 20 Nov 20:01: line 35 as a running ledger for Chovy (the grid was confusing)
+  ["35", (c) => <PMLedger cues={{ lineup: at(c, WA("35", ["against", "players"])), result: at(c, WA("35", ["over", "26"])), n26: at(c, WA("35", ["26", "about"])),
+    fast: at(c, WA("35", ["add", "up"])), done: at(c, L("35").end) + 12 }} />],
   ["37", (c) => { const k = Math.max(1, fr(Cl.CLIMB_T0 - c.t0)); // ay 20 Nov 14:36: line 36 cut, straight to the graph
     return <><Sequence durationInFrames={k} layout="none"><Freeze frame={30}><Cl.SClimb voice={false} /></Freeze></Sequence>
       <Sequence from={k} layout="none"><Cl.SClimb voice={false} /></Sequence></>; }],

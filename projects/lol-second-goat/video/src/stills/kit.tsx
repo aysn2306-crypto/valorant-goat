@@ -44,12 +44,15 @@ export const Stage: React.FC<{ title?: string; children: React.ReactNode; glow?:
   }[glow];
   return (
     <AbsoluteFill style={{ background: `${g}, #0B0B0F`, overflow: "hidden" }}>
-      {cam ? <AbsoluteFill style={{ transform: `translate(${960 - cam.x * cam.s}px, ${540 - cam.y * cam.s}px) scale(${cam.s})`, transformOrigin: "0 0" }}>{children}</AbsoluteFill> : children}
+      {/* ay 20 Nov 20:01: the title is part of the graph. When the camera zooms, the title moves (and leaves the frame)
+          with everything else instead of staying pinned on top of the zoomed dots. */}
+      {(() => {
+        const t = title && (
+          <div style={{ position: "absolute", left: 0, right: 0, top: 40, textAlign: "center", fontFamily: F.title, fontSize: 80, letterSpacing: 2,
+            color: CREAM, textShadow: "0 0 18px rgba(236,230,210,0.35)" }}>{title}</div>);
+        return cam ? <AbsoluteFill style={{ transform: `translate(${960 - cam.x * cam.s}px, ${540 - cam.y * cam.s}px) scale(${cam.s})`, transformOrigin: "0 0" }}>{children}{t}</AbsoluteFill> : <>{children}{t}</>;
+      })()}
       <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%)", pointerEvents: "none" }} />
-      {title && (
-        <div style={{ position: "absolute", left: 0, right: 0, top: 40, textAlign: "center", fontFamily: F.title, fontSize: 80, letterSpacing: 2,
-          color: CREAM, textShadow: "0 0 18px rgba(236,230,210,0.35)" }}>{title}</div>
-      )}
     </AbsoluteFill>
   );
 };

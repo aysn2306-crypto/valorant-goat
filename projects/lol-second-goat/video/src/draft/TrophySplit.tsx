@@ -49,13 +49,13 @@ export const TrophySplit: React.FC<{ cues: { photos: number; pie: number; shares
         const gap = 10 * cut;
         const mvpOn = f >= (cues.mvp ?? 1e9);
         const lit = mvpOn ? id === "ning" : id === "rookie" && f >= (cues.top ?? 1e9);
-        const o = pop(cues.shares + i * 4);
+        const o = pop(cues.shares); // ay 20 Nov 20:01: all five count up together, 0 to their share
         return (
           <React.Fragment key={id}>
             <div style={{ position: "absolute", left: x + gap / 2, top: Y, width: Math.max(0, w - gap), height: H, background: lit ? TEAL : (cut < 0.05 ? SEG[0] : SEG[i % 2]),
               clipPath: `inset(0 ${Math.max(0, Math.min(100, ((x + w - (X0 + W * barIn)) / Math.max(1, w - gap)) * 100))}% 0 0)` }} />
             <div style={{ position: "absolute", left: x, width: w, top: Y + 38, textAlign: "center", fontFamily: BEBAS, fontSize: 70, color: lit ? "#10241F" : INK, opacity: o }}>
-              {pct[i].toFixed(1)}%</div>
+              {(pct[i] * interpolate(f, [cues.shares, cues.shares + 30], [0, 1], { ...clamp, easing: easeOut })).toFixed(1)}%</div>
             <div style={{ position: "absolute", left: x, width: w, top: Y + H + 26, display: "flex", flexDirection: "column", alignItems: "center", opacity: o }}>
               <div style={{ width: 110, height: 110, borderRadius: "50%", overflow: "hidden", background: "#2E333C", border: `4px solid ${lit ? TEAL : INK}` }}>
                 <Img src={staticFile(`players/ig2018/${id}.png`)} style={{ width: "100%", height: "100%", objectFit: "cover", background: "#E9E6DE" }} />
