@@ -640,7 +640,19 @@ def main():
     P["big_stage_raw"] = best_years(bs, "big", 15, pad=True).reindex(pool).fillna(0)
     yr = s[s.Link.isin(pool)].groupby(["Link", "year"]).apply(lambda d: pd.Series({"imp": wmean(d, "a_impact"), "G": d.G.sum()}), include_groups=False).reset_index()
     yr["imp_s"] = shrink(yr.imp.fillna(0), yr.G, k)
-    yr.to_csv(os.path.join(CSV, "season_ratings.csv"), index=False)   # per player-year season rating (for charts and checks)
+    # v15.2 (ay 20 Nov 18:08, "Fix it and rerun"): 2013-15 seasons are built from fewer tracked stats (no laning stats
+    # before 2014, no damage before 2020) and fewer recorded games, so their best seasons sat lower than every year from
+    # 2017 on. Each year is scaled so its top 10 seasons (40+ games) average the same as 2016-2026; years with fewer
+    # than 20 such players (2012) are left alone. ERA_SCALE=0 reproduces v15.1.
+    era_f = pd.Series(dtype=float)
+    if os.environ.get("ERA_SCALE", "1") != "0":
+        q = yr[yr.G >= 40]
+        t10 = q.groupby("year").imp_s.apply(lambda x: x.nlargest(10).mean())
+        ref_t = t10[t10.index >= 2016].mean()
+        era_f = (ref_t / t10).where(q.groupby("year").size() >= 20, 1.0)
+        yr["imp_s"] = yr.imp_s * yr.year.map(era_f).fillna(1.0)
+    if not variant:
+        yr.to_csv(os.path.join(CSV, "season_ratings.csv"), index=False)   # per player-year season rating (for charts and checks)
     best = yr.loc[yr.groupby("Link").imp_s.idxmax()].set_index("Link")
     P["peak_raw"], P["peak_year"] = best.imp_s, best.year
     LG = CFG.get("longevity", {"min_games": 20, "min_impact": 0.35})
@@ -656,7 +668,7 @@ def main():
     if LG.get("year_cap"):   # a monster year counts as one great year, not three ordinary ones (ay 18 Nov)
         above = np.minimum(above, LG["year_cap"])
     P["longevity_raw"] = pd.Series(above, index=ok.index).groupby(ok.Link).sum().reindex(pool).fillna(0)
-    P["individual_raw"] = best_years(s[s.Link.isin(pool)], "a_impact", k)
+    P["individual_raw"] = best_years(s[s.Link.isin(pool)].assign(a_impact=lambda d: d.a_impact * d.year.map(era_f).fillna(1.0)), "a_impact", k)
     cf = os.path.join(CSV, "clutch.csv")
     if os.path.exists(cf):
         cl = pd.read_csv(cf)

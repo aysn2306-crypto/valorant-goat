@@ -14,31 +14,31 @@ Data: Leaguepedia scoreboards, 303 tournaments, 25,987 games (approx.), 1,915 pl
 
 | # | Player | Role | Regions | Years | Worlds | MSI | Domestic | MVPs | Score | #1 in 1000 runs | #2 in 1000 runs |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Faker | Mid | LCK | 2013-2026 | 6 | 2 | 10 | 3 | 95.4 | 100.0% | 0.0% |
-| 2 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 2 | 73.5 | 0.0% | 100.0% |
+| 1 | Faker | Mid | LCK | 2013-2026 | 6 | 2 | 10 | 3 | 96.6 | 100.0% | 0.0% |
+| 2 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 2 | 73.1 | 0.0% | 100.0% |
 | 3 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 1 | 70.3 | 0.0% | 0.0% |
-| 4 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 68.2 | 0.0% | 0.0% |
-| 5 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 0 | 65.4 | 0.0% | 0.0% |
-| 6 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 65.0 | 0.0% | 0.0% |
-| 7 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 63.1 | 0.0% | 0.0% |
-| 8 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 62.9 | 0.0% | 0.0% |
-| 9 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 62.3 | 0.0% | 0.0% |
+| 4 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 68.3 | 0.0% | 0.0% |
+| 5 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 0 | 65.6 | 0.0% | 0.0% |
+| 6 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 65.2 | 0.0% | 0.0% |
+| 7 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 63.0 | 0.0% | 0.0% |
+| 8 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 62.9 | 0.0% | 0.0% |
+| 9 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 62.7 | 0.0% | 0.0% |
 | 10 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 0 | 61.0 | 0.0% | 0.0% |
 | 11 | Oner | Jungle | LCK | 2021-2026 | 3 | 0 | 1 | 0 | 59.6 | 0.0% | 0.0% |
-| 12 | Caps | Mid | LEC | 2017-2026 | 0 | 1 | 18 | 1 | 59.0 | 0.0% | 0.0% |
-| 13 | Gumayusi | Bot | LCK | 2021-2026 | 3 | 1 | 1 | 1 | 58.7 | 0.0% | 0.0% |
-| 14 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 0 | 58.7 | 0.0% | 0.0% |
-| 15 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 0 | 56.4 | 0.0% | 0.0% |
+| 12 | Caps | Mid | LEC | 2017-2026 | 0 | 1 | 18 | 1 | 58.6 | 0.0% | 0.0% |
+| 13 | Gumayusi | Bot | LCK | 2021-2026 | 3 | 1 | 1 | 1 | 58.6 | 0.0% | 0.0% |
+| 14 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 0 | 58.3 | 0.0% | 0.0% |
+| 15 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 0 | 56.5 | 0.0% | 0.0% |
 
-Benchmark: Faker score 95.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 94, peak 77, winning 99, longevity 100, carry 78, clean_play 70, consistency 78, laning 74, killing 89, teamfight 64, vision 72, team_carry 64, solo_carry 68, recognition 89, team_lift 50, clutch 100, title_teams 60, individual 79, big_stage_clutch 100, carry_pillar 71, skill 79, impact 100, intangibles 89
+Benchmark: Faker score 96.6, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 94, peak 87, winning 99, longevity 100, carry 78, clean_play 70, consistency 78, laning 74, killing 89, teamfight 64, vision 72, team_carry 64, solo_carry 68, recognition 89, team_lift 50, clutch 100, title_teams 60, individual 85, big_stage_clutch 100, carry_pillar 71, skill 86, impact 100, intangibles 89
 
 ## Players ay named
 
 | Player | Rank | Score | Worlds | Trophy pts | Big stage | Peak (year) |
 |---|---|---|---|---|---|---|
-| Knight | 2 | 73.5 | 1 | 695 | 100 | 100 (2026) |
-| Viper | 10 | 61.0 | 2 | 554 | 79 | 73 (2026) |
-| Bin | 8 | 62.9 | 1 | 561 | 91 | 82 (2026) |
+| Knight | 2 | 73.1 | 1 | 695 | 100 | 99 (2026) |
+| Viper | 10 | 61.0 | 2 | 554 | 79 | 75 (2024) |
+| Bin | 9 | 62.7 | 1 | 561 | 91 | 81 (2026) |
 
 ## Tipping point (trophy weight -> #1 overall, then #2)
 
@@ -54,11 +54,11 @@ Benchmark: Faker score 95.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 ## Side-board: Most Dominant (individual categories only)
 
-1. Chovy (Mid, 1018 games, peak 2025): 91.8
-2. Knight (Mid, 1102 games, peak 2026): 90.3
-3. Keria (Support, 995 games, peak 2024): 85.3
-4. Faker (Mid, 1575 games, peak 2016): 81.6
-5. Bin (Top, 937 games, peak 2026): 81.0
+1. Chovy (Mid, 1018 games, peak 2025): 92.4
+2. Knight (Mid, 1102 games, peak 2026): 89.6
+3. Keria (Support, 995 games, peak 2024): 86.9
+4. Faker (Mid, 1575 games, peak 2016): 85.7
+5. Bjergsen (Mid, 712 games, peak 2014): 81.2
 
 ## Every category top 5 (Faker included)
 
@@ -66,11 +66,11 @@ Benchmark: Faker score 95.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 **big_stage**: Knight 100, Faker 94, Bin 91, Keria 89, Zeus 88
 
-**peak**: Knight 100, Chovy 97, Kiin 94, Keria 91, Zeus 91
+**peak**: Chovy 100, Knight 99, Keria 98, Clearlove 96, Zeus 93
 
 **winning**: Chovy 100, Faker 99, Canyon 99, Ruler 97, Peanut 92
 
-**longevity**: Faker 100, Deft 90, Knight 90, Chovy 90, Ruler 88
+**longevity**: Faker 100, Deft 92, Knight 90, Chovy 90, Rookie 89
 
 **carry**: Chovy 100, Kanavi 97, Uzi 96, Knight 90, TheShy 89
 
@@ -98,13 +98,13 @@ Benchmark: Faker score 95.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 **title_teams**: Peanut 100, Deft 90, Mata 90, Knight 80, Viper 80
 
-**individual**: Chovy 100, Knight 99, Keria 96, Zeus 90, Kanavi 88
+**individual**: Chovy 100, Knight 97, Keria 96, Zeus 90, Kanavi 88
 
 **big_stage_clutch**: Faker 100, Knight 98, Bin 98, Zeus 89, Gumayusi 87
 
 **carry_pillar**: Chovy 100, Bjergsen 96, Froggen 86, Hauntzer 86, BeryL 85
 
-**skill**: Chovy 100, Knight 100, Keria 95, Zeus 91, Kiin 90
+**skill**: Chovy 100, Knight 98, Keria 96, Zeus 91, Kanavi 88
 
 **impact**: Faker 100, Ruler 91, Doinb 87, TheShy 82, JackeyLove 81
 
