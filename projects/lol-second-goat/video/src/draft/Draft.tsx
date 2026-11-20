@@ -15,7 +15,7 @@ import { SeasonList } from "./SeasonList";
 import { HeadToHead } from "./HeadToHead";
 import * as Ov from "./Overlays";
 import { KillsLine } from "./KillsLine";
-import { HardestBars, PriceClimb } from "./Bars";
+import { HardestRuns, PriceClimb } from "./Bars";
 import { Concrete } from "../samples/Climb";
 import { PercentStack } from "./PercentStack";
 import { PillBars, StackedLines, TitleList } from "./Lists";
@@ -94,6 +94,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["23", (c) => <AbsoluteFill><Concrete /><Ov.FlipCounter at={at(c, W("23", "coin"))} end={at(c, W("23", "opponents"))} /></AbsoluteFill>],
   // Jxmy gold-bar ranking in our look (style map 2:22): T1 2024 = 8.7 flips, BLG 2026 second (stills.json events)
   // Jxmy close-up bar list, camera row to row, then pull back (style map 2:31); LEC left off (ay 19 Nov)
+  // ay 20 Nov 12:35: hardest Worlds runs on the champion's own odds (DRX 2022 hardest, T1 2024 second); line 24 is being re-recorded
+  ["24", (c) => { const w = (word: string, fb: number) => { try { return at(c, W("24", word)); } catch { return fb; } };
+    return <HardestRuns cues={{ rise: 4, lit: [{ team: "DRX", year: 2022, at: w("drx", 20) }, { team: "T1", year: 2024, at: w("t1", 50) }] }} />; }],
   ["25", (c) => <PriceClimb cues={[at(c, W("25", "worlds")), at(c, W("25", "messiah")), at(c, W("25", "so", 1)), at(c, W("25", "so", 1)) + 6, at(c, W("25", "so", 1)) + 12]} out={at(c, W("25", "so", 1)) + 14} />],
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
   ["26@sports", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
