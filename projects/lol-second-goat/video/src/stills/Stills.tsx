@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Img, staticFile } from "remotion";
+import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 import { C, F } from "../theme";
 import { D, P } from "../lib/data";
 import S from "../data/stills.json";
@@ -292,7 +292,12 @@ const LISTS: Record<string, [string, string][]> = {
   uzi: [["ESPORTS.NET 2025", "#4"], ["SPILLED.GG 2026", "#5"]],
   bengi: [["ESPORTS.NET 2025", "#2"], ["SPILLED.GG 2026", "#9"]],
 };
-const Pyramid: React.FC<{ focus?: boolean; internet?: boolean }> = ({ focus, internet }) => {
+/** zoomAt/arrowAt (frames): ay 20 Nov, on "here to there" the camera moves in and the arrow draws from Knight to Faker */
+const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; arrowAt?: number }> = ({ focus, internet, zoomAt, arrowAt }) => {
+  const fr0 = useCurrentFrame();
+  const zk = zoomAt === undefined ? 1 : Math.min(1, Math.max(0, (fr0 - zoomAt) / 24));
+  const zke = zk < 0.5 ? 2 * zk * zk : 1 - Math.pow(-2 * zk + 2, 2) / 2;
+  const ak = arrowAt === undefined ? 1 : Math.min(1, Math.max(0, (fr0 - arrowAt) / 20));
   const top = 110, base = 948, half = 800, cx = 960;
   const cuts = [top, 330, 490, 640, 795, base];
   const hw = (y: number) => ((y - top) / (base - top)) * half;
@@ -304,7 +309,7 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean }> = ({ focus, int
   const hidden = (i: number) => internet && i < 3;
   return (
     <Stage glow="gold">
-      <AbsoluteFill style={{ transform: focus ? "scale(1.45)" : undefined, transformOrigin: `${kn.x + 80}px ${top + 20}px` }}>
+      <AbsoluteFill style={{ transform: focus ? `scale(${1 + 0.75 * zke})` : undefined, transformOrigin: `${kn.x + 80}px ${top + 60}px` }}>
         <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
           {TIERS.map((_, i) => {
             const y0 = cuts[i], y1 = cuts[i + 1];
@@ -359,9 +364,11 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean }> = ({ focus, int
         {focus && (
           <>
             <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
-              <defs><marker id="ah" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill={C.text} /></marker></defs>
+              <defs><marker id="ah" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill={C.text} /></marker>
+                <mask id="arrowDraw"><path d={`M ${kn.x - 30} ${kn.y - 50} C ${kn.x - 100} ${kn.y - 130}, ${fk.x - 150} ${fk.y + 40}, ${fk.x - 72} ${fk.y + 10}`} stroke="#fff" strokeWidth={14}
+                  fill="none" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ak} /></mask></defs>
               <path d={`M ${kn.x - 30} ${kn.y - 50} C ${kn.x - 100} ${kn.y - 130}, ${fk.x - 150} ${fk.y + 40}, ${fk.x - 72} ${fk.y + 10}`} stroke={C.text} strokeWidth={5}
-                fill="none" strokeDasharray="14 10" markerEnd="url(#ah)" style={{ filter: "drop-shadow(0 0 6px rgba(255,255,255,0.6))" }} />
+                fill="none" strokeDasharray="14 10" markerEnd={ak > 0.97 ? "url(#ah)" : undefined} mask="url(#arrowDraw)" opacity={ak > 0 ? 1 : 0} />
             </svg>
             <div style={{ position: "absolute", left: kn.x - 470, top: (kn.y + fk.y) / 2 - 60, width: 300, textAlign: "right", fontFamily: F.title, fontSize: 40,
               letterSpacing: 1, color: CREAM, lineHeight: 1.05, textShadow: "0 0 12px #0B0B0F" }}>WHAT WOULD IT TAKE?</div>
@@ -372,7 +379,7 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean }> = ({ focus, int
   );
 };
 export const S10Pyramid: React.FC = () => <Pyramid />;
-export const S10bPyramidArrow: React.FC = () => <Pyramid focus />;
+export const S10bPyramidArrow: React.FC<{ zoomAt?: number; arrowAt?: number }> = (p) => <Pyramid focus {...p} />;
 export const S10aPyramidInternet: React.FC = () => <Pyramid internet />;
 
 // 11a. Knight vs Faker, part by part (v11 parts and weights, MODEL-CURRENT 18 Nov 17:20; "intangibles" is called Recognition on screen)
@@ -533,7 +540,9 @@ export const S15Impact: React.FC = () => {
 // 16. Clutch vs luck: best-of-five and best-of-three series won above what the team ratings expected, with the luck band
 // (2 standard deviations of pure coin flips: about the square root of the series played)
 type Cl = [string, string, number, number];
-export const S16Clutch: React.FC = () => {
+/** reveal: frame where Faker, Bin and Knight are picked out (ay 20 Nov: until "yep, it's Faker" they are plain dots) */
+export const S16Clutch: React.FC<{ reveal?: number }> = ({ reveal = 0 }) => {
+  const shown = useCurrentFrame() >= reveal;
   const rows = S.clutch as Cl[];
   const xr: [number, number] = [0, 140], yr: [number, number] = [-10, 18]; // v14 plain series won above expected (clutch_v14_unweighted.csv)
   const { X, Y } = scale(B, xr, yr);
@@ -550,9 +559,9 @@ export const S16Clutch: React.FC = () => {
       <Big x={X(110)} y={Y(-6)} size={40} color="#9AA3B1" align="center" w={300}>LUCK</Big>
       <Axes b={B} xr={xr} yr={yr} xt={[0, 20, 40, 60, 80, 100, 120, 140]} yt={[-10, -5, 0, 5, 10, 15]} xl="BEST OF FIVES PLAYED" yl="SERIES WON ABOVE EXPECTED" yf={(v) => (v > 0 ? "+" + v : String(v))} />
       {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 7) / 21)} o={r[3] > Math.sqrt(r[2]) ? 1 : 0.6} />)}
-      {named.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
-      <Face id="faker" x={X(fk[2])} y={Y(fk[3])} size={100} />
-      <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={0} pad={56} color={C.gold} size={1.3} />
+      {!shown && <Dot x={X(fk[2])} y={Y(fk[3])} r={6} color={heat((fk[3] + 7) / 21)} o={1} />}
+      {shown && named.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
+      {shown && <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={22} pad={20} color={C.gold} size={1.3} />}
     </Stage>
   );
 };
@@ -762,7 +771,12 @@ export const S24Credit: React.FC = () => {
 
 // SAMPLE (ay 18:32, wider chart forms): Knight vs Faker as a radar, same v11 PARTS as still 20. Each part is 0 to 100,
 // pool median 50 (dashed ring), so the shapes are on one honest scale from 0.
-export const SampleKnightRadar: React.FC = () => {
+/** gapAt (frame): ay 20 Nov, on "the main gap" the circle draws and the camera zooms in on it */
+export const SampleKnightRadar: React.FC<{ gapAt?: number }> = ({ gapAt }) => {
+  const fr0 = useCurrentFrame();
+  const gk = gapAt === undefined ? 1 : Math.min(1, Math.max(0, (fr0 - gapAt) / 18));
+  const zk = gapAt === undefined ? 0 : Math.min(1, Math.max(0, (fr0 - gapAt - 6) / 26));
+  const zke = zk < 0.5 ? 2 * zk * zk : 1 - Math.pow(-2 * zk + 2, 2) / 2;
   const cx = 820, cy = 545, R = 300;
   const ang = (i: number) => ((-90 + 60 * i) * Math.PI) / 180;
   const pt = (i: number, v: number) => [cx + Math.cos(ang(i)) * R * v / 100, cy + Math.sin(ang(i)) * R * v / 100];
@@ -775,6 +789,7 @@ export const SampleKnightRadar: React.FC = () => {
   const [kx, ky] = pt(0, PARTS[0][3]), [fx, fy] = pt(0, 100);
   return (
     <Stage title="KNIGHT VS FAKER" glow="split">
+     <AbsoluteFill style={{ transform: `scale(${1 + 0.6 * zke})`, transformOrigin: `${cx}px ${cy - 220}px` }}>
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
         {[25, 50, 75, 100].map((v) => (
           <polygon key={v} points={PARTS.map((_, i) => pt(i, v).join(",")).join(" ")} fill="none"
@@ -795,16 +810,16 @@ export const SampleKnightRadar: React.FC = () => {
       <Big x={kx + 82} y={ky - 10} size={44} color={C.cyan} w={200}>{r0(PARTS[0][3])}</Big>
       {/* ay 19:41: Knight matches Faker almost everywhere; circle the trophy gap as the one thing he needs */}
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
-        <ellipse cx={cx} cy={(ky + fy) / 2} rx={70} ry={(ky - fy) / 2 + 40} fill="none" stroke={CREAM} strokeWidth={5} strokeDasharray="14 9"
-          style={{ filter: "drop-shadow(0 0 8px rgba(236,230,210,0.6))" }} />
-        <path d={`M ${cx - 80} ${(ky + fy) / 2} L ${cx - 230} ${(ky + fy) / 2 - 40}`} stroke={CREAM} strokeWidth={4} />
+        <ellipse cx={cx} cy={(ky + fy) / 2} rx={70} ry={(ky - fy) / 2 + 40} fill="none" stroke={CREAM} strokeWidth={5} pathLength={1} strokeDasharray={`${gk} 1`} />
+        <path d={`M ${cx - 80} ${(ky + fy) / 2} L ${cx - 230} ${(ky + fy) / 2 - 40}`} stroke={CREAM} strokeWidth={4} opacity={gk > 0.95 ? 1 : 0} />
       </svg>
-      <Big x={cx - 240} y={(ky + fy) / 2 - 110} size={46} align="right" w={420} color={CREAM}>THE BIG GAP</Big>
+      <div style={{ opacity: gk > 0.95 ? 1 : 0 }}><Big x={cx - 240} y={(ky + fy) / 2 - 110} size={46} align="right" w={420} color={CREAM}>THE BIG GAP</Big></div>
       <Big x={fx + 82} y={fy - 30} size={44} color={C.gold} w={200}>100</Big>
       <Face id="faker" x={1560} y={400} size={140} ring={C.gold} glow={C.gold} />
       <Big x={1560} y={480} size={48} align="center" color={C.gold} w={300}>#1 FAKER</Big>
       <Face id="knight" x={1560} y={680} size={140} ring={C.cyan} glow={C.cyan} />
       <Big x={1560} y={760} size={48} align="center" color={C.cyan} w={300}>#2 KNIGHT</Big>
+     </AbsoluteFill>
     </Stage>
   );
 };

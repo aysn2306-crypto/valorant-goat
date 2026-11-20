@@ -99,29 +99,23 @@ export const BigWord: React.FC<{ text: string; at: number; y?: number; size?: nu
 
 // CommentPile: from Jxmy's comment bubbles (video-research/jxmy-graphics/videos/WyYOm44eQyI/graphs/
 //   x02_comment-bubbles_article-highlight-then-comments-pile): white bubbles with a small avatar and a name line, popping
-//   in one after another until they pile up across the frame. Ours are written by us to stand for the debate, so the
-//   avatars and names are blank (no real users). Then the bubble being talked about comes forward and the rest dim.
-const TAKES: { text: string; x: number; y: number; id?: string }[] = [
-  { text: "keria. best support ever, not close", x: 90, y: 90, id: "keria" },
-  { text: "chovy's mechanics are on another level", x: 930, y: 150, id: "chovy" },
-  { text: "uzi. no worlds but nobody played adc like him", x: 60, y: 290 },
-  { text: "ruler is #2 and nobody talks about it", x: 1010, y: 350 },
-  { text: "rookie in 2014 was unreal", x: 150, y: 490 },
-  { text: "knight after THIS worlds??", x: 1000, y: 550 },
-  { text: "bengi has 3 rings, just saying", x: 1060, y: 750 },
-  { text: "deft. the longevity alone", x: 80, y: 690 },
-  { text: "caps carried the whole west", x: 200, y: 880 },
-  { text: "theshy peak > everyone's peak", x: 960, y: 930 },
+//   in one after another until they pile up across the frame. ay 20 Nov: real answers only, quoted word for word from
+//   real articles (lol-second-goat/research/fan-answers.csv), each with its site and year. Then the one being talked
+//   about comes forward and the rest dim.
+const TAKES: { text: string; src: string; x: number; y: number; id?: string }[] = [
+  { text: "“The second-best player of all time has got to be the LPL's Rookie.”", src: "RIFTFEED · 2023", x: 70, y: 120 },
+  { text: "“2. Ryu \"Keria\" Min-seok (T1)”", src: "SPILLED.GG · 2026", x: 1200, y: 300, id: "keria" },
+  { text: "“The true LPL goat and nearest to SGOAT is Xiaohu.”", src: "TEAM LIQUID · 2025", x: 70, y: 300 },
+  { text: "“The GOAT label gets thrown around when people talk about him” (Chovy)", src: "SPILLED.GG · 2026", x: 70, y: 480, id: "chovy" },
+  { text: "“the only one who could come close to matching Faker's status” (Uzi)", src: "HOTSPAWN · 2026", x: 70, y: 660 },
+  { text: "“2. Bengi | The Vision Master”", src: "ESPORTS.NET · 2025", x: 1180, y: 840 },
 ];
 
-const Bubble: React.FC<{ text: string; o: number; dim: number; lift: number }> = ({ text, o, dim, lift }) => (
-  <div style={{ display: "flex", alignItems: "center", gap: 16, padding: "16px 28px 16px 16px", background: INK, borderRadius: 40, opacity: o * (1 - 0.6 * dim),
+const Bubble: React.FC<{ text: string; src: string; o: number; dim: number; lift: number }> = ({ text, src, o, dim, lift }) => (
+  <div style={{ padding: "18px 30px", background: INK, borderRadius: 26, opacity: o * (1 - 0.6 * dim),
     transform: `scale(${(0.85 + 0.15 * o) * (1 + 0.1 * lift)})`, transformOrigin: "0% 50%", boxShadow: lift ? `0 0 0 ${4 * lift}px ${TEAL}` : undefined }}>
-    <div style={{ width: 62, height: 62, borderRadius: 31, background: "#9BA3AE", flex: "none" }} />
-    <div>
-      <div style={{ width: 90, height: 10, borderRadius: 5, background: "#C4C9CF", marginBottom: 8 }} />
-      <div style={{ fontFamily: "Inter", fontWeight: 600, fontSize: 38, color: "#1B1E25", whiteSpace: "nowrap" }}>{text}</div>
-    </div>
+    <div style={{ fontFamily: "Inter", fontWeight: 700, fontSize: 20, letterSpacing: 2, color: "#6B7380", marginBottom: 6 }}>{src}</div>
+    <div style={{ fontFamily: "Inter", fontWeight: 600, fontSize: 36, color: "#1B1E25", whiteSpace: "nowrap" }}>{text}</div>
   </div>
 );
 
@@ -138,7 +132,7 @@ export const CommentPile: React.FC<{ cues: { from: number; to: number; focus: { 
         const me = cur && cur.id === t.id;
         return (
           <div key={t.text} style={{ position: "absolute", left: t.x, top: t.y, zIndex: me ? 2 : 1 }}>
-            <Bubble text={t.text} o={o} dim={cur && !me ? k : 0} lift={me ? k : 0} />
+            <Bubble text={t.text} src={t.src} o={o} dim={cur && !me ? k : 0} lift={me ? k : 0} />
           </div>
         );
       })}
@@ -328,6 +322,20 @@ export const EchoLenses: React.FC<{ word: string; bg: string; lenses: { src: str
           </div>
         );
       })}
+    </AbsoluteFill>
+  );
+};
+
+// Gumayusi's quote over his footage (Jxmy quote on dark, jxmy-graphics GPH4nK5sQ-8 x10); the photo card is gone (ay 20 Nov)
+export const QuoteOnClip: React.FC = () => {
+  const f = useCurrentFrame();
+  const o = interpolate(f, [4, 14], [0, 1], clamp);
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", padding: "0 220px" }}>
+      <div style={{ opacity: o, textAlign: "center" }}>
+        <div style={{ fontFamily: "Inter", fontWeight: 600, fontSize: 60, lineHeight: 1.3, color: INK }}>"If my goal was to become the best player in the world, I couldn't stay with T1 forever."</div>
+        <div style={{ fontFamily: BEBAS, fontSize: 36, letterSpacing: 3, color: "#9BA3AE", marginTop: 24 }}>GUMAYUSI · DAILY ESPORTS (TRANSLATED)</div>
+      </div>
     </AbsoluteFill>
   );
 };

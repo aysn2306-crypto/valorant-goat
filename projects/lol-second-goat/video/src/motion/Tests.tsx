@@ -101,21 +101,22 @@ export const T2Climb: React.FC = () => {
   const side: Record<string, "left" | "right"> = { ruler: "right", gumayusi: "left", canyon: "left", knight: "right" };
   // camera: value at screen centre (c) and zoom (s)
   const climb = p(f, T.climb, T.land, climbE), zoom = p(f, T.zoom, T.zoomEnd, inOut);
-  const c0 = 450, c1 = FK - 270 / PX, c2 = 1250 / 2 + 20;
+  const TOP = 1600; // ay 20 Nov: the axis runs past Faker's 1,509
+  const c0 = 450, c1 = FK - 270 / PX, c2 = TOP / 2 + 10;
   const c = interpolate(zoom, [0, 1], [interpolate(climb, [0, 1], [c0, c1]), c2]);
   // camera pull back: y fits the whole range, x shrinks less so the chart keeps its width
-  const s = interpolate(zoom, [0, 1], [1, 700 / (1250 * PX)]);
+  const s = interpolate(zoom, [0, 1], [1, 860 / (TOP * PX)]);
   const syk = s;
   const sy = (v: number) => 560 - (v - c) * PX * syk;
   const sx = (x: number) => 380 + (x - 380) * s;
   const axisX = sx(250);
   const step = syk > 0.5 ? 50 : syk > 0.3 ? 100 : 200;
-  const ticks: number[] = []; for (let v = 0; v <= 1300; v += step) ticks.push(v);
+  const ticks: number[] = []; for (let v = 0; v <= TOP; v += step) ticks.push(v);
   const gap = f >= T.bracket ? 1 : 0;
   const rulerV = D.players.find((q) => q.id === "ruler")!.raw.trophies;
   return (
     <Stage title="THE TROPHY CABINET">
-      <div style={{ position: "absolute", left: axisX, top: Math.max(0, sy(1300)), width: 3, height: Math.min(1080, sy(0) + 20) - Math.max(0, sy(1300)), background: "rgba(237,239,242,0.85)" }} />
+      <div style={{ position: "absolute", left: axisX, top: Math.max(0, sy(TOP)), width: 3, height: Math.min(1080, sy(0) + 20) - Math.max(0, sy(TOP)), background: "rgba(237,239,242,0.85)" }} />
       {ticks.map((v) => { const y = sy(v); if (y < 120 || y > 1080) return null; return (
         <div key={v} style={{ position: "absolute", left: axisX - 175 * s - 20, width: 160 * s + 10, top: y - 32 * s, textAlign: "right", fontFamily: F.title,
           fontSize: 52 * s, color: C.text }}>{v.toLocaleString("en-US")}</div>); })}
@@ -126,9 +127,10 @@ export const T2Climb: React.FC = () => {
       })}
       {named.map((id) => { const q = D.players.find((z) => z.id === id)!; const x = sx(xs(seasons(q.years))), y = sy(q.raw.trophies);
         return <Tag key={id} x={x} y={y} name={q.name.toUpperCase()} value={String(Math.round(q.raw.trophies))} o={1} side={side[id]} pad={20 * s + 6} s={s} />; })}
-      {(() => { const x = sx(xs(seasons(fk.years))), y = sy(FK); const sz = 120 * s; return (<>
-        <div style={{ position: "absolute", left: x - sz / 2, top: y - sz / 2, filter: `drop-shadow(0 0 ${24 * s}px ${C.gold})` }}><Photo id="faker" size={sz} round ring={C.gold} /></div>
-        <Tag x={x} y={y} name="FAKER, TROPHY SCORE" value={Math.round(FK).toLocaleString("en-US")} o={1} color={C.gold} side="left" pad={sz / 2 + 10} s={1.5 * s} />
+      {(() => { const x = sx(xs(seasons(fk.years))), y = sy(FK); const r = 16 * s; return (<>
+        {/* ay 20 Nov: Faker is a dot like everyone else, only its colour differs */}
+        <div style={{ position: "absolute", left: x - r, top: y - r, width: 2 * r, height: 2 * r, borderRadius: r, background: C.gold }} />
+        <Tag x={x} y={y} name="FAKER" value={Math.round(FK).toLocaleString("en-US")} o={1} color={C.gold} side="left" pad={20 * s + 6} s={Math.max(s, 0.5)} />
       </>); })()}
       {gap > 0 && (() => { const x = sx(xs(seasons(fk.years))) + 50, a = sy(FK), b = sy(rulerV); return (
         <div style={{ position: "absolute", left: x, top: a, height: b - a, borderLeft: "3px dashed rgba(237,239,242,0.8)", opacity: gap }}>

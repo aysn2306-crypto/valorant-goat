@@ -45,13 +45,14 @@ const ICON: Record<string, React.ReactNode> = {
   years: <path d="M7 2h18v3c0 5-6 8-6 11s6 6 6 11v3H7v-3c0-5 6-8 6-11S7 10 7 5z" />,
   medal: <g><path d="M9 1h5l3 9h-5zM23 1h-5l-3 9h5z" /><circle cx="16" cy="21" r="9" /></g>,
 };
-const PARTS: { name: string; icon: string; id: string }[] = [
-  { name: "TROPHIES", icon: "trophy", id: "faker" },
-  { name: "SKILL", icon: "skill", id: "chovy" },
-  { name: "BIG GAMES\n& CLUTCH", icon: "clutch", id: "zeus" },
-  { name: "TEAM\nIMPACT", icon: "team", id: "ruler" },
-  { name: "LONGEVITY", icon: "years", id: "deft" },
-  { name: "RECOGNITION", icon: "medal", id: "caps" },
+// ay 20 Nov: no names on these cards, an action photo per part (stand-ins from lol-second-goat/action-photos until ay picks)
+const PARTS: { name: string; icon: string; id: string; shot: string; pos?: string }[] = [
+  { name: "TROPHIES", icon: "trophy", id: "faker", shot: "faker-holds-trophy-w24.jpg", pos: "55% 20%" },
+  { name: "SKILL", icon: "skill", id: "chovy", shot: "chovy-hand-on-mouse-w26-sf.jpg", pos: "50% 30%" },
+  { name: "BIG GAMES\n& CLUTCH", icon: "clutch", id: "zeus", shot: "ruler-fists-up-w26-sf.jpg", pos: "50% 25%" },
+  { name: "TEAM\nIMPACT", icon: "team", id: "ruler", shot: "keria-shouting-calls-w24-final.jpg", pos: "50% 30%" },
+  { name: "LONGEVITY", icon: "years", id: "deft", shot: "peanut-competes-msi23.jpg", pos: "50% 30%" },
+  { name: "RECOGNITION", icon: "medal", id: "caps", shot: "knight-mvp-trophy-w26-final.jpg", pos: "50% 25%" },
 ];
 export const RED = "#C9412F", BLUE = "#3B78C4", YEL = "#F1C232";
 
@@ -64,12 +65,11 @@ const PartCard: React.FC<{ part: (typeof PARTS)[number]; w: number; h: number }>
       <div style={{ position: "absolute", left: 0, right: 0, top: h * 0.62 + 18, height: 18, background: BLUE }} />
       <div style={{ position: "absolute", left: pad, top: pad, width: frameW, height: h - pad * 2, borderRadius: 22, border: `7px solid ${YEL}`, background: RED, overflow: "hidden" }}>
         <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: photoH, overflow: "hidden" }}>
-          <Cutout id={part.id} w={frameW - 14} h={photoH} />
+          <Img src={staticFile(`_local/${part.shot}`)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: part.pos ?? "50% 30%" }} />
         </div>
         <div style={{ position: "absolute", left: 8, right: 8, bottom: 8, height: plateH, borderRadius: 14, background: BLUE, border: `4px solid ${YEL}`,
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4 }}>
           <div style={{ fontFamily: F.title, fontSize: part.name.includes("\n") ? 30 : 36, lineHeight: 1.0, color: CREAM, letterSpacing: 1, textAlign: "center", whiteSpace: "pre-line" }}>{part.name}</div>
-          <div style={{ fontFamily: F.body, fontWeight: 600, fontSize: 17, color: "rgba(236,230,210,0.8)", letterSpacing: 1 }}>{P(part.id).name.toUpperCase()}</div>
         </div>
       </div>
       {/* part icon, top right, where a maker's mark would sit */}
@@ -125,7 +125,6 @@ const TraitPanel: React.FC<{ part: (typeof PARTS)[number]; w: number; startAt: n
       <div style={{ transformOrigin: "50% 0%", transform: `rotateX(${rx}deg)`, background: "#ECE6D2", boxShadow: "0 14px 30px rgba(0,0,0,0.45)" }}>
         <div style={{ height: 16, background: RED }} />
         <div style={{ padding: "14px 16px 16px", display: "flex", flexDirection: "column", gap: 10 }}>
-          <div style={{ fontFamily: F.body, fontStyle: "italic", fontWeight: 700, fontSize: 15, letterSpacing: 1.5, color: "#6B5F4A", textAlign: "center" }}>{P(part.id).name.toUpperCase()}</div>
           {TRAITS[part.name].map((t) => (
             <div key={t} style={{ display: "flex", alignItems: "center", gap: 10 }}>
               <svg width={22} height={22} viewBox="0 0 32 32" fill="#2A1A10" stroke="#2A1A10" style={{ flexShrink: 0 }}>{ICON[part.icon]}</svg>

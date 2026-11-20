@@ -102,3 +102,16 @@ export const QuoteSubtitle: React.FC<{ lines: { text: string; at: number }[]; y?
     </AbsoluteFill>
   );
 };
+
+/** ay 20 Nov: "just write it on the screen, black background" */
+export const OnBlack: React.FC<{ big: string; at: number; sub?: string; subAt?: number }> = ({ big, at, sub, subAt = at }) => {
+  const f = useCurrentFrame();
+  const k = interpolate(f, [at, at + 6], [0, 1], clamp);
+  const s = interpolate(f, [subAt, subAt + 8], [0, 1], clamp);
+  return (
+    <AbsoluteFill style={{ background: "#000", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ fontFamily: BEBAS, fontSize: 210, letterSpacing: 6, color: INK, opacity: k, lineHeight: 1 }}>{big}</div>
+      {sub && <div style={{ fontFamily: BEBAS, fontSize: 46, letterSpacing: 4, color: MUTE, opacity: s, marginTop: 24 }}>{sub}</div>}
+    </AbsoluteFill>
+  );
+};
