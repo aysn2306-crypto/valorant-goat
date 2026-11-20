@@ -92,7 +92,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["26@basketball", (c) => <Ov.ArticlePage kicker="Basketball stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did on the floor. Two players on the same team can end up with very different shares." />],
   ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, L("27").start + 0.4), shares: at(c, L("27").start + 1.6), caption: at(c, L("27").start + 3.0) }} />],
-  ["28", (c) => { const rv = at(c, W("31", "yep")); return <Build C={() => <St.S16Clutch reveal={rv} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
+  ["28", (c) => { const rv = at(c, W("31", "yup")); return <Build C={() => <St.S16Clutch reveal={rv} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
   ["32", (c) => <WithWithout cues={{ withAt: at(c, W("33", "77")), withoutAt: at(c, W("33", "64")), diffAt: at(c, W("33", "13")), doubtAt: at(c, W("33", "not")) }} />],
   // ay 20 Nov: from the Chovy graph straight to the wins-added graph, held the whole time, then the climb to Faker
   ["34", (c) => { const k = Math.max(1, fr(Cl.CLIMB_T0 - c.t0));
@@ -165,10 +165,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["82", () => <SplitClips labels={["2013", "2026"]} left={[["faker2013Desk", 0, 4.4], ["skt2013Hug", 0, 2], ["skt2013Faker", 0, 4.9], ["skt2013Cup", 0, 5]]} right={[["fakerWalkout", 4, 16]]} />],
   ["82@treats", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, W("85", "15"))]} />],
   ["86", (c) => <St.S10bPyramidArrow zoomAt={at(c, W("86", "here"))} arrowAt={at(c, W("86", "here")) + 4} />],
-  ["88", (c) => <St.SampleKnightRadar gapAt={at(c, W("88", "gap"))} />], // re-cue to the last line once ay re-records 88/90 (trophies gap last)
+  ["88", (c) => <St.SampleKnightRadar gapAt={at(c, W("88", "gap"))} />], // 88 now ends "the glaring gap you can see is the trophies": circle and zoom on "gap"
   // ay 20 Nov: silverware needed to reach Faker's score today (Faker held flat), no years; Gumayusi joins after his quote
-  ["92", (c) => <Silverware fakerAt={4} rows={[KNIGHT_ROW(at(c, W("93", "knight"))), CHOVY_ROW(at(c, W("93", "trovie")))]} />],
-  ["94", (c) => { const back = at(c, W("94", "you")); return <>
+  ["92", (c) => <Silverware fakerAt={4} rows={[KNIGHT_ROW(at(c, W("93", "knight"))), CHOVY_ROW(at(c, W("93", "trophy")))]} />],
+  ["94", (c) => { const back = at(c, W("94", "but")); return <>
     <Sequence durationInFrames={back} layout="none"><AbsoluteFill><Clip id="guma" from={0} dim={0.5} /><Ov.QuoteOnClip /></AbsoluteFill></Sequence>
     <Sequence from={back} layout="none"><Silverware fakerAt={-30} rows={[KNIGHT_ROW(-30), CHOVY_ROW(-30), GUMA_ROW(4)]} /></Sequence></>; }],
 ];

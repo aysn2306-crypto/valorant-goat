@@ -789,7 +789,7 @@ export const SampleKnightRadar: React.FC<{ gapAt?: number }> = ({ gapAt }) => {
   const [kx, ky] = pt(0, PARTS[0][3]), [fx, fy] = pt(0, 100);
   return (
     <Stage title="KNIGHT VS FAKER" glow="split">
-     <AbsoluteFill style={{ transform: `scale(${1 + 0.6 * zke})`, transformOrigin: `${cx}px ${cy - 220}px` }}>
+     <AbsoluteFill style={{ transform: `translateY(${70 * zke}px) scale(${1 + 0.6 * zke})`, transformOrigin: `${cx}px ${cy - 220}px` }}>
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
         {[25, 50, 75, 100].map((v) => (
           <polygon key={v} points={PARTS.map((_, i) => pt(i, v).join(",")).join(" ")} fill="none"
