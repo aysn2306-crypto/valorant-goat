@@ -34,7 +34,7 @@ const Figure: React.FC<{ id: string; h: number; ring: string; rank: number; name
 };
 
 // ------------------------------------------------------------------ the 2025 pyramid twist (top three tiers)
-export const ORDER_2025 = ["faker", "chovy", "keria", "ruler", "knight", "peanut", "canyon", "oner", "zeus", "xiaohu"];
+export const ORDER_2025 = ["faker", "chovy", "ruler", "keria", "knight", "peanut", "canyon", "oner", "zeus", "xiaohu"];
 export const ORDER_2026 = ["faker", "knight", "chovy", "ruler", "keria", "canyon", "zeus", "peanut", "bin", "viper"];
 export const ORDER_GENG = ["faker", "chovy", "ruler", "knight", "canyon", "keria", "zeus", "peanut", "kiin", "bin"];
 /** states: from frame `at`, the pyramid shows `order` (top 10) under the label */
@@ -138,7 +138,7 @@ export const TwoFakers: React.FC<{ cues: [number, number] }> = ({ cues }) => {
         })}
       </svg>
       {t1 > 0.9 && <Tag x={xOf("Faker 2013-19") + bw / 2} y={Y(score["Faker 2013-19"]) - 20} id="faker" text="FAKER 2013–19" sub="#1" color={C.gold} />}
-      {t2 > 0.9 && <Tag x={xOf("Faker 2020-26") + bw / 2} y={Y(score["Faker 2020-26"]) - 20} id="faker" text="FAKER 2020–26" sub="#13" color={C.gold} />}
+      {t2 > 0.9 && <Tag x={xOf("Faker 2020-26") + bw / 2} y={Y(score["Faker 2020-26"]) - 20} id="faker" text="FAKER 2020–26" sub="#14" color={C.gold} />}
       {grow > 0.9 && <Tag x={xOf("Knight") + bw / 2 + 430} y={Y(score["Knight"]) - 10} id="knight" text="KNIGHT" sub={t1 > 0.5 ? "#2" : "#1"} color={C.cyan} small />}
       {grow > 0.9 && <svg width={1920} height={1080} style={{ position: "absolute" }}><line x1={xOf("Knight") + bw} y1={Y(score["Knight"]) + 6} x2={xOf("Knight") + bw / 2 + 420} y2={Y(score["Knight"]) - 50} stroke={C.cyan} strokeWidth={3} /></svg>}
       <div style={{ position: "absolute", left: 0, right: 0, top: 40, textAlign: "center", fontFamily: F.title, fontSize: 72, color: CREAM, letterSpacing: 2 }}>TWO FAKERS</div>

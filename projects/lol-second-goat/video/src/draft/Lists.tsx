@@ -45,9 +45,9 @@ export const StackedLines: React.FC<{ lines: { text: string; at: number; accent?
 };
 
 export const BIG_STAGE: { id: string; name: string; v: number; overall: number }[] = [
-  { id: "keria", name: "KERIA", v: 100, overall: 5 }, { id: "zeus", name: "ZEUS", v: 98.9, overall: 7 },
-  { id: "knight", name: "KNIGHT", v: 96.5, overall: 2 }, { id: "chovy", name: "CHOVY", v: 94.5, overall: 3 },
-  { id: "ruler", name: "RULER", v: 85.2, overall: 4 }];
+  { id: "keria", name: "KERIA", v: 100, overall: 5 }, { id: "zeus", name: "ZEUS", v: 98.7, overall: 7 },
+  { id: "knight", name: "KNIGHT", v: 96.4, overall: 2 }, { id: "chovy", name: "CHOVY", v: 95.1, overall: 3 },
+  { id: "ruler", name: "RULER", v: 84.9, overall: 4 }];
 
 /** cues: rise (bars grow), lit (the first bar turns teal), side (the side list slides in) */
 export const PillBars: React.FC<{ cues: { rise: number; lit: number; side: number } }> = ({ cues }) => {

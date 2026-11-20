@@ -383,8 +383,8 @@ export const S10bPyramidArrow: React.FC<{ zoomAt?: number; arrowAt?: number }> =
 export const S10aPyramidInternet: React.FC = () => <Pyramid internet />;
 
 // 11a. Knight vs Faker, part by part (v11 parts and weights, MODEL-CURRENT 18 Nov 17:20; "intangibles" is called Recognition on screen)
-const PARTS: [string, number, number, number][] = [["TROPHIES", 40, 100, 46.1], ["BIG GAMES", 14, 94.1, 98.9], ["SKILL", 18, 78.6, 99.9],
-  ["TEAM IMPACT", 12, 100, 75.9], ["YEARS AT THE TOP", 9, 100, 89.7], ["RECOGNITION", 7, 61.3, 77.6]]; // v12
+const PARTS: [string, number, number, number][] = [["TROPHIES", 40, 100, 46.1], ["BIG GAMES", 14, 94.7, 99.8], ["SKILL", 18, 78.6, 99.9],
+  ["TEAM IMPACT", 12, 100, 75.9], ["YEARS AT THE TOP", 9, 100, 89.7], ["RECOGNITION", 7, 85.8, 87.7]]; // v14.1 (data/csv/draft_scores.csv, c_ pillars, Faker then Knight)
 export const S11aKnightVsFaker: React.FC = () => {
   const b: Box = { x0: 620, y0: 210, x1: 1640, y1: 830 };
   const X = (v: number) => b.x0 + ((v - 30) / 72) * (b.x1 - b.x0);
