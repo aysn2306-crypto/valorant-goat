@@ -421,7 +421,7 @@ export const SPyramid: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
     if (i === 1) return j === 0 ? b(WA("71", ["chovy"])) : b(W("71", "knight")); // Chovy, then Knight on his name
     return Infinity;                                 // Faker's slot stays for later in the video
   };
-  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: 1e9 /* no longer spoken */, caps: a(W("66", "caps")), knight: b(WA("71", ["second", "2nd"])) };
+  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "bjergsen")) /* ay 20:21: highlighted, not spoken */, caps: a(W("66", "caps")), knight: b(WA("71", ["second", "2nd"])) };
   return (
     <AbsoluteFill>
       <PyramidScene fill={fill} pulse={pulse} zoomAt={b(W("71", "knight") + 0.6)} tierIn={a(W("64", "tiers"))} />
@@ -481,7 +481,7 @@ export const SPyramidCam: React.FC<{ voice?: boolean }> = ({ voice = true }) => 
     if (i === 1) return j === 0 ? a(WA("71", ["chovy"])) : a(W("71", "knight"));
     return Infinity;
   };
-  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: 1e9 /* no longer spoken */, caps: a(W("66", "caps")),
+  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "bjergsen")) /* ay 20:21: highlighted, not spoken */, caps: a(W("66", "caps")),
     uzi: a(W("67", "uzi")) + 14, bengi: a(W("67", "bengi")), knight: a(WA("71", ["second", "2nd"])) };
   return (
     <AbsoluteFill>

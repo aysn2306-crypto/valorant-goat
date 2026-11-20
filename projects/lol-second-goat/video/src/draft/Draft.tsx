@@ -69,7 +69,7 @@ const OGPyramid: React.FC<{ c: { t0: number; dur: number } }> = ({ c }) => {
   const cam = { x: v0.x + (v1.x - v0.x) * e, y: v0.y + (v1.y - v0.y) * e, s: v0.s + (v1.s - v0.s) * e };
   const showAt = (i: number, j: number) => i === 4 ? a(W("65", "bottom")) + 18 + j * 5 : i === 3 ? a(W("66", "tier")) + 18 + j * 5 : i === 2 ? a(W("69", "tier")) + 18 + j * 6
     : i === 1 ? (j === 1 ? a(W("71", "chovy")) : a(W("71", "knight"))) : 0; // ay 20 Nov 15:28: Faker sits in the top row from the start
-  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: 1e9 /* no longer spoken: face stays, no highlight */, caps: a(W("66", "caps")) + 20 };
+  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "bjergsen")) /* ay 20:21: highlighted, not spoken */, caps: a(W("66", "caps")) + 20 };
   return <St.PyramidOld showAt={showAt} cam={cam} pulse={pulse} outlierAt={c.t0 < L("68").start ? a(W("67", "uzi")) : undefined} />;
 };
 const FromFrame: React.FC<{ k: number; children: React.ReactNode }> = ({ k, children }) => (useCurrentFrame() >= k ? <>{children}</> : null);
