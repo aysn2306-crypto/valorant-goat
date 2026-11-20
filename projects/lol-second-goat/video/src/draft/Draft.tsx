@@ -102,7 +102,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // Jxmy handwritten note over the shot (style map 1:08); photo stands in for a rebuild-year game
   // ay 20 Nov: show his titles getting cut down by the averaging
   ["13", (c) => <TrophyWeight barAt={at(c, WA("13", ["trophies", "main"]))} cupsAt={at(c, WA("13", ["six", "barely", "worlds"]))}
-    barsAt={at(c, WA("13", ["top", "that"]))} avgAt={at(c, W("13", "averaging"))} dragAt={at(c, WA("13", ["dragging", "later", "down"]))} />], // script 16:05: trophy weight too small + averaging
+    barsAt={at(c, WA("13", ["moved", "barely"]))} avgAt={at(c, WA("13", ["averaged", "averaging"]))} dragAt={at(c, WA("13", ["dragged", "later", "down"]))} />], // script 16:05: trophy weight too small + averaging
   ["15", (c) => <MLBoard title="Peak, not average" lines={[
     { text: "Version 1: the average of every year", at: 4 },
     { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },
@@ -127,7 +127,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // script 20 Nov 15:52 (ay: trophies go straight into what each title is worth, no blank screen, no coin-flip card)
   ["22", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="TROPHIES" at={at(c, L("22").start + 0.2)} /></AbsoluteFill>],
   // the worth bars open on "how much is an MSI worth", then each value lands as it is said in 23
-  ["22@how", (c) => { const w1 = at(c, WA("23", ["100", "hundred"])), w2 = at(c, WA("23", ["56", "fifty"])), w3 = at(c, WA("23", ["44", "forty"]));
+  ["22@but", (c) => { const w1 = at(c, WA("23", ["100", "hundred"])), w2 = at(c, WA("23", ["56", "fifty"])), w3 = at(c, WA("23", ["44", "forty"]));
     return <PriceClimb cues={[Math.min(w1, 20), w2, w3, w3 + 10, w3 + 16]} out={w3 + 22} />; }],
   // line 24: every Worlds winner by the strength of the field it beat; "down here" lights DAMWON 2020, "all the way up here" T1 2024
   ["24", (c) => <WorldsValues cues={{ rise: 4, lit: [{ team: "DAMWON Gaming", year: 2020, at: at(c, WA("24", ["down", "damwon"])) },
@@ -163,7 +163,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["38", (c) => <PercentStack header="HOW MANY ALL-PRO PICKS COME OUT RIGHT" rows={[
     { icon: "trophy", label: "PICK FROM THE WINNING TEAMS", pct: 58, at: at(c, W("40", "winning")) },
     { icon: "model", label: "THE MODEL", pct: 63, at: at(c, W("41", "63")), accent: true }]}
-    cues={{ votes: at(c, W("39", "all")), hide: at(c, W("40", "model")), ask: at(c, W("40", "If")) }} />],
+    cues={{ votes: at(c, W("39", "all")), hide: at(c, W("40", "model")), ask: at(c, WA("40", ["asked", "pick"])) }} />],
   ["42@final", anchored(<Sm.SCards voice={false} />, Sm.CARDS_T0)],
   // Jxmy small stacked text card (jxmy-graphics l38FEWdJnhg x03, style map 4:56)
   ["43", (c) => <StackedLines lines={[
@@ -185,7 +185,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { label: "WIN RATE", l: "69.2%", r: "66.9%", better: "l" },
     { label: "SKILL SCORE", l: "100", r: "97.8", better: "l", big: true }]} />],
   ["51", (c) => <MLBoard title="Trophy score" lines={[
-    { text: "Each title = price × how hard × his share", at: at(c, W("51", "stack")) },
+    { text: "Each title = price × how hard × his share", at: at(c, WA("51", ["how", "times"])) },
     { text: "Added up over a whole career", at: at(c, W("51", "share")), accent: true }]} />],
   // The cabinet without Faker in view (Canyon, Ruler, Knight named), held still, then on "here's Faker" the camera climbs
   // all the way up to Faker and holds, zooms out on line 55 to compare him with everyone, and the gap bracket lands on
@@ -214,11 +214,11 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["82", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, WA("85", ["down", "13", "15"]))]} />],
   // ay 20 Nov: the arrow was over before it could be seen; zoom on "Knight", arrow drawn through "from here to there", held into 88
   ["86", (c) => <St.S10bPyramidArrow zoomAt={at(c, W("86", "knight")) - 6} arrowAt={at(c, W("86", "from"))} />],
-  ["88@whole", (c) => <St.SampleKnightRadar gapAt={at(c, W("88", "gap"))} />], // 88 now ends "the glaring gap you can see is the trophies": circle and zoom on "gap"
+  ["88", (c) => <St.SampleKnightRadar gapAt={at(c, W("88", "gap"))} />], // 88 now ends "the glaring gap you can see is the trophies": circle and zoom on "gap"
   // ay 20 Nov: silverware needed to reach Faker's score today (Faker held flat), no years; Gumayusi joins after his quote
   ["92", (c) => <Silverware fakerAt={4} rows={[KNIGHT_ROW(at(c, WA("93", ["knight"]))), CHOVY_ROW(at(c, WA("93", ["chovy", "and"])))]} />],
   // ay 20 Nov: no B-roll, just the quote on screen, then Gumayusi's row joins Knight and Chovy
-  ["94", (c) => { const back = at(c, W("94", "but")); return <>
+  ["94", (c) => { const back = at(c, WA("94", ["still", "long"])); return <>
     <Sequence durationInFrames={back} layout="none"><AbsoluteFill><Concrete /><Ov.GumaQuoteCard /></AbsoluteFill></Sequence>
     <Sequence from={back} layout="none"><Silverware fakerAt={-30} rows={[KNIGHT_ROW(-30), CHOVY_ROW(-30), GUMA_ROW(4)]} /></Sequence></>; }],
 ];
