@@ -1,6 +1,6 @@
 # Current League model (the one every thread uses)
 
-**Version 14.1 (audit fixes, 20 Nov 2026, ~01:30 London), on top of v14 (19 Nov 16:45). v14.1 = bug fixes only, no design change (see "What changed"). v14 = big games count domestic playoffs and finals in every region (ay 16:16). v13 = Recognition fixed (ay 21:00: the LCK held no All-Pro vote before 2020, so Faker's prime counted nothing). v12 = career-level plus-minus (ay chose "Fix it" 19:14).** ay approved each change on cards: halfway trophy blend (16:58), LCK/LPL fix (17:09), keep trophies as share of Faker (17:09), count 2013-15 games (17:10). Owner: the model thread. If a number here differs from anything older (script, stills, notes), this file wins.
+**Version 15 (ay chose "Fix all 3 now", 20 Nov 2026, ~13:30 London): fan-check fixes. On top of v14.1 (audit fixes) and v14 (19 Nov 16:45). v14.1 = bug fixes only, no design change (see "What changed"). v14 = big games count domestic playoffs and finals in every region (ay 16:16). v13 = Recognition fixed (ay 21:00: the LCK held no All-Pro vote before 2020, so Faker's prime counted nothing). v12 = career-level plus-minus (ay chose "Fix it" 19:14).** ay approved each change on cards: halfway trophy blend (16:58), LCK/LPL fix (17:09), keep trophies as share of Faker (17:09), count 2013-15 games (17:10). Owner: the model thread. If a number here differs from anything older (script, stills, notes), this file wins.
 Scores file: `projects/lol-second-goat/data/csv/draft_scores.csv` (branch claude/project-thread-a343zy). Video data: `video/src/data/league.json`. Regenerate this file with `python3 scoring/model_current.py`.
 
 ## GOAT pyramid (ay 18 Nov 17:46, final design)
@@ -10,16 +10,18 @@ Tiers follow the model's ranking only, never reputation. A few example faces per
 | Tier | Ranks | Faces shown |
 |---|---|---|
 | 1 | #1 | Faker (#1) |
-| 2 | #2 to #3 | Knight (#2), Chovy (#3) |
-| 3 | #4 to #10 | Ruler (#4), Keria (#5), Bin (#9), Viper (#10) |
-| 4 | #11 to #30 | Caps (#11), Gumayusi (#14), Deft (#17), Uzi (#21), TheShy (#24), Scout (#27) |
-| 5 | #31 to #62 | Doinb (#37), Perkz (#40), Bengi (#44), Bjergsen (#51), Jankos (#53) |
+| 2 | #2 to #3 | Knight (#2), Keria (#3) |
+| 3 | #4 to #10 | Ruler (#4), Chovy (#6), Gumayusi (#8), Bin (#9) |
+| 4 | #11 to #30 | Viper (#11), Caps (#12), Deft (#20), Uzi (#25), TheShy (#26), Scout (#29) |
+| 5 | #31 to #62 | Bengi (#31), Doinb (#34), Perkz (#38), Jankos (#51), Bjergsen (#58) |
 
 Faces picked for a spread of regions (ay 18:09: less LCK and old SKT heavy).
 
 Reveal: build from the bottom up. In tier 2, Chovy fills first, then a beat of silence, then Knight. Faker goes alone on top. Zoom in on Knight at #2, then an arrow draws from tier 2 up to tier 1 ("what would it take to get from here to here?") and leads into the outro.
 
 ## What changed
+**v15 (ay 20 Nov, "Fix all 3 now" on the fan-check card; V15=0 reproduces v14.1):** (1) Recognition: every All-Pro vote, MVP and model All-Pro pick counts at its league's strength that year (LCK about 1.0, LEC/LCS about 0.3 to 0.6). (2) Trophies: all of a player's league results together are worth at most one Worlds title (100), so no pile of league titles outweighs a Worlds. (3) Big games: the big-stage half is now half play (v14 stats) and half results: net big best-of-fives won (+1 win, -1 loss, international doubled). Top 10: Faker 95.4, Knight 73.2, Keria 71.2, Ruler 68.3, Zeus 68.0, Chovy 66.3, Oner 65.5, Gumayusi 65.5, Bin 64.8, Canyon 64.2. Knight #2 in 995 of 1,000 reruns (Keria 5). Trophy order: Faker, Gumayusi, Keria, Oner, Zeus. Big stage: Knight, Faker, Bin; big games + clutch: Faker 100. Recognition: Chovy, Faker, Knight. Knight vs Faker parts: trophies 45/100, big games 98/100, skill 100/79, impact 76/100, longevity 90/100, recognition 87/89. End of 2025: Keria #2, Knight #8. Gen.G wins: Ruler #2, Keria #3, Chovy #4, Knight #5. Two Fakers: Faker 2013-19 #1 (758 of 1,000), Keria #2, Knight #3, Faker 2020-26 #8. Silverware (Faker frozen 95.4): Knight 3 more Worlds + 3 MSIs (or 4 Worlds alone); Chovy 4 Worlds + 4 MSIs (or 6 alone); Gumayusi 4 more Worlds + 4 MSIs (or 6 alone). League titles no longer move it (capped).
+
 **v14.1 (audit thread, 20 Nov, bug fixes only; AUDIT20=0 reproduces v14 exactly):**
 1. Recognition counted the same MVP twice when Leaguepedia lists it under two names (Chovy 2024 Spring, Keria 2023 Spring, Ruler 2022 Summer, Bdd 2020 Spring). Now one MVP per player per split.
 2. Recognition counted domestic finals MVPs only for LCK 2015-2020 (stored as "Most Valuable Player" on playoff pages; later ones are "Finals MVP" and never counted). Now season MVPs only, as documented, in every era.

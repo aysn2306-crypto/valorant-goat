@@ -352,7 +352,7 @@ def mvps(s):
     return pd.DataFrame(rows)
 
 
-def recognition(s, pool):
+def recognition(s, pool, strength=None):
     """Intangibles proxy 1: what voters saw. All-Pro points (1st 3, 2nd 2, 3rd 1) plus 3 per season MVP, per split
     played in seasons where Leaguepedia records the vote (LCK/LPL from 2020, EU/NA from 2015), shrunk toward zero.
     Players with no covered split get the pool median, so missing votes neither help nor hurt."""
@@ -403,6 +403,19 @@ def recognition(s, pool):
     rs = rs[rs.G >= rs.groupby(["Page", "role"]).G.transform("max") * 0.5]
     rs["rk"] = rs.groupby(["Page", "role"]).a_impact.rank(ascending=False, method="first")
     filled = rs[rs.rk <= 3].assign(pts=lambda d: 4 - d.rk)[["Page", "Link", "pts"]].rename(columns={"Page": "OverviewPage"})
+    if V15 and strength is not None:
+        # v15 (ay 20 Nov): an honour is worth what its league is worth. An LEC or LCS All-Pro vote (or MVP) counts
+        # at that league's strength that year (LCK about 1.0, LEC/LCS about 0.3 to 0.6), the same scale the model
+        # already uses for league titles and stats.
+        RG = {"Champions": "LCK", "LCK": "LCK", "LPL": "LPL", "LEC": "LEC", "EU LCS": "LEC", "LCS": "LCS", "NA LCS": "LCS",
+              "LMS": "LMS", "LTA North": "LCS"}
+        def wtd(d):
+            rg = d.OverviewPage.str.extract(r"^([^/]+)/")[0].map(RG)
+            yr = d.OverviewPage.str.extract(r"(20\d\d)")[0].astype(float)
+            w = [strength.loc[int(y), r] if (r in strength.columns and y == y and int(y) in strength.index) else 1.0 for y, r in zip(yr, rg)]
+            return d.assign(pts=d.pts * np.array(w))
+        pts, filled = wtd(pts), wtd(filled)
+        tot = pts.groupby("Link").pts.sum().reindex(pool).fillna(0)
     tot = tot.add(filled.groupby("Link").pts.sum().reindex(pool).fillna(0), fill_value=0)
     played = played + rs[rs.Link.isin(pool)].groupby("Link").Page.nunique().reindex(pool).fillna(0)
     # v13: honours are counted in full, the way All-NBA selections are counted in a Hall of Fame case. A rate per
@@ -506,7 +519,8 @@ def add_future(s, T, fut):
     return s, T
 
 FUTURE_CFG = None
-AUDIT20 = os.environ.get("AUDIT20", "1") != "0"   # audit fixes of 20 Nov (AUDIT20=0 reproduces v14 exactly)
+AUDIT20 = os.environ.get("AUDIT20", "1") != "0"
+V15 = os.environ.get("V15", "1") != "0"   # ay's three fan-check fixes of 20 Nov (V15=0 reproduces v14.1)   # audit fixes of 20 Nov (AUDIT20=0 reproduces v14 exactly)
 
 def main():
     variant = os.environ.get("VARIANT", "")
@@ -682,6 +696,10 @@ def main():
         else:
             P["clutch_raw"] = (g.d / (g.n + CFG.get("clutch_shrink", 25))).reindex(pool)
         P["clutch_n"] = g.n.reindex(pool).fillna(0).astype(int)
+        # v15 (ay 20 Nov): big games also count results. Every best-of-five (playoffs, finals, Worlds, MSI, First
+        # Stand) won is +1 and lost is -1, international ones doubled as in clutch: net big series won over a career.
+        b5 = cl[cl.kind == "bo5"]
+        P["big_results_raw"] = ((2 * b5.won - 1) * b5.w).groupby(b5.Link).sum().reindex(pool).fillna(0)
     else:
         P["clutch_raw"], P["clutch_n"] = np.nan, 0
     sp = s[s.Link.isin(pool)]
@@ -692,7 +710,7 @@ def main():
         P[c + "_raw"] = best_years(sp[sp["z_" + c].notna()], "a_" + c, k).reindex(pool).fillna(0)
     sp = sp.assign(z_gap_w=np.where(sp.z_gap > 0, sp.z_gap * np.clip(1 - sp.mates_impact.fillna(0), 0.25, 1.75), sp.z_gap))
     P["team_carry_raw"] = best_years(sp, "z_gap_w", k)
-    P["recognition_raw"], P["allpro_pts"], P["covered_splits"] = recognition(s, pool)
+    P["recognition_raw"], P["allpro_pts"], P["covered_splits"] = recognition(s, pool, strength)
     P["team_lift_raw"] = team_lift(s, pool, strength)
     ev = s[s.Link.isin(pool) & (s.G >= 5)]
     cons = ev.groupby("Link").apply(lambda d: pd.Series({"n": len(d), "up": (d.a_impact > 0).sum()}), include_groups=False)
@@ -708,6 +726,13 @@ def main():
     T["cast"] = np.clip(1 - T.mates / 0.4, 0, 1.5)   # 1 = teammates at league average for their role-year, 0 = teammates 0.4 SD above (a strong roster gets no solo-carry credit)
     T["lead"] = T.get("lead", T.credit).fillna(T.credit)
     T["carry_pts"] = (T.base * (T.lead - 1)).clip(lower=0) * T.cast
+    if V15:
+        # v15 (ay 20 Nov): all of a player's league results together can be worth at most one Worlds title, so no
+        # pile of league titles outweighs a Worlds. Each league result keeps its share of that cap.
+        cap = CFG["trophy_points"]["worlds"][1]
+        dm = T.tier == "domestic"
+        dsum = T[dm].groupby("Link").pts.transform("sum")
+        T.loc[dm, "pts"] = T.loc[dm, "pts"] * np.minimum(1.0, cap / dsum)
     tp = T.groupby("Link").agg(trophy_pts=("pts", "sum"), raw_pts=("base", "sum"), solo_carry_pts=("carry_pts", "sum"))
     P = P.join(tp).fillna({"trophy_pts": 0, "raw_pts": 0, "solo_carry_pts": 0})
     P["mvps"] = T[T.tier == "award"].groupby("Link").size().reindex(pool).fillna(0).astype(int) if (T.tier == "award").any() else 0
@@ -725,6 +750,8 @@ def main():
     C = pd.DataFrame(index=pool)
     C["trophies"] = percentile(P.trophy_pts) if CFG.get("trophy_scale") == "linear" else P.trophy_pts / P.trophy_pts.max() * 100
     C["big_stage"] = percentile(P.big_stage_raw)
+    if V15 and "big_results_raw" in P:   # half how he played in big games, half whether his team won them
+        C["big_stage"] = percentile(0.5 * C.big_stage + 0.5 * percentile(P.big_results_raw))
     C["peak"] = percentile(P.peak_raw)
     C["winning"] = percentile(P.win_raw)
     C["longevity"] = percentile(P.longevity_raw + P.games / 1e6)

@@ -14,36 +14,35 @@ Data: Leaguepedia scoreboards, 303 tournaments, 25,987 games (approx.), 1,915 pl
 
 | # | Player | Role | Regions | Years | Worlds | MSI | Domestic | MVPs | Score | #1 in 1000 runs | #2 in 1000 runs |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Faker | Mid | LCK | 2013-2026 | 6 | 2 | 10 | 3 | 94.4 | 100.0% | 0.0% |
-| 2 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 2 | 73.7 | 0.0% | 100.0% |
-| 3 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 1 | 71.4 | 0.0% | 0.0% |
-| 4 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 68.6 | 0.0% | 0.0% |
-| 5 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 0 | 66.7 | 0.0% | 0.0% |
-| 6 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 65.1 | 0.0% | 0.0% |
-| 7 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 64.5 | 0.0% | 0.0% |
-| 8 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 63.0 | 0.0% | 0.0% |
-| 9 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 62.6 | 0.0% | 0.0% |
-| 10 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 0 | 61.5 | 0.0% | 0.0% |
-| 11 | Caps | Mid | LEC | 2017-2026 | 0 | 1 | 18 | 1 | 60.3 | 0.0% | 0.0% |
-| 12 | Oner | Jungle | LCK | 2021-2026 | 3 | 0 | 1 | 0 | 60.0 | 0.0% | 0.0% |
-| 13 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 0 | 59.3 | 0.0% | 0.0% |
-| 14 | Gumayusi | Bot | LCK | 2021-2026 | 3 | 1 | 1 | 1 | 59.1 | 0.0% | 0.0% |
-| 15 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 0 | 57.1 | 0.0% | 0.0% |
+| 1 | Faker | Mid | LCK | 2013-2026 | 6 | 2 | 10 | 3 | 95.4 | 100.0% | 0.0% |
+| 2 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 2 | 73.2 | 0.0% | 99.5% |
+| 3 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 0 | 71.2 | 0.0% | 0.5% |
+| 4 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 68.3 | 0.0% | 0.0% |
+| 5 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 68.0 | 0.0% | 0.0% |
+| 6 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 1 | 66.3 | 0.0% | 0.0% |
+| 7 | Oner | Jungle | LCK | 2021-2026 | 3 | 0 | 1 | 0 | 65.5 | 0.0% | 0.0% |
+| 8 | Gumayusi | Bot | LCK | 2021-2026 | 3 | 1 | 1 | 1 | 65.5 | 0.0% | 0.0% |
+| 9 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 64.8 | 0.0% | 0.0% |
+| 10 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 64.2 | 0.0% | 0.0% |
+| 11 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 0 | 62.8 | 0.0% | 0.0% |
+| 12 | Caps | Mid | LEC | 2017-2026 | 0 | 1 | 18 | 1 | 59.5 | 0.0% | 0.0% |
+| 13 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 0 | 59.0 | 0.0% | 0.0% |
+| 14 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 57.5 | 0.0% | 0.0% |
+| 15 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 0 | 56.9 | 0.0% | 0.0% |
 
-Benchmark: Faker score 94.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 80, peak 77, winning 99, longevity 100, carry 78, clean_play 70, consistency 78, laning 74, killing 89, teamfight 64, vision 72, team_carry 64, solo_carry 68, recognition 86, team_lift 50, clutch 100, title_teams 60, individual 79, big_stage_clutch 95, carry_pillar 71, skill 79, impact 100, intangibles 86
+Benchmark: Faker score 95.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 94, peak 77, winning 99, longevity 100, carry 78, clean_play 70, consistency 78, laning 74, killing 89, teamfight 64, vision 72, team_carry 64, solo_carry 68, recognition 89, team_lift 50, clutch 100, title_teams 60, individual 79, big_stage_clutch 100, carry_pillar 71, skill 79, impact 100, intangibles 89
 
 ## Players ay named
 
 | Player | Rank | Score | Worlds | Trophy pts | Big stage | Peak (year) |
 |---|---|---|---|---|---|---|
-| Knight | 2 | 73.7 | 1 | 695 | 96 | 100 (2026) |
-| Viper | 10 | 61.5 | 2 | 554 | 82 | 73 (2026) |
-| Bin | 9 | 62.6 | 1 | 561 | 83 | 82 (2026) |
+| Knight | 2 | 73.2 | 1 | 480 | 100 | 100 (2026) |
+| Viper | 11 | 62.8 | 2 | 437 | 79 | 73 (2026) |
+| Bin | 9 | 64.8 | 1 | 445 | 91 | 82 (2026) |
 
 ## Tipping point (trophy weight -> #1 overall, then #2)
 
-- trophy weight 0%: Knight first, Faker next
-- trophy weight 4%: Faker first, Knight next
+- trophy weight 0%: Faker first, Knight next
 
 ## Side-board: Most Decorated (pure trophy points, no carry share)
 
@@ -55,17 +54,17 @@ Benchmark: Faker score 94.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 ## Side-board: Most Dominant (individual categories only)
 
-1. Chovy (Mid, 1018 games, peak 2025): 93.9
-2. Knight (Mid, 1102 games, peak 2026): 90.7
-3. Keria (Support, 995 games, peak 2024): 88.1
-4. Zeus (Top, 744 games, peak 2025): 83.5
-5. Kiin (Top, 1039 games, peak 2026): 81.1
+1. Chovy (Mid, 1018 games, peak 2025): 91.8
+2. Knight (Mid, 1102 games, peak 2026): 90.3
+3. Keria (Support, 995 games, peak 2024): 85.3
+4. Faker (Mid, 1575 games, peak 2016): 81.6
+5. Bin (Top, 937 games, peak 2026): 81.0
 
 ## Every category top 5 (Faker included)
 
-**trophies**: Faker 100, Canyon 47, Ruler 47, Knight 46, Chovy 45
+**trophies**: Faker 100, Gumayusi 58, Keria 55, Oner 53, Zeus 51
 
-**big_stage**: Keria 100, Zeus 99, Knight 96, Chovy 95, Kiin 85
+**big_stage**: Knight 100, Faker 94, Bin 91, Keria 89, Zeus 88
 
 **peak**: Knight 100, Chovy 97, Kiin 94, Keria 91, Zeus 91
 
@@ -91,7 +90,7 @@ Benchmark: Faker score 94.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 **solo_carry**: Chovy 100, BeryL 89, Bjergsen 88, Hauntzer 85, PraY 76
 
-**recognition**: Caps 100, Chovy 98, Bjergsen 92, Knight 88, Faker 86
+**recognition**: Chovy 100, Faker 89, Knight 87, Caps 83, Ruler 82
 
 **team_lift**: DanDy 100, MMD 100, Ambition 95, Dhokla 92, Zest 89
 
@@ -101,7 +100,7 @@ Benchmark: Faker score 94.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 **individual**: Chovy 100, Knight 99, Keria 96, Zeus 90, Kanavi 88
 
-**big_stage_clutch**: Zeus 100, Knight 100, Bin 97, Keria 95, Faker 95
+**big_stage_clutch**: Faker 100, Knight 98, Bin 98, Zeus 89, Gumayusi 87
 
 **carry_pillar**: Chovy 100, Bjergsen 96, Froggen 86, Hauntzer 86, BeryL 85
 
@@ -109,7 +108,7 @@ Benchmark: Faker score 94.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 **impact**: Faker 100, Ruler 91, Doinb 87, TheShy 82, JackeyLove 81
 
-**intangibles**: Caps 100, Chovy 98, Bjergsen 92, Knight 88, Faker 86
+**intangibles**: Chovy 100, Faker 89, Knight 87, Caps 83, Ruler 82
 
 ## Worlds title carry shares (credit 0.5 to 1.5)
 

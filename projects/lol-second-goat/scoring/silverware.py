@@ -29,10 +29,23 @@ def lin(x, ref):
     return max(0.0, 50 + 50 * (x - med) / (top - med))
 
 
+def lin_s(x, ref):
+    med, top = ref.median(), ref.max()
+    return (50 + 50 * (x - med) / (top - med)).clip(lower=0)
+
+
+def big_stage(p, P):
+    """v15: half big-game play, half big-series results, both on today's scale."""
+    if "big_results_raw" not in P:
+        return lin(p.big_stage_raw, P.big_stage_raw)
+    ref = 0.5 * lin_s(P.big_stage_raw, P.big_stage_raw) + 0.5 * lin_s(P.big_results_raw, P.big_results_raw)
+    return lin(0.5 * lin(p.big_stage_raw, P.big_stage_raw) + 0.5 * lin(p.big_results_raw, P.big_results_raw), ref)
+
+
 def frozen_parts(p, P=P0):
     cl = P.clutch_raw.fillna(P.clutch_raw.median())
     return {"trophies": p.trophy_pts / P.loc["Faker", "trophy_pts"] * 100,
-            "big_stage_clutch": lin(0.6 * lin(p.big_stage_raw, P.big_stage_raw) + 0.4 * lin(cl.median() if pd.isna(p.clutch_raw) else p.clutch_raw, cl),
+            "big_stage_clutch": lin(0.6 * big_stage(p, P) + 0.4 * lin(cl.median() if pd.isna(p.clutch_raw) else p.clutch_raw, cl),
                                     0.6 * P.c_big_stage + 0.4 * P.c_clutch),
             "skill": lin(0.7 * lin(p.individual_raw, P.individual_raw) + 0.3 * lin(p.peak_raw, P.peak_raw),
                          0.7 * P.c_individual + 0.3 * P.c_peak),

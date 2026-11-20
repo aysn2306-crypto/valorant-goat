@@ -39,7 +39,7 @@ Players above 70: {(P.score > 70).sum()}. Caps #{rk[L('Caps')]} ({round(P.score[
 
 **Two Fakers (2013-19 and 2020-26, even halves by years, 3 Worlds each; ay 17:23):** {(sf.score > 70).sum()} players above 70 in this version.
 {sfm.to_markdown(index=False)}
-Faker 2020-26 is #{int(sf.index[sf.name == 'Faker 2020-26'][0]) + 1} at {sf.score[sf.name == 'Faker 2020-26'].iloc[0]:.1f}. Weight reruns in this version: #1 Faker 2013-19 951, Knight 49.
+Faker 2020-26 is #{int(sf.index[sf.name == 'Faker 2020-26'][0]) + 1} at {sf.score[sf.name == 'Faker 2020-26'].iloc[0]:.1f}. Weight reruns in this version: #1 Faker 2013-19 758, Knight 183, Keria 59.
 
 **What Knight or Gumayusi need to pass Faker:** on hold (ay 16:57). The old frozen-stats tables were wrong (they only added trophies) and are removed.
 

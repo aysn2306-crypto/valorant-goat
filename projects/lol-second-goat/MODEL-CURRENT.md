@@ -1,6 +1,6 @@
 # Current League model (the one every thread uses)
 
-**Version 14.1 (audit fixes, 20 Nov 2026, ~01:30 London), on top of v14 (19 Nov 16:45). v14.1 = bug fixes only, no design change (see "What changed"). v14 = big games count domestic playoffs and finals in every region (ay 16:16). v13 = Recognition fixed (ay 21:00: the LCK held no All-Pro vote before 2020, so Faker's prime counted nothing). v12 = career-level plus-minus (ay chose "Fix it" 19:14).** ay approved each change on cards: halfway trophy blend (16:58), LCK/LPL fix (17:09), keep trophies as share of Faker (17:09), count 2013-15 games (17:10). Owner: the model thread. If a number here differs from anything older (script, stills, notes), this file wins.
+**Version 15 (ay chose "Fix all 3 now", 20 Nov 2026, ~13:30 London): fan-check fixes. On top of v14.1 (audit fixes) and v14 (19 Nov 16:45). v14.1 = bug fixes only, no design change (see "What changed"). v14 = big games count domestic playoffs and finals in every region (ay 16:16). v13 = Recognition fixed (ay 21:00: the LCK held no All-Pro vote before 2020, so Faker's prime counted nothing). v12 = career-level plus-minus (ay chose "Fix it" 19:14).** ay approved each change on cards: halfway trophy blend (16:58), LCK/LPL fix (17:09), keep trophies as share of Faker (17:09), count 2013-15 games (17:10). Owner: the model thread. If a number here differs from anything older (script, stills, notes), this file wins.
 Scores file: `projects/lol-second-goat/data/csv/draft_scores.csv` (branch claude/project-thread-a343zy). Video data: `video/src/data/league.json`. Regenerate this file with `python3 scoring/model_current.py`.
 
 ## GOAT pyramid (ay 18 Nov 17:46, final design)
@@ -10,16 +10,18 @@ Tiers follow the model's ranking only, never reputation. A few example faces per
 | Tier | Ranks | Faces shown |
 |---|---|---|
 | 1 | #1 | Faker (#1) |
-| 2 | #2 to #3 | Knight (#2), Chovy (#3) |
-| 3 | #4 to #10 | Ruler (#4), Keria (#5), Bin (#9), Viper (#10) |
-| 4 | #11 to #30 | Caps (#11), Gumayusi (#14), Deft (#17), Uzi (#21), TheShy (#24), Scout (#27) |
-| 5 | #31 to #62 | Doinb (#37), Perkz (#40), Bengi (#44), Bjergsen (#51), Jankos (#53) |
+| 2 | #2 to #3 | Knight (#2), Keria (#3) |
+| 3 | #4 to #10 | Ruler (#4), Chovy (#6), Gumayusi (#8), Bin (#9) |
+| 4 | #11 to #30 | Viper (#11), Caps (#12), Deft (#20), Uzi (#25), TheShy (#26), Scout (#29) |
+| 5 | #31 to #62 | Bengi (#31), Doinb (#34), Perkz (#38), Jankos (#51), Bjergsen (#58) |
 
 Faces picked for a spread of regions (ay 18:09: less LCK and old SKT heavy).
 
 Reveal: build from the bottom up. In tier 2, Chovy fills first, then a beat of silence, then Knight. Faker goes alone on top. Zoom in on Knight at #2, then an arrow draws from tier 2 up to tier 1 ("what would it take to get from here to here?") and leads into the outro.
 
 ## What changed
+**v15 (ay 20 Nov, "Fix all 3 now" on the fan-check card; V15=0 reproduces v14.1):** (1) Recognition: every All-Pro vote, MVP and model All-Pro pick counts at its league's strength that year (LCK about 1.0, LEC/LCS about 0.3 to 0.6). (2) Trophies: all of a player's league results together are worth at most one Worlds title (100), so no pile of league titles outweighs a Worlds. (3) Big games: the big-stage half is now half play (v14 stats) and half results: net big best-of-fives won (+1 win, -1 loss, international doubled). Top 10: Faker 95.4, Knight 73.2, Keria 71.2, Ruler 68.3, Zeus 68.0, Chovy 66.3, Oner 65.5, Gumayusi 65.5, Bin 64.8, Canyon 64.2. Knight #2 in 995 of 1,000 reruns (Keria 5). Trophy order: Faker, Gumayusi, Keria, Oner, Zeus. Big stage: Knight, Faker, Bin; big games + clutch: Faker 100. Recognition: Chovy, Faker, Knight. Knight vs Faker parts: trophies 45/100, big games 98/100, skill 100/79, impact 76/100, longevity 90/100, recognition 87/89. End of 2025: Keria #2, Knight #8. Gen.G wins: Ruler #2, Keria #3, Chovy #4, Knight #5. Two Fakers: Faker 2013-19 #1 (758 of 1,000), Keria #2, Knight #3, Faker 2020-26 #8. Silverware (Faker frozen 95.4): Knight 3 more Worlds + 3 MSIs (or 4 Worlds alone); Chovy 4 Worlds + 4 MSIs (or 6 alone); Gumayusi 4 more Worlds + 4 MSIs (or 6 alone). League titles no longer move it (capped).
+
 **v14.1 (audit thread, 20 Nov, bug fixes only; AUDIT20=0 reproduces v14 exactly):**
 1. Recognition counted the same MVP twice when Leaguepedia lists it under two names (Chovy 2024 Spring, Keria 2023 Spring, Ruler 2022 Summer, Bdd 2020 Spring). Now one MVP per player per split.
 2. Recognition counted domestic finals MVPs only for LCK 2015-2020 (stored as "Most Valuable Player" on playoff pages; later ones are "Finals MVP" and never counted). Now season MVPs only, as documented, in every era.
@@ -54,51 +56,51 @@ so **on screen show rank and % of Faker, not the raw score.**
 ## Top 16 with part scores
 |   Rank | Player   | Role    |   Score |   % of Faker |   Trophy pts |   Worlds |   trophies (40) |   big stage clutch (14) |   skill (18) |   impact (12) |   longevity (9) |   intangibles (7) |
 |-------:|:---------|:--------|--------:|-------------:|-------------:|---------:|----------------:|------------------------:|-------------:|--------------:|----------------:|------------------:|
-|      1 | Faker    | Mid     |    94.4 |          100 |       1509   |        6 |           100   |                    94.7 |         78.6 |         100   |           100   |              85.8 |
-|      2 | Knight   | Mid     |    73.7 |           78 |        695.5 |        1 |            46.1 |                    99.8 |         99.9 |          75.9 |            89.7 |              87.7 |
-|      3 | Chovy    | Mid     |    71.4 |           76 |        684.3 |        0 |            45.3 |                    78.3 |        100   |          77.6 |            89.7 |              98.1 |
-|      4 | Ruler    | Bot     |    68.6 |           73 |        705.3 |        1 |            46.7 |                    77   |         80.9 |          90.8 |            88.5 |              81.1 |
-|      5 | Keria    | Support |    66.7 |           71 |        613.7 |        3 |            40.7 |                    95   |         95.3 |          62.2 |            78.3 |              78.3 |
-|      6 | Canyon   | Jungle  |    65.1 |           69 |        714.2 |        1 |            47.3 |                    70.5 |         78.6 |          78.7 |            79.1 |              79.2 |
-|      7 | Zeus     | Top     |    64.5 |           68 |        582.9 |        2 |            38.6 |                   100   |         91.1 |          68   |            68.5 |              61.3 |
-|      8 | Peanut   | Jungle  |    63   |           67 |        628.8 |        0 |            41.7 |                    73.7 |         76.4 |          75.8 |            87   |              76.4 |
-|      9 | Bin      | Top     |    62.6 |           66 |        561.3 |        1 |            37.2 |                    96.6 |         79.3 |          74.2 |            74.4 |              61.3 |
-|     10 | Viper    | Bot     |    61.5 |           65 |        553.9 |        2 |            36.7 |                    81.6 |         80.2 |          67.6 |            83.4 |              76.4 |
-|     11 | Caps     | Mid     |    60.3 |           64 |        455.1 |        0 |            30.2 |                    79.3 |         77.8 |          72.8 |            81.8 |             100   |
-|     12 | Oner     | Jungle  |    60   |           64 |        571.5 |        3 |            37.9 |                    82.5 |         80.8 |          68.6 |            72.2 |              57.5 |
-|     13 | Kiin     | Top     |    59.3 |           63 |        440.9 |        0 |            29.2 |                    72.3 |         90.3 |          72.9 |            84.3 |              69.8 |
-|     14 | Gumayusi | Bot     |    59.1 |           63 |        620.9 |        3 |            41.1 |                    90.7 |         69.8 |          59.5 |            71.3 |              54.7 |
-|     15 | Kanavi   | Jungle  |    57.1 |           61 |        401.1 |        0 |            26.6 |                    74.3 |         87.6 |          64.8 |            79.1 |              77.4 |
-|     16 | Xiaohu   | Mid     |    56.9 |           60 |        489.1 |        0 |            32.4 |                    76.3 |         71.2 |          76.7 |            80.9 |              56.6 |
+|      1 | Faker    | Mid     |    95.4 |          100 |       1057.9 |        6 |           100   |                   100   |         78.6 |         100   |           100   |              88.7 |
+|      2 | Knight   | Mid     |    73.2 |           77 |        480.2 |        1 |            45.4 |                    98.2 |         99.9 |          75.9 |            89.7 |              87.4 |
+|      3 | Keria    | Support |    71.2 |           75 |        583.1 |        3 |            55.1 |                    84.1 |         95.3 |          62.2 |            78.3 |              81.1 |
+|      4 | Ruler    | Bot     |    68.3 |           72 |        497.3 |        1 |            47   |                    73.3 |         80.9 |          90.8 |            88.5 |              82.5 |
+|      5 | Zeus     | Top     |    68   |           71 |        537.8 |        2 |            50.8 |                    89.3 |         91.1 |          68   |            68.5 |              63.5 |
+|      6 | Chovy    | Mid     |    66.3 |           69 |        373.3 |        0 |            35.3 |                    69.7 |        100   |          77.6 |            89.7 |             100   |
+|      7 | Oner     | Jungle  |    65.5 |           69 |        556.5 |        3 |            52.6 |                    78.4 |         80.8 |          68.6 |            72.2 |              59.7 |
+|      8 | Gumayusi | Bot     |    65.5 |           69 |        614   |        3 |            58   |                    86.9 |         69.8 |          59.5 |            71.3 |              56.6 |
+|      9 | Bin      | Top     |    64.8 |           68 |        445.1 |        1 |            42.1 |                    98.1 |         79.3 |          74.2 |            74.4 |              62.9 |
+|     10 | Canyon   | Jungle  |    64.2 |           67 |        478.8 |        1 |            45.3 |                    68.5 |         78.6 |          78.7 |            79.1 |              82.1 |
+|     11 | Viper    | Bot     |    62.8 |           66 |        437.4 |        2 |            41.3 |                    77.2 |         80.2 |          67.6 |            83.4 |              77.7 |
+|     12 | Caps     | Mid     |    59.5 |           62 |        333.3 |        0 |            31.5 |                    78.2 |         77.8 |          72.8 |            81.8 |              83.3 |
+|     13 | Kiin     | Top     |    59   |           62 |        317.8 |        0 |            30   |                    67.1 |         90.3 |          72.9 |            84.3 |              71.5 |
+|     14 | Peanut   | Jungle  |    57.5 |           60 |        314.7 |        0 |            29.8 |                    68.3 |         76.4 |          75.8 |            87   |              77.2 |
+|     15 | Kanavi   | Jungle  |    56.9 |           60 |        294.3 |        0 |            27.8 |                    70.1 |         87.6 |          64.8 |            79.1 |              75.1 |
+|     16 | Xiaohu   | Mid     |    56.9 |           60 |        364.1 |        0 |            34.4 |                    69.9 |         71.2 |          76.7 |            80.9 |              57.2 |
 
-Weight reruns (each weight moved up to 30%, 1,000 times): Faker #1 in 1,000; Knight #2 in 1,000 (see whatif.py output).
-Players above 70: 3. Caps #11 (64% of Faker). Uzi #21. Bengi #44.
+Weight reruns (each weight moved up to 30%, 1,000 times): Faker #1 in 1,000; Knight #2 in 995 (see whatif.py output).
+Players above 70: 3. Caps #12 (62% of Faker). Uzi #25. Bengi #31.
 
 ## Twists and what-ifs
-**International trophies only:** Faker 94.4, Knight 71.1, Keria 70.6, Zeus 67.3, Ruler 66.5, Chovy 64.6, Gumayusi 64.1, Oner 63.9, Bin 62.1, Canyon 61.9.
+**International trophies only:** Faker 95.4, Knight 70.9, Keria 69.3, Ruler 66.1, Zeus 66.0, Gumayusi 63.7, Chovy 63.6, Oner 63.5, Bin 62.4, Canyon 61.9.
 
 **Two Fakers (2013-19 and 2020-26, even halves by years, 3 Worlds each; ay 17:23):** 12 players above 70 in this version.
 |   Rank | name          |   score |
 |-------:|:--------------|--------:|
-|      1 | Faker 2013-19 |    90.2 |
-|      2 | Knight        |    87.5 |
-|      3 | Chovy         |    85   |
-|      4 | Ruler         |    82.7 |
-|      5 | Canyon        |    79   |
-|      6 | Keria         |    78.7 |
-|      7 | Zeus          |    75.7 |
-|      8 | Peanut        |    75.5 |
-|      9 | Bin           |    73.6 |
-|     10 | Viper         |    72.5 |
-|     11 | Oner          |    71.1 |
-|     12 | Gumayusi      |    71   |
-|     13 | Caps          |    69.5 |
-|     14 | Faker 2020-26 |    69.4 |
-Faker 2020-26 is #14 at 69.4. Weight reruns in this version: #1 Faker 2013-19 951, Knight 49.
+|      1 | Faker 2013-19 |    89.1 |
+|      2 | Keria         |    87.9 |
+|      3 | Knight        |    87.6 |
+|      4 | Zeus          |    83.4 |
+|      5 | Ruler         |    83.2 |
+|      6 | Gumayusi      |    83   |
+|      7 | Oner          |    81.4 |
+|      8 | Faker 2020-26 |    79.2 |
+|      9 | Canyon        |    78.2 |
+|     10 | Bin           |    78   |
+|     11 | Chovy         |    77.6 |
+|     12 | Viper         |    75.8 |
+|     13 | Caps          |    69.6 |
+|     14 | Bang          |    69.3 |
+Faker 2020-26 is #8 at 79.2. Weight reruns in this version: #1 Faker 2013-19 758, Knight 183, Keria 59.
 
 **What Knight or Gumayusi need to pass Faker:** on hold (ay 16:57). The old frozen-stats tables were wrong (they only added trophies) and are removed.
 
-**Ruler vs Chovy:** gap -2.8 for Ruler at the current weights. Ruler passes Chovy once trophies are 80% or more of the score.
+**Ruler vs Chovy:** gap +2.0 for Ruler at the current weights. Ruler passes Chovy once trophies are 30% or more of the score.
 
 ## Known limits (say them on screen)
 - Bengi and other setup junglers: box scores can't see them.
