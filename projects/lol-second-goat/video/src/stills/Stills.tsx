@@ -588,7 +588,7 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
   const dn = band.slice().reverse().map((n) => `${X(n)},${Y(Math.max(yr[0], -Math.sqrt(n)))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
   // LOCKED (ay 20 Nov, again 20:04): the walk goes through THREE tiers: bottom named, MIDDLE named (around expected), top named
-  const middle: [string, "left" | "right" | "above" | "below"][] = [["gala", "above"], ["doran", "below"], ["369", "right"], ["zven", "above"]]; // line 30b. LOCKED (ay 20 Nov): middle names are players not already in the video
+  const middle: [string, "left" | "right" | "above" | "below"][] = [["gala", "above"], ["doran", "below"], ["369", "right"], ["zven", "above"]]; // line 30b. LOCKED (ay 20 Nov 20:19): highlight these four; the voice names only 369 and Doran
   const named: [string, "left" | "right" | "above" | "below"][] = [["on", "below"], ["zeus", "below"], ["gumayusi", "above"], ["knight", "right"], ["bin", "above"]]; // line 31 (19:36): On, Zeus, Gumayusi, Knight, Bin
   const keys: CamKey[] = walk ? [{ at: walk.bottom, x: X(70), y: Y(-5.5), s: 1.75 }, { at: walk.mid, x: X(76), y: Y(0), s: 1.7 },
     { at: walk.top, x: X(88), y: Y(10.5), s: 1.6 }, ...(walk.out ? [{ at: walk.out, x: 960, y: 540, s: 1 }] : [])] : [];

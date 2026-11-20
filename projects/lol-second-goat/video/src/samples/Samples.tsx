@@ -171,7 +171,7 @@ export const SCards: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
 // ---------------------------------------------------------------- 2. Elo towers
 const LINE = "#8FF0EC";
 export const ELO_T0 = L("20").start - 0.4, ELO_T1 = L("20").end + 0.5;
-const E = { chess: W("19", "chess"), same: W("20", "same"), win: W("20", "win"), points: W("20", "points"), beat: W("20", "beat"), way: W("20", "way"), take2: W("20", "take", 1), lot: W("20", "lot"), n26: W("20", "26"), games: W("20", "games") };
+const E = { chess: W("19", "chess"), same: W("20", "win"), win: W("20", "win"), points: W("20", "points"), beat: W("20", "beat"), way: W("20", "way"), take2: W("20", "take", 1), lot: W("20", "lot"), n26: W("20", "26"), games: W("20", "games") };
 export const ELO_FRAMES = Math.round((ELO_T1 - ELO_T0) * FPS);
 export const SElo: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const f = useCurrentFrame();
@@ -233,7 +233,7 @@ export const SElo: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
 
 // ---------------------------------------------------------------- 3. plus-minus lineup grid
 export const PM_T0 = L("34").start - 0.25, PM_T1 = L("35").end + 1.0;
-const PMW = { plus: W("34", "plus") - 0.15, who: W("34", "who"), change: W("34", "change"), solve: W("35", "who"), five: W("35", "5"), n26: W("35", "26"), games: W("35", "games") };
+const PMW = { plus: W("34", "plus") - 0.15, who: W("34", "teams"), change: W("34", "change"), solve: W("35", "who"), five: W("35", "5"), n26: W("35", "26"), games: W("35", "games") };
 export const PM_FRAMES = Math.round((PM_T1 - PM_T0) * FPS);
 // Illustrative games: Chovy's team (left) v opponents (right); 0 = Chovy, other numbers = other players. Not real lineups.
 const GAMES: { l: number[]; r: number[]; w: boolean }[] = [
@@ -421,10 +421,10 @@ export const SPyramid: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
     if (i === 1) return j === 0 ? b(WA("71", ["chovy"])) : b(W("71", "knight")); // Chovy, then Knight on his name
     return Infinity;                                 // Faker's slot stays for later in the video
   };
-  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")), knight: b(WA("71", ["second", "2nd"])) };
+  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: 1e9 /* no longer spoken */, caps: a(W("66", "caps")), knight: b(WA("71", ["second", "2nd"])) };
   return (
     <AbsoluteFill>
-      <PyramidScene fill={fill} pulse={pulse} zoomAt={b(W("71", "knight") + 0.6)} tierIn={a(W("64", "tears"))} />
+      <PyramidScene fill={fill} pulse={pulse} zoomAt={b(W("71", "knight") + 0.6)} tierIn={a(W("64", "tiers"))} />
       {voice && <Sequence durationInFrames={PA}><Voice from={PYR_A[0]} to={PYR_A[1]} /></Sequence>}
       {voice && <Sequence from={PA}><Voice from={PYR_B[0]} to={PYR_B[1]} /></Sequence>}
       <Sequence from={PA - 6} durationInFrames={12} layout="none">
@@ -481,11 +481,11 @@ export const SPyramidCam: React.FC<{ voice?: boolean }> = ({ voice = true }) => 
     if (i === 1) return j === 0 ? a(WA("71", ["chovy"])) : a(W("71", "knight"));
     return Infinity;
   };
-  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")),
-    uzi: a(W("67", "uzi")) + 14, bengi: a(W("67", "benji")), knight: a(WA("71", ["second", "2nd"])) };
+  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: 1e9 /* no longer spoken */, caps: a(W("66", "caps")),
+    uzi: a(W("67", "uzi")) + 14, bengi: a(W("67", "bengi")), knight: a(WA("71", ["second", "2nd"])) };
   return (
     <AbsoluteFill>
-      <PyramidScene fill={fill} pulse={pulse} tierIn={a(W("64", "tears"))} cam={cam} />
+      <PyramidScene fill={fill} pulse={pulse} tierIn={a(W("64", "tiers"))} cam={cam} />
       {voice && <Voice from={PYRC_T0} to={PYRC_T1} />}
     </AbsoluteFill>
   );
