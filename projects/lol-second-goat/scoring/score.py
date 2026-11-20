@@ -717,9 +717,9 @@ def main():
         cl["w"] = np.where(cl.Page.str.contains("World Championship|Mid-Season Invitational|First Stand", regex=True), 2.0, 1.0)
         cl["d"] = (cl.won - cl.exp) * cl.w
         g = cl.groupby("Link").agg(n=("w", "sum"), d=("d", "sum"))
-        PG_K = float(os.environ.get("PG_SHRINK", CFG.get("clutch_shrink", 25)))
-        PG_MIN = float(os.environ.get("PG_MIN", 0))   # below this many (weighted) big series a rate counts as "as expected" (0)
-        PER_GAME = os.environ.get("PER_GAME") == "1"   # what-if (ay 20 Nov 23:08): clutch, big results and team impact per game/series
+        PG_K = float(os.environ.get("PG_SHRINK", CFG.get("per_series_pull", 25)))
+        PG_MIN = float(os.environ.get("PG_MIN", CFG.get("per_series_min", 0)))   # below this many (weighted) big series a rate counts as "as expected" (0)
+        PER_GAME = os.environ.get("PER_GAME", "1" if CFG.get("per_game") else "0") == "1"   # v15.3 (ay 20 Nov 23:17) (ay 20 Nov 23:08): clutch, big results and team impact per game/series
         if CFG.get("clutch_mode") == "total" and not (PER_GAME and os.environ.get("PG_CLUTCH", "1") == "1"):   # wins above expectation over a whole career, not a per-series rate
             P["clutch_raw"] = g.d.reindex(pool)
         else:
@@ -832,7 +832,7 @@ def main():
             r = dd.r.sort_values(ascending=False)
             n = 5   # rapm_seasons covers 2011 on, so every career is measured the same way (audit 18 Nov)
             imp[l] = r.head(n).sum() / n
-            if os.environ.get("IMPACT_CAREER") == "1" or os.environ.get("PER_GAME") == "1":   # what-if (ay 20 Nov 23:08): whole-career games-weighted average
+            if os.environ.get("IMPACT_CAREER") == "1" or os.environ.get("PER_GAME", "1" if CFG.get("per_game") else "0") == "1":   # v15.3: whole-career games-weighted average
                 imp[l] = float(np.average(dd.r, weights=dd.G))
         P["impact_raw"] = pd.Series(imp).reindex(P.index).fillna(0)
         C["impact"] = percentile(P.impact_raw)
