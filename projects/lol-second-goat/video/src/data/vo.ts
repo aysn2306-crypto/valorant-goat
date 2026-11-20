@@ -1,12 +1,15 @@
 // ay's assembled voiceover: line and word times from voiceover-timing.json, so every graphic lands on its word
 // whichever take ends up in the assembly.
 import TM from "./vo-timing.json";
-type Line = { line: string; start: number; end: number; words: { w: string; start: number }[] };
+type Line = { line: string; start: number; end: number; text?: string; sub?: boolean; words: { w: string; start: number }[] };
 const RAW = (TM as unknown as { lines: Line[] }).lines;
 const RAW_DURATION = (TM as unknown as { duration: number }).duration;
+/** the voice file for this timing (a preview timeline before the re-record has its own file) */
+export const VO_AUDIO: string = (TM as unknown as { audio?: string }).audio ?? "vo/vo-assembled.mp3";
+export const VO_PREVIEW = !!(TM as unknown as { preview?: boolean }).preview;
 // ay 20 Nov 14:36: lines cut from the scratch voice (36 "it doesn't know about kills or trophies", 50 the Peanut line).
 // A cut removes the line and the pause after it; every time below is on the cut timeline, so cues need no changes.
-export const CUT_LINES = ["36", "50"];
+export const CUT_LINES: string[] = []; // the 15:54 script has no lines 36 or 50
 const CUTS = RAW.map((l, i) => CUT_LINES.includes(l.line) ? [l.start, i + 1 < RAW.length ? RAW[i + 1].start : RAW_DURATION] as [number, number] : null)
   .filter((c): c is [number, number] => !!c);
 /** raw voiceover time -> time on the cut timeline */

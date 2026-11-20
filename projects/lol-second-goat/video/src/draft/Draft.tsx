@@ -28,7 +28,7 @@ import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
-import { L, VO_DURATION, VO_KEEP, vt, W, WA, WE } from "../data/vo";
+import { L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
 const FPS = 30;
 // ay 20 Nov: the cold open runs from the caster's "It's been five years" to his "LPL", the picture fades in, the
@@ -265,8 +265,30 @@ export const Draft: React.FC = () => (
     <Sequence from={fr(LEAD + W("80", "cinema"))} durationInFrames={41} layout="none"><AbsoluteCinema at={0} out={40} /></Sequence>
     <Sequence from={fr(LEAD + VO_END + 0.8)}><EndCard /></Sequence>
     {VO_KEEP.map(([a, b], i) => (
-      <Sequence key={"vo" + i} from={fr(LEAD + vt(a))} durationInFrames={fr(b - a)}><Audio src={staticFile("vo/vo-assembled.mp3")} startFrom={fr(a)} endAt={fr(b)} /></Sequence>
+      <Sequence key={"vo" + i} from={fr(LEAD + vt(a))} durationInFrames={fr(b - a)}><Audio src={staticFile(VO_AUDIO)} startFrom={fr(a)} endAt={fr(b)} /></Sequence>
     ))}
-    <div style={{ position: "absolute", right: 24, top: 16, fontFamily: F.body, fontSize: 18, color: "#4A5361" }}>DRAFT · no music yet</div>
+    {VO_PREVIEW && VO_LINES.filter((l) => l.sub).flatMap((l) => subChunks(l).map((c, k) => (
+      <Sequence key={"sub" + l.line + "-" + k} from={fr(LEAD + c.a - 0.1)} durationInFrames={Math.max(1, fr(c.b - c.a + 0.1))} layout="none"><Subtitle text={c.text} /></Sequence>
+    )))}
+    <div style={{ position: "absolute", right: 24, top: 16, fontFamily: F.body, fontSize: 18, color: "#4A5361" }}>{VO_PREVIEW ? "TIMING PREVIEW · new lines as subtitles, not recorded yet" : "DRAFT · no music yet"}</div>
   </AbsoluteFill>
+);
+
+/** subtitle chunks: a sentence, or at most 14 words, each on screen from its first word to the next chunk */
+const subChunks = (l: { end: number; words: { w: string; start: number }[] }) => {
+  const groups: { w: string; start: number }[][] = [[]];
+  for (const w of l.words) {
+    const g = groups[groups.length - 1]; g.push(w);
+    if (/[.?!]$/.test(w.w) || g.length >= 14) groups.push([]);
+  }
+  const gs = groups.filter((g) => g.length);
+  return gs.map((g, i) => ({ text: g.map((w) => w.w).join(" "), a: g[0].start, b: i + 1 < gs.length ? gs[i + 1][0].start : l.end + 0.2 }));
+};
+
+/** timing preview only: a line of the new script that has no recording yet, read at ay's pace */
+const Subtitle: React.FC<{ text: string }> = ({ text }) => (
+  <div style={{ position: "absolute", left: 160, right: 160, bottom: 46, textAlign: "center" }}>
+    <span style={{ fontFamily: F.body, fontSize: 34, lineHeight: 1.45, color: "#F2F2EE", background: "rgba(10,10,12,0.82)", padding: "4px 14px", boxDecorationBreak: "clone", WebkitBoxDecorationBreak: "clone" }}>
+      {text}</span>
+  </div>
 );
