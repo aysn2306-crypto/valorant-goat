@@ -10,6 +10,7 @@ import * as Cl from "../samples/Climb";
 import * as Sm from "../samples/Samples";
 import { Build, Count527, Footage, Formula, Quote, Words } from "../rough/RoughCut";
 import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWithout } from "./Boards";
+import { TrophySplit } from "./TrophySplit";
 import { TitleShare } from "./TitleShare";
 import { SeasonList } from "./SeasonList";
 import { HeadToHead } from "./HeadToHead";
@@ -101,8 +102,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
   ["26@sports", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did in the game. Two players on the same team can end up with very different shares." />],
-  // ay 20 Nov 12:27: explain the share without naming or ranking the BLG five (see TitleShare.tsx)
-  ["27", (c) => <TitleShare cues={{ bar: 0, cut: at(c, L("27").start + 0.4), vary: at(c, W("27", "based")) }} />],
+  // ay 20 Nov 13:13: BLG 2026 shares are back (TitleShare.tsx, the no-names version, is kept but unused)
+  ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, L("27").start + 0.4), shares: at(c, L("27").start + 1.6), caption: at(c, L("27").start + 3.0) }} />], // ay 20 Nov 13:13: back to BLG 2026, current shares
   ["28", (c) => { const rv = at(c, W("31", "yup")); return <Build C={() => <St.S16Clutch reveal={rv} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
   // ay 20 Nov: the old with/without graph with all three players back (only Chovy is talked about)
   ["32", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],

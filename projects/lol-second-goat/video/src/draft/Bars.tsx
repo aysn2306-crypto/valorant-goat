@@ -116,7 +116,7 @@ const TEAM_SHORT: Record<string, string> = { "Samsung Galaxy": "SSG", "Samsung W
 // champion's chance of winning the title before the knockouts started, so a shorter bar is a harder run. BLG 2026 picked
 // out as the 5th hardest. Logos: Liquipedia Commons, lol-second-goat/logos/SOURCES.md (kept in public/_local, not in git).
 const LOGO: Record<string, string> = { "DRX 2022": "DRX_allmode.png", "T1 2023": "T1_allmode.png", "T1 2024": "T1_allmode.png", "T1 2025": "T1_allmode.png",
-  "Samsung Galaxy 2017": "Samsung_Galaxy_allmode.png", "Bilibili Gaming 2026": "Bilibili_Gaming_allmode.png", "Samsung White 2014": "Samsung_White_Logo.png",
+  "Samsung Galaxy 2017": "Samsung_Galaxy_allmode.png", "Bilibili Gaming 2026": "Bilibili_Gaming_2021_allmode.png", "Samsung White 2014": "Samsung_White_Logo.png",
   "SK Telecom T1 2015": "SK_Telecom_T1_allmode.png", "SK Telecom T1 2016": "SK_Telecom_T1_allmode.png", "EDward Gaming 2021": "EDward_Gaming_2017_darkmode.png",
   "Invictus Gaming 2018": "Invictus_Gaming_darkmode.png", "FunPlus Phoenix 2019": "FunPlus_Phoenix_2019_allmode.png", "DAMWON Gaming 2020": "DAMWON_Gaming_allmode.png" };
 const HARD_KEEP = { team: "Bilibili Gaming", year: 2026 }; // always picked out (ay: "where is BLG?")
