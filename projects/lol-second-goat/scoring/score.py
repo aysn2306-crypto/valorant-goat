@@ -613,6 +613,15 @@ def main():
             w = w.fillna(w.groupby(ry).transform("median")).fillna(w.median())   # play-ins: that league's value that year
         dp["big"] = dp.a_impact
         dp["G"] = dp.G * w.values
+        DOM_FINALS = os.environ.get("BIG_DOM_FINALS") == "1"   # what-if (ay 20 Nov 22:56): domestic big games = league finals only
+        if DOM_FINALS:
+            gf = pd.read_csv(os.path.join(CSV, "games_all.csv"), usecols=["Page", "Link", "Team", "GameId"])
+            gf = gf[gf.Page.isin(set(dp.Page.str.replace(r" \(future \d+\)$", "", regex=True)))].copy()
+            gf["rnd"] = [gid[len(pg) + 1:].rsplit("_", 2)[0] for gid, pg in zip(gf.GameId, gf.Page)]
+            gf["Link"] = [redirect(l) for l in gf.Link]
+            fin = gf[gf.rnd == "Finals"].drop_duplicates(["GameId", "Link"]).groupby(["Page", "Link", "Team"]).size()
+            key = list(zip(dp.Page.str.replace(r" \(future \d+\)$", "", regex=True), dp.Link, dp.Team))
+            dp["G"] = fin.reindex(key).fillna(0).values * w.values   # the player's playoff rating, counted by his finals games only
         if AUDIT20:
             # audit 20 Nov: title events whose group stage and knockouts share one page (OGN Champions 2012-14, LCK Cup)
             # are not flagged as playoffs, so their quarterfinals, semifinals and finals were left out of big games
@@ -629,7 +638,7 @@ def main():
                     yy = gg.Page.str.extract(r"(20\d\d)")[0].astype(int)
                     m = gg.Link == "Faker"
                     gg.loc[m, "Link"] = np.where(yy[m] <= FS, FA, FB)
-                ko = gg[gg.rnd.str.contains(r"Final|Semi|Quarter|Third|Playoffs Round", regex=True)]
+                ko = gg[gg.rnd == "Finals"] if DOM_FINALS else gg[gg.rnd.str.contains(r"Final|Semi|Quarter|Third|Playoffs Round", regex=True)]
                 n = ko.drop_duplicates(["GameId", "Link"]).groupby(["Page", "Link", "Team"]).size().rename("koG").reset_index()
                 ex = s[s.Link.isin(pool)].assign(base=lambda d: d.Page.str.replace(r" \(future \d+\)$", "", regex=True))
                 ex = ex[ex.base.isin(kp)].merge(n.rename(columns={"Page": "base"}), on=["base", "Link", "Team"]).drop(columns="base")
@@ -716,6 +725,8 @@ def main():
         # v15 (ay 20 Nov): big games also count results. Every best-of-five (playoffs, finals, Worlds, MSI, First
         # Stand) won is +1 and lost is -1, international ones doubled as in clutch: net big series won over a career.
         b5 = cl[cl.kind == "bo5"]
+        if os.environ.get("BIG_DOM_FINALS") == "1":   # what-if: domestic series count in big-game results only if they are the league final
+            b5 = b5[(b5.w > 1) | b5.match.str.contains(r"_Finals_\d+$", regex=True)]
         P["big_results_raw"] = ((2 * b5.won - 1) * b5.w).groupby(b5.Link).sum().reindex(pool).fillna(0)
     else:
         P["clutch_raw"], P["clutch_n"] = np.nan, 0
