@@ -2,8 +2,24 @@
 // whichever take ends up in the assembly.
 import TM from "./vo-timing.json";
 type Line = { line: string; start: number; end: number; words: { w: string; start: number }[] };
-export const VO_LINES = (TM as unknown as { lines: Line[] }).lines;
-export const VO_DURATION = (TM as unknown as { duration: number }).duration;
+const RAW = (TM as unknown as { lines: Line[] }).lines;
+const RAW_DURATION = (TM as unknown as { duration: number }).duration;
+// ay 20 Nov 14:36: lines cut from the scratch voice (36 "it doesn't know about kills or trophies", 50 the Peanut line).
+// A cut removes the line and the pause after it; every time below is on the cut timeline, so cues need no changes.
+export const CUT_LINES = ["36", "50"];
+const CUTS = RAW.map((l, i) => CUT_LINES.includes(l.line) ? [l.start, i + 1 < RAW.length ? RAW[i + 1].start : RAW_DURATION] as [number, number] : null)
+  .filter((c): c is [number, number] => !!c);
+/** raw voiceover time -> time on the cut timeline */
+export const vt = (t: number) => CUTS.reduce((acc, [a, b]) => acc - (t >= b ? b - a : t > a ? t - a : 0), t);
+/** the kept stretches of the raw voiceover file, [raw start, raw end] */
+export const VO_KEEP: [number, number][] = (() => {
+  const out: [number, number][] = []; let s = 0;
+  for (const [a, b] of CUTS) { if (a > s) out.push([s, a]); s = b; }
+  out.push([s, RAW_DURATION]); return out;
+})();
+export const VO_LINES: Line[] = RAW.filter((l) => !CUT_LINES.includes(l.line))
+  .map((l) => ({ ...l, start: vt(l.start), end: vt(l.end), words: l.words.map((w) => ({ ...w, start: vt(w.start) })) }));
+export const VO_DURATION = vt(RAW_DURATION);
 export const L = (id: string) => { const l = VO_LINES.find((x) => x.line === id); if (!l) throw new Error("no line " + id); return l; };
 /** voiceover time of the n-th word in a line that starts with `w` (punctuation ignored) */
 export const W = (id: string, w: string, n = 0) => {

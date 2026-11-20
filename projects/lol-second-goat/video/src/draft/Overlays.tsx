@@ -108,7 +108,7 @@ const TAKES: { text: string; src: string; x: number; y: number; id?: string }[] 
   { text: "“The true LPL goat and nearest to SGOAT is Xiaohu.”", src: "TEAM LIQUID · 2025", x: 70, y: 300 },
   { text: "“The GOAT label gets thrown around when people talk about him” (Chovy)", src: "SPILLED.GG · 2026", x: 70, y: 480, id: "chovy" },
   { text: "“the only one who could come close to matching Faker's status” (Uzi)", src: "HOTSPAWN · 2026", x: 70, y: 660 },
-  { text: "“2. Bengi | The Vision Master”", src: "ESPORTS.NET · 2025", x: 1180, y: 840 },
+  // ay 20 Nov 14:36: Bengi taken off
 ];
 
 const Bubble: React.FC<{ text: string; src: string; o: number; dim: number; lift: number }> = ({ text, src, o, dim, lift }) => (
@@ -171,6 +171,22 @@ export const VerdictWord: React.FC<{ words: { text: string; at: number; accent?:
 };
 
 /** a text card that cuts to a big number at `at` */
+/** ay 20 Nov 14:36: one card that builds, no panel switch: the line, then the big number, then the years under it */
+export const ModelCard: React.FC<{ text: string; value: string; unit: string; years: string; numAt: number; yearsAt: number }> = (p) => {
+  const f = useCurrentFrame();
+  const n = interpolate(f, [p.numAt, p.numAt + 8], [0, 1], { ...clamp, easing: easeOut });
+  const y = interpolate(f, [p.yearsAt, p.yearsAt + 8], [0, 1], { ...clamp, easing: easeOut });
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+      <div style={{ fontFamily: BEBAS, fontSize: 64, letterSpacing: 4, color: INK, transform: `translateY(${-40 * n}px)` }}>{p.text}</div>
+      <div style={{ height: 300 * n, overflow: "hidden", opacity: n, display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ fontFamily: BEBAS, fontSize: 260, lineHeight: 0.9, color: TEAL }}>{p.value}</div>
+        <div style={{ fontFamily: BEBAS, fontSize: 40, letterSpacing: 8, color: "#9BA3AE", marginTop: 6 }}>{p.unit}</div>
+      </div>
+      <div style={{ fontFamily: BEBAS, fontSize: 72, letterSpacing: 6, color: INK, opacity: y, transform: `translateY(${(1 - y) * 16}px)`, marginTop: 24 }}>{p.years}</div>
+    </AbsoluteFill>
+  );
+};
 export const CardThenNumber: React.FC<{ text: string; value: string; unit: string; at: number }> = ({ text, value, unit, at }) =>
   useCurrentFrame() < at ? <TextCard text={text} /> : <BigNumber value={value} unit={unit} />;
 
@@ -322,6 +338,19 @@ export const EchoLenses: React.FC<{ word: string; bg: string; lenses: { src: str
           </div>
         );
       })}
+    </AbsoluteFill>
+  );
+};
+
+/** ay 20 Nov 14:38: the real quote card ay supplied (Polymarket card via lolesports). The top strip with the Polymarket
+ *  and Worlds logos is cropped off (no Riot logos). File in public/_local/refs (not in git). */
+export const GumaQuoteCard: React.FC = () => {
+  const f = useCurrentFrame();
+  const o = interpolate(f, [0, 6], [0, 1], clamp);
+  const s = interpolate(f, [0, 120], [1.0, 1.04], clamp);
+  return (
+    <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+      <Img src={staticFile("_local/refs/guma-quote.jpg")} style={{ height: 1000, opacity: o, transform: `scale(${s})`, boxShadow: "0 0 0 1px rgba(255,255,255,0.08)" }} />
     </AbsoluteFill>
   );
 };

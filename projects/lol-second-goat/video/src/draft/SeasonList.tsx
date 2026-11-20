@@ -21,14 +21,17 @@ export const SeasonList: React.FC<{ cues: { scroll0: number; scroll1: number; sp
   const RH = 176, X0 = 560, W = 900, k = RH / 118; // big rows, so only five or six fit and the list has to scroll
   // list top at y; camera starts showing the bottom rows and ends with #1 at the top of the frame
   const yStart = 1080 - 60 - n * RH, yEnd = 170;
-  const y = interpolate(f, [cues.scroll0, cues.scroll1], [yStart, yEnd], { ...clamp, easing: inOut });
+  const y = interpolate(f, [cues.scroll0, cues.scroll1], [yStart, yEnd], { ...clamp, easing: Easing.bezier(0.45, 0, 0.25, 1) });
   const spot = interpolate(f, [cues.spot, cues.spot + 10], [0, 1], clamp);
   const fade = interpolate(f, [0, 8], [0, 1], clamp);
   return (
     <AbsoluteFill style={{ opacity: fade }}>
       <Concrete />
+      {/* ay 20 Nov 14:36: the scroll was choppy. The whole list now moves as one layer (sub-pixel transform), with a
+          longer, gentler ease, instead of each row snapping to whole pixels on its own */}
+      <div style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translate3d(0, ${y}px, 0)`, willChange: "transform" }}>
       {rows.map((p, i) => {
-        const top = y + i * RH;
+        const top = i * RH;
         const lit = i === 0;
         const dim = lit ? 0 : spot;
         return (
@@ -47,6 +50,7 @@ export const SeasonList: React.FC<{ cues: { scroll0: number; scroll1: number; sp
           </div>
         );
       })}
+      </div>
       {/* fixed header, top left, like the small label Jxmy keeps over a scrolling list */}
       <div style={{ position: "absolute", left: 70, top: 60, fontFamily: BEBAS, fontSize: 64, letterSpacing: 2, color: INK, lineHeight: 0.95 }}>
         BEST SINGLE<br />SEASON EVER</div>

@@ -220,11 +220,12 @@ const DreamPanel: React.FC<{ who: string; id: string; x: number; start: number; 
 const PARTS6 = ["TROPHIES", "SKILL", "BIG GAMES", "TEAM IMPACT", "LONGEVITY", "RECOGNITION"];
 const BASE = [40, 18, 14, 12, 9, 7];
 const rr = (n: number) => { const x = Math.sin(n * 12.9898) * 43758.5453; return x - Math.floor(x); };
-/** cues: [first roll, rolls speed up, 1,000 reached] */
+/** ay 20 Nov 14:36: cues: [first roll, time-lapse starts, 1,000 reached]. About ten rolls one by one (so the viewer
+ *  sees how a roll moves the weights), then it holds on roll 10, then a time-lapse to 1,000. */
 export const MonteCarlo: React.FC<{ cues: [number, number, number] }> = ({ cues }) => {
   const f = useCurrentFrame();
-  const slow = Math.max(0, Math.floor((Math.min(f, cues[1]) - cues[0]) / 24) + 1);
-  const fast = f > cues[1] ? interpolate(f, [cues[1], cues[2]], [0, 1000 - slow], { ...clamp, easing: Easing.in(Easing.quad) }) : 0;
+  const slow = Math.min(10, Math.max(0, Math.floor((f - cues[0]) / 20) + 1));
+  const fast = f > cues[1] ? interpolate(f, [cues[1], cues[2]], [0, 990], { ...clamp, easing: Easing.inOut(Easing.quad) }) : 0;
   const rolls = f < cues[0] ? 0 : Math.min(1000, Math.round(slow + fast));
   const roll = rolls;
   const bars = BASE.map((b, i) => (roll === 0 ? b : b * (0.7 + 0.6 * rr(roll * 7 + i))));
@@ -296,11 +297,11 @@ export const PlayerCards: React.FC<{ title: string; titleAt: number; cards: Card
         <React.Fragment key={c.id}>
           <div style={{ position: "absolute", left: x0 + i * gap - 60, top: 240 }}><Flip startAt={c.flipAt} w={w} h={h}><BigCard c={c} w={w} h={h} /></Flip></div>
           <div style={{ position: "absolute", left: x0 + i * gap + w - 100, top: 500, width: 330, background: "#ECE6D2", boxShadow: "0 14px 30px rgba(0,0,0,0.45)",
-            opacity: f >= c.lines[0].at ? 1 : 0 }}>
+            opacity: f >= Math.max(c.lines[0].at, c.flipAt + 6) ? 1 : 0 }}>{/* ay 14:36: a panel never shows before its card */}
             <div style={{ height: 16, background: RED }} />
             <div style={{ padding: "16px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
               {c.lines.map((l) => (
-                <div key={l.text} style={{ fontFamily: F.title, fontSize: 34, lineHeight: 1.05, color: l.bad ? "#B3261E" : "#1C1D22", opacity: f >= l.at ? 1 : 0,
+                <div key={l.text} style={{ fontFamily: F.title, fontSize: 34, lineHeight: 1.05, color: l.bad ? "#B3261E" : "#1C1D22", opacity: f >= Math.max(l.at, c.flipAt + 6) ? 1 : 0,
                   transform: `translateX(${interpolate(f, [l.at, l.at + 6], [-20, 0], clamp)}px)` }}>{l.text}</div>
               ))}
             </div>

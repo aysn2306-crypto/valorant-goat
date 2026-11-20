@@ -293,7 +293,11 @@ const LISTS: Record<string, [string, string][]> = {
   bengi: [["ESPORTS.NET 2025", "#2"], ["SPILLED.GG 2026", "#9"]],
 };
 /** zoomAt/arrowAt (frames): ay 20 Nov, on "here to there" the camera moves in and the arrow draws from Knight to Faker */
-const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; arrowAt?: number; tiers?: string[][]; ranks?: Record<string, number>; label?: string; glowIds?: string[] }> = ({ focus, internet, zoomAt, arrowAt, tiers, ranks, label, glowIds = [] }) => {
+type PyrCam = { x: number; y: number; s: number };
+/** showAt(i, j): frame a face pops in (before it, a dashed empty slot); cam: camera centre and zoom in pyramid pixels;
+ *  outlierAt: frame the Uzi and Bengi outlier cards and arrows come in (others dim); pulse: id -> frame of a short pop */
+const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; arrowAt?: number; tiers?: string[][]; ranks?: Record<string, number>; label?: string; glowIds?: string[];
+  showAt?: (i: number, j: number) => number; cam?: PyrCam; outlierAt?: number; pulse?: Record<string, number> }> = ({ focus, internet, zoomAt, arrowAt, tiers, ranks, label, glowIds = [], showAt, cam, outlierAt, pulse = {} }) => {
   const TIERS = tiers ?? TIERS_2026;
   const fr0 = useCurrentFrame();
   const zk = zoomAt === undefined ? 1 : Math.min(1, Math.max(0, (fr0 - zoomAt) / 24));
@@ -306,11 +310,14 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; 
   const sizes = [112, 86, 74, 68, 68], gaps = [0, 230, 190, 175, 165];
   const pos = (i: number, j: number) => ({ x: cx + (j - (TIERS[i].length - 1) / 2) * gaps[i], y: i === 0 ? 236 : cuts[i] + 34 + sizes[i] / 2 });
   const kn = pos(1, 0), fk = pos(0, 0);
-  const lit = (id: string) => (internet ? id in LISTS : !focus || id === "knight" || id === "faker");
+  const outK = outlierAt === undefined ? 0 : Math.min(1, Math.max(0, (fr0 - outlierAt) / 12));
+  const net = internet || outK > 0;
+  const lit = (id: string) => (net ? id in LISTS : !focus || id === "knight" || id === "faker");
   const hidden = (i: number) => internet && i < 3;
   return (
     <Stage glow="gold">
-      <AbsoluteFill style={{ transform: focus ? `scale(${1 + 0.75 * zke})` : undefined, transformOrigin: `${kn.x + 80}px ${top + 60}px` }}>
+      <AbsoluteFill style={{ transform: cam ? `translate(${960 - cam.x * cam.s}px, ${540 - cam.y * cam.s}px) scale(${cam.s})` : focus ? `scale(${1 + 0.75 * zke})` : undefined,
+        transformOrigin: cam ? "0 0" : `${kn.x + 80}px ${top + 60}px` }}>
         <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
           {TIERS.map((_, i) => {
             const y0 = cuts[i], y1 = cuts[i + 1];
@@ -326,10 +333,15 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; 
         {TIERS.map((ids, i) => ids.map((id, j) => {
           const size = sizes[i]; const { x, y } = pos(i, j);
           const ring = i === 0 ? C.gold : i === 1 ? C.cyan : "#E9ECF1";
-          if (hidden(i)) return <div key={id} style={{ position: "absolute", left: x - size / 2, top: y - size / 2, width: size, height: size, borderRadius: size,
+          const sa = showAt ? showAt(i, j) : -1e9;
+          if (hidden(i) || fr0 < sa) return <div key={id} style={{ position: "absolute", left: x - size / 2, top: y - size / 2, width: size, height: size, borderRadius: size,
             border: "3px dashed rgba(237,239,242,0.25)" }} />;
+          const pop = Math.min(1, Math.max(0, (fr0 - sa) / 8));
+          const pu = pulse[id] === undefined ? 0 : Math.max(0, 1 - Math.abs(fr0 - pulse[id] - 6) / 8);
+          const sc = (0.6 + 0.4 * (1 - Math.pow(1 - pop, 3))) * (1 + 0.18 * pu);
           return (
-            <div key={id} style={{ opacity: lit(id) ? 1 : 0.25, filter: lit(id) ? undefined : "grayscale(1)" }}>
+            <div key={id} style={{ opacity: (lit(id) ? 1 : 0.25 + 0.75 * (1 - outK)) * pop, filter: lit(id) || outK === 0 ? undefined : "grayscale(1)",
+              transform: `scale(${sc})`, transformOrigin: `${x}px ${y}px`, position: "absolute", inset: 0 }}>
               <Face id={id} x={x} y={y} size={size} ring={glowIds.includes(id) ? C.cyan : i < 2 ? ring : "rgba(237,239,242,0.8)"} glow={glowIds.includes(id) ? C.cyan : i === 0 ? C.gold : i === 1 ? C.cyan : "rgba(0,0,0,0.6)"} />
               <div style={{ position: "absolute", left: x + size * 0.26, top: y - size * 0.64, minWidth: 26, padding: "0 6px", height: Math.max(22, size * 0.3), borderRadius: 12,
                 background: ring, color: "#0B0B0F", fontFamily: F.title, fontSize: Math.max(17, size * 0.23),
@@ -340,19 +352,23 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; 
             </div>
           );
         }))}
-        {internet && Object.entries(LISTS).map(([id, rows]) => {
+        {net && Object.entries(LISTS).map(([id, rows]) => {
           const i = TIERS.findIndex((t) => t.includes(id)); const { x, y } = pos(i, TIERS[i].indexOf(id));
           const cx0 = 1590, cy0 = id === "uzi" ? 450 : 640, cw = 300, ch = 104;
           // Uzi: straight line to the card; Bengi: elbow below the base so it never crosses Jankos.
           const pts = id === "uzi" ? `${x + 40},${y} ${cx0},${cy0 + ch / 2}` : `${x},${y + 66} ${x},${985} ${cx0 + 170},${985} ${cx0 + 170},${cy0 + ch}`;
           return (
             <React.Fragment key={"c" + id}>
-              <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
-                <polyline points={pts} fill="none" stroke="rgba(237,239,242,0.7)" strokeWidth={2} />
+              <svg style={{ position: "absolute", inset: 0, opacity: internet ? 1 : outK }} width={1920} height={1080}>
+                <polyline points={pts} fill="none" stroke="rgba(237,239,242,0.85)" strokeWidth={3} />
+                {/* arrowhead at the player end: the arrow points at the outlier (ay 20 Nov 14:36) */}
+                {(() => { const q = pts.split(" ").map((v) => v.split(",").map(Number)); const [ax, ay] = q[0], [bx, by] = q[1];
+                  const a = Math.atan2(ay - by, ax - bx), L = 22; const h = (d: number) => `${ax - L * Math.cos(a + d)},${ay - L * Math.sin(a + d)}`;
+                  return <polygon points={`${ax},${ay} ${h(0.45)} ${h(-0.45)}`} fill="rgba(237,239,242,0.95)" />; })()}
               </svg>
-              <div style={{ position: "absolute", left: cx0, top: cy0, width: cw, height: ch, boxSizing: "border-box", padding: "12px 16px", background: "rgba(11,11,15,0.92)", border: "2px solid rgba(237,239,242,0.6)",
+              <div style={{ opacity: internet ? 1 : outK, position: "absolute", left: cx0, top: cy0, width: cw, height: ch, boxSizing: "border-box", padding: "12px 16px", background: "rgba(11,11,15,0.92)", border: "2px solid rgba(237,239,242,0.6)",
                 borderRadius: 10, boxShadow: "0 10px 30px rgba(0,0,0,0.6)" }}>
-                {rows.map(([n, v]) => (
+                {[...rows, ["THIS MODEL", "#" + P(id).rank] as [string, string]].map(([n, v]) => (
                   <div key={n} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", fontFamily: F.body, fontWeight: 800, lineHeight: 1.45 }}>
                     <span style={{ fontSize: 20, color: "#AEB6C2" }}>{n}</span>
                     <span style={{ fontSize: v === "LISTED" ? 20 : 28, color: C.text }}>{v}</span>
@@ -365,11 +381,18 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; 
         {focus && (
           <>
             <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
-              <defs><marker id="ah" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill={C.text} /></marker>
-                <mask id="arrowDraw"><path d={`M ${kn.x - 30} ${kn.y - 50} C ${kn.x - 100} ${kn.y - 130}, ${fk.x - 150} ${fk.y + 40}, ${fk.x - 72} ${fk.y + 10}`} stroke="#fff" strokeWidth={14}
-                  fill="none" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ak} /></mask></defs>
-              <path d={`M ${kn.x - 30} ${kn.y - 50} C ${kn.x - 100} ${kn.y - 130}, ${fk.x - 150} ${fk.y + 40}, ${fk.x - 72} ${fk.y + 10}`} stroke={C.text} strokeWidth={5}
-                fill="none" strokeDasharray="14 10" markerEnd={ak > 0.97 ? "url(#ah)" : undefined} mask="url(#arrowDraw)" opacity={ak > 0 ? 1 : 0} />
+              {/* ay 20 Nov 14:36: a real arrow. One solid curved line that draws on, then a filled arrowhead pointing along the
+                  line's last stretch (the old dashed line with an SVG marker under a mask showed as a square on a squiggle) */}
+              {(() => {
+                const sx = kn.x - 30, sy = kn.y - 50, c1x = kn.x - 100, c1y = kn.y - 130, c2x = fk.x - 150, c2y = fk.y + 40, ex = fk.x - 72, ey = fk.y + 10;
+                const a = Math.atan2(ey - c2y, ex - c2x), L = 34;
+                const h = (d: number) => `${ex - L * Math.cos(a + d)},${ey - L * Math.sin(a + d)}`;
+                return <>
+                  <path d={`M ${sx} ${sy} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${ex - 14 * Math.cos(a)} ${ey - 14 * Math.sin(a)}`} stroke={C.text} strokeWidth={7} strokeLinecap="round"
+                    fill="none" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ak} opacity={ak > 0 ? 1 : 0} />
+                  <polygon points={`${ex},${ey} ${h(0.42)} ${h(-0.42)}`} fill={C.text} opacity={ak > 0.95 ? 1 : 0} />
+                </>;
+              })()}
             </svg>
             <div style={{ position: "absolute", left: kn.x - 470, top: (kn.y + fk.y) / 2 - 60, width: 300, textAlign: "right", fontFamily: F.title, fontSize: 40,
               letterSpacing: 1, color: CREAM, lineHeight: 1.05, textShadow: "0 0 12px #0B0B0F" }}>WHAT WOULD IT TAKE?</div>
@@ -547,8 +570,11 @@ export const S15Impact: React.FC = () => {
 // (2 standard deviations of pure coin flips: about the square root of the series played)
 type Cl = [string, string, number, number];
 /** reveal: frame where Faker, Bin and Knight are picked out (ay 20 Nov: until "yep, it's Faker" they are plain dots) */
-export const S16Clutch: React.FC<{ reveal?: number }> = ({ reveal = 0 }) => {
+export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number }> = ({ reveal = 0, chokeAt = 0 }) => {
   const shown = useCurrentFrame() >= reveal;
+  const chokeShown = useCurrentFrame() >= chokeAt;
+  // ay 20 Nov 14:36: name a few who win LESS than expected first, then Faker and the clutch ones
+  const chokers: [string, "left" | "right" | "above" | "below"][] = [["creme", "below"], ["jackeylove", "below"], ["meiko", "right"]]; // script v15.1 line 30
   const rows = S.clutch as Cl[];
   const xr: [number, number] = [0, 140], yr: [number, number] = [-10, 18]; // v14 plain series won above expected (clutch_v14_unweighted.csv)
   const { X, Y } = scale(B, xr, yr);
@@ -557,19 +583,19 @@ export const S16Clutch: React.FC<{ reveal?: number }> = ({ reveal = 0 }) => {
   const up = band.map((n) => `${X(n)},${Y(Math.min(yr[1], Math.sqrt(n)))}`).join(" ");
   const dn = band.slice().reverse().map((n) => `${X(n)},${Y(Math.max(yr[0], -Math.sqrt(n)))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
-  const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["knight", "below"]];
+  const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["gumayusi", "left"], ["zeus", "below"], ["on", "right"]]; // line 31
   return (
     <Stage title="CLUTCH OR LUCK">
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
         <polygon points={up + " " + dn} fill="rgba(150,160,175,0.16)" stroke="rgba(190,196,206,0.4)" strokeWidth={2} />
       </svg>
       {/* ay 20 Nov: name the regions plainly. Inside the grey band = could be luck; above it = clutch; below it = choked */}
-      <Big x={X(112)} y={Y(1.5)} size={34} color="#9AA3B1" align="center" w={320}>COULD JUST BE LUCK</Big>
       <Big x={X(40)} y={Y(15.5)} size={38} color={C.gold} align="center" w={300}>CLUTCH ↑</Big>
       <Big x={X(40)} y={Y(-8.5)} size={34} color="#9AA3B1" align="center" w={300}>CHOKED ↓</Big>
       <Axes b={B} xr={xr} yr={yr} xt={[0, 20, 40, 60, 80, 100, 120, 140]} yt={[-10, -5, 0, 5, 10, 15]} xl="BEST OF FIVES PLAYED" yl="SERIES WON ABOVE EXPECTED" yf={(v) => (v > 0 ? "+" + v : String(v))} />
       {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 7) / 21)} o={r[3] > Math.sqrt(r[2]) ? 1 : 0.6} />)}
       <Dot x={X(fk[2])} y={Y(fk[3])} r={6} color={heat((fk[3] + 7) / 21)} o={1} />{/* Faker's dot is there from the start; "yup" circles it */}
+      {chokeShown && chokers.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={r0(r[3])} side={side} ring={18} color="#E06A5A" />; })}
       {shown && named.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
       {shown && <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={22} pad={20} color={C.gold} size={1.3} />}
     </Stage>
