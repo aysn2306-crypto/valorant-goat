@@ -1,23 +1,26 @@
-player,link,mix,extra_worlds,extra_msi,extra_league_titles,worlds_total,trophy_part_vs_faker_now,score,faker_now,reaches_faker,smallest,score_capped_old
-Chovy,Chovy,Worlds + MSI + all league titles each season,3,3,6,3,92,92.0,94.5,False,False,92.0
-Chovy,Chovy,Worlds + MSI + all league titles each season,4,4,8,4,107,98.5,94.5,True,True,95.7
-Chovy,Chovy,Worlds only,4,0,0,4,73,84.7,94.5,False,False,84.7
-Chovy,Chovy,Worlds only,5,0,0,5,79,87.7,94.5,False,False,87.7
-Chovy,Chovy,Worlds only,6,0,0,6,86,90.7,94.5,False,False,90.7
-Chovy,Chovy,Worlds + all league titles (no MSI),3,0,6,3,80,87.5,94.5,False,False,87.5
-Chovy,Chovy,Worlds + all league titles (no MSI),4,0,8,4,92,92.4,94.5,False,False,92.4
-Chovy,Chovy,Worlds + all league titles (no MSI),5,0,10,5,103,97.3,94.5,True,False,96.0
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,4,4,8,7,101,87.5,94.5,False,False,87.0
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,5,5,10,8,116,94.1,94.5,False,False,87.5
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,6,6,12,9,131,100.4,94.5,True,True,87.8
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,7,7,14,10,146,106.5,94.5,True,False,87.9
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,8,8,16,11,162,112.5,94.5,True,False,87.9
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,9,9,18,12,177,118.6,94.5,True,False,88.0
-Knight,Knight (Zhuo Ding),Worlds + MSI + all league titles each season,3,3,9,4,93,93.3,94.5,False,False,93.3
-Knight,Knight (Zhuo Ding),Worlds + MSI + all league titles each season,4,4,12,5,109,99.6,94.5,True,True,96.0
-Knight,Knight (Zhuo Ding),Worlds only,4,0,0,5,74,85.4,94.5,False,False,85.4
-Knight,Knight (Zhuo Ding),Worlds only,5,0,0,6,80,88.2,94.5,False,False,88.2
-Knight,Knight (Zhuo Ding),Worlds only,6,0,0,7,87,90.9,94.5,False,False,90.9
-Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),3,0,9,4,82,88.7,94.5,False,False,88.7
-Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),4,0,12,5,94,93.5,94.5,False,False,93.5
-Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),5,0,15,6,105,98.2,94.5,True,False,96.0
+player,link,mix,extra_worlds,extra_msi,extra_league_titles,worlds_total,part_trophies,part_big_stage_clutch,part_skill,part_impact,part_longevity,part_intangibles,score,faker_now,reaches_faker,same_world_score,same_world_faker,same_world_rank,smallest
+Chovy,Chovy,Worlds + MSI + all league titles each season,2,2,4,2,76.1,84.6,104.5,78.6,100.3,109.4,87.2,94.4,False,85.7,93.6,2,False
+Chovy,Chovy,Worlds + MSI + all league titles each season,3,3,6,3,91.5,86.6,106.3,78.7,105.6,115.1,94.9,94.4,True,92.2,92.8,2,True
+Chovy,Chovy,Worlds + MSI + all league titles each season,4,4,8,4,106.9,88.6,107.8,78.7,110.9,120.8,102.5,94.4,True,95.8,89.6,1,False
+Chovy,Chovy,Worlds + all league titles (no MSI),3,0,6,3,80.1,74.5,107.6,78.7,105.6,115.1,88.8,94.4,False,85.9,92.7,2,False
+Chovy,Chovy,Worlds + all league titles (no MSI),4,0,8,4,91.7,72.4,109.3,78.7,110.9,120.8,94.4,94.4,False,90.2,92.1,2,False
+Chovy,Chovy,Worlds + all league titles (no MSI),5,0,10,5,103.3,70.3,109.6,78.7,116.2,126.4,99.6,94.4,True,93.3,90.4,1,True
+Chovy,Chovy,Worlds only,4,0,0,4,72.6,72.4,109.3,78.7,110.9,120.8,86.7,94.4,False,82.6,92.1,2,False
+Chovy,Chovy,Worlds only,5,0,0,5,79.4,70.3,109.6,78.7,116.2,126.4,90.1,94.4,False,85.0,91.6,2,False
+Chovy,Chovy,Worlds only,6,0,0,6,86.2,68.2,109.6,78.7,121.5,132.1,93.4,94.4,False,87.4,91.3,2,False
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,4,4,8,7,101.3,123.2,73.6,60.8,92.5,58.5,90.7,94.4,False,87.0,92.2,2,False
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,5,5,10,8,116.4,129.8,73.6,60.8,97.8,59.4,98.2,94.4,True,87.5,86.9,1,True
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,6,6,12,9,131.4,136.5,73.6,60.8,103.1,60.4,105.7,94.4,True,87.8,82.5,1,False
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,7,7,14,10,146.5,143.2,73.6,60.8,108.4,61.3,113.2,94.4,True,87.8,78.9,1,False
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,8,8,16,11,161.5,149.9,73.6,60.8,113.7,62.3,120.7,94.4,True,87.9,75.9,1,False
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,9,9,18,12,176.6,156.5,73.6,60.8,119.0,63.2,128.2,94.4,True,88.0,73.4,1,False
+Knight,Knight (Zhuo Ding),Worlds + MSI + all league titles each season,2,2,6,3,77.5,120.6,106.3,75.9,100.3,87.7,91.3,94.4,False,87.3,91.9,2,False
+Knight,Knight (Zhuo Ding),Worlds + MSI + all league titles each season,3,3,9,4,93.2,129.9,108.8,75.9,105.6,87.7,99.8,94.4,True,93.5,90.8,1,True
+Knight,Knight (Zhuo Ding),Worlds + MSI + all league titles each season,4,4,12,5,108.9,138.2,110.5,75.9,110.9,87.7,108.0,94.4,True,96.2,86.8,1,False
+Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),2,0,6,3,69.8,112.1,106.8,75.9,100.3,87.7,87.1,94.4,False,84.2,92.6,2,False
+Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),3,0,9,4,81.7,117.3,109.4,75.9,105.6,87.7,93.5,94.4,False,88.9,91.5,2,False
+Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),4,0,12,5,93.6,121.3,111.2,75.9,110.9,87.7,99.7,94.4,True,93.7,90.8,1,True
+Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),5,0,15,6,105.5,125.2,111.3,75.9,116.2,87.7,105.5,94.4,True,96.2,88.2,1,False
+Knight,Knight (Zhuo Ding),Worlds only,4,0,0,5,73.5,121.3,111.2,75.9,110.9,87.7,91.6,94.4,False,85.6,90.8,2,False
+Knight,Knight (Zhuo Ding),Worlds only,5,0,0,6,80.4,125.2,111.3,75.9,116.2,87.7,95.4,94.4,True,88.4,90.2,2,True
+Knight,Knight (Zhuo Ding),Worlds only,6,0,0,7,87.2,129.1,111.3,75.9,121.5,87.7,99.2,94.4,True,91.1,89.8,1,False
