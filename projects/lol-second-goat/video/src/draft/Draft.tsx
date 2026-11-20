@@ -96,7 +96,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["32", (c) => <WithWithout cues={{ withAt: at(c, W("33", "77")), withoutAt: at(c, W("33", "64")), diffAt: at(c, W("33", "13")), doubtAt: at(c, W("33", "not")) }} />],
   // ay 20 Nov: from the Chovy graph straight to the wins-added graph, held the whole time, then the climb to Faker
   ["34", (c) => { const k = Math.max(1, fr(Cl.CLIMB_T0 - c.t0));
-    return <><Sequence durationInFrames={k} layout="none"><Freeze frame={0}><Cl.SClimb voice={false} /></Freeze></Sequence>
+    return <><Sequence durationInFrames={k} layout="none"><Freeze frame={30}><Cl.SClimb voice={false} /></Freeze></Sequence>
       <Sequence from={k} layout="none"><Cl.SClimb voice={false} /></Sequence></>; }],
   // Jxmy percent stack (jxmy-graphs XMaPrXzclaQ g08), with 100 picks lit on the right
   ["38", (c) => <PercentStack header="HOW MANY ALL-PRO PICKS COME OUT RIGHT" rows={[
