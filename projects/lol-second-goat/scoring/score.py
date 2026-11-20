@@ -730,10 +730,10 @@ def main():
     T["cast"] = np.clip(1 - T.mates / 0.4, 0, 1.5)   # 1 = teammates at league average for their role-year, 0 = teammates 0.4 SD above (a strong roster gets no solo-carry credit)
     T["lead"] = T.get("lead", T.credit).fillna(T.credit)
     T["carry_pts"] = (T.base * (T.lead - 1)).clip(lower=0) * T.cast
-    if V15:
+    if V15 and os.environ.get("DOM_CAP", "1") != "0":   # DOM_CAP=0: what-if with no cap on league titles
         # v15 (ay 20 Nov): all of a player's league results together can be worth at most one Worlds title, so no
         # pile of league titles outweighs a Worlds. Each league result keeps its share of that cap.
-        cap = CFG["trophy_points"]["worlds"][1]
+        cap = CFG["trophy_points"]["worlds"][1] * float(os.environ.get("DOM_CAP", 1))   # DOM_CAP=2: what-if, two Worlds' worth
         dm = T.tier == "domestic"
         dsum = T[dm].groupby("Link").pts.transform("sum")
         T.loc[dm, "pts"] = T.loc[dm, "pts"] * np.minimum(1.0, cap / dsum)
