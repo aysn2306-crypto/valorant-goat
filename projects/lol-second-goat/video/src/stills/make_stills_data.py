@@ -19,7 +19,10 @@ out["pool"] = [[by_link.get(r["Link"], r["Link"]), r["name"], int(float(r["games
 ds = rows("draft_scores.csv")
 f = lambda v: round(float(v), 2) if v not in ("", None) else None
 idof = lambda r: by_link.get(r["Link"], r["Link"])
-out["clutch"] = [[idof(r), r["name"], int(r["clutch_n"]), f(r["clutch_raw"])] for r in ds if r["clutch_raw"] not in ("", None) and int(r["clutch_n"]) > 0]
+# the spoken measure (script 30-31): best-of-5 series won above expected, NOT draft_scores clutch_raw (weighted total
+# with deciders, a different scale that pushed players off the axes in draft 10)
+cl = list(csv.DictReader(open("/mnt/project-files/lol-second-goat/research/data/clutch_v14_unweighted.csv")))
+out["clutch"] = [[by_link.get(r["link"], r["link"].lower()), r["player"], int(r["series"]), float(r["series_above_expected"])] for r in cl if r["series"] and int(r["series"]) > 0]
 out["impact"] = [[by_link.get(r["Link"], r["Link"]), r["Link"].split(" (")[0], int(float(r["G"])), round(float(r["waa"]), 1)] for r in rows("rapm_career.csv")]
 out["board"] = [[idof(r), r["name"], int(float(r["games"])), f(r["c_skill"]), f(r["c_big_stage"]), int(float(r["title_teams"] or 0)),
   int(float(r["worlds_titles"] or 0)) + int(float(r["msi_titles"] or 0)) + int(float(r["first_stand_titles"] or 0)) + int(float(r["domestic_titles"] or 0)),
