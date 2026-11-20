@@ -5,7 +5,7 @@
 import React from "react";
 import { AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { P } from "../lib/data";
-import { Clip } from "./Clip";
+import { Concrete } from "../samples/Climb";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const easeOut = Easing.bezier(0.16, 1, 0.3, 1);
@@ -36,11 +36,11 @@ export const TrophySplit: React.FC<{ cues: { photos: number; pie: number; shares
   let acc = 0;
   return (
     <AbsoluteFill>
-      <Clip id="lift" from={20} dim={0.62} />
+      <Concrete />
       <div style={{ position: "absolute", left: 0, right: 0, top: 150, textAlign: "center", fontFamily: BEBAS, fontSize: 96, letterSpacing: 3, color: INK, opacity: barIn }}>
         ONE TROPHY, FIVE PLAYERS</div>
       <div style={{ position: "absolute", left: 0, right: 0, top: 262, textAlign: "center", fontFamily: BEBAS, fontSize: 38, letterSpacing: 2, color: MUTE, opacity: pop(cues.caption) }}>
-        BLG AT WORLDS 2026 · SHARE OF THE TITLE · EVERY GAME OF THE TOURNAMENT COUNTS</div>
+        BLG AT WORLDS 2026 · SHARE FROM EACH PLAYER'S STATS · EVERY GAME OF THE TOURNAMENT COUNTS</div>
       {/* the whole trophy first, then the cuts open up */}
       {SHARES.map(([id], i) => {
         const w = (pct[i] / 100) * W, x = X0 + (acc / 100) * W; acc += pct[i];

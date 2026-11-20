@@ -284,7 +284,7 @@ export const S9TwoFakers: React.FC = () => {
 // 10. Finale: the GOAT pyramid (ay 18 Nov 17:46: back to round photos). Tiers follow our ranking only, sorted by rank
 // (MODEL-CURRENT commit 67d8ad3): round photo, small rank badge, name under it, a small "TIER n" per row, no percentages, no title.
 // ay 18:09: wider spread of regions (MODEL-CURRENT commit 789f9d7)
-const TIERS = [["faker"], ["knight", "chovy"], ["ruler", "keria", "bin", "viper"], ["gumayusi", "caps", "deft", "theshy", "uzi"],
+const TIERS_2026 = [["faker"], ["knight", "chovy"], ["ruler", "keria", "bin", "viper"], ["gumayusi", "caps", "deft", "theshy", "uzi"],
   ["scout", "doinb", "bengi", "perkz", "bjergsen", "jankos"]]; // v12 rank order
 // 19a (ay 18:15): after tiers 5 and 4 fill, dim all but Uzi and Bengi and show where 2025/26 published lists put them
 // (research/model-vs-published-lists.md; esports.net and spilled.gg only, Red Bull dropped as unranked).
@@ -293,7 +293,8 @@ const LISTS: Record<string, [string, string][]> = {
   bengi: [["ESPORTS.NET 2025", "#2"], ["SPILLED.GG 2026", "#9"]],
 };
 /** zoomAt/arrowAt (frames): ay 20 Nov, on "here to there" the camera moves in and the arrow draws from Knight to Faker */
-const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; arrowAt?: number }> = ({ focus, internet, zoomAt, arrowAt }) => {
+const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; arrowAt?: number; tiers?: string[][]; ranks?: Record<string, number>; label?: string; glowIds?: string[] }> = ({ focus, internet, zoomAt, arrowAt, tiers, ranks, label, glowIds = [] }) => {
+  const TIERS = tiers ?? TIERS_2026;
   const fr0 = useCurrentFrame();
   const zk = zoomAt === undefined ? 1 : Math.min(1, Math.max(0, (fr0 - zoomAt) / 24));
   const zke = zk < 0.5 ? 2 * zk * zk : 1 - Math.pow(-2 * zk + 2, 2) / 2;
@@ -329,10 +330,10 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; 
             border: "3px dashed rgba(237,239,242,0.25)" }} />;
           return (
             <div key={id} style={{ opacity: lit(id) ? 1 : 0.25, filter: lit(id) ? undefined : "grayscale(1)" }}>
-              <Face id={id} x={x} y={y} size={size} ring={i < 2 ? ring : "rgba(237,239,242,0.8)"} glow={i === 0 ? C.gold : i === 1 ? C.cyan : "rgba(0,0,0,0.6)"} />
+              <Face id={id} x={x} y={y} size={size} ring={glowIds.includes(id) ? C.cyan : i < 2 ? ring : "rgba(237,239,242,0.8)"} glow={glowIds.includes(id) ? C.cyan : i === 0 ? C.gold : i === 1 ? C.cyan : "rgba(0,0,0,0.6)"} />
               <div style={{ position: "absolute", left: x + size * 0.26, top: y - size * 0.64, minWidth: 26, padding: "0 6px", height: Math.max(22, size * 0.3), borderRadius: 12,
                 background: ring, color: "#0B0B0F", fontFamily: F.title, fontSize: Math.max(17, size * 0.23),
-                display: "flex", alignItems: "center", justifyContent: "center" }}>#{P(id).rank}</div>
+                display: "flex", alignItems: "center", justifyContent: "center" }}>#{ranks?.[id] ?? P(id).rank}</div>
               <div style={{ position: "absolute", left: x - 100, width: 200, top: y + size / 2 + 2, textAlign: "center", fontFamily: F.body, fontWeight: 800,
                 fontSize: i === 0 ? 28 : i === 1 ? 24 : 20, color: i === 0 ? C.gold : i === 1 ? C.cyan : C.text, whiteSpace: "nowrap", lineHeight: 1.1,
                 textShadow: "0 0 6px #0B0B0F" }}>{P(id).name.toUpperCase()}</div>
@@ -375,9 +376,14 @@ const Pyramid: React.FC<{ focus?: boolean; internet?: boolean; zoomAt?: number; 
           </>
         )}
       </AbsoluteFill>
+      {label && <div style={{ position: "absolute", left: 70, top: 60, lineHeight: 0.95 }}>
+        <div style={{ fontFamily: F.title, fontSize: 40, letterSpacing: 6, color: C.gold }}>LEAGUE G.O.A.T. PYRAMID</div>
+        <div style={{ fontFamily: F.title, fontSize: 88, letterSpacing: 2, color: CREAM, whiteSpace: "pre-line" }}>{label}</div>
+      </div>}
     </Stage>
   );
 };
+export const PyramidOld = Pyramid;
 export const S10Pyramid: React.FC = () => <Pyramid />;
 export const S10bPyramidArrow: React.FC<{ zoomAt?: number; arrowAt?: number }> = (p) => <Pyramid focus {...p} />;
 export const S10aPyramidInternet: React.FC = () => <Pyramid internet />;
@@ -547,8 +553,9 @@ export const S16Clutch: React.FC<{ reveal?: number }> = ({ reveal = 0 }) => {
   const xr: [number, number] = [0, 140], yr: [number, number] = [-10, 18]; // v14 plain series won above expected (clutch_v14_unweighted.csv)
   const { X, Y } = scale(B, xr, yr);
   const band = Array.from({ length: 29 }, (_, i) => i * 5);
-  const up = band.map((n) => `${X(n)},${Y(Math.sqrt(n))}`).join(" ");
-  const dn = band.slice().reverse().map((n) => `${X(n)},${Y(-Math.sqrt(n))}`).join(" ");
+  // ay 20 Nov: the luck band stays inside the axes (it used to run off the bottom right)
+  const up = band.map((n) => `${X(n)},${Y(Math.min(yr[1], Math.sqrt(n)))}`).join(" ");
+  const dn = band.slice().reverse().map((n) => `${X(n)},${Y(Math.max(yr[0], -Math.sqrt(n)))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
   const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["knight", "below"]];
   return (
@@ -556,10 +563,13 @@ export const S16Clutch: React.FC<{ reveal?: number }> = ({ reveal = 0 }) => {
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
         <polygon points={up + " " + dn} fill="rgba(150,160,175,0.16)" stroke="rgba(190,196,206,0.4)" strokeWidth={2} />
       </svg>
-      <Big x={X(110)} y={Y(-6)} size={40} color="#9AA3B1" align="center" w={300}>LUCK</Big>
+      {/* ay 20 Nov: name the regions plainly. Inside the grey band = could be luck; above it = clutch; below it = choked */}
+      <Big x={X(112)} y={Y(1.5)} size={34} color="#9AA3B1" align="center" w={320}>COULD JUST BE LUCK</Big>
+      <Big x={X(40)} y={Y(15.5)} size={38} color={C.gold} align="center" w={300}>CLUTCH ↑</Big>
+      <Big x={X(40)} y={Y(-8.5)} size={34} color="#9AA3B1" align="center" w={300}>CHOKED ↓</Big>
       <Axes b={B} xr={xr} yr={yr} xt={[0, 20, 40, 60, 80, 100, 120, 140]} yt={[-10, -5, 0, 5, 10, 15]} xl="BEST OF FIVES PLAYED" yl="SERIES WON ABOVE EXPECTED" yf={(v) => (v > 0 ? "+" + v : String(v))} />
       {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 7) / 21)} o={r[3] > Math.sqrt(r[2]) ? 1 : 0.6} />)}
-      {!shown && <Dot x={X(fk[2])} y={Y(fk[3])} r={6} color={heat((fk[3] + 7) / 21)} o={1} />}
+      <Dot x={X(fk[2])} y={Y(fk[3])} r={6} color={heat((fk[3] + 7) / 21)} o={1} />{/* Faker's dot is there from the start; "yup" circles it */}
       {shown && named.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
       {shown && <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={22} pad={20} color={C.gold} size={1.3} />}
     </Stage>
@@ -920,7 +930,7 @@ const yearsShort = (s: string) => {
     out.push(j > i ? `${y[i]}-${String(y[j]).slice(2)}` : `${y[i]}`); i = j + 1; }
   return out.join(" + ");
 };
-export const SampleWithWithout: React.FC = () => {
+export const SampleWithWithout: React.FC<{ lit?: string }> = ({ lit: litId = "knight" }) => {
   const b: Box = { x0: 270, y0: 250, x1: 1720, y1: 780 };
   const { Y } = scale(b, [0, 1], [0, 100]);
   const rows = S.withWithout as [string, string, string, number, number, number, number, string][];
@@ -933,7 +943,7 @@ export const SampleWithWithout: React.FC = () => {
       {rows.map(([id, , abbr, wW, wL, oW, oL, yrs], i) => {
         const cx = b.x0 + gw * (i + 0.5), xa = cx - bw - 10, xb = cx + 10;
         const pw = (100 * wW) / (wW + wL), po = oW + oL ? (100 * oW) / (oW + oL) : null;
-        const lit = id === "knight", fk = id === "faker";
+        const lit = id === litId, fk = id === "faker";
         const colW = lit ? C.cyan : fk ? "rgba(245,184,61,0.55)" : "rgba(214,219,226,0.75)";
         return (
           <React.Fragment key={id}>
