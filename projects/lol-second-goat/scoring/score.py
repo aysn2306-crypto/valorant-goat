@@ -307,7 +307,11 @@ def titles(t, s, strength):
             continue
         per = ev.groupby("Link").agg(G=("G", "sum")).reset_index()
         need = tp["min_share_of_games"] * per.G.max()
-        imp = ev.groupby("Link").apply(lambda d: wmean(d, "z_impact"), include_groups=False)
+        zc = "z_impact"
+        if os.environ.get("CREDIT_SUP"):   # what-if (ay 20 Nov): support play in the title share, half and half
+            ev = ev.assign(z_credit=0.5 * ev.z_impact + 0.5 * ev[["z_vis_pm", "z_kp", "z_assists_pm"]].mean(axis=1, skipna=True).fillna(ev.z_impact))
+            zc = "z_credit"
+        imp = ev.groupby("Link").apply(lambda d: wmean(d, zc), include_groups=False)
         team_mean = imp[per.set_index("Link").G >= need].mean()
         path = path_mult.get((e.Page, e.Team), 1.0)
         for _, p in per.iterrows():
