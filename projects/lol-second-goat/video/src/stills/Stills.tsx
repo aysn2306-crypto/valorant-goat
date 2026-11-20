@@ -596,7 +596,7 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
         <polygon points={up + " " + dn} fill={`rgba(150,160,175,${0.16 + 0.16 * midLit})`} stroke={`rgba(190,196,206,${0.4 + 0.5 * midLit})`} strokeWidth={2} />
       </svg>
-      {midLit > 0 && <Big x={X(75)} y={Y(-1.2)} size={40} color="#F2F2EE" align="center" w={520}><span style={{ opacity: midLit }}>ABOUT 9 IN 10 PLAYERS</span></Big>}
+      {/* ay 20 Nov 18:03: the "about 9 in 10 players" label crossed the dots; the lit band says it on its own */}
       {/* ay 20 Nov: name the regions plainly. Inside the grey band = could be luck; above it = clutch; below it = choked */}
       <Big x={X(40)} y={Y(15.5)} size={38} color={C.gold} align="center" w={300}>CLUTCH ↑</Big>
       <Big x={X(40)} y={Y(-8.5)} size={34} color="#9AA3B1" align="center" w={300}>CHOKED ↓</Big>

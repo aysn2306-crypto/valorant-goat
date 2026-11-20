@@ -24,7 +24,7 @@ import { PillBars, StackedLines, TitleList } from "./Lists";
 import { OnBlack, RecordCounter } from "./Banners";
 import { Clip, Cuts, RingClip, SplitClips } from "./Clip";
 import { FansVsModel } from "./Slope";
-import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
+import { TrophyWeight, HardRunBonus, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
@@ -134,8 +134,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // 24b: the biggest underdog is a different question: each champion's own odds, DRX 2022 lit on "DRX", the 1 in 500 on "500"
   ["24b", (c) => <HardestRuns cues={{ rise: 0, lit: [{ team: "DRX", year: 2022, at: at(c, WA("24b", ["drx"])) }] }} />],
   // 25: what BLG's harder run is worth to Knight
-  ["25", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="BLG'S HARDER RUN, FOR KNIGHT" value="+11" unit="TROPHY POINTS"
-    years="UNDER HALF A POINT ON HIS FINAL SCORE" numAt={at(c, WA("25", ["11", "eleven", "added"]))} yearsAt={at(c, WA("25", ["half", "less"]))} /></AbsoluteFill>],
+  ["25", (c) => <HardRunBonus barAt={at(c, L("25").start + 0.3)} bonusAt={at(c, WA("25", ["11", "eleven", "added"]))} scoreAt={at(c, WA("25", ["half", "less"]))} />],
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
   ["26@win", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did in the game. Two players on the same team can end up with very different shares." />],
@@ -171,9 +170,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["45", (c) => <PillBars cues={{ rise: 4, lit: at(c, WA("46", ["knight", "carrier"])), side: 1e6 }} />],
   ["47", (c) => { const kn = at(c, W("48", "knight")); return <SeasonList n={8} cues={{ scroll0: 2, scroll1: kn - 2, spot: kn }} />; }],
   // Jxmy two-player board (jxmy-graphs GPH4nK5sQ-8 g01): Chovy vs Knight, the skill score "by a hair" last
-  // script 15:52 line 48b: where Faker's best season sits, and why the early stats undersell it
-  ["48b", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="FAKER'S BEST SEASON, 2016" value="#31" unit="ALL TIME"
-    years="FEW STATS TRACKED BEFORE 2020" numAt={at(c, WA("48b", ["31", "thirty", "2016"]))} yearsAt={at(c, WA("48b", ["thin", "stats"]))} /></AbsoluteFill>],
+  // 48b (Faker's best season) cut, ay 20 Nov 18:03: not in the video
   ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, W("49", "ahead")) }} rows={[
     { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
     { label: "GOLD AHEAD AT 15 MIN", l: "+339", r: "+451", better: "r" },

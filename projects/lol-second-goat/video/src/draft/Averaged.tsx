@@ -91,7 +91,7 @@ export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; avgAt: numb
       {/* the score bar: trophies a thin gold slice, everything else grey */}
       <div style={{ position: "absolute", left: BX0, top: by, width: BW, height: bh, opacity: tO, border: `3px solid ${INK}`, boxSizing: "border-box" }}>
         <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: TW * fill, background: GOLD }} />
-        <div style={{ position: "absolute", left: TW, top: 0, bottom: 0, width: (BW - TW - 3) * fill, background: "#3A3D42" }} />
+        <div style={{ position: "absolute", left: TW, top: 0, bottom: 0, width: (BW - 6 - TW) * fill, background: "#3A3D42" }} />
         {SIXCUPS(f, cupsAt, TW, bh)}
       </div>
       <div style={{ position: "absolute", left: BX0, top: by + bh + 14, opacity: fill, fontFamily: BEBAS, fontSize: interpolate(up, [0, 1], [56, 40]), color: GOLD, letterSpacing: 2 }}>TROPHIES 28%</div>
@@ -146,5 +146,32 @@ export const ChatLine: React.FC<{ user: string; text: string; at: number }> = ({
     <div style={{ position: "absolute", left: 60, bottom: 120, opacity: k, fontFamily: "Inter", fontSize: 26, color: "#EFEFF1", background: "rgba(14,14,16,0.72)", padding: "6px 12px", borderRadius: 4 }}>
       <span style={{ fontWeight: 700, color: "#9147FF" }}>{user}</span>: {text}
     </div>
+  );
+};
+
+/** ay 20 Nov 18:03 ("what is that BLG harder run for Knight graphic? I don't understand that"): one bar of Knight's
+ *  trophy points (695, draft_scores.csv v15.1), the +11 from BLG's hard 2026 run lit as a thin teal sliver at its end,
+ *  so the eye sees how small it is. Then the plain sentence: under half a point on his final score (73.5). */
+export const HardRunBonus: React.FC<{ barAt: number; bonusAt: number; scoreAt: number }> = ({ barAt, bonusAt, scoreAt }) => {
+  const f = useCurrentFrame();
+  const TOTAL = 695, BONUS = 11, X0 = 160, W = 1600, Y = 430, H = 120;
+  const tO = interpolate(f, [0, 8], [0, 1], clamp);
+  const fill = interpolate(f, [barAt, barAt + 24], [0, 1], { ...clamp, easing: easeOut });
+  const b = interpolate(f, [bonusAt, bonusAt + 10], [0, 1], clamp);
+  const sc = interpolate(f, [scoreAt, scoreAt + 10], [0, 1], clamp);
+  const base = W * ((TOTAL - BONUS) / TOTAL), bw = W * (BONUS / TOTAL);
+  return (
+    <AbsoluteFill>
+      <Concrete />
+      <div style={{ position: "absolute", left: X0, top: 120, opacity: tO, fontFamily: BEBAS, fontSize: 72, letterSpacing: 3, color: INK }}>KNIGHT'S TROPHY POINTS</div>
+      <div style={{ position: "absolute", left: X0, top: Y, width: base * fill, height: H, background: GOLD, opacity: tO }} />
+      <div style={{ position: "absolute", left: X0 + base, top: Y, width: bw, height: H, background: TEAL, opacity: b }} />
+      <div style={{ position: "absolute", left: X0, top: Y + H + 16, opacity: fill, fontFamily: BEBAS, fontSize: 48, color: GOLD, letterSpacing: 2 }}>695 IN TOTAL</div>
+      <div style={{ position: "absolute", left: X0 + base + bw / 2 - 2, top: Y - 70, width: 4, height: 58, background: TEAL, opacity: b }} />
+      <div style={{ position: "absolute", right: 1920 - (X0 + base + bw / 2) - 40, top: Y - 140, opacity: b, textAlign: "right", fontFamily: BEBAS, fontSize: 56, lineHeight: 1, color: TEAL, letterSpacing: 2, whiteSpace: "nowrap" }}>
+        +11 FROM BLG'S HARD RUN</div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 800, textAlign: "center", opacity: sc, transform: `translateY(${(1 - sc) * 14}px)`, fontFamily: BEBAS, fontSize: 60, letterSpacing: 3, color: INK }}>
+        ON HIS FINAL SCORE: UNDER HALF A POINT</div>
+    </AbsoluteFill>
   );
 };
