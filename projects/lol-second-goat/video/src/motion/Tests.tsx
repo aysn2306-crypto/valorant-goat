@@ -97,12 +97,12 @@ export const T2Climb: React.FC = () => {
   const FK = fk.raw.trophies;
   const seasons = (y: string) => { const a = y.split("-"); return Number(a[a.length - 1]) - Number(a[0]) + 1; };
   const xs = (n: number) => 330 + ((n - 1) / 14) * 1350;
-  const named = ["gumayusi", "keria", "oner"]; // v15 line 51: the three-time world champions, Gumayusi, Keria, Oner
-  const side: Record<string, "left" | "right"> = { gumayusi: "right", keria: "left", oner: "right" };
+  const named = ["canyon", "ruler", "knight"]; // v15.1 line 51: Canyon, Ruler, Knight
+  const side: Record<string, "left" | "right"> = { canyon: "left", ruler: "right", knight: "right" };
   // camera: value at screen centre (c) and zoom (s)
   const climb = p(f, T.climb, T.land, climbE), zoom = p(f, T.zoom, T.zoomEnd, inOut);
-  const TOP = 1100; // the axis runs just past Faker's 1,058 (v15)
-  const c0 = 520, c1 = FK - 270 / PX, c2 = TOP / 2 + 10;
+  const TOP = 1600; // the axis runs past Faker's 1,509
+  const c0 = 450, c1 = FK - 270 / PX, c2 = TOP / 2 + 10;
   const c = interpolate(zoom, [0, 1], [interpolate(climb, [0, 1], [c0, c1]), c2]);
   // camera pull back: y fits the whole range, x shrinks less so the chart keeps its width
   const s = interpolate(zoom, [0, 1], [1, 860 / (TOP * PX)]);

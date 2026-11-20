@@ -53,7 +53,7 @@ export const RecordCounter: React.FC<{ cues: { first: number; second: number } }
   const f = useCurrentFrame();
   const rows = [
     { at: cues.first, badge: "players/faker.png", name: "FAKER", sub: "1,000 RERUNS, WEIGHTS ROLLED AT RANDOM", rank: "#1", accent: false, n: 1000 },
-    { at: cues.second, badge: null, name: "? ? ?", sub: "ALMOST EVERY TIME", rank: "#2", accent: true, n: 995 }, // v15: Knight 995 of 1,000
+    { at: cues.second, badge: null, name: "? ? ?", sub: "THE SAME NAME EVERY TIME", rank: "#2", accent: true, n: 1000 }, // v15.1: Knight 1,000 of 1,000
   ];
   return (
     <AbsoluteFill>

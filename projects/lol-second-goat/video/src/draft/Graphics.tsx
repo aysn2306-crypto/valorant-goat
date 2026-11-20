@@ -34,10 +34,10 @@ const Figure: React.FC<{ id: string; h: number; ring: string; rank: number; name
 };
 
 // ------------------------------------------------------------------ the 2025 pyramid twist (top three tiers)
-// model v15 (data/csv/draft_scores_cut2025.csv, draft_scores_cut2026.csv, draft_scores_geng_wins.csv)
-export const ORDER_2025 = ["faker", "keria", "ruler", "oner", "chovy", "zeus", "canyon", "knight", "gumayusi", "peanut"];
-export const ORDER_2026 = ["faker", "knight", "keria", "ruler", "zeus", "chovy", "oner", "gumayusi", "bin", "canyon"];
-export const ORDER_GENG = ["faker", "ruler", "keria", "chovy", "knight", "zeus", "canyon", "oner", "gumayusi", "kiin"];
+// model v15.1 (data/csv/draft_scores_cut2025.csv, draft_scores.csv, draft_scores_geng_wins.csv)
+export const ORDER_2025 = ["faker", "chovy", "ruler", "keria", "knight", "peanut", "canyon", "oner", "zeus", "xiaohu"];
+export const ORDER_2026 = ["faker", "knight", "chovy", "ruler", "keria", "canyon", "zeus", "bin", "peanut", "viper"];
+export const ORDER_GENG = ["faker", "chovy", "ruler", "knight", "canyon", "keria", "zeus", "peanut", "kiin", "bin"];
 /** states: from frame `at`, the pyramid shows `order` (top 10) under the label */
 export const PyramidTwist: React.FC<{ states: { at: number; order: string[]; label: string }[]; glowIds?: string[] }> = ({ states, glowIds = [] }) => {
   const f = useCurrentFrame();

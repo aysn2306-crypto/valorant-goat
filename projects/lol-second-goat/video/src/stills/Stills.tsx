@@ -284,8 +284,8 @@ export const S9TwoFakers: React.FC = () => {
 // 10. Finale: the GOAT pyramid (ay 18 Nov 17:46: back to round photos). Tiers follow our ranking only, sorted by rank
 // (MODEL-CURRENT commit 67d8ad3): round photo, small rank badge, name under it, a small "TIER n" per row, no percentages, no title.
 // ay 18:09: wider spread of regions (MODEL-CURRENT commit 789f9d7)
-const TIERS_2026 = [["faker"], ["knight", "keria"], ["ruler", "chovy", "gumayusi", "bin"], ["viper", "caps", "deft", "uzi", "theshy"],
-  ["scout", "bengi", "doinb", "perkz", "jankos", "bjergsen"]]; // model v15 faces (research/v15-script-changes.md), rank order
+const TIERS_2026 = [["faker"], ["knight", "chovy"], ["ruler", "keria", "bin", "viper"], ["caps", "gumayusi", "deft", "uzi", "theshy"],
+  ["scout", "doinb", "bengi", "perkz", "bjergsen", "jankos"]]; // model v15.1 faces (MODEL-CURRENT), rank order
 // 19a (ay 18:15): after tiers 5 and 4 fill, dim all but Uzi and Bengi and show where 2025/26 published lists put them
 // (research/model-vs-published-lists.md; esports.net and spilled.gg only, Red Bull dropped as unranked).
 const LISTS: Record<string, [string, string][]> = {
@@ -389,8 +389,8 @@ export const S10bPyramidArrow: React.FC<{ zoomAt?: number; arrowAt?: number }> =
 export const S10aPyramidInternet: React.FC = () => <Pyramid internet />;
 
 // 11a. Knight vs Faker, part by part (v11 parts and weights, MODEL-CURRENT 18 Nov 17:20; "intangibles" is called Recognition on screen)
-const PARTS: [string, number, number, number][] = [["TROPHIES", 40, 100, 45.4], ["BIG GAMES", 14, 100, 98.2], ["SKILL", 18, 78.6, 99.9],
-  ["TEAM IMPACT", 12, 100, 75.9], ["YEARS AT THE TOP", 9, 100, 89.7], ["RECOGNITION", 7, 88.7, 87.4]]; // v15 (data/csv/draft_scores.csv, c_ pillars, Faker then Knight)
+const PARTS: [string, number, number, number][] = [["TROPHIES", 40, 100, 46.1], ["BIG GAMES", 14, 100, 98.2], ["SKILL", 18, 78.6, 99.9],
+  ["TEAM IMPACT", 12, 100, 75.9], ["YEARS AT THE TOP", 9, 100, 89.7], ["RECOGNITION", 7, 88.7, 87.4]]; // v15.1 (data/csv/draft_scores.csv, c_ pillars, Faker then Knight)
 export const S11aKnightVsFaker: React.FC = () => {
   const b: Box = { x0: 620, y0: 210, x1: 1640, y1: 830 };
   const X = (v: number) => b.x0 + ((v - 30) / 72) * (b.x1 - b.x0);

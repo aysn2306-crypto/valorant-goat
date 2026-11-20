@@ -149,7 +149,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
       <Sequence from={beat - K} layout="none"><FromFrame k={K}><Mo.T2Climb /></FromFrame></Sequence></>;
   }],
   // Jxmy angled stat banner over footage (jxmy-graphics XyihDTdpF8w x07, style map 5:57); v14 trophy points
-  ["55", (c) => <OnBlack at={at(c, W("55", "double"))} big="ALMOST DOUBLE" sub="FAKER 1,058 TROPHY POINTS · NEXT BEST 614" subAt={at(c, W("55", "anyone"))} />],
+  ["55", (c) => <OnBlack at={at(c, W("55", "double"))} big="MORE THAN DOUBLE" sub="FAKER 1,509 TROPHY POINTS · NEXT BEST 714" subAt={at(c, W("55", "anyone"))} />],
   ["56", (c) => <MonteCarlo cues={[at(c, W("57", "rolls")), at(c, W("60", "thousand")), at(c, L("60").end)]} />],
   // Jxmy article page (jxmy-graphics XyihDTdpF8w x08, style map 6:11): our own page, the line marked as it is said
   ["57@monte", (c) => <Ov.ArticlePage kicker="How to test a ranking" title="The Monte Carlo test"
@@ -165,16 +165,16 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: back to the bordered face cards for Uzi and Bengi
   ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, W("68", "also"))} stamp={{ text: "GLAZED?", at: at(c, W("68", "bit")) + 12, card: 0 }} cards={[
     { id: "uzi", sub: "#25 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
-    { id: "bengi", sub: "#31 ALL TIME", flipAt: at(c, W("68", "benji")), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won")) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
+    { id: "bengi", sub: "#41 ALL TIME", flipAt: at(c, W("68", "benji")), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won")) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
   ]} />],
   ["69", anchored(<Sm.SPyramidCam voice={false} />, Sm.PYRC_T0)],
   ["76", () => <Words text="TWO TWISTS" />],
   // ay 20 Nov: the twists on the original five-tier pyramid, with the G.O.A.T. pyramid writing top left
   ["77", (c) => <PyramidStates states={[{ at: 0, order: ORDER_2026, label: "2026" }, { at: at(c, W("77", "2025")), order: ORDER_2025, label: "END OF 2025" }]} />],
-  ["80", (c) => <><PyramidStates glowIds={["knight"]} states={[{ at: 0, order: ORDER_2025, label: "END OF 2025" }, { at: at(c, WA("80", ["second", "2nd"])), order: ORDER_2026, label: "2026" },
+  ["80", (c) => <><PyramidStates glowIds={["knight", "chovy"]} states={[{ at: 0, order: ORDER_2025, label: "END OF 2025" }, { at: at(c, WA("80", ["second", "2nd"])), order: ORDER_2026, label: "2026" },
     { at: at(c, W("81", "gen")), order: ORDER_GENG, label: "IF GEN.G\nHAD WON" }]} />
     <AbsoluteCinema at={at(c, W("80", "cinema"))} out={at(c, W("80", "cinema")) + 40} /></>],
-  ["82", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, WA("85", ["10", "ten", "15"]))]} />],
+  ["82", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, WA("85", ["15", "ten", "10"]))]} />],
   // ay 20 Nov: the arrow was over before it could be seen; zoom on "Knight", arrow drawn through "from here to there", held into 88
   ["86", (c) => <St.S10bPyramidArrow zoomAt={at(c, W("86", "knight")) - 6} arrowAt={at(c, W("86", "from"))} />],
   ["88@whole", (c) => <St.SampleKnightRadar gapAt={at(c, W("88", "gap"))} />], // 88 now ends "the glaring gap you can see is the trophies": circle and zoom on "gap"

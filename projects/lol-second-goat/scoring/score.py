@@ -307,7 +307,11 @@ def titles(t, s, strength):
             continue
         per = ev.groupby("Link").agg(G=("G", "sum")).reset_index()
         need = tp["min_share_of_games"] * per.G.max()
-        imp = ev.groupby("Link").apply(lambda d: wmean(d, "z_impact"), include_groups=False)
+        zc = "z_impact"
+        if os.environ.get("CREDIT_SUP"):   # what-if (ay 20 Nov): support play in the title share, half and half
+            ev = ev.assign(z_credit=0.5 * ev.z_impact + 0.5 * ev[["z_vis_pm", "z_kp", "z_assists_pm"]].mean(axis=1, skipna=True).fillna(ev.z_impact))
+            zc = "z_credit"
+        imp = ev.groupby("Link").apply(lambda d: wmean(d, zc), include_groups=False)
         team_mean = imp[per.set_index("Link").G >= need].mean()
         path = path_mult.get((e.Page, e.Team), 1.0)
         for _, p in per.iterrows():
@@ -726,10 +730,10 @@ def main():
     T["cast"] = np.clip(1 - T.mates / 0.4, 0, 1.5)   # 1 = teammates at league average for their role-year, 0 = teammates 0.4 SD above (a strong roster gets no solo-carry credit)
     T["lead"] = T.get("lead", T.credit).fillna(T.credit)
     T["carry_pts"] = (T.base * (T.lead - 1)).clip(lower=0) * T.cast
-    if V15:
+    if V15 and os.environ.get("DOM_CAP", "0") != "0":   # v15.1 (ay 13:25): no cap on league titles; DOM_CAP=1 or 2 restores a cap of that many Worlds
         # v15 (ay 20 Nov): all of a player's league results together can be worth at most one Worlds title, so no
         # pile of league titles outweighs a Worlds. Each league result keeps its share of that cap.
-        cap = CFG["trophy_points"]["worlds"][1]
+        cap = CFG["trophy_points"]["worlds"][1] * float(os.environ.get("DOM_CAP", 1))   # DOM_CAP=2: what-if, two Worlds' worth
         dm = T.tier == "domestic"
         dsum = T[dm].groupby("Link").pts.transform("sum")
         T.loc[dm, "pts"] = T.loc[dm, "pts"] * np.minimum(1.0, cap / dsum)

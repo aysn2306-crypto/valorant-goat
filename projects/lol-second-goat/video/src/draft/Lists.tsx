@@ -45,10 +45,10 @@ export const StackedLines: React.FC<{ lines: { text: string; at: number; accent?
 };
 
 export const BIG_STAGE: { id: string; name: string; v: number; overall: number }[] = [
-  // model v15 c_big_stage (play and big series won): Knight, then Faker
+  // model v15.1 c_big_stage (play and big series won): Knight, then Faker
   { id: "knight", name: "KNIGHT", v: 100, overall: 2 }, { id: "faker", name: "FAKER", v: 93.7, overall: 1 },
-  { id: "bin", name: "BIN", v: 91.4, overall: 9 }, { id: "keria", name: "KERIA", v: 88.7, overall: 3 },
-  { id: "zeus", name: "ZEUS", v: 88.4, overall: 5 }];
+  { id: "bin", name: "BIN", v: 91.4, overall: 8 }, { id: "keria", name: "KERIA", v: 88.7, overall: 5 },
+  { id: "zeus", name: "ZEUS", v: 88.4, overall: 7 }];
 
 /** cues: rise (bars grow), lit (the first bar turns teal), side (the side list slides in) */
 export const PillBars: React.FC<{ cues: { rise: number; lit: number; side: number } }> = ({ cues }) => {
