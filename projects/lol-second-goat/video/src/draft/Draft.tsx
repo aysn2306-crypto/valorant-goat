@@ -114,7 +114,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["16", (c) => <KillsLine cues={{ lck: at(c, L("16").start + 0.3), lpl: at(c, W("16", "lpl")), gap: at(c, W("17", "3")) }} />],
   // Jxmy highlighted page, then big text sliding past (style map 1:34)
   // ay 20 Nov 14:36: two LPL teams side by side, same role against same role (replaces the text reveal)
-  ["18", (c) => <TeamRoles cues={{ rows: Math.max(4, at(c, W("18", "compares")) - 6), role: at(c, W("18", "role")) }} />],
+  ["18", (c) => <TeamRoles cues={{ rows: Math.max(4, at(c, W("18", "compares")) - 6), role: at(c, W("18", "role")), old: at(c, WA("18b", ["2013", "old"])) }} />], // 18b: the old-era 5v5 on "2013"
   // ay 20 Nov: keep this B-roll (the DK "bottom team" joke), with a tiny chat line on it
   ["19", (c) => <AbsoluteFill><Clip id="stomp" from={20} /><ChatLine user="dk_enjoyer" text="DK LOL" at={at(c, W("19", "bottom"))} /></AbsoluteFill>],
   ["19@gen", () => <Clip id="close" from={22} />],
