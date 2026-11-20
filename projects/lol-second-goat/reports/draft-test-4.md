@@ -15,20 +15,20 @@ Data: Leaguepedia scoreboards, 303 tournaments, 25,987 games (approx.), 1,915 pl
 | # | Player | Role | Regions | Years | Worlds | MSI | Domestic | MVPs | Score | #1 in 1000 runs | #2 in 1000 runs |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | Faker | Mid | LCK | 2013-2026 | 6 | 2 | 10 | 3 | 95.4 | 100.0% | 0.0% |
-| 2 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 2 | 73.2 | 0.0% | 99.5% |
-| 3 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 0 | 71.2 | 0.0% | 0.5% |
-| 4 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 68.3 | 0.0% | 0.0% |
-| 5 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 68.0 | 0.0% | 0.0% |
-| 6 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 1 | 66.3 | 0.0% | 0.0% |
-| 7 | Oner | Jungle | LCK | 2021-2026 | 3 | 0 | 1 | 0 | 65.5 | 0.0% | 0.0% |
-| 8 | Gumayusi | Bot | LCK | 2021-2026 | 3 | 1 | 1 | 1 | 65.5 | 0.0% | 0.0% |
-| 9 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 64.8 | 0.0% | 0.0% |
-| 10 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 64.2 | 0.0% | 0.0% |
-| 11 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 0 | 62.8 | 0.0% | 0.0% |
-| 12 | Caps | Mid | LEC | 2017-2026 | 0 | 1 | 18 | 1 | 59.5 | 0.0% | 0.0% |
-| 13 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 0 | 59.0 | 0.0% | 0.0% |
-| 14 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 57.5 | 0.0% | 0.0% |
-| 15 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 0 | 56.9 | 0.0% | 0.0% |
+| 2 | Knight | Mid | LPL | 2018-2026 | 1 | 1 | 8 | 2 | 73.5 | 0.0% | 100.0% |
+| 3 | Chovy | Mid | LCK | 2018-2026 | 0 | 2 | 7 | 1 | 70.3 | 0.0% | 0.0% |
+| 4 | Ruler | Bot | LCK/LPL | 2016-2026 | 1 | 2 | 6 | 1 | 68.2 | 0.0% | 0.0% |
+| 5 | Keria | Support | LCK | 2020-2026 | 3 | 0 | 1 | 0 | 65.4 | 0.0% | 0.0% |
+| 6 | Canyon | Jungle | LCK | 2019-2026 | 1 | 2 | 7 | 1 | 65.0 | 0.0% | 0.0% |
+| 7 | Zeus | Top | LCK | 2021-2026 | 2 | 1 | 2 | 2 | 63.1 | 0.0% | 0.0% |
+| 8 | Bin | Top | LPL | 2020-2026 | 1 | 1 | 6 | 0 | 62.9 | 0.0% | 0.0% |
+| 9 | Peanut | Jungle | LCK/LPL | 2015-2025 | 0 | 1 | 8 | 0 | 62.3 | 0.0% | 0.0% |
+| 10 | Viper | Bot | LCK/LPL | 2018-2026 | 2 | 0 | 5 | 0 | 61.0 | 0.0% | 0.0% |
+| 11 | Oner | Jungle | LCK | 2021-2026 | 3 | 0 | 1 | 0 | 59.6 | 0.0% | 0.0% |
+| 12 | Caps | Mid | LEC | 2017-2026 | 0 | 1 | 18 | 1 | 59.0 | 0.0% | 0.0% |
+| 13 | Gumayusi | Bot | LCK | 2021-2026 | 3 | 1 | 1 | 1 | 58.7 | 0.0% | 0.0% |
+| 14 | Kiin | Top | LCK | 2017-2026 | 0 | 2 | 4 | 0 | 58.7 | 0.0% | 0.0% |
+| 15 | Kanavi | Jungle | LCK/LPL | 2019-2026 | 0 | 2 | 5 | 0 | 56.4 | 0.0% | 0.0% |
 
 Benchmark: Faker score 95.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trophies 100, big_stage 94, peak 77, winning 99, longevity 100, carry 78, clean_play 70, consistency 78, laning 74, killing 89, teamfight 64, vision 72, team_carry 64, solo_carry 68, recognition 89, team_lift 50, clutch 100, title_teams 60, individual 79, big_stage_clutch 100, carry_pillar 71, skill 79, impact 100, intangibles 89
 
@@ -36,9 +36,9 @@ Benchmark: Faker score 95.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 | Player | Rank | Score | Worlds | Trophy pts | Big stage | Peak (year) |
 |---|---|---|---|---|---|---|
-| Knight | 2 | 73.2 | 1 | 480 | 100 | 100 (2026) |
-| Viper | 11 | 62.8 | 2 | 437 | 79 | 73 (2026) |
-| Bin | 9 | 64.8 | 1 | 445 | 91 | 82 (2026) |
+| Knight | 2 | 73.5 | 1 | 695 | 100 | 100 (2026) |
+| Viper | 10 | 61.0 | 2 | 554 | 79 | 73 (2026) |
+| Bin | 8 | 62.9 | 1 | 561 | 91 | 82 (2026) |
 
 ## Tipping point (trophy weight -> #1 overall, then #2)
 
@@ -62,7 +62,7 @@ Benchmark: Faker score 95.4, 6 Worlds, 2 MSI, 10 domestic; category scores: trop
 
 ## Every category top 5 (Faker included)
 
-**trophies**: Faker 100, Gumayusi 58, Keria 55, Oner 53, Zeus 51
+**trophies**: Faker 100, Canyon 47, Ruler 47, Knight 46, Chovy 45
 
 **big_stage**: Knight 100, Faker 94, Bin 91, Keria 89, Zeus 88
 

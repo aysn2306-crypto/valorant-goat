@@ -1,6 +1,6 @@
 # Current League model (the one every thread uses)
 
-**Version 15 (ay chose "Fix all 3 now", 20 Nov 2026, ~13:30 London): fan-check fixes. On top of v14.1 (audit fixes) and v14 (19 Nov 16:45). v14.1 = bug fixes only, no design change (see "What changed"). v14 = big games count domestic playoffs and finals in every region (ay 16:16). v13 = Recognition fixed (ay 21:00: the LCK held no All-Pro vote before 2020, so Faker's prime counted nothing). v12 = career-level plus-minus (ay chose "Fix it" 19:14).** ay approved each change on cards: halfway trophy blend (16:58), LCK/LPL fix (17:09), keep trophies as share of Faker (17:09), count 2013-15 games (17:10). Owner: the model thread. If a number here differs from anything older (script, stills, notes), this file wins.
+**Version 15.1 (ay 20 Nov 2026, 13:25: "make the no cap version final"): v15 without the cap on league titles. v15 (ay chose "Fix all 3 now", ~13:00) = fan-check fixes, on top of v14.1 (audit fixes) and v14 (19 Nov 16:45). v14.1 = bug fixes only, no design change (see "What changed"). v14 = big games count domestic playoffs and finals in every region (ay 16:16). v13 = Recognition fixed (ay 21:00: the LCK held no All-Pro vote before 2020, so Faker's prime counted nothing). v12 = career-level plus-minus (ay chose "Fix it" 19:14).** ay approved each change on cards: halfway trophy blend (16:58), LCK/LPL fix (17:09), keep trophies as share of Faker (17:09), count 2013-15 games (17:10). Owner: the model thread. If a number here differs from anything older (script, stills, notes), this file wins.
 Scores file: `projects/lol-second-goat/data/csv/draft_scores.csv` (branch claude/project-thread-a343zy). Video data: `video/src/data/league.json`. Regenerate this file with `python3 scoring/model_current.py`.
 
 ## GOAT pyramid (ay 18 Nov 17:46, final design)
@@ -10,16 +10,18 @@ Tiers follow the model's ranking only, never reputation. A few example faces per
 | Tier | Ranks | Faces shown |
 |---|---|---|
 | 1 | #1 | Faker (#1) |
-| 2 | #2 to #3 | Knight (#2), Keria (#3) |
-| 3 | #4 to #10 | Ruler (#4), Chovy (#6), Gumayusi (#8), Bin (#9) |
-| 4 | #11 to #30 | Viper (#11), Caps (#12), Deft (#20), Uzi (#25), TheShy (#26), Scout (#29) |
-| 5 | #31 to #62 | Bengi (#31), Doinb (#34), Perkz (#38), Jankos (#51), Bjergsen (#58) |
+| 2 | #2 to #3 | Knight (#2), Chovy (#3) |
+| 3 | #4 to #10 | Ruler (#4), Keria (#5), Bin (#8), Viper (#10) |
+| 4 | #11 to #30 | Caps (#12), Gumayusi (#13), Deft (#17), Uzi (#25), TheShy (#26), Scout (#29) |
+| 5 | #31 to #62 | Doinb (#37), Bengi (#41), Perkz (#42), Bjergsen (#55), Jankos (#58) |
 
 Faces picked for a spread of regions (ay 18:09: less LCK and old SKT heavy).
 
 Reveal: build from the bottom up. In tier 2, Chovy fills first, then a beat of silence, then Knight. Faker goes alone on top. Zoom in on Knight at #2, then an arrow draws from tier 2 up to tier 1 ("what would it take to get from here to here?") and leads into the outro.
 
 ## What changed
+**v15.1 (ay 20 Nov 13:21 and 13:25: "capping someone's trophies in the first place doesn't make much sense", "make the no cap version final"):** v15 with the league-title cap removed (DOM_CAP=0 is the default; DOM_CAP=1 restores v15). Recognition by league strength and big games counting series results stay. Top 10: Faker 95.4, Knight 73.5, Chovy 70.3, Ruler 68.2, Keria 65.4, Canyon 65.0, Zeus 63.1, Bin 62.9, Peanut 62.3, Viper 61.0. Oner #11, Caps #12, Gumayusi #13. Knight #2 in 1,000 of 1,000 reruns; lead over Chovy 3.2. Trophy points: Faker 1509, Canyon 714, Ruler 705, Knight 695, Chovy 684. Big stage: Knight, Faker, Bin; big games + clutch: Faker 100, Knight 98. Knight vs Faker parts: trophies 46/100, big games 98/100, skill 100/79, impact 76/100, longevity 90/100, recognition 87/89. Uzi #25, Bengi #41, Perkz #42, Bjergsen #55, Jankos #58. End of 2025: Chovy #2, Ruler #3, Keria #4, Knight #5. Gen.G wins: Chovy #2, Ruler #3, Knight #4. Two Fakers: Faker 2013-19 #1 (933 of 1,000 reruns, Knight 67), Knight #2, Chovy #3, Faker 2020-26 #13. Year-end #2: 2024 Knight (64.4 vs Chovy 63.5), 2025 Chovy, 2026 Knight. Silverware (Faker frozen at 95.4, data/csv/silverware_needed.csv): Knight 3 more Worlds + 3 MSIs + his LPL titles those years (101.5), or 4 Worlds + LPL titles with no MSI (100.8), or 5 Worlds alone (97.1); Chovy 4 Worlds + 4 MSIs + LCK titles (102.9; three of each is 94.9, just short), or 5 Worlds + LCK titles (99.4); Gumayusi 5 more Worlds + 5 MSIs + LCK titles (98.7).
+
 **v15 (ay 20 Nov, "Fix all 3 now" on the fan-check card; V15=0 reproduces v14.1):** (1) Recognition: every All-Pro vote, MVP and model All-Pro pick counts at its league's strength that year (LCK about 1.0, LEC/LCS about 0.3 to 0.6). (2) Trophies: all of a player's league results together are worth at most one Worlds title (100), so no pile of league titles outweighs a Worlds. (3) Big games: the big-stage half is now half play (v14 stats) and half results: net big best-of-fives won (+1 win, -1 loss, international doubled). Top 10: Faker 95.4, Knight 73.2, Keria 71.2, Ruler 68.3, Zeus 68.0, Chovy 66.3, Oner 65.5, Gumayusi 65.5, Bin 64.8, Canyon 64.2. Knight #2 in 995 of 1,000 reruns (Keria 5). Trophy order: Faker, Gumayusi, Keria, Oner, Zeus. Big stage: Knight, Faker, Bin; big games + clutch: Faker 100. Recognition: Chovy, Faker, Knight. Knight vs Faker parts: trophies 45/100, big games 98/100, skill 100/79, impact 76/100, longevity 90/100, recognition 87/89. End of 2025: Keria #2, Knight #8. Gen.G wins: Ruler #2, Keria #3, Chovy #4, Knight #5. Two Fakers: Faker 2013-19 #1 (758 of 1,000), Keria #2, Knight #3, Faker 2020-26 #8. Silverware (Faker frozen 95.4): Knight 3 more Worlds + 3 MSIs (or 4 Worlds alone); Chovy 4 Worlds + 4 MSIs (or 6 alone); Gumayusi 4 more Worlds + 4 MSIs (or 6 alone). League titles no longer move it (capped).
 
 **v14.1 (audit thread, 20 Nov, bug fixes only; AUDIT20=0 reproduces v14 exactly):**
