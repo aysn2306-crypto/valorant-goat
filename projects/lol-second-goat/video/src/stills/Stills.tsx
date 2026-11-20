@@ -110,10 +110,10 @@ export const S5PeakLongevity: React.FC = () => {
   const named: Record<string, [string, "left" | "right" | "above" | "below"]> = { chovy: ["Chovy", "left"], kiin: ["Kiin", "below"], faker: ["Faker", "right"], keria: ["Keria", "left"] };
   const nx: Record<string, number> = { chovy: -0.4, kiin: 0.3, knight: 0.05 };
   return (
-    <Stage title="BEST SEASON VS YEARS AT THE TOP">
+    <Stage title="BEST STATISTICAL SEASON VS YEARS AT THE TOP">
       <div style={{ position: "absolute", left: X(6.5), top: B.y0 - 10, width: B.x1 - X(6.5) + 30, height: Y(80) - B.y0 + 10,
         background: "radial-gradient(ellipse at 100% 0%, rgba(92,190,80,0.28) 0%, rgba(92,190,80,0) 70%)" }} />
-      <Axes b={B} xr={xr} yr={yr} xt={[0, 2, 4, 6, 8, 10]} yt={[40, 50, 60, 70, 80, 90, 100]} xl="ELITE YEARS" yl="BEST SEASON" />
+      <Axes b={B} xr={xr} yr={yr} xt={[0, 2, 4, 6, 8, 10]} yt={[40, 50, 60, 70, 80, 90, 100]} xl="ELITE YEARS" yl="BEST STATISTICAL SEASON" />
       {PL.filter((p) => p.id !== "knight" && p.cats.peak >= 40).map((p) => {
         const jx = named[p.id] ? nx[p.id] ?? 0 : (hash(p.id) - 0.5) * 0.7;
         return <Dot key={p.id} x={X(p.eliteYears + jx)} y={Y(p.cats.peak)} r={8} color={heat((p.cats.peak - 40) / 60)} o={named[p.id] ? 1 : 0.8} />;

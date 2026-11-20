@@ -2,7 +2,7 @@
 // g02_ranked-list-spotlight_ppg-seasons-list-scroll, strips p01-p05): a narrow column of rows (rank, square face, name
 // stacked over the season, the number in the accent), the camera scrolls up steadily from the bottom of the list to #1,
 // then every other row greys out and one row stays lit. Made in our look (dark slate ground, Bebas, one accent).
-// Data: model v13 best single season (league.json cats.peak, peakYear), one season per player.
+// Data: model v15.2 best statistical season (league.json cats.peak, peakYear), one season per player.
 import React from "react";
 import { AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { D } from "../lib/data";
@@ -53,7 +53,7 @@ export const SeasonList: React.FC<{ cues: { scroll0: number; scroll1: number; sp
       </div>
       {/* fixed header, top left, like the small label Jxmy keeps over a scrolling list */}
       <div style={{ position: "absolute", left: 70, top: 60, fontFamily: BEBAS, fontSize: 64, letterSpacing: 2, color: INK, lineHeight: 0.95 }}>
-        BEST SINGLE<br />SEASON EVER</div>
+        BEST STATISTICAL<br />SEASON</div>
       <div style={{ position: "absolute", left: 72, top: 196, fontFamily: BEBAS, fontSize: 30, letterSpacing: 1.5, color: "#9BA3AE", width: 420 }}>
         SEASON SCORE, BEST EVER = 100</div>
     </AbsoluteFill>

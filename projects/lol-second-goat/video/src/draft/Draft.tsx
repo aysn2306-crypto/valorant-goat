@@ -168,16 +168,16 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: no chapter titles in the six-parts section, footage between the graphs
   // Jxmy pill bars with the players at the foot (jxmy-graphs eatF7QHwga4 g08, style map 5:15); v14 big-stage half alone
   ["45", (c) => <PillBars cues={{ rise: 4, lit: at(c, WA("46", ["knight", "carrier"])), side: 1e6 }} />],
-  ["47", (c) => { const kn = at(c, W("48", "knight")); return <SeasonList n={8} cues={{ scroll0: 2, scroll1: kn - 2, spot: kn }} />; }],
+  ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top }} />; }], // v15.2: climbs to Chovy 2025
   // Jxmy two-player board (jxmy-graphs GPH4nK5sQ-8 g01): Chovy vs Knight, the skill score "by a hair" last
   // 48b (Faker's best season) cut, ay 20 Nov 18:03: not in the video
-  ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, W("49", "ahead")) }} rows={[
+  ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, WA("49", ["behind", "just", "knight"])) }} rows={[
     { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
     { label: "GOLD AHEAD AT 15 MIN", l: "+339", r: "+451", better: "r" },
     { label: "KDA", l: "5.67", r: "5.77", better: "r" },
     { label: "DEATHS A GAME", l: "1.69", r: "1.94", better: "l" },
     { label: "WIN RATE", l: "69.2%", r: "66.9%", better: "l" },
-    { label: "SKILL SCORE", l: "100", r: "99.9", better: "l", big: true }]} />],
+    { label: "SKILL SCORE", l: "100", r: "97.8", better: "l", big: true }]} />],
   ["51", (c) => <MLBoard title="Trophy score" lines={[
     { text: "Each title = price × how hard × his share", at: at(c, W("51", "stack")) },
     { text: "Added up over a whole career", at: at(c, W("51", "share")), accent: true }]} />],
@@ -202,7 +202,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: back to the bordered face cards for Uzi and Bengi
   ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, WA("68", ["intangibles", "also"]))} stamp={{ text: "GLAZED?", at: at(c, W("68", "bit")) + 12, card: 0 }} cards={[
     { id: "uzi", sub: "#25 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
-    { id: "bengi", sub: "#41 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
+    { id: "bengi", sub: "#37 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#182 OWN NUMBERS", at: at(c, WA("68", ["182", "numbers"])), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
   ]} />],
   ["69", (c) => <OGPyramid c={c} />],
   ["76", () => <Words text="TWO TWISTS" />],
