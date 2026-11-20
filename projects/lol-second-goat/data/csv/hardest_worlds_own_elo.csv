@@ -1,0 +1,16 @@
+rank_hardest,year,team,series,chance_pct,coin_flips,champion_win_chance_each_series,note
+1,2022,DRX,3,0.2,9.28,"[0.16, 0.18, 0.06]",
+2,2024,T1,3,1.5,6.05,"[0.32, 0.31, 0.15]",
+3,2023,T1,3,5.1,4.29,"[0.72, 0.35, 0.2]",
+4,2017,Samsung Galaxy,3,5.7,4.14,"[0.42, 0.26, 0.52]",
+5,2026,Bilibili Gaming,3,10.0,3.32,"[0.26, 0.61, 0.63]",
+6,2014,Samsung White,3,13.1,2.93,"[0.59, 0.54, 0.42]",
+7,2016,SK Telecom T1,3,15.1,2.73,"[0.63, 0.61, 0.39]",
+8,2021,EDward Gaming,3,16.4,2.61,"[0.34, 0.63, 0.76]",
+9,2025,T1,3,19.1,2.39,"[0.62, 0.53, 0.58]",
+10,2018,Invictus Gaming,3,21.9,2.19,"[0.49, 0.56, 0.79]",
+11,2013,SK Telecom T1,2,27.8,1.85,"[0.39, 0.7]","early bracket incomplete in the data, not comparable"
+12,2012,Taipei Assassins,1,28.9,1.79,[0.29],"early bracket incomplete in the data, not comparable"
+13,2019,FunPlus Phoenix,3,30.1,1.73,"[0.52, 0.68, 0.85]",
+14,2020,DAMWON Gaming,3,47.3,1.08,"[0.79, 0.83, 0.72]",
+15,2015,SK Telecom T1,3,58.5,0.77,"[0.88, 0.72, 0.92]",

@@ -19,7 +19,7 @@ sfm = sf.head(14)[["name", "score"]].round(1); sfm.insert(0, "Rank", range(1, 15
 io = pd.read_csv(os.path.join(CSV, "whatif_intl_only.csv"))[["name", "score"]]
 kn = pd.read_csv(os.path.join(CSV, "whatif_knight_needs.csv")); fw = pd.read_csv(os.path.join(CSV, "whatif_four_worlds.csv"))
 import re as _re
-kn2 = (_re.search(r"Knight's finish across reruns: \{2: (\d+)", open("/tmp/claude-0/whatif.log").read()) or [0, "?"])[1] if os.path.exists("/tmp/claude-0/whatif.log") else "?"
+kn2 = f"{int(pd.read_csv(os.path.join(ROOT, 'data', 'csv', 'shuffle_counts.csv'), index_col=0).seconds.get('Knight (Zhuo Ding)', 0)):,}"   # from the saved reruns, not a log file
 rk = P.score.rank(ascending=False).astype(int)
 notes = open(os.path.join(ROOT, "config", "model_notes.md")).read()
 doc = f"""{notes}
@@ -39,7 +39,7 @@ Players above 70: {(P.score > 70).sum()}. Caps #{rk[L('Caps')]} ({round(P.score[
 
 **Two Fakers (2013-19 and 2020-26, even halves by years, 3 Worlds each; ay 17:23):** {(sf.score > 70).sum()} players above 70 in this version.
 {sfm.to_markdown(index=False)}
-Faker 2020-26 is #{int(sf.index[sf.name == 'Faker 2020-26'][0]) + 1} at {sf.score[sf.name == 'Faker 2020-26'].iloc[0]:.1f}. Weight reruns in this version: #1 Faker 2013-19 768, Knight 232.
+Faker 2020-26 is #{int(sf.index[sf.name == 'Faker 2020-26'][0]) + 1} at {sf.score[sf.name == 'Faker 2020-26'].iloc[0]:.1f}. Weight reruns in this version: #1 Faker 2013-19 758, Knight 183, Keria 59.
 
 **What Knight or Gumayusi need to pass Faker:** on hold (ay 16:57). The old frozen-stats tables were wrong (they only added trophies) and are removed.
 
@@ -47,8 +47,9 @@ Faker 2020-26 is #{int(sf.index[sf.name == 'Faker 2020-26'][0]) + 1} at {sf.scor
 
 ## Known limits (say them on screen)
 - Bengi and other setup junglers: box scores can't see them.
-- Best of five and plus-minus data start in 2016, so Faker's 2013 to 2015 series and games aren't in clutch or team impact.
-- Intangibles are proxies (All-Pro votes, team record with and without). Uzi (Hall of Legends) sits low because the Hall honours impact and fame while we weight titles at 40%.
+- Laning numbers (gold, CS and XP ahead at 15) are missing for LPL 2014-17 and 2022-25, so about half of Knight's games are judged without laning (the rating re-standardises inside each league, so no league moves).
+- Clutch, team impact and title difficulty cover 2011 on (since v11); the coin-flip difficulty list in the script covers 2016 on.
+- Recognition is honours only (All-Pro votes, model All-Pro where no vote was held, season MVPs). Uzi (Hall of Legends) sits low because the Hall honours impact and fame while we weight titles at 40%.
 """
 open(os.path.join(ROOT, "MODEL-CURRENT.md"), "w").write(doc)
 print("written", len(doc))

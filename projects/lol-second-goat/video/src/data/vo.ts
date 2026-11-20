@@ -11,3 +11,8 @@ export const W = (id: string, w: string, n = 0) => {
   if (!hits[n]) throw new Error(`no word ${w} in line ${id}`);
   return hits[n].start;
 };
+/** first of several words that is in the line (for lines being re-recorded with new wording); falls back to the line start */
+export const WA = (id: string, ws: string[], n = 0) => {
+  for (const w of ws) { try { return W(id, w, n); } catch { /* try the next word */ } }
+  return L(id).start;
+};

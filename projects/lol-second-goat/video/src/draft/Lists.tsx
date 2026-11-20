@@ -45,9 +45,10 @@ export const StackedLines: React.FC<{ lines: { text: string; at: number; accent?
 };
 
 export const BIG_STAGE: { id: string; name: string; v: number; overall: number }[] = [
-  { id: "keria", name: "KERIA", v: 100, overall: 5 }, { id: "zeus", name: "ZEUS", v: 98.7, overall: 7 },
-  { id: "knight", name: "KNIGHT", v: 96.4, overall: 2 }, { id: "chovy", name: "CHOVY", v: 95.1, overall: 3 },
-  { id: "ruler", name: "RULER", v: 84.9, overall: 4 }];
+  // model v15 c_big_stage (play and big series won): Knight, then Faker
+  { id: "knight", name: "KNIGHT", v: 100, overall: 2 }, { id: "faker", name: "FAKER", v: 93.7, overall: 1 },
+  { id: "bin", name: "BIN", v: 91.4, overall: 9 }, { id: "keria", name: "KERIA", v: 88.7, overall: 3 },
+  { id: "zeus", name: "ZEUS", v: 88.4, overall: 5 }];
 
 /** cues: rise (bars grow), lit (the first bar turns teal), side (the side list slides in) */
 export const PillBars: React.FC<{ cues: { rise: number; lit: number; side: number } }> = ({ cues }) => {
@@ -63,7 +64,7 @@ export const PillBars: React.FC<{ cues: { rise: number; lit: number; side: numbe
       <Concrete />
       <div style={{ position: "absolute", left: x0 - 40, top: 60, opacity: tO }}>
         <div style={{ fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>BEST ON THE BIG STAGE</div>
-        <div style={{ fontFamily: BEBAS, fontSize: 30, letterSpacing: 2, color: MUTE }}>BIG-STAGE FORM ALONE, 0 TO 100</div>
+        <div style={{ fontFamily: BEBAS, fontSize: 30, letterSpacing: 2, color: MUTE }}>PLAY AND SERIES WON IN PLAYOFFS, FINALS, WORLDS AND MSI, 0 TO 100</div>
       </div>
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
         <line x1={x0 - 40} x2={x0 - 40} y1={base - hpx - 20} y2={base} stroke={INK} strokeOpacity={0.5} strokeWidth={3} opacity={tO} />

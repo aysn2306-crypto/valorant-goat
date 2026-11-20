@@ -11,7 +11,7 @@ import { AbsoluteFill, Audio, Easing, Img, interpolate, Sequence, staticFile, us
 import { C, F } from "../theme";
 import { P } from "../lib/data";
 import { CREAM } from "../stills/kit";
-import { L, W } from "../data/vo";
+import { L, W, WA } from "../data/vo";
 
 const FPS = 30;
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -328,8 +328,9 @@ export const SPlusMinus: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
 // ---------------------------------------------------------------- 4. pyramid with Knight's reveal
 /** photos with a background instead of a cut-out; faded into the tier with a soft mask */
 const BOXED = new Set(["jankos", "cabochard", "cyanide", "lilballz", "shushei"]);
-const TIERS_V13 = [["faker"], ["chovy", "knight"], ["ruler", "keria", "bin", "viper"], ["caps", "gumayusi", "deft", "uzi", "theshy", "scout"],
-  ["doinb", "perkz", "bengi", "bjergsen", "jankos"]];
+// model v15 faces (research/v15-script-changes.md); tier 2 is Keria then Knight, as line 71 names them
+const TIERS_V13 = [["faker"], ["keria", "knight"], ["ruler", "chovy", "gumayusi", "bin"], ["viper", "caps", "deft", "uzi", "theshy", "scout"],
+  ["bengi", "doinb", "perkz", "jankos", "bjergsen"]];
 export const PYR_A = [L("64").start - 0.3, L("66").end + 0.6] as const, PYR_B = [L("69").start - 0.2, L("74").end + 0.2] as const;
 const PA = Math.round((PYR_A[1] - PYR_A[0]) * FPS);
 export const PYR_FRAMES = PA + Math.round((PYR_B[1] - PYR_B[0]) * FPS);
@@ -413,10 +414,10 @@ export const SPyramid: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
     if (i === 4) return a(W("65", "bottom")) + j * 7;           // "At the bottom"
     if (i === 3) return a(W("66", "tier")) + j * 6;           // "tier 4"
     if (i === 2) return b(W("69", "tier") + 0.4) + j * 6;          // "tier 3"
-    if (i === 1) return j === 0 ? b(W("71", "chovy")) : b(W("71", "knight")); // Chovy, then Knight on his name
+    if (i === 1) return j === 0 ? b(WA("71", ["keria", "chovy"])) : b(W("71", "knight")); // Chovy, then Knight on his name
     return Infinity;                                 // Faker's slot stays for later in the video
   };
-  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")), knight: b(W("71", "2nd")) };
+  const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")), knight: b(WA("71", ["second", "2nd"])) };
   return (
     <AbsoluteFill>
       <PyramidScene fill={fill} pulse={pulse} zoomAt={b(W("71", "knight") + 0.6)} tierIn={a(W("64", "tears"))} />
@@ -473,11 +474,11 @@ export const SPyramidCam: React.FC<{ voice?: boolean }> = ({ voice = true }) => 
     if (i === 4) return a(W("65", "bottom")) + 20 + j * 7;
     if (i === 3) return a(W("66", "tier")) + 20 + j * 6;
     if (i === 2) return a(W("69", "tier")) + 14 + j * 6;
-    if (i === 1) return j === 0 ? a(W("71", "chovy")) : a(W("71", "knight"));
+    if (i === 1) return j === 0 ? a(WA("71", ["keria", "chovy"])) : a(W("71", "knight"));
     return Infinity;
   };
   const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")),
-    uzi: a(W("67", "uzi")) + 14, bengi: a(W("67", "benji")), knight: a(W("71", "2nd")) };
+    uzi: a(W("67", "uzi")) + 14, bengi: a(W("67", "benji")), knight: a(WA("71", ["second", "2nd"])) };
   return (
     <AbsoluteFill>
       <PyramidScene fill={fill} pulse={pulse} tierIn={a(W("64", "tears"))} cam={cam} />

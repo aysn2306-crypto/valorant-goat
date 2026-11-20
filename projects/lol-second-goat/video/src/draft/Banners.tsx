@@ -52,15 +52,15 @@ export const StatBanner: React.FC<{ at: number; cells: { label: string; value: s
 export const RecordCounter: React.FC<{ cues: { first: number; second: number } }> = ({ cues }) => {
   const f = useCurrentFrame();
   const rows = [
-    { at: cues.first, badge: "players/faker.png", name: "FAKER", sub: "1,000 RERUNS, WEIGHTS ROLLED AT RANDOM", rank: "#1", accent: false },
-    { at: cues.second, badge: null, name: "? ? ?", sub: "THE SAME NAME EVERY TIME", rank: "#2", accent: true },
+    { at: cues.first, badge: "players/faker.png", name: "FAKER", sub: "1,000 RERUNS, WEIGHTS ROLLED AT RANDOM", rank: "#1", accent: false, n: 1000 },
+    { at: cues.second, badge: null, name: "? ? ?", sub: "ALMOST EVERY TIME", rank: "#2", accent: true, n: 995 }, // v15: Knight 995 of 1,000
   ];
   return (
     <AbsoluteFill>
       <Concrete />
       {rows.map((r, i) => {
         const k = interpolate(f, [r.at, r.at + 10], [0, 1], { ...clamp, easing: easeOut });
-        const rec = interpolate(f, [r.at + 6, r.at + 30], [0, 1000], { ...clamp, easing: Easing.out(Easing.quad) });
+        const rec = interpolate(f, [r.at + 6, r.at + 30], [0, r.n], { ...clamp, easing: Easing.out(Easing.quad) });
         const top = 170 + i * 400;
         const col = r.accent ? TEAL : INK;
         return (

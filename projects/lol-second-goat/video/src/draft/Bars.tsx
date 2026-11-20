@@ -7,7 +7,7 @@
 //   g04_hbar-ranking_box-plus-minus-climb-zoomout): tight on one row at a time, the label inside the bar, the camera
 //   moving row to row as each is said, then a pull back to the whole list. Data: model v11+ trophy values.
 import React from "react";
-import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import S from "../data/stills.json";
 import HW from "../data/hardest_worlds.json";
 import { Concrete } from "../samples/Climb";
@@ -112,44 +112,60 @@ export const PriceClimb: React.FC<{ cues: number[]; out: number }> = ({ cues, ou
 // Bars = coin flips in a row at those odds (log2 of 1/chance), hardest on the right, the chance written as "1 in N".
 const TEAM_SHORT: Record<string, string> = { "Samsung Galaxy": "SSG", "Samsung White": "SSW", "SK Telecom T1": "SKT", "EDward Gaming": "EDG",
   "Invictus Gaming": "IG", "FunPlus Phoenix": "FPX", "DAMWON Gaming": "DWG", "Bilibili Gaming": "BLG" };
+// ay 20 Nov 13:10: each team's logo (from the year it won) on top of its bar, like Jxmy's; no coin flips, the axis is the
+// champion's chance of winning the title before the knockouts started, so a shorter bar is a harder run. BLG 2026 picked
+// out as the 5th hardest. Logos: Liquipedia Commons, lol-second-goat/logos/SOURCES.md (kept in public/_local, not in git).
+const LOGO: Record<string, string> = { "DRX 2022": "DRX_allmode.png", "T1 2023": "T1_allmode.png", "T1 2024": "T1_allmode.png", "T1 2025": "T1_allmode.png",
+  "Samsung Galaxy 2017": "Samsung_Galaxy_allmode.png", "Bilibili Gaming 2026": "Bilibili_Gaming_allmode.png", "Samsung White 2014": "Samsung_White_Logo.png",
+  "SK Telecom T1 2015": "SK_Telecom_T1_allmode.png", "SK Telecom T1 2016": "SK_Telecom_T1_allmode.png", "EDward Gaming 2021": "EDward_Gaming_2017_darkmode.png",
+  "Invictus Gaming 2018": "Invictus_Gaming_darkmode.png", "FunPlus Phoenix 2019": "FunPlus_Phoenix_2019_allmode.png", "DAMWON Gaming 2020": "DAMWON_Gaming_allmode.png" };
+const HARD_KEEP = { team: "Bilibili Gaming", year: 2026 }; // always picked out (ay: "where is BLG?")
 export const HardestRuns: React.FC<{ cues: { rise: number; lit: { team: string; year: number; at: number }[] } }> = ({ cues }) => {
   const f = useCurrentFrame();
-  const rows = [...(HW as [string, number, number, number][])].sort((a, b) => a[3] - b[3]); // easiest left, hardest right
-  const x0 = 230, x1 = 1590, base = 830, vmax = 10, hpx = 560;
-  const bw = (x1 - x0) / rows.length;
-  const H = (v: number) => (v / vmax) * hpx;
+  const rows = [...(HW as [string, number, number, number][])].sort((a, b) => a[2] - b[2]); // hardest (lowest chance) on the left
+  const x0 = 250, x1 = 1700, base = 800, vmax = 60, hpx = 440;
+  const bw = (x1 - x0) / rows.length, lw = bw * 0.96;
+  const H = (v: number) => Math.max(5, (v / vmax) * hpx);
   const tO = interpolate(f, [0, 8], [0, 1], clamp);
-  const oneIn = (pct: number) => `1 IN ${Math.round(100 / pct).toLocaleString("en-US")}`;
+  const pctTxt = (v: number) => (v < 2 ? v.toFixed(1) : String(Math.round(v))) + "%";
   return (
     <AbsoluteFill>
       <Concrete />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 60, textAlign: "center", opacity: tO }}>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 50, textAlign: "center", opacity: tO }}>
         <div style={{ fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>THE HARDEST WORLDS RUNS</div>
-        <div style={{ fontFamily: BEBAS, fontSize: 30, letterSpacing: 2, color: MUTE }}>THE CHAMPION'S OWN ODDS OF WINNING ITS KNOCKOUT BRACKET · 2014 TO 2026</div>
+        <div style={{ fontFamily: BEBAS, fontSize: 30, letterSpacing: 2, color: MUTE }}>EACH CHAMPION'S CHANCE TO WIN THE TITLE, BEFORE THE KNOCKOUTS STARTED · 2014 TO 2026</div>
       </div>
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
-        <line x1={x1 + 30} x2={x1 + 30} y1={base - hpx - 10} y2={base} stroke={INK} strokeOpacity={0.5} strokeWidth={3} opacity={tO} />
-        {[0, 2, 4, 6, 8, 10].map((v) => <g key={v} opacity={tO}>
-          <line x1={x0 - 20} x2={x1 + 30} y1={base - H(v)} y2={base - H(v)} stroke={INK} strokeOpacity={v ? 0.07 : 0.5} strokeWidth={v ? 2 : 3} />
-          <text x={x1 + 48} y={base - H(v) + 12} fontFamily={BEBAS} fontSize={34} fill={MUTE}>{v}</text></g>)}
-        <text transform={`translate(${x1 + 130} ${base - hpx / 2}) rotate(90)`} textAnchor="middle" fontFamily={BEBAS} fontSize={30} letterSpacing={2} fill={MUTE} opacity={tO}>COIN FLIPS IN A ROW</text>
-        {rows.map(([team, year, pct, flips], i) => {
-          const k = interpolate(f, [cues.rise + i * 2, cues.rise + i * 2 + 14], [0, 1], { ...clamp, easing: easeOut });
-          const L = cues.lit.find((q) => q.team === team && q.year === year);
-          const lit = L ? interpolate(f, [L.at, L.at + 8], [0, 1], clamp) : 0;
-          const first = L === cues.lit[0];
-          const col = lit > 0.5 ? (first ? TEAL : INK) : BAR;
-          const h = H(flips) * k, x = x0 + i * bw + bw * 0.14, w = bw * 0.72;
-          return (
-            <g key={team + year}>
-              <rect x={x} y={base - h} width={w} height={h} fill={col} />
-              {lit > 0 && <text x={x + w / 2} y={base - h - 18} textAnchor="middle" fontFamily={BEBAS} fontSize={44} fill={col} opacity={lit}>{oneIn(pct)}</text>}
-              <text transform={`translate(${x + w / 2 + 10} ${base + 30}) rotate(-35)`} textAnchor="end" fontFamily={BEBAS} fontSize={30} letterSpacing={1}
-                fill={lit > 0.5 ? col : MUTE} opacity={k}>{`${TEAM_SHORT[team] ?? team} ${String(year).slice(2)}`}</text>
-            </g>
-          );
-        })}
+        <line x1={x0 - 30} x2={x0 - 30} y1={base - hpx - 10} y2={base} stroke={INK} strokeOpacity={0.5} strokeWidth={3} opacity={tO} />
+        {[0, 20, 40, 60].map((v) => <g key={v} opacity={tO}>
+          <line x1={x0 - 30} x2={x1} y1={base - (v / vmax) * hpx} y2={base - (v / vmax) * hpx} stroke={INK} strokeOpacity={v ? 0.07 : 0.5} strokeWidth={v ? 2 : 3} />
+          <text x={x0 - 46} y={base - (v / vmax) * hpx + 12} textAnchor="end" fontFamily={BEBAS} fontSize={34} fill={MUTE}>{v}%</text></g>)}
+        <text transform={`translate(${x0 - 130} ${base - hpx / 2}) rotate(-90)`} textAnchor="middle" fontFamily={BEBAS} fontSize={30} letterSpacing={2} fill={MUTE} opacity={tO}>CHANCE TO WIN IT</text>
+        <text x={x0} y={base + 150} fontFamily={BEBAS} fontSize={30} letterSpacing={2} fill={MUTE} opacity={tO}>← HARDER</text>
+        <text x={x1} y={base + 150} textAnchor="end" fontFamily={BEBAS} fontSize={30} letterSpacing={2} fill={MUTE} opacity={tO}>EASIER →</text>
       </svg>
+      {rows.map(([team, year, pct], i) => {
+        const k = interpolate(f, [cues.rise + i * 2, cues.rise + i * 2 + 14], [0, 1], { ...clamp, easing: easeOut });
+        const L = cues.lit.find((q) => q.team === team && q.year === year);
+        const lit = L ? interpolate(f, [L.at, L.at + 8], [0, 1], clamp) : 0;
+        const keep = team === HARD_KEEP.team && year === HARD_KEEP.year;
+        const first = L === cues.lit[0];
+        const col = lit > 0.5 ? (first ? TEAL : INK) : keep ? "#C9CED6" : BAR;
+        const h = H(pct) * k, cx = x0 + i * bw + bw / 2, w = bw * 0.62;
+        const big = lit > 0.5 || keep;
+        return (
+          <React.Fragment key={team + year}>
+            <div style={{ position: "absolute", left: cx - w / 2, top: base - h, width: w, height: h, background: col }} />
+            <Img src={staticFile(`_local/logos/${LOGO[`${team} ${year}`]}`)} style={{ position: "absolute", left: cx - lw / 2, top: base - h - lw * 0.62 - 12,
+              width: lw, height: lw * 0.62, objectFit: "contain", opacity: k,
+              filter: team === "DAMWON Gaming" ? "brightness(0) invert(0.92)" : undefined }} />
+            <div style={{ position: "absolute", left: cx - bw, width: bw * 2, top: base - h - lw * 0.62 - (big ? 66 : 50), textAlign: "center", fontFamily: BEBAS,
+              fontSize: big ? 46 : 32, color: lit > 0.5 ? col : keep ? INK : MUTE, opacity: k }}>{pctTxt(pct)}</div>
+            <div style={{ position: "absolute", left: cx - bw / 2, width: bw, top: base + 14, textAlign: "center", fontFamily: BEBAS, fontSize: 30, lineHeight: 1,
+              color: big ? (lit > 0.5 ? col : INK) : MUTE, opacity: k }}>{`#${i + 1}`}<br /><span style={{ fontSize: 26 }}>{`${TEAM_SHORT[team] ?? team} ${String(year).slice(2)}`}</span></div>
+          </React.Fragment>
+        );
+      })}
     </AbsoluteFill>
   );
 };

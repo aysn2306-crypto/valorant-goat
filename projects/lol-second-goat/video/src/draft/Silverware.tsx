@@ -1,7 +1,7 @@
 // What it takes to reach Faker (ay 20 Nov): no years and no Faker decline, just the silverware each player would need
 // to reach Faker's score as it stands today (94.4, v14.1). A unit chart, one icon per title (Jxmy's unit grid, jxmy-graphs
 // XMaPrXzclaQ g07): titles already won in grey, the ones still needed drawn in teal, row by row as each name is said.
-// Data: research/data/silverware_needed.csv (model thread, v14.1 876cd53: smallest haul that reaches 94.4, Faker frozen) and
+// Data: research/data/silverware_needed.csv (model v15 36415a2: smallest haul that reaches 95.4, Faker frozen; league titles are in the copied seasons but capped) and
 // league-v14.json titles. Faker today: 6 Worlds, 2 MSI, 10 LCK titles.
 import React from "react";
 import { AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
@@ -57,7 +57,7 @@ export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number }> = ({ 
               </div>
               <div>
                 <div style={{ fontFamily: BEBAS, fontSize: 48, letterSpacing: 2, color: col, lineHeight: 1 }}>{P(r.id).name.toUpperCase()}</div>
-                <div style={{ fontFamily: BEBAS, fontSize: 26, letterSpacing: 2, color: MUTE }}>{fk ? "TODAY · 94.4" : r.score ?? ""}</div>
+                <div style={{ fontFamily: BEBAS, fontSize: 26, letterSpacing: 2, color: MUTE }}>{fk ? "TODAY · 95.4" : r.score ?? ""}</div>
               </div>
             </div>
             {[0, 1, 2].map((j) => {
@@ -85,6 +85,6 @@ export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number }> = ({ 
   );
 };
 
-export const KNIGHT_ROW = (at: number): SilverRow => ({ id: "knight", have: [1, 1, 8], need: [3, 3, 9], at, score: "WITH THESE · 99.8" });
-export const CHOVY_ROW = (at: number): SilverRow => ({ id: "chovy", have: [0, 2, 7], need: [3, 3, 6], at, score: "WITH THESE · 94.9" });
-export const GUMA_ROW = (at: number): SilverRow => ({ id: "gumayusi", have: [3, 1, 1], need: [5, 5, 10], at, score: "WITH THESE · 98.2" });
+export const KNIGHT_ROW = (at: number): SilverRow => ({ id: "knight", have: [1, 1, 8], need: [3, 3, 9], at, score: "WITH THESE · 100.7" });
+export const CHOVY_ROW = (at: number): SilverRow => ({ id: "chovy", have: [0, 2, 7], need: [4, 4, 8], at, score: "WITH THESE · 98.5" });
+export const GUMA_ROW = (at: number): SilverRow => ({ id: "gumayusi", have: [3, 1, 1], need: [4, 4, 8], at, score: "WITH THESE · 97.1" });

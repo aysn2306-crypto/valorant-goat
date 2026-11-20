@@ -97,12 +97,12 @@ export const T2Climb: React.FC = () => {
   const FK = fk.raw.trophies;
   const seasons = (y: string) => { const a = y.split("-"); return Number(a[a.length - 1]) - Number(a[0]) + 1; };
   const xs = (n: number) => 330 + ((n - 1) / 14) * 1350;
-  const named = ["ruler", "gumayusi", "canyon", "knight"];
-  const side: Record<string, "left" | "right"> = { ruler: "right", gumayusi: "left", canyon: "left", knight: "right" };
+  const named = ["gumayusi", "keria", "oner"]; // v15 line 51: the three-time world champions, Gumayusi, Keria, Oner
+  const side: Record<string, "left" | "right"> = { gumayusi: "right", keria: "left", oner: "right" };
   // camera: value at screen centre (c) and zoom (s)
   const climb = p(f, T.climb, T.land, climbE), zoom = p(f, T.zoom, T.zoomEnd, inOut);
-  const TOP = 1600; // ay 20 Nov: the axis runs past Faker's 1,509
-  const c0 = 450, c1 = FK - 270 / PX, c2 = TOP / 2 + 10;
+  const TOP = 1100; // the axis runs just past Faker's 1,058 (v15)
+  const c0 = 520, c1 = FK - 270 / PX, c2 = TOP / 2 + 10;
   const c = interpolate(zoom, [0, 1], [interpolate(climb, [0, 1], [c0, c1]), c2]);
   // camera pull back: y fits the whole range, x shrinks less so the chart keeps its width
   const s = interpolate(zoom, [0, 1], [1, 860 / (TOP * PX)]);
@@ -113,7 +113,7 @@ export const T2Climb: React.FC = () => {
   const step = syk > 0.5 ? 50 : syk > 0.3 ? 100 : 200;
   const ticks: number[] = []; for (let v = 0; v <= TOP; v += step) ticks.push(v);
   const gap = f >= T.bracket ? 1 : 0;
-  const rulerV = D.players.find((q) => q.id === "ruler")!.raw.trophies;
+  const rulerV = Math.max(...D.players.filter((q) => q.id !== "faker").map((q) => q.raw.trophies)); // next best (Gumayusi in v15)
   return (
     <Stage title="THE TROPHY CABINET">
       <div style={{ position: "absolute", left: axisX, top: Math.max(0, sy(TOP)), width: 3, height: Math.min(1080, sy(0) + 20) - Math.max(0, sy(TOP)), background: "rgba(237,239,242,0.85)" }} />

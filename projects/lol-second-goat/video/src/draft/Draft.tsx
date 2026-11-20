@@ -26,7 +26,7 @@ import { AveragedCups, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
-import { L, VO_DURATION, W } from "../data/vo";
+import { L, VO_DURATION, W, WA } from "../data/vo";
 
 const FPS = 30;
 // ay 20 Nov: the cold open runs from the caster's "It's been five years" to his "LPL", the picture fades in, the
@@ -126,7 +126,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { text: "EVERYONE ELSE = A SHARE OF HIM", at: at(c, W("43", "everyone")) }]} />],
   // ay 20 Nov: no chapter titles in the six-parts section, footage between the graphs
   // Jxmy pill bars with the players at the foot (jxmy-graphs eatF7QHwga4 g08, style map 5:15); v14 big-stage half alone
-  ["45", (c) => <PillBars cues={{ rise: 4, lit: at(c, W("46", "carrier")), side: 1e6 }} />],
+  ["45", (c) => <PillBars cues={{ rise: 4, lit: at(c, WA("46", ["knight", "carrier"])), side: 1e6 }} />],
   ["47", (c) => { const kn = at(c, W("48", "knight")); return <SeasonList n={8} cues={{ scroll0: 2, scroll1: kn - 2, spot: kn }} />; }],
   // Jxmy two-player board (jxmy-graphs GPH4nK5sQ-8 g01): Chovy vs Knight, the skill score "by a hair" last
   ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, W("49", "ahead")) }} rows={[
@@ -148,7 +148,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
       <Sequence from={beat - K} layout="none"><FromFrame k={K}><Mo.T2Climb /></FromFrame></Sequence></>;
   }],
   // Jxmy angled stat banner over footage (jxmy-graphics XyihDTdpF8w x07, style map 5:57); v14 trophy points
-  ["55", (c) => <OnBlack at={at(c, W("55", "double"))} big="MORE THAN DOUBLE" sub="FAKER 1,509 TROPHY POINTS · NEXT BEST 714" subAt={at(c, W("55", "anyone"))} />],
+  ["55", (c) => <OnBlack at={at(c, W("55", "double"))} big="ALMOST DOUBLE" sub="FAKER 1,058 TROPHY POINTS · NEXT BEST 614" subAt={at(c, W("55", "anyone"))} />],
   ["56", (c) => <MonteCarlo cues={[at(c, W("57", "rolls")), at(c, W("60", "thousand")), at(c, L("60").end)]} />],
   // Jxmy article page (jxmy-graphics XyihDTdpF8w x08, style map 6:11): our own page, the line marked as it is said
   ["57@monte", (c) => <Ov.ArticlePage kicker="How to test a ranking" title="The Monte Carlo test"
@@ -163,22 +163,22 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: the Uzi/Bengi cards repeated the six-part cards; now a slope chart, fans vs the model (league-v14 ranks)
   // ay 20 Nov: back to the bordered face cards for Uzi and Bengi
   ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, W("68", "also"))} stamp={{ text: "GLAZED?", at: at(c, W("68", "bit")) + 12, card: 0 }} cards={[
-    { id: "uzi", sub: "#21 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
-    { id: "bengi", sub: "#44 ALL TIME", flipAt: at(c, W("68", "benji")), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won")) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
+    { id: "uzi", sub: "#25 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
+    { id: "bengi", sub: "#31 ALL TIME", flipAt: at(c, W("68", "benji")), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won")) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
   ]} />],
   ["69", anchored(<Sm.SPyramidCam voice={false} />, Sm.PYRC_T0)],
   ["76", () => <Words text="TWO TWISTS" />],
   // ay 20 Nov: the twists on the original five-tier pyramid, with the G.O.A.T. pyramid writing top left
   ["77", (c) => <PyramidStates states={[{ at: 0, order: ORDER_2026, label: "2026" }, { at: at(c, W("77", "2025")), order: ORDER_2025, label: "END OF 2025" }]} />],
-  ["80", (c) => <><PyramidStates glowIds={["knight", "chovy"]} states={[{ at: 0, order: ORDER_2025, label: "END OF 2025" }, { at: at(c, W("80", "2nd")), order: ORDER_2026, label: "2026" },
+  ["80", (c) => <><PyramidStates glowIds={["knight"]} states={[{ at: 0, order: ORDER_2025, label: "END OF 2025" }, { at: at(c, WA("80", ["second", "2nd"])), order: ORDER_2026, label: "2026" },
     { at: at(c, W("81", "gen")), order: ORDER_GENG, label: "IF GEN.G\nHAD WON" }]} />
     <AbsoluteCinema at={at(c, W("80", "cinema"))} out={at(c, W("80", "cinema")) + 40} /></>],
-  ["82", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, W("85", "15"))]} />],
+  ["82", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, WA("85", ["10", "ten", "15"]))]} />],
   // ay 20 Nov: the arrow was over before it could be seen; zoom on "Knight", arrow drawn through "from here to there", held into 88
   ["86", (c) => <St.S10bPyramidArrow zoomAt={at(c, W("86", "knight")) - 6} arrowAt={at(c, W("86", "from"))} />],
   ["88@whole", (c) => <St.SampleKnightRadar gapAt={at(c, W("88", "gap"))} />], // 88 now ends "the glaring gap you can see is the trophies": circle and zoom on "gap"
   // ay 20 Nov: silverware needed to reach Faker's score today (Faker held flat), no years; Gumayusi joins after his quote
-  ["92", (c) => <Silverware fakerAt={4} rows={[KNIGHT_ROW(at(c, W("93", "knight"))), CHOVY_ROW(at(c, W("93", "trophy")))]} />],
+  ["92", (c) => <Silverware fakerAt={4} rows={[KNIGHT_ROW(at(c, WA("93", ["knight"]))), CHOVY_ROW(at(c, WA("93", ["chovy", "trophy"])))]} />],
   // ay 20 Nov: no B-roll, just the quote on screen, then Gumayusi's row joins Knight and Chovy
   ["94", (c) => { const back = at(c, W("94", "but")); return <>
     <Sequence durationInFrames={back} layout="none"><AbsoluteFill><Concrete /><Ov.QuoteOnClip /></AbsoluteFill></Sequence>
