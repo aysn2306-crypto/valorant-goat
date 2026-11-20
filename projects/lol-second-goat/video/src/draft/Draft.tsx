@@ -137,7 +137,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["25", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="BLG'S HARDER RUN, FOR KNIGHT" value="+11" unit="TROPHY POINTS"
     years="UNDER HALF A POINT ON HIS FINAL SCORE" numAt={at(c, WA("25", ["11", "eleven", "added"]))} yearsAt={at(c, WA("25", ["half", "less"]))} /></AbsoluteFill>],
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
-  ["26@basketball", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
+  ["26@win", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did in the game. Two players on the same team can end up with very different shares." />],
   // ay 20 Nov 13:13: BLG 2026 shares are back (TitleShare.tsx, the no-names version, is kept but unused)
   ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, L("27").start + 0.4), shares: at(c, L("27").start + 1.6), caption: at(c, L("27").start + 3.0) }} />], // ay 20 Nov 13:13: back to BLG 2026, current shares
