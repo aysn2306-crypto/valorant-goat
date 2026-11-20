@@ -81,8 +81,8 @@ export const PillBars: React.FC<{ cues: { rise: number; lit: number; side: numbe
             <div style={{ position: "absolute", left: cx - bw / 2, top: base - h, width: bw, height: h, background: col, borderRadius: `${bw / 2}px ${bw / 2}px 0 0` }} />
             <div style={{ position: "absolute", left: cx - bw / 2, width: bw, top: base - h + 26, textAlign: "center", fontFamily: BEBAS, fontSize: 58,
               color: first && lit > 0.5 ? GROUND : INK, opacity: k }}>{p.v.toFixed(p.v === 100 ? 0 : 1)}</div>
-            {/* the player stands at the foot of the bar, like Jxmy's */}
-            <Img src={staticFile(`players/${p.id}.png`)} style={{ position: "absolute", left: cx - 95, top: base - 210, width: 190, height: 190, objectFit: "cover",
+            {/* the player stands ON the axis line at the foot of the bar, like Jxmy's (ay 20 Nov 15:28: they used to float above it) */}
+            <Img src={staticFile(`players/${p.id}.png`)} style={{ position: "absolute", left: cx - 95, top: base - 190 - 1.5, width: 190, height: 190, objectFit: "cover", objectPosition: "50% 100%",
               opacity: k, filter: first && lit > 0.5 ? undefined : "grayscale(0.35)" }} />
             <div style={{ position: "absolute", left: cx - gw / 2, width: gw, top: base + 12, textAlign: "center", fontFamily: BEBAS, fontSize: 40, letterSpacing: 2,
               color: first && lit > 0.5 ? TEAL : INK, opacity: k }}>{p.name}</div>

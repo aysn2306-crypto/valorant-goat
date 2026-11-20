@@ -46,13 +46,16 @@ const ICON: Record<string, React.ReactNode> = {
   medal: <g><path d="M9 1h5l3 9h-5zM23 1h-5l-3 9h5z" /><circle cx="16" cy="21" r="9" /></g>,
 };
 // ay 20 Nov: no names on these cards, an action photo per part (stand-ins from lol-second-goat/action-photos until ay picks)
-const PARTS: { name: string; icon: string; id: string; shot: string; pos?: string }[] = [
-  { name: "TROPHIES", icon: "trophy", id: "faker", shot: "faker-holds-trophy-w24.jpg", pos: "55% 20%" },
-  { name: "SKILL", icon: "skill", id: "chovy", shot: "chovy-hand-on-mouse-w26-sf.jpg", pos: "50% 30%" },
-  { name: "BIG GAMES\n& CLUTCH", icon: "clutch", id: "zeus", shot: "ruler-fists-up-w26-sf.jpg", pos: "50% 25%" },
-  { name: "TEAM\nIMPACT", icon: "team", id: "ruler", shot: "keria-shouting-calls-w24-final.jpg", pos: "50% 30%" },
-  { name: "LONGEVITY", icon: "years", id: "deft", shot: "peanut-competes-msi23.jpg", pos: "50% 30%" },
-  { name: "RECOGNITION", icon: "medal", id: "caps", shot: "knight-mvp-trophy-w26-final.jpg", pos: "50% 25%" },
+// ay 20 Nov 15:28: the right player on each photo, named on the photo. Each card shows a player the model puts at or near
+// the top of that part (v15.1 league.json cats): Faker trophies #1, Chovy skill, Knight big stage #1, Ruler team impact #2,
+// Deft longevity #2 (Faker is #1, already on trophies), Knight recognition top 3 (the MVP award).
+const PARTS: { name: string; icon: string; id: string; shot: string; pos?: string; who: string }[] = [
+  { name: "TROPHIES", icon: "trophy", id: "faker", shot: "faker-holds-trophy-w24.jpg", pos: "55% 20%", who: "FAKER · WORLDS 2024" },
+  { name: "SKILL", icon: "skill", id: "chovy", shot: "chovy-hand-on-mouse-w26-sf.jpg", pos: "50% 30%", who: "CHOVY · WORLDS 2026" },
+  { name: "BIG GAMES\n& CLUTCH", icon: "clutch", id: "knight", shot: "bin-knight-celebrate-w26-final.jpg", pos: "68% 25%", who: "KNIGHT · WORLDS 2026" },
+  { name: "TEAM\nIMPACT", icon: "team", id: "ruler", shot: "ruler-fists-up-w26-sf.jpg", pos: "50% 25%", who: "RULER · WORLDS 2026" },
+  { name: "LONGEVITY", icon: "years", id: "deft", shot: "deft-talks-midgame-worlds2015-qf.jpg", pos: "50% 30%", who: "DEFT · WORLDS 2015" },
+  { name: "RECOGNITION", icon: "medal", id: "knight", shot: "knight-mvp-trophy-w26-final.jpg", pos: "50% 25%", who: "KNIGHT · FINALS MVP" },
 ];
 export const RED = "#C9412F", BLUE = "#3B78C4", YEL = "#F1C232";
 
@@ -66,6 +69,8 @@ const PartCard: React.FC<{ part: (typeof PARTS)[number]; w: number; h: number }>
       <div style={{ position: "absolute", left: pad, top: pad, width: frameW, height: h - pad * 2, borderRadius: 22, border: `7px solid ${YEL}`, background: RED, overflow: "hidden" }}>
         <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: photoH, overflow: "hidden" }}>
           <Img src={staticFile(`_local/${part.shot}`)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: part.pos ?? "50% 30%" }} />
+          <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "18px 8px 6px", background: "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.75))",
+            fontFamily: F.title, fontSize: 20, letterSpacing: 1, color: CREAM, textAlign: "center" }}>{part.who}</div>
         </div>
         <div style={{ position: "absolute", left: 8, right: 8, bottom: 8, height: plateH, borderRadius: 14, background: BLUE, border: `4px solid ${YEL}`,
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4 }}>
@@ -147,7 +152,7 @@ export const SCards: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const w = 272, h = 430, gap = 30, x0 = (1920 - (6 * w + 5 * gap)) / 2;
   return (
     <AbsoluteFill>
-      <Vignette bg="#18243A" />
+      <Vignette bg="#121316" />
       <TitleBar text="ONE SCORE, SIX PARTS" inAt={A(W("42", "6"))} top={95} />
       {PARTS.map((p, i) => (
         <React.Fragment key={p.name}>

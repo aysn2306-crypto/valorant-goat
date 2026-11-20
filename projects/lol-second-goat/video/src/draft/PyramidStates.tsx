@@ -22,7 +22,8 @@ export const PyramidStates: React.FC<{ states: { at: number; order: string[]; la
         const o = i === si ? (i === 0 ? 1 : interpolate(f, [s.at, s.at + 10], [0, 1], clamp)) : 1;
         return (
           <AbsoluteFill key={i} style={{ opacity: o }}>
-            <PyramidOld tiers={tiersOf(s.order)} ranks={ranksOf(s.order)} label={s.label} glowIds={si > 0 ? glowIds : []} />
+            {/* ay 20 Nov 15:28: only the top matters in the swaps, so the camera holds on tiers 1 to 3 (tiers 4 and 5 off screen) */}
+            <PyramidOld tiers={tiersOf(s.order)} ranks={ranksOf(s.order)} label={s.label} glowIds={si > 0 ? glowIds : []} cam={{ x: 960, y: 360, s: 1.85 }} />
           </AbsoluteFill>
         );
       })}

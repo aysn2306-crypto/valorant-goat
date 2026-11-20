@@ -24,16 +24,27 @@ export const heat = (t: number) => {
 };
 export const hash = (s: string) => { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return ((h >>> 0) % 10000) / 10000; };
 
-export const Stage: React.FC<{ title?: string; children: React.ReactNode; glow?: "split" | "blue" | "red" | "gold" }> = ({ title, children, glow = "split" }) => {
+/** camera keys: from frame `at` the camera eases (over `dur`, default 30) to centre (x, y) in stage pixels at zoom s */
+export type CamKey = { at: number; x: number; y: number; s: number; dur?: number };
+export const camAt = (f: number, keys: CamKey[]) => {
+  let c = { x: 960, y: 540, s: 1 };
+  for (const k of keys) {
+    if (f < k.at) break;
+    const t = Math.min(1, (f - k.at) / (k.dur ?? 30)), e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    c = { x: c.x + (k.x - c.x) * e, y: c.y + (k.y - c.y) * e, s: c.s + (k.s - c.s) * e };
+  }
+  return c;
+};
+export const Stage: React.FC<{ title?: string; children: React.ReactNode; glow?: "split" | "blue" | "red" | "gold"; cam?: { x: number; y: number; s: number } }> = ({ title, children, glow = "split", cam }) => {
   const g = {
-    split: "radial-gradient(ellipse at 28% 45%, rgba(40,58,92,0.55) 0%, rgba(0,0,0,0) 55%), radial-gradient(ellipse at 74% 55%, rgba(92,34,40,0.55) 0%, rgba(0,0,0,0) 55%)",
+    split: "radial-gradient(ellipse at 28% 45%, rgba(40,58,92,0.28) 0%, rgba(0,0,0,0) 55%), radial-gradient(ellipse at 74% 55%, rgba(92,34,40,0.28) 0%, rgba(0,0,0,0) 55%)",
     blue: "radial-gradient(ellipse at 50% 50%, rgba(40,62,100,0.6) 0%, rgba(0,0,0,0) 65%)",
     red: "radial-gradient(ellipse at 50% 50%, rgba(100,36,40,0.55) 0%, rgba(0,0,0,0) 65%)",
     gold: "radial-gradient(ellipse at 50% 30%, rgba(110,82,30,0.45) 0%, rgba(0,0,0,0) 60%), radial-gradient(ellipse at 50% 80%, rgba(40,58,92,0.4) 0%, rgba(0,0,0,0) 60%)",
   }[glow];
   return (
     <AbsoluteFill style={{ background: `${g}, #0B0B0F`, overflow: "hidden" }}>
-      {children}
+      {cam ? <AbsoluteFill style={{ transform: `translate(${960 - cam.x * cam.s}px, ${540 - cam.y * cam.s}px) scale(${cam.s})`, transformOrigin: "0 0" }}>{children}</AbsoluteFill> : children}
       <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%)", pointerEvents: "none" }} />
       {title && (
         <div style={{ position: "absolute", left: 0, right: 0, top: 40, textAlign: "center", fontFamily: F.title, fontSize: 80, letterSpacing: 2,

@@ -169,3 +169,60 @@ export const HardestRuns: React.FC<{ cues: { rise: number; lit: { team: string; 
     </AbsoluteFill>
   );
 };
+
+// Script v15.1 line 24 (ay 20 Nov 15:28: trophies go straight into what each title is worth): what each Worlds title
+// from 2016 is worth in the model. 100 is a normal Worlds; the harder the field a champion beat, the higher it counts
+// (data/csv/title_credits.csv "path", 0.95 to 1.14). Bars grow up or down from the 100 line, hardest on the left, the
+// winner's logo at the end of each bar, in the trophy gold (style sheet: gold = trophies).
+const WORLDS_VALUE: [string, number, number][] = [["T1", 2024, 114.1], ["T1", 2023, 112.2], ["Bilibili Gaming", 2026, 110.3], ["T1", 2025, 108.4],
+  ["SK Telecom T1", 2016, 106.6], ["DRX", 2022, 104.7], ["Samsung Galaxy", 2017, 102.8], ["EDward Gaming", 2021, 100.9], ["Invictus Gaming", 2018, 99.1],
+  ["FunPlus Phoenix", 2019, 97.2], ["DAMWON Gaming", 2020, 95.3]];
+const GOLD = "#E8B04B";
+export const WorldsValues: React.FC<{ cues: { rise: number; lit: { team: string; year: number; at: number }[] } }> = ({ cues }) => {
+  const f = useCurrentFrame();
+  const rows = WORLDS_VALUE;
+  const x0 = 260, x1 = 1700, mid = 640, ppu = 22; // 1 point = 22 px
+  const bw = (x1 - x0) / rows.length, lw = bw * 0.72;
+  const tO = interpolate(f, [0, 8], [0, 1], clamp);
+  const Y = (v: number) => mid - (v - 100) * ppu;
+  return (
+    <AbsoluteFill>
+      <Concrete />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 50, textAlign: "center", opacity: tO }}>
+        <div style={{ fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>WHAT EACH WORLDS TITLE IS WORTH</div>
+        <div style={{ fontFamily: BEBAS, fontSize: 30, letterSpacing: 2, color: MUTE }}>THE STRONGER THE TEAMS THE CHAMPION BEAT, THE MORE IT COUNTS · 2016 TO 2026</div>
+      </div>
+      <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
+        {[90, 95, 105, 110, 115].map((v) => <g key={v} opacity={tO}>
+          <line x1={x0 - 30} x2={x1} y1={Y(v)} y2={Y(v)} stroke={INK} strokeOpacity={0.07} strokeWidth={2} />
+          <text x={x0 - 46} y={Y(v) + 12} textAnchor="end" fontFamily={BEBAS} fontSize={34} fill={MUTE}>{v}</text></g>)}
+        <line x1={x0 - 30} x2={x1} y1={mid} y2={mid} stroke={INK} strokeOpacity={0.6} strokeWidth={3} opacity={tO} />
+        <text x={x0 - 46} y={mid + 12} textAnchor="end" fontFamily={BEBAS} fontSize={38} fill={INK} opacity={tO}>100</text>
+        <text x={x1 + 20} y={mid + 10} fontFamily={BEBAS} fontSize={28} letterSpacing={1.5} fill={MUTE} opacity={tO}>A NORMAL</text>
+        <text x={x1 + 20} y={mid + 40} fontFamily={BEBAS} fontSize={28} letterSpacing={1.5} fill={MUTE} opacity={tO}>WORLDS</text>
+        <text x={x0} y={1010} fontFamily={BEBAS} fontSize={30} letterSpacing={2} fill={MUTE} opacity={tO}>← HARDER FIELD</text>
+        <text x={x1} y={1010} textAnchor="end" fontFamily={BEBAS} fontSize={30} letterSpacing={2} fill={MUTE} opacity={tO}>EASIER FIELD →</text>
+      </svg>
+      {rows.map(([team, year, v], i) => {
+        const k = interpolate(f, [cues.rise + i * 2, cues.rise + i * 2 + 14], [0, 1], { ...clamp, easing: easeOut });
+        const L = cues.lit.find((q) => q.team === team && q.year === year);
+        const lit = L ? interpolate(f, [L.at, L.at + 8], [0, 1], clamp) : 0;
+        const up = v >= 100, h = Math.abs(v - 100) * ppu * k, cx = x0 + i * bw + bw / 2, w = bw * 0.56;
+        const col = lit > 0.5 ? GOLD : "rgba(232,176,75,0.38)";
+        const top = up ? mid - h : mid, end = up ? mid - h : mid + h;
+        return (
+          <React.Fragment key={team + year}>
+            <div style={{ position: "absolute", left: cx - w / 2, top, width: w, height: Math.max(h, 3), background: col }} />
+            <Img src={staticFile(`_local/logos/${LOGO[`${team} ${year}`]}`)} style={{ position: "absolute", left: cx - lw / 2, top: up ? end - lw * 0.62 - 10 : end + 10,
+              width: lw, height: lw * 0.62, objectFit: "contain", opacity: k * (lit > 0.5 || !cues.lit.length ? 1 : 0.75),
+              filter: team === "DAMWON Gaming" ? "brightness(0) invert(0.92)" : undefined }} />
+            <div style={{ position: "absolute", left: cx - bw, width: bw * 2, top: up ? end - lw * 0.62 - (lit > 0.5 ? 72 : 52) : end + lw * 0.62 + 14, textAlign: "center",
+              fontFamily: BEBAS, fontSize: lit > 0.5 ? 54 : 34, color: lit > 0.5 ? GOLD : MUTE, opacity: k }}>{Math.round(v)}</div>
+            <div style={{ position: "absolute", left: cx - bw / 2, width: bw, top: up ? mid + 14 : mid - 44, textAlign: "center", fontFamily: BEBAS, fontSize: 28,
+              color: lit > 0.5 ? INK : MUTE, opacity: k }}>{`${TEAM_SHORT[team] ?? team} ${String(year).slice(2)}`}</div>
+          </React.Fragment>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};

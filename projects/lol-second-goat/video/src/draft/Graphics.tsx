@@ -222,11 +222,13 @@ const BASE = [40, 18, 14, 12, 9, 7];
 const rr = (n: number) => { const x = Math.sin(n * 12.9898) * 43758.5453; return x - Math.floor(x); };
 /** ay 20 Nov 14:36: cues: [first roll, time-lapse starts, 1,000 reached]. About ten rolls one by one (so the viewer
  *  sees how a roll moves the weights), then it holds on roll 10, then a time-lapse to 1,000. */
-export const MonteCarlo: React.FC<{ cues: [number, number, number] }> = ({ cues }) => {
+/** cues: [slow rolls start, time-lapse start, time-lapse end]; from = rolls already done before this scene (the roll count
+ *  carries on after the cut to the Monte Carlo page) */
+export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: number }> = ({ cues, from = 0 }) => {
   const f = useCurrentFrame();
-  const slow = Math.min(10, Math.max(0, Math.floor((f - cues[0]) / 20) + 1));
+  const slow = Math.min(10, from + Math.max(0, Math.floor((f - cues[0]) / 20) + (from ? 0 : 1)));
   const fast = f > cues[1] ? interpolate(f, [cues[1], cues[2]], [0, 990], { ...clamp, easing: Easing.inOut(Easing.quad) }) : 0;
-  const rolls = f < cues[0] ? 0 : Math.min(1000, Math.round(slow + fast));
+  const rolls = f < cues[0] && !from ? 0 : Math.min(1000, Math.round(slow + fast));
   const roll = rolls;
   const bars = BASE.map((b, i) => (roll === 0 ? b : b * (0.7 + 0.6 * rr(roll * 7 + i))));
   const max = 56;
@@ -290,7 +292,7 @@ export const PlayerCards: React.FC<{ title: string; titleAt: number; cards: Card
   const w = 380, h = 560, gap = 800, x0 = 960 - ((cards.length - 1) * gap + 550) / 2;
   return (
     <AbsoluteFill>
-      <Vignette bg="#18243A" />
+      <Vignette bg="#121316" />
       <AbsoluteFill style={{ transform: `scale(${push})` }}>
       <TitleBar text={title} inAt={titleAt} top={70} />
       {cards.map((c, i) => (

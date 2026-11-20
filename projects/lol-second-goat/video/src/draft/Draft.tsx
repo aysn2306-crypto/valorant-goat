@@ -17,7 +17,7 @@ import { SeasonList } from "./SeasonList";
 import { HeadToHead } from "./HeadToHead";
 import * as Ov from "./Overlays";
 import { KillsLine } from "./KillsLine";
-import { HardestRuns, PriceClimb } from "./Bars";
+import { WorldsValues, HardestRuns, PriceClimb } from "./Bars";
 import { Concrete } from "../samples/Climb";
 import { PercentStack } from "./PercentStack";
 import { PillBars, StackedLines, TitleList } from "./Lists";
@@ -42,7 +42,9 @@ const TEAL = "#3FD0B5";
 /** plays T2Climb on the voice: hold, climb at 1x from "here's", hold on Faker, zoom out 1.6x from line 55, bracket on "anyone" */
 const ClimbRemap: React.FC<{ c: { t0: number; dur: number } }> = ({ c }) => {
   const f = useCurrentFrame();
-  const K = 86, b0 = at(c, W("53", "here")), z0 = at(c, L("55").start), br = at(c, W("55", "anyone"));
+  // ay 20 Nov 15:28: "but we're missing one name", then the climb itself reveals Faker (silent beat 54), holds a second at
+  // the top, zooms out to everyone, and the bracket lands on "anyone else"
+  const K = 86, b0 = at(c, WA("53", ["name", "here"])) + 8, z0 = b0 + (165 - K) + 30, br = Math.max(z0 + 100, at(c, WA("55", ["anyone"])));
   const g = f < b0 ? K : f < b0 + (165 - K) ? K + (f - b0) : f < z0 ? 165 : f < z0 + 94 ? 270 + (f - z0) * 1.6 : f < br ? 420 : 495 + (f - br);
   return <Freeze frame={Math.round(Math.min(g, 540))}><Mo.T2Climb /></Freeze>;
 };
@@ -57,13 +59,15 @@ const OGPyramid: React.FC<{ c: { t0: number; dur: number } }> = ({ c }) => {
     [a(W("66", "tier")) - 4, T(871)], [a(W("66", "tier")) + 18, T(717)], [a(W("66", "caps")) - 2, T(717)], [a(W("66", "caps")) + 20, T(717, 2.8, 610)],
     [a(L("67").start) - 2, T(717, 2.8, 610)], [a(L("67").start) + 22, T(600, 1.05, 1010)],
     [a(W("69", "tier")) - 4, T(600, 1.05, 1010)], [a(W("69", "tier")) + 18, T(565)], [a(W("70", "tier")) - 4, T(565)], [a(W("70", "tier")) + 18, T(410, 2.2)],
-    [a(W("71", "knight")) + 6, T(410, 2.2)], [a(W("71", "knight")) + 30, T(410, 2.9, 845)], [a(L("75").end) - 20, T(410, 2.9, 845)], [a(L("75").end) + 10, FULL]];
+    [a(W("71", "knight")) + 6, T(410, 2.2)], [a(W("71", "knight")) + 30, T(410, 2.9, 845)],
+    // ay 20 Nov 15:28: once Knight is revealed, zoom out on the whole pyramid while he is talked about
+    [a(L("74").start) - 4, T(410, 2.9, 845)], [a(L("74").start) + 40, FULL]];
   let k = 0; while (k < keys.length - 2 && f >= keys[k + 1][0]) k++;
   const [f0, v0] = keys[k], [f1, v1] = keys[k + 1];
   const e = interpolate(f, [f0, f1], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.65, 0, 0.35, 1) });
   const cam = { x: v0.x + (v1.x - v0.x) * e, y: v0.y + (v1.y - v0.y) * e, s: v0.s + (v1.s - v0.s) * e };
   const showAt = (i: number, j: number) => i === 4 ? a(W("65", "bottom")) + 18 + j * 5 : i === 3 ? a(W("66", "tier")) + 18 + j * 5 : i === 2 ? a(W("69", "tier")) + 18 + j * 6
-    : i === 1 ? (j === 1 ? a(W("71", "chovy")) : a(W("71", "knight"))) : 1e9;
+    : i === 1 ? (j === 1 ? a(W("71", "chovy")) : a(W("71", "knight"))) : 0; // ay 20 Nov 15:28: Faker sits in the top row from the start
   const pulse = { perkz: a(W("65", "perkz")), bjergsen: a(W("65", "bjergsen")), jankos: a(W("65", "jankos")), caps: a(W("66", "caps")) + 20 };
   return <St.PyramidOld showAt={showAt} cam={cam} pulse={pulse} outlierAt={c.t0 < L("68").start ? a(W("67", "uzi")) : undefined} />;
 };
@@ -126,14 +130,14 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // Jxmy close-up bar list, camera row to row, then pull back (style map 2:31); LEC left off (ay 19 Nov)
   // ay 20 Nov 12:35: hardest Worlds runs on the champion's own odds (DRX 2022 hardest, T1 2024 second); line 24 is being re-recorded
   ["24", (c) => { const w = (word: string, fb: number) => { try { return at(c, W("24", word)); } catch { return fb; } };
-    return <HardestRuns cues={{ rise: 4, lit: [{ team: "DRX", year: 2022, at: w("drx", 20) }, { team: "T1", year: 2024, at: w("t1", 50) }] }} />; }],
+    return <WorldsValues cues={{ rise: 4, lit: [{ team: "T1", year: 2024, at: w("t1", 30) }, { team: "DAMWON Gaming", year: 2020, at: w("damwon", 90) }] }} />; }],
   ["25", (c) => <PriceClimb cues={[at(c, W("25", "worlds")), at(c, W("25", "messiah")), at(c, W("25", "so", 1)), at(c, W("25", "so", 1)) + 6, at(c, W("25", "so", 1)) + 12]} out={at(c, W("25", "so", 1)) + 14} />],
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
   ["26@sports", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did in the game. Two players on the same team can end up with very different shares." />],
   // ay 20 Nov 13:13: BLG 2026 shares are back (TitleShare.tsx, the no-names version, is kept but unused)
   ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, L("27").start + 0.4), shares: at(c, L("27").start + 1.6), caption: at(c, L("27").start + 3.0) }} />], // ay 20 Nov 13:13: back to BLG 2026, current shares
-  ["28", (c) => { const rv = at(c, W("31", "yup")), ch = at(c, L("29").end); return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
+  ["28", (c) => { const rv = at(c, W("31", "yup")), ch = at(c, L("29").end); return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} walk={{ bottom: ch, mid: ch + 75, top: rv - 60 }} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
   // ay 20 Nov: the old with/without graph with all three players back (only Chovy is talked about)
   ["32", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
   // ay 20 Nov: from the Chovy graph straight to the wins-added graph, held the whole time, then the climb to Faker
@@ -173,13 +177,16 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // all the way up to Faker and holds, zooms out on line 55 to compare him with everyone, and the gap bracket lands on
   // "anyone". No "more than double" card; it holds until "how sure" (ay 20 Nov 14:36, like Jxmy's climb then zoom out).
   ["51@ended", (c) => <ClimbRemap c={c} />],
-  ["56", () => <MonteCarlo cues={[1e6, 1e6, 1e6]} />], // ay 14:36: hold the graph still on "how sure", no rolling yet
+  // ay 20 Nov 15:28: still on "how sure", the rolls start on "the model rolls a dice", a clean cut to the Monte Carlo page,
+  // then back with the count carried on: about 10 rolls, a hold on one, the time-lapse to 1,000 on "all 1000"
+  ["56", (c) => <MonteCarlo cues={[at(c, WA("57", ["dice", "rolls"])), 1e6, 1e6]} />],
   // Jxmy article page (jxmy-graphics XyihDTdpF8w x08, style map 6:11): our own page, the line marked as it is said
   ["57@monte", (c) => <Ov.ArticlePage kicker="How to test a ranking" title="The Monte Carlo test"
     before="Rerun the whole thing many times, and each time roll the choices it rests on at random."
     mark="Named after the casino, because it runs on luck." after="If an answer holds across a thousand rolls, it was never the luck."
     markAt={at(c, W("57", "named"))} />],
-  ["58", (c) => <MonteCarlo cues={[6, at(c, W("60", "ran")), at(c, W("61", "1000"))]} />], // back from the page: ~10 rolls, hold, time-lapse to 1,000 on "all 1000"; holds through 61-63
+  ["58", (c) => { const done = Math.max(1, Math.floor((startOf("57@monte") - WA("57", ["dice", "rolls"])) * 30 / 20) + 1);
+    return <MonteCarlo from={Math.min(10, done)} cues={[6, at(c, W("60", "ran")), at(c, W("61", "1000"))]} />; }], // back from the page: ~10 rolls, hold, time-lapse to 1,000 on "all 1000"; holds through 61-63
   // Jxmy record card (jxmy-graphs 4lbvnNVGd-I g06, style map 6:32)
   // Jxmy quote subtitle over footage (jxmy-graphics 3hZ6Su5PVnI x02, style map 6:42)
   ["64", (c) => <OGPyramid c={c} />],
@@ -215,20 +222,6 @@ const TL = SCENES.map(([id, el], i) => {
   const t1 = i + 1 < SCENES.length ? startOf(SCENES[i + 1][0]) : VO_END + 0.8;
   return { id, el, t0, dur: fr(t1 - t0) };
 });
-// ay 20 Nov 14:36 "less black and grey": one ground colour per act (CLAUDE.md: two or three fields, changing only
-// at a turn in the story, neighbours differing in lightness, hard cuts). A screen layer lifts only the dark ground:
-// white type and the accents stay as they are. Footage scenes are left untouched.
-const NAVY = "rgb(14,34,84)", WINE = "rgb(64,12,34)", BRONZE = "rgb(56,36,10)";
-const FOOTAGE = new Set(["1", "1@knight", "3", "19", "19@gen"]);
-const groundOf = (key: string): string | null => {
-  if (FOOTAGE.has(key)) return null;
-  const n = parseInt(key, 10);
-  if (n < 22) return NAVY;     // act 1: the problem and how the model is built
-  if (n < 42) return WINE;     // act 2: trophies, clutch, with and without
-  if (n < 64) return NAVY;     // act 3: the six parts, the climb, how sure
-  if (n < 76) return BRONZE;   // act 4: the pyramid
-  return WINE;                 // act 5: the twists and the future
-};
 export const DRAFT_TOTAL = fr(LEAD + VO_END + 0.8 + OUTRO);
 
 // End card (ay 20 Nov: no "who's your #2"). 12 s of quiet footage with room for YouTube's end-screen
@@ -255,7 +248,6 @@ export const Draft: React.FC = () => (
     {TL.map((s, i) => (
       <Sequence key={i} from={fr(LEAD + s.t0) + (i === 0 ? fr(LEAD) : 0)} durationInFrames={s.dur - (i === 0 ? fr(LEAD) : 0)} name={"line " + s.id}>
         <AbsoluteFill>{s.el({ t0: i === 0 ? 0 : s.t0, dur: s.dur })}</AbsoluteFill>
-        {groundOf(s.id) && <AbsoluteFill style={{ background: groundOf(s.id)!, mixBlendMode: "screen", pointerEvents: "none" }} />}
       </Sequence>
     ))}
     {/* the meme sits above the act's ground colour so its black and white stay true */}

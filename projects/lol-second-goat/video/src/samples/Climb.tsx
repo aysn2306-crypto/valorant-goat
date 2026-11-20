@@ -18,7 +18,7 @@ const INK = "#F2F2EE";
 
 /** Our ground (ay 19 Nov: Jxmy styles made in our look): Jxmy-style textured ground in our dark slate, fine grain, soft blotches, darker edges */
 export const Concrete: React.FC = () => (
-  <AbsoluteFill style={{ background: "#1B1E25" }}>
+  <AbsoluteFill style={{ background: "#0F1012" }}>
     <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
       <filter id="blot"><feTurbulence type="fractalNoise" baseFrequency="0.004" numOctaves={3} seed={4} />
         <feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 -0.08" /></filter>
@@ -27,7 +27,7 @@ export const Concrete: React.FC = () => (
       <rect width={1920} height={1080} filter="url(#blot)" />
       <rect width={1920} height={1080} filter="url(#grain)" />
     </svg>
-    <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.45) 100%)" }} />
+    <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.6) 100%)" }} />
   </AbsoluteFill>
 );
 
@@ -56,7 +56,10 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const t = 0.55 + 0.45 * s; // text keeps most of its size when the camera pulls back
 
   const pop = (a: number) => interpolate(f, [a, a + 8], [0, 1], { ...clamp, easing: easeOut });
-  const dotsIn = (i: number) => interpolate(f, [2 + (i % 40) * 0.4, 10 + (i % 40) * 0.4], [0, 1], clamp);
+  // ay 20 Nov 15:28: dots come in from the bottom left to the top right (rank by games + wins added), over a second
+  const G0 = Math.floor(Math.min(...rows.map((r) => r[2])) / 50) * 50; // the axis starts at the fewest games in the pool
+  const order = new Map(rows.map((r) => [r[0], (r[2] - G0) / 1500 + (r[3] + 40) / 370] as [string, number]).sort((a, b) => a[1] - b[1]).map(([id], k) => [id, k]));
+  const dotsIn = (i: number) => { const k = (order.get(rows[i][0]) ?? 0) / rows.length; return interpolate(f, [2 + k * 30, 8 + k * 30], [0, 1], clamp); };
   const ticks = Array.from({ length: 20 }, (_, i) => -40 + i * 20);
   const named: { id: string; at: number; big?: boolean }[] = [
     { id: "xiaohu", at: climb0 + 14 }, { id: "jackeylove", at: climb0 + 10 }, { id: "ruler", at: A(W("37", "ruler")) },
@@ -68,15 +71,15 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
       <Concrete />
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
         {/* y axis and its big numbers */}
-        <line x1={X(0) - 10} x2={X(0) - 10} y1={Y(-40) + 6} y2={Y(350)} stroke={INK} strokeWidth={5 * t} />
-        <line x1={X(0) - 12} x2={X(1700)} y1={Y(-40) + 6} y2={Y(-40) + 6} stroke={INK} strokeWidth={5 * t} />
+        <line x1={X(G0) - 10} x2={X(G0) - 10} y1={Y(-40) + 6} y2={Y(350)} stroke={INK} strokeWidth={5 * t} />
+        <line x1={X(G0) - 12} x2={X(1700)} y1={Y(-40) + 6} y2={Y(-40) + 6} stroke={INK} strokeWidth={5 * t} />
         {ticks.map((v) => (
-          <text key={v} opacity={v % 40 === 0 ? 1 : 1 - kOut} x={X(0) - 30 * t} y={Y(v) + 22 * t} textAnchor="end" fontFamily={BEBAS} fontSize={66 * t} fill={INK}>{v > 0 ? "+" + v : v}</text>))}
-        {[0, 400, 800, 1200, 1600].map((g) => (
+          <text key={v} opacity={v % 40 === 0 ? 1 : 1 - kOut} x={X(G0) - 30 * t} y={Y(v) + 22 * t} textAnchor="end" fontFamily={BEBAS} fontSize={66 * t} fill={INK}>{v > 0 ? "+" + v : v}</text>))}
+        {[G0, 400, 800, 1200, 1600].map((g) => (
           <text key={g} x={X(g)} y={Y(-40) + 64 * t} textAnchor="middle" fontFamily={BEBAS} fontSize={44 * t} fill={INK}>{g.toLocaleString("en-GB")}</text>))}
-        <text x={X(850)} y={Y(-40) + 116 * t} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t} fill={INK} letterSpacing={2}>GAMES PLAYED</text>
-        <text transform={`translate(${X(0) - 150 * t} ${Y(cy)}) rotate(-90)`} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t} fill={INK} letterSpacing={2}>WINS ADDED</text>
-        <line x1={X(0) - 10} x2={X(1700)} y1={Y(0)} y2={Y(0)} stroke={INK} strokeOpacity={0.25} strokeWidth={2} strokeDasharray="10 10" />
+        <text x={X((G0 + 1700) / 2)} y={Y(-40) + 116 * t} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t} fill={INK} letterSpacing={2}>GAMES PLAYED</text>
+        <text transform={`translate(${X(G0) - 150 * t} ${Y(cy)}) rotate(-90)`} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t} fill={INK} letterSpacing={2}>WINS ADDED</text>
+        <line x1={X(G0) - 10} x2={X(1700)} y1={Y(0)} y2={Y(0)} stroke={INK} strokeOpacity={0.25} strokeWidth={2} strokeDasharray="10 10" />
         {/* every player */}
         {rows.map((r, i) => {
           const o = dotsIn(i) * (r[0] === "faker" ? 1 : named.some((n) => n.id === r[0]) ? 0.95 : 0.6);

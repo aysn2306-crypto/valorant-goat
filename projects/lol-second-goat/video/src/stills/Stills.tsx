@@ -3,7 +3,7 @@ import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 import { C, F } from "../theme";
 import { D, P } from "../lib/data";
 import S from "../data/stills.json";
-import { Axes, Big, Box, Callout, CREAM, Dot, Face, hash, heat, scale, Stage, Star } from "./kit";
+import { Axes, Big, Box, Callout, camAt, CamKey, CREAM, Dot, Face, hash, heat, scale, Stage, Star } from "./kit";
 
 // Graph stills for ay to judge (18 Nov). Each is the finished frame of one graph; motion comes after ay's notes.
 // Numbers: league.json + stills.json (from the ranking thread's CSVs). Nothing below y = 950 (YouTube bar).
@@ -570,11 +570,14 @@ export const S15Impact: React.FC = () => {
 // (2 standard deviations of pure coin flips: about the square root of the series played)
 type Cl = [string, string, number, number];
 /** reveal: frame where Faker, Bin and Knight are picked out (ay 20 Nov: until "yep, it's Faker" they are plain dots) */
-export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number }> = ({ reveal = 0, chokeAt = 0 }) => {
-  const shown = useCurrentFrame() >= reveal;
+/** walk (ay 20 Nov 15:28, Jxmy's way of reading a graph): bottom, middle, top. bottom = zoom on the chokers, mid = pull back
+ * and light the band, top = pan up to the clutch players; reveal = "yup" (Faker named) */
+export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { bottom: number; mid: number; top: number; out?: number } }> = ({ reveal = 0, chokeAt = 0, walk }) => {
+  const fr0 = useCurrentFrame();
+  const shown = fr0 >= reveal;
   const chokeShown = useCurrentFrame() >= chokeAt;
   // ay 20 Nov 14:36: name a few who win LESS than expected first, then Faker and the clutch ones
-  const chokers: [string, "left" | "right" | "above" | "below"][] = [["creme", "below"], ["jackeylove", "below"], ["meiko", "right"]]; // script v15.1 line 30
+  const chokers: [string, "left" | "right" | "above" | "below"][] = [["creme", "left"], ["jackeylove", "below"], ["meiko", "right"]]; // script v15.1 line 30
   const rows = S.clutch as Cl[];
   const xr: [number, number] = [0, 140], yr: [number, number] = [-10, 18]; // v14 plain series won above expected (clutch_v14_unweighted.csv)
   const { X, Y } = scale(B, xr, yr);
@@ -583,12 +586,17 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number }> = ({ rev
   const up = band.map((n) => `${X(n)},${Y(Math.min(yr[1], Math.sqrt(n)))}`).join(" ");
   const dn = band.slice().reverse().map((n) => `${X(n)},${Y(Math.max(yr[0], -Math.sqrt(n)))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
-  const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["gumayusi", "left"], ["zeus", "below"], ["on", "right"]]; // line 31
+  const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["gumayusi", "above"], ["zeus", "below"], ["on", "right"]]; // line 31
+  const keys: CamKey[] = walk ? [{ at: walk.bottom, x: X(70), y: Y(-5.5), s: 1.75 }, { at: walk.mid, x: X(62), y: Y(0.5), s: 1.12 },
+    { at: walk.top, x: X(88), y: Y(10.5), s: 1.6 }, ...(walk.out ? [{ at: walk.out, x: 960, y: 540, s: 1 }] : [])] : [];
+  const cam = walk ? camAt(fr0, keys) : undefined;
+  const midLit = walk ? Math.min(1, Math.max(0, (fr0 - walk.mid - 10) / 10)) * (fr0 < walk.top ? 1 : Math.max(0, 1 - (fr0 - walk.top) / 10)) : 0;
   return (
-    <Stage title="CLUTCH OR LUCK">
+    <Stage title="CLUTCH OR LUCK" cam={cam}>
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
-        <polygon points={up + " " + dn} fill="rgba(150,160,175,0.16)" stroke="rgba(190,196,206,0.4)" strokeWidth={2} />
+        <polygon points={up + " " + dn} fill={`rgba(150,160,175,${0.16 + 0.16 * midLit})`} stroke={`rgba(190,196,206,${0.4 + 0.5 * midLit})`} strokeWidth={2} />
       </svg>
+      {midLit > 0 && <Big x={X(75)} y={Y(-1.2)} size={40} color="#F2F2EE" align="center" w={520}><span style={{ opacity: midLit }}>ABOUT 9 IN 10 PLAYERS</span></Big>}
       {/* ay 20 Nov: name the regions plainly. Inside the grey band = could be luck; above it = clutch; below it = choked */}
       <Big x={X(40)} y={Y(15.5)} size={38} color={C.gold} align="center" w={300}>CLUTCH ↑</Big>
       <Big x={X(40)} y={Y(-8.5)} size={34} color="#9AA3B1" align="center" w={300}>CHOKED ↓</Big>
