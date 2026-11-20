@@ -216,7 +216,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["86", (c) => <St.S10bPyramidArrow zoomAt={at(c, W("86", "knight")) - 6} arrowAt={at(c, W("86", "from"))} />],
   ["88@whole", (c) => <St.SampleKnightRadar gapAt={at(c, W("88", "gap"))} />], // 88 now ends "the glaring gap you can see is the trophies": circle and zoom on "gap"
   // ay 20 Nov: silverware needed to reach Faker's score today (Faker held flat), no years; Gumayusi joins after his quote
-  ["92", (c) => <Silverware fakerAt={4} rows={[KNIGHT_ROW(at(c, WA("93", ["knight"]))), CHOVY_ROW(at(c, WA("93", ["chovy", "trophy"])))]} />],
+  ["92", (c) => <Silverware fakerAt={4} rows={[KNIGHT_ROW(at(c, WA("93", ["knight"]))), CHOVY_ROW(at(c, WA("93", ["chovy", "and"])))]} />],
   // ay 20 Nov: no B-roll, just the quote on screen, then Gumayusi's row joins Knight and Chovy
   ["94", (c) => { const back = at(c, W("94", "but")); return <>
     <Sequence durationInFrames={back} layout="none"><AbsoluteFill><Concrete /><Ov.GumaQuoteCard /></AbsoluteFill></Sequence>
