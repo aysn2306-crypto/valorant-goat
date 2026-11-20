@@ -319,3 +319,35 @@ export const PlayerCards: React.FC<{ title: string; titleAt: number; cards: Card
     </AbsoluteFill>
   );
 };
+
+// ay 20 Nov 23:03: a Monte Carlo card while ay explains the test (56 to 57b), BEFORE the roll-the-dice graph (58).
+// A casino wheel (drawn here, no outside art): still at first, the title on "Monte Carlo", the wheel spins on "luck".
+export const MonteCarloIntro: React.FC<{ titleAt: number; spinAt: number }> = ({ titleAt, spinAt }) => {
+  const f = useCurrentFrame();
+  const N = 24, R = 300, cx = 960, cy = 600;
+  const inO = interpolate(f, [0, 10], [0, 1], clamp);
+  const tO = interpolate(f, [titleAt - 4, titleAt + 6], [0, 1], { ...clamp, easing: easeOut });
+  const spin = f < spinAt ? 0 : (f - spinAt) * 6 * interpolate(f, [spinAt, spinAt + 20], [0.2, 1], clamp);
+  const ball = -spin * 1.6;
+  const seg = (i: number) => {
+    const a0 = (i / N) * 2 * Math.PI - Math.PI / 2, a1 = ((i + 1) / N) * 2 * Math.PI - Math.PI / 2;
+    return `M0 0 L${R * Math.cos(a0)} ${R * Math.sin(a0)} A${R} ${R} 0 0 1 ${R * Math.cos(a1)} ${R * Math.sin(a1)} Z`;
+  };
+  return (
+    <Ground>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 70, textAlign: "center", fontFamily: F.title, fontSize: 110, color: CREAM, letterSpacing: 4, opacity: tO,
+        transform: `translateY(${(1 - tO) * 20}px)` }}>THE MONTE CARLO TEST</div>
+      <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: inO }}>
+        <g transform={`translate(${cx} ${cy + 60})`}>
+          <circle r={R + 26} fill="#1B212B" stroke="rgba(237,239,242,0.25)" strokeWidth={3} />
+          <g transform={`rotate(${spin})`}>
+            {Array.from({ length: N }, (_, i) => <path key={i} d={seg(i)} fill={i === 0 ? C.gold : i % 2 ? "#2A313D" : "#3A4250"} stroke="#0D0F14" strokeWidth={2} />)}
+            <circle r={R * 0.42} fill="#0D0F14" stroke="rgba(237,239,242,0.25)" strokeWidth={3} />
+            {Array.from({ length: 4 }, (_, i) => <rect key={i} x={-6} y={-R * 0.4} width={12} height={R * 0.8} rx={6} fill="#8C96A6" transform={`rotate(${i * 45})`} />)}
+          </g>
+          <circle cx={(R + 8) * Math.cos((ball * Math.PI) / 180 - Math.PI / 2)} cy={(R + 8) * Math.sin((ball * Math.PI) / 180 - Math.PI / 2)} r={14} fill={CREAM} />
+        </g>
+      </svg>
+    </Ground>
+  );
+};

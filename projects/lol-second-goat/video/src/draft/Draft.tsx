@@ -28,7 +28,7 @@ import { FansVsModel } from "./Slope";
 import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
-import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
+import { PlayerCards, DreamSeasons, MonteCarlo, MonteCarloIntro, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
 const FPS = 30;
@@ -185,7 +185,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { label: "WIN RATE", l: "69.2%", r: "66.9%", better: "l" },
     { label: "SKILL SCORE", l: "100", r: "97.8", better: "l", big: true }]} />],
   ["51", (c) => <MLBoard title="Trophy score" lines={[
-    { text: "Each title = price × how hard × his share", at: at(c, WA("51", ["how", "times"])) },
+    { text: "Each title = which trophy × how hard × his share", at: at(c, WA("51", ["how", "times"])) },
     { text: "Added up over a whole career", at: at(c, W("51", "share")), accent: true }]} />],
   // The cabinet without Faker in view (Canyon, Ruler, Knight named), held still, then on "here's Faker" the camera climbs
   // all the way up to Faker and holds, zooms out on line 55 to compare him with everyone, and the gap bracket lands on
@@ -195,7 +195,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // then back with the count carried on: about 10 rolls, a hold on one, the time-lapse to 1,000 on "all 1000"
   // ay 20 Nov 19:16: the graph holds still while ay explains the Monte Carlo test (57, 57b), then moves on
   // "the model rolls a dice" (58): rolls one by one, a time-lapse on "ran it", 1,000 on "all 1,000". No article page cut.
-  ["56", (c) => <MonteCarlo cues={[at(c, WA("58", ["dice", "rolls"])), at(c, WA("60", ["ran", "thousand"])), at(c, WA("61", ["1000", "1,000", "all"]))]} />],
+  // ay 20 Nov 23:03: Monte Carlo card while ay explains (56 to 57b), then the roll-the-dice graph from 58
+  ["56", (c) => <MonteCarloIntro titleAt={at(c, WA("57", ["monte", "carlo"]))} spinAt={at(c, WA("57b", ["luck", "casino"]))} />],
+  ["58", (c) => <MonteCarlo cues={[at(c, WA("58", ["dice", "rolls"])), at(c, WA("60", ["ran", "thousand"])), at(c, WA("61", ["1000", "1,000", "all"]))]} />],
   // Jxmy record card (jxmy-graphs 4lbvnNVGd-I g06, style map 6:32)
   // Jxmy quote subtitle over footage (jxmy-graphics 3hZ6Su5PVnI x02, style map 6:42)
   ["64", (c) => <OGPyramid c={c} />],
