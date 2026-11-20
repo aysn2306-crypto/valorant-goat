@@ -35,9 +35,9 @@ const Figure: React.FC<{ id: string; h: number; ring: string; rank: number; name
 
 // ------------------------------------------------------------------ the 2025 pyramid twist (top three tiers)
 // model v15.1 (data/csv/draft_scores_cut2025.csv, draft_scores.csv, draft_scores_geng_wins.csv)
-export const ORDER_2025 = ["faker", "chovy", "ruler", "keria", "knight", "peanut", "canyon", "oner", "zeus", "xiaohu"];
-export const ORDER_2026 = ["faker", "knight", "chovy", "ruler", "keria", "canyon", "zeus", "peanut", "bin", "viper"];
-export const ORDER_GENG = ["faker", "chovy", "ruler", "knight", "canyon", "keria", "zeus", "peanut", "kiin", "bin"];
+export const ORDER_2025 = ["faker", "chovy", "ruler", "knight", "keria", "peanut", "canyon", "oner", "zeus", "xiaohu"]; // v15.3
+export const ORDER_2026 = ["faker", "knight", "chovy", "ruler", "keria", "canyon", "zeus", "bin", "peanut", "viper"];
+export const ORDER_GENG = ["faker", "chovy", "knight", "ruler", "canyon", "keria", "zeus", "peanut", "bin", "kiin"];
 /** states: from frame `at`, the pyramid shows `order` (top 10) under the label */
 export const PyramidTwist: React.FC<{ states: { at: number; order: string[]; label: string }[]; glowIds?: string[] }> = ({ states, glowIds = [] }) => {
   const f = useCurrentFrame();
@@ -218,7 +218,7 @@ const DreamPanel: React.FC<{ who: string; id: string; x: number; start: number; 
 
 // ------------------------------------------------------------------ Monte Carlo rolls
 const PARTS6 = ["TROPHIES", "SKILL", "BIG GAMES", "TEAM IMPACT", "LONGEVITY", "RECOGNITION"];
-const BASE = [40, 18, 14, 12, 9, 7];
+const BASE = [30, 21, 16.3, 14, 10.5, 8.2]; // v15.3 weights
 const rr = (n: number) => { const x = Math.sin(n * 12.9898) * 43758.5453; return x - Math.floor(x); };
 /** ay 20 Nov 14:36: cues: [first roll, time-lapse starts, 1,000 reached]. About ten rolls one by one (so the viewer
  *  sees how a roll moves the weights), then it holds on roll 10, then a time-lapse to 1,000. */

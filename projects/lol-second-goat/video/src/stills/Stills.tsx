@@ -413,8 +413,8 @@ export const S10aPyramidInternet: React.FC = () => <Pyramid internet />;
 
 // 11a. Knight vs Faker, part by part (v11 parts and weights, MODEL-CURRENT 18 Nov 17:20; "intangibles" is called Recognition on screen)
 // LOCKED (ay 20 Nov 19:16): the part is called LONGEVITY here, same as the six-part cards
-const PARTS: [string, number, number, number][] = [["TROPHIES", 40, 100, 46.1], ["BIG GAMES", 14, 100, 98.2], ["SKILL", 18, 85.7, 97.8],
-  ["TEAM IMPACT", 12, 100, 75.9], ["LONGEVITY", 9, 100, 89.9], ["RECOGNITION", 7, 88.7, 87.4]]; // v15.2 (data/csv/draft_scores.csv: c_trophies, c_big_stage_clutch, c_skill, c_impact, c_longevity, c_recognition; Faker then Knight)
+const PARTS: [string, number, number, number][] = [["TROPHIES", 30, 100, 46.1], ["BIG GAMES", 16.3, 93.0, 99.3], ["SKILL", 21, 85.7, 97.8],
+  ["TEAM IMPACT", 14, 100, 75.8], ["LONGEVITY", 10.5, 100, 89.9], ["RECOGNITION", 8.2, 88.7, 87.4]]; // v15.3 (research/data/ranking_v15_3.csv; Faker then Knight)
 export const S11aKnightVsFaker: React.FC = () => {
   const b: Box = { x0: 620, y0: 210, x1: 1640, y1: 830 };
   const X = (v: number) => b.x0 + ((v - 30) / 72) * (b.x1 - b.x0);
@@ -578,46 +578,49 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
   const shown = fr0 >= reveal;
   const chokeShown = useCurrentFrame() >= chokeAt;
   // ay 20 Nov 14:36: name a few who win LESS than expected first, then Faker and the clutch ones
-  const chokers: [string, "left" | "right" | "above" | "below"][] = [["creme", "left"], ["jackeylove", "below"], ["vulcan", "right"]]; // script 19:36 line 30 (clutch_v14_unweighted.csv)
+  // v15.3 (ay 20 Nov 23:09 "change the ones that need changing"): series won above expected PER 10 big series, players
+  // with 40+ big series (research/data/clutch_v15_3_per10.csv). Voice names two per tier, the graph lights 3 to 4 (ay 20:21).
+  const chokers: [string, "left" | "right" | "above" | "below"][] = [["creme", "left"], ["jackeylove", "right"], ["vulcan", "left"]];
   const rows = S.clutch as Cl[];
-  const xr: [number, number] = [0, 140], yr: [number, number] = [-10, 18]; // v14 plain series won above expected (clutch_v14_unweighted.csv)
+  const xr: [number, number] = [30, 260], yr: [number, number] = [-1.5, 1.5];
   const { X, Y } = scale(B, xr, yr);
-  const band = Array.from({ length: 29 }, (_, i) => i * 5);
-  // ay 20 Nov: the luck band stays inside the axes (it used to run off the bottom right)
-  const up = band.map((n) => `${X(n)},${Y(Math.min(yr[1], Math.sqrt(n)))}`).join(" ");
-  const dn = band.slice().reverse().map((n) => `${X(n)},${Y(Math.max(yr[0], -Math.sqrt(n)))}`).join(" ");
+  const luck = (n: number) => 10 / Math.sqrt(n); // about two standard deviations of coin-flip luck, per 10 series
+  const band = Array.from({ length: 47 }, (_, i) => 30 + i * 5);
+  // ay 20 Nov: the luck band stays inside the axes
+  const up = band.map((n) => `${X(n)},${Y(Math.min(yr[1], luck(n)))}`).join(" ");
+  const dn = band.slice().reverse().map((n) => `${X(n)},${Y(Math.max(yr[0], -luck(n)))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
   // LOCKED (ay 20 Nov, again 20:04): the walk goes through THREE tiers: bottom named, MIDDLE named (around expected), top named
-  const middle: [string, "left" | "right" | "above" | "below"][] = [["gala", "above"], ["doran", "below"], ["369", "right"], ["zven", "above"]]; // line 30b. LOCKED (ay 20 Nov 20:19): highlight these four; the voice names only 369 and Doran
-  const named: [string, "left" | "right" | "above" | "below"][] = [["on", "below"], ["zeus", "below"], ["gumayusi", "above"], ["knight", "right"], ["bin", "above"]]; // line 31 (19:36): On, Zeus, Gumayusi, Knight, Bin
-  const keys: CamKey[] = walk ? [{ at: walk.bottom, x: X(70), y: Y(-5.5), s: 1.75 }, { at: walk.mid, x: X(76), y: Y(0), s: 1.7 },
-    { at: walk.top, x: X(88), y: Y(10.5), s: 1.6 }, ...(walk.out ? [{ at: walk.out, x: 960, y: 540, s: 1 }] : [])] : [];
+  const middle: [string, "left" | "right" | "above" | "below"][] = [["gala", "left"], ["doran", "right"], ["369", "below"], ["zven", "above"]]; // line 30b. LOCKED (ay 20 Nov 20:19): highlight these four; the voice names only 369 and Doran
+  const named: [string, "left" | "right" | "above" | "below"][] = [["on", "below"], ["zeus", "below"], ["gumayusi", "above"], ["zeka", "right"], ["bin", "right"]]; // line 31 (v15.3): voice Gumayusi, Zeka, Bin
+  const keys: CamKey[] = walk ? [{ at: walk.bottom, x: X(100), y: Y(-0.7), s: 1.75 }, { at: walk.mid, x: X(105), y: Y(-0.05), s: 1.75 },
+    { at: walk.top, x: X(150), y: Y(0.75), s: 1.35 }, ...(walk.out ? [{ at: walk.out, x: 960, y: 540, s: 1 }] : [])] : [];
   const cam = walk ? camAt(fr0, keys) : undefined;
   const midLit = walk ? Math.min(1, Math.max(0, (fr0 - walk.mid - 10) / 10)) * (fr0 < walk.top ? 1 : Math.max(0, 1 - (fr0 - walk.top) / 10)) : 0;
+  const v2 = (v: number) => (v > 0 ? "+" : "") + v.toFixed(2);
   return (
     <Stage title="CLUTCH OR LUCK" cam={cam}>
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
         <polygon points={up + " " + dn} fill={`rgba(150,160,175,${0.16 + 0.16 * midLit})`} stroke={`rgba(190,196,206,${0.4 + 0.5 * midLit})`} strokeWidth={2} />
       </svg>
-      {/* ay 20 Nov 18:03: the "about 9 in 10 players" label crossed the dots; the lit band says it on its own */}
-      {/* ay 20 Nov: name the regions plainly. Inside the grey band = could be luck; above it = clutch; below it = choked */}
-      <Big x={X(40)} y={Y(15.5)} size={38} color={C.gold} align="center" w={300}>CLUTCH ↑</Big>
-      <Big x={X(40)} y={Y(-8.5)} size={34} color="#9AA3B1" align="center" w={300}>CHOKED ↓</Big>
-      <Axes b={B} xr={xr} yr={yr} xt={[0, 20, 40, 60, 80, 100, 120, 140]} yt={[-10, -5, 0, 5, 10, 15]} xl="BEST OF FIVES PLAYED" yl="SERIES WON ABOVE EXPECTED" yf={(v) => (v > 0 ? "+" + v : String(v))} />
-      {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 7) / 21)} o={r[3] > Math.sqrt(r[2]) ? 1 : 0.6} />)}
-      <Dot x={X(fk[2])} y={Y(fk[3])} r={6} color={heat((fk[3] + 7) / 21)} o={1} />{/* Faker's dot is there from the start; "yup" circles it */}
-      {chokeShown && chokers.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={r0(r[3])} side={side} ring={18} color="#E06A5A" />; })}
+      {/* ay 20 Nov 18:03: no "about 9 in 10 players" label; the lit band says it on its own */}
+      <Big x={X(215)} y={Y(1.3)} size={38} color={C.gold} align="center" w={300}>CLUTCH ↑</Big>
+      <Big x={X(70)} y={Y(-1.25)} size={34} color="#9AA3B1" align="center" w={300}>CHOKED ↓</Big>
+      <Axes b={B} xr={xr} yr={yr} xt={[40, 80, 120, 160, 200, 240]} yt={[-1.5, -1, -0.5, 0, 0.5, 1, 1.5]} xl="BIG SERIES PLAYED (40+ BIG SERIES)" yl="SERIES WON ABOVE EXPECTED, PER 10" yf={(v) => (v > 0 ? "+" + v : String(v))} />
+      {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 1) / 2)} o={Math.abs(r[3]) > luck(r[2]) ? 1 : 0.6} />)}
+      <Dot x={X(fk[2])} y={Y(fk[3])} r={6} color={heat((fk[3] + 1) / 2)} o={1} />{/* Faker's dot is there from the start; his line circles it */}
+      {chokeShown && chokers.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={v2(r[3])} side={side} ring={18} color="#E06A5A" />; })}
       {middle.filter(([id]) => nameAt[id] !== undefined && fr0 >= nameAt[id] && fr0 < (walk?.top ?? 1e9)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!;
-        return <Callout key={"m" + id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={(r[3] > 0 ? "+" : "") + r[3].toFixed(1)} side={side} ring={14} pad={6} size={0.85} color="#F2F2EE" />; })}
-      {named.filter(([id]) => fr0 >= (nameAt[id] ?? reveal)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
-      {shown && <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={22} pad={20} color={C.gold} size={1.3} />}
+        return <Callout key={"m" + id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={v2(r[3])} side={side} ring={14} pad={6} size={0.85} color="#F2F2EE" />; })}
+      {named.filter(([id]) => fr0 >= (nameAt[id] ?? reveal)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={v2(r[3])} side={side} ring={id === "bin" ? 22 : 18} size={id === "bin" ? 1.2 : 1} />; })}
+      {shown && <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={v2(fk[3])} side="left" ring={22} pad={20} color={C.gold} size={1.2} />}
     </Stage>
   );
 };
 
 // 17. The score card: six parts and their weights (v11). Recognition = All-Pro votes plus team record with and without him.
-const CARD: [string, number, string][] = [["TROPHIES", 40, C.gold], ["SKILL", 18, "#5CBE50"], ["BIG GAMES + CLUTCH", 14, "#22D3EE"],
-  ["TEAM IMPACT", 12, "#E8CD3A"], ["LONGEVITY", 9, "#F27828"], ["RECOGNITION", 7, "#C77DFF"]];
+const CARD: [string, number, string][] = [["TROPHIES", 30, C.gold], ["SKILL", 21, "#5CBE50"], ["BIG GAMES + CLUTCH", 16.3, "#22D3EE"],
+  ["TEAM IMPACT", 14, "#E8CD3A"], ["LONGEVITY", 10.5, "#F27828"], ["RECOGNITION", 8.2, "#C77DFF"]]; // v15.3
 export const S17ScoreCard: React.FC = () => {
   const x0 = 160, x1 = 1760, y = 470, h = 120;
   const W = (v: number) => (v / 100) * (x1 - x0);

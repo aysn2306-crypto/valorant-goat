@@ -2,7 +2,7 @@
 // climb 399"): the chart opens tight on the pack, big axis numbers; the camera rises through empty space with the axis
 // numbers scrolling past until it lands on the one dot way above everyone, "Name (value)" under it; then it pulls back
 // to the whole chart and a dashed bracket says how big the gap is. Plain white dots on a grey concrete ground.
-// Data: model v13 team impact (plus-minus wins added over a career, stills.json "impact").
+// Data: model v15.3 team impact (plus-minus wins added PER 100 GAMES, 300+ games, stills.json "impact"; ay 20 Nov 23:09).
 import React from "react";
 import { AbsoluteFill, Audio, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { P } from "../lib/data";
@@ -45,16 +45,16 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   // camera: centre (data units) and zoom; 1 = tight on the pack. Script 20 Nov (Jxmy's benchmark then outlier): on "plus
   // 100" the camera rises a little to the +100 line ("only 23 players"), Ruler is named on "Ruler", the climb to Faker
   // starts on the second "Faker" ("way up here"), and the pull back with the gap comes after "330"
-  const bench0 = A(WA("37", ["plus", "100"])), bench1 = bench0 + 30, benchLab = A(WA("37", ["23", "twenty", "only"]));
+  const bench0 = A(WA("37", ["plus", "12"])), bench1 = bench0 + 30, benchLab = A(WA("37", ["15", "fifteen", "only"]));
   const climb0 = A((() => { try { return W("37", "faker", 1); } catch { return WA("37", ["way", "then"]); } })()), climb1 = climb0 + 48;
-  const out0 = Math.max(climb1 + 20, A(WA("37", ["330", "three"])) + 24), out1 = out0 + 30;
+  const out0 = Math.max(climb1 + 20, A(WA("37", ["21", "twenty"])) + 24), out1 = out0 + 30;
   const kB = interpolate(f, [bench0, bench1], [0, 1], { ...clamp, easing: inOut });
   const kUp = interpolate(f, [climb0, climb1], [0, 1], { ...clamp, easing: inOut });
   const kOut = interpolate(f, [out0, out1], [0, 1], { ...clamp, easing: inOut });
-  const cy = 40 + kB * (125 - 40) + kUp * (300 - 125) + kOut * (140 - 300);
+  const cy = 3 + kB * (7 - 3) + kUp * (17 - 7) + kOut * (8 - 17);
   const s = 1 - kOut * 0.53, sx = 1 - kOut * 0.28;
   const cx = 850 + kOut * 60;
-  const KY = 4.6, KX = 0.88;
+  const KY = 60, KX = 0.88;
   const X = (g: number) => 960 + (g - cx) * KX * sx;
   const Y = (v: number) => 560 - (v - cy) * KY * s;
   const t = 0.55 + 0.45 * s; // text keeps most of its size when the camera pulls back
@@ -62,31 +62,31 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const pop = (a: number) => interpolate(f, [a, a + 8], [0, 1], { ...clamp, easing: easeOut });
   // ay 20 Nov 15:28: dots come in from the bottom left to the top right (rank by games + wins added), over a second
   const G0 = Math.floor(Math.min(...rows.map((r) => r[2])) / 50) * 50; // the axis starts at the fewest games in the pool
-  const order = new Map(rows.map((r) => [r[0], (r[2] - G0) / 1500 + (r[3] + 40) / 370] as [string, number]).sort((a, b) => a[1] - b[1]).map(([id], k) => [id, k]));
+  const order = new Map(rows.map((r) => [r[0], (r[2] - G0) / 1500 + (r[3] + 6) / 27] as [string, number]).sort((a, b) => a[1] - b[1]).map(([id], k) => [id, k]));
   const dotsIn = (i: number) => { const k = (order.get(rows[i][0]) ?? 0) / rows.length; return interpolate(f, [2 + k * 30, 8 + k * 30], [0, 1], clamp); };
-  const ticks = Array.from({ length: 20 }, (_, i) => -40 + i * 20);
+  const ticks = Array.from({ length: 11 }, (_, i) => -6 + i * 3);
   const named: { id: string; at: number; big?: boolean }[] = [{ id: "ruler", at: A(WA("37", ["ruler"])) }, { id: "faker", at: climb1 - 6, big: true }];
-  const gap = Math.round(fk[3] - ru[3]);
+  const gap = (fk[3] - ru[3]).toFixed(1);
 
   return (
     <AbsoluteFill>
       <Concrete />
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
         {/* y axis and its big numbers */}
-        <line x1={X(G0) - 10} x2={X(G0) - 10} y1={Y(-40) + 6} y2={Y(350)} stroke={INK} strokeWidth={5 * t} />
-        <line x1={X(G0) - 12} x2={X(1700)} y1={Y(-40) + 6} y2={Y(-40) + 6} stroke={INK} strokeWidth={5 * t} />
+        <line x1={X(G0) - 10} x2={X(G0) - 10} y1={Y(-6) + 6} y2={Y(26)} stroke={INK} strokeWidth={5 * t} />
+        <line x1={X(G0) - 12} x2={X(1700)} y1={Y(-6) + 6} y2={Y(-6) + 6} stroke={INK} strokeWidth={5 * t} />
         {ticks.map((v) => (
-          <text key={v} opacity={v % 40 === 0 ? 1 : 1 - kOut} x={X(G0) - 30 * t} y={Y(v) + 22 * t} textAnchor="end" fontFamily={BEBAS} fontSize={66 * t} fill={INK}>{v > 0 ? "+" + v : v}</text>))}
+          <text key={v} opacity={v % 6 === 0 ? 1 : 1 - kOut} x={X(G0) - 30 * t} y={Y(v) + 22 * t} textAnchor="end" fontFamily={BEBAS} fontSize={66 * t} fill={INK}>{v > 0 ? "+" + v : v}</text>))}
         {[G0, 400, 800, 1200, 1600].map((g) => (
-          <text key={g} x={X(g)} y={Y(-40) + 64 * t} textAnchor="middle" fontFamily={BEBAS} fontSize={44 * t} fill={INK}>{g.toLocaleString("en-GB")}</text>))}
-        <text x={X((G0 + 1700) / 2)} y={Y(-40) + 116 * t} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t} fill={INK} letterSpacing={2}>GAMES PLAYED</text>
-        <text transform={`translate(${X(G0) - 150 * t} ${Y(cy)}) rotate(-90)`} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t} fill={INK} letterSpacing={2}>WINS ADDED</text>
+          <text key={g} x={X(g)} y={Y(-6) + 64 * t} textAnchor="middle" fontFamily={BEBAS} fontSize={44 * t} fill={INK}>{g.toLocaleString("en-GB")}</text>))}
+        <text x={X((G0 + 1700) / 2)} y={Y(-6) + 116 * t} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t} fill={INK} letterSpacing={2}>GAMES PLAYED (300+)</text>
+        <text transform={`translate(${X(G0) - 150 * t} ${Y(cy)}) rotate(-90)`} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t} fill={INK} letterSpacing={2}>WINS ADDED PER 100 GAMES</text>
         <line x1={X(G0) - 10} x2={X(1700)} y1={Y(0)} y2={Y(0)} stroke={INK} strokeOpacity={0.25} strokeWidth={2} strokeDasharray="10 10" />
-        {/* the benchmark: +100 wins added, only 23 players ever (stills.json impact) */}
+        {/* the benchmark: +12 per 100 games, only 15 players (stills.json impact) */}
         <g opacity={kB}>
-          <line x1={X(G0) - 10} x2={X(1700)} y1={Y(100)} y2={Y(100)} stroke={INK} strokeOpacity={0.7} strokeWidth={3 * t} strokeDasharray="14 10" />
-          <text x={X(1700)} y={Y(100) - 16 * t} textAnchor="end" fontFamily={BEBAS} fontSize={44 * t} fill={INK} opacity={interpolate(f, [benchLab, benchLab + 8], [0, 1], clamp)}>
-            ONLY {rows.filter((r) => r[3] >= 100).length} PLAYERS EVER ABOVE +100</text>
+          <line x1={X(G0) - 10} x2={X(1700)} y1={Y(12)} y2={Y(12)} stroke={INK} strokeOpacity={0.7} strokeWidth={3 * t} strokeDasharray="14 10" />
+          <text x={X(1700)} y={Y(12) - 16 * t} textAnchor="end" fontFamily={BEBAS} fontSize={44 * t} fill={INK} opacity={interpolate(f, [benchLab, benchLab + 8], [0, 1], clamp)}>
+            ONLY {rows.filter((r) => r[3] > 12).length} PLAYERS ABOVE +12</text>
         </g>
         {/* every player */}
         {rows.map((r, i) => {
@@ -98,8 +98,8 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
           <line x1={X(1730)} x2={X(1730)} y1={Y(fk[3])} y2={Y(ru[3])} stroke={INK} strokeWidth={4} strokeDasharray="14 10" />
           <line x1={X(1210)} x2={X(1730)} y1={Y(ru[3])} y2={Y(ru[3])} stroke={INK} strokeOpacity={0.5} strokeWidth={2} strokeDasharray="6 8" />
           <line x1={X(1600)} x2={X(1730)} y1={Y(fk[3])} y2={Y(fk[3])} stroke={INK} strokeOpacity={0.5} strokeWidth={2} strokeDasharray="6 8" />
-          <text x={X(1730) + 22} y={Y((fk[3] + ru[3]) / 2) - 8} fontFamily={BEBAS} fontSize={50} fill={INK}>{gap} more wins added</text>
-          <text x={X(1730) + 22} y={Y((fk[3] + ru[3]) / 2) + 44} fontFamily={BEBAS} fontSize={50} fill={INK}>than number two</text>
+          <text x={X(1730) + 22} y={Y((fk[3] + ru[3]) / 2) - 8} fontFamily={BEBAS} fontSize={50} fill={INK}>+{gap} per 100 games</text>
+          <text x={X(1730) + 22} y={Y((fk[3] + ru[3]) / 2) + 44} fontFamily={BEBAS} fontSize={50} fill={INK}>over number two</text>
         </g>
       </svg>
       {/* names under their dots, Jxmy style: "Name (value)" */}
@@ -109,7 +109,7 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
         return (
           <div key={n.id} style={{ position: "absolute", left: X(r[2]) - 300, width: 600, top: Y(r[3]) + 16 * t, textAlign: "center",
             fontFamily: BEBAS, fontSize: size, color: INK, letterSpacing: 1, opacity: pop(n.at), whiteSpace: "nowrap" }}>
-            {r[1]} (+{Math.round(r[3])})
+            {r[1]} (+{r[3].toFixed(1)})
           </div>
         );
       })}

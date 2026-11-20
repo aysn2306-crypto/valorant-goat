@@ -21,9 +21,10 @@ f = lambda v: round(float(v), 2) if v not in ("", None) else None
 idof = lambda r: by_link.get(r["Link"], r["Link"])
 # the spoken measure (script 30-31): best-of-5 series won above expected, NOT draft_scores clutch_raw (weighted total
 # with deciders, a different scale that pushed players off the axes in draft 10)
-cl = list(csv.DictReader(open("/mnt/project-files/lol-second-goat/research/data/clutch_v14_unweighted.csv")))
-out["clutch"] = [[by_link.get(r["link"], r["link"].lower()), r["player"], int(r["series"]), float(r["series_above_expected"])] for r in cl if r["series"] and int(r["series"]) > 0]
-out["impact"] = [[by_link.get(r["Link"], r["Link"]), r["Link"].split(" (")[0], int(float(r["G"])), round(float(r["waa"]), 1)] for r in rows("rapm_career.csv")]
+cl = list(csv.DictReader(open("/mnt/project-files/lol-second-goat/research/data/clutch_v15_3_per10.csv")))  # v15.3: per 10 big series, 40+ big series
+out["clutch"] = [[by_link.get(r["Link"], r["player"].lower()), r["player"], int(float(r["big_series_weighted"])), float(r["series_above_per10"])] for r in cl]
+im = list(csv.DictReader(open("/mnt/project-files/lol-second-goat/research/data/impact_v15_3_per100.csv")))  # v15.3: wins added per 100 games, 300+ games
+out["impact"] = [[by_link.get(r["Link"], r["player"].lower()), r["player"], int(float(r["games"])), round(float(r["wins_added_per100"]), 1)] for r in im]
 out["board"] = [[idof(r), r["name"], int(float(r["games"])), f(r["c_skill"]), f(r["c_big_stage"]), int(float(r["title_teams"] or 0)),
   int(float(r["worlds_titles"] or 0)) + int(float(r["msi_titles"] or 0)) + int(float(r["first_stand_titles"] or 0)) + int(float(r["domestic_titles"] or 0)),
   int(float(r["worlds_titles"] or 0)), f(r["vs_faker"]), f(r["intl_games"])] for r in ds]

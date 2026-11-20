@@ -12,6 +12,7 @@ import { Build, Count527, Footage, Formula, Quote, Words } from "../rough/RoughC
 import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWithout } from "./Boards";
 import { TeamRoles } from "./TeamRoles";
 import { PMLedger } from "./PMLedger";
+import { TrophyShare } from "./TrophyShare";
 import { TrophySplit } from "./TrophySplit";
 import { TitleShare } from "./TitleShare";
 import { SeasonList } from "./SeasonList";
@@ -111,6 +112,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     side={<SideBars caption="Faker's all-time rank" rows={[
       { label: "Average of every year", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
       { label: "Best years + longevity", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "longevity")) }]} />} sideAt={10} />],
+  // v15.3 (ay 20 Nov 23:09): trophies are 30% of the score; the share swings on "subjective", settles on "30%"
+  ["15b", (c) => <TrophyShare swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))} />],
   // Jxmy line chart (style map 1:22)
   ["16", (c) => <KillsLine cues={{ lck: at(c, L("16").start + 0.3), lpl: at(c, W("16", "lpl")), gap: at(c, W("17", "3")) }} />],
   // Jxmy highlighted page, then big text sliding past (style map 1:34)
@@ -144,9 +147,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     top: at(c, WA("27", ["rookie", "biggest"])), mvp: at(c, WA("27b", ["ning", "finals"])) }} />], // ay 19:16: IG 2018 shares, Ning (Finals MVP) smallest on 27b
   ["28", (c) => { // script 15:52, Jxmy's walk: "at the bottom" zooms on the chokers (named on "Creme"), "in the middle" lights the band,
     // "all the way up here" pans to the clutch players, "yup" names Faker
-    const rv = at(c, WA("31", ["yup"])), ch = at(c, WA("30", ["creme", "bottom"]));
+    const rv = at(c, WA("31", ["faker's", "faker"])), ch = at(c, WA("30", ["creme", "bottom"]));
     return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} walk={{ bottom: at(c, WA("30", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
-      nameAt={Object.fromEntries([...["on", "zeus", "gumayusi", "knight", "bin"].map((id) => [id, at(c, WA("31", [id === "bin" ? "bin" : "knight"]))]),
+      nameAt={Object.fromEntries([...["on", "zeus", "gumayusi", "zeka"].map((id) => [id, at(c, WA("31", ["gumayusi"]))]), ["bin", at(c, WA("31", ["bin"]))],
         ...[["369", "369"], ["gala", "369"], ["zven", "369"], ["doran", "doran"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])] /* ay 20:19: highlight four, voice names two */)} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
   // ay 20 Nov: the old with/without graph with all three players back (only Chovy is talked about)
   ["32", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
@@ -204,8 +207,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: the Uzi/Bengi cards repeated the six-part cards; now a slope chart, fans vs the model (league-v14 ranks)
   // ay 20 Nov: back to the bordered face cards for Uzi and Bengi
   ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, WA("68", ["intangibles", "also"]))} stamp={{ text: "GLAZED?", at: at(c, W("68", "bit")) + 12, card: 0 }} cards={[
-    { id: "uzi", sub: "#25 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
-    { id: "bengi", sub: "#37 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#182 OWN NUMBERS", at: at(c, WA("68", ["182", "numbers"])), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
+    { id: "uzi", sub: "#22 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
+    { id: "bengi", sub: "#43 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#182 OWN NUMBERS", at: at(c, WA("68", ["182", "numbers"])), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
   ]} />],
   ["69", (c) => <OGPyramid c={c} />],
   ["76", () => <Words text="TWO TWISTS" />],
