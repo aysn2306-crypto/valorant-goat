@@ -640,6 +640,7 @@ def main():
     P["big_stage_raw"] = best_years(bs, "big", 15, pad=True).reindex(pool).fillna(0)
     yr = s[s.Link.isin(pool)].groupby(["Link", "year"]).apply(lambda d: pd.Series({"imp": wmean(d, "a_impact"), "G": d.G.sum()}), include_groups=False).reset_index()
     yr["imp_s"] = shrink(yr.imp.fillna(0), yr.G, k)
+    yr.to_csv(os.path.join(CSV, "season_ratings.csv"), index=False)   # per player-year season rating (for charts and checks)
     best = yr.loc[yr.groupby("Link").imp_s.idxmax()].set_index("Link")
     P["peak_raw"], P["peak_year"] = best.imp_s, best.year
     LG = CFG.get("longevity", {"min_games": 20, "min_impact": 0.35})
