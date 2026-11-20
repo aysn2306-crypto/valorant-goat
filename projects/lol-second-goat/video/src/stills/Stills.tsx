@@ -578,7 +578,7 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
   const shown = fr0 >= reveal;
   const chokeShown = useCurrentFrame() >= chokeAt;
   // ay 20 Nov 14:36: name a few who win LESS than expected first, then Faker and the clutch ones
-  const chokers: [string, "left" | "right" | "above" | "below"][] = [["creme", "left"], ["jackeylove", "below"], ["meiko", "right"]]; // script v15.1 line 30
+  const chokers: [string, "left" | "right" | "above" | "below"][] = [["creme", "left"], ["jackeylove", "below"], ["vulcan", "right"]]; // script 19:36 line 30 (clutch_v14_unweighted.csv)
   const rows = S.clutch as Cl[];
   const xr: [number, number] = [0, 140], yr: [number, number] = [-10, 18]; // v14 plain series won above expected (clutch_v14_unweighted.csv)
   const { X, Y } = scale(B, xr, yr);
@@ -587,7 +587,7 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
   const up = band.map((n) => `${X(n)},${Y(Math.min(yr[1], Math.sqrt(n)))}`).join(" ");
   const dn = band.slice().reverse().map((n) => `${X(n)},${Y(Math.max(yr[0], -Math.sqrt(n)))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
-  const named: [string, "left" | "right" | "above" | "below"][] = [["bin", "above"], ["gumayusi", "above"], ["zeus", "below"], ["on", "right"]]; // line 31
+  const named: [string, "left" | "right" | "above" | "below"][] = [["on", "below"], ["zeus", "below"], ["gumayusi", "above"], ["knight", "right"], ["bin", "above"]]; // line 31 (19:36): On, Zeus, Gumayusi, Knight, Bin
   const keys: CamKey[] = walk ? [{ at: walk.bottom, x: X(70), y: Y(-5.5), s: 1.75 }, { at: walk.mid, x: X(62), y: Y(0.5), s: 1.12 },
     { at: walk.top, x: X(88), y: Y(10.5), s: 1.6 }, ...(walk.out ? [{ at: walk.out, x: 960, y: 540, s: 1 }] : [])] : [];
   const cam = walk ? camAt(fr0, keys) : undefined;
