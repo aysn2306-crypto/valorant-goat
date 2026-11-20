@@ -147,7 +147,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     const rv = at(c, WA("31", ["yup"])), ch = at(c, WA("30", ["creme", "bottom"]));
     return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} walk={{ bottom: at(c, WA("30", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
       nameAt={Object.fromEntries([...["on", "zeus", "gumayusi", "knight", "bin"].map((id) => [id, at(c, id === "on" ? WE("31", "on") : WA("31", [id === "gumayusi" ? "guma" : id]))]),
-        ...["ruler", "rookie", "doran", "impact"].map((id) => [id, at(c, WA("30b", [id]))])])} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
+        ...[["369", "369"], ["gala", "gala"], ["doran", "doran"], ["zven", "zven"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])])} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
   // ay 20 Nov: the old with/without graph with all three players back (only Chovy is talked about)
   ["32", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
   // ay 20 Nov: from the Chovy graph straight to the wins-added graph, held the whole time, then the climb to Faker

@@ -588,7 +588,7 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
   const dn = band.slice().reverse().map((n) => `${X(n)},${Y(Math.max(yr[0], -Math.sqrt(n)))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
   // LOCKED (ay 20 Nov, again 20:04): the walk goes through THREE tiers: bottom named, MIDDLE named (around expected), top named
-  const middle: [string, "left" | "right" | "above" | "below"][] = [["ruler", "below"], ["rookie", "above"], ["doran", "left"], ["impact", "right"]]; // line 30b
+  const middle: [string, "left" | "right" | "above" | "below"][] = [["gala", "above"], ["doran", "below"], ["369", "right"], ["zven", "above"]]; // line 30b. LOCKED (ay 20 Nov): middle names are players not already in the video
   const named: [string, "left" | "right" | "above" | "below"][] = [["on", "below"], ["zeus", "below"], ["gumayusi", "above"], ["knight", "right"], ["bin", "above"]]; // line 31 (19:36): On, Zeus, Gumayusi, Knight, Bin
   const keys: CamKey[] = walk ? [{ at: walk.bottom, x: X(70), y: Y(-5.5), s: 1.75 }, { at: walk.mid, x: X(76), y: Y(0), s: 1.7 },
     { at: walk.top, x: X(88), y: Y(10.5), s: 1.6 }, ...(walk.out ? [{ at: walk.out, x: 960, y: 540, s: 1 }] : [])] : [];
@@ -608,7 +608,7 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
       <Dot x={X(fk[2])} y={Y(fk[3])} r={6} color={heat((fk[3] + 7) / 21)} o={1} />{/* Faker's dot is there from the start; "yup" circles it */}
       {chokeShown && chokers.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={r0(r[3])} side={side} ring={18} color="#E06A5A" />; })}
       {middle.filter(([id]) => nameAt[id] !== undefined && fr0 >= nameAt[id] && fr0 < (walk?.top ?? 1e9)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!;
-        return <Callout key={"m" + id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={(r[3] > 0 ? "+" : "") + r[3].toFixed(1)} side={side} ring={14} color="#F2F2EE" />; })}
+        return <Callout key={"m" + id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={(r[3] > 0 ? "+" : "") + r[3].toFixed(1)} side={side} ring={14} pad={6} size={0.85} color="#F2F2EE" />; })}
       {named.filter(([id]) => fr0 >= (nameAt[id] ?? reveal)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
       {shown && <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={22} pad={20} color={C.gold} size={1.3} />}
     </Stage>
