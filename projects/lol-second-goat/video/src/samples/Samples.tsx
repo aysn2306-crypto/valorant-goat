@@ -69,8 +69,7 @@ const PartCard: React.FC<{ part: (typeof PARTS)[number]; w: number; h: number }>
       <div style={{ position: "absolute", left: pad, top: pad, width: frameW, height: h - pad * 2, borderRadius: 22, border: `7px solid ${YEL}`, background: RED, overflow: "hidden" }}>
         <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: photoH, overflow: "hidden" }}>
           <Img src={staticFile(`_local/${part.shot}`)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: part.pos ?? "50% 30%" }} />
-          <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "18px 8px 6px", background: "linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.75))",
-            fontFamily: F.title, fontSize: 20, letterSpacing: 1, color: CREAM, textAlign: "center" }}>{part.who}</div>
+          {/* LOCKED (ay 20 Nov 15:48, again 19:18): NO names or event captions on these cards. `who` is a code note only. */}
         </div>
         <div style={{ position: "absolute", left: 8, right: 8, bottom: 8, height: plateH, borderRadius: 14, background: BLUE, border: `4px solid ${YEL}`,
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4 }}>

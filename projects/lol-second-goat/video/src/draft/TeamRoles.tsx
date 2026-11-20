@@ -53,9 +53,9 @@ const Y0 = 262, RH = 158;
 // stat columns: left side reads outside-in, right side mirrors it, so the same stat sits either side of the role
 const LX = [470, 640, 790], RX = [1450, 1280, 1130];
 
-const Face: React.FC<{ id: string; x: number }> = ({ id, x }) => (
+const Face: React.FC<{ id: string; x: number; dir?: string }> = ({ id, x, dir = "" }) => (
   <div style={{ position: "absolute", left: x - 58, top: -58, width: 116, height: 116, borderRadius: 58, overflow: "hidden", background: "#E9E6DE", border: `3px solid ${INK}` }}>
-    <Img src={staticFile(`players/${id}.png`)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+    <Img src={staticFile(`players/${dir}${id}.png`)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
   </div>
 );
 
@@ -98,9 +98,9 @@ export const TeamRoles: React.FC<{ cues: { rows: number; role: number; old?: num
         return (
           <div key={"old" + role} style={{ position: "absolute", left: 0, top: y, width: 1920, opacity: o, transform: `translateY(${(1 - o) * 24}px)` }}>
             <div style={{ position: "absolute", left: 70, right: 70, top: -RH / 2 + 2, height: RH - 4, borderTop: j ? "1px solid rgba(242,242,238,0.12)" : undefined }} />
-            <Face id={l.id} x={130} />
+            <Face id={l.id} x={130} dir="y2013/" />
             <div style={{ position: "absolute", left: 210, top: l.name.length > 7 ? -26 : -34, fontFamily: BEBAS, fontSize: l.name.length > 7 ? 46 : 64, color: INK, letterSpacing: 1 }}>{l.name.toUpperCase()}</div>
-            <Face id={r.id} x={1790} />
+            <Face id={r.id} x={1790} dir="y2013/" />
             <div style={{ position: "absolute", right: 210, top: -34, fontFamily: BEBAS, fontSize: 64, color: INK, letterSpacing: 1, textAlign: "right" }}>{r.name.toUpperCase()}</div>
             <div style={{ position: "absolute", left: 960 - 92, width: 184, top: -26, height: 52, lineHeight: "54px", textAlign: "center", fontFamily: BEBAS, fontSize: 40, letterSpacing: 2,
               color: "#10241F", background: TEAL, border: `2px solid ${TEAL}`, borderRadius: 6 }}>{role}</div>

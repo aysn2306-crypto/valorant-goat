@@ -24,7 +24,7 @@ import { PillBars, StackedLines, TitleList } from "./Lists";
 import { OnBlack, RecordCounter } from "./Banners";
 import { Clip, Cuts, RingClip, SplitClips } from "./Clip";
 import { FansVsModel } from "./Slope";
-import { TrophyWeight, HardRunBonus, AbsoluteCinema, ChatLine } from "./Averaged";
+import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
@@ -134,12 +134,13 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // 24b: the biggest underdog is a different question: each champion's own odds, DRX 2022 lit on "DRX", the 1 in 500 on "500"
   ["24b", (c) => <HardestRuns cues={{ rise: 0, lit: [{ team: "DRX", year: 2022, at: at(c, WA("24b", ["drx"])) }] }} />],
   // 25: what BLG's harder run is worth to Knight
-  ["25", (c) => <HardRunBonus barAt={at(c, L("25").start + 0.3)} bonusAt={at(c, WA("25", ["11", "eleven", "added"]))} scoreAt={at(c, WA("25", ["half", "less"]))} />],
+  // 25 cut (ay 20 Nov 19:16): no Knight trophy-points segment
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
   ["26@win", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did in the game. Two players on the same team can end up with very different shares." />],
   // ay 20 Nov 13:13: BLG 2026 shares are back (TitleShare.tsx, the no-names version, is kept but unused)
-  ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, L("27").start + 0.4), shares: at(c, L("27").start + 1.6), caption: at(c, L("27").start + 3.0) }} />], // ay 20 Nov 13:13: back to BLG 2026, current shares
+  ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, WA("27", ["same", "titles"])), shares: at(c, WA("27", ["every", "share"])), caption: at(c, WA("27", ["ig", "2018"])),
+    top: at(c, WA("27", ["rookie", "biggest"])), mvp: at(c, WA("27b", ["ning", "finals"])) }} />], // ay 19:16: IG 2018 shares, Ning (Finals MVP) smallest on 27b
   ["28", (c) => { // script 15:52, Jxmy's walk: "at the bottom" zooms on the chokers (named on "Creme"), "in the middle" lights the band,
     // "all the way up here" pans to the clutch players, "yup" names Faker
     const rv = at(c, WA("31", ["yup"])), ch = at(c, WA("30", ["creme", "bottom"]));
@@ -187,14 +188,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["51@only", (c) => <ClimbRemap c={c} />],
   // ay 20 Nov 15:28: still on "how sure", the rolls start on "the model rolls a dice", a clean cut to the Monte Carlo page,
   // then back with the count carried on: about 10 rolls, a hold on one, the time-lapse to 1,000 on "all 1000"
-  ["56", (c) => <MonteCarlo cues={[at(c, WA("57", ["dice", "rolls"])), 1e6, 1e6]} />],
-  // Jxmy article page (jxmy-graphics XyihDTdpF8w x08, style map 6:11): our own page, the line marked as it is said
-  ["57b", (c) => <Ov.ArticlePage kicker="How to test a ranking" title="The Monte Carlo test"
-    before="Rerun the whole thing many times, and each time roll the choices it rests on at random."
-    mark="Named after the casino, because it runs on luck." after="If an answer holds across a thousand rolls, it was never the luck."
-    markAt={at(c, WA("57b", ["named"]))} />],
-  ["58", (c) => { const done = Math.max(1, Math.floor((startOf("57b") - WA("57", ["dice", "rolls"])) * 30 / 20) + 1);
-    return <MonteCarlo from={Math.min(10, done)} cues={[6, at(c, W("60", "ran")), at(c, W("61", "1000"))]} />; }], // back from the page: ~10 rolls, hold, time-lapse to 1,000 on "all 1000"; holds through 61-63
+  // ay 20 Nov 19:16: the graph holds still while ay explains the Monte Carlo test (57, 57b), then moves on
+  // "the model rolls a dice" (58): rolls one by one, a time-lapse on "ran it", 1,000 on "all 1,000". No article page cut.
+  ["56", (c) => <MonteCarlo cues={[at(c, WA("58", ["dice", "rolls"])), at(c, WA("60", ["ran", "thousand"])), at(c, WA("61", ["1000", "1,000", "all"]))]} />],
   // Jxmy record card (jxmy-graphs 4lbvnNVGd-I g06, style map 6:32)
   // Jxmy quote subtitle over footage (jxmy-graphics 3hZ6Su5PVnI x02, style map 6:42)
   ["64", (c) => <OGPyramid c={c} />],
