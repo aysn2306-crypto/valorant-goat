@@ -3,9 +3,9 @@
 // A season-by-season column chart, 2013 to 2026: a full column in each Worlds year, nothing in the others. On
 // "averaging" a dashed line drops to the average (6 titles over 14 seasons), and on "less" every column is cut down
 // to it: the cut-off tops turn red and fall away. Data: Faker's Worlds years (Liquipedia, league.json titles.worlds = 6).
-// AbsoluteCinema: a small "ABSOLUTE CINEMA" sticker for ay's "low-key cinema" aside (stands in for the meme image).
+// AbsoluteCinema: the real meme image ay supplied (20 Nov 15:06, black bars cut off) as a sticker on the "cinema" aside.
 import React from "react";
-import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { Concrete } from "../samples/Climb";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -67,9 +67,8 @@ export const AbsoluteCinema: React.FC<{ at: number; out: number }> = ({ at, out 
   const s = interpolate(f, [at, at + 8], [1.4, 1], { ...clamp, easing: easeOut });
   if (f < at || f > out) return null;
   return (
-    <div style={{ position: "absolute", right: 120, top: 120, opacity: k, transform: `rotate(-6deg) scale(${s})`, background: "#0B0B0F", border: `5px solid ${INK}`,
-      padding: "14px 30px", fontFamily: "Georgia, 'Times New Roman', serif", fontSize: 64, letterSpacing: 4, color: INK, textAlign: "center", lineHeight: 1 }}>
-      ABSOLUTE<br />CINEMA
+    <div style={{ position: "absolute", right: 110, top: 110, opacity: k, transform: `rotate(-4deg) scale(${s})`, border: `6px solid ${INK}`, lineHeight: 0 }}>
+      <Img src={staticFile("_local/refs/absolute-cinema.png")} style={{ width: 620, height: "auto", display: "block" }} />
     </div>
   );
 };

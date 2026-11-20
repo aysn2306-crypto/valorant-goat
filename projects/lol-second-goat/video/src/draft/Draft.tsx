@@ -194,8 +194,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: the twists on the original five-tier pyramid, with the G.O.A.T. pyramid writing top left
   ["77", (c) => <PyramidStates states={[{ at: 0, order: ORDER_2026, label: "2026" }, { at: at(c, W("77", "2025")), order: ORDER_2025, label: "END OF 2025" }]} />],
   ["80", (c) => <><PyramidStates glowIds={["knight", "chovy"]} states={[{ at: 0, order: ORDER_2025, label: "END OF 2025" }, { at: at(c, WA("80", ["second", "2nd"])), order: ORDER_2026, label: "2026" },
-    { at: at(c, W("81", "gen")), order: ORDER_GENG, label: "IF GEN.G\nHAD WON" }]} />
-    <AbsoluteCinema at={at(c, W("80", "cinema"))} out={at(c, W("80", "cinema")) + 40} /></>],
+    { at: at(c, W("81", "gen")), order: ORDER_GENG, label: "IF GEN.G\nHAD WON" }]} /></>],
   ["82", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, WA("85", ["15", "ten", "10"]))]} />],
   // ay 20 Nov: the arrow was over before it could be seen; zoom on "Knight", arrow drawn through "from here to there", held into 88
   ["86", (c) => <St.S10bPyramidArrow zoomAt={at(c, W("86", "knight")) - 6} arrowAt={at(c, W("86", "from"))} />],
@@ -259,6 +258,8 @@ export const Draft: React.FC = () => (
         {groundOf(s.id) && <AbsoluteFill style={{ background: groundOf(s.id)!, mixBlendMode: "screen", pointerEvents: "none" }} />}
       </Sequence>
     ))}
+    {/* the meme sits above the act's ground colour so its black and white stay true */}
+    <Sequence from={fr(LEAD + W("80", "cinema"))} durationInFrames={41} layout="none"><AbsoluteCinema at={0} out={40} /></Sequence>
     <Sequence from={fr(LEAD + VO_END + 0.8)}><EndCard /></Sequence>
     {VO_KEEP.map(([a, b], i) => (
       <Sequence key={"vo" + i} from={fr(LEAD + vt(a))} durationInFrames={fr(b - a)}><Audio src={staticFile("vo/vo-assembled.mp3")} startFrom={fr(a)} endAt={fr(b)} /></Sequence>
