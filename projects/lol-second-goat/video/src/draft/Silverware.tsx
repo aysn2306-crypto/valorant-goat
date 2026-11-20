@@ -30,7 +30,7 @@ const Box: React.FC<{ s: number; fill?: string; stroke?: string }> = ({ s, fill,
 
 export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number }> = ({ rows, fakerAt = 0 }) => {
   const f = useCurrentFrame();
-  const COL = [470, 930, 1290], ICON = [40, 38, 22], GAP = [6, 6, 5], CW = [440, 340, 570];
+  const COL = [450, 900, 1290], ICON = [34, 34, 18], GAP = [6, 6, 4], CW = [440, 380, 580];
   const all: SilverRow[] = [{ id: "faker", have: [6, 2, 10], need: [0, 0, 0], at: fakerAt }, ...rows];
   const RH = 170, Y0 = 250;
   const tO = interpolate(f, [0, 8], [0, 1], clamp);

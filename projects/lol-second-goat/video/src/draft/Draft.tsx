@@ -28,7 +28,7 @@ import { L, VO_DURATION, W } from "../data/vo";
 
 const FPS = 30;
 const LEAD = 20; // the Nexus (clip 0:32) and the full caster call before ay's first line (FOOTAGE-MAP.md) // seconds before the voice: the broadcast call goes here
-const OUTRO = 0; // ay 20 Nov: no "who's your #2" card; ay may add a camera ending
+const OUTRO = 12; // ay 20 Nov: no "who's your #2" card; a quiet end card holds the YouTube end screen and the Riot line
 const TEAL = "#3FD0B5";
 /** renders its child only from frame k on (so a clip can join mid-way at a set frame) */
 const FromFrame: React.FC<{ k: number; children: React.ReactNode }> = ({ k, children }) => (useCurrentFrame() >= k ? <>{children}</> : null);
@@ -183,11 +183,13 @@ const TL = SCENES.map(([id, el], i) => {
 });
 export const DRAFT_TOTAL = fr(LEAD + VO_END + 0.8 + OUTRO);
 
-const Outro: React.FC = () => (
-  <AbsoluteFill style={{ background: "#0B0B0F", alignItems: "center", justifyContent: "center", gap: 30 }}>
-    <div style={{ fontFamily: F.title, fontSize: 110, color: "#ECE6D2" }}>WHO'S YOUR #2?</div>
-    <div style={{ fontFamily: F.body, fontSize: 30, color: C.muted }}>Outro: ay on camera, recorded later</div>
-    <div style={{ fontFamily: F.body, fontSize: 26, color: C.muted }}>Not endorsed by Riot Games.</div>
+// End card (ay 20 Nov: no "who's your #2"). 12 s of quiet footage with room for YouTube's end-screen
+// video and subscribe elements in the middle, and the Riot line at the foot.
+const EndCard: React.FC = () => (
+  <AbsoluteFill>
+    <Clip id="skyline" from={0} dim={0.6} />
+    <div style={{ position: "absolute", left: 0, right: 0, bottom: 56, textAlign: "center", fontFamily: F.body, fontSize: 24, color: "#B7BDC6", lineHeight: 1.5 }}>
+      Not endorsed by Riot Games. League of Legends and Riot Games are trademarks of Riot Games, Inc.<br />Footage from LoL Esports broadcasts.</div>
   </AbsoluteFill>
 );
 
@@ -199,6 +201,7 @@ export const Draft: React.FC = () => (
         <AbsoluteFill>{s.el({ t0: i === 0 ? 0 : s.t0, dur: s.dur })}</AbsoluteFill>
       </Sequence>
     ))}
+    <Sequence from={fr(LEAD + VO_END + 0.8)}><EndCard /></Sequence>
     <Sequence from={fr(LEAD)}><Audio src={staticFile("vo/vo-assembled.mp3")} /></Sequence>
     <div style={{ position: "absolute", right: 24, top: 16, fontFamily: F.body, fontSize: 18, color: "#4A5361" }}>DRAFT · no music yet</div>
   </AbsoluteFill>

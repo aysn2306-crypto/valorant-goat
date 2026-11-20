@@ -30,10 +30,10 @@ export const FansVsModel: React.FC<{ rows: Row[]; stamp?: { text: string; at: nu
       <div style={{ position: "absolute", left: 0, right: 0, top: 50, textAlign: "center", fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK, opacity: tO }}>FANS VS THE MODEL</div>
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
         {/* rank axis on the left, #1 at the top */}
-        <line x1={XL - 170} x2={XL - 170} y1={Y0} y2={Y1} stroke={INK} strokeOpacity={0.5} strokeWidth={3} opacity={tO} />
+        <line x1={XL - 360} x2={XL - 360} y1={Y0} y2={Y1} stroke={INK} strokeOpacity={0.5} strokeWidth={3} opacity={tO} />
         {[1, 10, 20, 30, 40, 50].map((r) => <g key={r} opacity={tO}>
-          <line x1={XL - 170} x2={XR + 60} y1={Y(r)} y2={Y(r)} stroke={INK} strokeOpacity={0.07} strokeWidth={2} />
-          <text x={XL - 190} y={Y(r) + 11} textAnchor="end" fontFamily={BEBAS} fontSize={32} fill={MUTE}>#{r}</text></g>)}
+          <line x1={XL - 360} x2={XR + 60} y1={Y(r)} y2={Y(r)} stroke={INK} strokeOpacity={0.07} strokeWidth={2} />
+          <text x={XL - 380} y={Y(r) + 11} textAnchor="end" fontFamily={BEBAS} fontSize={32} fill={MUTE}>#{r}</text></g>)}
         {/* the fans' band */}
         <rect x={XL - 60} y={Y(1) - 10} width={120} height={Y(10) - Y(1) + 20} fill={INK} opacity={0.08 * tO} />
         <text x={XL} y={Y0 - 34} textAnchor="middle" fontFamily={BEBAS} fontSize={34} letterSpacing={2} fill={MUTE} opacity={tO}>MOST FAN LISTS</text>
@@ -53,12 +53,12 @@ export const FansVsModel: React.FC<{ rows: Row[]; stamp?: { text: string; at: nu
         const k = interpolate(f, [r.at + 16, r.at + 24], [0, 1], { ...clamp, easing: easeOut });
         return (
           <React.Fragment key={r.id}>
-            <div style={{ position: "absolute", left: XL - 150, top: Y(r.fan) - 34, display: "flex", alignItems: "center", gap: 12, opacity: o, flexDirection: "row-reverse" }}>
-              <div style={{ width: 64, height: 64, borderRadius: "50%", overflow: "hidden", background: "#2E333C", border: `3px solid ${INK}` }}>
+            <div style={{ position: "absolute", left: XL - 150, top: Y(r.fan) - 27, display: "flex", alignItems: "center", gap: 12, opacity: o, flexDirection: "row-reverse" }}>
+              <div style={{ width: 50, height: 50, borderRadius: "50%", overflow: "hidden", background: "#2E333C", border: `3px solid ${INK}` }}>
                 {P(r.id).photo && <Img src={staticFile(P(r.id).photo!)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
               </div>
             </div>
-            <div style={{ position: "absolute", left: XL - 340, width: 160, textAlign: "right", top: Y(r.fan) - 26, fontFamily: BEBAS, fontSize: 46, color: INK, opacity: o }}>{P(r.id).name.toUpperCase()}</div>
+            <div style={{ position: "absolute", left: XL - 330, width: 160, textAlign: "right", top: Y(r.fan) - 22, fontFamily: BEBAS, fontSize: 40, color: INK, opacity: o }}>{P(r.id).name.toUpperCase()}</div>
             <div style={{ position: "absolute", left: XR + 30, top: Y(r.model) - 40, fontFamily: BEBAS, fontSize: 76, color: BAD, opacity: k }}>#{r.model}</div>
             {/* what the model can't count, written beside the model's rank */}
             <div style={{ position: "absolute", left: XR + 170, top: Y(r.model) - 46, display: "flex", flexDirection: "column", gap: 4 }}>

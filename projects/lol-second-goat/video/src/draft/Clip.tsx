@@ -63,7 +63,8 @@ export const RingClip: React.FC<{ id: ClipId; from?: number; text: string; bg?: 
   const phrase = Array.from({ length: 6 }, () => text).join("   ·   ");
   return (
     <AbsoluteFill style={{ background: "#14161B" }}>
-      {bg && <AbsoluteFill style={{ opacity: 0.35 }}><Clip id={bg} from={bgFrom} dim={0.4} /></AbsoluteFill>}
+      {/* Jxmy x19: the footage fills the frame and the words circle over it; the round window keeps the subject bright */}
+      <AbsoluteFill style={{ opacity: 0.55 }}><Clip id={bg ?? id} from={bg ? bgFrom : from} dim={0.45} /></AbsoluteFill>
       <div style={{ position: "absolute", left: cx - R, top: cy - R, width: 2 * R, height: 2 * R, borderRadius: "50%", overflow: "hidden" }}>
         <Clip id={id} from={from} dim={0} />
       </div>
