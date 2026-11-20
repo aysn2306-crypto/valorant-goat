@@ -717,10 +717,15 @@ def main():
         cl["w"] = np.where(cl.Page.str.contains("World Championship|Mid-Season Invitational|First Stand", regex=True), 2.0, 1.0)
         cl["d"] = (cl.won - cl.exp) * cl.w
         g = cl.groupby("Link").agg(n=("w", "sum"), d=("d", "sum"))
-        if CFG.get("clutch_mode") == "total":   # wins above expectation over a whole career, not a per-series rate
+        PG_K = float(os.environ.get("PG_SHRINK", CFG.get("clutch_shrink", 25)))
+        PG_MIN = float(os.environ.get("PG_MIN", 0))   # below this many (weighted) big series a rate counts as "as expected" (0)
+        PER_GAME = os.environ.get("PER_GAME") == "1"   # what-if (ay 20 Nov 23:08): clutch, big results and team impact per game/series
+        if CFG.get("clutch_mode") == "total" and not (PER_GAME and os.environ.get("PG_CLUTCH", "1") == "1"):   # wins above expectation over a whole career, not a per-series rate
             P["clutch_raw"] = g.d.reindex(pool)
         else:
-            P["clutch_raw"] = (g.d / (g.n + CFG.get("clutch_shrink", 25))).reindex(pool)
+            P["clutch_raw"] = (g.d / (g.n + PG_K)).reindex(pool)
+            if PER_GAME:
+                P["clutch_raw"] = P.clutch_raw.where(g.n.reindex(pool).fillna(0) >= PG_MIN, 0.0)
         P["clutch_n"] = g.n.reindex(pool).fillna(0).astype(int)
         # v15 (ay 20 Nov): big games also count results. Every best-of-five (playoffs, finals, Worlds, MSI, First
         # Stand) won is +1 and lost is -1, international ones doubled as in clutch: net big series won over a career.
@@ -728,6 +733,9 @@ def main():
         if os.environ.get("BIG_DOM_FINALS") == "1":   # what-if: domestic series count in big-game results only if they are the league final
             b5 = b5[(b5.w > 1) | b5.match.str.contains(r"_Finals_\d+$", regex=True)]
         P["big_results_raw"] = ((2 * b5.won - 1) * b5.w).groupby(b5.Link).sum().reindex(pool).fillna(0)
+        if PER_GAME:   # net big series won per series played (international doubled), pulled toward 0 for small samples
+            nb = b5.groupby("Link").w.sum().reindex(pool).fillna(0)
+            P["big_results_raw"] = (P.big_results_raw / (nb + PG_K)).where(nb >= PG_MIN, 0.0)
     else:
         P["clutch_raw"], P["clutch_n"] = np.nan, 0
     sp = s[s.Link.isin(pool)]
@@ -824,6 +832,8 @@ def main():
             r = dd.r.sort_values(ascending=False)
             n = 5   # rapm_seasons covers 2011 on, so every career is measured the same way (audit 18 Nov)
             imp[l] = r.head(n).sum() / n
+            if os.environ.get("IMPACT_CAREER") == "1" or os.environ.get("PER_GAME") == "1":   # what-if (ay 20 Nov 23:08): whole-career games-weighted average
+                imp[l] = float(np.average(dd.r, weights=dd.G))
         P["impact_raw"] = pd.Series(imp).reindex(P.index).fillna(0)
         C["impact"] = percentile(P.impact_raw)
     # v13: recognition is honours only. The with/without half could not measure a player who never left his team
