@@ -1,23 +1,23 @@
-player,link,mix,extra_worlds,extra_msi,extra_league_titles,worlds_total,score,faker_now,reaches_faker,smallest
-Chovy,Chovy,Worlds + MSI + all league titles each season,3,3,6,3,92.0,94.5,False,False
-Chovy,Chovy,Worlds + MSI + all league titles each season,4,4,8,4,95.7,94.5,True,True
-Chovy,Chovy,Worlds only,4,0,0,4,84.7,94.5,False,False
-Chovy,Chovy,Worlds only,5,0,0,5,87.7,94.5,False,False
-Chovy,Chovy,Worlds only,6,0,0,6,90.7,94.5,False,False
-Chovy,Chovy,Worlds + all league titles (no MSI),3,0,6,3,87.5,94.5,False,False
-Chovy,Chovy,Worlds + all league titles (no MSI),4,0,8,4,92.4,94.5,False,False
-Chovy,Chovy,Worlds + all league titles (no MSI),5,0,10,5,96.0,94.5,True,False
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,4,4,8,7,87.0,94.5,False,False
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,5,5,10,8,87.5,94.5,False,False
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,6,6,12,9,87.8,94.5,False,False
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,7,7,14,10,87.9,94.5,False,False
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,8,8,16,11,87.9,94.5,False,False
-Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,9,9,18,12,88.0,94.5,False,False
-Knight,Knight (Zhuo Ding),Worlds + MSI + all league titles each season,3,3,9,4,93.3,94.5,False,False
-Knight,Knight (Zhuo Ding),Worlds + MSI + all league titles each season,4,4,12,5,96.0,94.5,True,True
-Knight,Knight (Zhuo Ding),Worlds only,4,0,0,5,85.4,94.5,False,False
-Knight,Knight (Zhuo Ding),Worlds only,5,0,0,6,88.2,94.5,False,False
-Knight,Knight (Zhuo Ding),Worlds only,6,0,0,7,90.9,94.5,False,False
-Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),3,0,9,4,88.7,94.5,False,False
-Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),4,0,12,5,93.5,94.5,False,False
-Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),5,0,15,6,96.0,94.5,True,False
+player,link,mix,extra_worlds,extra_msi,extra_league_titles,worlds_total,trophy_part_vs_faker_now,score,faker_now,reaches_faker,smallest,score_capped_old
+Chovy,Chovy,Worlds + MSI + all league titles each season,3,3,6,3,92,92.0,94.5,False,False,92.0
+Chovy,Chovy,Worlds + MSI + all league titles each season,4,4,8,4,107,98.5,94.5,True,True,95.7
+Chovy,Chovy,Worlds only,4,0,0,4,73,84.7,94.5,False,False,84.7
+Chovy,Chovy,Worlds only,5,0,0,5,79,87.7,94.5,False,False,87.7
+Chovy,Chovy,Worlds only,6,0,0,6,86,90.7,94.5,False,False,90.7
+Chovy,Chovy,Worlds + all league titles (no MSI),3,0,6,3,80,87.5,94.5,False,False,87.5
+Chovy,Chovy,Worlds + all league titles (no MSI),4,0,8,4,92,92.4,94.5,False,False,92.4
+Chovy,Chovy,Worlds + all league titles (no MSI),5,0,10,5,103,97.3,94.5,True,False,96.0
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,4,4,8,7,101,87.5,94.5,False,False,87.0
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,5,5,10,8,116,94.1,94.5,False,False,87.5
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,6,6,12,9,131,100.4,94.5,True,True,87.8
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,7,7,14,10,146,106.5,94.5,True,False,87.9
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,8,8,16,11,162,112.5,94.5,True,False,87.9
+Gumayusi,Gumayusi,Worlds + MSI + all league titles each season,9,9,18,12,177,118.6,94.5,True,False,88.0
+Knight,Knight (Zhuo Ding),Worlds + MSI + all league titles each season,3,3,9,4,93,93.3,94.5,False,False,93.3
+Knight,Knight (Zhuo Ding),Worlds + MSI + all league titles each season,4,4,12,5,109,99.6,94.5,True,True,96.0
+Knight,Knight (Zhuo Ding),Worlds only,4,0,0,5,74,85.4,94.5,False,False,85.4
+Knight,Knight (Zhuo Ding),Worlds only,5,0,0,6,80,88.2,94.5,False,False,88.2
+Knight,Knight (Zhuo Ding),Worlds only,6,0,0,7,87,90.9,94.5,False,False,90.9
+Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),3,0,9,4,82,88.7,94.5,False,False,88.7
+Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),4,0,12,5,94,93.5,94.5,False,False,93.5
+Knight,Knight (Zhuo Ding),Worlds + all league titles (no MSI),5,0,15,6,105,98.2,94.5,True,False,96.0
