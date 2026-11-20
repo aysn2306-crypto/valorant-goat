@@ -572,7 +572,7 @@ type Cl = [string, string, number, number];
 /** reveal: frame where Faker, Bin and Knight are picked out (ay 20 Nov: until "yep, it's Faker" they are plain dots) */
 /** walk (ay 20 Nov 15:28, Jxmy's way of reading a graph): bottom, middle, top. bottom = zoom on the chokers, mid = pull back
  * and light the band, top = pan up to the clutch players; reveal = "yup" (Faker named) */
-export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { bottom: number; mid: number; top: number; out?: number } }> = ({ reveal = 0, chokeAt = 0, walk }) => {
+export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { bottom: number; mid: number; top: number; out?: number }; nameAt?: Record<string, number> }> = ({ reveal = 0, chokeAt = 0, walk, nameAt = {} }) => {
   const fr0 = useCurrentFrame();
   const shown = fr0 >= reveal;
   const chokeShown = useCurrentFrame() >= chokeAt;
@@ -604,7 +604,7 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
       {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 7) / 21)} o={r[3] > Math.sqrt(r[2]) ? 1 : 0.6} />)}
       <Dot x={X(fk[2])} y={Y(fk[3])} r={6} color={heat((fk[3] + 7) / 21)} o={1} />{/* Faker's dot is there from the start; "yup" circles it */}
       {chokeShown && chokers.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={r0(r[3])} side={side} ring={18} color="#E06A5A" />; })}
-      {shown && named.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
+      {named.filter(([id]) => fr0 >= (nameAt[id] ?? reveal)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={"+" + r0(r[3])} side={side} ring={18} />; })}
       {shown && <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={"+" + r0(fk[3])} side="left" ring={22} pad={20} color={C.gold} size={1.3} />}
     </Stage>
   );

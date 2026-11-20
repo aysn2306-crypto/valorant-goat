@@ -32,3 +32,8 @@ export const WA = (id: string, ws: string[], n = 0) => {
   for (const w of ws) { try { return W(id, w, n); } catch { /* try the next word */ } }
   return L(id).start;
 };
+/** exact word match (W matches word starts, so "on" would also hit "ones"); falls back to the line start */
+export const WE = (id: string, w: string, n = 0) => {
+  const hits = L(id).words.filter((x) => x.w.toLowerCase().replace(/[^a-z0-9]/g, "") === w.toLowerCase());
+  return hits[n] ? hits[n].start : L(id).start;
+};

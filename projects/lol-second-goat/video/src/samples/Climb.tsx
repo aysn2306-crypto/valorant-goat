@@ -6,7 +6,7 @@
 import React from "react";
 import { AbsoluteFill, Audio, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { P } from "../lib/data";
-import { L, W } from "../data/vo";
+import { L, W, WA } from "../data/vo";
 import S from "../data/stills.json";
 
 const FPS = 30;
@@ -42,12 +42,16 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const get = (id: string) => rows.find((r) => r[0] === id)!;
   const fk = get("faker"), ru = get("ruler");
 
-  // camera: centre (data units) and zoom; 1 = tight on the pack
-  const climb0 = A(W("37", "faker")), climb1 = climb0 + 48;
-  const out0 = A(W("37", "ruler")) - 4, out1 = out0 + 30;
+  // camera: centre (data units) and zoom; 1 = tight on the pack. Script 20 Nov (Jxmy's benchmark then outlier): on "plus
+  // 100" the camera rises a little to the +100 line ("only 23 players"), Ruler is named on "Ruler", the climb to Faker
+  // starts on the second "Faker" ("way up here"), and the pull back with the gap comes after "330"
+  const bench0 = A(WA("37", ["plus", "100"])), bench1 = bench0 + 30, benchLab = A(WA("37", ["23", "twenty", "only"]));
+  const climb0 = A((() => { try { return W("37", "faker", 1); } catch { return WA("37", ["way", "then"]); } })()), climb1 = climb0 + 48;
+  const out0 = Math.max(climb1 + 20, A(WA("37", ["330", "three"])) + 24), out1 = out0 + 30;
+  const kB = interpolate(f, [bench0, bench1], [0, 1], { ...clamp, easing: inOut });
   const kUp = interpolate(f, [climb0, climb1], [0, 1], { ...clamp, easing: inOut });
   const kOut = interpolate(f, [out0, out1], [0, 1], { ...clamp, easing: inOut });
-  const cy = 40 + kUp * (300 - 40) + kOut * (140 - 300);
+  const cy = 40 + kB * (125 - 40) + kUp * (300 - 125) + kOut * (140 - 300);
   const s = 1 - kOut * 0.53, sx = 1 - kOut * 0.28;
   const cx = 850 + kOut * 60;
   const KY = 4.6, KX = 0.88;
@@ -61,9 +65,7 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const order = new Map(rows.map((r) => [r[0], (r[2] - G0) / 1500 + (r[3] + 40) / 370] as [string, number]).sort((a, b) => a[1] - b[1]).map(([id], k) => [id, k]));
   const dotsIn = (i: number) => { const k = (order.get(rows[i][0]) ?? 0) / rows.length; return interpolate(f, [2 + k * 30, 8 + k * 30], [0, 1], clamp); };
   const ticks = Array.from({ length: 20 }, (_, i) => -40 + i * 20);
-  const named: { id: string; at: number; big?: boolean }[] = [
-    { id: "xiaohu", at: climb0 + 14 }, { id: "jackeylove", at: climb0 + 10 }, { id: "ruler", at: A(W("37", "ruler")) },
-    { id: "faker", at: climb1 - 6, big: true }];
+  const named: { id: string; at: number; big?: boolean }[] = [{ id: "ruler", at: A(WA("37", ["ruler"])) }, { id: "faker", at: climb1 - 6, big: true }];
   const gap = Math.round(fk[3] - ru[3]);
 
   return (
@@ -80,6 +82,12 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
         <text x={X((G0 + 1700) / 2)} y={Y(-40) + 116 * t} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t} fill={INK} letterSpacing={2}>GAMES PLAYED</text>
         <text transform={`translate(${X(G0) - 150 * t} ${Y(cy)}) rotate(-90)`} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t} fill={INK} letterSpacing={2}>WINS ADDED</text>
         <line x1={X(G0) - 10} x2={X(1700)} y1={Y(0)} y2={Y(0)} stroke={INK} strokeOpacity={0.25} strokeWidth={2} strokeDasharray="10 10" />
+        {/* the benchmark: +100 wins added, only 23 players ever (stills.json impact) */}
+        <g opacity={kB}>
+          <line x1={X(G0) - 10} x2={X(1700)} y1={Y(100)} y2={Y(100)} stroke={INK} strokeOpacity={0.7} strokeWidth={3 * t} strokeDasharray="14 10" />
+          <text x={X(1700)} y={Y(100) - 16 * t} textAnchor="end" fontFamily={BEBAS} fontSize={44 * t} fill={INK} opacity={interpolate(f, [benchLab, benchLab + 8], [0, 1], clamp)}>
+            ONLY {rows.filter((r) => r[3] >= 100).length} PLAYERS EVER ABOVE +100</text>
+        </g>
         {/* every player */}
         {rows.map((r, i) => {
           const o = dotsIn(i) * (r[0] === "faker" ? 1 : named.some((n) => n.id === r[0]) ? 0.95 : 0.6);

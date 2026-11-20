@@ -28,7 +28,7 @@ import { AveragedCups, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
-import { L, VO_DURATION, VO_KEEP, vt, W, WA } from "../data/vo";
+import { L, VO_DURATION, VO_KEEP, vt, W, WA, WE } from "../data/vo";
 
 const FPS = 30;
 // ay 20 Nov: the cold open runs from the caster's "It's been five years" to his "LPL", the picture fades in, the
@@ -92,7 +92,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["3@who", (c) => <AbsoluteFill><Concrete /><Ov.BigWord text="WHO IS #2?" at={4} /></AbsoluteFill>],
   // the invented comment pile is gone (ay 20 Nov): real fan answers from real sites go here once collected
   ["5", (c) => <AbsoluteFill><Concrete /><Ov.CommentPile cues={{ from: 2, to: at(c, W("5", "answers")),
-    focus: [{ id: "keria", at: at(c, W("6", "carrier")) }, { id: "chovy", at: at(c, W("7", "chovy")) }], all: at(c, W("9", "everyone")) }} /></AbsoluteFill>],
+    focus: [{ id: "keria", at: at(c, WA("6", ["keria", "carrier"])) }, { id: "chovy", at: at(c, W("7", "chovy")) }], all: at(c, W("9", "everyone")) }} /></AbsoluteFill>],
   // Jxmy text card, then his big number card on the number (style map 0:44)
   ["10", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="SO I BUILT A MODEL" years="2011 TO 2026" yearsAt={at(c, W("10", "2011"))} value="527" unit="PLAYERS" numAt={at(c, W("10", "527"))} /></AbsoluteFill>], // ay 14:36: one card, added on
   // Jxmy verdict word over the shot: #14, then WRONG (style map 0:58)
@@ -100,7 +100,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     <Ov.VerdictWord words={[{ text: "WRONG", at: at(c, W("11", "wrong")) }, { text: "FAKER #14", at: at(c, W("11", "14th")) }]} /></AbsoluteFill>],
   // Jxmy handwritten note over the shot (style map 1:08); photo stands in for a rebuild-year game
   // ay 20 Nov: show his titles getting cut down by the averaging
-  ["13", (c) => <AveragedCups dropAt={at(c, W("13", "averaging"))} cutAt={at(c, W("13", "less"))} />],
+  ["13", (c) => <AveragedCups dropAt={at(c, W("13", "averaging"))} cutAt={at(c, WA("13", ["nearly", "enough", "less"]))} />],
   ["15", (c) => <MLBoard title="Peak, not average" lines={[
     { text: "Version 1: the average of every year", at: 4 },
     { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },
@@ -122,22 +122,29 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { text: "Same stat line", at: at(c, W("21", "same")) },
     { text: "Better opponent, more credit", at: at(c, W("21", "counts")), accent: true }]}
     side={<SideTowers at={at(c, W("21", "same"))} at2={at(c, W("21", "counts"))} />} sideAt={at(c, W("21", "same"))} />],
-  // Jxmy chapter title over footage (style map 2:07); photo stands in for a trophy lift
+  // script 20 Nov 15:52 (ay: trophies go straight into what each title is worth, no blank screen, no coin-flip card)
   ["22", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="TROPHIES" at={at(c, L("22").start + 0.2)} /></AbsoluteFill>],
-  // Jxmy number over footage as a running count (style map 2:13): each extra coin flip doubles the odds
-  ["23", (c) => <AbsoluteFill><Concrete /><Ov.FlipCounter at={at(c, W("23", "coin"))} end={at(c, W("23", "opponents"))} /></AbsoluteFill>],
-  // Jxmy gold-bar ranking in our look (style map 2:22): T1 2024 = 8.7 flips, BLG 2026 second (stills.json events)
-  // Jxmy close-up bar list, camera row to row, then pull back (style map 2:31); LEC left off (ay 19 Nov)
-  // ay 20 Nov 12:35: hardest Worlds runs on the champion's own odds (DRX 2022 hardest, T1 2024 second); line 24 is being re-recorded
-  ["24", (c) => { const w = (word: string, fb: number) => { try { return at(c, W("24", word)); } catch { return fb; } };
-    return <WorldsValues cues={{ rise: 4, lit: [{ team: "T1", year: 2024, at: w("t1", 30) }, { team: "DAMWON Gaming", year: 2020, at: w("damwon", 90) }] }} />; }],
-  ["25", (c) => <PriceClimb cues={[at(c, W("25", "worlds")), at(c, W("25", "messiah")), at(c, W("25", "so", 1)), at(c, W("25", "so", 1)) + 6, at(c, W("25", "so", 1)) + 12]} out={at(c, W("25", "so", 1)) + 14} />],
+  // the worth bars open on "how much is an MSI worth", then each value lands as it is said in 23
+  ["22@how", (c) => { const w1 = at(c, WA("23", ["100", "hundred"])), w2 = at(c, WA("23", ["56", "fifty"])), w3 = at(c, WA("23", ["44", "forty"]));
+    return <PriceClimb cues={[Math.min(w1, 20), w2, w3, w3 + 10, w3 + 16]} out={w3 + 22} />; }],
+  // line 24: every Worlds winner by the strength of the field it beat; "down here" lights DAMWON 2020, "all the way up here" T1 2024
+  ["24", (c) => <WorldsValues cues={{ rise: 4, lit: [{ team: "DAMWON Gaming", year: 2020, at: at(c, WA("24", ["down", "damwon"])) },
+    { team: "T1", year: 2024, at: at(c, WA("24", ["t1", "toughest"])) }] }} />],
+  // 24b: the biggest underdog is a different question: each champion's own odds, DRX 2022 lit on "DRX", the 1 in 500 on "500"
+  ["24b", (c) => <HardestRuns cues={{ rise: 0, lit: [{ team: "DRX", year: 2022, at: at(c, WA("24b", ["drx"])) }] }} />],
+  // 25: what BLG's harder run is worth to Knight
+  ["25", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="BLG'S HARDER RUN, FOR KNIGHT" value="+11" unit="TROPHY POINTS"
+    years="UNDER HALF A POINT ON HIS FINAL SCORE" numAt={at(c, WA("25", ["11", "eleven", "added"]))} yearsAt={at(c, WA("25", ["half", "less"]))} /></AbsoluteFill>],
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
-  ["26@sports", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
+  ["26@basketball", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did in the game. Two players on the same team can end up with very different shares." />],
   // ay 20 Nov 13:13: BLG 2026 shares are back (TitleShare.tsx, the no-names version, is kept but unused)
   ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, L("27").start + 0.4), shares: at(c, L("27").start + 1.6), caption: at(c, L("27").start + 3.0) }} />], // ay 20 Nov 13:13: back to BLG 2026, current shares
-  ["28", (c) => { const rv = at(c, W("31", "yup")), ch = at(c, L("29").end); return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} walk={{ bottom: ch, mid: ch + 75, top: rv - 60 }} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
+  ["28", (c) => { // script 15:52, Jxmy's walk: "at the bottom" zooms on the chokers (named on "Creme"), "in the middle" lights the band,
+    // "all the way up here" pans to the clutch players, "yup" names Faker
+    const rv = at(c, WA("31", ["yup"])), ch = at(c, WA("30", ["creme", "bottom"]));
+    return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} walk={{ bottom: at(c, WA("30", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
+      nameAt={Object.fromEntries(["on", "zeus", "gumayusi", "bin"].map((id) => [id, at(c, id === "on" ? WE("31", "on") : WA("31", [id === "gumayusi" ? "guma" : id]))]))} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
   // ay 20 Nov: the old with/without graph with all three players back (only Chovy is talked about)
   ["32", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
   // ay 20 Nov: from the Chovy graph straight to the wins-added graph, held the whole time, then the climb to Faker
@@ -163,6 +170,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["45", (c) => <PillBars cues={{ rise: 4, lit: at(c, WA("46", ["knight", "carrier"])), side: 1e6 }} />],
   ["47", (c) => { const kn = at(c, W("48", "knight")); return <SeasonList n={8} cues={{ scroll0: 2, scroll1: kn - 2, spot: kn }} />; }],
   // Jxmy two-player board (jxmy-graphs GPH4nK5sQ-8 g01): Chovy vs Knight, the skill score "by a hair" last
+  // script 15:52 line 48b: where Faker's best season sits, and why the early stats undersell it
+  ["48b", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="FAKER'S BEST SEASON, 2016" value="#31" unit="ALL TIME"
+    years="FEW STATS TRACKED BEFORE 2020" numAt={at(c, WA("48b", ["31", "thirty", "2016"]))} yearsAt={at(c, WA("48b", ["thin", "stats"]))} /></AbsoluteFill>],
   ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, W("49", "ahead")) }} rows={[
     { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
     { label: "GOLD AHEAD AT 15 MIN", l: "+339", r: "+451", better: "r" },
@@ -176,25 +186,25 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // The cabinet without Faker in view (Canyon, Ruler, Knight named), held still, then on "here's Faker" the camera climbs
   // all the way up to Faker and holds, zooms out on line 55 to compare him with everyone, and the gap bracket lands on
   // "anyone". No "more than double" card; it holds until "how sure" (ay 20 Nov 14:36, like Jxmy's climb then zoom out).
-  ["51@ended", (c) => <ClimbRemap c={c} />],
+  ["51@only", (c) => <ClimbRemap c={c} />],
   // ay 20 Nov 15:28: still on "how sure", the rolls start on "the model rolls a dice", a clean cut to the Monte Carlo page,
   // then back with the count carried on: about 10 rolls, a hold on one, the time-lapse to 1,000 on "all 1000"
   ["56", (c) => <MonteCarlo cues={[at(c, WA("57", ["dice", "rolls"])), 1e6, 1e6]} />],
   // Jxmy article page (jxmy-graphics XyihDTdpF8w x08, style map 6:11): our own page, the line marked as it is said
-  ["57@monte", (c) => <Ov.ArticlePage kicker="How to test a ranking" title="The Monte Carlo test"
+  ["57b", (c) => <Ov.ArticlePage kicker="How to test a ranking" title="The Monte Carlo test"
     before="Rerun the whole thing many times, and each time roll the choices it rests on at random."
     mark="Named after the casino, because it runs on luck." after="If an answer holds across a thousand rolls, it was never the luck."
-    markAt={at(c, W("57", "named"))} />],
-  ["58", (c) => { const done = Math.max(1, Math.floor((startOf("57@monte") - WA("57", ["dice", "rolls"])) * 30 / 20) + 1);
+    markAt={at(c, WA("57b", ["named"]))} />],
+  ["58", (c) => { const done = Math.max(1, Math.floor((startOf("57b") - WA("57", ["dice", "rolls"])) * 30 / 20) + 1);
     return <MonteCarlo from={Math.min(10, done)} cues={[6, at(c, W("60", "ran")), at(c, W("61", "1000"))]} />; }], // back from the page: ~10 rolls, hold, time-lapse to 1,000 on "all 1000"; holds through 61-63
   // Jxmy record card (jxmy-graphs 4lbvnNVGd-I g06, style map 6:32)
   // Jxmy quote subtitle over footage (jxmy-graphics 3hZ6Su5PVnI x02, style map 6:42)
   ["64", (c) => <OGPyramid c={c} />],
   // ay 20 Nov: the Uzi/Bengi cards repeated the six-part cards; now a slope chart, fans vs the model (league-v14 ranks)
   // ay 20 Nov: back to the bordered face cards for Uzi and Bengi
-  ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, W("68", "also"))} stamp={{ text: "GLAZED?", at: at(c, W("68", "bit")) + 12, card: 0 }} cards={[
+  ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, WA("68", ["intangibles", "also"]))} stamp={{ text: "GLAZED?", at: at(c, W("68", "bit")) + 12, card: 0 }} cards={[
     { id: "uzi", sub: "#25 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
-    { id: "bengi", sub: "#41 ALL TIME", flipAt: at(c, W("68", "benji")), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
+    { id: "bengi", sub: "#41 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#247 OWN NUMBERS", at: at(c, W("68", "247")), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
   ]} />],
   ["69", (c) => <OGPyramid c={c} />],
   ["76", () => <Words text="TWO TWISTS" />],
@@ -202,7 +212,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["77", (c) => <PyramidStates states={[{ at: 0, order: ORDER_2026, label: "2026" }, { at: at(c, W("77", "2025")), order: ORDER_2025, label: "END OF 2025" }]} />],
   ["80", (c) => <><PyramidStates glowIds={["knight", "chovy"]} states={[{ at: 0, order: ORDER_2025, label: "END OF 2025" }, { at: at(c, WA("80", ["second", "2nd"])), order: ORDER_2026, label: "2026" },
     { at: at(c, W("81", "gen")), order: ORDER_GENG, label: "IF GEN.G\nHAD WON" }]} /></>],
-  ["82", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, WA("85", ["15", "ten", "10"]))]} />],
+  ["82", (c) => <TwoFakers cues={[at(c, W("85", "greatest")), at(c, WA("85", ["down", "13", "15"]))]} />],
   // ay 20 Nov: the arrow was over before it could be seen; zoom on "Knight", arrow drawn through "from here to there", held into 88
   ["86", (c) => <St.S10bPyramidArrow zoomAt={at(c, W("86", "knight")) - 6} arrowAt={at(c, W("86", "from"))} />],
   ["88@whole", (c) => <St.SampleKnightRadar gapAt={at(c, W("88", "gap"))} />], // 88 now ends "the glaring gap you can see is the trophies": circle and zoom on "gap"
