@@ -47,8 +47,9 @@ Faker 2020-26 is #{int(sf.index[sf.name == 'Faker 2020-26'][0]) + 1} at {sf.scor
 
 ## Known limits (say them on screen)
 - Bengi and other setup junglers: box scores can't see them.
-- Best of five and plus-minus data start in 2016, so Faker's 2013 to 2015 series and games aren't in clutch or team impact.
-- Intangibles are proxies (All-Pro votes, team record with and without). Uzi (Hall of Legends) sits low because the Hall honours impact and fame while we weight titles at 40%.
+- Laning numbers (gold, CS and XP ahead at 15) are missing for LPL 2014-17 and 2022-25, so about half of Knight's games are judged without laning (the rating re-standardises inside each league, so no league moves).
+- Clutch, team impact and title difficulty cover 2011 on (since v11); the coin-flip difficulty list in the script covers 2016 on.
+- Recognition is honours only (All-Pro votes, model All-Pro where no vote was held, season MVPs). Uzi (Hall of Legends) sits low because the Hall honours impact and fame while we weight titles at 40%.
 """
 open(os.path.join(ROOT, "MODEL-CURRENT.md"), "w").write(doc)
 print("written", len(doc))

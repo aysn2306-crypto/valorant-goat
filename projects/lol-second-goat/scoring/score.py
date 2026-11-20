@@ -371,6 +371,14 @@ def recognition(s, pool):
     ap = a[a.Display.isin(tier)].assign(pts=lambda d: d.Display.map(tier))
     covered = set(ap.OverviewPage)
     mv = a[a.Display.isin(["Most Valuable Player", "Player of the Split", "Regular Season MVP", "MVP"])].assign(pts=3)
+    if AUDIT20:
+        # audit 20 Nov: (1) one MVP per player per split: Leaguepedia lists some MVPs twice under two names
+        # ("Most Valuable Player" + "Player of the Split": Chovy 2024 Spring, Keria 2023 Spring, Ruler 2022 Summer,
+        # Bdd 2020 Spring), which counted the same honour twice. (2) season MVPs only, as documented: playoff-page
+        # MVPs are finals MVPs, recorded that way only for LCK 2015-2020 ("Finals MVP" rows after that were never
+        # counted), so they favoured one era.
+        mv = mv[~mv.OverviewPage.str.contains("Playoff|Finals", regex=True)]
+        mv = mv.groupby(["OverviewPage", "Link"]).pts.max().reset_index()
     pts = pd.concat([ap.groupby(["OverviewPage", "Link"]).pts.max().reset_index(), mv[["OverviewPage", "Link", "pts"]]])
     tot = pts.groupby("Link").pts.sum().reindex(pool).fillna(0)
     played = s[s.Page.isin(covered) & s.Link.isin(pool)].groupby("Link").Page.nunique().reindex(pool).fillna(0)
@@ -382,7 +390,16 @@ def recognition(s, pool):
     lg = lambda pg: pg.str.extract(MAJOR)[0].replace({"Champions": "LCK"}) + " " + pg.str.extract(r"(20\d\d)")[0]
     voted = set(lg(pd.Series(sorted(covered))))
     rs = s[(s.kind == "dom") & s.Page.str.match(MAJOR) & ~s.Page.str.contains("Playoff|Preseason|Cup|Road to|Regional|Qualifier|Finals|Promotion", regex=True)].copy()
-    rs = rs[~lg(rs.Page).isin(voted)]
+    if AUDIT20:
+        # audit 20 Nov: a league-year with a vote for only one of its two splits (LPL 2020, EU/NA LCS 2015, LMS 2019)
+        # left the other split with no honours at all, so that split gets a model All-Pro like any unvoted split.
+        # Only the two-split years whose sibling split has a vote are filled; other formats name their vote pages
+        # differently (LEC 2023-24 votes sit on season pages), so they stay covered by league and year.
+        sib = rs.Page.str.replace("Spring Season", "@").str.replace("Summer Season", "Spring Season").str.replace("@", "Summer Season")
+        gap = rs.Page.str.contains(r"(Spring|Summer) Season$", regex=True) & sib.isin(covered) & ~rs.Page.isin(covered)
+        rs = rs[~lg(rs.Page).isin(voted) | gap]
+    else:
+        rs = rs[~lg(rs.Page).isin(voted)]
     rs = rs[rs.G >= rs.groupby(["Page", "role"]).G.transform("max") * 0.5]
     rs["rk"] = rs.groupby(["Page", "role"]).a_impact.rank(ascending=False, method="first")
     filled = rs[rs.rk <= 3].assign(pts=lambda d: 4 - d.rk)[["Page", "Link", "pts"]].rename(columns={"Page": "OverviewPage"})
@@ -463,6 +480,12 @@ def add_future(s, T, fut):
     for i, w in enumerate(fut["worlds"]):
         y = base + 1 + i
         r = src[sy or (base - 1 if i % 2 else base)].copy()
+        if AUDIT20:   # audit 20 Nov: a copied season only keeps the international events that season is asked to win
+            m_ = fut.get("msi")
+            if not (m_ and m_[i]):
+                r = r[~r.League.isin(["Mid-Season Invitational", "First Stand"])]
+            if not w:
+                r = r[r.League != "World Championship"]
         r["year"] = y
         r["Page"] = r.Page + f" (future {y})"
         add_s.append(r)
@@ -483,6 +506,7 @@ def add_future(s, T, fut):
     return s, T
 
 FUTURE_CFG = None
+AUDIT20 = os.environ.get("AUDIT20", "1") != "0"   # audit fixes of 20 Nov (AUDIT20=0 reproduces v14 exactly)
 
 def main():
     variant = os.environ.get("VARIANT", "")
@@ -571,6 +595,29 @@ def main():
             w = w.fillna(w.groupby(ry).transform("median")).fillna(w.median())   # play-ins: that league's value that year
         dp["big"] = dp.a_impact
         dp["G"] = dp.G * w.values
+        if AUDIT20:
+            # audit 20 Nov: title events whose group stage and knockouts share one page (OGN Champions 2012-14, LCK Cup)
+            # are not flagged as playoffs, so their quarterfinals, semifinals and finals were left out of big games
+            # (Faker's 2013 and 2013-14 OGN finals among them). Count each player's knockout games there, at the
+            # event's rating and the title's value.
+            ga = os.path.join(CSV, "games_all.csv")
+            kp = [p for p in wpage.index if p in set(s.Page) and (s.loc[s.Page == p, "IsPlayoffs"].astype(str) != "1").all()]
+            if kp and os.path.exists(ga):
+                gg = pd.read_csv(ga, usecols=["Page", "Link", "Team", "GameId"])
+                gg = gg[gg.Page.isin(kp)].copy()
+                gg["Link"] = [redirect(l) for l in gg.Link]
+                gg["rnd"] = [gid[len(p) + 1:].rsplit("_", 2)[0] for gid, p in zip(gg.GameId, gg.Page)]
+                if variant == "split_faker":
+                    yy = gg.Page.str.extract(r"(20\d\d)")[0].astype(int)
+                    m = gg.Link == "Faker"
+                    gg.loc[m, "Link"] = np.where(yy[m] <= FS, FA, FB)
+                ko = gg[gg.rnd.str.contains(r"Final|Semi|Quarter|Third|Playoffs Round", regex=True)]
+                n = ko.drop_duplicates(["GameId", "Link"]).groupby(["Page", "Link", "Team"]).size().rename("koG").reset_index()
+                ex = s[s.Link.isin(pool)].assign(base=lambda d: d.Page.str.replace(r" \(future \d+\)$", "", regex=True))
+                ex = ex[ex.base.isin(kp)].merge(n.rename(columns={"Page": "base"}), on=["base", "Link", "Team"]).drop(columns="base")
+                ex["big"] = ex.a_impact
+                ex["G"] = ex.koG * ex.Page.str.replace(r" \(future \d+\)$", "", regex=True).map(wpage).values
+                dp = pd.concat([dp, ex.drop(columns="koG")], ignore_index=True)
         bs = pd.concat([bs, dp[dp.G > 0]], ignore_index=True)
     P["big_stage_raw"] = best_years(bs, "big", 15, pad=True).reindex(pool).fillna(0)
     yr = s[s.Link.isin(pool)].groupby(["Link", "year"]).apply(lambda d: pd.Series({"imp": wmean(d, "a_impact"), "G": d.G.sum()}), include_groups=False).reset_index()
@@ -613,8 +660,16 @@ def main():
                 y = base + 1 + i
                 yy = FUTURE_CFG.get("src_year") or (base - 1 if i % 2 else base)
                 r = mine[(mine.year == yy) & ~mine.Page.str.contains("World Championship")].copy()
+                if AUDIT20 and not (FUTURE_CFG.get("msi") and FUTURE_CFG["msi"][i]):
+                    r = r[~r.Page.str.contains("Mid-Season Invitational|First Stand", regex=True)]
                 if w and tyears:
                     r = pd.concat([r, mine[(mine.year == tyears[-1]) & mine.Page.str.contains("World Championship")]])
+                elif w and AUDIT20:
+                    # audit 20 Nov: a player with no Worlds title yet (Chovy) won a what-if Worlds without a single
+                    # Worlds series in clutch. Use his latest Worlds knockout run, every series won.
+                    wy = mine[mine.Page.str.contains("World Championship")].year
+                    if len(wy):
+                        r = pd.concat([r, mine[(mine.year == wy.max()) & mine.Page.str.contains("World Championship")].assign(won=1)])
                 r["year"] = y; r["Page"] = r.Page + f" (future {y})"
                 if "match" in r: r["match"] = r["match"].astype(str) + f" f{y}"
                 extra.append(r)
