@@ -454,7 +454,9 @@ def add_future(s, T, fut):
     mine = T[T.Link == l]
     credit = mine[mine.place == 1].credit.mean() if (mine.place == 1).any() else 1.0
     dom = mine[(mine.tier == "domestic") & mine.year.between(base - 2, base)].pts.sum() / 3
-    if fut.get("dream"):   # a title season at home: his best domestic year of the last three, not his average
+    if "dom_pts" in fut:   # silverware what-if: exactly the league titles asked for (0 = none)
+        dom = float(fut["dom_pts"])
+    elif fut.get("dream"):   # a title season at home: his best domestic year of the last three, not his average
         dom = mine[(mine.tier == "domestic") & mine.year.between(base - 2, base)].groupby("year").pts.sum().max()
     tp = CFG["trophy_points"]
     add_s, add_t = [], []
@@ -464,7 +466,7 @@ def add_future(s, T, fut):
         r["year"] = y
         r["Page"] = r.Page + f" (future {y})"
         add_s.append(r)
-        rows = [("domestic", dom, 1)]
+        rows = [("domestic", dom, 1)] if dom > 0 else []
         if w:
             rows.append(("worlds", tp["worlds"][1], 1))
         if fut.get("msi") and fut["msi"][i]:
