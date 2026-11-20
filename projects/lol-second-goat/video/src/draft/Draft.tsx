@@ -24,7 +24,7 @@ import { PillBars, StackedLines, TitleList } from "./Lists";
 import { OnBlack, RecordCounter } from "./Banners";
 import { Clip, Cuts, RingClip, SplitClips } from "./Clip";
 import { FansVsModel } from "./Slope";
-import { AveragedCups, AbsoluteCinema, ChatLine } from "./Averaged";
+import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
@@ -100,7 +100,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     <Ov.VerdictWord words={[{ text: "WRONG", at: at(c, W("11", "wrong")) }, { text: "FAKER #14", at: at(c, W("11", "14th")) }]} /></AbsoluteFill>],
   // Jxmy handwritten note over the shot (style map 1:08); photo stands in for a rebuild-year game
   // ay 20 Nov: show his titles getting cut down by the averaging
-  ["13", (c) => <AveragedCups dropAt={at(c, W("13", "averaging"))} cutAt={at(c, WA("13", ["nearly", "enough", "less"]))} />],
+  ["13", (c) => <TrophyWeight barAt={at(c, WA("13", ["trophies", "main"]))} cupsAt={at(c, WA("13", ["six", "barely", "worlds"]))}
+    avgAt={at(c, W("13", "averaging"))} dragAt={at(c, WA("13", ["dragging", "later", "down"]))} />], // script 16:05: trophy weight too small + averaging
   ["15", (c) => <MLBoard title="Peak, not average" lines={[
     { text: "Version 1: the average of every year", at: 4 },
     { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },

@@ -61,6 +61,70 @@ export const AveragedCups: React.FC<{ dropAt: number; cutAt: number }> = ({ drop
   );
 };
 
+// Script 16:05 (line 13): version 1 had Faker 14th because trophies were only 28% of the score, and every season was
+// averaged. Beat 1: Faker's version-1 score as one bar, trophies a thin gold slice (28%) with his six Worlds cups
+// squeezed inside it. Beat 2 (on "averaging"): the bar moves up and his season ratings come in under it
+// (data/csv/rapm_seasons.csv, column r), a dashed line drops to the career average, and on "dragging" the seasons
+// under that line turn coral: the years pulling the average down.
+const SEASONS: [number, number][] = [[2013, 0.956], [2014, 0.865], [2015, 0.768], [2016, 0.885], [2017, 0.847], [2018, 0.527], [2019, 0.877],
+  [2020, 0.653], [2021, 0.751], [2022, 0.851], [2023, 1.167], [2024, 0.82], [2025, 0.86], [2026, 0.757]];
+const GOLD = "#E8B04B";
+export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; avgAt: number; dragAt: number }> = ({ barAt, cupsAt, avgAt, dragAt }) => {
+  const f = useCurrentFrame();
+  const tO = interpolate(f, [0, 8], [0, 1], clamp);
+  const fill = interpolate(f, [barAt, barAt + 22], [0, 1], { ...clamp, easing: easeOut });
+  const up = interpolate(f, [avgAt, avgAt + 18], [0, 1], { ...clamp, easing: inOut });
+  const BX0 = 160, BX1 = 1760, BW = BX1 - BX0, TW = BW * 0.28;
+  const by = interpolate(up, [0, 1], [450, 170]), bh = interpolate(up, [0, 1], [150, 90]);
+  // season chart
+  const X0 = 220, X1 = 1700, Y1 = 900, H = 420, step = (X1 - X0) / SEASONS.length, bw = step * 0.6, MAX = 1.2;
+  const avg = SEASONS.reduce((a, [, r]) => a + r, 0) / SEASONS.length;
+  const chartO = interpolate(f, [avgAt + 6, avgAt + 16], [0, 1], clamp);
+  const drop = interpolate(f, [avgAt + 22, avgAt + 44], [0, 1], { ...clamp, easing: inOut });
+  const peakY = Y1 - H * (1.167 / MAX), avgY = Y1 - H * (avg / MAX);
+  const lineY = peakY + (avgY - peakY) * drop;
+  const drag = interpolate(f, [dragAt, dragAt + 10], [0, 1], clamp);
+  return (
+    <AbsoluteFill>
+      <Concrete />
+      <div style={{ position: "absolute", left: BX0, top: 60, opacity: tO, fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>FAKER'S SCORE, MODEL VERSION 1</div>
+      {/* the score bar: trophies a thin gold slice, everything else grey */}
+      <div style={{ position: "absolute", left: BX0, top: by, width: BW, height: bh, opacity: tO, border: `3px solid ${INK}`, boxSizing: "border-box" }}>
+        <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: TW * fill, background: GOLD }} />
+        <div style={{ position: "absolute", left: TW, top: 0, bottom: 0, width: (BW - TW - 3) * fill, background: "#3A3D42" }} />
+        {SIXCUPS(f, cupsAt, TW, bh)}
+      </div>
+      <div style={{ position: "absolute", left: BX0, top: by + bh + 14, opacity: fill, fontFamily: BEBAS, fontSize: interpolate(up, [0, 1], [56, 40]), color: GOLD, letterSpacing: 2 }}>TROPHIES 28%</div>
+      <div style={{ position: "absolute", right: 1920 - BX1, top: by + bh + 14, opacity: fill, fontFamily: BEBAS, fontSize: interpolate(up, [0, 1], [56, 40]), color: MUTE, letterSpacing: 2 }}>EVERYTHING ELSE 72%</div>
+      {chartO > 0 && <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: chartO }}>
+        <text x={X0 - 20} y={Y1 - H - 30} fontFamily={BEBAS} fontSize={34} fill={MUTE} letterSpacing={2}>HIS RATING, EVERY SEASON</text>
+        <line x1={X0 - 20} x2={X1} y1={Y1} y2={Y1} stroke={INK} strokeOpacity={0.6} strokeWidth={3} />
+        {SEASONS.map(([y, r], i) => {
+          const x = X0 + i * step + (step - bw) / 2, h = H * (r / MAX);
+          const grow = interpolate(f, [avgAt + 6 + i * 1.5, avgAt + 18 + i * 1.5], [0, 1], { ...clamp, easing: easeOut });
+          const low = r < avg;
+          return <g key={y}>
+            <rect x={x} y={Y1 - h * grow} width={bw} height={h * grow} fill={low && drag > 0.5 ? BAD : y === 2023 ? TEAL : "#6B7178"} />
+            <text x={x + bw / 2} y={Y1 + 42} textAnchor="middle" fontFamily={BEBAS} fontSize={30} fill={MUTE}>{"'" + String(y).slice(2)}</text>
+          </g>;
+        })}
+        {drop > 0 && <line x1={X0 - 20} x2={X1} y1={lineY} y2={lineY} stroke={INK} strokeWidth={3} strokeDasharray="14 10" />}
+        {drop > 0 && <text x={X1 + 18} y={lineY + 12} fontFamily={BEBAS} fontSize={34} fill={INK}>AVERAGE</text>}
+        <text x={X0 + 10 * step + step / 2} y={peakY - 16} textAnchor="middle" fontFamily={BEBAS} fontSize={30} fill={TEAL}>BEST</text>
+      </svg>}
+    </AbsoluteFill>
+  );
+};
+function SIXCUPS(f: number, at: number, w: number, h: number) {
+  const n = 6, cw = w / n, s = Math.min(cw * 0.7, h * 0.6);
+  return Array.from({ length: n }, (_, i) => {
+    const k = interpolate(f, [at + i * 3, at + i * 3 + 8], [0, 1], { ...clamp, easing: easeOut });
+    return <svg key={i} width={s} height={s} viewBox="0 0 24 24" style={{ position: "absolute", left: i * cw + (cw - s) / 2, top: (h - s) / 2 - 3, opacity: k, transform: `scale(${0.5 + 0.5 * k})` }}>
+      <path d="M6 3h12v3h3v2a5 5 0 0 1-5 5h-.4A6 6 0 0 1 13 15.9V18h3v3H8v-3h3v-2.1A6 6 0 0 1 8.4 13H8a5 5 0 0 1-5-5V6h3V3zm0 5H5a3 3 0 0 0 1 2.2V8zm12 0v2.2A3 3 0 0 0 19 8h-1z" fill="#0F1012" />
+    </svg>;
+  });
+}
+
 export const AbsoluteCinema: React.FC<{ at: number; out: number }> = ({ at, out }) => {
   const f = useCurrentFrame();
   const k = interpolate(f, [at, at + 6, out - 6, out], [0, 1, 1, 0], clamp);
