@@ -98,13 +98,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     focus: [{ id: "keria", at: at(c, WA("6", ["keria", "carrier"])) }, { id: "chovy", at: at(c, W("7", "chovy")) }], all: at(c, W("9", "everyone")) }} /></AbsoluteFill>],
   // Jxmy text card, then his big number card on the number (style map 0:44)
   ["10", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="SO I BUILT A MODEL" years="2011 TO 2026" yearsAt={at(c, W("10", "2011"))} value="527" unit="PLAYERS" numAt={at(c, W("10", "527"))} /></AbsoluteFill>], // ay 14:36: one card, added on
-  // Jxmy verdict word over the shot: #14, then WRONG (style map 0:58)
-  ["11", (c) => <AbsoluteFill><Concrete />
-    <Ov.VerdictWord words={[{ text: "WRONG", at: at(c, W("11", "wrong")) }, { text: "FAKER #14", at: at(c, W("11", "14th")) }]} /></AbsoluteFill>],
-  // Jxmy handwritten note over the shot (style map 1:08); photo stands in for a rebuild-year game
-  // ay 20 Nov: show his titles getting cut down by the averaging
-  // ay 21 Nov 00:42 ("be honest about why he was 14th"): version 1 had his trophies at 100; missing data did it
-  ["13", (c) => <VersionOne trophiesAt={at(c, WA("13", ["trophies"]))} partsAt={at(c, WA("13", ["data"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={at(c, WA("13b", ["damage"]))} />], // 13 and 13b
+  // ay 21 Nov 01:22: the WRONG / FAKER #14 verdict card looked low budget; the version 1 graph now starts on line 11
+  ["11", (c) => <VersionOne trophiesAt={10} partsAt={at(c, WA("11", ["14th", "14"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={at(c, WA("13b", ["damage"]))} />], // lines 11 to 13b
   // ay 21 Nov 00:29: "Peak, not average" was misleading (team impact and clutch use the whole career); the board now says
   // exactly what line 15 says changed
   ["15", (c) => <MLBoard title="What changed" lines={[
