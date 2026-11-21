@@ -32,7 +32,7 @@ import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
-import { L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
+import { HAS, L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
 const FPS = 30;
 // ay 20 Nov: the cold open runs from the caster's "It's been five years" to his "LPL", the picture fades in, the
@@ -100,7 +100,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // Jxmy text card, then his big number card on the number (style map 0:44)
   ["10", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="SO I BUILT A MODEL" years="2011 TO 2026" yearsAt={at(c, W("10", "2011"))} value="527" unit="PLAYERS" numAt={at(c, W("10", "527"))} /></AbsoluteFill>], // ay 14:36: one card, added on
   // ay 21 Nov 01:22: the WRONG / FAKER #14 verdict card looked low budget; the version 1 graph now starts on line 11
-  ["11", (c) => <VersionOne trophiesAt={10} partsAt={at(c, WA("11", ["14th", "14"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={at(c, WA("13b", ["damage"]))} />], // lines 11 to 13b
+  ["11", (c) => <VersionOne trophiesAt={10} partsAt={at(c, WA("11", ["14th", "14"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={HAS("13b") ? at(c, WA("13b", ["damage"])) : 1e9 /* 13b not recorded yet: the damage row waits for it */} />], // lines 11 to 13b
   // ay 21 Nov 00:29: "Peak, not average" was misleading (team impact and clutch use the whole career); the board now says
   // exactly what line 15 says changed
   ["15", (c) => <MLBoard title="What changed" lines={[
@@ -114,8 +114,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
       { label: "Version 1", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
       { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, L("15").end) - 10 }]} />} sideAt={10} />],
   // v15.3 (ay 20 Nov 23:09): trophies are 30% of the score; the share swings on "subjective", settles on "30%"
-  // 21 Nov re-record: lines 15b and 15d were not in the take; this graphic comes back when they are re-recorded
-  // ["15b", (c) => <TrophyShare swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))} />],
+  // 21 Nov 15:40 take has 15b and 15d again
+  ["15b", (c) => <TrophyShare swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))} />],
   // Jxmy line chart (style map 1:22)
   ["16", (c) => <KillsLine cues={{ lck: at(c, L("16").start + 0.3), lpl: at(c, W("16", "lpl")), gap: at(c, W("17", "3")) }} />],
   // Jxmy highlighted page, then big text sliding past (style map 1:34)
@@ -211,9 +211,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["64", (c) => <OGPyramid c={c} />],
   // ay 20 Nov: the Uzi/Bengi cards repeated the six-part cards; now a slope chart, fans vs the model (league-v14 ranks)
   // ay 20 Nov: back to the bordered face cards for Uzi and Bengi
-  ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, WA("68", ["intangibles", "also"]))} stamp={{ text: "GLAZED?", at: at(c, WA("68", ["opinion", "honestly", "bit"])) + 12, card: 0 }} cards={[
+  ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, WA("68", ["intangibles", "also"]))} /* 21 Nov 15:40 take: ay no longer says "Uzi's a little bit glazed", so no GLAZED? stamp; it comes back if he does */ cards={[
     { id: "uzi", sub: "#22 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
-    { id: "bengi", sub: "#43 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#182 OWN NUMBERS", at: at(c, WA("68", ["182", "numbers"])), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
+    { id: "bengi", sub: "#43 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#182 OWN NUMBERS", at: at(c, WA("68", ["182", "numbers"])), bad: true }, { text: "SHOTCALLING", at: at(c, WA("68", ["shot", "measure"])) }] },
   ]} />],
   ["69", (c) => <OGPyramid c={c} />],
   ["76", () => <Words text="TWO TWISTS" />],

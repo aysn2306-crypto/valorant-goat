@@ -23,6 +23,8 @@ export const VO_KEEP: [number, number][] = (() => {
 export const VO_LINES: Line[] = RAW.filter((l) => !CUT_LINES.includes(l.line))
   .map((l) => ({ ...l, start: vt(l.start), end: vt(l.end), words: l.words.map((w) => ({ ...w, start: vt(w.start) })) }));
 export const VO_DURATION = vt(RAW_DURATION);
+/** is this line in the recording? */
+export const HAS = (id: string) => VO_LINES.some((x) => x.line === id);
 export const L = (id: string) => { const l = VO_LINES.find((x) => x.line === id); if (!l) throw new Error("no line " + id); return l; };
 /** voiceover time of the n-th word in a line that starts with `w` (punctuation ignored) */
 // Whisper writes some numbers as words and some as digits; a cue matches either spelling

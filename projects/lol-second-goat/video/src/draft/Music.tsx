@@ -4,7 +4,7 @@
 // Low under the voice and ducked while ay talks; Jxmy-style drop-outs to silence before the big reveals.
 import React from "react";
 import { Audio, Sequence, staticFile } from "remotion";
-import { L, VO_LINES, W } from "../data/vo";
+import { L, VO_LINES, W, WA } from "../data/vo";
 
 const FPS = 30;
 const fr = (s: number) => Math.round(s * FPS);
@@ -15,22 +15,29 @@ const A = { file: "_local/music/Buant_Groove_loop.wav", gap: db(-16), voice: db(
 const B = { file: "_local/music/Late_Night_Groove_loop.wav", gap: db(-14.5), voice: db(-20.5) };
 const XFADE = 3; // seconds, centred on the chapter break
 
-// [silent from (voice time), music back from (voice time)]: fade out over 0.6 s so it is silent on the line, back over 2 s
-// ay 21 Nov 14:36: on the long climb up the trophy cabinet to Faker (lines 53 to 55) the beat cuts out as the camera
-// climbs, "final boss" music hits the moment it reaches Faker, and the normal beat comes back when that panel ends
-// (line 56). Only this graph. The boss track is ay's pick: set BOSS to its file in public/_local/music when it lands.
-// Until then the climb is silent and the beat comes back on Faker. Climb timing mirrors ClimbRemap in Draft.tsx.
+// Drop-outs follow the Jxmy music-pause study (video-research/jxmy-sound/JXMY-SOUND-STUDY.md, section 5): cut on the
+// word before the payoff, about 1 to 3 s of silence, back hard on the next sentence, a little louder after the big
+// reveals. About 15 s of silence in the whole video instead of 60.
+// ay 21 Nov 14:36: on the long climb up the trophy cabinet to Faker (lines 53 to 55) the "final boss" music hits on
+// Faker and the normal beat comes back when that panel ends (line 56). Only this graph. Jxmy way (coordinator 15:39):
+// the beat keeps playing on the way up, cut on the landing, about 1 s of silence, then the boss track slams in.
+// The boss track is ay's pick: set BOSS to its file in public/_local/music when it lands. Until then the beat comes
+// back after about 2 s of silence, fading up while the camera zooms out. Climb timing mirrors ClimbRemap in Draft.tsx.
 type Boss = { file: string; gain: number; voice: number };
 const BOSS = null as Boss | null;
-const climb = () => { const c0 = W("53", "name") + 8 / 30; return { c0, hit: c0 + 79 / 30, end: L("56").start }; };
-const dropOuts = (): [number, number][] => [
-  ((c) => [c.c0 + 0.6, BOSS ? c.end : c.hit] as [number, number])(climb()), // fade starts as the climb starts
-  [W("61", "but"), L("64").start],     // Monte Carlo result: second in all 1,000 too
-  [L("71").start, L("74").start + 0.4], // the GOAT reveal: Chovy, then Knight
-  [L("80").start, L("81").start],      // Knight mid-gapped Chovy
-  [L("85").start, L("86").start],      // young Faker alone is the greatest
-  [L("93").start, L("94").start],      // what Knight and Chovy would need
-];
+const climb = () => { const c0 = W("53", "name") + 8 / 30; const hit = c0 + 79 / 30; return { c0, hit, boss: hit + 1, end: L("56").start }; };
+type Drop = { a: number; b: number; out: number; back: number; boost?: number };
+const dropOuts = (): Drop[] => {
+  const c = climb();
+  return [
+    BOSS ? { a: c.hit, b: c.end, out: 0.05, back: 1.5 } : { a: c.hit, b: c.hit + 2, out: 0.05, back: 4, boost: 4 }, // Faker's 1,509
+    { a: WA("61", ["second", "2nd"]) - 0.1, b: L("63").start, out: 0.1, back: 0.05 },               // "second in all 1,000 too"
+    { a: W("71", "second") - 0.1, b: W("71", "knight") + 0.5, out: 0.05, back: 0.05, boost: 5 }, // the GOAT reveal
+    { a: W("80", "this") - 0.1, b: L("81").start, out: 0.05, back: 0.05 },                 // "this model is lowkey cinema"
+    { a: W("85", "young") - 0.15, b: W("85", "ahead"), out: 0.05, back: 0.05 },            // young Faker alone is the greatest
+    { a: W("93", "that") - 0.1, b: L("94").start, out: 0.1, back: 0.05 },                 // "that's how far ahead Faker is"
+  ];
+};
 
 const smooth = (x: number) => x * x * (3 - 2 * x);
 
@@ -43,14 +50,17 @@ const buildEnvelope = (lead: number, total: number) => {
   const duck = new Float32Array(n);
   let y = 0;
   for (let f = 0; f < n; f++) { const k = talk[f] > y ? 0.35 : 0.06; y += (talk[f] - y) * k; duck[f] = y; }
-  const drops = dropOuts().map(([a, b]) => [lead + a, lead + b]);
-  const dropGain = (t: number) => drops.reduce((g, [a, b]) => {
-    if (t >= a - 0.6 && t < a) return Math.min(g, 1 - smooth((t - (a - 0.6)) / 0.6));
-    if (t >= a && t < b) return 0;
-    if (t >= b && t < b + 2) return Math.min(g, smooth((t - b) / 2));
+  const drops = dropOuts().map((d) => ({ ...d, a: lead + d.a, b: lead + d.b }));
+  const dropGain = (t: number) => drops.reduce((g, d) => {
+    if (t >= d.a - d.out && t < d.a) return Math.min(g, 1 - smooth((t - (d.a - d.out)) / d.out));
+    if (t >= d.a && t < d.b) return 0;
+    if (t >= d.b && t < d.b + d.back) return Math.min(g, smooth((t - d.b) / d.back));
     return g;
   }, 1);
-  return { duck, dropGain };
+  // back a little louder after a big reveal (+N dB, easing off over 4 s)
+  const boost = (t: number) => drops.reduce((g, d) => d.boost && t >= d.b && t < d.b + 4
+    ? g * Math.pow(10, (d.boost * (1 - smooth((t - d.b) / 4))) / 20) : g, 1);
+  return { duck, dropGain, boost };
 };
 
 export const Music: React.FC<{ lead: number; total: number }> = ({ lead, total }) => {
@@ -62,7 +72,7 @@ export const Music: React.FC<{ lead: number; total: number }> = ({ lead, total }
     const t = f / FPS;
     const d = env.duck[Math.min(f, env.duck.length - 1)] ?? 0;
     let g = trk.gap + (trk.voice - trk.gap) * d;
-    g *= env.dropGain(t);
+    g *= env.dropGain(t) * env.boost(t);
     g *= smooth(Math.min(1, Math.max(0, (t - t0) / 1.5))); // fade in
     g *= smooth(Math.min(1, Math.max(0, (end - t) / 3))); // fade out at the very end
     const x = smooth(Math.min(1, Math.max(0, (t - (brk - XFADE / 2)) / XFADE)));
@@ -71,7 +81,7 @@ export const Music: React.FC<{ lead: number; total: number }> = ({ lead, total }
   const cl = climb();
   const boss = (f: number) => {
     if (!BOSS) return 0;
-    const t = f / FPS, hit = lead + cl.hit, out = lead + cl.end;
+    const t = f / FPS, hit = lead + cl.boss, out = lead + cl.end;
     const d = env.duck[Math.min(f, env.duck.length - 1)] ?? 0;
     const g = BOSS.gain + (BOSS.voice - BOSS.gain) * d;
     return t < hit ? 0 : g * smooth(Math.min(1, Math.max(0, (out - t) / 1.5)));
@@ -84,8 +94,8 @@ export const Music: React.FC<{ lead: number; total: number }> = ({ lead, total }
     <Sequence from={bFrom} durationInFrames={total - bFrom} name="music B">
       <Audio src={staticFile(B.file)} volume={(f) => vol(B, f + bFrom, "b")} />
     </Sequence>
-    {BOSS && <Sequence from={fr(lead + cl.hit)} durationInFrames={fr(cl.end - cl.hit) + 1} name="boss music">
-      <Audio src={staticFile(BOSS.file)} volume={(f) => boss(f + fr(lead + cl.hit))} />
+    {BOSS && <Sequence from={fr(lead + cl.boss)} durationInFrames={fr(cl.end - cl.boss) + 1} name="boss music">
+      <Audio src={staticFile(BOSS.file)} volume={(f) => boss(f + fr(lead + cl.boss))} />
     </Sequence>}
   </>;
 };
