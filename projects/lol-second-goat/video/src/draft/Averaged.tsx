@@ -73,7 +73,7 @@ const SEASONS: [number, number][] = (FS as unknown as { seasons: [number, number
 const GOLD = "#E8B04B";
 // ay 20 Nov 20:01: every bar is on the graph first (on "on top of that"), then on "averaging" a dashed line draws
 // through them at his career average, labelled HIS AVERAGE; on "dragging" the seasons under it turn coral.
-export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; barsAt?: number; avgAt: number; dragAt: number }> = ({ barAt, cupsAt, barsAt: barsAt0, avgAt, dragAt }) => {
+export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; barsAt?: number; avgAt: number; dragAt: number; chartOnly?: boolean }> = ({ barAt, cupsAt, barsAt: barsAt0, avgAt, dragAt, chartOnly }) => {
   const barsAt = barsAt0 ?? avgAt;
   const f = useCurrentFrame();
   const tO = interpolate(f, [0, 8], [0, 1], clamp);
@@ -84,7 +84,7 @@ export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; barsAt?: nu
   // season chart: ratings can go below zero (an average player is 0), so bars grow up or down from a zero line
   const X0 = 220, X1 = 1700, step = (X1 - X0) / SEASONS.length, bw = step * 0.6;
   const vals = SEASONS.map(([, r]) => r), MAXV = 100, MINV = 0;
-  const YT = 510, YB = 880, Y = (v: number) => YT + (YB - YT) * (MAXV - v) / (MAXV - MINV), Y0 = Y(0);
+  const YT = chartOnly ? 330 : 510, YB = chartOnly ? 820 : 880, Y = (v: number) => YT + (YB - YT) * (MAXV - v) / (MAXV - MINV), Y0 = Y(0);
   const avg = vals.reduce((a, r) => a + r, 0) / vals.length, bestYear = SEASONS.find(([, r]) => r === Math.max(...vals))![0];
   const chartO = interpolate(f, [barsAt + 6, barsAt + 16], [0, 1], clamp);
   const draw = interpolate(f, [avgAt, avgAt + 24], [0, 1], { ...clamp, easing: inOut });
@@ -93,7 +93,9 @@ export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; barsAt?: nu
   return (
     <AbsoluteFill>
       <Concrete />
-      <div style={{ position: "absolute", left: BX0, top: 60, opacity: tO, fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>FAKER'S SCORE, MODEL VERSION 1</div>
+      <div style={{ position: "absolute", left: BX0, top: 60, opacity: tO, fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>{chartOnly ? "MODEL VERSION 1: EVERY SEASON AVERAGED" : "FAKER'S SCORE, MODEL VERSION 1"}</div>
+      {/* ay 21 Nov 00:42: line 13b uses only the season chart (the 28% bar was not why he was 14th) */}
+      {!chartOnly && <>
       {/* the score bar: trophies a thin gold slice, everything else grey */}
       <div style={{ position: "absolute", left: BX0, top: by, width: BW, height: bh, opacity: tO, border: `3px solid ${INK}`, boxSizing: "border-box" }}>
         <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: TW * fill, background: GOLD }} />
@@ -102,6 +104,7 @@ export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; barsAt?: nu
       </div>
       <div style={{ position: "absolute", left: BX0, top: by + bh + 14, opacity: fill, fontFamily: BEBAS, fontSize: interpolate(up, [0, 1], [56, 40]), color: GOLD, letterSpacing: 2 }}>TROPHIES 28%</div>
       <div style={{ position: "absolute", right: 1920 - BX1, top: by + bh + 14, opacity: fill, fontFamily: BEBAS, fontSize: interpolate(up, [0, 1], [56, 40]), color: MUTE, letterSpacing: 2 }}>EVERYTHING ELSE 72%</div>
+      </>}
       {chartO > 0 && <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: chartO }}>
         <text x={X0 - 20} y={YT - 64} fontFamily={BEBAS} fontSize={34} fill={MUTE} letterSpacing={2}>EACH SEASON: HIS STATS BETTER THAN __% OF PROS</text>
         {[0, 50, 100].map((v) => <text key={v} x={X0 - 34} y={Y(v) + 10} textAnchor="end" fontFamily={BEBAS} fontSize={28} fill={MUTE}>{v}%</text>)}

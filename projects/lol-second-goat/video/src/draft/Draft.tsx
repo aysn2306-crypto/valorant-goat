@@ -13,6 +13,7 @@ import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWi
 import { TeamRoles } from "./TeamRoles";
 import { PMLedger } from "./PMLedger";
 import { TrophyShare } from "./TrophyShare";
+import { VersionOne } from "./VersionOne";
 import { TrophySplit } from "./TrophySplit";
 import { TitleShare } from "./TitleShare";
 import { SeasonList } from "./SeasonList";
@@ -102,20 +103,20 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     <Ov.VerdictWord words={[{ text: "WRONG", at: at(c, W("11", "wrong")) }, { text: "FAKER #14", at: at(c, W("11", "14th")) }]} /></AbsoluteFill>],
   // Jxmy handwritten note over the shot (style map 1:08); photo stands in for a rebuild-year game
   // ay 20 Nov: show his titles getting cut down by the averaging
-  ["13", (c) => <TrophyWeight barAt={at(c, WA("13", ["trophies", "main"]))} cupsAt={at(c, WA("13", ["six", "barely", "worlds"]))}
-    barsAt={at(c, WA("13", ["moved", "barely"]))} avgAt={at(c, WA("13", ["averaged", "averaging"]))} dragAt={at(c, WA("13", ["dragged", "later", "down"]))} />], // script 16:05: trophy weight too small + averaging
+  // ay 21 Nov 00:42 ("be honest about why he was 14th"): version 1 had his trophies at 100; missing data did it
+  ["13", (c) => <VersionOne trophiesAt={at(c, WA("13", ["trophies"]))} partsAt={at(c, WA("13", ["data"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={at(c, WA("13b", ["damage"]))} />], // 13 and 13b
   // ay 21 Nov 00:29: "Peak, not average" was misleading (team impact and clutch use the whole career); the board now says
   // exactly what line 15 says changed
   ["15", (c) => <MLBoard title="What changed" lines={[
-    { text: "Version 1: every season averaged", at: 4 },
+    { text: "Version 1: early games untracked, no damage stats before 2020", at: 4 },
     { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },
-    { text: "Now: trophies are the biggest part", at: at(c, WA("15", ["trophies"])) },
-    { text: "Skill: his best years", at: at(c, WA("15", ["best"])) },
-    { text: "Longevity: its own score", at: at(c, WA("15", ["longevity"])) },
-    { face: "faker", text: "Faker now: #1", at: at(c, WA("15", ["longevity"])) + 20, accent: true }]}
+    { text: "Now: fixed for every old player", at: at(c, WA("15", ["every"])) },
+    { text: "Missing games filled in", at: at(c, WA("15", ["filled"])) },
+    { text: "Missing stats made up for", at: at(c, WA("15", ["made"])) },
+    { face: "faker", text: "Faker now: #1", at: at(c, L("15").end) - 10, accent: true }]}
     side={<SideBars caption="Faker's all-time rank" rows={[
       { label: "Version 1", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
-      { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, WA("15", ["longevity"])) + 20 }]} />} sideAt={10} />],
+      { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, L("15").end) - 10 }]} />} sideAt={10} />],
   // v15.3 (ay 20 Nov 23:09): trophies are 30% of the score; the share swings on "subjective", settles on "30%"
   ["15b", (c) => <TrophyShare swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))} />],
   // Jxmy line chart (style map 1:22)
