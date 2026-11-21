@@ -16,7 +16,15 @@ const B = { file: "_local/music/Late_Night_Groove_loop.wav", gap: db(-14.5), voi
 const XFADE = 3; // seconds, centred on the chapter break
 
 // [silent from (voice time), music back from (voice time)]: fade out over 0.6 s so it is silent on the line, back over 2 s
+// ay 21 Nov 14:36: on the long climb up the trophy cabinet to Faker (lines 53 to 55) the beat cuts out as the camera
+// climbs, "final boss" music hits the moment it reaches Faker, and the normal beat comes back when that panel ends
+// (line 56). Only this graph. The boss track is ay's pick: set BOSS to its file in public/_local/music when it lands.
+// Until then the climb is silent and the beat comes back on Faker. Climb timing mirrors ClimbRemap in Draft.tsx.
+type Boss = { file: string; gain: number; voice: number };
+const BOSS = null as Boss | null;
+const climb = () => { const c0 = W("53", "name") + 8 / 30; return { c0, hit: c0 + 79 / 30, end: L("56").start }; };
 const dropOuts = (): [number, number][] => [
+  ((c) => [c.c0 + 0.6, BOSS ? c.end : c.hit] as [number, number])(climb()), // fade starts as the climb starts
   [W("61", "but"), L("64").start],     // Monte Carlo result: second in all 1,000 too
   [L("71").start, L("74").start + 0.4], // the GOAT reveal: Chovy, then Knight
   [L("80").start, L("81").start],      // Knight mid-gapped Chovy
@@ -60,6 +68,14 @@ export const Music: React.FC<{ lead: number; total: number }> = ({ lead, total }
     const x = smooth(Math.min(1, Math.max(0, (t - (brk - XFADE / 2)) / XFADE)));
     return g * (which === "a" ? 1 - x : x);
   };
+  const cl = climb();
+  const boss = (f: number) => {
+    if (!BOSS) return 0;
+    const t = f / FPS, hit = lead + cl.hit, out = lead + cl.end;
+    const d = env.duck[Math.min(f, env.duck.length - 1)] ?? 0;
+    const g = BOSS.gain + (BOSS.voice - BOSS.gain) * d;
+    return t < hit ? 0 : g * smooth(Math.min(1, Math.max(0, (out - t) / 1.5)));
+  };
   const aFrom = fr(t0), bFrom = fr(brk - XFADE / 2);
   return <>
     <Sequence from={aFrom} durationInFrames={fr(brk + XFADE / 2) - aFrom + 1} name="music A">
@@ -68,5 +84,8 @@ export const Music: React.FC<{ lead: number; total: number }> = ({ lead, total }
     <Sequence from={bFrom} durationInFrames={total - bFrom} name="music B">
       <Audio src={staticFile(B.file)} volume={(f) => vol(B, f + bFrom, "b")} />
     </Sequence>
+    {BOSS && <Sequence from={fr(lead + cl.hit)} durationInFrames={fr(cl.end - cl.hit) + 1} name="boss music">
+      <Audio src={staticFile(BOSS.file)} volume={(f) => boss(f + fr(lead + cl.hit))} />
+    </Sequence>}
   </>;
 };
