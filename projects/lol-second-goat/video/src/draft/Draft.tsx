@@ -153,7 +153,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["28", (c) => { // script 15:52, Jxmy's walk: "at the bottom" zooms on the chokers (named on "Creme"), "in the middle" lights the band,
     // "all the way up here" pans to the clutch players, "yup" names Faker
     const rv = at(c, WA("31", ["faker's", "faker"])), ch = at(c, WA("30", ["creme", "bottom"]));
-    return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} walk={{ bottom: at(c, WA("30", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
+    const d0 = at(c, L("30").start) + 4, d1 = Math.max(d0 + 90, at(c, WA("30", ["down", "bottom"])) - 12);
+    return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} dots={[d0, d1]} walk={{ bottom: at(c, WA("30", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
       nameAt={Object.fromEntries([...["on", "zeus", "gumayusi", "zeka"].map((id) => [id, at(c, WA("31", ["gumayusi"]))]), ["bin", at(c, WA("31", ["bin"]))],
         ...[["369", "369"], ["gala", "369"], ["zven", "369"], ["doran", "doran"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])] /* ay 20:19: highlight four, voice names two */)} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
   // ay 20 Nov: the old with/without graph with all three players back (only Chovy is talked about)
