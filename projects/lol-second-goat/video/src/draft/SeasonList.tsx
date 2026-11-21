@@ -15,7 +15,8 @@ const INK = "#F2F2EE";
 const TEAL = "#3FD0B5";
 
 /** cues (frames in the scene): scroll start, scroll end (lands on #1), spotlight */
-export const SeasonList: React.FC<{ cues: { scroll0: number; scroll1: number; spot: number }; n?: number }> = ({ cues, n = 10 }) => {
+// 21 Nov re-record: ay names only Knight (2nd, this year) and Chovy (1st, 2025), so Knight's row lights on his name too
+export const SeasonList: React.FC<{ cues: { scroll0: number; scroll1: number; spot: number; second?: number }; n?: number }> = ({ cues, n = 10 }) => {
   const f = useCurrentFrame();
   const rows = [...D.players].filter((p) => p.cats.peak !== undefined).sort((a, b) => b.cats.peak - a.cats.peak).slice(0, n);
   const RH = 176, X0 = 560, W = 900, k = RH / 118; // big rows, so only five or six fit and the list has to scroll
@@ -32,7 +33,7 @@ export const SeasonList: React.FC<{ cues: { scroll0: number; scroll1: number; sp
       <div style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080, transform: `translate3d(0, ${y}px, 0)`, willChange: "transform" }}>
       {rows.map((p, i) => {
         const top = i * RH;
-        const lit = i === 0;
+        const lit = i === 0 || (i === 1 && cues.second !== undefined && f >= cues.second);
         const dim = lit ? 0 : spot;
         return (
           <div key={p.id} style={{ position: "absolute", left: X0, top, width: W, height: RH - 12, display: "flex", alignItems: "center",

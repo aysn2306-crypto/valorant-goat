@@ -25,8 +25,14 @@ export const VO_LINES: Line[] = RAW.filter((l) => !CUT_LINES.includes(l.line))
 export const VO_DURATION = vt(RAW_DURATION);
 export const L = (id: string) => { const l = VO_LINES.find((x) => x.line === id); if (!l) throw new Error("no line " + id); return l; };
 /** voiceover time of the n-th word in a line that starts with `w` (punctuation ignored) */
+// Whisper writes some numbers as words and some as digits; a cue matches either spelling
+const NUMS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve",
+  "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
+const alias = (w: string) => { const k = w.toLowerCase(); const i = NUMS.indexOf(k); return i >= 0 ? String(i) : /^\d+$/.test(k) && +k < NUMS.length ? NUMS[+k] : k; };
 export const W = (id: string, w: string, n = 0) => {
-  const hits = L(id).words.filter((x) => x.w.toLowerCase().replace(/[^a-z0-9]/g, "").startsWith(w.toLowerCase()));
+  const norm = (x: string) => x.toLowerCase().replace(/[^a-z0-9]/g, "");
+  let hits = L(id).words.filter((x) => norm(x.w).startsWith(w.toLowerCase()));
+  if (!hits.length && alias(w) !== w.toLowerCase()) hits = L(id).words.filter((x) => norm(x.w) === alias(w));
   if (!hits[n]) throw new Error(`no word ${w} in line ${id}`);
   return hits[n].start;
 };

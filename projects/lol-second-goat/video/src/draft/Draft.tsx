@@ -114,7 +114,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
       { label: "Version 1", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
       { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, L("15").end) - 10 }]} />} sideAt={10} />],
   // v15.3 (ay 20 Nov 23:09): trophies are 30% of the score; the share swings on "subjective", settles on "30%"
-  ["15b", (c) => <TrophyShare swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))} />],
+  // 21 Nov re-record: lines 15b and 15d were not in the take; this graphic comes back when they are re-recorded
+  // ["15b", (c) => <TrophyShare swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))} />],
   // Jxmy line chart (style map 1:22)
   ["16", (c) => <KillsLine cues={{ lck: at(c, L("16").start + 0.3), lpl: at(c, W("16", "lpl")), gap: at(c, W("17", "3")) }} />],
   // Jxmy highlighted page, then big text sliding past (style map 1:34)
@@ -179,7 +180,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: no chapter titles in the six-parts section, footage between the graphs
   // Jxmy pill bars with the players at the foot (jxmy-graphs eatF7QHwga4 g08, style map 5:15); v14 big-stage half alone
   ["45", (c) => <PillBars cues={{ rise: 4, lit: at(c, WA("46", ["knight", "carrier"])), side: 1e6 }} />],
-  ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top }} />; }], // v15.2: climbs to Chovy 2025
+  ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top, second: at(c, W("48", "knight")) }} />; }], // v15.2: climbs to Chovy 2025
   // Jxmy two-player board (jxmy-graphs GPH4nK5sQ-8 g01): Chovy vs Knight, the skill score "by a hair" last
   // 48b (Faker's best season) cut, ay 20 Nov 18:03: not in the video
   ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, WA("49", ["behind", "just", "knight"])) }} rows={[
@@ -210,7 +211,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["64", (c) => <OGPyramid c={c} />],
   // ay 20 Nov: the Uzi/Bengi cards repeated the six-part cards; now a slope chart, fans vs the model (league-v14 ranks)
   // ay 20 Nov: back to the bordered face cards for Uzi and Bengi
-  ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, WA("68", ["intangibles", "also"]))} stamp={{ text: "GLAZED?", at: at(c, W("68", "bit")) + 12, card: 0 }} cards={[
+  ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, WA("68", ["intangibles", "also"]))} stamp={{ text: "GLAZED?", at: at(c, WA("68", ["opinion", "honestly", "bit"])) + 12, card: 0 }} cards={[
     { id: "uzi", sub: "#22 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
     { id: "bengi", sub: "#43 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#182 OWN NUMBERS", at: at(c, WA("68", ["182", "numbers"])), bad: true }, { text: "SHOTCALLING", at: at(c, W("68", "shot")) }] },
   ]} />],
