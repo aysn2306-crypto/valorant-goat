@@ -22,7 +22,7 @@ const SEG = ["#5E6670", "#747C86"];
 const SHARES: [string, number][] = [["theshy", 1.0275622], ["ning", 0.9579728], ["rookie", 1.0385199], ["jackeylove", 0.9704338], ["baolan", 0.9988858]];
 
 /** `cues` are frames inside the scene: bar in, cut into five, shares written, caption */
-export const TrophySplit: React.FC<{ cues: { photos: number; pie: number; shares: number; caption: number; top?: number; mvp?: number } }> = ({ cues }) => {
+export const TrophySplit: React.FC<{ cues: { photos: number; pie: number; shares: number; caption: number; top?: number; mvp?: number; names?: Record<string, number> } }> = ({ cues }) => {
   const f = useCurrentFrame();
   const total = SHARES.reduce((a, s) => a + s[1], 0);
   // one decimal, largest remainder, so the five always add to exactly 100.0
@@ -48,7 +48,9 @@ export const TrophySplit: React.FC<{ cues: { photos: number; pie: number; shares
         const w = (pct[i] / 100) * W, x = X0 + (acc / 100) * W; acc += pct[i];
         const gap = 10 * cut;
         const mvpOn = f >= (cues.mvp ?? 1e9);
-        const lit = mvpOn ? id === "ning" : id === "rookie" && f >= (cues.top ?? 1e9);
+        // ay 21 Nov 17:07: as each player is named (Rookie to Ning) the highlight moves to him, one at a time
+        const named = cues.names ? Object.entries(cues.names).filter(([, t]) => f >= t).sort((a, b) => b[1] - a[1])[0]?.[0] : undefined;
+        const lit = mvpOn ? id === "ning" : cues.names ? id === named : id === "rookie" && f >= (cues.top ?? 1e9);
         const o = pop(cues.shares); // ay 20 Nov 20:01: all five count up together, 0 to their share
         return (
           <React.Fragment key={id}>

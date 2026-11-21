@@ -25,15 +25,18 @@ const XFADE = 3; // seconds, centred on the chapter break
 // back after about 2 s of silence, fading up while the camera zooms out. Climb timing mirrors ClimbRemap in Draft.tsx.
 type Boss = { file: string; gain: number; voice: number };
 const BOSS = null as Boss | null;
-const climb = () => { const c0 = W("53", "name") + 8 / 30; const hit = c0 + 79 / 30; return { c0, hit, boss: hit + 1, end: L("56").start }; };
+const climb = () => { const c0 = W("53", "name") + 8 / 30; const hit = c0 + 79 / 30; return { c0, hit, boss: hit, end: L("56").start }; };
 type Drop = { a: number; b: number; out: number; back: number; boost?: number };
 const dropOuts = (): Drop[] => {
   const c = climb();
   return [
-    BOSS ? { a: c.hit, b: c.end, out: 0.05, back: 1.5 } : { a: c.hit, b: c.hit + 2, out: 0.05, back: 4, boost: 4 }, // Faker's 1,509
+    // ay 21 Nov 17:07: the music stops on "But hold on" and stays out up the climb; on the landing (just after ay says
+    // "Faker") the boss track hits; when the panel ends the boss fades out over 1 s while Late Night Groove fades back in.
+    // With no boss track yet, the beat comes back on the landing, fading up while the camera zooms out.
+    BOSS ? { a: W("53", "but") - 0.05, b: c.end, out: 0.1, back: 1 } : { a: W("53", "but") - 0.05, b: c.hit, out: 0.1, back: 4, boost: 4 },
     { a: WA("61", ["second", "2nd"]) - 0.1, b: L("63").start, out: 0.1, back: 0.05 },               // "second in all 1,000 too"
     { a: W("71", "second") - 0.1, b: W("71", "knight") + 0.5, out: 0.05, back: 0.05, boost: 5 }, // the GOAT reveal
-    { a: W("80", "this") - 0.1, b: L("81").start, out: 0.05, back: 0.05 },                 // "this model is lowkey cinema"
+    { a: W("81", "this") - 0.1, b: W("81", "cinema") + 0.6, out: 0.05, back: 0.05 },        // "this model is lowkey cinema" (moved after line 81)
     { a: W("85", "young") - 0.15, b: W("85", "ahead"), out: 0.05, back: 0.05 },            // young Faker alone is the greatest
     { a: W("93", "that") - 0.1, b: L("94").start, out: 0.1, back: 0.05 },                 // "that's how far ahead Faker is"
   ];
@@ -84,7 +87,7 @@ export const Music: React.FC<{ lead: number; total: number }> = ({ lead, total }
     const t = f / FPS, hit = lead + cl.boss, out = lead + cl.end;
     const d = env.duck[Math.min(f, env.duck.length - 1)] ?? 0;
     const g = BOSS.gain + (BOSS.voice - BOSS.gain) * d;
-    return t < hit ? 0 : g * smooth(Math.min(1, Math.max(0, (out - t) / 1.5)));
+    return t < hit ? 0 : g * smooth(Math.min(1, Math.max(0, (out + 1 - t) / 1))); // crossfades with Late Night Groove coming back
   };
   const aFrom = fr(t0), bFrom = fr(brk - XFADE / 2);
   return <>
@@ -94,7 +97,7 @@ export const Music: React.FC<{ lead: number; total: number }> = ({ lead, total }
     <Sequence from={bFrom} durationInFrames={total - bFrom} name="music B">
       <Audio src={staticFile(B.file)} volume={(f) => vol(B, f + bFrom, "b")} />
     </Sequence>
-    {BOSS && <Sequence from={fr(lead + cl.boss)} durationInFrames={fr(cl.end - cl.boss) + 1} name="boss music">
+    {BOSS && <Sequence from={fr(lead + cl.boss)} durationInFrames={fr(cl.end + 1 - cl.boss) + 1} name="boss music">
       <Audio src={staticFile(BOSS.file)} volume={(f) => boss(f + fr(lead + cl.boss))} />
     </Sequence>}
   </>;

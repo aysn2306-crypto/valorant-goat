@@ -224,8 +224,14 @@ const rr = (n: number) => { const x = Math.sin(n * 12.9898) * 43758.5453; return
  *  sees how a roll moves the weights), then it holds on roll 10, then a time-lapse to 1,000. */
 /** cues: [slow rolls start, time-lapse start, time-lapse end]; from = rolls already done before this scene (the roll count
  *  carries on after the cut to the Monte Carlo page) */
-export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: number }> = ({ cues, from = 0 }) => {
+// ay 21 Nov 17:07: only Faker at #1 at first; the #2 row comes in when ay starts on "the number 2 player", then the
+// camera zooms in on it
+export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: number; twoAt?: number }> = ({ cues, from = 0, twoAt }) => {
   const f = useCurrentFrame();
+  const twoO = twoAt === undefined ? 1 : interpolate(f, [twoAt, twoAt + 8], [0, 1], { ...clamp, easing: easeOut });
+  const zK = twoAt === undefined ? 0 : interpolate(f, [twoAt + 10, twoAt + 40], [0, 1], { ...clamp, easing: Easing.bezier(0.65, 0, 0.35, 1) });
+  // the #2 row sits at about (1420, 690); zoom 1.9 centred on it
+  const zs = 1 + 0.9 * zK, zx = 960 + (1420 - 960) * zK, zy = 540 + (690 - 540) * zK;
   const slow = Math.min(10, from + Math.max(0, Math.floor((f - cues[0]) / 20) + (from ? 0 : 1)));
   const fast = f > cues[1] ? interpolate(f, [cues[1], cues[2]], [0, 990], { ...clamp, easing: Easing.inOut(Easing.quad) }) : 0;
   const rolls = f < cues[0] && !from ? 0 : Math.min(1000, Math.round(slow + fast));
@@ -234,6 +240,7 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
   const max = 56;
   return (
     <Ground>
+      <AbsoluteFill style={{ transform: `translate(960px, 540px) scale(${zs}) translate(${-zx}px, ${-zy}px)`, transformOrigin: "0 0" }}>
       <div style={{ position: "absolute", left: 120, top: 70, fontFamily: F.title, fontSize: 72, color: CREAM, letterSpacing: 2 }}>ROLL THE DICE</div>
       {PARTS6.map((p, i) => (
         <div key={p} style={{ position: "absolute", left: 120, top: 220 + i * 118, display: "flex", alignItems: "center", gap: 24 }}>
@@ -248,7 +255,7 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
         <div style={{ fontFamily: F.title, fontSize: 40, color: C.muted, letterSpacing: 2 }}>ROLLS</div>
         <div style={{ fontFamily: F.title, fontSize: 170, color: CREAM, lineHeight: 1 }}>{rolls.toLocaleString("en-US")}</div>
         {[["faker", "FAKER #1", C.gold], ["mystery", "#2, SAME NAME", C.cyan]].map(([id, lab, col], k) => (
-          <div key={id} style={{ display: "flex", alignItems: "center", gap: 20, marginTop: 50 }}>
+          <div key={id} style={{ display: "flex", alignItems: "center", gap: 20, marginTop: 50, opacity: k === 1 ? twoO : 1, transform: k === 1 ? `scale(${0.85 + 0.15 * twoO})` : undefined, transformOrigin: "0 50%" }}>
             <div style={{ width: 96, height: 96, borderRadius: 96, overflow: "hidden", position: "relative", background: "#1B212B", boxShadow: `inset 0 0 0 3px ${col}`,
               display: "flex", alignItems: "center", justifyContent: "center", fontFamily: F.title, fontSize: 56, color: col }}>
               {id === "faker" ? P(id).photo && <Img src={staticFile(P(id).photo!)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} /> : "?"}
@@ -261,6 +268,7 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
         ))}
       </div>
       <div style={{ position: "absolute", left: 120, bottom: 40, fontFamily: F.body, fontSize: 26, color: C.muted }}>White tick: my weights. Each roll moves every weight up to 30% up or down.</div>
+      </AbsoluteFill>
     </Ground>
   );
 };
@@ -268,7 +276,25 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
 
 // ------------------------------------------------------------------ Uzi and Bengi, as Jxmy trading cards
 import { Cutout, Flip, RED, BLUE, YEL, TitleBar, Vignette } from "../samples/Samples";
-type CardSpec = { id: string; sub: string; flipAt: number; lines: { text: string; at: number; bad?: boolean }[] };
+type CardSpec = { id: string; sub: string; flipAt: number; lines: { text: string; at: number; bad?: boolean }[]; badgeAt?: number };
+// ay 21 Nov 17:07: a small Hall of Fame "Intimidator" badge in the top right of Uzi's card on "Intimidator badge".
+// Drawn here as a stand-in (purple Hall of Fame shield, gold rim); set BADGE_SRC to ay's image file when he sends one.
+const BADGE_SRC: string | null = null;
+const Badge: React.FC<{ k: number }> = ({ k }) => (
+  <div style={{ width: 120, display: "flex", flexDirection: "column", alignItems: "center", opacity: k, transform: `scale(${1.5 - 0.5 * k}) rotate(${(1 - k) * -12}deg)` }}>
+    {BADGE_SRC ? <Img src={staticFile(BADGE_SRC)} style={{ width: 110, height: 110, objectFit: "contain" }} /> : (
+      <svg width={104} height={116} viewBox="0 0 104 116">
+        <path d="M52 4 L98 26 L98 70 Q98 96 52 112 Q6 96 6 70 L6 26 Z" fill="#5B2E9E" stroke="#E8B04B" strokeWidth={6} />
+        <path d="M52 18 L86 34 L86 68 Q86 88 52 100 Q18 88 18 68 L18 34 Z" fill="none" stroke="rgba(242,242,238,0.35)" strokeWidth={2} />
+        {/* a glare: two narrowed eyes */}
+        <path d="M28 56 Q40 46 50 58 Q40 62 28 56 Z M76 56 Q64 46 54 58 Q64 62 76 56 Z" fill="#F2F2EE" />
+        <circle cx={41} cy={56} r={3.5} fill="#1C1D22" /><circle cx={63} cy={56} r={3.5} fill="#1C1D22" />
+        <path d="M26 44 L48 50 M78 44 L56 50" stroke="#F2F2EE" strokeWidth={5} strokeLinecap="round" />
+        <text x={52} y={86} textAnchor="middle" fontFamily="Bebas Neue" fontSize={16} fill="#E8B04B" letterSpacing={1}>HOF</text>
+      </svg>)}
+    <div style={{ marginTop: 2, padding: "1px 8px", background: "#1C1D22", fontFamily: F.title, fontSize: 20, letterSpacing: 1.5, color: "#E8B04B" }}>INTIMIDATOR</div>
+  </div>
+);
 const BigCard: React.FC<{ c: CardSpec; w: number; h: number }> = ({ c, w, h }) => {
   const pad = 16, plateH = 110, photoH = h - pad * 2 - plateH - 10;
   return (
@@ -298,6 +324,9 @@ export const PlayerCards: React.FC<{ title: string; titleAt: number; cards: Card
       {cards.map((c, i) => (
         <React.Fragment key={c.id}>
           <div style={{ position: "absolute", left: x0 + i * gap - 60, top: 240 }}><Flip startAt={c.flipAt} w={w} h={h}><BigCard c={c} w={w} h={h} /></Flip></div>
+          {c.badgeAt !== undefined && f >= c.badgeAt && (
+            <div style={{ position: "absolute", left: x0 + i * gap - 60 + w - 128, top: 252 }}>
+              <Badge k={interpolate(f, [c.badgeAt, c.badgeAt + 8], [0, 1], { ...clamp, easing: easeOut })} /></div>)}
           <div style={{ position: "absolute", left: x0 + i * gap + w - 100, top: 500, width: 330, background: "#ECE6D2", boxShadow: "0 14px 30px rgba(0,0,0,0.45)",
             opacity: f >= Math.max(c.lines[0].at, c.flipAt + 6) ? 1 : 0 }}>{/* ay 14:36: a panel never shows before its card */}
             <div style={{ height: 16, background: RED }} />

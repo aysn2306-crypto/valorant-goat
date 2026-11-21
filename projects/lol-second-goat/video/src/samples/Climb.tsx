@@ -10,6 +10,7 @@ import { L, W, WA } from "../data/vo";
 import S from "../data/stills.json";
 
 const FPS = 30;
+const TEAL = "#3FD0B5";
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const inOut = Easing.bezier(0.65, 0, 0.35, 1);
 const easeOut = Easing.bezier(0.16, 1, 0.3, 1);
@@ -50,8 +51,11 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const out0 = Math.max(climb1 + 20, A(WA("37", ["21", "twenty"])) + 24), out1 = out0 + 30;
   const kB = interpolate(f, [bench0, bench1], [0, 1], { ...clamp, easing: inOut });
   const kUp = interpolate(f, [climb0, climb1], [0, 1], { ...clamp, easing: inOut });
+  // ay 21 Nov 17:07: "Ruler is second at 18" climbs to Ruler and lights him, then "Faker's up here" climbs on to Faker
+  const rul = A(WA("37", ["ruler"]));
+  const kR = interpolate(f, [rul - 6, rul + 24], [0, 1], { ...clamp, easing: inOut });
   const kOut = interpolate(f, [out0, out1], [0, 1], { ...clamp, easing: inOut });
-  const cy = 3 + kB * (7 - 3) + kUp * (17 - 7) + kOut * (8 - 17);
+  const cy = 3 + kB * (7 - 3) + kR * (13 - 7) + kUp * (17 - 13) + kOut * (8 - 17);
   const s = 1 - kOut * 0.53, sx = 1 - kOut * 0.28;
   const cx = 850 + kOut * 60;
   const KY = 60, KX = 0.88;
@@ -91,7 +95,11 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
         {/* every player */}
         {rows.map((r, i) => {
           const o = dotsIn(i) * (r[0] === "faker" ? 1 : named.some((n) => n.id === r[0]) ? 0.95 : 0.6);
-          return <circle key={r[0]} cx={X(r[2])} cy={Y(r[3])} r={(r[0] === "faker" ? 12 : 7) * t} fill={INK} opacity={o} />;
+          const nm = named.find((n) => n.id === r[0]), lit = nm ? pop(nm.at) : 0;
+          return <g key={r[0]}>
+            <circle cx={X(r[2])} cy={Y(r[3])} r={(r[0] === "faker" ? 12 : 7) * t * (1 + 0.5 * lit)} fill={lit > 0.5 ? TEAL : INK} opacity={o} />
+            {lit > 0 && <circle cx={X(r[2])} cy={Y(r[3])} r={(r[0] === "faker" ? 26 : 20) * t} fill="none" stroke={TEAL} strokeWidth={4 * t} opacity={lit} />}
+          </g>;
         })}
         {/* the gap, once the camera has pulled back */}
         <g opacity={pop(out1 - 2)}>

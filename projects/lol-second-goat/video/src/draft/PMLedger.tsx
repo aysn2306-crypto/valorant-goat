@@ -26,8 +26,9 @@ export const PMLedger: React.FC<{ cues: { lineup: number; result: number; fast: 
   const f = useCurrentFrame();
   const tO = interpolate(f, [0, 8], [0, 1], clamp);
   // which illustrated game is showing, and how far through it
-  const gStart = (i: number) => (i === 0 ? cues.lineup : cues.result + 6 + (i - 1) * 16);
-  const resAt = (i: number) => (i === 0 ? cues.result : gStart(i) + 8);
+  // ay 21 Nov 17:07: the win/loss switch was too fast to read; about a second per game now
+  const gStart = (i: number) => (i === 0 ? cues.lineup : cues.result + 10 + (i - 1) * 32);
+  const resAt = (i: number) => (i === 0 ? cues.result : gStart(i) + 12);
   let gi = 0; for (let i = 1; i < GAMES.length; i++) if (f >= gStart(i)) gi = i;
   const g = GAMES[gi];
   const barK = gi === 0 ? interpolate(f, [cues.lineup, cues.lineup + 14], [0, 1], { ...clamp, easing: easeOut }) : 1;
@@ -46,7 +47,14 @@ export const PMLedger: React.FC<{ cues: { lineup: number; result: number; fast: 
     <AbsoluteFill>
       <Concrete />
       <div style={{ position: "absolute", left: 120, top: 60, opacity: tO, fontFamily: BEBAS, fontSize: 72, letterSpacing: 3, color: INK }}>PLUS-MINUS: WINS ADDED</div>
-      <div style={{ position: "absolute", left: 124, top: 142, opacity: n26, fontFamily: BEBAS, fontSize: 34, letterSpacing: 2, color: MUTE }}>26,000 GAMES, EVERY PLAYER WORKED OUT AT ONCE</div>
+      {/* ay 21 Nov 17:07: a small 26,000 GAMES graphic on "26,000", counting up */}
+      <div style={{ position: "absolute", left: 124, top: 142, opacity: n26, display: "flex", alignItems: "baseline", gap: 14,
+        transform: `scale(${interpolate(f, [cues.n26, cues.n26 + 6, cues.n26 + 12], [0.8, 1.08, 1], clamp)})`, transformOrigin: "0 50%" }}>
+        <div style={{ fontFamily: BEBAS, fontSize: 64, lineHeight: 1, color: TEAL, letterSpacing: 1 }}>
+          {Math.round(26000 * interpolate(f, [cues.n26, cues.n26 + 18], [0, 1], { ...clamp, easing: easeOut })).toLocaleString("en-US")}</div>
+        <div style={{ fontFamily: BEBAS, fontSize: 40, letterSpacing: 2, color: INK }}>GAMES</div>
+        <div style={{ fontFamily: BEBAS, fontSize: 28, letterSpacing: 1.5, color: MUTE, marginLeft: 10 }}>EVERY PLAYER WORKED OUT AT ONCE</div>
+      </div>
       {/* the game card */}
       <div style={{ position: "absolute", left: 120, top: 250, width: 1040, opacity: tO * cardO }}>
         <div style={{ fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: MUTE }}>{fast > 0 ? "GAME " + gamesN.toLocaleString("en-US") : "GAME " + (gi + 1)}</div>

@@ -133,7 +133,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["22", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="TROPHIES" at={at(c, L("22").start + 0.2)} /></AbsoluteFill>],
   // the worth bars open on "how much is an MSI worth", then each value lands as it is said in 23
   ["22@but", (c) => { const w1 = at(c, WA("23", ["100", "hundred"])), w2 = at(c, WA("23", ["56", "fifty"])), w3 = at(c, WA("23", ["44", "forty"]));
-    return <PriceClimb cues={[Math.min(w1, 20), w2, w3, w3 + 10, w3 + 16]} out={w3 + 22} />; }],
+    // ay 21 Nov 17:07: zoom out right after "44" and hold the whole graph about a second (0.8 s pause added after line 23)
+    return <PriceClimb cues={[Math.min(w1, 20), w2, w3, w3 + 6, w3 + 10]} out={w3 + 12} />; }],
   // line 24: every Worlds winner by the strength of the field it beat; "down here" lights DAMWON 2020, "all the way up here" T1 2024
   ["24", (c) => <WorldsValues cues={{ rise: 4, lit: [{ team: "DAMWON Gaming", year: 2020, at: at(c, WA("24", ["down", "damwon"])) },
     { team: "T1", year: 2024, at: at(c, WA("24", ["t1", "toughest"])) }] }} />],
@@ -145,7 +146,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["26@win", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did in the game. Two players on the same team can end up with very different shares." />],
   // ay 20 Nov 13:13: BLG 2026 shares are back (TitleShare.tsx, the no-names version, is kept but unused)
-  ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, WA("27", ["same", "titles"])), shares: at(c, WA("27", ["every", "share"])), caption: at(c, WA("27", ["ig", "2018"])),
+  ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, WA("27", ["same", "titles"])), shares: at(c, WA("27", ["take", "ig"])) /* ay 21 Nov 17:07: players on screen from "Take IG in 2018" */, caption: at(c, WA("27", ["ig", "2018"])),
+    names: { rookie: at(c, WA("27", ["rookie"])), theshy: at(c, WA("27", ["shy"])), baolan: at(c, WA("27b", ["bao", "baolan"])), jackeylove: at(c, WA("27b", ["jackie", "jackey"])), ning: at(c, WA("27b", ["ning"])) },
     top: at(c, WA("27", ["rookie", "biggest"])), mvp: at(c, WA("27b", ["ning", "finals"])) }} />], // ay 19:16: IG 2018 shares, Ning (Finals MVP) smallest on 27b
   ["28", (c) => { // script 15:52, Jxmy's walk: "at the bottom" zooms on the chokers (named on "Creme"), "in the middle" lights the band,
     // "all the way up here" pans to the clutch players, "yup" names Faker
@@ -205,14 +207,16 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 21 Nov 00:29: the definition page, like before (not the wheel)
   ["56", (c) => <Ov.ArticlePage kicker="Statistics" title="Monte Carlo method" markAt={at(c, WA("57b", ["luck", "casino"]))}
     before="A Monte Carlo test runs the same model thousands of times, " mark="changing the inputs at random each time," after=" then counts how often each result comes up. It is named after the Monte Carlo casino, because it runs on chance." />],
-  ["58", (c) => <MonteCarlo cues={[at(c, WA("58", ["dice", "rolls"])), at(c, WA("60", ["ran", "thousand"])), at(c, WA("61", ["1000", "1,000", "all"]))]} />],
+  ["58", (c) => <MonteCarlo cues={[at(c, WA("58", ["dice", "rolls"])), at(c, WA("60", ["ran", "thousand"])), at(c, WA("61", ["1000", "1,000", "all"]))]} twoAt={at(c, WA("61", ["number", "but"]))} />],
   // Jxmy record card (jxmy-graphs 4lbvnNVGd-I g06, style map 6:32)
   // Jxmy quote subtitle over footage (jxmy-graphics 3hZ6Su5PVnI x02, style map 6:42)
   ["64", (c) => <OGPyramid c={c} />],
   // ay 20 Nov: the Uzi/Bengi cards repeated the six-part cards; now a slope chart, fans vs the model (league-v14 ranks)
   // ay 20 Nov: back to the bordered face cards for Uzi and Bengi
   ["68", (c) => <PlayerCards title="NOT EVERYTHING FITS IN A NUMBER" titleAt={at(c, WA("68", ["intangibles", "also"]))} /* 21 Nov 15:40 take: ay no longer says "Uzi's a little bit glazed", so no GLAZED? stamp; it comes back if he does */ cards={[
-    { id: "uzi", sub: "#22 ALL TIME", flipAt: at(c, W("68", "uzi")), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true }, { text: "AURA", at: at(c, W("68", "aura")) }] },
+    // ay 21 Nov 17:07: UNDERRATED under 0 WORLDS on "underrated", then AURA, and the Intimidator badge on "Intimidator"
+    { id: "uzi", sub: "#22 ALL TIME", flipAt: at(c, W("68", "uzi")), badgeAt: at(c, WA("68", ["intimidator", "badge", "hall"])), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true },
+      { text: "UNDERRATED", at: at(c, WA("68", ["underrated", "early"])) }, { text: "AURA", at: at(c, W("68", "aura")) }] },
     { id: "bengi", sub: "#43 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#182 OWN NUMBERS", at: at(c, WA("68", ["182", "numbers"])), bad: true }, { text: "SHOTCALLING", at: at(c, WA("68", ["shot", "measure"])) }] },
   ]} />],
   ["69", (c) => <OGPyramid c={c} />],
@@ -229,7 +233,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["92", (c) => <Silverware fakerAt={4} rows={[KNIGHT_ROW(at(c, WA("93", ["knight"]))), CHOVY_ROW(at(c, WA("93", ["chovy", "and"])))]} />],
   // ay 20 Nov: no B-roll, just the quote on screen, then Gumayusi's row joins Knight and Chovy
   ["94", (c) => { const back = at(c, WA("94", ["still", "long"])); return <>
-    <Sequence durationInFrames={back} layout="none"><AbsoluteFill><Concrete /><Ov.GumaQuoteCard /></AbsoluteFill></Sequence>
+    <Sequence durationInFrames={back} layout="none"><AbsoluteFill><Concrete /><Ov.GumaQuoteCard emojiAt={at(c, WA("94", ["error", "era"])) + 6} /></AbsoluteFill></Sequence>
     <Sequence from={back} layout="none"><Silverware fakerAt={-30} rows={[KNIGHT_ROW(-30), CHOVY_ROW(-30), GUMA_ROW(4)]} /></Sequence></>; }],
 ];
 
@@ -270,7 +274,8 @@ export const Draft: React.FC = () => (
       </Sequence>
     ))}
     {/* the meme sits above the act's ground colour so its black and white stay true */}
-    <Sequence from={fr(LEAD + W("80", "cinema"))} durationInFrames={41} layout="none"><AbsoluteCinema at={0} out={40} /></Sequence>
+    {/* ay 21 Nov 17:07: "this model is lowkey cinema" now ends line 81 */}
+    <Sequence from={fr(LEAD + W("81", "cinema"))} durationInFrames={41} layout="none"><AbsoluteCinema at={0} out={40} /></Sequence>
     <Sequence from={fr(LEAD + VO_END + 0.8)}><EndCard /></Sequence>
     {VO_KEEP.map(([a, b], i) => (
       <Sequence key={"vo" + i} from={fr(LEAD + vt(a))} durationInFrames={fr(b - a)}><Audio src={staticFile(VO_AUDIO)} startFrom={fr(a)} endAt={fr(b)} /></Sequence>

@@ -344,13 +344,19 @@ export const EchoLenses: React.FC<{ word: string; bg: string; lenses: { src: str
 
 /** ay 20 Nov 14:38: the real quote card ay supplied (Polymarket card via lolesports). The top strip with the Polymarket
  *  and Worlds logos is cropped off (no Riot logos). File in public/_local/refs (not in git). */
-export const GumaQuoteCard: React.FC = () => {
+// ay 21 Nov 17:07: a laughing emoji pops up beside the "Guma era" photo. ay supplies the image (17:15): set GUMA_EMOJI
+// to its file in public/_local when it lands; until then nothing shows.
+const GUMA_EMOJI: string | null = null;
+export const GumaQuoteCard: React.FC<{ emojiAt?: number }> = ({ emojiAt }) => {
   const f = useCurrentFrame();
+  const eK = emojiAt === undefined ? 0 : interpolate(f, [emojiAt, emojiAt + 8], [0, 1], { ...clamp, easing: Easing.bezier(0.34, 1.56, 0.64, 1) });
   const o = interpolate(f, [0, 6], [0, 1], clamp);
   const s = interpolate(f, [0, 120], [1.0, 1.04], clamp);
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
       <Img src={staticFile("_local/refs/guma-quote.jpg")} style={{ height: 1000, opacity: o, transform: `scale(${s})`, boxShadow: "0 0 0 1px rgba(255,255,255,0.08)" }} />
+      {GUMA_EMOJI && eK > 0 && <Img src={staticFile(GUMA_EMOJI)} style={{ position: "absolute", right: 150, top: 150, width: 180, height: 180, objectFit: "contain",
+        transform: `scale(${eK}) rotate(${Math.sin(f / 4) * 8}deg)` }} />}
     </AbsoluteFill>
   );
 };
