@@ -2,7 +2,7 @@
 // voiceover-timing.json). A scene starts on its line and holds until the next scene's line. Footage cards stand in for
 // broadcast clips; music is ay's own Suno tracks (Music.tsx); the outro is a placeholder until ay records it.
 import React from "react";
-import { AbsoluteFill, Audio, Easing, Freeze, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, Easing, Freeze, Img, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { C, F } from "../theme";
 import * as St from "../stills/Stills";
 import * as Mo from "../motion/Tests";
@@ -205,7 +205,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // "the model rolls a dice" (58): rolls one by one, a time-lapse on "ran it", 1,000 on "all 1,000". No article page cut.
   // ay 20 Nov 23:03: Monte Carlo explained (56 to 57b) before the roll-the-dice graph from 58
   // ay 21 Nov 00:29: the definition page, like before (not the wheel)
-  ["56", (c) => <Ov.ArticlePage kicker="Statistics" title="Monte Carlo method" markAt={at(c, WA("57b", ["luck", "casino"]))}
+  ["56", (c) => <Ov.ArticlePage kicker="Statistics" title="Monte Carlo method" markAt={at(c, WA("57b", ["changes", "inputs", "luck"]))}
     before="A Monte Carlo test runs the same model thousands of times, " mark="changing the inputs at random each time," after=" then counts how often each result comes up. It is named after the Monte Carlo casino, because it runs on chance." />],
   ["58", (c) => <MonteCarlo cues={[at(c, WA("58", ["dice", "rolls"])), at(c, WA("60", ["ran", "thousand"])), at(c, WA("61", ["1000", "1,000", "all"]))]} twoAt={at(c, WA("61", ["number", "but"]))} />],
   // Jxmy record card (jxmy-graphs 4lbvnNVGd-I g06, style map 6:32)
@@ -217,7 +217,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     // ay 21 Nov 17:07: UNDERRATED under 0 WORLDS on "underrated", then AURA, and the Intimidator badge on "Intimidator"
     { id: "uzi", sub: "#22 ALL TIME", flipAt: at(c, W("68", "uzi")), badgeAt: at(c, WA("68", ["intimidator", "badge", "hall"])), lines: [{ text: "0 WORLDS", at: at(c, W("68", "worlds")), bad: true },
       { text: "UNDERRATED", at: at(c, WA("68", ["underrated", "early"])) }, { text: "AURA", at: at(c, W("68", "aura")) }] },
-    { id: "bengi", sub: "#43 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#182 OWN NUMBERS", at: at(c, WA("68", ["182", "numbers"])), bad: true }, { text: "SHOTCALLING", at: at(c, WA("68", ["shot", "measure"])) }] },
+    { id: "bengi", sub: "#43 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#182 OWN NUMBERS", at: at(c, WA("68", ["182", "numbers"])), bad: true }, { text: "SHOTCALLING", at: at(c, WA("68b", ["shotcalling", "shot", "leadership"])) }] },
   ]} />],
   ["69", (c) => <OGPyramid c={c} />],
   ["76", () => <Words text="TWO TWISTS" />],
@@ -234,18 +234,20 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: no B-roll, just the quote on screen, then Gumayusi's row joins Knight and Chovy
   ["94", (c) => { const back = at(c, WA("94", ["still", "long"])); return <>
     <Sequence durationInFrames={back} layout="none"><AbsoluteFill><Concrete /><Ov.GumaQuoteCard emojiAt={at(c, WA("94", ["error", "era"])) + 6} /></AbsoluteFill></Sequence>
-    <Sequence from={back} layout="none"><Silverware fakerAt={-30} rows={[KNIGHT_ROW(-30), CHOVY_ROW(-30), GUMA_ROW(4)]} /></Sequence></>; }],
+    <Sequence from={back} layout="none"><Silverware fakerAt={-30} rows={[KNIGHT_ROW(-30), CHOVY_ROW(-30), GUMA_ROW(4)]} catAt={26} /></Sequence></>; }],
 ];
 
 const VO_END = VO_DURATION;
+// ay 21 Nov 17:24: hold the last panel (laughing cat under Guma's titles) about 3 s before the end card
+const TAIL = 3.0;
 /** "42" starts on line 42; "42@final" starts on the word "final" in line 42 */
 const startOf = (key: string) => { const [id, w] = key.split("@"); return (w ? W(id, w) : L(id).start) - 0.05; };
 const TL = SCENES.map(([id, el], i) => {
   const t0 = i === 0 ? -LEAD : startOf(id);
-  const t1 = i + 1 < SCENES.length ? startOf(SCENES[i + 1][0]) : VO_END + 0.8;
+  const t1 = i + 1 < SCENES.length ? startOf(SCENES[i + 1][0]) : VO_END + TAIL;
   return { id, el, t0, dur: fr(t1 - t0) };
 });
-export const DRAFT_TOTAL = fr(LEAD + VO_END + 0.8 + OUTRO);
+export const DRAFT_TOTAL = fr(LEAD + VO_END + TAIL + OUTRO);
 
 // End card (ay 20 Nov: no "who's your #2"). 12 s of quiet footage with room for YouTube's end-screen
 // video and subscribe elements in the middle, and the Riot line at the foot.
@@ -263,6 +265,16 @@ const EndCard: React.FC = () => (
   </AbsoluteFill>
 );
 
+const LaughFlash: React.FC = () => {
+  const f = useCurrentFrame();
+  const k = interpolate(f, [0, 5], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.34, 1.56, 0.64, 1) });
+  const out = interpolate(f, [fr(3.75) - 6, fr(3.75)], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const shake = Math.sin(f * 1.9) * 6 * (f < fr(3.2) ? 1 : 0);
+  // ay 21 Nov 17:28: the laughing cat beside the Guma quote during the laugh (the minion goes on the last panel)
+  return <Img src={staticFile("_local/memes/laughing-cat-sticker.png")} style={{ position: "absolute", left: 90, top: 380, width: 330, height: 307, objectFit: "contain",
+    opacity: out, transform: `scale(${k}) rotate(${-5 + shake * 0.4}deg) translate(${shake}px, ${-shake * 0.5}px)` }} />;
+};
+
 export const Draft: React.FC = () => (
   <AbsoluteFill style={{ background: "#0B0B0F" }}>
     <Sequence durationInFrames={fr(LEAD)}><ColdOpen /></Sequence>
@@ -274,9 +286,17 @@ export const Draft: React.FC = () => (
       </Sequence>
     ))}
     {/* the meme sits above the act's ground colour so its black and white stay true */}
+    {/* ay 21 Nov 17:24: after "I heard it was a Guma error" the music stops; vine boom, the laughing minion emote pops in on
+        the left of the Guma photo (so it stays readable) with ay's minion laugh, played whole but turned well down; then ay
+        carries on. ay's clips live in public/_local/memes (not in the public repo). */}
+    <Sequence from={fr(LEAD + W("94", "error") + 0.35)} durationInFrames={fr(3.75)} layout="none" name="Guma laugh">
+      <LaughFlash />
+      <Audio src={staticFile("_local/memes/vine-boom.mp3")} volume={0.32} />
+      <Sequence from={4} layout="none"><Audio src={staticFile("_local/memes/minion-laugh.mp3")} volume={0.55} /></Sequence>
+    </Sequence>
     {/* ay 21 Nov 17:07: "this model is lowkey cinema" now ends line 81 */}
     <Sequence from={fr(LEAD + W("81", "cinema"))} durationInFrames={41} layout="none"><AbsoluteCinema at={0} out={40} /></Sequence>
-    <Sequence from={fr(LEAD + VO_END + 0.8)}><EndCard /></Sequence>
+    <Sequence from={fr(LEAD + VO_END + TAIL)}><EndCard /></Sequence>
     {VO_KEEP.map(([a, b], i) => (
       <Sequence key={"vo" + i} from={fr(LEAD + vt(a))} durationInFrames={fr(b - a)}><Audio src={staticFile(VO_AUDIO)} startFrom={fr(a)} endAt={fr(b)} /></Sequence>
     ))}

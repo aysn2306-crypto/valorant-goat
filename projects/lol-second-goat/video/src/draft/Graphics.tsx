@@ -277,23 +277,12 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
 // ------------------------------------------------------------------ Uzi and Bengi, as Jxmy trading cards
 import { Cutout, Flip, RED, BLUE, YEL, TitleBar, Vignette } from "../samples/Samples";
 type CardSpec = { id: string; sub: string; flipAt: number; lines: { text: string; at: number; bad?: boolean }[]; badgeAt?: number };
-// ay 21 Nov 17:07: a small Hall of Fame "Intimidator" badge in the top right of Uzi's card on "Intimidator badge".
-// Drawn here as a stand-in (purple Hall of Fame shield, gold rim); set BADGE_SRC to ay's image file when he sends one.
-const BADGE_SRC: string | null = null;
+// ay 21 Nov 17:07 / 17:24: ay's 2K Hall of Fame "Intimidator" badge, cut out as a sticker with a white outline
+// (public/_local/memes/intimidator-sticker.png from meme-assets/intimidator-badge.png), tucked into the top right of
+// Uzi's photo on "Intimidator badge"
 const Badge: React.FC<{ k: number }> = ({ k }) => (
-  <div style={{ width: 120, display: "flex", flexDirection: "column", alignItems: "center", opacity: k, transform: `scale(${1.5 - 0.5 * k}) rotate(${(1 - k) * -12}deg)` }}>
-    {BADGE_SRC ? <Img src={staticFile(BADGE_SRC)} style={{ width: 110, height: 110, objectFit: "contain" }} /> : (
-      <svg width={104} height={116} viewBox="0 0 104 116">
-        <path d="M52 4 L98 26 L98 70 Q98 96 52 112 Q6 96 6 70 L6 26 Z" fill="#5B2E9E" stroke="#E8B04B" strokeWidth={6} />
-        <path d="M52 18 L86 34 L86 68 Q86 88 52 100 Q18 88 18 68 L18 34 Z" fill="none" stroke="rgba(242,242,238,0.35)" strokeWidth={2} />
-        {/* a glare: two narrowed eyes */}
-        <path d="M28 56 Q40 46 50 58 Q40 62 28 56 Z M76 56 Q64 46 54 58 Q64 62 76 56 Z" fill="#F2F2EE" />
-        <circle cx={41} cy={56} r={3.5} fill="#1C1D22" /><circle cx={63} cy={56} r={3.5} fill="#1C1D22" />
-        <path d="M26 44 L48 50 M78 44 L56 50" stroke="#F2F2EE" strokeWidth={5} strokeLinecap="round" />
-        <text x={52} y={86} textAnchor="middle" fontFamily="Bebas Neue" fontSize={16} fill="#E8B04B" letterSpacing={1}>HOF</text>
-      </svg>)}
-    <div style={{ marginTop: 2, padding: "1px 8px", background: "#1C1D22", fontFamily: F.title, fontSize: 20, letterSpacing: 1.5, color: "#E8B04B" }}>INTIMIDATOR</div>
-  </div>
+  <Img src={staticFile("_local/memes/intimidator-sticker.png")} style={{ width: 104, height: 120, objectFit: "contain", opacity: Math.min(1, k * 2),
+    transform: `scale(${1.6 - 0.6 * k}) rotate(${8 - (1 - k) * 20}deg)` }} />
 );
 const BigCard: React.FC<{ c: CardSpec; w: number; h: number }> = ({ c, w, h }) => {
   const pad = 16, plateH = 110, photoH = h - pad * 2 - plateH - 10;
@@ -325,7 +314,7 @@ export const PlayerCards: React.FC<{ title: string; titleAt: number; cards: Card
         <React.Fragment key={c.id}>
           <div style={{ position: "absolute", left: x0 + i * gap - 60, top: 240 }}><Flip startAt={c.flipAt} w={w} h={h}><BigCard c={c} w={w} h={h} /></Flip></div>
           {c.badgeAt !== undefined && f >= c.badgeAt && (
-            <div style={{ position: "absolute", left: x0 + i * gap - 60 + w - 128, top: 252 }}>
+            <div style={{ position: "absolute", left: x0 + i * gap - 60 + w - 128, top: 262 }}>
               <Badge k={interpolate(f, [c.badgeAt, c.badgeAt + 8], [0, 1], { ...clamp, easing: easeOut })} /></div>)}
           <div style={{ position: "absolute", left: x0 + i * gap + w - 100, top: 500, width: 330, background: "#ECE6D2", boxShadow: "0 14px 30px rgba(0,0,0,0.45)",
             opacity: f >= Math.max(c.lines[0].at, c.flipAt + 6) ? 1 : 0 }}>{/* ay 14:36: a panel never shows before its card */}

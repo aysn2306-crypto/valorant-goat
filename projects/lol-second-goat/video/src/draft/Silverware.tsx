@@ -30,7 +30,9 @@ const Box: React.FC<{ s: number; fill?: string; stroke?: string }> = ({ s, fill,
   <div style={{ width: s, height: s, boxSizing: "border-box", background: fill ?? "transparent", border: stroke ? `3px solid ${stroke}` : undefined }} />
 );
 
-export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number }> = ({ rows, fakerAt = 0 }) => {
+// ay 21 Nov 17:24/17:28: the video ends on the laughing minion (ay's LO emote) under Gumayusi's titles, with an arrow
+// to the Worlds he still needs.
+export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number; catAt?: number }> = ({ rows, fakerAt = 0, catAt }) => {
   const f = useCurrentFrame();
   const COL = [450, 900, 1290], ICON = [34, 34, 18], GAP = [6, 6, 4], CW = [440, 380, 580];
   const all: SilverRow[] = [{ id: "faker", have: [6, 2, 10], need: [0, 0, 0], at: fakerAt }, ...rows];
@@ -83,6 +85,20 @@ export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number }> = ({ 
           </div>
         );
       })}
+      {catAt !== undefined && (() => {
+        const k = interpolate(f, [catAt, catAt + 8], [0, 1], { ...clamp, easing: Easing.bezier(0.34, 1.56, 0.64, 1) });
+        const ar = interpolate(f, [catAt + 8, catAt + 22], [0, 1], { ...clamp, easing: easeOut });
+        const path = "M 1000 905 C 900 905, 840 880, 812 834";
+        return <>
+          <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
+            <path d={path} fill="none" stroke={GOLD} strokeWidth={7} strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ar} />
+            <path d="M 796 846 L 812 834 L 826 852" fill="none" stroke={GOLD} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" opacity={ar > 0.95 ? 1 : 0} />
+          </svg>
+          <Img src={staticFile("_local/memes/laugh-emote.png")} style={{ position: "absolute", left: 1010, top: 850, width: 320, height: 160, objectFit: "cover",
+            borderRadius: 12, border: "6px solid #F2F2EE",
+            opacity: Math.min(1, k * 2), transform: `scale(${k}) rotate(${-6 + Math.sin(f / 5) * 3}deg)` }} />
+        </>;
+      })()}
     </AbsoluteFill>
   );
 };

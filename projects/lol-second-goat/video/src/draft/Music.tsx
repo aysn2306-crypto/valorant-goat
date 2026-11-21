@@ -24,7 +24,8 @@ const XFADE = 3; // seconds, centred on the chapter break
 // The boss track is ay's pick: set BOSS to its file in public/_local/music when it lands. Until then the beat comes
 // back after about 2 s of silence, fading up while the camera zooms out. Climb timing mirrors ClimbRemap in Draft.tsx.
 type Boss = { file: string; gain: number; voice: number };
-const BOSS = null as Boss | null;
+// ay 21 Nov 17:13: Elden Ring boss music from 4:14 of ay's pick (music/boss/boss-elden-414-12s.wav, about -8 LUFS)
+const BOSS = { file: "_local/music/boss.wav", gain: db(-16), voice: db(-22) } as Boss | null;
 const climb = () => { const c0 = W("53", "name") + 8 / 30; const hit = c0 + 79 / 30; return { c0, hit, boss: hit, end: L("56").start }; };
 type Drop = { a: number; b: number; out: number; back: number; boost?: number };
 const dropOuts = (): Drop[] => {
@@ -38,7 +39,9 @@ const dropOuts = (): Drop[] => {
     { a: W("71", "second") - 0.1, b: W("71", "knight") + 0.5, out: 0.05, back: 0.05, boost: 5 }, // the GOAT reveal
     { a: W("81", "this") - 0.1, b: W("81", "cinema") + 0.6, out: 0.05, back: 0.05 },        // "this model is lowkey cinema" (moved after line 81)
     { a: W("85", "young") - 0.15, b: W("85", "ahead"), out: 0.05, back: 0.05 },            // young Faker alone is the greatest
-    { a: W("93", "that") - 0.1, b: L("94").start, out: 0.1, back: 0.05 },                 // "that's how far ahead Faker is"
+    { a: W("93", "that") - 0.1, b: L("94").start, out: 0.1, back: 0.05 },
+    // ay 21 Nov 17:24: after "I heard it was a Guma error" the music stops for the laugh (GIF + minion laugh), then carries on
+    { a: W("94", "error") + 0.35, b: W("94", "but") - 0.05, out: 0.05, back: 0.3 },                 // "that's how far ahead Faker is"
   ];
 };
 
