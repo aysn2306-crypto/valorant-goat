@@ -1,4 +1,5 @@
-// LOCKED (ay 20 Nov 20:01): each row shows the combo that lands CLOSEST above Faker's score, never far over it.
+// LOCKED (ay 20 Nov 20:01, 21 Nov 01:03): closest above Faker's score, trophies SPREAD across Worlds, MSI and league
+// titles for Knight and Chovy (model runs draft_scores_spread_*.csv); Gumayusi 6+6+12 as computed.
 // What it takes to reach Faker (ay 20 Nov): no years and no Faker decline, just the silverware each player would need
 // to reach Faker's score as it stands today (94.4, v14.1). A unit chart, one icon per title (Jxmy's unit grid, jxmy-graphs
 // XMaPrXzclaQ g07): titles already won in grey, the ones still needed drawn in teal, row by row as each name is said.
@@ -86,6 +87,6 @@ export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number }> = ({ 
   );
 };
 
-export const KNIGHT_ROW = (at: number): SilverRow => ({ id: "knight", have: [1, 1, 8], need: [5, 0, 0], at, score: "WITH THESE · 97.6" });
-export const CHOVY_ROW = (at: number): SilverRow => ({ id: "chovy", have: [0, 2, 7], need: [4, 0, 8], at, score: "WITH THESE · 95.3" });
+export const KNIGHT_ROW = (at: number): SilverRow => ({ id: "knight", have: [1, 1, 8], need: [3, 1, 5], at, score: "WITH THESE · 95.1" });
+export const CHOVY_ROW = (at: number): SilverRow => ({ id: "chovy", have: [0, 2, 7], need: [4, 1, 5], at, score: "WITH THESE · 95.0" });
 export const GUMA_ROW = (at: number): SilverRow => ({ id: "gumayusi", have: [3, 1, 1], need: [6, 6, 12], at, score: "WITH THESE · 97.6" });
