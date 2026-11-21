@@ -116,7 +116,7 @@ const TRAITS: Record<string, string[]> = {
   TROPHIES: ["Worlds", "MSI", "League titles"],
   SKILL: ["Lane stats", "Same role", "Same league"],
   "BIG GAMES\n& CLUTCH": ["Finals", "Playoffs", "Clutch series"],
-  "TEAM\nIMPACT": ["Plus-minus", "With or without", "Best 5 seasons"],
+  "TEAM\nIMPACT": ["Plus-minus", "With or without", "Per 100 games"], // v15.3: whole career per 100 games
   LONGEVITY: ["Years at the top", "Top seasons", "Consistency"],
   RECOGNITION: ["All-Pro teams", "MVP awards", "Pre-2020 picks"],
 };

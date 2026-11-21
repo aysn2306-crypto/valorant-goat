@@ -598,6 +598,8 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
   const cam = walk ? camAt(fr0, keys) : undefined;
   const midLit = walk ? Math.min(1, Math.max(0, (fr0 - walk.mid - 10) / 10)) * (fr0 < walk.top ? 1 : Math.max(0, 1 - (fr0 - walk.top) / 10)) : 0;
   const v2 = (v: number) => (v > 0 ? "+" : "") + v.toFixed(2);
+  const byScore = new Map(rows.slice().sort((p, q) => p[3] - q[3]).map((r, i) => [r[0], i] as [string, number]));
+  const dotIn = (id: string) => { const t = 6 + ((byScore.get(id) ?? 0) / Math.max(1, rows.length - 1)) * 60; return Math.min(1, Math.max(0, (fr0 - t) / 6)); };
   return (
     <Stage title="CLUTCH OR LUCK" cam={cam}>
       <svg style={{ position: "absolute", inset: 0 }} width={1920} height={1080}>
@@ -607,8 +609,8 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
       <Big x={X(215)} y={Y(1.3)} size={38} color={C.gold} align="center" w={300}>CLUTCH ↑</Big>
       <Big x={X(70)} y={Y(-1.25)} size={34} color="#9AA3B1" align="center" w={300}>CHOKED ↓</Big>
       <Axes b={B} xr={xr} yr={yr} xt={[40, 80, 120, 160, 200, 240]} yt={[-1.5, -1, -0.5, 0, 0.5, 1, 1.5]} xl="BIG SERIES PLAYED (40+ BIG SERIES)" yl="SERIES WON ABOVE EXPECTED, PER 10" yf={(v) => (v > 0 ? "+" + v : String(v))} />
-      {rows.filter((r) => r[0] !== "faker").map((r) => <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6} color={heat((r[3] + 1) / 2)} o={Math.abs(r[3]) > luck(r[2]) ? 1 : 0.6} />)}
-      <Dot x={X(fk[2])} y={Y(fk[3])} r={6} color={heat((fk[3] + 1) / 2)} o={1} />{/* Faker's dot is there from the start; his line circles it */}
+      {/* ay 21 Nov 00:29 (Jxmy): the dots come in one after another by score, lowest first, over two seconds */}
+      {rows.map((r) => { const k = dotIn(r[0]); return <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={6 * (0.4 + 0.6 * k)} color={heat((r[3] + 1) / 2)} o={k * (r[0] === "faker" || Math.abs(r[3]) > luck(r[2]) ? 1 : 0.6)} />; })}{/* Faker's dot is there from the start; his line circles it */}
       {chokeShown && chokers.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={v2(r[3])} side={side} ring={18} color="#E06A5A" />; })}
       {middle.filter(([id]) => nameAt[id] !== undefined && fr0 >= nameAt[id] && fr0 < (walk?.top ?? 1e9)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!;
         return <Callout key={"m" + id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={v2(r[3])} side={side} ring={14} pad={6} size={0.85} color="#F2F2EE" />; })}

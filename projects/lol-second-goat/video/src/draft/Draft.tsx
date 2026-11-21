@@ -29,7 +29,7 @@ import { FansVsModel } from "./Slope";
 import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
-import { PlayerCards, DreamSeasons, MonteCarlo, MonteCarloIntro, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
+import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
 const FPS = 30;
@@ -104,14 +104,18 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: show his titles getting cut down by the averaging
   ["13", (c) => <TrophyWeight barAt={at(c, WA("13", ["trophies", "main"]))} cupsAt={at(c, WA("13", ["six", "barely", "worlds"]))}
     barsAt={at(c, WA("13", ["moved", "barely"]))} avgAt={at(c, WA("13", ["averaged", "averaging"]))} dragAt={at(c, WA("13", ["dragged", "later", "down"]))} />], // script 16:05: trophy weight too small + averaging
-  ["15", (c) => <MLBoard title="Peak, not average" lines={[
-    { text: "Version 1: the average of every year", at: 4 },
+  // ay 21 Nov 00:29: "Peak, not average" was misleading (team impact and clutch use the whole career); the board now says
+  // exactly what line 15 says changed
+  ["15", (c) => <MLBoard title="What changed" lines={[
+    { text: "Version 1: every season averaged", at: 4 },
     { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },
-    { text: "Now: his best years, and longevity on its own", at: at(c, W("15", "best")) },
-    { face: "faker", text: "Faker now: #1", at: at(c, W("15", "longevity")), accent: true }]}
+    { text: "Now: trophies are the biggest part", at: at(c, WA("15", ["trophies"])) },
+    { text: "Skill: his best years", at: at(c, WA("15", ["best"])) },
+    { text: "Longevity: its own score", at: at(c, WA("15", ["longevity"])) },
+    { face: "faker", text: "Faker now: #1", at: at(c, WA("15", ["longevity"])) + 20, accent: true }]}
     side={<SideBars caption="Faker's all-time rank" rows={[
-      { label: "Average of every year", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
-      { label: "Best years + longevity", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "longevity")) }]} />} sideAt={10} />],
+      { label: "Version 1", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
+      { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, WA("15", ["longevity"])) + 20 }]} />} sideAt={10} />],
   // v15.3 (ay 20 Nov 23:09): trophies are 30% of the score; the share swings on "subjective", settles on "30%"
   ["15b", (c) => <TrophyShare swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))} />],
   // Jxmy line chart (style map 1:22)
@@ -198,8 +202,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // then back with the count carried on: about 10 rolls, a hold on one, the time-lapse to 1,000 on "all 1000"
   // ay 20 Nov 19:16: the graph holds still while ay explains the Monte Carlo test (57, 57b), then moves on
   // "the model rolls a dice" (58): rolls one by one, a time-lapse on "ran it", 1,000 on "all 1,000". No article page cut.
-  // ay 20 Nov 23:03: Monte Carlo card while ay explains (56 to 57b), then the roll-the-dice graph from 58
-  ["56", (c) => <MonteCarloIntro titleAt={at(c, WA("57", ["monte", "carlo"]))} spinAt={at(c, WA("57b", ["luck", "casino"]))} />],
+  // ay 20 Nov 23:03: Monte Carlo explained (56 to 57b) before the roll-the-dice graph from 58
+  // ay 21 Nov 00:29: the definition page, like before (not the wheel)
+  ["56", (c) => <Ov.ArticlePage kicker="Statistics" title="Monte Carlo method" markAt={at(c, WA("57b", ["luck", "casino"]))}
+    before="A Monte Carlo test runs the same model thousands of times, " mark="changing the inputs at random each time," after=" then counts how often each result comes up. It is named after the Monte Carlo casino, because it runs on chance." />],
   ["58", (c) => <MonteCarlo cues={[at(c, WA("58", ["dice", "rolls"])), at(c, WA("60", ["ran", "thousand"])), at(c, WA("61", ["1000", "1,000", "all"]))]} />],
   // Jxmy record card (jxmy-graphs 4lbvnNVGd-I g06, style map 6:32)
   // Jxmy quote subtitle over footage (jxmy-graphics 3hZ6Su5PVnI x02, style map 6:42)

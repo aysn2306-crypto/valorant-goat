@@ -112,7 +112,7 @@ export const TrophyWeight: React.FC<{ barAt: number; cupsAt: number; barsAt?: nu
           const top = Math.min(Y0, Y0 + (Y(r) - Y0) * grow), h = Math.abs(Y(r) - Y0) * grow;
           const low = r < avg;
           return <g key={y}>
-            <rect x={x} y={top} width={bw} height={h} fill={low && drag > 0.5 ? BAD : y === bestYear ? TEAL : "#6B7178"} />
+            <rect x={x} y={top} width={bw} height={h} fill={y === bestYear ? TEAL : "#6B7178"} /* LOCKED (ay 21 Nov 00:29): no red bars, his later seasons were great */ />
             <text x={x + bw / 2} y={Math.max(Y0, Y(r)) + 40} textAnchor="middle" fontFamily={BEBAS} fontSize={30} fill={MUTE}>{"'" + String(y).slice(2)}</text>
           </g>;
         })}
