@@ -1,6 +1,6 @@
 // Full draft (19 Nov night): every visual cut to ay's assembled voiceover (voiceover-assembled.mp3, word times from
 // voiceover-timing.json). A scene starts on its line and holds until the next scene's line. Footage cards stand in for
-// broadcast clips; no music (ay picks the track); the outro is a placeholder until ay records it.
+// broadcast clips; music is ay's own Suno tracks (Music.tsx); the outro is a placeholder until ay records it.
 import React from "react";
 import { AbsoluteFill, Audio, Easing, Freeze, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { C, F } from "../theme";
@@ -12,6 +12,7 @@ import { Build, Count527, Footage, Formula, Quote, Words } from "../rough/RoughC
 import { AllProTest, MLBoard, SideBars, SideCoins, SideScale, SideTowers, WithWithout } from "./Boards";
 import { TeamRoles } from "./TeamRoles";
 import { PMLedger } from "./PMLedger";
+import { Music } from "./Music";
 import { TrophyShare } from "./TrophyShare";
 import { VersionOne } from "./VersionOne";
 import { TrophySplit } from "./TrophySplit";
@@ -273,10 +274,11 @@ export const Draft: React.FC = () => (
     {VO_KEEP.map(([a, b], i) => (
       <Sequence key={"vo" + i} from={fr(LEAD + vt(a))} durationInFrames={fr(b - a)}><Audio src={staticFile(VO_AUDIO)} startFrom={fr(a)} endAt={fr(b)} /></Sequence>
     ))}
+    <Music lead={LEAD} total={DRAFT_TOTAL} />
     {VO_PREVIEW && VO_LINES.filter((l) => l.sub).flatMap((l) => subChunks(l).map((c, k) => (
       <Sequence key={"sub" + l.line + "-" + k} from={fr(LEAD + c.a - 0.1)} durationInFrames={Math.max(1, fr(c.b - c.a + 0.1))} layout="none"><Subtitle text={c.text} /></Sequence>
     )))}
-    <div style={{ position: "absolute", right: 24, top: 16, fontFamily: F.body, fontSize: 18, color: "#4A5361" }}>{VO_PREVIEW ? "TIMING PREVIEW · new lines as subtitles, not recorded yet" : "DRAFT · no music yet"}</div>
+    <div style={{ position: "absolute", right: 24, top: 16, fontFamily: F.body, fontSize: 18, color: "#4A5361" }}>{VO_PREVIEW ? "TIMING PREVIEW · new lines as subtitles, not recorded yet" : "DRAFT"}</div>
   </AbsoluteFill>
 );
 
