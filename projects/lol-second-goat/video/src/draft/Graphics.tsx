@@ -140,7 +140,7 @@ export const TwoFakers: React.FC<{ cues: [number, number] }> = ({ cues }) => {
       </svg>
       {t1 > 0.9 && <Tag x={xOf("Faker 2013-19") + bw / 2} y={Y(score["Faker 2013-19"]) - 20} id="faker" text="FAKER 2013–19" sub="#1" color={C.gold} />}
       {t2 > 0.9 && <Tag x={xOf("Faker 2020-26") + bw / 2} y={Y(score["Faker 2020-26"]) - 20} id="faker" text="FAKER 2020–26" sub={"#" + (orderC.indexOf("Faker 2020-26") + 1)} color={C.gold} />}
-      {grow > 0.9 && <Tag x={xOf("Knight") + bw / 2 + 430} y={Y(score["Knight"]) - 10} id="knight" text="KNIGHT" sub={"#" + ((t1 > 0.5 ? orderB : orderA).indexOf("Knight") + 1)} color={C.cyan} small />}
+      {grow > 0.9 && <Tag x={xOf("Knight") + bw / 2 + 430} y={Y(score["Knight"]) - 10} id="knight" text="KNIGHT" sub={t1 > 0.5 ? "#" + (orderB.indexOf("Knight") + 1) : "#1 WITHOUT FAKER" /* council 22 Nov: never a bare "KNIGHT #1" */} color={C.cyan} small />}
       {grow > 0.9 && <svg width={1920} height={1080} style={{ position: "absolute" }}><line x1={xOf("Knight") + bw} y1={Y(score["Knight"]) + 6} x2={xOf("Knight") + bw / 2 + 420} y2={Y(score["Knight"]) - 50} stroke={C.cyan} strokeWidth={3} /></svg>}
       <div style={{ position: "absolute", left: 0, right: 0, top: 40, textAlign: "center", fontFamily: F.title, fontSize: 72, color: CREAM, letterSpacing: 2 }}>TWO FAKERS</div>
     </Ground>
@@ -285,7 +285,7 @@ const Badge: React.FC<{ k: number }> = ({ k }) => (
     transform: `scale(${1.6 - 0.6 * k}) rotate(${8 - (1 - k) * 20}deg)` }} />
 );
 const BigCard: React.FC<{ c: CardSpec; w: number; h: number }> = ({ c, w, h }) => {
-  const pad = 16, plateH = 110, photoH = h - pad * 2 - plateH - 10;
+  const pad = 16, plateH = 136, photoH = h - pad * 2 - plateH - 10;
   return (
     <div style={{ width: w, height: h, background: RED, borderRadius: 6, position: "relative", overflow: "hidden", boxShadow: "0 18px 40px rgba(0,0,0,0.55)" }}>
       <div style={{ position: "absolute", left: 0, right: 0, top: h * 0.62, height: 20, background: CREAM }} />
@@ -294,8 +294,9 @@ const BigCard: React.FC<{ c: CardSpec; w: number; h: number }> = ({ c, w, h }) =
         <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: photoH, overflow: "hidden" }}><Cutout id={c.id} w={w - pad * 2 - 16} h={photoH} /></div>
         <div style={{ position: "absolute", left: 8, right: 8, bottom: 8, height: plateH, borderRadius: 14, background: BLUE, border: `4px solid ${YEL}`,
           display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ fontFamily: F.title, fontSize: 48, color: CREAM, letterSpacing: 1 }}>{P(c.id).name.toUpperCase()}</div>
-          <div style={{ fontFamily: F.body, fontWeight: 600, fontSize: 20, color: "rgba(236,230,210,0.85)", letterSpacing: 1 }}>{c.sub}</div>
+          <div style={{ fontFamily: F.title, fontSize: 52, lineHeight: 1, color: CREAM, letterSpacing: 1 }}>{P(c.id).name.toUpperCase()}</div>
+          {/* council 22 Nov: the rank was too small on a phone (20 px), now about twice the size */}
+          <div style={{ fontFamily: F.title, fontSize: 42, lineHeight: 1, marginTop: 6, color: CREAM, letterSpacing: 1.5 }}>{c.sub}</div>
         </div>
       </div>
     </div>
@@ -304,7 +305,7 @@ const BigCard: React.FC<{ c: CardSpec; w: number; h: number }> = ({ c, w, h }) =
 export const PlayerCards: React.FC<{ title: string; titleAt: number; cards: CardSpec[]; stamp?: { text: string; at: number; card: number } }> = ({ title, titleAt, cards, stamp }) => {
   const f = useCurrentFrame();
   const push = interpolate(f, [0, 900], [1, 1.07], clamp);
-  const w = 380, h = 560, gap = 800, x0 = 960 - ((cards.length - 1) * gap + 550) / 2;
+  const w = 380, h = 560, gap = 920, x0 = cards.length > 1 ? 110 : 960 - 275; // council 22 Nov: wider apart so the text boxes can be twice the size
   return (
     <AbsoluteFill>
       <Vignette bg="#121316" />
@@ -316,12 +317,12 @@ export const PlayerCards: React.FC<{ title: string; titleAt: number; cards: Card
           {c.badgeAt !== undefined && f >= c.badgeAt && (
             <div style={{ position: "absolute", left: x0 + i * gap - 60 + w - 128, top: 262 }}>
               <Badge k={interpolate(f, [c.badgeAt, c.badgeAt + 8], [0, 1], { ...clamp, easing: easeOut })} /></div>)}
-          <div style={{ position: "absolute", left: x0 + i * gap + w - 100, top: 500, width: 330, background: "#ECE6D2", boxShadow: "0 14px 30px rgba(0,0,0,0.45)",
+          <div style={{ position: "absolute", left: x0 + i * gap + w - 100, top: 470, width: 560, background: "#ECE6D2", boxShadow: "0 14px 30px rgba(0,0,0,0.45)",
             opacity: f >= Math.max(c.lines[0].at, c.flipAt + 6) ? 1 : 0 }}>{/* ay 14:36: a panel never shows before its card */}
             <div style={{ height: 16, background: RED }} />
-            <div style={{ padding: "16px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
+            <div style={{ padding: "20px 26px", display: "flex", flexDirection: "column", gap: 14 }}>
               {c.lines.map((l) => (
-                <div key={l.text} style={{ fontFamily: F.title, fontSize: 34, lineHeight: 1.05, color: l.bad ? "#B3261E" : "#1C1D22", opacity: f >= Math.max(l.at, c.flipAt + 6) ? 1 : 0,
+                <div key={l.text} style={{ fontFamily: F.title, fontSize: 60, lineHeight: 1, color: l.bad ? "#B3261E" : "#1C1D22", opacity: f >= Math.max(l.at, c.flipAt + 6) ? 1 : 0,
                   transform: `translateX(${interpolate(f, [l.at, l.at + 6], [-20, 0], clamp)}px)` }}>{l.text}</div>
               ))}
             </div>

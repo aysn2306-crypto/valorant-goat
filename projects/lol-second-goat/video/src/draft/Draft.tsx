@@ -19,9 +19,10 @@ import { TrophySplit } from "./TrophySplit";
 import { TitleShare } from "./TitleShare";
 import { SeasonList } from "./SeasonList";
 import { HeadToHead } from "./HeadToHead";
+import { LeadBars } from "./LeadBars";
 import * as Ov from "./Overlays";
 import { KillsLine } from "./KillsLine";
-import { WorldsValues, HardestRuns, PriceClimb } from "./Bars";
+import { WorldsValues, PriceClimb } from "./Bars";
 import { Concrete } from "../samples/Climb";
 import { PercentStack } from "./PercentStack";
 import { PillBars, StackedLines, TitleList } from "./Lists";
@@ -112,7 +113,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { face: "faker", text: "Faker now: #1", at: at(c, L("15").end) - 10, accent: true }]}
     side={<SideBars caption="Faker's all-time rank" rows={[
       { label: "Version 1", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
-      { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, L("15").end) - 10 }]} />} sideAt={10} />],
+      // council 22 Nov: the "Now" bar fills to #1 as ay says "So I fixed it" (it used to fill 1 s before the cut)
+      { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "fixed")) }]} />} sideAt={10} big />],
   // v15.3 (ay 20 Nov 23:09): trophies are 30% of the score; the share swings on "subjective", settles on "30%"
   // 21 Nov 15:40 take has 15b and 15d again
   ["15b", (c) => <TrophyShare swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))} />],
@@ -136,10 +138,11 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     // ay 21 Nov 17:07: zoom out right after "44" and hold the whole graph about a second (0.8 s pause added after line 23)
     return <PriceClimb cues={[Math.min(w1, 20), w2, w3, w3 + 6, w3 + 10]} out={w3 + 12} />; }],
   // line 24: every Worlds winner by the strength of the field it beat; "down here" lights DAMWON 2020, "all the way up here" T1 2024
-  ["24", (c) => <WorldsValues cues={{ rise: 4, lit: [{ team: "DAMWON Gaming", year: 2020, at: at(c, WA("24", ["down", "damwon"])) },
-    { team: "T1", year: 2024, at: at(c, WA("24", ["t1", "toughest"])) }] }} />],
-  // 24b: the biggest underdog is a different question: each champion's own odds, DRX 2022 lit on "DRX", the 1 in 500 on "500"
-  ["24b", (c) => <HardestRuns cues={{ rise: 0, lit: [{ team: "DRX", year: 2022, at: at(c, WA("24b", ["drx"])) }] }} />],
+  // council 22 Nov (ay: "make any changes you think are suitable"): one Worlds chart only. On 24b DAMWON and T1 dim,
+  // DRX 2022 lights on "DRX" and its "0.2% chance" callout lands on the number (the second "hardest runs" chart is cut)
+  ["24", (c) => { const drx = at(c, WA("24b", ["drx"])); return <WorldsValues cues={{ rise: 4, lit: [{ team: "DAMWON Gaming", year: 2020, at: at(c, WA("24", ["down", "damwon"])), until: drx },
+    { team: "T1", year: 2024, at: at(c, WA("24", ["t1", "toughest"])), until: drx }, { team: "DRX", year: 2022, at: drx }],
+    note: { team: "DRX", year: 2022, at: at(c, WA("24b", ["chance"])) - 36, big: "0.2% CHANCE", small: "THE MODEL'S ODDS FOR DRX BEFORE WORLDS 2022" } }} />; }],
   // 25: what BLG's harder run is worth to Knight
   // 25 cut (ay 20 Nov 19:16): no Knight trophy-points segment
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
@@ -220,6 +223,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { id: "bengi", sub: "#43 ALL TIME", flipAt: at(c, WA("68", ["bengi", "benji"])), lines: [{ text: "3 WORLDS", at: at(c, W("68", "won", 1)) }, { text: "#182 OWN NUMBERS", at: at(c, WA("68", ["182", "numbers"])), bad: true }, { text: "SHOTCALLING", at: at(c, WA("68b", ["shotcalling", "shot", "leadership"])) }] },
   ]} />],
   ["69", (c) => <OGPyramid c={c} />],
+  // council 22 Nov (ay: "make any changes you think are suitable"): after the zoom-out on the pyramid, where Knight's lead
+  // over Chovy comes from (big games; trophies about a tie), on "this year he's just beat everyone"
+  ["74@this", () => <LeadBars startAt={4} />],
   ["76", () => <Words text="TWO TWISTS" />],
   // ay 20 Nov: the twists on the original five-tier pyramid, with the G.O.A.T. pyramid writing top left
   ["77", (c) => <PyramidStates states={[{ at: 0, order: ORDER_2026, label: "2026" }, { at: at(c, W("77", "2025")), order: ORDER_2025, label: "END OF 2025" }]} />],

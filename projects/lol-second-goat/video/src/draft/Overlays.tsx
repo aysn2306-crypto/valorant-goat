@@ -102,20 +102,20 @@ export const BigWord: React.FC<{ text: string; at: number; y?: number; size?: nu
 //   in one after another until they pile up across the frame. ay 20 Nov: real answers only, quoted word for word from
 //   real articles (lol-second-goat/research/fan-answers.csv), each with its site and year. Then the one being talked
 //   about comes forward and the rest dim.
-const TAKES: { text: string; src: string; x: number; y: number; id?: string }[] = [
-  { text: "“The second-best player of all time has got to be the LPL's Rookie.”", src: "RIFTFEED · 2023", x: 70, y: 120 },
-  { text: "“2. Ryu \"Keria\" Min-seok (T1)”", src: "SPILLED.GG · 2026", x: 1200, y: 300, id: "keria" },
-  { text: "“The true LPL goat and nearest to SGOAT is Xiaohu.”", src: "TEAM LIQUID · 2025", x: 70, y: 300 },
-  { text: "“The GOAT label gets thrown around when people talk about him” (Chovy)", src: "SPILLED.GG · 2026", x: 70, y: 480, id: "chovy" },
-  { text: "“the only one who could come close to matching Faker's status” (Uzi)", src: "HOTSPAWN · 2026", x: 70, y: 660 },
+// council 22 Nov (ay: "make any changes you think are suitable"): five small quotes were unreadable on a phone; now the
+// three that matter, about twice the size (Xiaohu and Uzi quotes taken off)
+const TAKES: { text: string; src: string; x: number; y: number; w: number; id?: string }[] = [
+  { text: "“The second-best player of all time has got to be the LPL's Rookie.”", src: "RIFTFEED · 2023", x: 70, y: 90, w: 1150 },
+  { text: "“2. Ryu \"Keria\"\nMin-seok (T1)”", src: "SPILLED.GG · 2026", x: 1250, y: 370, w: 620, id: "keria" },
+  { text: "“The GOAT label gets thrown around when people talk about him” (Chovy)", src: "SPILLED.GG · 2026", x: 70, y: 640, w: 1150, id: "chovy" },
   // ay 20 Nov 14:36: Bengi taken off
 ];
 
-const Bubble: React.FC<{ text: string; src: string; o: number; dim: number; lift: number }> = ({ text, src, o, dim, lift }) => (
-  <div style={{ padding: "18px 30px", background: INK, borderRadius: 26, opacity: o * (1 - 0.6 * dim),
+const Bubble: React.FC<{ text: string; src: string; o: number; dim: number; lift: number; w: number }> = ({ text, src, o, dim, lift, w }) => (
+  <div style={{ maxWidth: w, padding: "24px 36px", background: INK, borderRadius: 26, opacity: o * (1 - 0.6 * dim),
     transform: `scale(${(0.85 + 0.15 * o) * (1 + 0.1 * lift)})`, transformOrigin: "0% 50%", boxShadow: lift ? `0 0 0 ${4 * lift}px ${TEAL}` : undefined }}>
-    <div style={{ fontFamily: "Inter", fontWeight: 700, fontSize: 20, letterSpacing: 2, color: "#6B7380", marginBottom: 6 }}>{src}</div>
-    <div style={{ fontFamily: "Inter", fontWeight: 600, fontSize: 36, color: "#1B1E25", whiteSpace: "nowrap" }}>{text}</div>
+    <div style={{ fontFamily: "Inter", fontWeight: 700, fontSize: 30, letterSpacing: 2, color: "#6B7380", marginBottom: 8 }}>{src}</div>
+    <div style={{ fontFamily: "Inter", fontWeight: 600, fontSize: 62, lineHeight: 1.15, color: "#1B1E25", whiteSpace: "pre-line" }}>{text}</div>
   </div>
 );
 
@@ -132,7 +132,7 @@ export const CommentPile: React.FC<{ cues: { from: number; to: number; focus: { 
         const me = cur && cur.id === t.id;
         return (
           <div key={t.text} style={{ position: "absolute", left: t.x, top: t.y, zIndex: me ? 2 : 1 }}>
-            <Bubble text={t.text} src={t.src} o={o} dim={cur && !me ? k : 0} lift={me ? k : 0} />
+            <Bubble text={t.text} src={t.src} w={t.w} o={o} dim={cur && !me ? k : 0} lift={me ? k : 0} />
           </div>
         );
       })}

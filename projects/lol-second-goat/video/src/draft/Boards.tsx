@@ -23,26 +23,27 @@ export const Face: React.FC<{ id: string; size: number; ring?: string }> = ({ id
 
 export type BLine = { text: string; at: number; face?: string; accent?: boolean; dim?: boolean };
 /** `at` values are frames inside the scene */
-export const MLBoard: React.FC<{ title: string; label?: string; def?: string; defAt?: number; lines: BLine[]; side?: React.ReactNode; sideAt?: number }> = ({ title, label, def, defAt = 0, lines, side, sideAt = 0 }) => {
+// council 22 Nov: `big` = phone-size text (used on "What changed")
+export const MLBoard: React.FC<{ title: string; label?: string; def?: string; defAt?: number; lines: BLine[]; side?: React.ReactNode; sideAt?: number; big?: boolean }> = ({ title, label, def, defAt = 0, lines, side, sideAt = 0, big }) => {
   const f = useCurrentFrame();
   const pop = (a: number) => ({ opacity: interpolate(f, [a, a + 5], [0, 1], clamp), transform: `translateY(${interpolate(f, [a, a + 8], [10, 0], { ...clamp, easing: easeOut })}px)` });
   return (
     <AbsoluteFill style={{ background: "#0B0C0F" }}>
-      <div style={{ position: "absolute", left: 110, top: 120, width: 1000 }}>
-        <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: 76, color: INK, letterSpacing: -0.5, ...pop(2) }}>{title}</div>
+      <div style={{ position: "absolute", left: big ? 90 : 110, top: big ? 80 : 120, width: big ? 1080 : 1000 }}>
+        <div style={{ fontFamily: F.body, fontWeight: 700, fontSize: big ? 84 : 76, color: INK, letterSpacing: -0.5, ...pop(2) }}>{title}</div>
         {def && <div style={{ marginTop: 36, ...pop(defAt) }}>
           {label && <div style={{ fontFamily: F.body, fontSize: 40, color: GREY }}>{label}</div>}
           <div style={{ fontFamily: F.body, fontWeight: 500, fontSize: 46, color: INK, lineHeight: 1.25, marginTop: 6 }}>{def}</div>
         </div>}
-        <div style={{ marginTop: def ? 54 : 70, display: "flex", flexDirection: "column", gap: 26 }}>
+        <div style={{ marginTop: def ? 54 : big ? 50 : 70, display: "flex", flexDirection: "column", gap: big ? 24 : 26 }}>
           {lines.map((l, i) => (
-            <div key={i} style={{ fontFamily: F.body, fontWeight: l.accent ? 600 : 500, fontSize: 46, lineHeight: 1.2, color: l.accent ? TEAL : l.dim ? GREY : INK, ...pop(l.at) }}>
-              {l.face && <Face id={l.face} size={54} ring={l.accent ? TEAL : undefined} />}{l.text}
+            <div key={i} style={{ fontFamily: F.body, fontWeight: l.accent ? 600 : 500, fontSize: big ? 60 : 46, lineHeight: 1.15, color: l.accent ? TEAL : l.dim ? GREY : INK, ...pop(l.at) }}>
+              {l.face && <Face id={l.face} size={big ? 68 : 54} ring={l.accent ? TEAL : undefined} />}{l.text}
             </div>
           ))}
         </div>
       </div>
-      {side && <div style={{ position: "absolute", left: 1220, top: 160, width: 600, height: 760, ...pop(sideAt) }}>{side}</div>}
+      {side && <div style={{ position: "absolute", left: big ? 1250 : 1220, top: 160, width: 600, height: 760, ...pop(sideAt) }}>{side}</div>}
     </AbsoluteFill>
   );
 };
@@ -57,15 +58,15 @@ export const SideBars: React.FC<{ rows: { label: string; value: string; frac: nu
         const g = interpolate(f, [r.at, r.at + 22], [0, 1], { ...clamp, easing: easeOut });
         return (
           <div key={r.label}>
-            <div style={{ fontFamily: F.body, fontSize: 28, color: GREY, marginBottom: 8, display: "flex", alignItems: "center" }}>{r.face && <Face id={r.face} size={40} />}{r.label}</div>
-            <div style={{ height: 50, background: "rgba(233,236,239,0.06)", position: "relative" }}>
+            <div style={{ fontFamily: F.body, fontSize: 44, color: GREY, marginBottom: 10, display: "flex", alignItems: "center" }}>{r.face && <Face id={r.face} size={40} />}{r.label}</div>
+            <div style={{ height: 80, background: "rgba(233,236,239,0.06)", position: "relative" }}>
               <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${r.frac * 100 * g}%`, background: r.color }} />
-              <div style={{ position: "absolute", left: 14, top: 8, fontFamily: F.body, fontWeight: 700, fontSize: 28, color: "#0B0C0F", opacity: g > 0.6 ? 1 : 0 }}>{r.value}</div>
+              <div style={{ position: "absolute", left: 18, top: 10, fontFamily: F.body, fontWeight: 700, fontSize: 52, lineHeight: 1.1, color: "#0B0C0F", opacity: g > 0.6 ? 1 : 0 }}>{r.value}</div>
             </div>
           </div>
         );
       })}
-      {caption && <div style={{ fontFamily: F.body, fontSize: 24, color: GREY }}>{caption}</div>}
+      {caption && <div style={{ fontFamily: F.body, fontSize: 36, color: GREY }}>{caption}</div>}
     </div>
   );
 };

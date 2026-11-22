@@ -34,9 +34,10 @@ const Box: React.FC<{ s: number; fill?: string; stroke?: string }> = ({ s, fill,
 // to the Worlds he still needs.
 export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number; catAt?: number }> = ({ rows, fakerAt = 0, catAt }) => {
   const f = useCurrentFrame();
-  const COL = [450, 900, 1290], ICON = [34, 34, 18], GAP = [6, 6, 4], CW = [440, 380, 580];
+  // council 22 Nov: icons were too small on a phone; cups about 2x, league boxes about 2.4x, wrapping to a second line
+  const COL = [450, 1000, 1380], ICON = [72, 72, 44], GAP = [10, 10, 7], CW = [520, 380, 520];
   const all: SilverRow[] = [{ id: "faker", have: [6, 2, 10], need: [0, 0, 0], at: fakerAt }, ...rows];
-  const RH = 170, Y0 = 250;
+  const RH = 172, Y0 = 222;
   const tO = interpolate(f, [0, 8], [0, 1], clamp);
   return (
     <AbsoluteFill>
@@ -46,7 +47,7 @@ export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number; catAt?:
         <div style={{ fontFamily: BEBAS, fontSize: 30, letterSpacing: 2, color: MUTE }}>TITLES NEEDED TO MATCH FAKER'S SCORE TODAY · GREY = WON · TEAL = STILL NEEDED</div>
       </div>
       {["WORLDS", "MSI", "LEAGUE TITLES"].map((h, j) => (
-        <div key={h} style={{ position: "absolute", left: COL[j], top: Y0 - 50, fontFamily: BEBAS, fontSize: 34, letterSpacing: 2, color: MUTE, opacity: tO }}>{h}</div>
+        <div key={h} style={{ position: "absolute", left: COL[j], top: Y0 - 56, fontFamily: BEBAS, fontSize: 40, letterSpacing: 2, color: MUTE, opacity: tO }}>{h}</div>
       ))}
       {all.map((r, i) => {
         const o = interpolate(f, [r.at - 8, r.at], [0, 1], clamp);
@@ -60,14 +61,14 @@ export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number; catAt?:
                 {P(r.id).photo && <Img src={staticFile(P(r.id).photo!)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
               </div>
               <div>
-                <div style={{ fontFamily: BEBAS, fontSize: 48, letterSpacing: 2, color: col, lineHeight: 1 }}>{P(r.id).name.toUpperCase()}</div>
-                <div style={{ fontFamily: BEBAS, fontSize: 26, letterSpacing: 2, color: MUTE }}>{fk ? "TODAY · 94.9" : r.score ?? ""}</div>
+                <div style={{ fontFamily: BEBAS, fontSize: 56, letterSpacing: 2, color: col, lineHeight: 1 }}>{P(r.id).name.toUpperCase()}</div>
+                <div style={{ fontFamily: BEBAS, fontSize: 32, letterSpacing: 2, color: MUTE }}>{fk ? "TODAY · 94.9" : r.score ?? ""}</div>
               </div>
             </div>
             {[0, 1, 2].map((j) => {
               const n = r.have[j] + r.need[j];
               return (
-                <div key={j} style={{ position: "absolute", left: COL[j], top: y + (j === 2 ? 14 : 22), width: CW[j], display: "flex", flexWrap: "wrap", gap: GAP[j] }}>
+                <div key={j} style={{ position: "absolute", left: COL[j], top: y + (j === 2 ? 8 : 0), width: CW[j], display: "flex", flexWrap: "wrap", gap: GAP[j] }}>
                   {Array.from({ length: n }, (_, k) => {
                     const needed = k >= r.have[j];
                     const nk = needed ? interpolate(f, [r.at + 6 + (k - r.have[j]) * 2, r.at + 12 + (k - r.have[j]) * 2], [0, 1], { ...clamp, easing: easeOut }) : 1;
@@ -77,7 +78,7 @@ export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number; catAt?:
                       {j === 2 ? <Box s={ICON[j]} fill={fill} stroke={stroke} /> : <Cup s={ICON[j]} fill={fill} stroke={stroke} />}
                     </div>;
                   })}
-                  {r.need[j] > 0 && <div style={{ fontFamily: BEBAS, fontSize: j === 2 ? 34 : 44, color: TEAL, marginLeft: 8, alignSelf: "center",
+                  {r.need[j] > 0 && <div style={{ fontFamily: BEBAS, fontSize: 60, lineHeight: 1, color: TEAL, marginLeft: 8, alignSelf: "center",
                     opacity: interpolate(f, [r.at + 14, r.at + 20], [0, 1], clamp) }}>+{r.need[j]}</div>}
                 </div>
               );
@@ -88,13 +89,13 @@ export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number; catAt?:
       {catAt !== undefined && (() => {
         const k = interpolate(f, [catAt, catAt + 8], [0, 1], { ...clamp, easing: Easing.bezier(0.34, 1.56, 0.64, 1) });
         const ar = interpolate(f, [catAt + 8, catAt + 22], [0, 1], { ...clamp, easing: easeOut });
-        const path = "M 1000 905 C 900 905, 840 880, 812 834";
+        const path = "M 1000 985 C 880 990, 800 960, 772 900"; // to Gumayusi's Worlds cups (council 22 Nov layout)
         return <>
           <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
             <path d={path} fill="none" stroke={GOLD} strokeWidth={7} strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ar} />
-            <path d="M 796 846 L 812 834 L 826 852" fill="none" stroke={GOLD} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" opacity={ar > 0.95 ? 1 : 0} />
+            <path d="M 754 910 L 772 900 L 784 920" fill="none" stroke={GOLD} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" opacity={ar > 0.95 ? 1 : 0} />
           </svg>
-          <Img src={staticFile("_local/memes/laugh-emote.png")} style={{ position: "absolute", left: 1010, top: 850, width: 320, height: 160, objectFit: "cover",
+          <Img src={staticFile("_local/memes/laugh-emote.png")} style={{ position: "absolute", left: 1010, top: 905, width: 320, height: 160, objectFit: "cover",
             borderRadius: 12, border: "6px solid #F2F2EE",
             opacity: Math.min(1, k * 2), transform: `scale(${k}) rotate(${-6 + Math.sin(f / 5) * 3}deg)` }} />
         </>;

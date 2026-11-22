@@ -178,7 +178,9 @@ const WORLDS_VALUE: [string, number, number][] = [["T1", 2024, 114.1], ["T1", 20
   ["SK Telecom T1", 2016, 106.6], ["DRX", 2022, 104.7], ["Samsung Galaxy", 2017, 102.8], ["EDward Gaming", 2021, 100.9], ["Invictus Gaming", 2018, 99.1],
   ["FunPlus Phoenix", 2019, 97.2], ["DAMWON Gaming", 2020, 95.3]];
 const GOLD = "#E8B04B";
-export const WorldsValues: React.FC<{ cues: { rise: number; lit: { team: string; year: number; at: number }[] } }> = ({ cues }) => {
+// council 22 Nov: the second Worlds chart (HardestRuns) is cut; DRX lights on this one with a "0.2% chance" callout
+type Lit = { team: string; year: number; at: number; until?: number };
+export const WorldsValues: React.FC<{ cues: { rise: number; lit: Lit[]; note?: { team: string; year: number; at: number; big: string; small: string } } }> = ({ cues }) => {
   const f = useCurrentFrame();
   const rows = WORLDS_VALUE;
   const x0 = 260, x1 = 1700, mid = 640, ppu = 22; // 1 point = 22 px
@@ -206,7 +208,7 @@ export const WorldsValues: React.FC<{ cues: { rise: number; lit: { team: string;
       {rows.map(([team, year, v], i) => {
         const k = interpolate(f, [cues.rise + i * 2, cues.rise + i * 2 + 14], [0, 1], { ...clamp, easing: easeOut });
         const L = cues.lit.find((q) => q.team === team && q.year === year);
-        const lit = L ? interpolate(f, [L.at, L.at + 8], [0, 1], clamp) : 0;
+        const lit = L ? interpolate(f, [L.at, L.at + 8], [0, 1], clamp) * (L.until ? interpolate(f, [L.until, L.until + 8], [1, 0], clamp) : 1) : 0;
         const up = v >= 100, h = Math.abs(v - 100) * ppu * k, cx = x0 + i * bw + bw / 2, w = bw * 0.56;
         const col = lit > 0.5 ? GOLD : "rgba(232,176,75,0.38)";
         const top = up ? mid - h : mid, end = up ? mid - h : mid + h;
@@ -223,6 +225,19 @@ export const WorldsValues: React.FC<{ cues: { rise: number; lit: { team: string;
           </React.Fragment>
         );
       })}
+      {cues.note && (() => { const N = cues.note!, i = rows.findIndex(([t, y]) => t === N.team && y === N.year); if (i < 0) return null;
+        const v = rows[i][2], cx = x0 + i * bw + bw / 2, ty = Y(v) - lw * 0.62 - 90; // just above the bar's number
+        const k = interpolate(f, [N.at, N.at + 10], [0, 1], { ...clamp, easing: easeOut });
+        const bx = 1090, by = 215;
+        return <>
+          <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: k }}>
+            <path d={`M ${bx - 10} ${by + 80} C ${bx - 70} ${by + 90}, ${cx + 40} ${ty - 60}, ${cx + 14} ${ty - 6}`} fill="none" stroke={GOLD} strokeWidth={5} strokeLinecap="round" />
+            <path d={`M ${cx + 14} ${ty - 6} l -14 -18 M ${cx + 14} ${ty - 6} l 20 -12`} stroke={GOLD} strokeWidth={5} strokeLinecap="round" />
+          </svg>
+          <div style={{ position: "absolute", left: bx, top: by, opacity: k, transform: `scale(${0.85 + 0.15 * k})`, transformOrigin: "left center" }}>
+            <div style={{ fontFamily: BEBAS, fontSize: 120, lineHeight: 0.9, color: GOLD }}>{N.big}</div>
+            <div style={{ fontFamily: BEBAS, fontSize: 40, letterSpacing: 2, color: INK }}>{N.small}</div>
+          </div></>; })()}
     </AbsoluteFill>
   );
 };

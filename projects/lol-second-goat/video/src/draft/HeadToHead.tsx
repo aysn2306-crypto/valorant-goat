@@ -40,7 +40,7 @@ export const HeadToHead: React.FC<{ left: string; right: string; title: string; 
   const f = useCurrentFrame();
   const snap = interpolate(f, [cues.in, cues.in + 8], [0, 1], { ...clamp, easing: easeOut });
   const pop = (a: number) => interpolate(f, [a, a + 6], [0, 1], clamp);
-  const x0 = 520, x1 = 1400;
+  const x0 = 480, x1 = 1440; // council 22 Nov: wider middle so the stat names can be bigger on a phone
   return (
     <AbsoluteFill>
       <Concrete />
@@ -55,12 +55,12 @@ export const HeadToHead: React.FC<{ left: string; right: string; title: string; 
         return (
           <div key={r.label} style={{ position: "absolute", left: x0, width: x1 - x0, top: y, height: r.big ? 130 : 80, display: "flex", alignItems: "center",
             opacity: o, transform: `translateY(${(1 - o) * 10}px)`, borderTop: r.big ? `2px solid rgba(242,242,238,0.25)` : undefined, paddingTop: r.big ? 16 : 0 }}>
-            <div style={{ width: 270, display: "flex", justifyContent: "flex-end", alignItems: "center", gap: 14 }}>
+            <div style={{ width: 230, display: "flex", justifyContent: "flex-end", alignItems: "center", gap: 14 }}>
               <Check on={r.better === "l"} o={o} />
               <span style={{ fontFamily: BEBAS, fontSize: fs, color: r.better === "l" ? TEAL : INK }}>{r.l}</span>
             </div>
-            <div style={{ flex: 1, textAlign: "center", fontFamily: BEBAS, fontSize: r.big ? 40 : 32, letterSpacing: 1.5, color: MUTE }}>{r.label}</div>
-            <div style={{ width: 270, display: "flex", alignItems: "center", gap: 14 }}>
+            <div style={{ flex: 1, textAlign: "center", fontFamily: BEBAS, fontSize: r.big ? 54 : 46, lineHeight: 1, letterSpacing: 1.5, color: "#C3C9D1" }}>{r.label}</div>
+            <div style={{ width: 230, display: "flex", alignItems: "center", gap: 14 }}>
               <span style={{ fontFamily: BEBAS, fontSize: fs, color: r.better === "r" ? TEAL : INK }}>{r.r}</span>
               <Check on={r.better === "r"} o={o} />
             </div>
