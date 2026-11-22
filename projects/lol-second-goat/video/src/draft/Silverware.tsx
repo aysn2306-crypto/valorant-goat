@@ -88,11 +88,12 @@ export const Silverware: React.FC<{ rows: SilverRow[]; fakerAt?: number; catAt?:
       {catAt !== undefined && (() => {
         const k = interpolate(f, [catAt, catAt + 8], [0, 1], { ...clamp, easing: Easing.bezier(0.34, 1.56, 0.64, 1) });
         const ar = interpolate(f, [catAt + 8, catAt + 22], [0, 1], { ...clamp, easing: easeOut });
-        const path = "M 1000 905 C 900 905, 840 880, 812 834";
+        // ay 22 Nov 21:54: the arrow was messed up; it now curves from the minion to the Worlds Gumayusi still needs
+        const path = "M 1000 915 C 860 925, 720 900, 692 832";
         return <>
           <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
             <path d={path} fill="none" stroke={GOLD} strokeWidth={7} strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1 - ar} />
-            <path d="M 796 846 L 812 834 L 826 852" fill="none" stroke={GOLD} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" opacity={ar > 0.95 ? 1 : 0} />
+            <path d="M 685 861 L 692 832 L 717 848" fill="none" stroke={GOLD} strokeWidth={7} strokeLinecap="round" strokeLinejoin="round" opacity={ar > 0.95 ? 1 : 0} />
           </svg>
           <Img src={staticFile("_local/memes/laugh-emote.png")} style={{ position: "absolute", left: 1010, top: 850, width: 320, height: 160, objectFit: "cover",
             borderRadius: 12, border: "6px solid #F2F2EE",

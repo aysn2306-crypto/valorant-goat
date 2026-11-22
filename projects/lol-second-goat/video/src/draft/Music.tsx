@@ -42,7 +42,7 @@ const dropOuts = (): Drop[] => {
     { a: W("93", "that") - 0.1, b: L("94").start, out: 0.1, back: 0.05 },
     // ay 22 Nov 20:53: the laugh moved from the quote to the last panel (when it shows the Worlds Guma needs); the music
     // stops for it there and comes back on the end card
-    { a: WA("94", ["still", "long"]) + 22 / 30 - 0.05, b: L("94").end + 4.0, out: 0.05, back: 0.3 },
+    { a: WA("94", ["still", "long"]) + 26 / 30 - 0.05, b: WA("94", ["still", "long"]) + 26 / 30 + 1.2, out: 0.05, back: 0.3 }, // ay 21:54: a short stop for the vine boom only
   ];
 };
 

@@ -245,7 +245,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
 
 const VO_END = VO_DURATION;
 // ay 21 Nov 17:24: hold the last panel (laughing cat under Guma's titles) about 3 s before the end card
-const TAIL = 4.0; // ay 22 Nov 20:53: the laugh now plays on the last panel, so hold it until the laugh ends
+const TAIL = 3.0; // ay 22 Nov 21:54: laugh sound gone, back to the 3 s hold
 /** "42" starts on line 42; "42@final" starts on the word "final" in line 42 */
 const startOf = (key: string) => { const [id, w] = key.split("@"); return (w ? W(id, w) : L(id).start) - 0.05; };
 const TL = SCENES.map(([id, el], i) => {
@@ -296,10 +296,9 @@ export const Draft: React.FC = () => (
         the left of the Guma photo (so it stays readable) with ay's minion laugh, played whole but turned well down; then ay
         carries on. ay's clips live in public/_local/memes (not in the public repo). */}
     {/* ay 22 Nov 20:53: no laugh on the quote; the cat, vine boom and laugh play when the panel shows the Worlds Guma needs */}
-    <Sequence from={fr(LEAD + WA("94", ["still", "long"])) + 22} durationInFrames={fr(3.75)} layout="none" name="Guma laugh">
-      <LaughFlash />
+    {/* ay 22 Nov 21:54: no laughing cat and no laugh sound anywhere; only the vine boom as the minion pops in on the last panel */}
+    <Sequence from={fr(LEAD + WA("94", ["still", "long"])) + 26} durationInFrames={fr(2)} layout="none" name="Guma vine boom">
       <Audio src={staticFile("_local/memes/vine-boom.mp3")} volume={0.32} />
-      <Sequence from={4} layout="none"><Audio src={staticFile("_local/memes/minion-laugh.mp3")} volume={0.55} /></Sequence>
     </Sequence>
     {/* ay 21 Nov 17:07: "this model is lowkey cinema" now ends line 81 */}
     <Sequence from={fr(LEAD + W("81", "cinema"))} durationInFrames={41} layout="none"><AbsoluteCinema at={0} out={40} /></Sequence>
