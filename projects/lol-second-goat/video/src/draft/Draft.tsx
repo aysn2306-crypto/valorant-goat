@@ -22,7 +22,7 @@ import { HeadToHead } from "./HeadToHead";
 import { LeadBars } from "./LeadBars";
 import * as Ov from "./Overlays";
 import { KillsLine } from "./KillsLine";
-import { WorldsValues, PriceClimb } from "./Bars";
+import { WorldsValues, HardestRuns, PriceClimb } from "./Bars";
 import { Concrete } from "../samples/Climb";
 import { PercentStack } from "./PercentStack";
 import { PillBars, StackedLines, TitleList } from "./Lists";
@@ -138,11 +138,11 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     // ay 21 Nov 17:07: zoom out right after "44" and hold the whole graph about a second (0.8 s pause added after line 23)
     return <PriceClimb cues={[Math.min(w1, 20), w2, w3, w3 + 6, w3 + 10]} out={w3 + 12} />; }],
   // line 24: every Worlds winner by the strength of the field it beat; "down here" lights DAMWON 2020, "all the way up here" T1 2024
-  // council 22 Nov (ay: "make any changes you think are suitable"): one Worlds chart only. On 24b DAMWON and T1 dim,
-  // DRX 2022 lights on "DRX" and its "0.2% chance" callout lands on the number (the second "hardest runs" chart is cut)
-  ["24", (c) => { const drx = at(c, WA("24b", ["drx"])); return <WorldsValues cues={{ rise: 4, lit: [{ team: "DAMWON Gaming", year: 2020, at: at(c, WA("24", ["down", "damwon"])), until: drx },
-    { team: "T1", year: 2024, at: at(c, WA("24", ["t1", "toughest"])), until: drx }, { team: "DRX", year: 2022, at: drx }],
-    note: { team: "DRX", year: 2022, at: at(c, WA("24b", ["chance"])) - 36, big: "0.2% CHANCE", small: "THE MODEL'S ODDS FOR DRX BEFORE WORLDS 2022" } }} />; }],
+  ["24", (c) => <WorldsValues cues={{ rise: 4, lit: [{ team: "DAMWON Gaming", year: 2020, at: at(c, WA("24", ["down", "damwon"])) },
+    { team: "T1", year: 2024, at: at(c, WA("24", ["t1", "toughest"])) }] }} />],
+  // 24b: the biggest underdog is a different question: each champion's own odds, DRX 2022 lit on "DRX", the 1 in 500 on "500"
+  // LOCKED (ay 22 Nov 20:53): keep this separate DRX graph (the council cut it in draft 15 and ay wanted it back)
+  ["24b", (c) => <HardestRuns cues={{ rise: 0, lit: [{ team: "DRX", year: 2022, at: at(c, WA("24b", ["drx"])) }] }} />],
   // 25: what BLG's harder run is worth to Knight
   // 25 cut (ay 20 Nov 19:16): no Knight trophy-points segment
   // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
@@ -245,7 +245,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
 
 const VO_END = VO_DURATION;
 // ay 21 Nov 17:24: hold the last panel (laughing cat under Guma's titles) about 3 s before the end card
-const TAIL = 3.0;
+const TAIL = 4.0; // ay 22 Nov 20:53: the laugh now plays on the last panel, so hold it until the laugh ends
 /** "42" starts on line 42; "42@final" starts on the word "final" in line 42 */
 const startOf = (key: string) => { const [id, w] = key.split("@"); return (w ? W(id, w) : L(id).start) - 0.05; };
 const TL = SCENES.map(([id, el], i) => {
@@ -276,8 +276,8 @@ const LaughFlash: React.FC = () => {
   const k = interpolate(f, [0, 5], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.34, 1.56, 0.64, 1) });
   const out = interpolate(f, [fr(3.75) - 6, fr(3.75)], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const shake = Math.sin(f * 1.9) * 6 * (f < fr(3.2) ? 1 : 0);
-  // ay 21 Nov 17:28: the laughing cat beside the Guma quote during the laugh (the minion goes on the last panel)
-  return <Img src={staticFile("_local/memes/laughing-cat-sticker.png")} style={{ position: "absolute", left: 90, top: 380, width: 330, height: 307, objectFit: "contain",
+  // ay 22 Nov 20:53: the laughing cat on the last panel (bottom right, clear of the rows), not on the quote
+  return <Img src={staticFile("_local/memes/laughing-cat-sticker.png")} style={{ position: "absolute", left: 1660, top: 840, width: 240, height: 223, objectFit: "contain",
     opacity: out, transform: `scale(${k}) rotate(${-5 + shake * 0.4}deg) translate(${shake}px, ${-shake * 0.5}px)` }} />;
 };
 
@@ -295,7 +295,8 @@ export const Draft: React.FC = () => (
     {/* ay 21 Nov 17:24: after "I heard it was a Guma error" the music stops; vine boom, the laughing minion emote pops in on
         the left of the Guma photo (so it stays readable) with ay's minion laugh, played whole but turned well down; then ay
         carries on. ay's clips live in public/_local/memes (not in the public repo). */}
-    <Sequence from={fr(LEAD + W("94", "error") + 0.35)} durationInFrames={fr(3.75)} layout="none" name="Guma laugh">
+    {/* ay 22 Nov 20:53: no laugh on the quote; the cat, vine boom and laugh play when the panel shows the Worlds Guma needs */}
+    <Sequence from={fr(LEAD + WA("94", ["still", "long"])) + 22} durationInFrames={fr(3.75)} layout="none" name="Guma laugh">
       <LaughFlash />
       <Audio src={staticFile("_local/memes/vine-boom.mp3")} volume={0.32} />
       <Sequence from={4} layout="none"><Audio src={staticFile("_local/memes/minion-laugh.mp3")} volume={0.55} /></Sequence>

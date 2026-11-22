@@ -40,8 +40,9 @@ const dropOuts = (): Drop[] => {
     { a: W("81", "this") - 0.1, b: W("81", "cinema") + 0.6, out: 0.05, back: 0.05 },        // "this model is lowkey cinema" (moved after line 81)
     { a: W("85", "young") - 0.15, b: W("85", "ahead"), out: 0.05, back: 0.05 },            // young Faker alone is the greatest
     { a: W("93", "that") - 0.1, b: L("94").start, out: 0.1, back: 0.05 },
-    // ay 21 Nov 17:24: after "I heard it was a Guma error" the music stops for the laugh (GIF + minion laugh), then carries on
-    { a: W("94", "error") + 0.35, b: W("94", "but") - 0.05, out: 0.05, back: 0.3 },                 // "that's how far ahead Faker is"
+    // ay 22 Nov 20:53: the laugh moved from the quote to the last panel (when it shows the Worlds Guma needs); the music
+    // stops for it there and comes back on the end card
+    { a: WA("94", ["still", "long"]) + 22 / 30 - 0.05, b: L("94").end + 4.0, out: 0.05, back: 0.3 },
   ];
 };
 

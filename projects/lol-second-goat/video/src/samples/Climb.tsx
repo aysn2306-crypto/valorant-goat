@@ -46,8 +46,10 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   // camera: centre (data units) and zoom; 1 = tight on the pack. Script 20 Nov (Jxmy's benchmark then outlier): on "plus
   // 100" the camera rises a little to the +100 line ("only 23 players"), Ruler is named on "Ruler", the climb to Faker
   // starts on the second "Faker" ("way up here"), and the pull back with the gap comes after "330"
-  const bench0 = A(WA("37", ["plus", "12"])), bench1 = bench0 + 30, benchLab = A(WA("37", ["15", "fifteen", "only"]));
-  const climb0 = A((() => { try { return W("37", "faker", 1); } catch { return WA("37", ["way", "then"]); } })()), climb1 = climb0 + 48;
+  // ay 22 Nov 20:53: "and even here Faker's in first" cut from the voice; the graph opens already on the +12 line
+  const bench0 = -60, bench1 = -30, benchLab = A(WA("37", ["15", "fifteen", "only"]));
+  const fks = L("37").words.filter((w) => w.w.toLowerCase().startsWith("faker")); // the LAST "Faker" ("Faker's up here")
+  const climb0 = A(fks.length ? fks[fks.length - 1].start : WA("37", ["up", "way"])), climb1 = climb0 + 48;
   const out0 = Math.max(climb1 + 20, A(WA("37", ["21", "twenty"])) + 24), out1 = out0 + 30;
   const kB = interpolate(f, [bench0, bench1], [0, 1], { ...clamp, easing: inOut });
   const kUp = interpolate(f, [climb0, climb1], [0, 1], { ...clamp, easing: inOut });
