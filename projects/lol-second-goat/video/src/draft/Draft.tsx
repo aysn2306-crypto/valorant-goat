@@ -256,8 +256,11 @@ const VO_END = VO_DURATION;
 const TAIL = 3.0; // ay 22 Nov 21:54: laugh sound gone, back to the 3 s hold
 // with the outro recorded (23 Nov), the Guma panel holds until the outro, and the end card starts on "have a blessed day"
 // and stays about 13 s after the last word (music runs on under it, OUTRO-STUDY.md)
-const END_AT = HAS("105") ? L("105").start - 0.15 : VO_DURATION + TAIL;
-const END_HOLD = HAS("105") ? VO_DURATION - L("105").start + 0.15 + 13 : OUTRO;
+// ay 23 Nov 22:50: no bridge footage at the end; the last outro card stays on for a few seconds after "have a blessed
+// day", with the Riot line on it (RIOT_AT), and the video ends there
+const RIOT_AT = HAS("105") ? L("105").start - 0.15 : VO_DURATION + TAIL;
+const END_AT = HAS("105") ? VO_DURATION + 6 : VO_DURATION + TAIL;
+const END_HOLD = HAS("105") ? 0 : OUTRO;
 /** "42" starts on line 42; "42@final" starts on the word "final" in line 42 */
 const startOf = (key: string) => { const [id, w] = key.split("@"); return (w ? W(id, w) : L(id).start) - 0.05; };
 const TL = SCENES.map(([id, el], i) => {
@@ -275,6 +278,12 @@ const ColdOpen: React.FC = () => {
     <Clip id="coldopen" from={COLD_FROM} dim={0} /></AbsoluteFill></AbsoluteFill>;
 };
 
+const RiotLine: React.FC = () => (
+  <AbsoluteFill style={{ opacity: interpolate(useCurrentFrame(), [0, 10], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}>
+    <div style={{ position: "absolute", left: 0, right: 0, bottom: 56, textAlign: "center", fontFamily: F.body, fontSize: 24, color: "#B7BDC6", lineHeight: 1.5 }}>
+      Not endorsed by Riot Games. League of Legends and Riot Games are trademarks of Riot Games, Inc.<br />Footage from LoL Esports broadcasts.</div>
+  </AbsoluteFill>
+);
 const EndCard: React.FC = () => (
   <AbsoluteFill>
     <Clip id="skyline" from={0} dim={0.6} />
@@ -314,7 +323,7 @@ export const Draft: React.FC = () => (
     </Sequence>
     {/* ay 21 Nov 17:07: "this model is lowkey cinema" now ends line 81 */}
     <Sequence from={fr(LEAD + W("81", "cinema"))} durationInFrames={41} layout="none"><AbsoluteCinema at={0} out={40} /></Sequence>
-    <Sequence from={fr(LEAD + END_AT)}><EndCard /></Sequence>
+    {HAS("105") ? <Sequence from={fr(LEAD + RIOT_AT)}><RiotLine /></Sequence> : <Sequence from={fr(LEAD + END_AT)}><EndCard /></Sequence>}
     {VO_KEEP.map(([a, b], i) => (
       <Sequence key={"vo" + i} from={fr(LEAD + vt(a))} durationInFrames={fr(b - a)}><Audio src={staticFile(VO_AUDIO)} startFrom={fr(a)} endAt={fr(b)} /></Sequence>
     ))}
