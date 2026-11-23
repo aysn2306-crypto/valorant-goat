@@ -4,7 +4,7 @@
 // Low under the voice and ducked while ay talks; Jxmy-style drop-outs to silence before the big reveals.
 import React from "react";
 import { Audio, Sequence, staticFile } from "remotion";
-import { L, VO_LINES, W, WA } from "../data/vo";
+import { HAS, L, VO_LINES, W, WA } from "../data/vo";
 
 const FPS = 30;
 const fr = (s: number) => Math.round(s * FPS);
@@ -42,7 +42,9 @@ const dropOuts = (): Drop[] => {
     { a: W("93", "that") - 0.1, b: L("94").start, out: 0.1, back: 0.05 },
     // ay 22 Nov 20:53: the laugh moved from the quote to the last panel (when it shows the Worlds Guma needs); the music
     // stops for it there and comes back on the end card
-    { a: WA("94", ["still", "long"]) + 26 / 30 - 0.05, b: WA("94", ["still", "long"]) + 26 / 30 + 1.2, out: 0.05, back: 0.3 }, // ay 21:54: a short stop for the vine boom only
+    // ay 23 Nov 21:27: the music cuts on the vine boom and stays out while the minion points at Guma; it fades back in
+    // softly as the outro starts (or stays out to the end when there is no outro)
+    { a: WA("94", ["still", "long"]) + 26 / 30 - 0.05, b: HAS("101") ? L("101").start - 0.4 : 1e6, out: 0.05, back: 1.5 },
   ];
 };
 
