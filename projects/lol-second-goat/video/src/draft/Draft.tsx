@@ -331,7 +331,8 @@ export const Draft: React.FC = () => (
     {VO_PREVIEW && VO_LINES.filter((l) => l.sub).flatMap((l) => subChunks(l).map((c, k) => (
       <Sequence key={"sub" + l.line + "-" + k} from={fr(LEAD + c.a - 0.1)} durationInFrames={Math.max(1, fr(c.b - c.a + 0.1))} layout="none"><Subtitle text={c.text} /></Sequence>
     )))}
-    <div style={{ position: "absolute", right: 24, top: 16, fontFamily: F.body, fontSize: 18, color: "#4A5361" }}>{VO_PREVIEW ? "TIMING PREVIEW · new lines as subtitles, not recorded yet" : "DRAFT"}</div>
+    {/* the DRAFT tag is off for the final upload render (23 Nov); only a timing preview is labelled */}
+    {VO_PREVIEW && <div style={{ position: "absolute", right: 24, top: 16, fontFamily: F.body, fontSize: 18, color: "#4A5361" }}>TIMING PREVIEW · new lines as subtitles, not recorded yet</div>}
   </AbsoluteFill>
 );
 
