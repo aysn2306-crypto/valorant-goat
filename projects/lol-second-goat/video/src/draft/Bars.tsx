@@ -81,7 +81,8 @@ export const PriceClimb: React.FC<{ cues: number[]; out: number }> = ({ cues, ou
   const cx = 1020 + (960 - 1020) * ko;
   cy = cy + ((rowY(0) + rowY(cues.length - 1) + RH) / 2 - 110 - cy) * ko;
   const cam = `translate(960px, 540px) scale(${s}) translate(${-cx}px, ${-cy}px)`;
-  const tO = interpolate(f, [0, 6, cues[0] - 4, cues[0], out + 22, out + 32], [0, 1, 1, 0, 0, 1], clamp);
+  // ay 23 Nov 17:29: the title stays at the top the WHOLE time the scores scroll (rows pass under a strip of the ground)
+  const tO = interpolate(f, [0, 6], [0, 1], clamp);
   return (
     <AbsoluteFill>
       <Concrete />
@@ -99,6 +100,7 @@ export const PriceClimb: React.FC<{ cues: number[]; out: number }> = ({ cues, ou
         })}
         <div style={{ position: "absolute", left: BX - 4, top: rowY(0), width: 4, height: PRICES.length * RH, background: INK, opacity: 0.6 }} />
       </AbsoluteFill>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 190, overflow: "hidden", opacity: tO }}><Concrete /></div>
       <div style={{ position: "absolute", left: 110, top: 70, opacity: tO }}>
         <div style={{ fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>WHAT EACH TROPHY IS WORTH</div>
         <div style={{ fontFamily: BEBAS, fontSize: 30, letterSpacing: 2, color: MUTE }}>TROPHY POINTS, A WORLDS TITLE = 100</div>

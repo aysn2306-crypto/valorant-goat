@@ -20,6 +20,7 @@ import { TitleShare } from "./TitleShare";
 import { SeasonList } from "./SeasonList";
 import { HeadToHead } from "./HeadToHead";
 import { LeadBars } from "./LeadBars";
+import { OutroCard } from "./OutroCard";
 import * as Ov from "./Overlays";
 import { KillsLine } from "./KillsLine";
 import { WorldsValues, HardestRuns, PriceClimb } from "./Bars";
@@ -241,19 +242,30 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["94", (c) => { const back = at(c, WA("94", ["still", "long"])); return <>
     <Sequence durationInFrames={back} layout="none"><AbsoluteFill><Concrete /><Ov.GumaQuoteCard emojiAt={at(c, WA("94", ["error", "era"])) + 6} /></AbsoluteFill></Sequence>
     <Sequence from={back} layout="none"><Silverware fakerAt={-30} rows={[KNIGHT_ROW(-30), CHOVY_ROW(-30), GUMA_ROW(4)]} catAt={26} /></Sequence></>; }],
+  // ay's outro (23 Nov, voice only): plain card, a few words on their spoken words (OutroCard.tsx); the end card follows
+  ...(HAS("101") ? [["101", (c: Ctx) => <OutroCard pages={[
+    { at: 0, big: "MY FIRST VIDEO", small: "A LIKE OR SUB MEANS A LOT", smallAt: at(c, WA("101", ["please", "leave", "like"])) },
+    { at: at(c, WA("102", ["ranking", "this"])), big: "THE MODEL'S LIST", small: "NOT PERFECT", smallAt: at(c, WA("102", ["perfect", "course"])) },
+    { at: at(c, WA("103", ["keria", "personal"])), face: "keria", big: "MY OWN #2: KERIA", small: "YOUR #2? COMMENTS", smallAt: at(c, WA("103", ["feel", "leave"])) },
+    { at: at(c, WA("104", ["mistakes", "anyone"])), big: "SPOT A MISTAKE?", small: "TELL ME IN THE COMMENTS", smallAt: at(c, WA("104", ["please", "let"])) },
+  ]} />] as [string, (c: Ctx) => React.ReactNode]] : []),
 ];
 
 const VO_END = VO_DURATION;
 // ay 21 Nov 17:24: hold the last panel (laughing cat under Guma's titles) about 3 s before the end card
 const TAIL = 3.0; // ay 22 Nov 21:54: laugh sound gone, back to the 3 s hold
+// with the outro recorded (23 Nov), the Guma panel holds until the outro, and the end card starts on "have a blessed day"
+// and stays about 13 s after the last word (music runs on under it, OUTRO-STUDY.md)
+const END_AT = HAS("105") ? L("105").start - 0.15 : VO_DURATION + TAIL;
+const END_HOLD = HAS("105") ? VO_DURATION - L("105").start + 0.15 + 13 : OUTRO;
 /** "42" starts on line 42; "42@final" starts on the word "final" in line 42 */
 const startOf = (key: string) => { const [id, w] = key.split("@"); return (w ? W(id, w) : L(id).start) - 0.05; };
 const TL = SCENES.map(([id, el], i) => {
   const t0 = i === 0 ? -LEAD : startOf(id);
-  const t1 = i + 1 < SCENES.length ? startOf(SCENES[i + 1][0]) : VO_END + TAIL;
+  const t1 = i + 1 < SCENES.length ? startOf(SCENES[i + 1][0]) : END_AT;
   return { id, el, t0, dur: fr(t1 - t0) };
 });
-export const DRAFT_TOTAL = fr(LEAD + VO_END + TAIL + OUTRO);
+export const DRAFT_TOTAL = fr(LEAD + END_AT + END_HOLD);
 
 // End card (ay 20 Nov: no "who's your #2"). 12 s of quiet footage with room for YouTube's end-screen
 // video and subscribe elements in the middle, and the Riot line at the foot.
@@ -302,7 +314,7 @@ export const Draft: React.FC = () => (
     </Sequence>
     {/* ay 21 Nov 17:07: "this model is lowkey cinema" now ends line 81 */}
     <Sequence from={fr(LEAD + W("81", "cinema"))} durationInFrames={41} layout="none"><AbsoluteCinema at={0} out={40} /></Sequence>
-    <Sequence from={fr(LEAD + VO_END + TAIL)}><EndCard /></Sequence>
+    <Sequence from={fr(LEAD + END_AT)}><EndCard /></Sequence>
     {VO_KEEP.map(([a, b], i) => (
       <Sequence key={"vo" + i} from={fr(LEAD + vt(a))} durationInFrames={fr(b - a)}><Audio src={staticFile(VO_AUDIO)} startFrom={fr(a)} endAt={fr(b)} /></Sequence>
     ))}
