@@ -33,7 +33,7 @@ import { FansVsModel } from "./Slope";
 import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
-import { CoinRow, EloTowers, LongRec, PartTop, Roadmap, SectionOpener, SourceNote } from "./Polish";
+import { AxisSweep, CoinRow, EloTowers, LongRec, PartTop, Roadmap, SectionOpener, SourceNote } from "./Polish";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { HAS, L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
@@ -154,7 +154,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 24 Nov 14:54: Elo told like ranked: steal points, the favourite drops 29 losing to the underdog but gains only 3
   // beating them. Holds through 20a and 21
   ["20", (c) => <EloTowers cues={{ steal: at(c, WA("20", ["steal"])), n26: at(c, WA("20", ["26,000", "26"])), games: at(c, WA("20", ["games"])),
-    fav: at(c, WA("20a", ["3", "three"])), upset: at(c, WA("20a", ["steal", "29"])), hurt: at(c, WA("20a", ["hurts", "way"])) }} />],
+    fav: at(c, WA("20a", ["2", "two", "3", "three"])), upset: at(c, WA("20a", ["steal", "22", "29"])), hurt: at(c, WA("20a", ["hurts", "way"])) }} />],
   ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top, second: at(c, WA("48", ["knight", "night"])) }} />; }],
   ["49", (c) => <HeadToHead left="chovy" right="knight" title="SKILL PART: #1 VS #2" cues={{ in: 0, rows: 6, last: at(c, WA("49", ["behind", "just", "knight"])) }} rows={[
     { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
@@ -193,7 +193,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     return <><Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} dots={[d0, d1]} walk={{ bottom: at(c, WA("30c", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
       nameAt={Object.fromEntries([...["gumayusi", "zeka"].map((id) => [id, at(c, WA("31", ["gumayusi", "guma"]))]), ["bin", at(c, WA("31", ["bin"]))],
         ...[["369", "369"], ["gala", "369"], ["doran", "doran"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])])} />} mode="wipe" dur={c.dur} />
-      <CoinRow cues={{ flip: at(c, WA("29", ["flip", "coin"])), heads: at(c, WA("29", ["heads", "8"])), out: at(c, WA("29", ["expected"])) }} /></>; }],
+      <CoinRow cues={{ flip: at(c, WA("29", ["flip", "coin"])), heads: at(c, WA("29", ["heads", "8"])), out: at(c, WA("29", ["expected"])) }} />
+      <AxisSweep x0={262} x1={1700} yb={810} y0={810} y1={250} right={at(c, WA("30a", ["right"]))} up={at(c, WA("30a", ["higher", "up"]))} out={ch - 12} /></>; }],
   // v19b: the part's winners come straight after the clutch graph (line 45 dropped, 46 opens it). ay 24 Nov 14:54: the board
   // is the WHOLE part (big-game play + series won + clutch), so Bin tops it by 0.7 over Knight
   ["46", (c) => <PillBars data={BIG_PART} title="#1 IN BIG GAMES + CLUTCH" sub="PLAY IN BIG GAMES, BIG SERIES WON AND CLUTCH TOGETHER, 0 TO 100"

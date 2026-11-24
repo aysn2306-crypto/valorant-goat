@@ -212,18 +212,18 @@ export const RankedElo: React.FC<{ cues: { steal: number; n26: number; games: nu
 /** ay 24 Nov 19:01: the rank badges read badly, so the Elo is drawn plainly again, after j3m's "The Elo Rating System"
  *  (chart-refs-2/05-j3m-elo-rating-system, 01:26 and 03:00: each rating is a tower on one ground line and after a game
  *  height flows from the loser's tower to the winner's). Same story as the ranked version: winning takes points off the
- *  team you beat, the favourite gets 3 for an expected win, the underdog takes 29 for an upset, and the two outcomes stay
- *  side by side in a small ledger so "hurts way more" is a plain -3 next to -29. */
+ *  team you beat, the favourite gets 2 for an expected win, the underdog takes 22 for an upset, and the two outcomes stay
+ *  side by side in a small ledger so "hurts way more" is a plain -2 next to -22. */
 export const EloTowers: React.FC<{ cues: { steal: number; n26: number; games: number; fav: number; upset: number; hurt: number } }> = ({ cues }) => {
   const f = useCurrentFrame();
   const G = 900, K = 0.27, TW = 230, XL = 400, XR = 940;
   const io = Easing.bezier(0.65, 0, 0.35, 1);
   const grow = interpolate(f, [2, 22], [0, 1], { ...clamp, easing: easeOut });
-  // favourite win: 3 points flow underdog -> favourite; then reset; upset: 29 flow favourite -> underdog
+  // favourite win: 2 points flow underdog -> favourite; then reset; upset: 22 flow favourite -> underdog
   const t3 = interpolate(f, [cues.fav, cues.fav + 20], [0, 1], { ...clamp, easing: io });
   const back = interpolate(f, [cues.upset - 8, cues.upset], [0, 1], { ...clamp, easing: io });
   const t29 = interpolate(f, [cues.upset, cues.upset + 22], [0, 1], { ...clamp, easing: io });
-  const d = 3 * t3 * (1 - back) - 29 * t29;
+  const d = 2 * t3 * (1 - back) - 22 * t29;
   const vL = 1300 - d, vR = 1700 + d;
   const steal = pop(f, cues.steal, 10) * (1 - pop(f, cues.fav - 8, 8));
   const games = Math.round(interpolate(f, [cues.n26, cues.games + 10], [0, 26000], clamp));
@@ -250,7 +250,7 @@ export const EloTowers: React.FC<{ cues: { steal: number; n26: number; games: nu
       color: txt.startsWith("+") ? TEAL : RED, opacity: k }}>{txt}</div> : null;
   };
   const showFav = f >= cues.fav + 16 && f < cues.upset - 8, showUp = f >= cues.upset + 18;
-  const rows = [{ at: cues.fav, who: "FAVOURITE WINS", fav: "+3", dog: "-3" }, { at: cues.upset, who: "UNDERDOG WINS", fav: "-29", dog: "+29" }];
+  const rows = [{ at: cues.fav, who: "FAVOURITE WINS", fav: "+2", dog: "-2" }, { at: cues.upset, who: "UNDERDOG WINS", fav: "-22", dog: "+22" }];
   return (
     <AbsoluteFill>
       <Concrete />
@@ -264,10 +264,10 @@ export const EloTowers: React.FC<{ cues: { steal: number; n26: number; games: nu
         <path d={`M${XL + TW / 2} ${top(1300) - 130} Q${(XL + XR + TW) / 2} ${top(1700) - 260} ${XR + TW / 2 - 20} ${top(1700) - 140}`} fill="none" stroke={TEAL} strokeWidth={6} strokeDasharray="16 12" />
         <polygon points={`${XR + TW / 2 - 20},${top(1700) - 140} ${XR + TW / 2 - 60},${top(1700) - 158} ${XR + TW / 2 - 44},${top(1700) - 118}`} fill={TEAL} />
       </svg>
-      {chip(t3, 3, XL + TW / 2, XR + TW / 2, top(1300), top(1700))}
-      {chip(t29, 29, XR + TW / 2, XL + TW / 2, top(1700), top(1300))}
-      {showFav && <>{delta(cues.fav + 16, "-3", XL - 160, top(vL) - 90)}{delta(cues.fav + 16, "+3", XR + TW + 20, top(vR) - 90)}</>}
-      {showUp && <>{delta(cues.upset + 18, "+29", XL - 160, top(vL) - 90)}{delta(cues.upset + 18, "-29", XR + TW + 20, top(vR) - 90)}</>}
+      {chip(t3, 2, XL + TW / 2, XR + TW / 2, top(1300), top(1700))}
+      {chip(t29, 22, XR + TW / 2, XL + TW / 2, top(1700), top(1300))}
+      {showFav && <>{delta(cues.fav + 16, "-2", XL - 160, top(vL) - 90)}{delta(cues.fav + 16, "+2", XR + TW + 20, top(vR) - 90)}</>}
+      {showUp && <>{delta(cues.upset + 18, "+22", XL - 160, top(vL) - 90)}{delta(cues.upset + 18, "-22", XR + TW + 20, top(vR) - 90)}</>}
       {/* the ledger keeps both outcomes on screen */}
       <div style={{ position: "absolute", left: 1400, top: 330, width: 440 }}>
         <div style={{ display: "flex", fontFamily: BEBAS, fontSize: 34, letterSpacing: 3, color: MUTE, opacity: pop(f, cues.fav, 8) }}>
@@ -430,3 +430,25 @@ export const SectionOpener: React.FC<{ title: string; size?: number; shots: { id
     </AbsoluteFill>
   );
 };
+
+// ay 24 Nov 20:09: when the voice says "going right" / "higher up", an arrow runs along that axis (Jxmy's axis arrows,
+// video-research/jxmy-graphs). Full-frame coordinates of the axis corner and ends.
+export const AxisSweep: React.FC<{ x0: number; x1: number; yb: number; y0: number; y1: number; right: number; up: number; out: number; color?: string }> =
+  ({ x0, x1, yb, y0, y1, right, up, out, color = INK }) => {
+    const f = useCurrentFrame();
+    const dx = interpolate(f, [right, right + 22], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
+    const dy = interpolate(f, [up, up + 22], [0, 1], { ...clamp, easing: Easing.out(Easing.cubic) });
+    const k = 1 - interpolate(f, [out, out + 10], [0, 1], clamp);
+    if (dx <= 0 || k <= 0) return null;
+    const xe = x0 + (x1 - x0) * dx, ye = y0 + (y1 - y0) * dy;
+    return (
+      <AbsoluteFill style={{ opacity: k, pointerEvents: "none" }}>
+        <svg width={1920} height={1080}>
+          <line x1={x0} x2={xe} y1={yb} y2={yb} stroke={color} strokeWidth={8} strokeLinecap="round" />
+          <polygon points={`${xe + 26},${yb} ${xe - 6},${yb - 18} ${xe - 6},${yb + 18}`} fill={color} />
+          {dy > 0 && <><line x1={x0} x2={x0} y1={y0} y2={ye} stroke={color} strokeWidth={8} strokeLinecap="round" />
+            <polygon points={`${x0},${ye - 26} ${x0 - 18},${ye + 6} ${x0 + 18},${ye + 6}`} fill={color} /></>}
+        </svg>
+      </AbsoluteFill>
+    );
+  };
