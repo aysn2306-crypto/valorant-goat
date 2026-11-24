@@ -9,7 +9,8 @@
 //   the six weights as faders that wobble while ay says they're his choices.
 // - SourceNote: ZeKay and Jxmy name the source on screen as it is said (rival-ai-video/RIVAL-STUDY.md "Sources").
 import React from "react";
-import { AbsoluteFill, Easing, interpolate, random, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, interpolate, random, Sequence, useCurrentFrame } from "remotion";
+import { Clip, ClipId } from "./Clip";
 import { Concrete } from "../samples/Climb";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
@@ -268,6 +269,30 @@ export const LongRec: React.FC<{ cues: { rows: number[]; tagL: number; right: nu
           );
         })}
       </div>
+    </AbsoluteFill>
+  );
+};
+
+// ------------------------------------------------------------------ section openers on footage (ay 24 Nov 16:21)
+// From video-research/goat-section-study (Goodly Rogue "Eye Test" 11:37 and "Winning" 0:43; Jxmy XMaPrXzclaQ 3:19
+// "FORMULA METHOD"): the chapter word sits big over blurred, darkened footage for 1 to 3 s, the blur clears, and clips
+// that show the idea play under the opening lines, each cut on its word. The section's first graph follows.
+export const SectionOpener: React.FC<{ title: string; size?: number; shots: { id: ClipId; from: number; at: number }[]; cardEnd: number }> = ({ title, size = 200, shots, cardEnd }) => {
+  const f = useCurrentFrame();
+  const card = 1 - interpolate(f, [cardEnd, cardEnd + 10], [0, 1], { ...clamp, easing: easeOut });
+  const n = Math.floor(interpolate(f, [2, 2 + title.length * 1.5], [0, title.length], clamp));
+  return (
+    <AbsoluteFill style={{ background: "#000" }}>
+      <AbsoluteFill style={{ filter: card > 0.01 ? `blur(${10 * card}px)` : undefined }}>
+        {shots.map((s, i) => {
+          const end = i + 1 < shots.length ? shots[i + 1].at : undefined;
+          return <Sequence key={i} from={s.at} durationInFrames={end !== undefined ? end - s.at : undefined} layout="none"><Clip id={s.id} from={s.from} dim={0.1} /></Sequence>;
+        })}
+      </AbsoluteFill>
+      <AbsoluteFill style={{ background: `rgba(10,12,16,${0.45 * card})` }} />
+      {card > 0 && <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", opacity: card }}>
+        <div style={{ fontFamily: BEBAS, fontSize: size, letterSpacing: size * 0.12, color: INK, textShadow: "0 4px 0 rgba(0,0,0,0.4)", whiteSpace: "nowrap" }}>{title.slice(0, n)}</div>
+      </AbsoluteFill>}
     </AbsoluteFill>
   );
 };

@@ -37,6 +37,17 @@ export const CLIPS = {
   blgPair: { f: "29_blg_pair_knockout_trailer.mp4", len: 8 },
   walkoutFans: { f: "31_broll_blg_hle_walkout_fans.mp4", len: 48 },
   guma: { f: "32_gumayusi_fan_sign_then_desk.mp4", len: 13 },
+  // ay 24 Nov 16:21: section-opener B-roll, official LPL / LCK / LoL Esports VODs (goat-section-study/clips/CLIPS.md)
+  lplFight1: { f: "40_lpl26_al_vs_lgd_tarzan_fight.mp4", len: 6 },
+  lplFight2: { f: "41_lpl26_ig_vs_lgd_river_fight.mp4", len: 6 },
+  lplFight3: { f: "42_lpl26_al_vs_we_final_fight.mp4", len: 6 },
+  msi25Lift: { f: "43_geng_msi2025_trophy_lift.mp4", len: 6 },
+  worlds23Lift: { f: "44_t1_worlds2023_trophy_lift.mp4", len: 7 },
+  g5Worlds24: { f: "45_worlds2024_final_g5_t1_vs_blg.mp4", len: 7 },
+  g5Worlds25: { f: "46_worlds2025_final_g5_t1_vs_kt.mp4", len: 7 },
+  g5Lck24: { f: "47_lck2024s_final_g5_hle_vs_geng.mp4", len: 7 },
+  chovyMvpFilm: { f: "48_chovy_closeup_mvp_film.mp4", len: 2.8 }, // burned subtitle from 3.0 s: never past 2.8 s
+  gengMsi24Win: { f: "49_geng_msi2024_final_win_chovy.mp4", len: 7 },
 } as const;
 export type ClipId = keyof typeof CLIPS;
 

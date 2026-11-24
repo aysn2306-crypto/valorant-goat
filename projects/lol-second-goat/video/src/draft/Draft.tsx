@@ -33,7 +33,7 @@ import { FansVsModel } from "./Slope";
 import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
-import { LongRec, PartTop, RankedElo, Roadmap, SourceNote } from "./Polish";
+import { LongRec, PartTop, RankedElo, Roadmap, SectionOpener, SourceNote } from "./Polish";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { HAS, L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
@@ -143,8 +143,11 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // the new line 15x ("Faker went straight back to where he belongs"), and the board holds through it
   ["15", (c) => whatChanged(c)],
   // v19: each method opens on its part's name, a Jxmy chapter title (eatF7QHwga4 x04)
-  ["16a", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="SKILL" at={4} /></AbsoluteFill>],
-  ["16", (c) => <KillsLine cues={{ lck: at(c, L("16").start + 0.3), lpl: at(c, W("16", "lpl")), gap: at(c, W("17", "3")) }} />],
+  // ay 24 Nov 16:21 (GOAT section study): each idea section opens on its word over blurred footage, then clips that show
+  // the idea under the opening lines, then the first graph. Skill: LPL teamfights under "every LPL player looked like a demon"
+  ["16a", (c) => <SectionOpener title="SKILL" cardEnd={48} shots={[{ id: "lplFight1", from: 0, at: 0 }, { id: "lplFight2", from: 0, at: at(c, L("16").start) },
+    { id: "lplFight3", from: 0.5, at: at(c, WA("16", ["demon", "absolute"])) - 6 }]} />],
+  ["17", (c) => <KillsLine cues={{ lck: 6, lpl: at(c, W("17", "lpl")), gap: at(c, W("17", "3")) }} />],
   ["18", (c) => <TeamRoles cues={{ rows: Math.max(4, at(c, WA("18", ["compares"])) - 6), role: at(c, WA("18a", ["role", "lined"])), old: at(c, WA("18b", ["2013", "old"])) }} />],
   ["19", (c) => <AbsoluteFill><Clip id="stomp" from={20} /><ChatLine user="dk_enjoyer" text="DK LOL" at={at(c, W("19", "bottom"))} /></AbsoluteFill>],
   ["19@gen", () => <Clip id="close" from={22} />],
@@ -160,10 +163,12 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { label: "DEATHS A GAME", l: "1.69", r: "1.94", better: "l" },
     { label: "WIN RATE", l: "69.2%", r: "66.9%", better: "l" },
     { label: "SKILL SCORE", l: "100", r: "97.8", better: "l", big: true }]} />],
-  ["22", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="TROPHIES" at={at(c, L("22").start + 0.2)} /></AbsoluteFill>],
+  // trophies: the Worlds cup, then an MSI lift on "MSI", then the Worlds wide shot on "Worlds"
+  ["22", (c) => <SectionOpener title="TROPHIES" cardEnd={48} shots={[{ id: "worlds23Lift", from: 0, at: 0 }, { id: "msi25Lift", from: 1, at: at(c, WA("22", ["but", "msi"])) },
+    { id: "worlds23Lift", from: 4.8, at: at(c, WA("22", ["worlds"])) - 4 }]} />],
   // the worth bars open on "how much is an MSI worth", then each value lands as it is said; v19: the LPL bar lands on
   // "LPL" in 23a and the zoom-out waits for it
-  ["22@but", (c) => { const w1 = at(c, WA("23", ["100", "hundred"])), w2 = at(c, WA("23", ["56", "fifty"])), w3 = at(c, WA("23", ["44", "forty"]));
+  ["23", (c) => { const w1 = at(c, WA("23", ["100", "hundred"])), w2 = at(c, WA("23", ["56", "fifty"])), w3 = at(c, WA("23", ["44", "forty"]));
     const lpl = HAS("23a") ? at(c, WA("23a", ["lpl"])) : w3 + 10;
     return <PriceClimb cues={[Math.min(w1, 20), w2, w3, Math.max(w3 + 6, lpl - 8), lpl]} out={lpl + 14} />; }],
   ["24", (c) => <WorldsValues cues={{ rise: 4, lit: [{ team: "DAMWON Gaming", year: 2020, at: at(c, WA("24", ["down", "damwon"])) },
@@ -178,7 +183,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     top: at(c, WA("27", ["rookie", "biggest"])), mvp: at(c, WA("27b", ["ning", "finals"])) }} />],
   // v19 (ay: no full graph for a few seconds): the 5 s "Trophy score" board is gone, the cabinet starts on line 51
   ["51", (c) => <><ClimbRemap c={c} /><PartTop text="#1 IN TROPHIES: FAKER" at={at(c, WA("55", ["tops"]))} top={150} /></>],
-  ["28", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="BIG GAMES + CLUTCH" at={4} size={170} /></AbsoluteFill>],
+  // big games + clutch: three game 5 endings (Worlds 2024 and 2025 finals, LCK 2024 Summer final) under "win every game 5"
+  ["28", (c) => <SectionOpener title="BIG GAMES + CLUTCH" size={170} cardEnd={54} shots={[{ id: "g5Worlds24", from: 0, at: 0 }, { id: "g5Worlds25", from: 1, at: at(c, WA("28", ["some"])) },
+    { id: "g5Lck24", from: 0.5, at: at(c, WA("28", ["every", "win"])) }]} />],
   ["29", (c) => { // the clutch scatter (locked walk: bottom, middle, top), now from line 29 so the title card gets line 28
     // v19: dots pop in over "Here's every player..." (about 4 s, locked 21 Nov), then 30a names the axes on the full graph
     const rv = at(c, WA("31", ["faker's", "faker", "baker's"])), ch = at(c, WA("30c", ["cream", "creme", "bottom"]));
@@ -190,9 +197,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // is the WHOLE part (big-game play + series won + clutch), so Bin tops it by 0.7 over Knight
   ["46", (c) => <PillBars data={BIG_PART} title="#1 IN BIG GAMES + CLUTCH" sub="PLAY IN BIG GAMES, BIG SERIES WON AND CLUTCH TOGETHER, 0 TO 100"
     cues={{ rise: 4, lit: at(c, WA("46", ["bin", "tops"])), side: 1e6 }} />],
-  ["32", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="TEAM IMPACT" at={4} /></AbsoluteFill>],
+  // team impact: Chovy (first 2 s of the MVP film only), then Gen.G winning MSI 2024 with him on "with him"
+  ["32", (c) => <SectionOpener title="TEAM IMPACT" cardEnd={44} shots={[{ id: "gengMsi24Win", from: 0.5, at: 0 }, { id: "chovyMvpFilm", from: 0, at: Math.min(58, at(c, WA("32", ["with", "how"]))) }]} />],
   // v19: the title holds through "now for team impact", the with/without bars come in on "with him"
-  ["32@with", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
+  ["33", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
   ["34", anchored(<Sm.SPlusMinus voice={false} />, Sm.PM_T0)],
   ["35", (c) => <PMLedger cues={{ lineup: at(c, WA("35", ["against", "players"])), result: at(c, WA("35", ["over", "26"])), n26: at(c, WA("35", ["26", "about"])),
     fast: at(c, WA("35", ["add", "up"])), done: at(c, L("35").end) + 12 }} />],
