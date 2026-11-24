@@ -245,7 +245,7 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
   return (
     <Ground>
       <AbsoluteFill style={{ transform: `translate(960px, 540px) scale(${zs}) translate(${-zx}px, ${-zy}px)`, transformOrigin: "0 0" }}>
-      <div style={{ position: "absolute", left: 120, top: 70, fontFamily: F.title, fontSize: 72, color: CREAM, letterSpacing: 2 }}>{weights ? "MY WEIGHTS" : "ROLL THE DICE"}</div>
+      <div style={{ position: "absolute", left: 120, top: 70, fontFamily: F.title, fontSize: 72, color: CREAM, letterSpacing: 2 }}>ROLL THE DICE</div>
       {PARTS6.map((p, i) => (
         <div key={p} style={{ position: "absolute", left: 120, top: 220 + i * 118, display: "flex", alignItems: "center", gap: 24 }}>
           <div style={{ width: 300, textAlign: "right", fontFamily: F.title, fontSize: 40, color: C.text, letterSpacing: 1 }}>{p}</div>
@@ -253,7 +253,10 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
             <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${(bars[i] / max) * 100}%`, background: i === 0 ? C.gold : "#8C96A6" }} />
             <div style={{ position: "absolute", left: `${(BASE[i] / max) * 100}%`, top: -8, bottom: -8, width: 3, background: "rgba(237,239,242,0.6)" }} />
           </div>
-          {weights && <div style={{ width: 130, fontFamily: F.title, fontSize: 58, color: i === 0 ? C.gold : CREAM, opacity: wk(i), transform: `translateX(${(1 - wk(i)) * -16}px)` }}>{Math.round(BASE[i])}%</div>}
+          {/* ay 24 Nov 19:01: no "MY WEIGHTS" graph; the weights are said over this same dice graph, and in both places
+              each bar's % is live, so it goes up and down as the bars move (shares of 100) */}
+          <div style={{ width: 130, fontFamily: F.title, fontSize: 58, color: i === 0 ? C.gold : CREAM, opacity: weights ? wk(i) : 1,
+            transform: weights ? `translateX(${(1 - wk(i)) * -16}px)` : undefined }}>{Math.round((bars[i] / bars.reduce((a, b) => a + b, 0)) * 100)}%</div>
         </div>
       ))}
       {!weights && <div style={{ position: "absolute", left: 1180, top: 230, width: 640 }}>

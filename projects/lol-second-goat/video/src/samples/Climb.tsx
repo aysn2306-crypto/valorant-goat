@@ -84,8 +84,9 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
     { id: "apollo", at: A(WA("37c", ["apollo"])), color: RED, side: 2 }, { id: "smoothie", at: A(WA("37c", ["smoothie"])), color: RED, side: 1 },
     { id: "rekkles", at: A(WA("37d", ["rekkles"])), color: INK }, { id: "corejj", at: A(WA("37d", ["corejj"])), color: INK }] : [];
   const walkOut = walk ? interpolate(f, [tight0 - 8, tight0 + 6], [1, 0], clamp) : 1;
-  // ay 24 Nov 14:54: the walk names (Apollo, Smoothie, Rekkles, CoreJJ) stay on the graph, dimmed to 40% (Jxmy dims, never removes)
-  const walkDim = walk ? interpolate(f, [tight0 - 8, tight0 + 6], [1, 0.4], clamp) : 1;
+  // ay 24 Nov 14:54: the walk names (Apollo, Smoothie, Rekkles, CoreJJ) stay on the graph, dimmed (Jxmy dims, never removes).
+  // ay 24 Nov 19:01 (8:54): at 40% the red and grey names were lost in the grey dots, so 80% and a dark chip behind each name
+  const walkDim = walk ? interpolate(f, [tight0 - 8, tight0 + 6], [1, 0.8], clamp) : 1;
   const named: { id: string; at: number; big?: boolean; color?: string; side?: 1 | 2 }[] = [...walkNames, { id: "ruler", at: A(WA("37", ["ruler"])) }, { id: "faker", at: climb1 - 6, big: true }];
   const isWalk = (id: string) => walkNames.some((n) => n.id === id);
   const axX = walk ? interpolate(f, [A(WA("37a", ["right"])), A(WA("37a", ["right"])) + 8], [0, 1], clamp) * walkOut : 0;
@@ -143,7 +144,7 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
             left: n.side ? X(r[2]) + 30 * t : X(r[2]) - 300,
             top: n.side ? Y(r[3]) - size * 1.05 * n.side : Y(r[3]) + 16 * t,
             fontFamily: BEBAS, fontSize: size, color: n.color ?? INK, letterSpacing: 1, opacity: pop(n.at) * (isWalk(n.id) ? walkDim : 1), whiteSpace: "nowrap" }}>
-            {r[1]} ({r[3] >= 0 ? "+" : ""}{r[3].toFixed(1)})
+            <span style={{ background: "rgba(15,16,18,0.88)", padding: `${2 * t}px ${10 * t}px`, borderRadius: 6 * t }}>{r[1]} ({r[3] >= 0 ? "+" : ""}{r[3].toFixed(1)})</span>
           </div>
         );
       })}

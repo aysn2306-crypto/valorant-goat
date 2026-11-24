@@ -209,6 +209,119 @@ export const RankedElo: React.FC<{ cues: { steal: number; n26: number; games: nu
 
 // longevity: each year's value above the elite line, capped at 0.4 (a Worlds top 4 or a league final counts at least 0.3).
 // season_ratings.csv + title_credits.csv, which reproduce longevity_raw in draft_scores_v15.3 exactly (24 Nov)
+/** ay 24 Nov 19:01: the rank badges read badly, so the Elo is drawn plainly again, after j3m's "The Elo Rating System"
+ *  (chart-refs-2/05-j3m-elo-rating-system, 01:26 and 03:00: each rating is a tower on one ground line and after a game
+ *  height flows from the loser's tower to the winner's). Same story as the ranked version: winning takes points off the
+ *  team you beat, the favourite gets 3 for an expected win, the underdog takes 29 for an upset, and the two outcomes stay
+ *  side by side in a small ledger so "hurts way more" is a plain -3 next to -29. */
+export const EloTowers: React.FC<{ cues: { steal: number; n26: number; games: number; fav: number; upset: number; hurt: number } }> = ({ cues }) => {
+  const f = useCurrentFrame();
+  const G = 900, K = 0.27, TW = 230, XL = 400, XR = 940;
+  const io = Easing.bezier(0.65, 0, 0.35, 1);
+  const grow = interpolate(f, [2, 22], [0, 1], { ...clamp, easing: easeOut });
+  // favourite win: 3 points flow underdog -> favourite; then reset; upset: 29 flow favourite -> underdog
+  const t3 = interpolate(f, [cues.fav, cues.fav + 20], [0, 1], { ...clamp, easing: io });
+  const back = interpolate(f, [cues.upset - 8, cues.upset], [0, 1], { ...clamp, easing: io });
+  const t29 = interpolate(f, [cues.upset, cues.upset + 22], [0, 1], { ...clamp, easing: io });
+  const d = 3 * t3 * (1 - back) - 29 * t29;
+  const vL = 1300 - d, vR = 1700 + d;
+  const steal = pop(f, cues.steal, 10) * (1 - pop(f, cues.fav - 8, 8));
+  const games = Math.round(interpolate(f, [cues.n26, cues.games + 10], [0, 26000], clamp));
+  const hurt = pop(f, cues.hurt, 10);
+  const top = (v: number) => G - v * K * grow;
+  const Tower = ({ x, v, name, col }: { x: number; v: number; name: string; col: string }) => (
+    <>
+      <div style={{ position: "absolute", left: x, top: top(v), width: TW, height: G - top(v), background: "rgba(242,242,238,0.05)", border: `4px solid ${col}`, borderBottom: "none" }} />
+      <div style={{ position: "absolute", left: x - 40, width: TW + 80, top: top(v) - 110, textAlign: "center", fontFamily: BEBAS, fontSize: 96, lineHeight: 1, color: INK, opacity: grow }}>
+        {Math.round(v).toLocaleString("en-US")}</div>
+      <div style={{ position: "absolute", left: x - 60, width: TW + 120, top: G + 22, textAlign: "center", fontFamily: BEBAS, fontSize: 50, letterSpacing: 4, color: MUTE }}>{name}</div>
+    </>
+  );
+  // the points chip travelling between the tower tops, its size is the points moved
+  const chip = (t: number, n: number, from: number, to: number, y0: number, y1: number) => {
+    if (t <= 0 || t >= 1) return null;
+    const x = from + (to - from) * t, y = y0 + (y1 - y0) * t - 125 - Math.sin(t * Math.PI) * 50, h = 26 + n * 2.4;
+    return <div style={{ position: "absolute", left: x - 70, top: y - h, width: 140, height: h, background: n > 10 ? TEAL : INK, borderRadius: 8,
+      display: "flex", alignItems: "center", justifyContent: "center", fontFamily: BEBAS, fontSize: 48, color: GROUND }}>{n}</div>;
+  };
+  const delta = (a: number, txt: string, x: number, y: number) => {
+    const k = pop(f, a, 8);
+    return k > 0 ? <div style={{ position: "absolute", left: x, top: y, width: 140, textAlign: "center", fontFamily: BEBAS, fontSize: 72, lineHeight: 1,
+      color: txt.startsWith("+") ? TEAL : RED, opacity: k }}>{txt}</div> : null;
+  };
+  const showFav = f >= cues.fav + 16 && f < cues.upset - 8, showUp = f >= cues.upset + 18;
+  const rows = [{ at: cues.fav, who: "FAVOURITE WINS", fav: "+3", dog: "-3" }, { at: cues.upset, who: "UNDERDOG WINS", fav: "-29", dog: "+29" }];
+  return (
+    <AbsoluteFill>
+      <Concrete />
+      <div style={{ position: "absolute", left: 120, top: 60, fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>TEAM RATINGS</div>
+      <div style={{ position: "absolute", left: 120, top: 136, fontFamily: BEBAS, fontSize: 36, letterSpacing: 3, color: MUTE }}>WIN A GAME, TAKE POINTS OFF THE TEAM YOU BEAT</div>
+      <div style={{ position: "absolute", left: 160, width: 1100 * grow, top: G, height: 4, background: INK }} />
+      <Tower x={XL} v={vL} name="UNDERDOG" col={MUTE} />
+      <Tower x={XR} v={vR} name="FAVOURITE" col={MUTE} />
+      {/* "the team you beat": an arc from loser to winner while the rule is said */}
+      <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: steal }}>
+        <path d={`M${XL + TW / 2} ${top(1300) - 130} Q${(XL + XR + TW) / 2} ${top(1700) - 260} ${XR + TW / 2 - 20} ${top(1700) - 140}`} fill="none" stroke={TEAL} strokeWidth={6} strokeDasharray="16 12" />
+        <polygon points={`${XR + TW / 2 - 20},${top(1700) - 140} ${XR + TW / 2 - 60},${top(1700) - 158} ${XR + TW / 2 - 44},${top(1700) - 118}`} fill={TEAL} />
+      </svg>
+      {chip(t3, 3, XL + TW / 2, XR + TW / 2, top(1300), top(1700))}
+      {chip(t29, 29, XR + TW / 2, XL + TW / 2, top(1700), top(1300))}
+      {showFav && <>{delta(cues.fav + 16, "-3", XL - 160, top(vL) - 90)}{delta(cues.fav + 16, "+3", XR + TW + 20, top(vR) - 90)}</>}
+      {showUp && <>{delta(cues.upset + 18, "+29", XL - 160, top(vL) - 90)}{delta(cues.upset + 18, "-29", XR + TW + 20, top(vR) - 90)}</>}
+      {/* the ledger keeps both outcomes on screen */}
+      <div style={{ position: "absolute", left: 1400, top: 330, width: 440 }}>
+        <div style={{ display: "flex", fontFamily: BEBAS, fontSize: 34, letterSpacing: 3, color: MUTE, opacity: pop(f, cues.fav, 8) }}>
+          <div style={{ flex: 1 }} /><div style={{ width: 130, textAlign: "center" }}>FAVOURITE</div></div>
+        {rows.map((r, i) => {
+          const k = pop(f, r.at + 16, 8);
+          return (
+            <div key={r.who} style={{ display: "flex", alignItems: "center", height: 120, borderTop: `2px solid rgba(242,242,238,0.15)`, opacity: k }}>
+              <div style={{ flex: 1, fontFamily: BEBAS, fontSize: 46, letterSpacing: 2, color: INK }}>{r.who}</div>
+              <div style={{ width: 130, textAlign: "center", fontFamily: BEBAS, fontSize: 84, color: r.fav.startsWith("+") ? TEAL : RED, position: "relative" }}>
+                {r.fav}
+                {i === 1 && <div style={{ position: "absolute", inset: "-4px 0px 4px", border: `5px solid ${RED}`, borderRadius: 10, opacity: hurt, transform: `scale(${0.9 + 0.1 * hurt})` }} />}
+              </div>
+            </div>
+          );
+        })}
+        <div style={{ marginTop: 18, textAlign: "right", fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: RED, opacity: hurt }}>HURTS WAY MORE</div>
+      </div>
+      <div style={{ position: "absolute", right: 70, bottom: 40, fontFamily: BEBAS, fontSize: 40, letterSpacing: 3, color: MUTE, opacity: f >= cues.n26 ? 1 : 0 }}>
+        GAMES RATED {games.toLocaleString("en-US")}</div>
+    </AbsoluteFill>
+  );
+};
+
+/** ay 24 Nov 19:01: the clutch axes sat empty under "flip a coin 10 times and sometimes you get 8 heads". Ten coins
+ *  land one by one on "flip", 8 heads and 2 tails (3Blue1Brown's tick and cross rows, chart-refs-2/02 00:24), then
+ *  the row leaves as the dots come in. */
+export const CoinRow: React.FC<{ cues: { flip: number; heads: number; out: number } }> = ({ cues }) => {
+  const f = useCurrentFrame();
+  const res = [1, 1, 0, 1, 1, 1, 0, 1, 1, 1];
+  const span = Math.max(20, cues.heads - cues.flip - 4);
+  const k = pop(f, cues.flip - 6, 8) * (1 - pop(f, cues.out, 10));
+  if (k <= 0) return null;
+  return (
+    <AbsoluteFill style={{ opacity: k }}>
+      <AbsoluteFill style={{ background: "rgba(15,16,18,0.82)" }} />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 330, display: "flex", justifyContent: "center", gap: 26 }}>
+        {res.map((h, i) => {
+          const a = cues.flip + (i * span) / res.length, t = interpolate(f, [a, a + 8], [0, 1], { ...clamp, easing: easeOut });
+          return (
+            <div key={i} style={{ width: 130, height: 130, borderRadius: 130, border: `5px solid ${h ? TEAL : MUTE}`, background: h ? "rgba(63,208,181,0.12)" : "transparent",
+              display: "flex", alignItems: "center", justifyContent: "center", fontFamily: BEBAS, fontSize: 76, color: h ? TEAL : MUTE,
+              opacity: t, transform: `scaleX(${Math.abs(Math.cos((1 - t) * Math.PI * 1.5))})` }}>{h ? "H" : "T"}</div>
+          );
+        })}
+      </div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 560, textAlign: "center", fontFamily: BEBAS, fontSize: 110, color: INK, opacity: pop(f, cues.heads, 8) }}>
+        8 HEADS OUT OF 10</div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 700, textAlign: "center", fontFamily: BEBAS, fontSize: 56, letterSpacing: 3, color: MUTE, opacity: pop(f, cues.heads + 10, 8) }}>
+        SAME COIN, JUST LUCK</div>
+    </AbsoluteFill>
+  );
+};
+
 const LONG: { name: string; v: number; yrs: Record<number, number> }[] = [
   { name: "FAKER", v: 100, yrs: { 2013: 0.4, 2014: 0.3, 2015: 0.4, 2016: 0.4, 2017: 0.4, 2018: 0.06, 2019: 0.3, 2020: 0.3, 2021: 0.3, 2022: 0.3, 2023: 0.3, 2024: 0.3, 2025: 0.3, 2026: 0.3 } },
   { name: "DEFT", v: 92, yrs: { 2013: 0.03, 2014: 0.37, 2015: 0.4, 2016: 0.4, 2017: 0.4, 2018: 0.3, 2019: 0.29, 2020: 0.4, 2021: 0.34, 2022: 0.3, 2023: 0.4, 2024: 0.14 } },
@@ -218,7 +331,7 @@ const LONG: { name: string; v: number; yrs: Record<number, number> }[] = [
 const RECOG = [{ name: "CHOVY", v: 100 }, { name: "FAKER", v: 89 }, { name: "KNIGHT", v: 87 }];
 
 /** Longevity (left) then recognition (right) on one board; the left dims to a quarter when the right comes in (Jxmy) */
-export const LongRec: React.FC<{ cues: { rows: number[]; tagL: number; right: number; bars: number[]; tagR: number } }> = ({ cues }) => {
+export const LongRec: React.FC<{ cues: { rows: number[]; tagL: number; right: number; bars: number[]; tagR: number; key?: number[] } }> = ({ cues }) => {
   const f = useCurrentFrame();
   const inK = pop(f, 0, 10);
   const dimL = 1 - 0.7 * interpolate(f, [cues.right, cues.right + 12], [0, 1], clamp);
@@ -249,6 +362,27 @@ export const LongRec: React.FC<{ cues: { rows: number[]; tagL: number; right: nu
             </div>
           );
         })}
+        {/* ay 24 Nov 19:01: the board sat empty under 38a. A key, said word by word: a monster year fills the square,
+            a great year most of it, a year you only just made it a sliver. It leaves as the rows come in. */}
+        {cues.key && (() => {
+          const out = 1 - pop(f, cues.rows[0] - 10, 8);
+          const items = [{ t: "GREAT YEAR", v: 0.75, at: cues.key[0] }, { t: "MONSTER YEAR", v: 1, at: cues.key[1] }, { t: "ONLY JUST MADE IT", v: 0.15, at: cues.key[2] }];
+          return out > 0 ? (
+            <div style={{ position: "absolute", left: 160, top: 400, display: "flex", gap: 110, opacity: out }}>
+              {items.map((it) => {
+                const k = pop(f, it.at, 10), g = interpolate(f, [it.at + 4, it.at + 20], [0, 1], { ...clamp, easing: easeOut });
+                return (
+                  <div key={it.t} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 26, opacity: k }}>
+                    <div style={{ position: "relative", width: 150, height: 150, border: "3px solid rgba(242,242,238,0.3)" }}>
+                      <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: `${it.v * 100 * g}%`, background: it.v === 1 ? TEAL : INK }} />
+                    </div>
+                    <div style={{ fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: it.v === 1 ? TEAL : INK, whiteSpace: "nowrap" }}>{it.t}</div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : null;
+        })()}
         {[2013, 2016, 2019, 2022, 2026].map((yr) => (
           <div key={yr} style={{ position: "absolute", left: gx + (yr - 2013) * pitch - 30, width: cell + 60, top: y0 + 4 * rowH - 6, textAlign: "center",
             fontFamily: BEBAS, fontSize: 34, color: MUTE, opacity: pop(f, cues.rows[0]) }}>{yr}</div>

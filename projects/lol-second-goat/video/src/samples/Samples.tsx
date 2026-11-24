@@ -236,6 +236,9 @@ export const SElo: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
 // ---------------------------------------------------------------- 3. plus-minus lineup grid
 export const PM_T0 = L("34").start - 0.25, PM_T1 = L("35").end + 1.0;
 const PMW = { plus: W("34", "plus") - 0.15, who: W("34", "teams"), change: W("34", "change"), solve: W("35", "who"), five: W("35", "5"), n26: W("35", "26"), games: W("35", "games") };
+// ay 24 Nov 19:01: the screen sat empty from "plus-minus" to "5 against 5" (about 15 s). Line 34a's example now plays out:
+// Chovy leaves, a rookie comes in (big drop) or Faker comes in (no drop), and Chovy is the same player either way.
+const PMX = { nba: Ws("34", "nba"), think: L("34a").start, rookie: Ws("34a", "rookie"), faker: Ws("34a", "faker"), worse: Ws("34a", "worse") };
 export const PM_FRAMES = Math.round((PM_T1 - PM_T0) * FPS);
 // Illustrative games: Chovy's team (left) v opponents (right); 0 = Chovy, other numbers = other players. Not real lineups.
 const GAMES: { l: number[]; r: number[]; w: boolean }[] = [
@@ -297,7 +300,54 @@ export const SPlusMinus: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
       ) : (
         <>
           <div style={{ position: "absolute", left: 120, top: 70, fontFamily: F.title, fontSize: 76, color: CREAM, letterSpacing: 2 }}>ADJUSTED PLUS-MINUS</div>
-          <div style={{ position: "absolute", left: 120, top: 170, fontFamily: F.body, fontSize: 30, color: C.muted }}>Every game: five players against five. Only the result counts.</div>
+          {f >= A(PMW.five) - 6 && <div style={{ position: "absolute", left: 120, top: 170, fontFamily: F.body, fontSize: 30, color: C.muted }}>Every game: five players against five. Only the result counts.</div>}
+          {f < A(PMW.five) && (() => {
+            const out = 1 - interpolate(f, [A(PMW.five) - 8, A(PMW.five)], [0, 1], clamp);
+            const intro = interpolate(f, [A(PMX.think), A(PMX.think) + 8], [0, 1], clamp);
+            const swaps = [{ at: A(PMX.rookie), who: "ROOKIE IN", photo: undefined as string | undefined, to: 61, note: "BIG DROP", col: C.red },
+              { at: A(PMX.faker), who: "FAKER IN", photo: P("faker").photo, to: 76, note: "NO REAL DROP", col: C.mint }];
+            const same = interpolate(f, [A(PMX.worse), A(PMX.worse) + 8], [0, 1], clamp);
+            const pmIn = interpolate(f, [A(PMW.plus) + 4, A(PMW.plus) + 14], [0, 1], clamp) * (1 - intro);
+            const nba = interpolate(f, [A(PMX.nba), A(PMX.nba) + 8], [0, 1], clamp);
+            return (
+              <div style={{ position: "absolute", inset: 0, opacity: out }}>
+                {pmIn > 0 && <div style={{ position: "absolute", left: 0, right: 0, top: 330, textAlign: "center", opacity: pmIn }}>
+                  <div style={{ fontFamily: F.title, fontSize: 260, lineHeight: 1, color: C.cyan }}>+ / −</div>
+                  <div style={{ marginTop: 30, fontFamily: F.title, fontSize: 56, letterSpacing: 2, color: CREAM, opacity: nba }}>THE SAME IDEA THE NBA USES</div>
+                </div>}
+                <div style={{ position: "absolute", left: 120, top: 176, fontFamily: F.title, fontSize: 44, color: C.muted, letterSpacing: 1.5, opacity: intro }}>IF CHOVY LEAVES GEN.G</div>
+                {swaps.map((w, i) => {
+                  const k = interpolate(f, [w.at, w.at + 8], [0, 1], clamp);
+                  const drop = interpolate(f, [w.at + 10, w.at + 30], [0, 1], { ...clamp, easing: inOut });
+                  const wr = 77 + (w.to - 77) * drop, y = 300 + i * 290;
+                  return (
+                    <div key={w.who} style={{ position: "absolute", left: 120, top: y, opacity: k }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+                        {[1, 2, 9, 3, 4].map((n, j) => n === 9 ? (
+                          <div key={j} style={{ width: 120, height: 120, borderRadius: 120, position: "relative", overflow: "hidden", background: "#22303F",
+                            boxShadow: `inset 0 0 0 4px ${C.gold}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            {w.photo ? <Img src={staticFile(w.photo)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+                              : <span style={{ fontFamily: F.title, fontSize: 40, color: C.gold }}>NEW</span>}
+                          </div>) : <Dot key={j} n={n} size={90} />)}
+                        <div style={{ marginLeft: 20, fontFamily: F.title, fontSize: 52, color: CREAM, letterSpacing: 2, width: 260 }}>{w.who}</div>
+                      </div>
+                      <div style={{ position: "absolute", left: 1000, top: 10, width: 640 }}>
+                        <div style={{ fontFamily: F.body, fontSize: 26, color: C.muted }}>Gen.G win rate</div>
+                        <div style={{ position: "relative", height: 56, marginTop: 8, background: "#20252D", borderRadius: 6 }}>
+                          <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${wr}%`, background: drop > 0.5 ? w.col : C.cyan, borderRadius: 6 }} />
+                          <div style={{ position: "absolute", left: `${77}%`, top: -8, bottom: -8, width: 4, background: CREAM, opacity: 0.6 }} />
+                          <div style={{ position: "absolute", left: `calc(${wr}% + 14px)`, top: 4, fontFamily: F.title, fontSize: 44, color: CREAM }}>{Math.round(wr)}%</div>
+                        </div>
+                        <div style={{ marginTop: 10, fontFamily: F.title, fontSize: 40, color: w.col, opacity: drop }}>{w.note}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+                <div style={{ position: "absolute", left: 0, right: 0, top: 900, textAlign: "center", fontFamily: F.title, fontSize: 56, color: C.cyan, letterSpacing: 2, opacity: same }}>
+                  SAME CHOVY EITHER WAY</div>
+              </div>
+            );
+          })()}
           {rows.map((g, i) => {
             const o = interpolate(f, [g.t, g.t + 4], [0, 1], clamp);
             const y = 250 + i * 98;

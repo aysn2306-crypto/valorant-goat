@@ -33,7 +33,7 @@ import { FansVsModel } from "./Slope";
 import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
-import { LongRec, PartTop, RankedElo, Roadmap, SectionOpener, SourceNote } from "./Polish";
+import { CoinRow, EloTowers, LongRec, PartTop, Roadmap, SectionOpener, SourceNote } from "./Polish";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { HAS, L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
@@ -153,7 +153,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["19@gen", () => <Clip id="close" from={22} />],
   // ay 24 Nov 14:54: Elo told like ranked: steal points, the favourite drops 29 losing to the underdog but gains only 3
   // beating them. Holds through 20a and 21
-  ["20", (c) => <RankedElo cues={{ steal: at(c, WA("20", ["steal"])), n26: at(c, WA("20", ["26,000", "26"])), games: at(c, WA("20", ["games"])),
+  ["20", (c) => <EloTowers cues={{ steal: at(c, WA("20", ["steal"])), n26: at(c, WA("20", ["26,000", "26"])), games: at(c, WA("20", ["games"])),
     fav: at(c, WA("20a", ["3", "three"])), upset: at(c, WA("20a", ["steal", "29"])), hurt: at(c, WA("20a", ["hurts", "way"])) }} />],
   ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top, second: at(c, WA("48", ["knight", "night"])) }} />; }],
   ["49", (c) => <HeadToHead left="chovy" right="knight" title="SKILL PART: #1 VS #2" cues={{ in: 0, rows: 6, last: at(c, WA("49", ["behind", "just", "knight"])) }} rows={[
@@ -190,9 +190,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     // v19: dots pop in over "Here's every player..." (about 4 s, locked 21 Nov), then 30a names the axes on the full graph
     const rv = at(c, WA("31", ["faker's", "faker", "baker's"])), ch = at(c, WA("30c", ["cream", "creme", "bottom"]));
     const d0 = at(c, L("30").start) + 4, d1 = d0 + 110;
-    return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} dots={[d0, d1]} walk={{ bottom: at(c, WA("30c", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
+    return <><Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} dots={[d0, d1]} walk={{ bottom: at(c, WA("30c", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
       nameAt={Object.fromEntries([...["gumayusi", "zeka"].map((id) => [id, at(c, WA("31", ["gumayusi", "guma"]))]), ["bin", at(c, WA("31", ["bin"]))],
-        ...[["369", "369"], ["gala", "369"], ["doran", "doran"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])])} />} mode="wipe" dur={c.dur} />; }],
+        ...[["369", "369"], ["gala", "369"], ["doran", "doran"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])])} />} mode="wipe" dur={c.dur} />
+      <CoinRow cues={{ flip: at(c, WA("29", ["flip", "coin"])), heads: at(c, WA("29", ["heads", "8"])), out: at(c, WA("29", ["expected"])) }} /></>; }],
   // v19b: the part's winners come straight after the clutch graph (line 45 dropped, 46 opens it). ay 24 Nov 14:54: the board
   // is the WHOLE part (big-game play + series won + clutch), so Bin tops it by 0.7 over Knight
   ["46", (c) => <PillBars data={BIG_PART} title="#1 IN BIG GAMES + CLUTCH" sub="PLAY IN BIG GAMES, BIG SERIES WON AND CLUTCH TOGETHER, 0 TO 100"
@@ -212,7 +213,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["38a", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="LONGEVITY + RECOGNITION" at={4} size={136} /></AbsoluteFill>],
   // ay 24 Nov 14:54: the title had nothing after it. Longevity (great years, Faker #1) then recognition (Chovy #1) on one board
   ...(HAS("38c") ? [["38a@longevity", (c: Ctx) => <LongRec cues={{ rows: [at(c, WA("38c", ["faker"])), at(c, WA("38c", ["deft"])), at(c, WA("38c", ["knight"])), at(c, WA("38c", ["chovy"]))],
-    tagL: at(c, WA("38c", ["tops"])), right: at(c, L("38d").start), bars: [at(c, WA("38f", ["chovy"])), at(c, WA("38f", ["faker"])), at(c, WA("38f", ["knight"]))], tagR: at(c, WA("38f", ["tops"])) }} />] as [string, (c: Ctx) => React.ReactNode]] : []),
+    tagL: at(c, WA("38c", ["tops"])), right: at(c, L("38d").start), bars: [at(c, WA("38f", ["chovy"])), at(c, WA("38f", ["faker"])), at(c, WA("38f", ["knight"]))], tagR: at(c, WA("38f", ["tops"])),
+    key: [at(c, WA("38a", ["great"])), at(c, WA("38a", ["monster"])), at(c, WA("38a", ["just", "made"]))] }} />] as [string, (c: Ctx) => React.ReactNode]] : []),
   ["38", (c) => <PercentStack header="HOW MANY ALL-PRO PICKS COME OUT RIGHT" rows={[
     { icon: "trophy", label: "PICK FROM THE WINNING TEAMS", pct: 58, at: at(c, W("40", "winning")) },
     { icon: "model", label: "THE MODEL", pct: 63, at: at(c, W("41", "63")), accent: true }]}
