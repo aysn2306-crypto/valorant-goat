@@ -74,8 +74,9 @@ const buildEnvelope = (lead: number, total: number) => {
 
 export const Music: React.FC<{ lead: number; total: number }> = ({ lead, total }) => {
   const env = React.useMemo(() => buildEnvelope(lead, total), [lead, total]);
-  // v19: line 43 moved up to the recipe; the chapter break is now "who wins each part" (line 44)
-  const brk = lead + L(HAS("42p") ? "44" : "43").start - 0.8; // crossfade sits in the pause before the categories
+  // v19b: the recipe moved to the start and the winners come with each part, so the change of track sits on the last
+  // act, "how sure can we actually be" (line 56), in the pause before it
+  const brk = lead + L(HAS("42p") ? "56" : "43").start - 0.8; // crossfade sits in the pause before the categories
   const t0 = lead; // music comes in as the caster fades and ay starts
   const end = total / FPS;
   const vol = (trk: typeof A, f: number, which: "a" | "b") => {

@@ -16,11 +16,12 @@ const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const easeOut = Easing.bezier(0.16, 1, 0.3, 1);
 const BEBAS = "Bebas Neue", INK = "#F2F2EE", MUTE = "#9BA3AE", GOLD = "#E8B04B", TEAL = "#3FD0B5";
 
-/** "So here's how this is gonna go": three steps, each lights on its word, the earlier ones drop to 35% */
-export const Roadmap: React.FC<{ at: [number, number, number] }> = ({ at }) => {
+/** "So here's how this is gonna go": three steps, each lights on its word, the others drop to 35%. v19b: the
+ *  winners come with each part, so step 1 is the six parts; `cur` forces the lit step (held under "here's the recipe") */
+export const Roadmap: React.FC<{ at: [number, number, number]; cur?: number }> = ({ at, cur: force }) => {
   const f = useCurrentFrame();
-  const items = ["HOW THE MODEL WORKS", "WHO WINS EACH PART", "THE G.O.A.T. PYRAMID"];
-  const cur = at.filter((a) => f >= a).length - 1;
+  const items = ["THE SIX PARTS", "HOW SURE WE CAN BE", "THE G.O.A.T. PYRAMID"];
+  const cur = force ?? at.filter((a) => f >= a).length - 1;
   return (
     <AbsoluteFill>
       <Concrete />

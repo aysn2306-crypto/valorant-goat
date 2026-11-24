@@ -88,7 +88,7 @@ const ft = (text: string) => () => <Footage text={text} />;
 const still = (k: keyof typeof St, mode: "wipe" | "rise" | "cut" = "cut") => (c: Ctx) => <Build C={St[k] as React.FC} mode={mode} dur={c.dur} />;
 const at = (c: Ctx, t: number) => fr(t - c.t0);
 
-// ay 24 Nov (1:08 note): "Faker back where he belongs" and the panel stays up longer; it now holds until the recipe cards start
+// ay 24 Nov (1:08 note): "Faker back where he belongs" and the panel stays up longer (through 15x, until skill starts)
 const whatChanged = (c: Ctx) => <MLBoard title="What changed" lines={[
     { text: "Version 1: early games untracked, no damage stats before 2020", at: 4 },
     { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },
@@ -114,6 +114,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["3", () => <Clip id="fakerJerseys" from={0.3} dim={0} />],
   // v19: "he's won Worlds six times": SKT with the cup in 2013, his first
   ["3b", () => <Clip id="sktCup2013" from={8} dim={0} />],
+  // v19b (ay 14:27): "every year Faker doesn't win it, that number 2 spot changes hands": HLE passing the MSI 2026 cup
+  ["3d", () => <Clip id="msiLift" from={8} dim={0} />],
   // ay 20 Nov: B-roll stops at "who's the second best"; plain backgrounds from here on
   ["3c", (c) => <AbsoluteFill><Concrete /><Ov.BigWord text="WHO IS #2?" at={4} /></AbsoluteFill>],
   ["5", (c) => <AbsoluteFill><Concrete /><Ov.CommentPile cues={{ from: 2, to: at(c, W("5", "answers")),
@@ -122,17 +124,13 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["10", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="SO I BUILT A MODEL" years="2011 TO 2026" yearsAt={at(c, W("10", "2011"))} value="527" unit="PLAYERS" numAt={at(c, W("10", "527"))} />
     {HAS("10b") && <SourceNote text="LEAGUEPEDIA + ORACLE'S ELIXIR · ABOUT 26,000 GAMES" at={at(c, WA("10b", ["leaguepedia", "pulled"]))} />}</AbsoluteFill>],
   // v19: the chapter preview (3Blue1Brown), each step on its word
-  ["10c", (c) => <Roadmap at={[at(c, WA("10c", ["first"])), at(c, WA("10c", ["then"])), at(c, WA("10c", ["pyramid", "build"]))]} />],
-  ["11", (c) => <VersionOne trophiesAt={10} partsAt={at(c, WA("11", ["14th", "14"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={HAS("13b") ? at(c, WA("13b", ["damage"])) : 1e9} />],
-  // v19 (ay 24 Nov: "made up for the missing stats" needs a close, and the panel needs longer): "Faker now: #1" lands on
-  // the new line 15x ("Faker went straight back to where he belongs"), and the board holds through it
-  ["15", (c) => whatChanged(c)],
+  ["10c", (c) => <Roadmap at={[at(c, WA("10c", ["first", "six"])), at(c, WA("10c", ["sure"])), at(c, WA("10c", ["pyramid", "build"]))]} />],
   // v19: the recipe comes first (ay asked what clutch and plus-minus are added to): the six cards, moved up from 4:57
   // the cards are anchored to their spoken words in line 42 (empty ground for 3.6 s before "six"); until the title comes
-  // in on "six", the What changed board stays up (on top), so there is no empty frame under "here's the recipe"
-  ["42p", (c) => { const gap = at(c, W("42", "6")) - 3, c15 = { t0: L("15").start - 0.05, dur: 0 }, back = fr(c15.t0 - c.t0); return <>
+  // in on "six", the roadmap stays up with step 1 (the six parts) lit, under "here's the recipe" (v19b)
+  ["42p", (c) => { const gap = at(c, W("42", "6")) - 3; return <>
     {anchored(<Sm.SCards voice={false} />, Sm.CARDS_T0)(c)}
-    {gap > 0 && <Sequence from={back} durationInFrames={gap - back} layout="none">{whatChanged(c15)}</Sequence>}</>; }],
+    {gap > 0 && <Sequence durationInFrames={gap} layout="none"><Roadmap at={[-30, -20, -10]} cur={0} /></Sequence>}</>; }],
   ["43", (c) => <StackedLines lines={[
     { text: "50 = MIDDLE OF THE PACK", at: -30 },
     { text: "100 = THE BEST EVER", at: at(c, W("43", "100")) },
@@ -142,6 +140,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // parts on their numbers (15e) and holds through 15f
   ["15b", (c) => <RecipeBar swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))}
     splitAt={HAS("15e") ? [at(c, WA("15e", ["21%", "21", "skill"])), at(c, WA("15e", ["16"])), at(c, WA("15e", ["14"])), at(c, WA("15e", ["11"])), at(c, WA("15e", ["8"]))] : [1e9, 1e9, 1e9, 1e9, 1e9]} />],
+  ["11", (c) => <VersionOne trophiesAt={10} partsAt={at(c, WA("11", ["14th", "14"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={HAS("13b") ? at(c, WA("13b", ["damage"])) : 1e9} />],
+  // v19 (ay 24 Nov: "made up for the missing stats" needs a close, and the panel needs longer): "Faker now: #1" lands on
+  // the new line 15x ("Faker went straight back to where he belongs"), and the board holds through it
+  ["15", (c) => whatChanged(c)],
   // v19: each method opens on its part's name, a Jxmy chapter title (eatF7QHwga4 x04)
   ["16a", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="SKILL" at={4} /></AbsoluteFill>],
   ["16", (c) => <KillsLine cues={{ lck: at(c, L("16").start + 0.3), lpl: at(c, W("16", "lpl")), gap: at(c, W("17", "3")) }} />],
@@ -151,6 +153,14 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // v19 (ay: "a full graph for 2 seconds"): the "Stronger teams count more" board is gone; the Elo towers stay up
   // through 20a, 21 and 21a
   ["20", anchored(<Sm.SElo voice={false} />, Sm.ELO_T0)],
+  ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top, second: at(c, WA("48", ["knight", "night"])) }} />; }],
+  ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, WA("49", ["behind", "just", "knight"])) }} rows={[
+    { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
+    { label: "GOLD AHEAD AT 15 MIN", l: "+339", r: "+451", better: "r" },
+    { label: "KDA", l: "5.67", r: "5.77", better: "r" },
+    { label: "DEATHS A GAME", l: "1.69", r: "1.94", better: "l" },
+    { label: "WIN RATE", l: "69.2%", r: "66.9%", better: "l" },
+    { label: "SKILL SCORE", l: "100", r: "97.8", better: "l", big: true }]} />],
   ["22", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="TROPHIES" at={at(c, L("22").start + 0.2)} /></AbsoluteFill>],
   // the worth bars open on "how much is an MSI worth", then each value lands as it is said; v19: the LPL bar lands on
   // "LPL" in 23a and the zoom-out waits for it
@@ -167,6 +177,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, WA("27", ["same", "titles"])), shares: at(c, WA("27", ["take", "ig"])), caption: at(c, WA("27", ["ig", "2018"])),
     names: { rookie: at(c, WA("27", ["rookie"])), theshy: at(c, WA("27", ["shy"])), baolan: at(c, WA("27b", ["bao", "baolan"])), jackeylove: at(c, WA("27b", ["jackie", "jackey"])), ning: at(c, WA("27b", ["ning"])) },
     top: at(c, WA("27", ["rookie", "biggest"])), mvp: at(c, WA("27b", ["ning", "finals"])) }} />],
+  // v19 (ay: no full graph for a few seconds): the 5 s "Trophy score" board is gone, the cabinet starts on line 51
+  ["51", (c) => <ClimbRemap c={c} />],
   ["28", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="BIG GAMES + CLUTCH" at={4} size={170} /></AbsoluteFill>],
   ["29", (c) => { // the clutch scatter (locked walk: bottom, middle, top), now from line 29 so the title card gets line 28
     // v19: dots pop in over "Here's every player..." (about 4 s, locked 21 Nov), then 30a names the axes on the full graph
@@ -175,6 +187,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} dots={[d0, d1]} walk={{ bottom: at(c, WA("30c", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
       nameAt={Object.fromEntries([...["on", "zeus", "gumayusi", "zeka"].map((id) => [id, at(c, WA("31", ["gumayusi", "guma"]))]), ["bin", at(c, WA("31", ["bin"]))],
         ...[["369", "369"], ["gala", "369"], ["zven", "369"], ["doran", "doran"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])])} />} mode="wipe" dur={c.dur} />; }],
+  // v19b: best on the big stage comes straight after the clutch part (line 45 dropped, 46 opens it)
+  ["46", (c) => <PillBars cues={{ rise: 4, lit: at(c, WA("46", ["knight", "carrier", "night"])), side: 1e6 }} />],
   ["32", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="TEAM IMPACT" at={4} /></AbsoluteFill>],
   // v19: the title holds through "now for team impact", the with/without bars come in on "with him"
   ["32@with", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
@@ -190,19 +204,6 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { icon: "trophy", label: "PICK FROM THE WINNING TEAMS", pct: 58, at: at(c, W("40", "winning")) },
     { icon: "model", label: "THE MODEL", pct: 63, at: at(c, W("41", "63")), accent: true }]}
     cues={{ votes: at(c, W("39", "all")), hide: at(c, W("40", "model")), ask: at(c, WA("40", ["asked", "pick"])) }} />],
-  // v19: the six cards moved to the recipe; "who wins each part?" gets its own title card
-  ["44", () => <Words text={"WHO WINS\nEACH PART?"} />],
-  ["45", (c) => <PillBars cues={{ rise: 4, lit: at(c, WA("46", ["knight", "carrier", "night"])), side: 1e6 }} />],
-  ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top, second: at(c, WA("48", ["knight", "night"])) }} />; }],
-  ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, WA("49", ["behind", "just", "knight"])) }} rows={[
-    { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
-    { label: "GOLD AHEAD AT 15 MIN", l: "+339", r: "+451", better: "r" },
-    { label: "KDA", l: "5.67", r: "5.77", better: "r" },
-    { label: "DEATHS A GAME", l: "1.69", r: "1.94", better: "l" },
-    { label: "WIN RATE", l: "69.2%", r: "66.9%", better: "l" },
-    { label: "SKILL SCORE", l: "100", r: "97.8", better: "l", big: true }]} />],
-  // v19 (ay: no full graph for a few seconds): the 5 s "Trophy score" board is gone, the cabinet starts on line 51
-  ["51", (c) => <ClimbRemap c={c} />],
   // v19 (ay: "the Monte Carlo graphic shows before I mention it"): the weights first, while ay says they're his choices
   // (wobble on "choices", trophies boxed on "remember"), then the definition page on "Monte Carlo" (locked: page, not
   // the wheel), then the dice graph from 58 (locked)
