@@ -33,6 +33,7 @@ import { FansVsModel } from "./Slope";
 import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
+import { Roadmap, RecipeBar, SourceNote, WeightFaders } from "./Polish";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { HAS, L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
@@ -90,105 +91,102 @@ const at = (c: Ctx, t: number) => fr(t - c.t0);
 const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: footage only, never still player photos (lol-second-goat/footage, public/_local/footage)
   ["1", () => <Clip id="lift" from={2} />],
-  ["1@knight", () => <Clip id="lift" from={37} />],
+  // v19 (ay 24 Nov: "the intro is too fast, add context to the first scene"): BLG's run through three LCK teams, each
+  // clip on its team's name (footage as proof, rival study). The Gen.G final itself is the cold open, so the stage
+  // before game 4 stands in for it here. Knight's lift lands on "Knight".
+  ["1b", () => <Clip id="stomp" from={0.5} />],
+  ["1b@t1", () => <Clip id="semis" from={24} />],
+  ["1b@gen", () => <Clip id="stage" from={6} />],
+  ["1b@knight", () => <Clip id="lift" from={37} />],
   // ay 20 Nov: plain Faker B-roll, no circle text (clip 21 is Peyz, not Faker: checked frame by frame)
   ["3", () => <Clip id="fakerJerseys" from={0.3} dim={0} />],
-  // ay 19 Nov style map: Jxmy giant word over footage, then his comment-bubble pile (photo stands in for footage)
+  // v19: "he's won Worlds six times": SKT with the cup in 2013, his first
+  ["3b", () => <Clip id="sktCup2013" from={8} dim={0} />],
   // ay 20 Nov: B-roll stops at "who's the second best"; plain backgrounds from here on
-  ["3@who", (c) => <AbsoluteFill><Concrete /><Ov.BigWord text="WHO IS #2?" at={4} /></AbsoluteFill>],
-  // the invented comment pile is gone (ay 20 Nov): real fan answers from real sites go here once collected
+  ["3c", (c) => <AbsoluteFill><Concrete /><Ov.BigWord text="WHO IS #2?" at={4} /></AbsoluteFill>],
   ["5", (c) => <AbsoluteFill><Concrete /><Ov.CommentPile cues={{ from: 2, to: at(c, W("5", "answers")),
     focus: [{ id: "keria", at: at(c, WA("6", ["keria", "carrier"])) }, { id: "chovy", at: at(c, W("7", "chovy")) }], all: at(c, W("9", "everyone")) }} /></AbsoluteFill>],
-  // Jxmy text card, then his big number card on the number (style map 0:44)
-  ["10", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="SO I BUILT A MODEL" years="2011 TO 2026" yearsAt={at(c, W("10", "2011"))} value="527" unit="PLAYERS" numAt={at(c, W("10", "527"))} /></AbsoluteFill>], // ay 14:36: one card, added on
-  // ay 21 Nov 01:22: the WRONG / FAKER #14 verdict card looked low budget; the version 1 graph now starts on line 11
-  ["11", (c) => <VersionOne trophiesAt={10} partsAt={at(c, WA("11", ["14th", "14"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={HAS("13b") ? at(c, WA("13b", ["damage"])) : 1e9 /* 13b not recorded yet: the damage row waits for it */} />], // lines 11 to 13b
-  // ay 21 Nov 00:29: "Peak, not average" was misleading (team impact and clutch use the whole career); the board now says
-  // exactly what line 15 says changed
+  // v19: the sources are named in the voice (10b) and written under the card as they are said
+  ["10", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="SO I BUILT A MODEL" years="2011 TO 2026" yearsAt={at(c, W("10", "2011"))} value="527" unit="PLAYERS" numAt={at(c, W("10", "527"))} />
+    {HAS("10b") && <SourceNote text="LEAGUEPEDIA + ORACLE'S ELIXIR · ABOUT 26,000 GAMES" at={at(c, WA("10b", ["leaguepedia", "pulled"]))} />}</AbsoluteFill>],
+  // v19: the chapter preview (3Blue1Brown), each step on its word
+  ["10c", (c) => <Roadmap at={[at(c, WA("10c", ["first"])), at(c, WA("10c", ["then"])), at(c, WA("10c", ["pyramid", "build"]))]} />],
+  ["11", (c) => <VersionOne trophiesAt={10} partsAt={at(c, WA("11", ["14th", "14"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={HAS("13b") ? at(c, WA("13b", ["damage"])) : 1e9} />],
+  // v19 (ay 24 Nov: "made up for the missing stats" needs a close, and the panel needs longer): "Faker now: #1" lands on
+  // the new line 15x ("Faker went straight back to where he belongs"), and the board holds through it
   ["15", (c) => <MLBoard title="What changed" lines={[
     { text: "Version 1: early games untracked, no damage stats before 2020", at: 4 },
     { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },
     { text: "Now: fixed for every old player", at: at(c, WA("15", ["every"])) },
     { text: "Missing games filled in", at: at(c, WA("15", ["filled"])) },
     { text: "Missing stats made up for", at: at(c, WA("15", ["made"])) },
-    { face: "faker", text: "Faker now: #1", at: at(c, L("15").end) - 10, accent: true }]}
+    { face: "faker", text: "Faker now: #1", at: HAS("15x") ? at(c, WA("15x", ["back", "straight"])) : at(c, L("15").end) - 10, accent: true }]}
     side={<SideBars caption="Faker's all-time rank" rows={[
       { label: "Version 1", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
-      // council 22 Nov: the "Now" bar fills to #1 as ay says "So I fixed it" (it used to fill 1 s before the cut)
       { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "fixed")) }]} />} sideAt={10} big />],
-  // v15.3 (ay 20 Nov 23:09): trophies are 30% of the score; the share swings on "subjective", settles on "30%"
-  // 21 Nov 15:40 take has 15b and 15d again
-  ["15b", (c) => <TrophyShare swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))} />],
-  // Jxmy line chart (style map 1:22)
+  // v19: the recipe comes first (ay asked what clutch and plus-minus are added to): the six cards, moved up from 4:57
+  ["42p", anchored(<Sm.SCards voice={false} />, Sm.CARDS_T0)],
+  ["43", (c) => <StackedLines lines={[
+    { text: "50 = MIDDLE OF THE PACK", at: -30 },
+    { text: "100 = THE BEST EVER", at: at(c, W("43", "100")) },
+    { text: "TROPHIES: FAKER = 100", at: at(c, W("43", "faker")), accent: true, gap: 50 },
+    { text: "EVERYONE ELSE = A SHARE OF HIM", at: at(c, W("43", "everyone")) }]} />],
+  // v15.3 trophy share (locked swing on "subjective", settles on "30%"), then v19: the rest splits into the other five
+  // parts on their numbers (15e) and holds through 15f
+  ["15b", (c) => <RecipeBar swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))}
+    splitAt={HAS("15e") ? [at(c, WA("15e", ["21%", "21", "skill"])), at(c, WA("15e", ["16"])), at(c, WA("15e", ["14"])), at(c, WA("15e", ["11"])), at(c, WA("15e", ["8"]))] : [1e9, 1e9, 1e9, 1e9, 1e9]} />],
+  // v19: each method opens on its part's name, a Jxmy chapter title (eatF7QHwga4 x04)
+  ["16a", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="SKILL" at={4} /></AbsoluteFill>],
   ["16", (c) => <KillsLine cues={{ lck: at(c, L("16").start + 0.3), lpl: at(c, W("16", "lpl")), gap: at(c, W("17", "3")) }} />],
-  // Jxmy highlighted page, then big text sliding past (style map 1:34)
-  // ay 20 Nov 14:36: two LPL teams side by side, same role against same role (replaces the text reveal)
-  ["18", (c) => <TeamRoles cues={{ rows: Math.max(4, at(c, W("18", "compares")) - 6), role: at(c, W("18", "role")), old: at(c, WA("18b", ["2013", "old"])) }} />], // 18b: the old-era 5v5 on "2013"
-  // ay 20 Nov: keep this B-roll (the DK "bottom team" joke), with a tiny chat line on it
+  ["18", (c) => <TeamRoles cues={{ rows: Math.max(4, at(c, WA("18", ["compares"])) - 6), role: at(c, WA("18a", ["role", "lined"])), old: at(c, WA("18b", ["2013", "old"])) }} />],
   ["19", (c) => <AbsoluteFill><Clip id="stomp" from={20} /><ChatLine user="dk_enjoyer" text="DK LOL" at={at(c, W("19", "bottom"))} /></AbsoluteFill>],
   ["19@gen", () => <Clip id="close" from={22} />],
+  // v19 (ay: "a full graph for 2 seconds"): the "Stronger teams count more" board is gone; the Elo towers stay up
+  // through 20a, 21 and 21a
   ["20", anchored(<Sm.SElo voice={false} />, Sm.ELO_T0)],
-  ["21", (c) => <MLBoard title="Stronger teams count more" lines={[
-    { text: "Same stat line", at: at(c, W("21", "same")) },
-    { text: "Better opponent, more credit", at: at(c, W("21", "counts")), accent: true }]}
-    side={<SideTowers at={at(c, W("21", "same"))} at2={at(c, W("21", "counts"))} />} sideAt={at(c, W("21", "same"))} />],
-  // script 20 Nov 15:52 (ay: trophies go straight into what each title is worth, no blank screen, no coin-flip card)
   ["22", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="TROPHIES" at={at(c, L("22").start + 0.2)} /></AbsoluteFill>],
-  // the worth bars open on "how much is an MSI worth", then each value lands as it is said in 23
+  // the worth bars open on "how much is an MSI worth", then each value lands as it is said; v19: the LPL bar lands on
+  // "LPL" in 23a and the zoom-out waits for it
   ["22@but", (c) => { const w1 = at(c, WA("23", ["100", "hundred"])), w2 = at(c, WA("23", ["56", "fifty"])), w3 = at(c, WA("23", ["44", "forty"]));
-    // ay 21 Nov 17:07: zoom out right after "44" and hold the whole graph about a second (0.8 s pause added after line 23)
-    return <PriceClimb cues={[Math.min(w1, 20), w2, w3, w3 + 6, w3 + 10]} out={w3 + 12} />; }],
-  // line 24: every Worlds winner by the strength of the field it beat; "down here" lights DAMWON 2020, "all the way up here" T1 2024
+    const lpl = HAS("23a") ? at(c, WA("23a", ["lpl"])) : w3 + 10;
+    return <PriceClimb cues={[Math.min(w1, 20), w2, w3, Math.max(w3 + 6, lpl - 8), lpl]} out={lpl + 14} />; }],
   ["24", (c) => <WorldsValues cues={{ rise: 4, lit: [{ team: "DAMWON Gaming", year: 2020, at: at(c, WA("24", ["down", "damwon"])) },
     { team: "T1", year: 2024, at: at(c, WA("24", ["t1", "toughest"])) }] }} />],
-  // 24b: the biggest underdog is a different question: each champion's own odds, DRX 2022 lit on "DRX", the 1 in 500 on "500"
-  // LOCKED (ay 22 Nov 20:53): keep this separate DRX graph (the council cut it in draft 15 and ay wanted it back)
+  // LOCKED (ay 22 Nov 20:53): keep this separate DRX graph
   ["24b", (c) => <HardestRuns cues={{ rise: 0, lit: [{ team: "DRX", year: 2022, at: at(c, WA("24b", ["drx"])) }] }} />],
-  // 25: what BLG's harder run is worth to Knight
-  // 25 cut (ay 20 Nov 19:16): no Knight trophy-points segment
-  // stand-in shot of a team lift, then Jxmy's article page with the key line highlighted (style map 2:44)
-  ["26@win", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
+  // v19: the Win Shares page comes up on "basketball" (it was on screen 3.6 s)
+  ["26@basketball", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did in the game. Two players on the same team can end up with very different shares." />],
-  // ay 20 Nov 13:13: BLG 2026 shares are back (TitleShare.tsx, the no-names version, is kept but unused)
-  ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, WA("27", ["same", "titles"])), shares: at(c, WA("27", ["take", "ig"])) /* ay 21 Nov 17:07: players on screen from "Take IG in 2018" */, caption: at(c, WA("27", ["ig", "2018"])),
+  ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, WA("27", ["same", "titles"])), shares: at(c, WA("27", ["take", "ig"])), caption: at(c, WA("27", ["ig", "2018"])),
     names: { rookie: at(c, WA("27", ["rookie"])), theshy: at(c, WA("27", ["shy"])), baolan: at(c, WA("27b", ["bao", "baolan"])), jackeylove: at(c, WA("27b", ["jackie", "jackey"])), ning: at(c, WA("27b", ["ning"])) },
-    top: at(c, WA("27", ["rookie", "biggest"])), mvp: at(c, WA("27b", ["ning", "finals"])) }} />], // ay 19:16: IG 2018 shares, Ning (Finals MVP) smallest on 27b
-  ["28", (c) => { // script 15:52, Jxmy's walk: "at the bottom" zooms on the chokers (named on "Creme"), "in the middle" lights the band,
-    // "all the way up here" pans to the clutch players, "yup" names Faker
-    const rv = at(c, WA("31", ["faker's", "faker"])), ch = at(c, WA("30", ["creme", "bottom"]));
-    const d0 = at(c, L("30").start) + 4, d1 = Math.max(d0 + 90, at(c, WA("30", ["down", "bottom"])) - 12);
-    return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} dots={[d0, d1]} walk={{ bottom: at(c, WA("30", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
-      nameAt={Object.fromEntries([...["on", "zeus", "gumayusi", "zeka"].map((id) => [id, at(c, WA("31", ["gumayusi"]))]), ["bin", at(c, WA("31", ["bin"]))],
-        ...[["369", "369"], ["gala", "369"], ["zven", "369"], ["doran", "doran"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])] /* ay 20:19: highlight four, voice names two */)} />} mode="wipe" dur={c.dur} />; }], // ay 19 Nov: hold the clutch scatter from "clutch" to the end of the Faker line
-  // ay 20 Nov: the old with/without graph with all three players back (only Chovy is talked about)
-  ["32", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
-  // ay 20 Nov: from the Chovy graph straight to the wins-added graph, held the whole time, then the climb to Faker
-  // ay 20 Nov (draft 7): the "when he's out, who comes in" explainer back, then the wins-added graph, then the climb
+    top: at(c, WA("27", ["rookie", "biggest"])), mvp: at(c, WA("27b", ["ning", "finals"])) }} />],
+  ["28", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="BIG GAMES + CLUTCH" at={4} size={170} /></AbsoluteFill>],
+  ["29", (c) => { // the clutch scatter (locked walk: bottom, middle, top), now from line 29 so the title card gets line 28
+    // v19: dots pop in over "Here's every player..." (about 4 s, locked 21 Nov), then 30a names the axes on the full graph
+    const rv = at(c, WA("31", ["faker's", "faker", "baker's"])), ch = at(c, WA("30c", ["cream", "creme", "bottom"]));
+    const d0 = at(c, L("30").start) + 4, d1 = d0 + 110;
+    return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} dots={[d0, d1]} walk={{ bottom: at(c, WA("30c", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
+      nameAt={Object.fromEntries([...["on", "zeus", "gumayusi", "zeka"].map((id) => [id, at(c, WA("31", ["gumayusi", "guma"]))]), ["bin", at(c, WA("31", ["bin"]))],
+        ...[["369", "369"], ["gala", "369"], ["zven", "369"], ["doran", "doran"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])])} />} mode="wipe" dur={c.dur} />; }],
+  ["32", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="TEAM IMPACT" at={4} /></AbsoluteFill>],
+  // v19: the title holds through "now for team impact", the with/without bars come in on "with him"
+  ["32@with", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
   ["34", anchored(<Sm.SPlusMinus voice={false} />, Sm.PM_T0)],
-  // ay 20 Nov 20:01: line 35 as a running ledger for Chovy (the grid was confusing)
   ["35", (c) => <PMLedger cues={{ lineup: at(c, WA("35", ["against", "players"])), result: at(c, WA("35", ["over", "26"])), n26: at(c, WA("35", ["26", "about"])),
     fast: at(c, WA("35", ["add", "up"])), done: at(c, L("35").end) + 12 }} />],
-  ["37", (c) => { const k = Math.max(1, fr(Cl.CLIMB_T0 - c.t0)); // ay 20 Nov 14:36: line 36 cut, straight to the graph
+  // v19 (ay's 4:28 note): the climb opens on the whole chart for the walk-through (axes, bottom, middle), see Climb.tsx
+  [HAS("37a") ? "37a" : "37", (c) => { const k = Math.max(1, fr(Cl.CLIMB_T0 - c.t0));
     return <><Sequence durationInFrames={k} layout="none"><Freeze frame={30}><Cl.SClimb voice={false} /></Freeze></Sequence>
       <Sequence from={k} layout="none"><Cl.SClimb voice={false} /></Sequence></>; }],
-  // Jxmy percent stack (jxmy-graphs XMaPrXzclaQ g08), with 100 picks lit on the right
+  ["38a", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="LONGEVITY + RECOGNITION" at={4} size={136} /></AbsoluteFill>],
   ["38", (c) => <PercentStack header="HOW MANY ALL-PRO PICKS COME OUT RIGHT" rows={[
     { icon: "trophy", label: "PICK FROM THE WINNING TEAMS", pct: 58, at: at(c, W("40", "winning")) },
     { icon: "model", label: "THE MODEL", pct: 63, at: at(c, W("41", "63")), accent: true }]}
     cues={{ votes: at(c, W("39", "all")), hide: at(c, W("40", "model")), ask: at(c, WA("40", ["asked", "pick"])) }} />],
-  ["42@final", anchored(<Sm.SCards voice={false} />, Sm.CARDS_T0)],
-  // Jxmy small stacked text card (jxmy-graphics l38FEWdJnhg x03, style map 4:56)
-  ["43", (c) => <StackedLines lines={[
-    { text: "50 = MIDDLE OF THE PACK", at: -30 }, // ay 14:36: on screen from the start
-    { text: "100 = THE BEST EVER", at: at(c, W("43", "100")) },
-    { text: "TROPHIES: FAKER = 100", at: at(c, W("43", "faker")), accent: true, gap: 50 },
-    { text: "EVERYONE ELSE = A SHARE OF HIM", at: at(c, W("43", "everyone")) }]} />],
-  // ay 20 Nov: no chapter titles in the six-parts section, footage between the graphs
-  // Jxmy pill bars with the players at the foot (jxmy-graphs eatF7QHwga4 g08, style map 5:15); v14 big-stage half alone
-  ["45", (c) => <PillBars cues={{ rise: 4, lit: at(c, WA("46", ["knight", "carrier"])), side: 1e6 }} />],
-  ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top, second: at(c, W("48", "knight")) }} />; }], // v15.2: climbs to Chovy 2025
-  // Jxmy two-player board (jxmy-graphs GPH4nK5sQ-8 g01): Chovy vs Knight, the skill score "by a hair" last
-  // 48b (Faker's best season) cut, ay 20 Nov 18:03: not in the video
+  // v19: the six cards moved to the recipe; "who wins each part?" gets its own title card
+  ["44", () => <Words text={"WHO WINS\nEACH PART?"} />],
+  ["45", (c) => <PillBars cues={{ rise: 4, lit: at(c, WA("46", ["knight", "carrier", "night"])), side: 1e6 }} />],
+  ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top, second: at(c, WA("48", ["knight", "night"])) }} />; }],
   ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, WA("49", ["behind", "just", "knight"])) }} rows={[
     { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
     { label: "GOLD AHEAD AT 15 MIN", l: "+339", r: "+451", better: "r" },
@@ -196,24 +194,15 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { label: "DEATHS A GAME", l: "1.69", r: "1.94", better: "l" },
     { label: "WIN RATE", l: "69.2%", r: "66.9%", better: "l" },
     { label: "SKILL SCORE", l: "100", r: "97.8", better: "l", big: true }]} />],
-  ["51", (c) => <MLBoard title="Trophy score" lines={[
-    { text: "Each title = which trophy × how hard × his share", at: at(c, WA("51", ["how", "times"])) },
-    { text: "Added up over a whole career", at: at(c, W("51", "share")), accent: true }]} />],
-  // The cabinet without Faker in view (Canyon, Ruler, Knight named), held still, then on "here's Faker" the camera climbs
-  // all the way up to Faker and holds, zooms out on line 55 to compare him with everyone, and the gap bracket lands on
-  // "anyone". No "more than double" card; it holds until "how sure" (ay 20 Nov 14:36, like Jxmy's climb then zoom out).
-  ["51@only", (c) => <ClimbRemap c={c} />],
-  // ay 20 Nov 15:28: still on "how sure", the rolls start on "the model rolls a dice", a clean cut to the Monte Carlo page,
-  // then back with the count carried on: about 10 rolls, a hold on one, the time-lapse to 1,000 on "all 1000"
-  // ay 20 Nov 19:16: the graph holds still while ay explains the Monte Carlo test (57, 57b), then moves on
-  // "the model rolls a dice" (58): rolls one by one, a time-lapse on "ran it", 1,000 on "all 1,000". No article page cut.
-  // ay 20 Nov 23:03: Monte Carlo explained (56 to 57b) before the roll-the-dice graph from 58
-  // ay 21 Nov 00:29: the definition page, like before (not the wheel)
-  ["56", (c) => <Ov.ArticlePage kicker="Statistics" title="Monte Carlo method" markAt={at(c, WA("57b", ["changes", "inputs", "luck"]))}
+  // v19 (ay: no full graph for a few seconds): the 5 s "Trophy score" board is gone, the cabinet starts on line 51
+  ["51", (c) => <ClimbRemap c={c} />],
+  // v19 (ay: "the Monte Carlo graphic shows before I mention it"): the weights first, while ay says they're his choices
+  // (wobble on "choices", trophies boxed on "remember"), then the definition page on "Monte Carlo" (locked: page, not
+  // the wheel), then the dice graph from 58 (locked)
+  ["56", (c) => <WeightFaders wobbleAt={at(c, WA("56", ["choices", "weight"]))} boxAt={HAS("56a") ? at(c, WA("56a", ["30%", "30", "remember"])) : 1e9} />],
+  ["57", (c) => <Ov.ArticlePage kicker="Statistics" title="Monte Carlo method" markAt={at(c, WA("57b", ["changes", "inputs", "luck"]))}
     before="A Monte Carlo test runs the same model thousands of times, " mark="changing the inputs at random each time," after=" then counts how often each result comes up. It is named after the Monte Carlo casino, because it runs on chance." />],
   ["58", (c) => <MonteCarlo cues={[at(c, WA("58", ["dice", "rolls"])), at(c, WA("60", ["ran", "thousand"])), at(c, WA("61", ["1000", "1,000", "all"]))]} twoAt={at(c, WA("61", ["number", "but"]))} />],
-  // Jxmy record card (jxmy-graphs 4lbvnNVGd-I g06, style map 6:32)
-  // Jxmy quote subtitle over footage (jxmy-graphics 3hZ6Su5PVnI x02, style map 6:42)
   ["64", (c) => <OGPyramid c={c} />],
   // ay 20 Nov: the Uzi/Bengi cards repeated the six-part cards; now a slope chart, fans vs the model (league-v14 ranks)
   // ay 20 Nov: back to the bordered face cards for Uzi and Bengi

@@ -242,12 +242,12 @@ export const TextReveal: React.FC<{ before: string; mark: string; after: string;
 
 // ChapterTitle: from Jxmy's chapter titles over footage (eatF7QHwga4/graphs/x04_title-over-footage_impact-chapter-title):
 //   the shot darkens a little, one word types on letter by letter in the middle, holds, cut.
-export const ChapterTitle: React.FC<{ text: string; at: number }> = ({ text, at }) => {
+export const ChapterTitle: React.FC<{ text: string; at: number; size?: number }> = ({ text, at, size = 200 }) => {
   const f = useCurrentFrame();
   const n = Math.floor(interpolate(f, [at, at + text.length * 2], [0, text.length], clamp));
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", background: "rgba(10,12,16,0.35)" }}>
-      <div style={{ fontFamily: BEBAS, fontSize: 200, letterSpacing: 24, color: INK, textShadow: "0 4px 0 rgba(0,0,0,0.4)", minHeight: 200 }}>{text.slice(0, n)}</div>
+      <div style={{ fontFamily: BEBAS, fontSize: size, letterSpacing: size * 0.12, color: INK, textShadow: "0 4px 0 rgba(0,0,0,0.4)", minHeight: size, whiteSpace: "nowrap" }}>{text.slice(0, n)}</div>
     </AbsoluteFill>
   );
 };
