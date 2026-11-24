@@ -50,11 +50,19 @@ export const BIG_STAGE: { id: string; name: string; v: number; overall: number }
   { id: "zeus", name: "ZEUS", v: 90.0, overall: 7 }, { id: "faker", name: "FAKER", v: 88.9, overall: 1 },
   { id: "keria", name: "KERIA", v: 88.1, overall: 5 }];
 
+// v19c (ay 24 Nov 14:54: the board must show the #1 of the WHOLE part): big games + clutch together, c_big_stage_clutch
+// in draft_scores_v15.3: Bin 100, Knight 99.3, Zeus 94.5, Faker 93.0, Gumayusi 90.6
+export const BIG_PART: typeof BIG_STAGE = [
+  { id: "bin", name: "BIN", v: 100, overall: 8 }, { id: "knight", name: "KNIGHT", v: 99.3, overall: 2 },
+  { id: "zeus", name: "ZEUS", v: 94.5, overall: 7 }, { id: "faker", name: "FAKER", v: 93.0, overall: 1 },
+  { id: "gumayusi", name: "GUMAYUSI", v: 90.6, overall: 14 }];
+
 /** cues: rise (bars grow), lit (the first bar turns teal), side (the side list slides in) */
-export const PillBars: React.FC<{ cues: { rise: number; lit: number; side: number } }> = ({ cues }) => {
+export const PillBars: React.FC<{ cues: { rise: number; lit: number; side: number }; data?: typeof BIG_STAGE; title?: string; sub?: string }> = ({ cues, data, title, sub }) => {
+  const BIG_STAGE_ = data ?? BIG_STAGE;
   const f = useCurrentFrame();
   const x0 = 200, x1 = 1270, base = 930, hpx = 600, vmax = 100;
-  const gw = (x1 - x0) / BIG_STAGE.length, bw = 132;
+  const gw = (x1 - x0) / BIG_STAGE_.length, bw = 132;
   const H = (v: number) => (v / vmax) * hpx;
   const tO = interpolate(f, [0, 8], [0, 1], clamp);
   const lit = interpolate(f, [cues.lit, cues.lit + 8], [0, 1], clamp);
@@ -63,8 +71,8 @@ export const PillBars: React.FC<{ cues: { rise: number; lit: number; side: numbe
     <AbsoluteFill>
       <Concrete />
       <div style={{ position: "absolute", left: x0 - 40, top: 60, opacity: tO }}>
-        <div style={{ fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>BEST ON THE BIG STAGE</div>
-        <div style={{ fontFamily: BEBAS, fontSize: 30, letterSpacing: 2, color: MUTE }}>PLAY AND SERIES WON IN PLAYOFFS, FINALS, WORLDS AND MSI, 0 TO 100</div>
+        <div style={{ fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>{title ?? "BEST ON THE BIG STAGE"}</div>
+        <div style={{ fontFamily: BEBAS, fontSize: 30, letterSpacing: 2, color: MUTE }}>{sub ?? "PLAY AND SERIES WON IN PLAYOFFS, FINALS, WORLDS AND MSI, 0 TO 100"}</div>
       </div>
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
         <line x1={x0 - 40} x2={x0 - 40} y1={base - hpx - 20} y2={base} stroke={INK} strokeOpacity={0.5} strokeWidth={3} opacity={tO} />
@@ -72,7 +80,7 @@ export const PillBars: React.FC<{ cues: { rise: number; lit: number; side: numbe
           <line x1={x0 - 40} x2={x1} y1={base - H(v)} y2={base - H(v)} stroke={INK} strokeOpacity={v ? 0.07 : 0.5} strokeWidth={v ? 2 : 3} />
           <text x={x0 - 58} y={base - H(v) + 11} textAnchor="end" fontFamily={BEBAS} fontSize={32} fill={MUTE}>{v}</text></g>)}
       </svg>
-      {BIG_STAGE.map((p, i) => {
+      {BIG_STAGE_.map((p, i) => {
         const k = interpolate(f, [cues.rise + i * 3, cues.rise + i * 3 + 18], [0, 1], { ...clamp, easing: easeOut });
         const h = H(p.v) * k, cx = x0 + gw * (i + 0.5), first = i === 0;
         const col = first && lit > 0.5 ? TEAL : BAR;
@@ -92,7 +100,7 @@ export const PillBars: React.FC<{ cues: { rise: number; lit: number; side: numbe
       {/* side list: where each sits in the whole ranking */}
       <div style={{ position: "absolute", left: 1400, top: 200, width: 400, height: 790, background: "#23272F", opacity: sk, transform: `translateX(${(1 - sk) * 60}px)` }}>
         <div style={{ padding: "26px 0 6px", textAlign: "center", fontFamily: BEBAS, fontSize: 34, letterSpacing: 2, color: MUTE }}>RANK IN THE WHOLE MODEL</div>
-        {BIG_STAGE.map((p, i) => {
+        {BIG_STAGE_.map((p, i) => {
           const first = i === 0;
           return (
             <div key={p.id} style={{ display: "flex", alignItems: "center", height: 138, padding: "0 36px" }}>

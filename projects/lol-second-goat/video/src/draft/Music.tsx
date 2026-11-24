@@ -26,7 +26,8 @@ const XFADE = 3; // seconds, centred on the chapter break
 type Boss = { file: string; gain: number; voice: number };
 // ay 21 Nov 17:13: Elden Ring boss music from 4:14 of ay's pick (music/boss/boss-elden-414-12s.wav, about -8 LUFS)
 const BOSS = { file: "_local/music/boss.wav", gain: db(-16), voice: db(-22) } as Boss | null;
-const climb = () => { const c0 = W("53", "name") + 8 / 30; const hit = c0 + 79 / 30; return { c0, hit, boss: hit, end: L("56").start }; };
+const climb = () => { const c0 = W("53", "name") + 8 / 30; const hit = c0 + 79 / 30; return { c0, hit, boss: hit, end: HAS("42p") ? L("28").start : L("56").start }; };
+// ay 24 Nov 14:54: in v19b the climb is followed by BIG GAMES + CLUTCH (line 28), so the boss track ends there, not at 56
 type Drop = { a: number; b: number; out: number; back: number; boost?: number };
 const dropOuts = (): Drop[] => {
   const c = climb();

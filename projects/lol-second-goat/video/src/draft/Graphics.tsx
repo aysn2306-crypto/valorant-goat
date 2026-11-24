@@ -226,7 +226,9 @@ const rr = (n: number) => { const x = Math.sin(n * 12.9898) * 43758.5453; return
  *  carries on after the cut to the Monte Carlo page) */
 // ay 21 Nov 17:07: only Faker at #1 at first; the #2 row comes in when ay starts on "the number 2 player", then the
 // camera zooms in on it
-export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: number; twoAt?: number }> = ({ cues, from = 0, twoAt }) => {
+/** v19c (ay 24 Nov 14:54: the weights are explained once, here): `weights` = the frame each weight's number lands on
+ *  its bar (title MY WEIGHTS, no rolls, no right panel); `wobbleAt` = the bars start drifting ("move them around") */
+export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: number; twoAt?: number; weights?: number[]; wobbleAt?: number }> = ({ cues, from = 0, twoAt, weights, wobbleAt }) => {
   const f = useCurrentFrame();
   const twoO = twoAt === undefined ? 1 : interpolate(f, [twoAt, twoAt + 8], [0, 1], { ...clamp, easing: easeOut });
   const zK = twoAt === undefined ? 0 : interpolate(f, [twoAt + 10, twoAt + 40], [0, 1], { ...clamp, easing: Easing.bezier(0.65, 0, 0.35, 1) });
@@ -236,12 +238,14 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
   const fast = f > cues[1] ? interpolate(f, [cues[1], cues[2]], [0, 990], { ...clamp, easing: Easing.inOut(Easing.quad) }) : 0;
   const rolls = f < cues[0] && !from ? 0 : Math.min(1000, Math.round(slow + fast));
   const roll = rolls;
-  const bars = BASE.map((b, i) => (roll === 0 ? b : b * (0.7 + 0.6 * rr(roll * 7 + i))));
+  const wob = wobbleAt === undefined ? 0 : interpolate(f, [wobbleAt, wobbleAt + 20], [0, 1], clamp);
+  const bars = BASE.map((b, i) => (roll === 0 ? b * (1 + wob * 0.22 * Math.sin((f / 30) * (1.4 + rr(i + 3)) + rr(i) * 6)) : b * (0.7 + 0.6 * rr(roll * 7 + i))));
+  const wk = (i: number) => (weights ? interpolate(f, [weights[i], weights[i] + 8], [0, 1], { ...clamp, easing: easeOut }) : 0);
   const max = 56;
   return (
     <Ground>
       <AbsoluteFill style={{ transform: `translate(960px, 540px) scale(${zs}) translate(${-zx}px, ${-zy}px)`, transformOrigin: "0 0" }}>
-      <div style={{ position: "absolute", left: 120, top: 70, fontFamily: F.title, fontSize: 72, color: CREAM, letterSpacing: 2 }}>ROLL THE DICE</div>
+      <div style={{ position: "absolute", left: 120, top: 70, fontFamily: F.title, fontSize: 72, color: CREAM, letterSpacing: 2 }}>{weights ? "MY WEIGHTS" : "ROLL THE DICE"}</div>
       {PARTS6.map((p, i) => (
         <div key={p} style={{ position: "absolute", left: 120, top: 220 + i * 118, display: "flex", alignItems: "center", gap: 24 }}>
           <div style={{ width: 300, textAlign: "right", fontFamily: F.title, fontSize: 40, color: C.text, letterSpacing: 1 }}>{p}</div>
@@ -249,9 +253,10 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
             <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${(bars[i] / max) * 100}%`, background: i === 0 ? C.gold : "#8C96A6" }} />
             <div style={{ position: "absolute", left: `${(BASE[i] / max) * 100}%`, top: -8, bottom: -8, width: 3, background: "rgba(237,239,242,0.6)" }} />
           </div>
+          {weights && <div style={{ width: 130, fontFamily: F.title, fontSize: 58, color: i === 0 ? C.gold : CREAM, opacity: wk(i), transform: `translateX(${(1 - wk(i)) * -16}px)` }}>{Math.round(BASE[i])}%</div>}
         </div>
       ))}
-      <div style={{ position: "absolute", left: 1180, top: 230, width: 640 }}>
+      {!weights && <div style={{ position: "absolute", left: 1180, top: 230, width: 640 }}>
         <div style={{ fontFamily: F.title, fontSize: 40, color: C.muted, letterSpacing: 2 }}>ROLLS</div>
         <div style={{ fontFamily: F.title, fontSize: 170, color: CREAM, lineHeight: 1 }}>{rolls.toLocaleString("en-US")}</div>
         {[["faker", "FAKER #1", C.gold], ["mystery", "#2, SAME NAME", C.cyan]].map(([id, lab, col], k) => (
@@ -266,7 +271,7 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
             </div>
           </div>
         ))}
-      </div>
+      </div>}
       <div style={{ position: "absolute", left: 120, bottom: 40, fontFamily: F.body, fontSize: 26, color: C.muted }}>White tick: my weights. Each roll moves every weight up to 30% up or down.</div>
       </AbsoluteFill>
     </Ground>

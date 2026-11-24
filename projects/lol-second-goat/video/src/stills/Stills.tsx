@@ -591,13 +591,16 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
   const dn = band.slice().reverse().map((n) => `${X(n)},${Y(Math.max(yr[0], -luck(n)))}`).join(" ");
   const fk = rows.find((r) => r[0] === "faker")!;
   // LOCKED (ay 20 Nov, again 20:04): the walk goes through THREE tiers: bottom named, MIDDLE named (around expected), top named
-  const middle: [string, "left" | "right" | "above" | "below"][] = [["gala", "left"], ["doran", "right"], ["369", "below"], ["zven", "above"]]; // line 30b. LOCKED (ay 20 Nov 20:19): highlight these four; the voice names only 369 and Doran
-  const named: [string, "left" | "right" | "above" | "below"][] = [["on", "below"], ["zeus", "below"], ["gumayusi", "above"], ["zeka", "right"], ["bin", "right"]]; // line 31 (v15.3): voice Gumayusi, Zeka, Bin
+  // ay 24 Nov 14:54: "just show 3 examples in each section": middle GALA, Doran, 369 (Zven dropped); top Gumayusi, Zeka, Bin (On and
+  // Zeus dropped). Names are never removed: when the next group lights, the earlier ones dim (Jxmy, refs/ANIMATION.md)
+  const middle: [string, "left" | "right" | "above" | "below"][] = [["gala", "left"], ["doran", "right"], ["369", "below"]]; // line 30b. LOCKED (ay 20 Nov 20:19): highlight these four; the voice names only 369 and Doran
+  const named: [string, "left" | "right" | "above" | "below"][] = [["gumayusi", "above"], ["zeka", "right"], ["bin", "right"]]; // line 31 (v15.3): voice Gumayusi, Zeka, Bin
   const keys: CamKey[] = walk ? [{ at: walk.bottom, x: X(100), y: Y(-0.7), s: 1.75 }, { at: walk.mid, x: X(105), y: Y(-0.05), s: 1.75 },
     { at: walk.top, x: X(150), y: Y(0.75), s: 1.35 }, ...(walk.out ? [{ at: walk.out, x: 960, y: 540, s: 1 }] : [])] : [];
   const cam = walk ? camAt(fr0, keys) : undefined;
   const midLit = walk ? Math.min(1, Math.max(0, (fr0 - walk.mid - 10) / 10)) * (fr0 < walk.top ? 1 : Math.max(0, 1 - (fr0 - walk.top) / 10)) : 0;
   const v2 = (v: number) => (v > 0 ? "+" : "") + v.toFixed(2);
+  const dimTo = (a: number) => 1 - 0.6 * Math.min(1, Math.max(0, (fr0 - a - 10) / 10)); // earlier names stay, at 40%
   const byScore = new Map(rows.slice().sort((p, q) => p[3] - q[3]).map((r, i) => [r[0], i] as [string, number]));
   // LOCKED (ay 21 Nov 00:29, again 00:54): Jxmy reveal. The empty graph holds; on "Here's every player" the dots pop in
   // one after another by score, lowest first, spread over the whole sentence (about 4 s), each with a small overshoot
@@ -614,9 +617,13 @@ export const S16Clutch: React.FC<{ reveal?: number; chokeAt?: number; walk?: { b
       <Axes b={B} xr={xr} yr={yr} xt={[40, 80, 120, 160, 200, 240]} yt={[-1.5, -1, -0.5, 0, 0.5, 1, 1.5]} xl="BIG SERIES PLAYED (40+ BIG SERIES)" yl="SERIES WON ABOVE EXPECTED, PER 10" yf={(v) => (v > 0 ? "+" + v : String(v))} />
       {/* ay 21 Nov 00:29 (Jxmy): the dots come in one after another by score, lowest first, over two seconds */}
       {rows.map((r) => { const k = dotIn(r[0]); return <Dot key={r[0]} x={X(r[2])} y={Y(r[3])} r={8 * (0.4 + 0.6 * k)} color={heat((r[3] + 1) / 2)} o={Math.min(1, k) * (r[0] === "faker" || Math.abs(r[3]) > luck(r[2]) ? 1 : 0.6)} />; })}{/* Faker's dot is there from the start; his line circles it */}
+      <div style={{ opacity: walk ? dimTo(walk.mid) : 1 }}>
       {chokeShown && chokers.map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={v2(r[3])} side={side} ring={18} color="#E06A5A" />; })}
-      {middle.filter(([id]) => nameAt[id] !== undefined && fr0 >= nameAt[id] && fr0 < (walk?.top ?? 1e9)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!;
+      </div>
+      <div style={{ opacity: walk ? dimTo(walk.top) : 1 }}>
+      {middle.filter(([id]) => nameAt[id] !== undefined && fr0 >= nameAt[id]).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!;
         return <Callout key={"m" + id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={v2(r[3])} side={side} ring={14} pad={6} size={0.85} color="#F2F2EE" />; })}
+      </div>
       {named.filter(([id]) => fr0 >= (nameAt[id] ?? reveal)).map(([id, side]) => { const r = rows.find((q) => q[0] === id)!; return <Callout key={id} x={X(r[2])} y={Y(r[3])} name={P(id).name} value={v2(r[3])} side={side} ring={id === "bin" ? 22 : 18} size={id === "bin" ? 1.2 : 1} />; })}
       {shown && <Callout x={X(fk[2])} y={Y(fk[3])} name="Faker" value={v2(fk[3])} side="left" ring={22} pad={20} color={C.gold} size={1.2} />}
     </Stage>

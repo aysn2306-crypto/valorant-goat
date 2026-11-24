@@ -26,14 +26,14 @@ import { KillsLine } from "./KillsLine";
 import { WorldsValues, HardestRuns, PriceClimb } from "./Bars";
 import { Concrete } from "../samples/Climb";
 import { PercentStack } from "./PercentStack";
-import { PillBars, StackedLines, TitleList } from "./Lists";
+import { BIG_PART, PillBars, StackedLines, TitleList } from "./Lists";
 import { OnBlack, RecordCounter } from "./Banners";
 import { Clip, Cuts, RingClip, SplitClips } from "./Clip";
 import { FansVsModel } from "./Slope";
 import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
-import { Roadmap, RecipeBar, SourceNote, WeightFaders } from "./Polish";
+import { LongRec, PartTop, RankedElo, Roadmap, SourceNote } from "./Polish";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { HAS, L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
@@ -124,7 +124,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["10", (c) => <AbsoluteFill><Concrete /><Ov.ModelCard text="SO I BUILT A MODEL" years="2011 TO 2026" yearsAt={at(c, W("10", "2011"))} value="527" unit="PLAYERS" numAt={at(c, W("10", "527"))} />
     {HAS("10b") && <SourceNote text="LEAGUEPEDIA + ORACLE'S ELIXIR · ABOUT 26,000 GAMES" at={at(c, WA("10b", ["leaguepedia", "pulled"]))} />}</AbsoluteFill>],
   // v19: the chapter preview (3Blue1Brown), each step on its word
-  ["10c", (c) => <Roadmap at={[at(c, WA("10c", ["first", "six"])), at(c, WA("10c", ["sure"])), at(c, WA("10c", ["pyramid", "build"]))]} />],
+  // ay 24 Nov 14:54: plain names, each on its word (how it scores / testing it / the final ranking)
+  ["10c", (c) => <Roadmap at={[at(c, WA("10c", ["first", "scores"])), at(c, WA("10c", ["test", "trust"])), at(c, WA("10c", ["final", "ranking", "build"]))]} />],
   // v19: the recipe comes first (ay asked what clutch and plus-minus are added to): the six cards, moved up from 4:57
   // the cards are anchored to their spoken words in line 42 (empty ground for 3.6 s before "six"); until the title comes
   // in on "six", the roadmap stays up with step 1 (the six parts) lit, under "here's the recipe" (v19b)
@@ -136,10 +137,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { text: "100 = THE BEST EVER", at: at(c, W("43", "100")) },
     { text: "TROPHIES: FAKER = 100", at: at(c, W("43", "faker")), accent: true, gap: 50 },
     { text: "EVERYONE ELSE = A SHARE OF HIM", at: at(c, W("43", "everyone")) }]} />],
-  // v15.3 trophy share (locked swing on "subjective", settles on "30%"), then v19: the rest splits into the other five
-  // parts on their numbers (15e) and holds through 15f
-  ["15b", (c) => <RecipeBar swingAt={at(c, WA("15b", ["worth", "trophy"]))} settleAt={at(c, WA("15d", ["30%", "30"]))}
-    splitAt={HAS("15e") ? [at(c, WA("15e", ["21%", "21", "skill"])), at(c, WA("15e", ["16"])), at(c, WA("15e", ["14"])), at(c, WA("15e", ["11"])), at(c, WA("15e", ["8"]))] : [1e9, 1e9, 1e9, 1e9, 1e9]} />],
+  // ay 24 Nov 14:54: the trophies vs everything else bar is gone; the weights are explained once, in the Monte Carlo part
   ["11", (c) => <VersionOne trophiesAt={10} partsAt={at(c, WA("11", ["14th", "14"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={HAS("13b") ? at(c, WA("13b", ["damage"])) : 1e9} />],
   // v19 (ay 24 Nov: "made up for the missing stats" needs a close, and the panel needs longer): "Faker now: #1" lands on
   // the new line 15x ("Faker went straight back to where he belongs"), and the board holds through it
@@ -150,11 +148,12 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["18", (c) => <TeamRoles cues={{ rows: Math.max(4, at(c, WA("18", ["compares"])) - 6), role: at(c, WA("18a", ["role", "lined"])), old: at(c, WA("18b", ["2013", "old"])) }} />],
   ["19", (c) => <AbsoluteFill><Clip id="stomp" from={20} /><ChatLine user="dk_enjoyer" text="DK LOL" at={at(c, W("19", "bottom"))} /></AbsoluteFill>],
   ["19@gen", () => <Clip id="close" from={22} />],
-  // v19 (ay: "a full graph for 2 seconds"): the "Stronger teams count more" board is gone; the Elo towers stay up
-  // through 20a, 21 and 21a
-  ["20", anchored(<Sm.SElo voice={false} />, Sm.ELO_T0)],
+  // ay 24 Nov 14:54: Elo told like ranked: steal points, the favourite drops 29 losing to the underdog but gains only 3
+  // beating them. Holds through 20a and 21
+  ["20", (c) => <RankedElo cues={{ steal: at(c, WA("20", ["steal"])), n26: at(c, WA("20", ["26,000", "26"])), games: at(c, WA("20", ["games"])),
+    fav: at(c, WA("20a", ["3", "three"])), upset: at(c, WA("20a", ["steal", "29"])), hurt: at(c, WA("20a", ["hurts", "way"])) }} />],
   ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top, second: at(c, WA("48", ["knight", "night"])) }} />; }],
-  ["49", (c) => <HeadToHead left="chovy" right="knight" title="MOST SKILLED" cues={{ in: 0, rows: 6, last: at(c, WA("49", ["behind", "just", "knight"])) }} rows={[
+  ["49", (c) => <HeadToHead left="chovy" right="knight" title="SKILL PART: #1 VS #2" cues={{ in: 0, rows: 6, last: at(c, WA("49", ["behind", "just", "knight"])) }} rows={[
     { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
     { label: "GOLD AHEAD AT 15 MIN", l: "+339", r: "+451", better: "r" },
     { label: "KDA", l: "5.67", r: "5.77", better: "r" },
@@ -178,17 +177,19 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     names: { rookie: at(c, WA("27", ["rookie"])), theshy: at(c, WA("27", ["shy"])), baolan: at(c, WA("27b", ["bao", "baolan"])), jackeylove: at(c, WA("27b", ["jackie", "jackey"])), ning: at(c, WA("27b", ["ning"])) },
     top: at(c, WA("27", ["rookie", "biggest"])), mvp: at(c, WA("27b", ["ning", "finals"])) }} />],
   // v19 (ay: no full graph for a few seconds): the 5 s "Trophy score" board is gone, the cabinet starts on line 51
-  ["51", (c) => <ClimbRemap c={c} />],
+  ["51", (c) => <><ClimbRemap c={c} /><PartTop text="#1 IN TROPHIES: FAKER" at={at(c, WA("55", ["tops"]))} top={150} /></>],
   ["28", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="BIG GAMES + CLUTCH" at={4} size={170} /></AbsoluteFill>],
   ["29", (c) => { // the clutch scatter (locked walk: bottom, middle, top), now from line 29 so the title card gets line 28
     // v19: dots pop in over "Here's every player..." (about 4 s, locked 21 Nov), then 30a names the axes on the full graph
     const rv = at(c, WA("31", ["faker's", "faker", "baker's"])), ch = at(c, WA("30c", ["cream", "creme", "bottom"]));
     const d0 = at(c, L("30").start) + 4, d1 = d0 + 110;
     return <Build C={() => <St.S16Clutch reveal={rv} chokeAt={ch} dots={[d0, d1]} walk={{ bottom: at(c, WA("30c", ["bottom"])), mid: at(c, L("30b").start), top: at(c, L("31").start) }}
-      nameAt={Object.fromEntries([...["on", "zeus", "gumayusi", "zeka"].map((id) => [id, at(c, WA("31", ["gumayusi", "guma"]))]), ["bin", at(c, WA("31", ["bin"]))],
-        ...[["369", "369"], ["gala", "369"], ["zven", "369"], ["doran", "doran"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])])} />} mode="wipe" dur={c.dur} />; }],
-  // v19b: best on the big stage comes straight after the clutch part (line 45 dropped, 46 opens it)
-  ["46", (c) => <PillBars cues={{ rise: 4, lit: at(c, WA("46", ["knight", "carrier", "night"])), side: 1e6 }} />],
+      nameAt={Object.fromEntries([...["gumayusi", "zeka"].map((id) => [id, at(c, WA("31", ["gumayusi", "guma"]))]), ["bin", at(c, WA("31", ["bin"]))],
+        ...[["369", "369"], ["gala", "369"], ["doran", "doran"]].map(([id, w]) => [id, at(c, WA("30b", [w]))])])} />} mode="wipe" dur={c.dur} />; }],
+  // v19b: the part's winners come straight after the clutch graph (line 45 dropped, 46 opens it). ay 24 Nov 14:54: the board
+  // is the WHOLE part (big-game play + series won + clutch), so Bin tops it by 0.7 over Knight
+  ["46", (c) => <PillBars data={BIG_PART} title="#1 IN BIG GAMES + CLUTCH" sub="PLAY IN BIG GAMES, BIG SERIES WON AND CLUTCH TOGETHER, 0 TO 100"
+    cues={{ rise: 4, lit: at(c, WA("46", ["bin", "tops"])), side: 1e6 }} />],
   ["32", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="TEAM IMPACT" at={4} /></AbsoluteFill>],
   // v19: the title holds through "now for team impact", the with/without bars come in on "with him"
   ["32@with", (c) => <Build C={() => <St.SampleWithWithout lit="chovy" />} mode="wipe" dur={c.dur} />],
@@ -198,16 +199,21 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // v19 (ay's 4:28 note): the climb opens on the whole chart for the walk-through (axes, bottom, middle), see Climb.tsx
   [HAS("37a") ? "37a" : "37", (c) => { const k = Math.max(1, fr(Cl.CLIMB_T0 - c.t0));
     return <><Sequence durationInFrames={k} layout="none"><Freeze frame={30}><Cl.SClimb voice={false} /></Freeze></Sequence>
-      <Sequence from={k} layout="none"><Cl.SClimb voice={false} /></Sequence></>; }],
+      <Sequence from={k} layout="none"><Cl.SClimb voice={false} /></Sequence>
+      {HAS("37e") && <PartTop text="#1 IN TEAM IMPACT: FAKER" at={at(c, WA("37e", ["tops"]))} left={640} top={60} />}</>; }],
   ["38a", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="LONGEVITY + RECOGNITION" at={4} size={136} /></AbsoluteFill>],
+  // ay 24 Nov 14:54: the title had nothing after it. Longevity (great years, Faker #1) then recognition (Chovy #1) on one board
+  ...(HAS("38c") ? [["38a@longevity", (c: Ctx) => <LongRec cues={{ rows: [at(c, WA("38c", ["faker"])), at(c, WA("38c", ["deft"])), at(c, WA("38c", ["knight"])), at(c, WA("38c", ["chovy"]))],
+    tagL: at(c, WA("38c", ["tops"])), right: at(c, L("38d").start), bars: [at(c, WA("38f", ["chovy"])), at(c, WA("38f", ["faker"])), at(c, WA("38f", ["knight"]))], tagR: at(c, WA("38f", ["tops"])) }} />] as [string, (c: Ctx) => React.ReactNode]] : []),
   ["38", (c) => <PercentStack header="HOW MANY ALL-PRO PICKS COME OUT RIGHT" rows={[
     { icon: "trophy", label: "PICK FROM THE WINNING TEAMS", pct: 58, at: at(c, W("40", "winning")) },
     { icon: "model", label: "THE MODEL", pct: 63, at: at(c, W("41", "63")), accent: true }]}
-    cues={{ votes: at(c, W("39", "all")), hide: at(c, W("40", "model")), ask: at(c, WA("40", ["asked", "pick"])) }} />],
-  // v19 (ay: "the Monte Carlo graphic shows before I mention it"): the weights first, while ay says they're his choices
-  // (wobble on "choices", trophies boxed on "remember"), then the definition page on "Monte Carlo" (locked: page, not
-  // the wheel), then the dice graph from 58 (locked)
-  ["56", (c) => <WeightFaders wobbleAt={at(c, WA("56", ["choices", "weight"]))} boxAt={HAS("56a") ? at(c, WA("56a", ["30%", "30", "remember"])) : 1e9} />],
+    cues={{ votes: at(c, WA("39", ["all", "real", "check"])), hide: at(c, W("40", "model")), ask: at(c, WA("40", ["asked", "pick"])) }} />],
+  // ay 24 Nov 14:54: one graph for the whole part. The dice graph comes first with my weights (each number on its word, the
+  // bars drift on "move them around"), then the definition page on "Monte Carlo" (locked: page, not the wheel), then the
+  // dice graph again from 58, rolling (locked)
+  ["56", (c) => <MonteCarlo cues={[1e9, 1e9, 1e9]} weights={[at(c, WA("15d", ["30%", "30"])), at(c, WA("15e", ["21%", "21", "skill"])), at(c, WA("15e", ["16"])),
+    at(c, WA("15e", ["14"])), at(c, WA("15e", ["11"])), at(c, WA("15e", ["8"]))]} wobbleAt={at(c, WA("56b", ["move", "around"]))} />],
   ["57", (c) => <Ov.ArticlePage kicker="Statistics" title="Monte Carlo method" markAt={at(c, WA("57b", ["changes", "inputs", "luck"]))}
     before="A Monte Carlo test runs the same model thousands of times, " mark="changing the inputs at random each time," after=" then counts how often each result comes up. It is named after the Monte Carlo casino, because it runs on chance." />],
   ["58", (c) => <MonteCarlo cues={[at(c, WA("58", ["dice", "rolls"])), at(c, WA("60", ["ran", "thousand"])), at(c, WA("61", ["1000", "1,000", "all"]))]} twoAt={at(c, WA("61", ["number", "but"]))} />],

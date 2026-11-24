@@ -171,7 +171,9 @@ export const SCards: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
 // ---------------------------------------------------------------- 2. Elo towers
 const LINE = "#8FF0EC";
 export const ELO_T0 = L("20").start - 0.4, ELO_T1 = L("20").end + 0.5;
-const E = { chess: W("19", "chess"), same: W("20", "win"), win: W("20", "win"), points: W("20", "points"), beat: W("20", "beat"), way: W("20", "way"), take2: W("20", "take", 1), lot: W("20", "lot"), n26: W("20", "26"), games: W("20", "games") };
+// v19c: line 19/20 are reworded (ranked, not chess) and this graph is no longer used; cues fall back to the line start
+const Ws = (id: string, w: string, n = 0) => { try { return W(id, w, n); } catch { return L(id).start; } };
+const E = { chess: Ws("19", "chess"), same: Ws("20", "win"), win: Ws("20", "win"), points: Ws("20", "points"), beat: Ws("20", "beat"), way: Ws("20", "way"), take2: Ws("20", "take", 1), lot: Ws("20", "lot"), n26: Ws("20", "26"), games: Ws("20", "games") };
 export const ELO_FRAMES = Math.round((ELO_T1 - ELO_T0) * FPS);
 export const SElo: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const f = useCurrentFrame();

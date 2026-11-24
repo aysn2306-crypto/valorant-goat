@@ -84,6 +84,8 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
     { id: "apollo", at: A(WA("37c", ["apollo"])), color: RED, side: 2 }, { id: "smoothie", at: A(WA("37c", ["smoothie"])), color: RED, side: 1 },
     { id: "rekkles", at: A(WA("37d", ["rekkles"])), color: INK }, { id: "corejj", at: A(WA("37d", ["corejj"])), color: INK }] : [];
   const walkOut = walk ? interpolate(f, [tight0 - 8, tight0 + 6], [1, 0], clamp) : 1;
+  // ay 24 Nov 14:54: the walk names (Apollo, Smoothie, Rekkles, CoreJJ) stay on the graph, dimmed to 40% (Jxmy dims, never removes)
+  const walkDim = walk ? interpolate(f, [tight0 - 8, tight0 + 6], [1, 0.4], clamp) : 1;
   const named: { id: string; at: number; big?: boolean; color?: string; side?: 1 | 2 }[] = [...walkNames, { id: "ruler", at: A(WA("37", ["ruler"])) }, { id: "faker", at: climb1 - 6, big: true }];
   const isWalk = (id: string) => walkNames.some((n) => n.id === id);
   const axX = walk ? interpolate(f, [A(WA("37a", ["right"])), A(WA("37a", ["right"])) + 8], [0, 1], clamp) * walkOut : 0;
@@ -117,9 +119,9 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
         {/* every player */}
         {rows.map((r, i) => {
           const o = dotsIn(i) * (r[0] === "faker" ? 1 : named.some((n) => n.id === r[0]) ? 0.95 : 0.6);
-          const nm = named.find((n) => n.id === r[0]), lit = nm ? pop(nm.at) * (isWalk(r[0]) ? walkOut : 1) : 0, col = nm?.color ?? TEAL;
+          const nm = named.find((n) => n.id === r[0]), lit = nm ? pop(nm.at) * (isWalk(r[0]) ? walkDim : 1) : 0, col = nm?.color ?? TEAL;
           return <g key={r[0]}>
-            <circle cx={X(r[2])} cy={Y(r[3])} r={(r[0] === "faker" ? 12 : 7) * t * (1 + 0.5 * lit)} fill={lit > 0.5 ? col : INK} opacity={o} />
+            <circle cx={X(r[2])} cy={Y(r[3])} r={(r[0] === "faker" ? 12 : 7) * t * (1 + 0.5 * lit)} fill={lit > 0.3 ? col : INK} opacity={o} />
             {lit > 0 && <circle cx={X(r[2])} cy={Y(r[3])} r={(r[0] === "faker" ? 26 : 20) * t} fill="none" stroke={col} strokeWidth={4 * t} opacity={lit} />}
           </g>;
         })}
@@ -140,7 +142,7 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
           <div key={n.id} style={{ position: "absolute", width: 600, textAlign: n.side ? "left" : "center",
             left: n.side ? X(r[2]) + 30 * t : X(r[2]) - 300,
             top: n.side ? Y(r[3]) - size * 1.05 * n.side : Y(r[3]) + 16 * t,
-            fontFamily: BEBAS, fontSize: size, color: n.color ?? INK, letterSpacing: 1, opacity: pop(n.at) * (isWalk(n.id) ? walkOut : 1), whiteSpace: "nowrap" }}>
+            fontFamily: BEBAS, fontSize: size, color: n.color ?? INK, letterSpacing: 1, opacity: pop(n.at) * (isWalk(n.id) ? walkDim : 1), whiteSpace: "nowrap" }}>
             {r[1]} ({r[3] >= 0 ? "+" : ""}{r[3].toFixed(1)})
           </div>
         );
