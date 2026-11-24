@@ -88,6 +88,18 @@ const ft = (text: string) => () => <Footage text={text} />;
 const still = (k: keyof typeof St, mode: "wipe" | "rise" | "cut" = "cut") => (c: Ctx) => <Build C={St[k] as React.FC} mode={mode} dur={c.dur} />;
 const at = (c: Ctx, t: number) => fr(t - c.t0);
 
+// ay 24 Nov (1:08 note): "Faker back where he belongs" and the panel stays up longer; it now holds until the recipe cards start
+const whatChanged = (c: Ctx) => <MLBoard title="What changed" lines={[
+    { text: "Version 1: early games untracked, no damage stats before 2020", at: 4 },
+    { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },
+    { text: "Now: fixed for every old player", at: at(c, WA("15", ["every"])) },
+    { text: "Missing games filled in", at: at(c, WA("15", ["filled"])) },
+    { text: "Missing stats made up for", at: at(c, WA("15", ["made"])) },
+    { face: "faker", text: "Faker now: #1", at: HAS("15x") ? at(c, WA("15x", ["back", "straight"])) : at(c, L("15").end) - 10, accent: true }]}
+    side={<SideBars caption="Faker's all-time rank" rows={[
+      { label: "Version 1", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
+      { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "fixed")) }]} />} sideAt={10} big />;
+
 const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: footage only, never still player photos (lol-second-goat/footage, public/_local/footage)
   ["1", () => <Clip id="lift" from={2} />],
@@ -114,18 +126,13 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["11", (c) => <VersionOne trophiesAt={10} partsAt={at(c, WA("11", ["14th", "14"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={HAS("13b") ? at(c, WA("13b", ["damage"])) : 1e9} />],
   // v19 (ay 24 Nov: "made up for the missing stats" needs a close, and the panel needs longer): "Faker now: #1" lands on
   // the new line 15x ("Faker went straight back to where he belongs"), and the board holds through it
-  ["15", (c) => <MLBoard title="What changed" lines={[
-    { text: "Version 1: early games untracked, no damage stats before 2020", at: 4 },
-    { face: "faker", text: "Faker in version 1: #14", at: 16, dim: true },
-    { text: "Now: fixed for every old player", at: at(c, WA("15", ["every"])) },
-    { text: "Missing games filled in", at: at(c, WA("15", ["filled"])) },
-    { text: "Missing stats made up for", at: at(c, WA("15", ["made"])) },
-    { face: "faker", text: "Faker now: #1", at: HAS("15x") ? at(c, WA("15x", ["back", "straight"])) : at(c, L("15").end) - 10, accent: true }]}
-    side={<SideBars caption="Faker's all-time rank" rows={[
-      { label: "Version 1", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
-      { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "fixed")) }]} />} sideAt={10} big />],
+  ["15", (c) => whatChanged(c)],
   // v19: the recipe comes first (ay asked what clutch and plus-minus are added to): the six cards, moved up from 4:57
-  ["42p", anchored(<Sm.SCards voice={false} />, Sm.CARDS_T0)],
+  // the cards are anchored to their spoken words in line 42 (empty ground for 3.6 s before "six"); until the title comes
+  // in on "six", the What changed board stays up (on top), so there is no empty frame under "here's the recipe"
+  ["42p", (c) => { const gap = at(c, W("42", "6")) - 3, c15 = { t0: L("15").start - 0.05, dur: 0 }, back = fr(c15.t0 - c.t0); return <>
+    {anchored(<Sm.SCards voice={false} />, Sm.CARDS_T0)(c)}
+    {gap > 0 && <Sequence from={back} durationInFrames={gap - back} layout="none">{whatChanged(c15)}</Sequence>}</>; }],
   ["43", (c) => <StackedLines lines={[
     { text: "50 = MIDDLE OF THE PACK", at: -30 },
     { text: "100 = THE BEST EVER", at: at(c, W("43", "100")) },
