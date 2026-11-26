@@ -36,7 +36,7 @@ const dropOuts = (): Drop[] => {
     // ay 21 Nov 17:07: the music stops on "But hold on" and stays out up the climb; on the landing (just after ay says
     // "Faker") the boss track hits; when the panel ends the boss fades out over 1 s while Late Night Groove fades back in.
     // With no boss track yet, the beat comes back on the landing, fading up while the camera zooms out.
-    BOSS ? { a: W("53", "but") - 0.05, b: c.end, out: 0.1, back: 1 } : { a: W("53", "but") - 0.05, b: c.hit, out: 0.1, back: 4, boost: 4 },
+    BOSS ? { a: WA("53", ["but", "hold"]) - 0.05, b: c.end, out: 0.1, back: 1 } : { a: WA("53", ["but", "hold"]) - 0.05, b: c.hit, out: 0.1, back: 4, boost: 4 },
     { a: WA("61", ["second", "2nd"]) - 0.1, b: L("63").start, out: 0.1, back: 0.05 },               // "second in all 1,000 too"
     { a: W("71", "second") - 0.1, b: W("71", "knight") + 0.5, out: 0.05, back: 0.05, boost: 5 }, // the GOAT reveal
     { a: W("81", "this") - 0.1, b: W("81", "cinema") + 0.6, out: 0.05, back: 0.05 },        // "this model is lowkey cinema" (moved after line 81)

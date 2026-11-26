@@ -199,7 +199,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["26@basketball", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did in the game. Two players on the same team can end up with very different shares." />],
   ["27", (c) => <TrophySplit cues={{ photos: 0, pie: at(c, WA("27", ["same", "titles"])), shares: at(c, WA("27", ["take", "ig"])), caption: at(c, WA("27", ["ig", "2018"])),
-    names: { rookie: at(c, WA("27", ["rookie"])), theshy: at(c, WA("27", ["shy"])), baolan: at(c, WA("27b", ["bao", "baolan"])), jackeylove: at(c, WA("27b", ["jackie", "jackey"])), ning: at(c, WA("27b", ["ning"])) },
+    names: { rookie: at(c, WA("27", ["rookie"])), theshy: at(c, WA("27", ["shy", "theshy"])), baolan: at(c, WA("27b", ["bao", "baolan"])), jackeylove: at(c, WA("27b", ["jackie", "jackey"])), ning: at(c, WA("27b", ["ning"])) },
     top: at(c, WA("27", ["rookie", "biggest"])), mvp: at(c, WA("27b", ["ning", "finals"])) }} />],
   // v19 (ay: no full graph for a few seconds): the 5 s "Trophy score" board is gone, the cabinet starts on line 51
   ["51", (c) => <><ClimbRemap c={c} /><PartTop text="#1 IN TROPHIES: FAKER" at={at(c, WA("55", ["tops", "double"]))} top={150} /></>],
@@ -250,7 +250,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // bars drift on "move them around"), then the definition page on "Monte Carlo" (locked: page, not the wheel), then the
   // dice graph again from 58, rolling (locked)
   ["56", (c) => <MonteCarlo cues={[1e9, 1e9, 1e9]} weights={[at(c, WA("15d", ["30%", "30"])), at(c, WA("15e", ["21%", "21", "skill"])), at(c, WA("15e", ["16"])),
-    at(c, WA("15e", ["14"])), at(c, WA("15e", ["11"])), at(c, WA("15e", ["8"]))]} wobbleAt={at(c, WA("56b", ["move", "around"]))}
+    at(c, WA("15e", ["14", "etc"])), at(c, WA("15e", ["11", "etc"])) + 6, at(c, WA("15e", ["8", "etc"])) + 12]} wobbleAt={at(c, WA("56b", ["move", "around"]))}
     compare={[{ rows: [0, 1], at: at(c, WA("15b", ["trophy", "worth"])) }, { rows: [4, 2], at: at(c, WA("15b", ["longevity", "stack"])) }]}
     swingAt={at(c, WA("15b", ["subjective", "answer"]))} />],
   ["57", (c) => <Ov.ArticlePage kicker="Statistics" title="Monte Carlo method" markAt={at(c, WA("57b", ["changes", "inputs", "luck"]))}
