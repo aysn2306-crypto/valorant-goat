@@ -172,7 +172,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { label: "SKILL SCORE", l: "100", r: "97.8", better: "l", big: true }]} />],
   // v19f line 41 (ay 24 Nov 20:09, opinions about League itself, clips matching the words): Chovy in lane against Faker
   // under "winning your lane", the zoomed spacing replay on "dodges", Bin's Jax fight on "Bin"
-  ["16b", (c) => <TaggedClips shots={[{ id: "chovySolo", from: 6, at: 0, tag: "CHOVY" }, { id: "chovyDodge", from: 0, at: at(c, WA("16b", ["mechanically", "flawless", "dodges"])) - 9, tag: "CHOVY" },
+  ["16b", (c) => <TaggedClips shots={[{ id: "chovySolo", from: 6, at: 0, tag: "CHOVY" }, { id: "chovyDodge", from: 0, at: at(c, WA("16b", ["poster", "perfect", "mechanically"])) - 9, tag: "CHOVY" },
     { id: "binJax", from: 0, at: at(c, WA("16b", ["bin", "same"])) - 4, tag: "BIN ON JAX" }]} />],
   // trophies: the Worlds cup, then an MSI lift on "MSI", then the Worlds wide shot on "Worlds"
   ["22", (c) => <SectionOpener title="TROPHIES" cardEnd={48} shots={[{ id: "worlds23Lift", from: 0, at: 0 }, { id: "msi25Lift", from: 1, at: at(c, WA("22", ["but", "msi"])) },
@@ -185,7 +185,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["24", (c) => <WorldsValues cues={{ rise: 4, lit: [{ team: "DAMWON Gaming", year: 2020, at: at(c, WA("24", ["down", "damwon"])) },
     { team: "T1", year: 2024, at: at(c, WA("24", ["t1", "toughest"])) }] }} />],
   // LOCKED (ay 22 Nov 20:53): keep this separate DRX graph
-  ["24b", (c) => <HardestRuns cues={{ rise: 0, lit: [{ team: "DRX", year: 2022, at: at(c, WA("24b", ["drx"])) }] }} />],
+  ["24b", (c) => <HardestRuns cues={{ rise: 0, lit: [{ team: "DRX", year: 2022, at: at(c, WA("24b", ["drx"])) }], notes: [
+    { text: "EVERY UPSET: RATING UP", at: at(c, WA("24b", ["upset", "flying"])) },
+    { text: "TITLE WORTH ABOUT 105", at: at(c, WA("24b", ["105", "worth"])), accent: true },
+    { text: "FOR WHO THEY BEAT, NOT THE ODDS", at: at(c, WA("24b", ["beat", "because"])) }] }} />],
   // v19: the Win Shares page comes up on "basketball" (it was on screen 3.6 s)
   ["26@basketball", (c) => <Ov.ArticlePage kicker="Sports stats" title="Win Shares" markAt={at(c, W("26", "splits"))}
     before="Win Shares takes the games a team won and" mark="splits those wins between its players," after="so every player gets credit for part of each win, based on what they did in the game. Two players on the same team can end up with very different shares." />],
@@ -227,7 +230,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
       {HAS("37e") && <PartTop text="#1 IN TEAM IMPACT: FAKER" at={at(c, WA("37e", ["tops", "faker"]))} left={640} top={60} />}</>; }],
   ["38a", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="LONGEVITY + RECOGNITION" at={4} size={136} /></AbsoluteFill>],
   // ay 24 Nov 14:54: the title had nothing after it. Longevity (great years, Faker #1) then recognition (Chovy #1) on one board
-  ...(HAS("38c") ? [["38a@longevity", (c: Ctx) => <LongRec cues={{ rows: [at(c, WA("38c", ["faker"])), at(c, WA("38c", ["deft"])), at(c, WA("38c", ["knight"])), at(c, WA("38c", ["chovy"]))],
+  ...(HAS("38c") ? [["38a@how", (c: Ctx) => /* v20: the title types out over "The last two parts", the board comes on "how many great years" */ <LongRec cues={{ rows: [at(c, WA("38c", ["faker"])), at(c, WA("38c", ["deft"])), at(c, WA("38c", ["knight"])), at(c, WA("38c", ["chovy"]))],
     tagL: at(c, WA("38c", ["tops"])), right: at(c, L("38d").start), bars: [at(c, WA("38f", ["chovy"])), at(c, WA("38f", ["faker"])), at(c, WA("38f", ["knight"]))], tagR: at(c, WA("38f", ["tops"])),
     key: [at(c, WA("38a", ["great"])), at(c, WA("38a", ["monster"])), at(c, WA("38a", ["just", "made"]))],
     patch: HAS("38e") ? [at(c, WA("38e", ["patch"])), at(c, WA("38e", ["meta", "year"])), at(c, WA("38e", ["relearn", "over"]))] : undefined }} />] as [string, (c: Ctx) => React.ReactNode]] : []),
@@ -239,7 +242,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // bars drift on "move them around"), then the definition page on "Monte Carlo" (locked: page, not the wheel), then the
   // dice graph again from 58, rolling (locked)
   ["56", (c) => <MonteCarlo cues={[1e9, 1e9, 1e9]} weights={[at(c, WA("15d", ["30%", "30"])), at(c, WA("15e", ["21%", "21", "skill"])), at(c, WA("15e", ["16"])),
-    at(c, WA("15e", ["14"])), at(c, WA("15e", ["11"])), at(c, WA("15e", ["8"]))]} wobbleAt={at(c, WA("56b", ["move", "around"]))} />],
+    at(c, WA("15e", ["14"])), at(c, WA("15e", ["11"])), at(c, WA("15e", ["8"]))]} wobbleAt={at(c, WA("56b", ["move", "around"]))}
+    compare={[{ rows: [0, 1], at: at(c, WA("15b", ["trophy", "worth"])) }, { rows: [4, 2], at: at(c, WA("15b", ["longevity", "stack"])) }]}
+    swingAt={at(c, WA("15b", ["subjective", "answer"]))} />],
   ["57", (c) => <Ov.ArticlePage kicker="Statistics" title="Monte Carlo method" markAt={at(c, WA("57b", ["changes", "inputs", "luck"]))}
     before="A Monte Carlo test runs the same model thousands of times, " mark="changing the inputs at random each time," after=" then counts how often each result comes up. It is named after the Monte Carlo casino, because it runs on chance." />],
   ["58", (c) => <MonteCarlo cues={[at(c, WA("58", ["dice", "rolls"])), at(c, WA("60", ["ran", "thousand"])), at(c, WA("61", ["1000", "1,000", "all"]))]} twoAt={at(c, WA("61", ["number", "but"]))} />],

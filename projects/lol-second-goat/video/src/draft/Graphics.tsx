@@ -228,7 +228,11 @@ const rr = (n: number) => { const x = Math.sin(n * 12.9898) * 43758.5453; return
 // camera zooms in on it
 /** v19c (ay 24 Nov 14:54: the weights are explained once, here): `weights` = the frame each weight's number lands on
  *  its bar (title MY WEIGHTS, no rolls, no right panel); `wobbleAt` = the bars start drifting ("move them around") */
-export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: number; twoAt?: number; weights?: number[]; wobbleAt?: number }> = ({ cues, from = 0, twoAt, weights, wobbleAt }) => {
+// v20 (25 Nov take, line 15b): `compare` lights the two parts ay weighs against each other ("a trophy next to skill",
+// "longevity next to big games"), and `swingAt` swings the trophy bar on "subjective" until the weights are said
+// (LOCKED 20 Nov: the trophy share swings while ay says it's subjective, then settles on 30%)
+export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: number; twoAt?: number; weights?: number[]; wobbleAt?: number;
+  compare?: { rows: number[]; at: number }[]; swingAt?: number }> = ({ cues, from = 0, twoAt, weights, wobbleAt, compare, swingAt }) => {
   const f = useCurrentFrame();
   const twoO = twoAt === undefined ? 1 : interpolate(f, [twoAt, twoAt + 8], [0, 1], { ...clamp, easing: easeOut });
   const zK = twoAt === undefined ? 0 : interpolate(f, [twoAt + 10, twoAt + 40], [0, 1], { ...clamp, easing: Easing.bezier(0.65, 0, 0.35, 1) });
@@ -239,7 +243,13 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
   const rolls = f < cues[0] && !from ? 0 : Math.min(1000, Math.round(slow + fast));
   const roll = rolls;
   const wob = wobbleAt === undefined ? 0 : interpolate(f, [wobbleAt, wobbleAt + 20], [0, 1], clamp);
-  const bars = BASE.map((b, i) => (roll === 0 ? b * (1 + wob * 0.22 * Math.sin((f / 30) * (1.4 + rr(i + 3)) + rr(i) * 6)) : b * (0.7 + 0.6 * rr(roll * 7 + i))));
+  const settle = weights ? weights[0] : 1e9;
+  const sw = swingAt === undefined ? 0 : interpolate(f, [swingAt, swingAt + 10, settle - 14, settle], [0, 1, 1, 0], clamp);
+  const bars = BASE.map((b, i) => (roll === 0 ? b * (1 + wob * 0.22 * Math.sin((f / 30) * (1.4 + rr(i + 3)) + rr(i) * 6) + (i === 0 ? sw * 0.4 * Math.sin(f / 8) : 0))
+    : b * (0.7 + 0.6 * rr(roll * 7 + i))));
+  const cmp = compare ? [...compare].reverse().find((x) => f >= x.at && f < settle - 10) : undefined;
+  const cmpO = cmp ? interpolate(f, [cmp.at, cmp.at + 6], [0, 1], clamp) : 0;
+  const lit = (i: number) => (cmp ? (cmp.rows.includes(i) ? 1 : 1 - 0.6 * cmpO) : 1);
   const wk = (i: number) => (weights ? interpolate(f, [weights[i], weights[i] + 8], [0, 1], { ...clamp, easing: easeOut }) : 0);
   const max = 56;
   return (
@@ -247,8 +257,9 @@ export const MonteCarlo: React.FC<{ cues: [number, number, number]; from?: numbe
       <AbsoluteFill style={{ transform: `translate(960px, 540px) scale(${zs}) translate(${-zx}px, ${-zy}px)`, transformOrigin: "0 0" }}>
       <div style={{ position: "absolute", left: 120, top: 70, fontFamily: F.title, fontSize: 72, color: CREAM, letterSpacing: 2 }}>ROLL THE DICE</div>
       {PARTS6.map((p, i) => (
-        <div key={p} style={{ position: "absolute", left: 120, top: 220 + i * 118, display: "flex", alignItems: "center", gap: 24 }}>
-          <div style={{ width: 300, textAlign: "right", fontFamily: F.title, fontSize: 40, color: C.text, letterSpacing: 1 }}>{p}</div>
+        <div key={p} style={{ position: "absolute", left: 120, top: 220 + i * 118, display: "flex", alignItems: "center", gap: 24, opacity: lit(i) }}>
+          <div style={{ width: 300, textAlign: "right", fontFamily: F.title, fontSize: 40, color: cmp && cmp.rows.includes(i) ? CREAM : C.text, letterSpacing: 1,
+            transform: `scale(${cmp && cmp.rows.includes(i) ? 1 + 0.12 * cmpO : 1})`, transformOrigin: "100% 50%" }}>{p}</div>
           <div style={{ width: 560, height: 54, background: "rgba(237,239,242,0.06)", position: "relative" }}>
             <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${(bars[i] / max) * 100}%`, background: i === 0 ? C.gold : "#8C96A6" }} />
             <div style={{ position: "absolute", left: `${(BASE[i] / max) * 100}%`, top: -8, bottom: -8, width: 3, background: "rgba(237,239,242,0.6)" }} />

@@ -122,7 +122,8 @@ const LOGO: Record<string, string> = { "DRX 2022": "DRX_allmode.png", "T1 2023":
   "SK Telecom T1 2015": "SK_Telecom_T1_allmode.png", "SK Telecom T1 2016": "SK_Telecom_T1_allmode.png", "EDward Gaming 2021": "EDward_Gaming_2017_darkmode.png",
   "Invictus Gaming 2018": "Invictus_Gaming_darkmode.png", "FunPlus Phoenix 2019": "FunPlus_Phoenix_2019_allmode.png", "DAMWON Gaming 2020": "DAMWON_Gaming_allmode.png" };
 const HARD_KEEP = { team: "Bilibili Gaming", year: 2026 }; // always picked out (ay: "where is BLG?")
-export const HardestRuns: React.FC<{ cues: { rise: number; lit: { team: string; year: number; at: number }[] } }> = ({ cues }) => {
+// v20 (25 Nov take: line 24b runs about 25 s on this chart): `notes` stack short lines beside DRX on their words
+export const HardestRuns: React.FC<{ cues: { rise: number; lit: { team: string; year: number; at: number }[]; notes?: { at: number; text: string; accent?: boolean }[] } }> = ({ cues }) => {
   const f = useCurrentFrame();
   const rows = [...(HW as [string, number, number, number][])].sort((a, b) => a[2] - b[2]); // hardest (lowest chance) on the left
   const x0 = 250, x1 = 1700, base = 800, vmax = 60, hpx = 440;
@@ -168,6 +169,11 @@ export const HardestRuns: React.FC<{ cues: { rise: number; lit: { team: string; 
           </React.Fragment>
         );
       })}
+      {cues.notes && <div style={{ position: "absolute", left: 360, top: 330, width: 620 }}>
+        {cues.notes.map((n, k) => { const o = interpolate(f, [n.at, n.at + 8], [0, 1], { ...clamp, easing: easeOut });
+          return <div key={k} style={{ fontFamily: BEBAS, fontSize: 50, lineHeight: 1.15, letterSpacing: 1, color: n.accent ? TEAL : INK, opacity: o,
+            transform: `translateY(${(1 - o) * 14}px)`, borderLeft: `5px solid ${n.accent ? TEAL : "rgba(237,239,242,0.35)"}`, paddingLeft: 18, marginBottom: 16 }}>{n.text}</div>; })}
+      </div>}
     </AbsoluteFill>
   );
 };
