@@ -26,7 +26,8 @@ const XFADE = 3; // seconds, centred on the chapter break
 type Boss = { file: string; gain: number; voice: number };
 // ay 21 Nov 17:13: Elden Ring boss music from 4:14 of ay's pick (music/boss/boss-elden-414-12s.wav, about -8 LUFS)
 const BOSS = { file: "_local/music/boss.wav", gain: db(-16), voice: db(-22) } as Boss | null;
-const climb = () => { const c0 = W("53", "name") + 8 / 30; const hit = c0 + 79 / 30; return { c0, hit, boss: hit, end: HAS("42p") ? L("28").start : L("56").start }; };
+const climb = () => { const c0 = W("53", "name") + 8 / 30; const hit = c0 + 79 / 30; return { c0, hit, boss: hit, end: HAS("55b") ? L("55b").start : HAS("42p") ? L("28").start : L("56").start }; };
+// LOCKED (ay 26 Nov 17:00): the boss music ends when the trophy cabinet graph ends (line 55b starts), not at line 28
 // ay 24 Nov 14:54: in v19b the climb is followed by BIG GAMES + CLUTCH (line 28), so the boss track ends there, not at 56
 type Drop = { a: number; b: number; out: number; back: number; boost?: number };
 const dropOuts = (): Drop[] => {
@@ -96,7 +97,7 @@ export const Music: React.FC<{ lead: number; total: number }> = ({ lead, total }
     const t = f / FPS, hit = lead + cl.boss, out = lead + cl.end;
     const d = env.duck[Math.min(f, env.duck.length - 1)] ?? 0;
     const g = BOSS.gain + (BOSS.voice - BOSS.gain) * d;
-    return t < hit ? 0 : g * smooth(Math.min(1, Math.max(0, (out + 1 - t) / 1))); // crossfades with Late Night Groove coming back
+    return t < hit ? 0 : g * smooth(Math.min(1, Math.max(0, (out + 0.3 - t) / 0.3))); // ay 26 Nov: cut off as the graph ends (0.3 s), the beat comes back under it
   };
   const aFrom = fr(t0), bFrom = fr(brk - XFADE / 2);
   return <>

@@ -107,20 +107,7 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
           <text key={g} x={X(g)} y={Y(-6) + 64 * t} textAnchor="middle" fontFamily={BEBAS} fontSize={44 * t} fill={INK}>{g.toLocaleString("en-GB")}</text>))}
         <text x={X((G0 + 1700) / 2)} y={Y(-6) + 116 * t} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t * (1 + 0.35 * axX)} fill={axX > 0.5 ? TEAL : INK} letterSpacing={2}>GAMES PLAYED (300+){axX > 0.5 ? "  →" : ""}</text>
         <text transform={`translate(${X(G0) - 150 * t} ${Y(cy)}) rotate(-90)`} textAnchor="middle" fontFamily={BEBAS} fontSize={40 * t * (1 + 0.35 * axY)} fill={axY > 0.5 ? TEAL : INK} letterSpacing={2}>WINS ADDED PER 100 GAMES{axY > 0.5 ? "  →" : ""}</text>
-        {/* ay 24 Nov 19:01 (8 PM note): "going right" and "going up" move along the graph. A teal arrow runs along the
-            x axis on "right" and up the y axis on "up" (Jxmy's axis arrows, refs/ANIMATION.md), then stays as a faint guide */}
-        {walk && (() => {
-          const ar = A(WA("37a", ["right"])), au = A(WA("37a", ["up"]));
-          const dx = interpolate(f, [ar, ar + 22], [0, 1], { ...clamp, easing: easeOut }), dy = interpolate(f, [au, au + 22], [0, 1], { ...clamp, easing: easeOut });
-          const x0 = X(G0) + 10, x1 = X(1700) - 10, yb = Y(-6) - 26, yx = X(G0) + 26, y0 = Y(-6) - 10, y1 = Y(24);
-          const xe = x0 + (x1 - x0) * dx, ye = y0 + (y1 - y0) * dy;
-          return <g opacity={walkOut}>
-            {dx > 0 && <><line x1={x0} x2={xe} y1={yb} y2={yb} stroke={TEAL} strokeWidth={8 * t} strokeLinecap="round" />
-              <polygon points={`${xe + 26 * t},${yb} ${xe - 6 * t},${yb - 18 * t} ${xe - 6 * t},${yb + 18 * t}`} fill={TEAL} /></>}
-            {dy > 0 && <><line x1={yx} x2={yx} y1={y0} y2={ye} stroke={TEAL} strokeWidth={8 * t} strokeLinecap="round" />
-              <polygon points={`${yx},${ye - 26 * t} ${yx - 18 * t},${ye + 6 * t} ${yx + 18 * t},${ye + 6 * t}`} fill={TEAL} /></>}
-          </g>;
-        })()}
+        {/* LOCKED (ay 26 Nov 17:00): no long arrows inside this graph; "going right / up" only light the axis names (above) */}
         {/* v19: "most players sit in the middle, around plus 5" */}
         <rect x={X(G0) - 6} width={X(1700) - X(G0) + 6} y={Y(8)} height={Y(2) - Y(8)} fill={INK} opacity={0.08 * band} />
         <text x={X(1700)} y={Y(8) - 12 * t} textAnchor="end" fontFamily={BEBAS} fontSize={46 * t} fill={INK} opacity={band}>MOST PROS: AROUND +5</text>
@@ -156,7 +143,7 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
         return (
           <div key={n.id} style={{ position: "absolute", width: 600, textAlign: n.side ? "left" : "center",
             left: n.side ? X(r[2]) + 30 * t : X(r[2]) - 300,
-            top: n.side ? Y(r[3]) - size * 1.05 * n.side : Y(r[3]) + 16 * t,
+            top: n.side ? Y(r[3]) - size * 1.05 * n.side : Y(r[3]) + 30 * t, // LOCKED (ay 26 Nov): label clear of the ring, every ring a full circle
             fontFamily: BEBAS, fontSize: size, color: n.color ?? INK, letterSpacing: 1, opacity: pop(n.at) * (isWalk(n.id) ? walkDim : 1), whiteSpace: "nowrap" }}>
             <span style={{ background: "rgba(15,16,18,0.88)", padding: `${2 * t}px ${10 * t}px`, borderRadius: 6 * t }}>{r[1]} ({r[3] >= 0 ? "+" : ""}{r[3].toFixed(1)})</span>
           </div>

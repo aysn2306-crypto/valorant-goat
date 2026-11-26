@@ -33,7 +33,7 @@ import { FansVsModel } from "./Slope";
 import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
-import { AxisSweep, CoinRow, EloTowers, LongRec, PartTop, Roadmap, SectionOpener, SourceNote, StatSheet, TaggedClips } from "./Polish";
+import { AxisSweep, CoinRow, EloTowers, LongRec, PartTop, Roadmap, SectionOpener, SourceNote, MatchupSheet, TaggedClips } from "./Polish";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { HAS, L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
@@ -151,7 +151,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // v19f (25 Nov flow fix): skill opens on its card and "how well you play in every single game", then what every game is
   // scored on (16c, StatSheet), then the LPL problem back on LPL fights, the third fight on "demon"
   ["16a", (c) => <SectionOpener title="SKILL" cardEnd={48} shots={[{ id: "lplFight1", from: 0, at: 0 }]} />],
-  ["16c", (c) => <StatSheet cues={{ stats: [at(c, WA("16c", ["gold"])), at(c, WA("16c", ["cs", "see"])), at(c, WA("16c", ["kills"])), at(c, WA("16c", ["damage", "share"])),
+  ["16c", (c) => <MatchupSheet cues={{ stats: [at(c, WA("16c", ["gold"])), at(c, WA("16c", ["cs", "see"])), at(c, WA("16c", ["kills"])), at(c, WA("16c", ["damage", "share"])),
     at(c, WA("16c", ["die", "dies", "dying", "often"]))], role: at(c, WA("16c", ["role", "own"])) }} />],
   ["16", (c) => <TaggedClips shots={[{ id: "lplFight2", from: 0, at: 0 }, { id: "lplFight3", from: 0.5, at: at(c, WA("16", ["demon", "absolute"])) - 6 }]} />],
   ["17", (c) => <KillsLine cues={{ lck: 6, lpl: at(c, W("17", "lpl")), gap: at(c, W("17", "3")) }} />],

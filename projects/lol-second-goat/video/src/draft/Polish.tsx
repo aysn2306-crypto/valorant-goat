@@ -9,7 +9,8 @@
 //   the six weights as faders that wobble while ay says they're his choices.
 // - SourceNote: ZeKay and Jxmy name the source on screen as it is said (rival-ai-video/RIVAL-STUDY.md "Sources").
 import React from "react";
-import { AbsoluteFill, Easing, interpolate, random, Sequence, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate, random, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { P } from "../lib/data";
 import { Clip, ClipId } from "./Clip";
 import { Concrete } from "../samples/Climb";
 
@@ -336,57 +337,66 @@ export const LongRec: React.FC<{ cues: { rows: number[]; tagL: number; right: nu
   const inK = pop(f, 0, 10);
   const dimL = 1 - 0.7 * interpolate(f, [cues.right, cues.right + 12], [0, 1], clamp);
   const rK = pop(f, cues.right, 12);
-  const x0 = 110, gx = 280, pitch = 50, cell = 44, y0 = 330, rowH = 118;
-  const years = Array.from({ length: 14 }, (_, i) => 2013 + i);
+  const x0 = 110, y0 = 330, rowH = 118;
   return (
     <AbsoluteFill style={{ opacity: inK }}>
       <Concrete />
+      {/* ay 26 Nov 17:00: the year grid with empty squares was rejected ("Knight and Chovy have empty bits").
+          Rebuilt from the Jxmy column-stack reference (video-research/jxmy-graphs/style-sheets/column-stack_p1.jpg,
+          Rlyp8PLqFS0 g09): one stacked pill per great year, the face rides the top of its column as it builds.
+          Only years that count are stacked, so no column has a gap; the year is written in its pill. */}
       <div style={{ opacity: dimL }}>
         <div style={{ position: "absolute", left: x0, top: 110, fontFamily: BEBAS, fontSize: 72, letterSpacing: 3, color: INK }}>LONGEVITY</div>
         <div style={{ position: "absolute", left: x0, top: 190, fontFamily: BEBAS, fontSize: 34, letterSpacing: 3, color: MUTE }}>GREAT YEARS AT THE TOP</div>
         <PartTop text="#1 FAKER" at={cues.tagL} top={118} right={1920 - 1010} />
         {LONG.map((p, i) => {
-          const k = pop(f, cues.rows[i], 10), y = y0 + i * rowH, lead = i === 0;
+          const cx = 240 + i * 220, base = 945, ph = 28, pitch = 35, pw = 150;
+          const yrs = Object.keys(p.yrs).map(Number).sort((u, v) => u - v);
+          const t0 = cues.rows[i], k = pop(f, t0, 10), lead = i === 0;
+          const built = interpolate(f, [t0, t0 + yrs.length * 2.5], [0, yrs.length], clamp);
+          const topY = base - built * pitch;
           return (
             <div key={p.name} style={{ opacity: k }}>
-              <div style={{ position: "absolute", left: x0, top: y - 4, fontFamily: BEBAS, fontSize: 56, letterSpacing: 2, color: lead ? TEAL : INK }}>{p.name}</div>
-              {years.map((yr, j) => {
-                const v = p.yrs[yr] ?? 0, g = interpolate(f, [cues.rows[i] + j * 1.5, cues.rows[i] + j * 1.5 + 8], [0, 1], clamp);
-                return (
-                  <div key={yr} style={{ position: "absolute", left: gx + j * pitch, top: y, width: cell, height: cell, border: "2px solid rgba(242,242,238,0.18)" }}>
-                    <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: `${(v / 0.4) * 100 * g}%`, background: lead ? TEAL : INK, opacity: lead ? 1 : 0.8 }} />
-                  </div>
-                );
+              {yrs.map((yr, j) => {
+                const v = p.yrs[yr], g = interpolate(built, [j, j + 1], [0, 1], clamp);
+                const tier = v >= 0.395 ? 2 : v >= 0.2 ? 1 : 0;
+                return g > 0 ? (
+                  <div key={yr} style={{ position: "absolute", left: cx - pw / 2, top: base - (j + 1) * pitch + (1 - g) * -40, width: pw, height: ph, borderRadius: ph / 2,
+                    opacity: g, background: tier === 2 ? TEAL : tier === 1 ? INK : "transparent", border: tier === 0 ? "3px solid rgba(242,242,238,0.45)" : "none",
+                    boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: BEBAS, fontSize: 24, letterSpacing: 2,
+                    color: tier === 0 ? MUTE : "#12161B" }}>{yr}</div>
+                ) : null;
               })}
-              <div style={{ position: "absolute", left: gx + 14 * pitch + 14, top: y - 6, fontFamily: BEBAS, fontSize: 56, color: lead ? TEAL : INK }}>{p.v}</div>
+              <div style={{ position: "absolute", left: cx - 48, top: topY - 104, width: 96, height: 96, borderRadius: "50%", overflow: "hidden",
+                border: `5px solid ${lead ? TEAL : INK}`, boxSizing: "border-box", background: "#1B2027" }}>
+                <Img src={staticFile(P(p.name.toLowerCase()).photo ?? "")} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 15%" }} />
+              </div>
+              <div style={{ position: "absolute", left: cx - 100, width: 200, top: topY - 160, textAlign: "center", fontFamily: BEBAS, fontSize: 50, lineHeight: 1,
+                color: lead ? TEAL : INK, opacity: interpolate(built, [yrs.length - 0.5, yrs.length], [0, 1], clamp) }}>{p.v}</div>
+              <div style={{ position: "absolute", left: cx - 110, width: 220, top: base + 6, textAlign: "center", fontFamily: BEBAS, fontSize: 48, letterSpacing: 2,
+                color: lead ? TEAL : INK }}>{p.name}</div>
             </div>
           );
         })}
-        {/* ay 24 Nov 19:01: the board sat empty under 38a. A key, said word by word: a monster year fills the square,
-            a great year most of it, a year you only just made it a sliver. It leaves as the rows come in. */}
+        {/* ay 24 Nov 19:01: the key, said word by word, now as the three pills; it leaves as the columns come in */}
         {cues.key && (() => {
           const out = 1 - pop(f, cues.rows[0] - 10, 8);
-          const items = [{ t: "GREAT YEAR", v: 0.75, at: cues.key[0] }, { t: "MONSTER YEAR", v: 1, at: cues.key[1] }, { t: "ONLY JUST MADE IT", v: 0.15, at: cues.key[2] }];
+          const items = [{ t: "GREAT YEAR", tier: 1, at: cues.key[0] }, { t: "MONSTER YEAR", tier: 2, at: cues.key[1] }, { t: "ONLY JUST MADE IT", tier: 0, at: cues.key[2] }];
           return out > 0 ? (
-            <div style={{ position: "absolute", left: 160, top: 400, display: "flex", gap: 110, opacity: out }}>
+            <div style={{ position: "absolute", left: 140, top: 470, display: "flex", gap: 70, opacity: out }}>
               {items.map((it) => {
-                const k = pop(f, it.at, 10), g = interpolate(f, [it.at + 4, it.at + 20], [0, 1], { ...clamp, easing: easeOut });
+                const kk = pop(f, it.at, 10);
                 return (
-                  <div key={it.t} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 26, opacity: k }}>
-                    <div style={{ position: "relative", width: 150, height: 150, border: "3px solid rgba(242,242,238,0.3)" }}>
-                      <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: `${it.v * 100 * g}%`, background: it.v === 1 ? TEAL : INK }} />
-                    </div>
-                    <div style={{ fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: it.v === 1 ? TEAL : INK, whiteSpace: "nowrap" }}>{it.t}</div>
+                  <div key={it.t} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 30, opacity: kk, transform: `translateY(${(1 - kk) * -30}px)` }}>
+                    <div style={{ width: 220, height: 56, borderRadius: 28, boxSizing: "border-box", background: it.tier === 2 ? TEAL : it.tier === 1 ? INK : "transparent",
+                      border: it.tier === 0 ? "4px solid rgba(242,242,238,0.45)" : "none" }} />
+                    <div style={{ fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: it.tier === 2 ? TEAL : it.tier === 1 ? INK : MUTE, whiteSpace: "nowrap" }}>{it.t}</div>
                   </div>
                 );
               })}
             </div>
           ) : null;
         })()}
-        {[2013, 2016, 2019, 2022, 2026].map((yr) => (
-          <div key={yr} style={{ position: "absolute", left: gx + (yr - 2013) * pitch - 30, width: cell + 60, top: y0 + 4 * rowH - 6, textAlign: "center",
-            fontFamily: BEBAS, fontSize: 34, color: MUTE, opacity: pop(f, cues.rows[0]) }}>{yr}</div>
-        ))}
       </div>
       {/* v19f line 79 (38e, 25 Nov): while ay says why staying great is hard, the empty right half says it on its words,
           and leaves as recognition comes in */}
@@ -540,6 +550,92 @@ export const TaggedClips: React.FC<{ shots: { id: ClipId; from: number; at: numb
           </Sequence>
         );
       })}
+    </AbsoluteFill>
+  );
+};
+
+/** Line 26 (16c), v20 (ay 26 Nov: "a certain League graphic that shows the difference between two players", the
+ *  column-and-arrows sheet was "trash"). A real lane matchup in the League broadcast's post-game layout: values on
+ *  the outside, the stat in the middle, bars that show who was ahead and by how much (refs: Worlds 2026 post-game
+ *  team compare, video-research/refs-1126/worlds26-postgame-team-compare-gold-diff.png; Jxmy two-player box score
+ *  board, jxmy-graphs/style-sheets/head-to-head_p1.jpg GPH4nK5sQ-8 g01). Data: Oracle's Elixir, Worlds 2026 semifinal
+ *  game 1 (LOLTMNT02_488293), Knight vs Faker. Each row lights on its word; the role strip comes on "own role". */
+const MATCHUP = {
+  sub: "WORLDS 2026 SEMIFINAL · GAME 1 · MID VS MID",
+  l: { id: "knight", name: "KNIGHT", team: "BLG" }, r: { id: "faker", name: "FAKER", team: "T1" },
+  rows: [
+    { t: "GOLD AHEAD", s: "AT 15 MIN", l: 684, r: -684, fmt: (v: number) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toLocaleString("en-GB"), diff: 1000 },
+    { t: "CS AHEAD", s: "AT 15 MIN", l: 39, r: -39, fmt: (v: number) => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v), diff: 60 },
+    { t: "KILLS", s: "", l: 8, r: 4, fmt: (v: number) => String(v), max: 10 },
+    { t: "DAMAGE SHARE", s: "OF THE TEAM'S", l: 28.7, r: 28.9, fmt: (v: number) => v.toFixed(1) + "%", max: 35 },
+    { t: "DEATHS", s: "FEWER IS BETTER", l: 0, r: 2, fmt: (v: number) => String(v), max: 5, low: true },
+  ] as { t: string; s: string; l: number; r: number; fmt: (v: number) => string; diff?: number; max?: number; low?: boolean }[],
+};
+export const MatchupSheet: React.FC<{ cues: { stats: number[]; role: number } }> = ({ cues }) => {
+  const f = useCurrentFrame();
+  const inK = pop(f, 0, 10), rK = pop(f, cues.role, 10), strike = interpolate(f, [cues.role + 10, cues.role + 22], [0, 1], { ...clamp, easing: easeOut });
+  const ROLES = ["TOP", "JUNGLE", "MID", "BOT", "SUPPORT"];
+  const cx = 960, half = 330, top0 = 236, rowH = 116;
+  const card = (side: "l" | "r") => {
+    const p = MATCHUP[side], ph = P(p.id).photo;
+    return (
+      <div style={{ position: "absolute", top: 230, [side === "l" ? "left" : "right"]: 110, width: 300 }}>
+        <div style={{ width: 300, height: 380, overflow: "hidden", background: "#1B212B", border: `3px solid ${side === "l" ? TEAL : "rgba(242,242,238,0.35)"}` }}>
+          {ph && <Img src={staticFile(ph)} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 20%" }} />}
+        </div>
+        <div style={{ marginTop: 14, textAlign: "center", fontFamily: BEBAS, fontSize: 58, letterSpacing: 3, color: INK, lineHeight: 1 }}>{p.name}</div>
+        <div style={{ textAlign: "center", fontFamily: BEBAS, fontSize: 32, letterSpacing: 3, color: MUTE }}>{p.team} · MID</div>
+      </div>
+    );
+  };
+  return (
+    <AbsoluteFill style={{ opacity: inK }}>
+      <Concrete />
+      <div style={{ position: "absolute", left: 0, right: 0, top: 62, textAlign: "center", fontFamily: BEBAS, fontSize: 80, letterSpacing: 3, color: INK }}>WHAT EVERY GAME IS SCORED ON</div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 152, textAlign: "center", fontFamily: BEBAS, fontSize: 34, letterSpacing: 4, color: MUTE }}>{MATCHUP.sub}</div>
+      {card("l")}{card("r")}
+      {MATCHUP.rows.map((r, i) => {
+        const a = cues.stats[i], k = pop(f, a, 10), grow = interpolate(f, [a + 4, a + 20], [0, 1], { ...clamp, easing: easeOut });
+        const lWins = r.low ? r.l < r.r : r.l > r.r, rWins = r.low ? r.r < r.l : r.r > r.l;
+        const y = top0 + i * rowH;
+        const valStyle = (win: boolean): React.CSSProperties => ({ position: "absolute", top: y - 6, width: 200, fontFamily: BEBAS, fontSize: 64, lineHeight: 1,
+          color: win ? TEAL : MUTE, opacity: 0.2 + 0.8 * k });
+        return (
+          <React.Fragment key={r.t}>
+            <div style={{ ...valStyle(lWins), left: cx - half - 230, textAlign: "right" }}>{r.fmt(r.l)}</div>
+            <div style={{ ...valStyle(rWins), left: cx + half + 30, textAlign: "left" }}>{r.fmt(r.r)}</div>
+            <div style={{ position: "absolute", left: cx - half, width: half * 2, top: y - 4, textAlign: "center", opacity: 0.2 + 0.8 * k }}>
+              <span style={{ fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: INK }}>{r.t}</span>
+              {r.s && <span style={{ fontFamily: BEBAS, fontSize: 28, letterSpacing: 2, color: MUTE, marginLeft: 14 }}>{r.s}</span>}
+            </div>
+            {/* the track: split in the middle like the broadcast's damage bars */}
+            <div style={{ position: "absolute", left: cx - half, width: half * 2, top: y + 50, height: 22, background: "rgba(242,242,238,0.07)", opacity: 0.3 + 0.7 * k }} />
+            <div style={{ position: "absolute", left: cx - 2, width: 4, top: y + 44, height: 34, background: "rgba(242,242,238,0.5)", opacity: 0.3 + 0.7 * k }} />
+            {r.diff !== undefined ? (() => {
+              // a gap: one bar from the middle toward whoever was ahead, as long as the gap
+              const w = (Math.abs(r.l) / r.diff) * half * grow, toLeft = r.l > 0;
+              return <div style={{ position: "absolute", top: y + 50, height: 22, width: w, left: toLeft ? cx - w : cx, background: TEAL }} />;
+            })() : (<>
+              <div style={{ position: "absolute", top: y + 50, height: 22, width: (r.l / r.max!) * half * grow, left: cx - (r.l / r.max!) * half * grow - 3, background: lWins ? TEAL : "#7C8591" }} />
+              <div style={{ position: "absolute", top: y + 50, height: 22, width: (r.r / r.max!) * half * grow, left: cx + 3, background: rWins ? TEAL : "#7C8591" }} />
+            </>)}
+          </React.Fragment>
+        );
+      })}
+      <div style={{ position: "absolute", left: 0, right: 0, top: 860, display: "flex", justifyContent: "center", alignItems: "center", gap: 24, opacity: rK }}>
+        <div style={{ fontFamily: BEBAS, fontSize: 48, letterSpacing: 3, color: MUTE, marginRight: 12, whiteSpace: "nowrap" }}>ONLY COMPARED WITH</div>
+        {ROLES.map((ro) => {
+          const me = ro === "MID";
+          return (
+            <div key={ro} style={{ position: "relative", padding: "8px 26px 2px", borderRadius: 8, fontFamily: BEBAS, fontSize: 54, letterSpacing: 3,
+              background: me ? TEAL : "transparent", color: me ? GROUND : INK, border: me ? `3px solid ${TEAL}` : "3px solid rgba(242,242,238,0.35)",
+              opacity: me ? 1 : 1 - 0.7 * strike }}>
+              {ro}
+              {!me && <div style={{ position: "absolute", left: 10, right: 10, top: "52%", height: 5, background: RED, transform: `scaleX(${strike})`, transformOrigin: "0 50%" }} />}
+            </div>
+          );
+        })}
+      </div>
     </AbsoluteFill>
   );
 };

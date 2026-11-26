@@ -336,7 +336,8 @@ export const SPlusMinus: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
                         <div style={{ position: "relative", height: 56, marginTop: 8, background: "#20252D", borderRadius: 6 }}>
                           <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: `${wr}%`, background: drop > 0.5 ? w.col : C.cyan, borderRadius: 6 }} />
                           <div style={{ position: "absolute", left: `${77}%`, top: -8, bottom: -8, width: 4, background: CREAM, opacity: 0.6 }} />
-                          <div style={{ position: "absolute", left: `calc(${wr}% + 14px)`, top: 4, fontFamily: F.title, fontSize: 44, color: CREAM }}>{Math.round(wr)}%</div>
+                          {/* LOCKED (ay 26 Nov): the % sits centred on the bar, not low */}
+                          <div style={{ position: "absolute", left: `calc(${wr}% + 14px)`, top: 0, bottom: 0, display: "flex", alignItems: "center", fontFamily: F.title, fontSize: 44, lineHeight: 1, paddingTop: 4, color: CREAM }}>{Math.round(wr)}%</div>
                         </div>
                         <div style={{ marginTop: 10, fontFamily: F.title, fontSize: 40, color: w.col, opacity: drop }}>{w.note}</div>
                       </div>

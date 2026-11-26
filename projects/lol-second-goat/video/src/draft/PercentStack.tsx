@@ -22,6 +22,17 @@ const ICONS: Record<string, React.ReactNode> = {
     {[28, 36, 44].map((v) => <g key={v}><path d={`M${v} 12v8M${v} 52v8M12 ${v}h8M52 ${v}h8`} /></g>)}<rect x={29} y={29} width={14} height={14} fill={INK} stroke="none" /></g>,
 };
 
+// 100 seats in 6 rows of a half circle; seats per row by row length, then ordered by angle (left first) so a share fills as a wedge
+const HX = 1430, HY = 840, SEAT = 34;
+const SEATS = (() => {
+  const radii = [160, 206, 252, 298, 344, 390], tot = radii.reduce((a, b) => a + b, 0);
+  const n = radii.map((r) => Math.round((100 * r) / tot));
+  n[n.length - 1] += 100 - n.reduce((a, b) => a + b, 0);
+  const out: { x: number; y: number; a: number; r: number }[] = [];
+  radii.forEach((r, i) => { for (let j = 0; j < n[i]; j++) { const a = Math.PI * (1 - j / (n[i] - 1)); out.push({ x: r * Math.cos(a), y: r * Math.sin(a), a, r }); } });
+  return out.sort((p, q) => q.a - p.a || p.r - q.r);
+})();
+
 export type PRow = { icon: keyof typeof ICONS; label: string; pct: number; at: number; accent?: boolean };
 
 /** cues (optional, frames in the scene): the empty grid is up from the start; at `votes` all 100 light (the real
@@ -31,7 +42,6 @@ export const PercentStack: React.FC<{ header: string; rows: PRow[]; cues?: { vot
   // the grid shows the newest row that has landed
   let cur = -1; rows.forEach((r, i) => { if (f >= r.at) cur = i; });
   const fill = cur < 0 ? 0 : Math.round(interpolate(f, [rows[cur].at + 6, rows[cur].at + 26], [cur > 0 ? rows[cur - 1].pct : 0, rows[cur].pct], clamp));
-  const gx = 1120, gy = 250, cell = 54, gap = 8;
   const gridO = interpolate(f, [0, 8], [0, 1], clamp);
   const votes = cues ? interpolate(f, [cues.votes, cues.votes + 18, cues.hide, cues.hide + 12], [0, 1, 1, 0], clamp) : 0;
   const askO = cues ? interpolate(f, [cues.ask, cues.ask + 8], [0, 1], clamp) : 1;
@@ -60,13 +70,17 @@ export const PercentStack: React.FC<{ header: string; rows: PRow[]; cues?: { vot
           </div>
         );
       })}
-      {/* 100 picks, the right ones lit */}
-      <div style={{ position: "absolute", left: gx, top: gy - 80, fontFamily: BEBAS, fontSize: 38, letterSpacing: 1.5, color: MUTE, opacity: gridO }}>100 ALL-PRO PICKS</div>
-      {Array.from({ length: 100 }, (_, k) => {
+      {/* ay 26 Nov 17:00: "instead of squares there could be chairs, like seats that represent a vote". The 100 picks
+          are now a seat chart, from the hemicycle reference (video-research/refs-1126/hemicycle-seat-chart.png): rows of
+          round seats in a half circle, filled as a wedge from the left, so 58 and 63 read as a share of the room. */}
+      <div style={{ position: "absolute", left: HX - 300, width: 600, top: HY + 30, textAlign: "center", fontFamily: BEBAS, fontSize: 38, letterSpacing: 1.5, color: MUTE, opacity: gridO }}>100 ALL-PRO SEATS</div>
+      {cur >= 0 && <div style={{ position: "absolute", left: HX - 200, width: 400, top: HY - 120, textAlign: "center", fontFamily: BEBAS, fontSize: 120, lineHeight: 1,
+        color: rows[cur].accent ? TEAL : INK, opacity: interpolate(f, [rows[cur].at + 6, rows[cur].at + 12], [0, 1], clamp) }}>{fill}</div>}
+      {SEATS.map((st, k) => {
         const on = k < fill;
-        return <div key={k} style={{ position: "absolute", left: gx + (k % 10) * (cell + gap), top: gy + Math.floor(k / 10) * (cell + gap), width: cell, height: cell, borderRadius: 6,
-          background: on ? (cur >= 0 && rows[cur].accent ? TEAL : INK) : `rgba(242,242,238,${0.08 + 0.84 * votes * Math.min(1, Math.max(0, votes * 1.6 - (k % 10 + Math.floor(k / 10)) / 30))})`,
-          opacity: gridO }} />;
+        const wave = Math.min(1, Math.max(0, votes * 1.6 - k / 160));
+        return <div key={k} style={{ position: "absolute", left: HX + st.x - SEAT / 2, top: HY - st.y - SEAT / 2, width: SEAT, height: SEAT, borderRadius: "50%",
+          background: on ? (rows[cur].accent ? TEAL : INK) : `rgba(242,242,238,${0.1 + 0.82 * votes * wave})`, opacity: gridO }} />;
       })}
     </AbsoluteFill>
   );
