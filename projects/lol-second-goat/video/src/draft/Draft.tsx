@@ -33,7 +33,7 @@ import { FansVsModel } from "./Slope";
 import { TrophyWeight, AbsoluteCinema, ChatLine } from "./Averaged";
 import { PyramidStates } from "./PyramidStates";
 import { CHOVY_ROW, GUMA_ROW, KNIGHT_ROW, Silverware } from "./Silverware";
-import { AxisSweep, CoinRow, EloTowers, LongRec, PartTop, Roadmap, SectionOpener, SourceNote } from "./Polish";
+import { AxisSweep, CoinRow, EloTowers, LongRec, PartTop, Roadmap, SectionOpener, SourceNote, StatSheet, TaggedClips } from "./Polish";
 import { PlayerCards, DreamSeasons, MonteCarlo, ORDER_2025, ORDER_2026, ORDER_GENG, PyramidTwist, TwoFakers } from "./Graphics";
 import { HAS, L, VO_AUDIO, VO_DURATION, VO_KEEP, VO_LINES, VO_PREVIEW, vt, W, WA, WE } from "../data/vo";
 
@@ -106,7 +106,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // v19 (ay 24 Nov: "the intro is too fast, add context to the first scene"): BLG's run through three LCK teams, each
   // clip on its team's name (footage as proof, rival study). The Gen.G final itself is the cold open, so the stage
   // before game 4 stands in for it here. Knight's lift lands on "Knight".
-  ["1b", () => <Clip id="stomp" from={0.5} />],
+  // v19f (ay 25 Nov: "you didn't mention that they beat HLE as well"): the HLE walk-out (BLG vs Hanwha Life card) under
+  // "Hanwha Life", then DK in the quarters on "DK"
+  ["1b", () => <Clip id="walkoutFans" from={0} dim={0} />],
+  ["1b@dk", () => <Clip id="stomp" from={0.5} />],
   ["1b@t1", () => <Clip id="semis" from={24} />],
   ["1b@gen", () => <Clip id="stage" from={6} />],
   ["1b@knight", () => <Clip id="lift" from={37} />],
@@ -145,8 +148,12 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // v19: each method opens on its part's name, a Jxmy chapter title (eatF7QHwga4 x04)
   // ay 24 Nov 16:21 (GOAT section study): each idea section opens on its word over blurred footage, then clips that show
   // the idea under the opening lines, then the first graph. Skill: LPL teamfights under "every LPL player looked like a demon"
-  ["16a", (c) => <SectionOpener title="SKILL" cardEnd={48} shots={[{ id: "lplFight1", from: 0, at: 0 }, { id: "lplFight2", from: 0, at: at(c, L("16").start) },
-    { id: "lplFight3", from: 0.5, at: at(c, WA("16", ["demon", "absolute"])) - 6 }]} />],
+  // v19f (25 Nov flow fix): skill opens on its card and "how well you play in every single game", then what every game is
+  // scored on (16c, StatSheet), then the LPL problem back on LPL fights, the third fight on "demon"
+  ["16a", (c) => <SectionOpener title="SKILL" cardEnd={48} shots={[{ id: "lplFight1", from: 0, at: 0 }]} />],
+  ["16c", (c) => <StatSheet cues={{ stats: [at(c, WA("16c", ["gold"])), at(c, WA("16c", ["cs", "see"])), at(c, WA("16c", ["kills"])), at(c, WA("16c", ["damage", "share"])),
+    at(c, WA("16c", ["die", "dies", "dying", "often"]))], role: at(c, WA("16c", ["role", "own"])) }} />],
+  ["16", (c) => <TaggedClips shots={[{ id: "lplFight2", from: 0, at: 0 }, { id: "lplFight3", from: 0.5, at: at(c, WA("16", ["demon", "absolute"])) - 6 }]} />],
   ["17", (c) => <KillsLine cues={{ lck: 6, lpl: at(c, W("17", "lpl")), gap: at(c, W("17", "3")) }} />],
   ["18", (c) => <TeamRoles cues={{ rows: Math.max(4, at(c, WA("18", ["compares"])) - 6), role: at(c, WA("18a", ["role", "lined"])), old: at(c, WA("18b", ["2013", "old"])) }} />],
   ["19", (c) => <AbsoluteFill><Clip id="stomp" from={20} /><ChatLine user="dk_enjoyer" text="DK LOL" at={at(c, W("19", "bottom"))} /></AbsoluteFill>],
@@ -163,6 +170,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { label: "DEATHS A GAME", l: "1.69", r: "1.94", better: "l" },
     { label: "WIN RATE", l: "69.2%", r: "66.9%", better: "l" },
     { label: "SKILL SCORE", l: "100", r: "97.8", better: "l", big: true }]} />],
+  // v19f line 41 (ay 24 Nov 20:09, opinions about League itself, clips matching the words): Chovy in lane against Faker
+  // under "winning your lane", the zoomed spacing replay on "dodges", Bin's Jax fight on "Bin"
+  ["16b", (c) => <TaggedClips shots={[{ id: "chovySolo", from: 6, at: 0, tag: "CHOVY" }, { id: "chovyDodge", from: 0, at: at(c, WA("16b", ["mechanically", "flawless", "dodges"])) - 9, tag: "CHOVY" },
+    { id: "binJax", from: 0, at: at(c, WA("16b", ["bin", "same"])) - 4, tag: "BIN ON JAX" }]} />],
   // trophies: the Worlds cup, then an MSI lift on "MSI", then the Worlds wide shot on "Worlds"
   ["22", (c) => <SectionOpener title="TROPHIES" cardEnd={48} shots={[{ id: "worlds23Lift", from: 0, at: 0 }, { id: "msi25Lift", from: 1, at: at(c, WA("22", ["but", "msi"])) },
     { id: "worlds23Lift", from: 4.8, at: at(c, WA("22", ["worlds"])) - 4 }]} />],
@@ -182,10 +193,13 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     names: { rookie: at(c, WA("27", ["rookie"])), theshy: at(c, WA("27", ["shy"])), baolan: at(c, WA("27b", ["bao", "baolan"])), jackeylove: at(c, WA("27b", ["jackie", "jackey"])), ning: at(c, WA("27b", ["ning"])) },
     top: at(c, WA("27", ["rookie", "biggest"])), mvp: at(c, WA("27b", ["ning", "finals"])) }} />],
   // v19 (ay: no full graph for a few seconds): the 5 s "Trophy score" board is gone, the cabinet starts on line 51
-  ["51", (c) => <><ClimbRemap c={c} /><PartTop text="#1 IN TROPHIES: FAKER" at={at(c, WA("55", ["tops"]))} top={150} /></>],
+  ["51", (c) => <><ClimbRemap c={c} /><PartTop text="#1 IN TROPHIES: FAKER" at={at(c, WA("55", ["tops", "double"]))} top={150} /></>],
+  // v19f line 54 (55b): the Summoner's Cup on its word, then Chovy on "Chovy" (still no Worlds)
+  ["55b", (c) => <TaggedClips shots={[{ id: "cupNight", from: 2, at: 0 }, { id: "chovyArena", from: 0, at: at(c, WA("55b", ["chovy", "ask"])) - 4, tag: "CHOVY: 0 WORLDS" }]} />],
   // big games + clutch: three game 5 endings (Worlds 2024 and 2025 finals, LCK 2024 Summer final) under "win every game 5"
-  ["28", (c) => <SectionOpener title="BIG GAMES + CLUTCH" size={170} cardEnd={54} shots={[{ id: "g5Worlds24", from: 0, at: 0 }, { id: "g5Worlds25", from: 1, at: at(c, WA("28", ["some"])) },
-    { id: "g5Lck24", from: 0.5, at: at(c, WA("28", ["every", "win"])) }]} />],
+  ["28", (c) => <SectionOpener title="BIG GAMES + CLUTCH" size={170} cardEnd={54} shots={[{ id: "g5Lck24", from: 0.5, at: 0 },
+    // 25 Nov take: the Worlds 2024 final lands on "like Faker, Worlds 2024", then T1's 2025 game 5 on "a lot of players ... a clutch team"
+    { id: "g5Worlds24", from: 0, at: at(c, WA("28", ["like", "faker"])) - 3 }, { id: "g5Worlds25", from: 1, at: at(c, WA("28", ["lot", "part"])) - 3 }]} />],
   ["29", (c) => { // the clutch scatter (locked walk: bottom, middle, top), now from line 29 so the title card gets line 28
     // v19: dots pop in over "Here's every player..." (about 4 s, locked 21 Nov), then 30a names the axes on the full graph
     const rv = at(c, WA("31", ["faker's", "faker", "baker's"])), ch = at(c, WA("30c", ["cream", "creme", "bottom"]));
@@ -210,12 +224,13 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   [HAS("37a") ? "37a" : "37", (c) => { const k = Math.max(1, fr(Cl.CLIMB_T0 - c.t0));
     return <><Sequence durationInFrames={k} layout="none"><Freeze frame={30}><Cl.SClimb voice={false} /></Freeze></Sequence>
       <Sequence from={k} layout="none"><Cl.SClimb voice={false} /></Sequence>
-      {HAS("37e") && <PartTop text="#1 IN TEAM IMPACT: FAKER" at={at(c, WA("37e", ["tops"]))} left={640} top={60} />}</>; }],
+      {HAS("37e") && <PartTop text="#1 IN TEAM IMPACT: FAKER" at={at(c, WA("37e", ["tops", "faker"]))} left={640} top={60} />}</>; }],
   ["38a", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="LONGEVITY + RECOGNITION" at={4} size={136} /></AbsoluteFill>],
   // ay 24 Nov 14:54: the title had nothing after it. Longevity (great years, Faker #1) then recognition (Chovy #1) on one board
   ...(HAS("38c") ? [["38a@longevity", (c: Ctx) => <LongRec cues={{ rows: [at(c, WA("38c", ["faker"])), at(c, WA("38c", ["deft"])), at(c, WA("38c", ["knight"])), at(c, WA("38c", ["chovy"]))],
     tagL: at(c, WA("38c", ["tops"])), right: at(c, L("38d").start), bars: [at(c, WA("38f", ["chovy"])), at(c, WA("38f", ["faker"])), at(c, WA("38f", ["knight"]))], tagR: at(c, WA("38f", ["tops"])),
-    key: [at(c, WA("38a", ["great"])), at(c, WA("38a", ["monster"])), at(c, WA("38a", ["just", "made"]))] }} />] as [string, (c: Ctx) => React.ReactNode]] : []),
+    key: [at(c, WA("38a", ["great"])), at(c, WA("38a", ["monster"])), at(c, WA("38a", ["just", "made"]))],
+    patch: HAS("38e") ? [at(c, WA("38e", ["patch"])), at(c, WA("38e", ["meta", "year"])), at(c, WA("38e", ["relearn", "over"]))] : undefined }} />] as [string, (c: Ctx) => React.ReactNode]] : []),
   ["38", (c) => <PercentStack header="HOW MANY ALL-PRO PICKS COME OUT RIGHT" rows={[
     { icon: "trophy", label: "PICK FROM THE WINNING TEAMS", pct: 58, at: at(c, W("40", "winning")) },
     { icon: "model", label: "THE MODEL", pct: 63, at: at(c, W("41", "63")), accent: true }]}
@@ -261,7 +276,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { at: 0, big: "MY FIRST VIDEO", small: "A LIKE OR SUB MEANS A LOT", smallAt: at(c, WA("101", ["please", "leave", "like"])) },
     { at: at(c, WA("102", ["ranking", "this"])), big: "THE MODEL'S LIST", small: "NOT PERFECT", smallAt: at(c, WA("102", ["perfect", "course"])) },
     { at: at(c, WA("103", ["keria", "personal"])), face: "keria", big: "MY OWN #2: KERIA", small: "YOUR #2? COMMENTS", smallAt: at(c, WA("103", ["feel", "leave"])) },
-    { at: at(c, WA("104", ["mistakes", "anyone"])), big: "SPOT A MISTAKE?", small: "TELL ME IN THE COMMENTS", smallAt: at(c, WA("104", ["please", "let"])) },
+    { at: at(c, WA("104", ["mistakes", "anyone"])), big: "SPOT A MISTAKE?", small: "TELL ME IN THE COMMENTS", smallAt: at(c, WA("104", ["let", "please"])) },
+    // 25 Nov take: ay asks for video ideas at the end of 104
+    { at: at(c, WA("104", ["ideas", "video"])), big: "VIDEO IDEAS?", small: "LEAVE THEM BELOW", smallAt: at(c, WA("104", ["leave", "below"])) },
   ]} />] as [string, (c: Ctx) => React.ReactNode]] : []),
 ];
 
@@ -277,9 +294,11 @@ const END_AT = HAS("105") ? VO_DURATION + 6 : VO_DURATION + TAIL;
 const END_HOLD = HAS("105") ? 0 : OUTRO;
 /** "42" starts on line 42; "42@final" starts on the word "final" in line 42 */
 const startOf = (key: string) => { const [id, w] = key.split("@"); return (w ? W(id, w) : L(id).start) - 0.05; };
-const TL = SCENES.map(([id, el], i) => {
+// a line that isn't in the recording (not read yet) drops its scenes, the scene before it runs on
+const LIVE = SCENES.filter(([id]) => HAS(id.split("@")[0]));
+const TL = LIVE.map(([id, el], i) => {
   const t0 = i === 0 ? -LEAD : startOf(id);
-  const t1 = i + 1 < SCENES.length ? startOf(SCENES[i + 1][0]) : END_AT;
+  const t1 = i + 1 < LIVE.length ? startOf(LIVE[i + 1][0]) : END_AT;
   return { id, el, t0, dur: fr(t1 - t0) };
 });
 export const DRAFT_TOTAL = fr(LEAD + END_AT + END_HOLD);

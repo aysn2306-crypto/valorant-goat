@@ -48,6 +48,11 @@ export const CLIPS = {
   g5Lck24: { f: "47_lck2024s_final_g5_hle_vs_geng.mp4", len: 7 },
   chovyMvpFilm: { f: "48_chovy_closeup_mvp_film.mp4", len: 2.8 }, // burned subtitle from 3.0 s: never past 2.8 s
   gengMsi24Win: { f: "49_geng_msi2024_final_win_chovy.mp4", len: 7 },
+  // v19f line 41 (ay 24 Nov 20:09: Chovy dodging and farming, Bin running people over on Jax): footage/clips-2009/CLIPS.md
+  chovySolo: { f: "chovy1_solokill-faker-lck.mp4", len: 17 }, // 0-5 s is a WORLDS title card: start at 6+
+  chovyDodge: { f: "chovy2_lane-spacing-zoomed.mp4", len: 16 },
+  binJax: { f: "bin1_jax-vs-renekton-worlds2020-fight.mp4", len: 16 }, // last 2 s are the scoreboard
+  binLane: { f: "bin2_jax-vs-renekton-worlds2020-lane-stats.mp4", len: 19 },
 } as const;
 export type ClipId = keyof typeof CLIPS;
 

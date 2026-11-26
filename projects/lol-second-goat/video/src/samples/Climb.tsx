@@ -51,7 +51,7 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   // ay 22 Nov 20:53: "and even here Faker's in first" cut from the voice; the graph opens already on the +12 line
   const bench0 = -60, bench1 = -30, benchLab = A(WA("37", ["15", "fifteen", "only"]));
   const fks = L("37").words.filter((w) => w.w.toLowerCase().startsWith("faker")); // the LAST "Faker" ("Faker's up here")
-  const climb0 = A(fks.length ? fks[fks.length - 1].start : WA("37", ["up", "way"])), climb1 = climb0 + 48;
+  const climb0 = A(fks.length ? fks[fks.length - 1].start : WA("37", ["up", "way", "faker"])), climb1 = climb0 + 48;
   const out0 = Math.max(climb1 + 20, A(WA("37", ["21", "twenty"])) + 24), out1 = out0 + 30;
   const kB = interpolate(f, [bench0, bench1], [0, 1], { ...clamp, easing: inOut });
   const kUp = interpolate(f, [climb0, climb1], [0, 1], { ...clamp, easing: inOut });
@@ -81,7 +81,7 @@ export const SClimb: React.FC<{ voice?: boolean }> = ({ voice = true }) => {
   const RED = "#E5484D";
   const walkNames: { id: string; at: number; big?: boolean; color?: string; side?: 1 | 2 }[] = walk ? [
     // Apollo and Smoothie sit on top of each other at -6: their names stack to the right of the dots (the y numbers are on the left)
-    { id: "apollo", at: A(WA("37c", ["apollo"])), color: RED, side: 2 }, { id: "smoothie", at: A(WA("37c", ["smoothie"])), color: RED, side: 1 },
+    { id: "apollo", at: A(WA("37c", ["apollo", "under"])), color: RED, side: 2 }, { id: "smoothie", at: A(WA("37c", ["smoothie", "worse"])), color: RED, side: 1 },
     { id: "rekkles", at: A(WA("37d", ["rekkles"])), color: INK }, { id: "corejj", at: A(WA("37d", ["corejj"])), color: INK }] : [];
   const walkOut = walk ? interpolate(f, [tight0 - 8, tight0 + 6], [1, 0], clamp) : 1;
   // ay 24 Nov 14:54: the walk names (Apollo, Smoothie, Rekkles, CoreJJ) stay on the graph, dimmed (Jxmy dims, never removes).

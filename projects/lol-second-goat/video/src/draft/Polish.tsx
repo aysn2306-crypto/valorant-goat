@@ -331,7 +331,7 @@ const LONG: { name: string; v: number; yrs: Record<number, number> }[] = [
 const RECOG = [{ name: "CHOVY", v: 100 }, { name: "FAKER", v: 89 }, { name: "KNIGHT", v: 87 }];
 
 /** Longevity (left) then recognition (right) on one board; the left dims to a quarter when the right comes in (Jxmy) */
-export const LongRec: React.FC<{ cues: { rows: number[]; tagL: number; right: number; bars: number[]; tagR: number; key?: number[] } }> = ({ cues }) => {
+export const LongRec: React.FC<{ cues: { rows: number[]; tagL: number; right: number; bars: number[]; tagR: number; key?: number[]; patch?: number[] } }> = ({ cues }) => {
   const f = useCurrentFrame();
   const inK = pop(f, 0, 10);
   const dimL = 1 - 0.7 * interpolate(f, [cues.right, cues.right + 12], [0, 1], clamp);
@@ -388,6 +388,26 @@ export const LongRec: React.FC<{ cues: { rows: number[]; tagL: number; right: nu
             fontFamily: BEBAS, fontSize: 34, color: MUTE, opacity: pop(f, cues.rows[0]) }}>{yr}</div>
         ))}
       </div>
+      {/* v19f line 79 (38e, 25 Nov): while ay says why staying great is hard, the empty right half says it on its words,
+          and leaves as recognition comes in */}
+      {cues.patch && (() => {
+        const out = 1 - pop(f, cues.right - 8, 8);
+        const items = [{ big: "NEW PATCH", small: "EVERY COUPLE OF WEEKS", at: cues.patch[0] }, { big: "NEW META", small: "EVERY YEAR", at: cues.patch[1] },
+          { big: "RELEARN THE GAME", small: "OVER AND OVER", at: cues.patch[2] }];
+        return out > 0 ? (
+          <div style={{ position: "absolute", left: 1150, top: 330, display: "flex", flexDirection: "column", gap: 44, opacity: out }}>
+            {items.map((it, i) => {
+              const k = pop(f, it.at, 10);
+              return (
+                <div key={it.big} style={{ opacity: k, transform: `translateX(${(1 - k) * 30}px)`, borderLeft: `8px solid ${i === 2 ? TEAL : INK}`, paddingLeft: 28 }}>
+                  <div style={{ fontFamily: BEBAS, fontSize: 72, lineHeight: 1, letterSpacing: 2, color: i === 2 ? TEAL : INK, whiteSpace: "nowrap" }}>{it.big}</div>
+                  <div style={{ fontFamily: BEBAS, fontSize: 38, letterSpacing: 3, color: MUTE, whiteSpace: "nowrap" }}>{it.small}</div>
+                </div>
+              );
+            })}
+          </div>
+        ) : null;
+      })()}
       <div style={{ opacity: rK }}>
         <div style={{ position: "absolute", left: 1150, top: 110, fontFamily: BEBAS, fontSize: 72, letterSpacing: 3, color: INK }}>RECOGNITION</div>
         <div style={{ position: "absolute", left: 1150, top: 190, fontFamily: BEBAS, fontSize: 34, letterSpacing: 3, color: MUTE }}>ALL-PRO TEAMS AND MVPS, 0 TO 100</div>
@@ -452,3 +472,74 @@ export const AxisSweep: React.FC<{ x0: number; x1: number; yb: number; y0: numbe
       </AbsoluteFill>
     );
   };
+
+// ------------------------------------------------------------------ v19f additions (ay's full re-record, 25 Nov)
+/** Line 26 (16c): what skill is scored on, before any adjustment. A post-game stat row (MachineLoLing's portrait stat
+ *  table, machineloling-frames/07m54, and the formula board 04m10): each stat lights on its word with a Jxmy good/bad
+ *  arrow (deaths: fewer is better), then the role strip keeps only your own role on "own role". */
+export const StatSheet: React.FC<{ cues: { stats: number[]; role: number } }> = ({ cues }) => {
+  const f = useCurrentFrame();
+  const STATS = [{ t: "GOLD AHEAD", s: "AT 15 MIN" }, { t: "CS AHEAD", s: "AT 15 MIN" }, { t: "KILLS", s: "EVERY GAME" }, { t: "DAMAGE SHARE", s: "OF YOUR TEAM'S" },
+    { t: "DEATHS", s: "FEWER IS BETTER", bad: true }];
+  const ROLES = ["TOP", "JUNGLE", "MID", "BOT", "SUPPORT"];
+  const inK = pop(f, 0, 10), rK = pop(f, cues.role, 10), strike = interpolate(f, [cues.role + 10, cues.role + 22], [0, 1], { ...clamp, easing: easeOut });
+  const colW = 316, x0 = 170;
+  return (
+    <AbsoluteFill style={{ opacity: inK }}>
+      <Concrete />
+      <div style={{ position: "absolute", left: x0, top: 150, fontFamily: BEBAS, fontSize: 84, letterSpacing: 3, color: INK }}>WHAT EVERY GAME IS SCORED ON</div>
+      <div style={{ position: "absolute", left: x0, top: 330, width: colW * 5, height: 330, background: "rgba(27,30,37,0.85)", border: "2px solid rgba(242,242,238,0.14)" }} />
+      {STATS.map((st, i) => {
+        const a = cues.stats[i], k = pop(f, a, 10), lit = 0.16 + 0.84 * k, ar = interpolate(f, [a + 4, a + 16], [0, 1], { ...clamp, easing: easeOut });
+        const col = st.bad ? RED : TEAL;
+        return (
+          <div key={st.t} style={{ position: "absolute", left: x0 + i * colW, top: 330, width: colW, height: 330, opacity: lit,
+            borderLeft: i ? "2px solid rgba(242,242,238,0.10)" : undefined, display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 40 }}>
+            <div style={{ fontFamily: BEBAS, fontSize: 58, lineHeight: 1, letterSpacing: 1, color: INK, whiteSpace: "nowrap" }}>{st.t}</div>
+            <div style={{ fontFamily: BEBAS, fontSize: 34, letterSpacing: 3, color: MUTE, marginTop: 8, whiteSpace: "nowrap" }}>{st.s}</div>
+            <svg width={110} height={130} style={{ marginTop: 24, transform: `translateY(${(1 - ar) * (st.bad ? -24 : 24)}px)`, opacity: ar }}>
+              {st.bad ? <polygon points="55,124 8,58 36,58 36,6 74,6 74,58 102,58" fill={col} />
+                : <polygon points="55,6 102,72 74,72 74,124 36,124 36,72 8,72" fill={col} />}
+            </svg>
+          </div>
+        );
+      })}
+      <div style={{ position: "absolute", left: x0, top: 740, display: "flex", alignItems: "center", gap: 26, opacity: rK }}>
+        <div style={{ fontFamily: BEBAS, fontSize: 52, letterSpacing: 3, color: MUTE, marginRight: 14, whiteSpace: "nowrap" }}>ONLY COMPARED WITH</div>
+        {ROLES.map((r) => {
+          const me = r === "MID";
+          return (
+            <div key={r} style={{ position: "relative", padding: "10px 30px 4px", borderRadius: 8, fontFamily: BEBAS, fontSize: 60, letterSpacing: 3,
+              background: me ? TEAL : "transparent", color: me ? GROUND : INK, border: me ? `3px solid ${TEAL}` : "3px solid rgba(242,242,238,0.35)",
+              opacity: me ? 1 : 1 - 0.7 * strike }}>
+              {r}
+              {!me && <div style={{ position: "absolute", left: 10, right: 10, top: "52%", height: 5, background: RED, transform: `scaleX(${strike})`, transformOrigin: "0 50%" }} />}
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ position: "absolute", left: x0, top: 862, fontFamily: BEBAS, fontSize: 44, letterSpacing: 3, color: INK, opacity: pop(f, cues.role + 22, 10) }}>
+        A MID ONLY EVER AGAINST OTHER MIDS</div>
+    </AbsoluteFill>
+  );
+};
+
+/** footage cut on its words, each shot with a small name tag bottom left (who you are looking at) */
+export const TaggedClips: React.FC<{ shots: { id: ClipId; from: number; at: number; tag?: string; rate?: number }[] }> = ({ shots }) => {
+  const f = useCurrentFrame();
+  return (
+    <AbsoluteFill style={{ background: "#000" }}>
+      {shots.map((s, i) => {
+        const end = i + 1 < shots.length ? shots[i + 1].at : undefined;
+        const k = pop(f, s.at + 6, 8) * (end !== undefined ? 1 - pop(f, end - 4, 4) : 1);
+        return (
+          <Sequence key={i} from={s.at} durationInFrames={end !== undefined ? end - s.at : undefined} layout="none">
+            <Clip id={s.id} from={s.from} dim={0.08} rate={s.rate ?? 1} />
+            {s.tag && <div style={{ position: "absolute", left: 70, bottom: 70, padding: "8px 24px 2px", background: "rgba(15,16,18,0.86)", borderLeft: `6px solid ${TEAL}`,
+              fontFamily: BEBAS, fontSize: 50, letterSpacing: 3, color: INK, opacity: k, whiteSpace: "nowrap" }}>{s.tag}</div>}
+          </Sequence>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
