@@ -55,6 +55,12 @@ const ClimbRemap: React.FC<{ c: { t0: number; dur: number } }> = ({ c }) => {
   const g = f < b0 ? K : f < b0 + (165 - K) ? K + (f - b0) : f < z0 ? 165 : f < z0 + 94 ? 270 + (f - z0) * 1.6 : f < br ? 420 : 495 + (f - br);
   return <Freeze frame={Math.round(Math.min(g, 540))}><Mo.T2Climb /></Freeze>;
 };
+const CabinetChovy: React.FC<{ c: { t0: number; dur: number } }> = ({ c }) => {
+  const f = useCurrentFrame();
+  const ch = at(c, WA("55b", ["chovy", "trophy.", "like"])), cup = at(c, WA("55b", ["touched", "summoner's", "summoners", "cup"]));
+  const ramp = (a: number, d: number) => interpolate(f, [a, a + d], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  return <Mo.T2Climb focus={{ k: ramp(4, 50), ring: ramp(ch, 16), tag: ramp(ch + 6, 8), ghost: interpolate(f, [cup, cup + 24], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.bezier(0.22, 1, 0.36, 1) }) }} />;
+};
 /** ay 20 Nov 14:36: the OG pyramid (round photos, rank badge) for the whole pyramid section, built bottom up on the
  *  voice, the camera moving tier by tier, a long hold on Caps, and the Uzi and Bengi outlier arrows on line 67. */
 const OGPyramid: React.FC<{ c: { t0: number; dur: number } }> = ({ c }) => {
@@ -198,7 +204,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // v19 (ay: no full graph for a few seconds): the 5 s "Trophy score" board is gone, the cabinet starts on line 51
   ["51", (c) => <><ClimbRemap c={c} /><PartTop text="#1 IN TROPHIES: FAKER" at={at(c, WA("55", ["tops", "double"]))} top={150} /></>],
   // v19f line 54 (55b): the Summoner's Cup on its word, then Chovy on "Chovy" (still no Worlds)
-  ["55b", (c) => <TaggedClips shots={[{ id: "cupNight", from: 2, at: 0 }, { id: "chovyArena", from: 0, at: at(c, WA("55b", ["chovy", "ask"])) - 4, tag: "CHOVY: 0 WORLDS" }]} />],
+  // ay 26 Nov 17:35: line 54 goes back to the cabinet (it only named three players): the camera drops to the pack under
+  // Faker, Chovy is ringed on his name with 0 WORLDS, and on "Summoner's Cup" a hollow dot shows where one Worlds would put him
+  ["55b", (c) => <CabinetChovy c={c} />],
   // big games + clutch: three game 5 endings (Worlds 2024 and 2025 finals, LCK 2024 Summer final) under "win every game 5"
   ["28", (c) => <SectionOpener title="BIG GAMES + CLUTCH" size={170} cardEnd={54} shots={[{ id: "g5Lck24", from: 0.5, at: 0 },
     // 25 Nov take: the Worlds 2024 final lands on "like Faker, Worlds 2024", then T1's 2025 game 5 on "a lot of players ... a clutch team"

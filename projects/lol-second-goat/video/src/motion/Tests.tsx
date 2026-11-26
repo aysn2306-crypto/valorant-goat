@@ -85,8 +85,12 @@ export const T1Rise: React.FC<{ map?: [number[], number[]] }> = ({ map }) => {
 
 // ---------- Test 2: Jxmy climb (pack hold, fast climb through empty axis, dead-still hold, true camera zoom out) ----------
 export const T2_CLIMB = 560;
-export const T2Climb: React.FC = () => {
-  const f = useCurrentFrame();
+/** focus (ay 26 Nov 17:35, line 54): back on the cabinet, the camera eases from the zoomed-out view (k 0) to the cluster
+ *  under Faker (k 1); Chovy is ringed with his 0 Worlds, then a hollow dot shows where one Worlds title (worth about 100)
+ *  would put him. ring/tag/ghost run 0 to 1. */
+export type ClimbFocus = { k: number; ring: number; tag: number; ghost: number };
+export const T2Climb: React.FC<{ focus?: ClimbFocus }> = ({ focus }) => {
+  const fr = useCurrentFrame(), f = focus ? 540 : fr;
   const PX = 3; // world px per trophy point
   // measured on Jxmy (refs/ANIMATION.md A): hold, 3.5 s climb at constant speed with a short ease in and a near hard stop,
   // 3.5 s still hold, 5 s ease in-out zoom out to about 0.2, 2.5 s hold, then the bracket pops on with no animation
@@ -97,22 +101,27 @@ export const T2Climb: React.FC = () => {
   const FK = fk.raw.trophies;
   const seasons = (y: string) => { const a = y.split("-"); return Number(a[a.length - 1]) - Number(a[0]) + 1; };
   const xs = (n: number) => 330 + ((n - 1) / 14) * 1350;
+  // ay 26 Nov: Chovy sits a little left of Knight (not under his label) so he can be lit on line 54
+  const jit = (id: string) => (id === "chovy" ? -45 : (hash(id) - 0.5) * 70);
   const named = ["canyon", "ruler", "knight"]; // v15.1 line 51: Canyon, Ruler, Knight
   const side: Record<string, "left" | "right"> = { canyon: "left", ruler: "right", knight: "right" };
   // camera: value at screen centre (c) and zoom (s)
   const climb = p(f, T.climb, T.land, climbE), zoom = p(f, T.zoom, T.zoomEnd, inOut);
   const TOP = 1600; // the axis runs past Faker's 1,509
   const c0 = 450, c1 = FK - 270 / PX, c2 = TOP / 2 + 10;
-  const c = interpolate(zoom, [0, 1], [interpolate(climb, [0, 1], [c0, c1]), c2]);
+  const cz = interpolate(zoom, [0, 1], [interpolate(climb, [0, 1], [c0, c1]), c2]);
   // camera pull back: y fits the whole range, x shrinks less so the chart keeps its width
-  const s = interpolate(zoom, [0, 1], [1, 860 / (TOP * PX)]);
+  const sz = interpolate(zoom, [0, 1], [1, 860 / (TOP * PX)]);
+  const fk01 = focus ? inOut(Math.min(1, Math.max(0, focus.k))) : 0;
+  const c = focus ? interpolate(fk01, [0, 1], [cz, 715]) : cz;
+  const s = focus ? interpolate(fk01, [0, 1], [sz, 1]) : sz;
   const syk = s;
   const sy = (v: number) => 560 - (v - c) * PX * syk;
   const sx = (x: number) => 380 + (x - 380) * s;
   const axisX = sx(250);
   const step = syk > 0.5 ? 50 : syk > 0.3 ? 100 : 200;
   const ticks: number[] = []; for (let v = 0; v <= TOP; v += step) ticks.push(v);
-  const gap = f >= T.bracket ? 1 : 0;
+  const gap = f >= T.bracket ? 1 - fk01 * 3 : 0;
   const rulerV = Math.max(...D.players.filter((q) => q.id !== "faker").map((q) => q.raw.trophies)); // next best (Gumayusi in v15)
   return (
     <Stage title="THE TROPHY CABINET">
@@ -122,7 +131,7 @@ export const T2Climb: React.FC = () => {
           fontSize: 52 * s, color: C.text }}>{v.toLocaleString("en-US")}</div>); })}
       {D.players.filter((q) => q.id !== "faker").map((q) => {
         const v = q.raw.trophies, y = sy(v); if (y < 110 || y > 1100) return null;
-        const x = sx(xs(seasons(q.years)) + (named.includes(q.id) ? 0 : (hash(q.id) - 0.5) * 70)); const r = 11 * s; const col = heat(v / 520);
+        const x = sx(xs(seasons(q.years)) + (named.includes(q.id) ? 0 : jit(q.id))); const r = 11 * s; const col = heat(v / 520);
         return <div key={q.id} style={{ position: "absolute", left: x - r, top: y - r, width: 2 * r, height: 2 * r, borderRadius: r, background: col, boxShadow: `0 0 ${r}px ${col}` }} />;
       })}
       {named.map((id) => { const q = D.players.find((z) => z.id === id)!; const x = sx(xs(seasons(q.years))), y = sy(q.raw.trophies);
@@ -137,6 +146,22 @@ export const T2Climb: React.FC = () => {
           <div style={{ position: "absolute", left: 30, top: (b - a) / 2 - 60, fontFamily: F.title, fontSize: 64, color: C.text, whiteSpace: "nowrap", lineHeight: 1.1 }}>
             {Math.round(FK) - Math.round(rulerV)} POINTS BETWEEN<br />FAKER AND THE NEXT BEST</div>
         </div>); })()}
+      {focus && (() => {
+        const q = D.players.find((z) => z.id === "chovy")!, v = q.raw.trophies, x = sx(xs(seasons(q.years)) + jit(q.id)), y = sy(v);
+        const g = focus.ghost, gy = sy(v + 100 * g), go = Math.min(1, g * 4);
+        return (<>
+          {/* his dot turns cyan and grows a little (a ring would run into Knight's label just above) */}
+          <div style={{ position: "absolute", left: x - 11 - 4 * focus.ring, top: y - 11 - 4 * focus.ring, width: 22 + 8 * focus.ring, height: 22 + 8 * focus.ring, borderRadius: "50%",
+            background: C.cyan, opacity: focus.ring, boxShadow: `0 0 ${14 * focus.ring}px ${C.cyan}` }} />
+          <Tag x={x} y={y + 22} name="CHOVY" value={String(Math.round(v))} o={focus.tag} color={C.cyan} side="left" pad={44} />
+          <div style={{ position: "absolute", left: x - 400 - 44, width: 400, top: y + 60, textAlign: "right", opacity: focus.tag, fontFamily: F.body, fontWeight: 800,
+            fontSize: 26, color: C.text, textShadow: "0 0 8px #0B0B0F" }}>0 WORLDS</div>
+          {g > 0 && <>
+            <div style={{ position: "absolute", left: x - 14, top: gy - 14, width: 28, height: 28, borderRadius: 14, border: `4px dashed ${C.cyan}`, boxSizing: "border-box", opacity: go }} />
+            <Tag x={x} y={gy} name="WITH ONE WORLDS" value={"ABOUT " + Math.round(v + 100)} o={Math.min(1, Math.max(0, g * 3 - 2))} color={C.cyan} side="right" pad={34} />
+          </>}
+        </>);
+      })()}
     </Stage>
   );
 };
