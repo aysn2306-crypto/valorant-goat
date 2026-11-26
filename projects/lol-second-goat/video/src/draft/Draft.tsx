@@ -238,7 +238,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
       {HAS("37e") && <PartTop text="#1 IN TEAM IMPACT: FAKER" at={at(c, WA("37e", ["tops", "faker"]))} left={640} top={60} />}</>; }],
   ["38a", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="LONGEVITY + RECOGNITION" at={4} size={136} /></AbsoluteFill>],
   // ay 24 Nov 14:54: the title had nothing after it. Longevity (great years, Faker #1) then recognition (Chovy #1) on one board
-  ...(HAS("38c") ? [["38a@how", (c: Ctx) => /* v20: the title types out over "The last two parts", the board comes on "how many great years" */ <LongRec cues={{ rows: [at(c, WA("38c", ["faker"])), at(c, WA("38c", ["deft"])), at(c, WA("38c", ["knight"])), at(c, WA("38c", ["chovy"]))],
+  ...(HAS("38c") ? [["38a@how", (c: Ctx) => /* v20: the title types out over "The last two parts", the board comes on "how many great years" */ <LongRec cues={{ rows: [at(c, WA("38c", ["faker"])), at(c, WA("38c", ["deft"])), at(c, WA("38c", ["knight", "behind"])), at(c, WA("38c", ["chovy", "behind"])) + 8],
     tagL: at(c, WA("38c", ["tops"])), right: at(c, L("38d").start), bars: [at(c, WA("38f", ["chovy"])), at(c, WA("38f", ["faker"])), at(c, WA("38f", ["knight"]))], tagR: at(c, WA("38f", ["tops"])),
     key: [at(c, WA("38a", ["great"])), at(c, WA("38a", ["monster"])), at(c, WA("38a", ["just", "made"]))],
     patch: HAS("38e") ? [at(c, WA("38e", ["patch"])), at(c, WA("38e", ["meta", "year"])), at(c, WA("38e", ["relearn", "over"]))] : undefined }} />] as [string, (c: Ctx) => React.ReactNode]] : []),
