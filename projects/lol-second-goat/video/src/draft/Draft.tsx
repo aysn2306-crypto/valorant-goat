@@ -218,9 +218,15 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // Faker, Chovy is ringed on his name with 0 WORLDS, and on "Summoner's Cup" a hollow dot shows where one Worlds would put him
   ["55b", (c) => <CabinetChovy c={c} />],
   // big games + clutch: three game 5 endings (Worlds 2024 and 2025 finals, LCK 2024 Summer final) under "win every game 5"
-  ["28", (c) => <SectionOpener title="BIG GAMES + CLUTCH" size={170} cardEnd={54} shots={[{ id: "g5Lck24", from: 0.5, at: 0 },
+  ["28", (c) => <SectionOpener title="BIG GAMES + CLUTCH" size={170} cardEnd={54} shots={[{ id: "g5Lck24", from: 0, at: 0 },
     // 25 Nov take: the Worlds 2024 final lands on "like Faker, Worlds 2024", then T1's 2025 game 5 on "a lot of players ... a clutch team"
-    { id: "sylasG4", from: 4, at: at(c, said28("sylas") ? WA("28", ["sylas"]) - 2.5 : WA("28", ["like", "faker"])) - 3 },
+    // 27 Nov take (longer line): T1's walkout (FAKER on the back) on "being able to show up", Faker's portrait on "Faker,",
+    // the Worlds 2024 final v BLG on "most clutch players ... T1 were down", then Sylas (game 4) and Galio (game 5)
+    ...(said28("himself") ? [{ id: "fakerWalkout" as const, from: 12.5, at: at(c, WA("28", ["being", "show"]) - 0.2) - 3 },
+      { id: "skt2013Faker" as const, from: 3, at: at(c, WA("28", ["faker"]) - 0.1) - 3 },
+      { id: "g5Worlds24" as const, from: 0, at: at(c, WA("28", ["players"])) - 3 },
+      { id: "sylasG4" as const, from: 7, at: at(c, WA("28", ["2024"]) + 0.5) - 3 }]
+      : [{ id: "sylasG4" as const, from: 4, at: at(c, said28("sylas") ? WA("28", ["sylas"]) - 2.5 : WA("28", ["like", "faker"])) - 3 }]),
     { id: "galioG5", from: 1.5, at: at(c, said28("galio") ? WA("28", ["galio"]) - 0.6 : WA("28", ["mattered", "showed"])) - 3 },
     { id: "g5Worlds25", from: 1, at: at(c, WA("28", ["lot", "part"])) - 3 }]} />],
   ["29", (c) => { // the clutch scatter (locked walk: bottom, middle, top), now from line 29 so the title card gets line 28
