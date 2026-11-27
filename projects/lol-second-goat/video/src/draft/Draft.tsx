@@ -15,7 +15,8 @@ import { PMLedger } from "./PMLedger";
 import { Music } from "./Music";
 import { TrophyShare } from "./TrophyShare";
 import { VersionOne } from "./VersionOne";
-import { EloLine, LongRace, MissingYears, StatMeanings } from "./Fixes1127";
+import { LongRace, MissingYears } from "./Fixes1127";
+import { EloSteal, StatRadar } from "./Fixes1127b";
 import { TrophySplit } from "./TrophySplit";
 import { TitleShare } from "./TitleShare";
 import { SeasonList } from "./SeasonList";
@@ -164,7 +165,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // scored on (16c, StatSheet), then the LPL problem back on LPL fights, the third fight on "demon"
   ["16a", (c) => <SectionOpener title="SKILL" cardEnd={48} shots={[{ id: "lplFight1", from: 0, at: 0 }]} />],
   // ay 27 Nov 01:29: what each stat means, not one player against another (Fixes1127.tsx)
-  ["16c", (c) => <StatMeanings cues={{ stats: [at(c, WA("16c", ["gold"])), at(c, WA("16c", ["cs", "see"])), at(c, WA("16c", ["kills"])), at(c, WA("16c", ["damage", "share"])),
+  ["16c", (c) => <StatRadar cues={{ intro: at(c, WA("16c", ["stats", "every"])), stats: [at(c, WA("16c", ["gold"])), at(c, WA("16c", ["cs", "see"])), at(c, WA("16c", ["kills"])), at(c, WA("16c", ["damage", "share"])),
     at(c, WA("16c", ["die", "dies", "dying", "often"]))], role: at(c, WA("16c", ["role", "own"])) }} />],
   ["16", (c) => <TaggedClips shots={[{ id: "lplFight2", from: 0, at: 0 }, { id: "lplFight3", from: 0.5, at: at(c, WA("16", ["demon", "absolute"])) - 6 }]} />],
   ["17", (c) => <KillsLine cues={{ lck: 6, lpl: at(c, W("17", "lpl")), gap: at(c, W("17", "3")) }} />],
@@ -174,7 +175,7 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 24 Nov 14:54: Elo told like ranked: steal points, the favourite drops 29 losing to the underdog but gains only 3
   // beating them. Holds through 20a and 21
   // ay 27 Nov 01:29: no arrow, the ratings as lines going up and down with the points gained and lost (Fixes1127.tsx)
-  ["20", (c) => <EloLine cues={{ draw: at(c, WA("20", ["works", "like"])), drawEnd: at(c, WA("20", ["games"])), n26: at(c, WA("20", ["26,000", "26"])), games: at(c, WA("20", ["games"])),
+  ["20", (c) => <EloSteal cues={{ steal: at(c, WA("20", ["steal"])), n26: at(c, WA("20", ["26,000", "26"])), games: at(c, WA("20", ["games"])),
     dog: at(c, WA("20a", ["1300", "underdog"])), fav: at(c, WA("20a", ["1700.", "1700", "favourite"])), win2: at(c, WA("20a", ["wins,", "wins"])),
     win22: at(c, WA("20a", ["steal"])) - 6, hurt: at(c, WA("20a", ["hurts", "way"])), climb: at(c, WA("20a", ["keeps", "beating"])), strong: at(c, WA("20a", ["strong", "actually"])) }} />],
   ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top, second: at(c, WA("48", ["knight", "night"])) }} />; }],

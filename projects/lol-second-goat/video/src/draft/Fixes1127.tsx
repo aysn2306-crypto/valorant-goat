@@ -253,6 +253,9 @@ const LONG: { name: string; yrs: Record<number, number> }[] = [
   { name: "KNIGHT", yrs: Object.fromEntries([2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026].map((y) => [y, 0.4])) },
   { name: "CHOVY", yrs: Object.fromEntries([2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026].map((y) => [y, 0.4])) }];
 const RECOG = [{ name: "CHOVY", v: 100 }, { name: "FAKER", v: 89 }, { name: "KNIGHT", v: 87 }];
+// ay 27 Nov 16:04: the year colours were too close to the video's teal and white. Medal colours instead:
+// gold = monster year, silver = great year, bronze = only just made it (filled, so those years are visible too)
+const TIER_COL = ["#B9733F", "#AEB7C3", "#F2B83A"];
 const tierOf = (v: number) => (v >= 0.395 ? 2 : v >= 0.2 ? 1 : 0);
 
 /** the year clock runs 2013 to 2026 and each career bar grows by that season (a monster season adds more than one
@@ -279,9 +282,8 @@ export const LongRace: React.FC<{ cues: { start: number; end: number; key: numbe
         <div style={{ position: "absolute", left: 110, top: 900, display: "flex", gap: 46 }}>
           {[{ t: "GREAT YEAR", tier: 1 }, { t: "MONSTER YEAR", tier: 2 }, { t: "ONLY JUST MADE IT", tier: 0 }].map((it, i) => (
             <div key={it.t} style={{ display: "flex", alignItems: "center", gap: 14, opacity: pop(f, cues.key[i], 8) }}>
-              <div style={{ width: 70, height: 34, boxSizing: "border-box", background: it.tier === 2 ? TEAL : it.tier === 1 ? INK : "transparent",
-                border: it.tier === 0 ? "3px solid rgba(242,242,238,0.5)" : "none" }} />
-              <div style={{ fontFamily: BEBAS, fontSize: 38, letterSpacing: 2, color: it.tier === 2 ? TEAL : it.tier === 1 ? INK : MUTE, whiteSpace: "nowrap" }}>{it.t}</div>
+              <div style={{ width: 70, height: 34, boxSizing: "border-box", background: TIER_COL[it.tier] }} />
+              <div style={{ fontFamily: BEBAS, fontSize: 38, letterSpacing: 2, color: TIER_COL[it.tier], whiteSpace: "nowrap" }}>{it.t}</div>
             </div>
           ))}
         </div>
@@ -304,9 +306,9 @@ export const LongRace: React.FC<{ cues: { start: number; end: number; key: numbe
                 color: lead || lit > 0.5 ? TEAL : INK }}>{p.name}</div>
               {segs.map((s) => s.w > 0.5 ? (
                 <div key={s.yr} style={{ position: "absolute", left: s.x, top: y, width: s.w, height: 72, boxSizing: "border-box",
-                  background: s.tier === 2 ? TEAL : s.tier === 1 ? INK : "transparent", border: s.tier === 0 ? "3px solid rgba(242,242,238,0.5)" : "none",
+                  background: TIER_COL[s.tier],
                   display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", fontFamily: BEBAS, fontSize: 26, color: GROUND }}>
-                  {s.w > 44 && s.tier > 0 ? `'${String(s.yr).slice(2)}` : ""}</div>
+                  {s.w > 44 ? `'${String(s.yr).slice(2)}` : ""}</div>
               ) : null)}
               {/* the face rides the end of the bar, the number of great years beside it */}
               {started && (
