@@ -46,6 +46,9 @@ export const CLIPS = {
   g5Worlds24: { f: "45_worlds2024_final_g5_t1_vs_blg.mp4", len: 7 },
   g5Worlds25: { f: "46_worlds2025_final_g5_t1_vs_kt.mp4", len: 7 },
   g5Lck24: { f: "47_lck2024s_final_g5_hle_vs_geng.mp4", len: 7 },
+  // ay 27 Nov 01:33: Faker's clutch plays in the Worlds 2024 final (LoL Esports highlights rZHrffKAc6k, footage/clips-1127)
+  sylasG4: { f: "50_faker_sylas_g4_worlds24_final.mp4", len: 15 }, // 17:14.5-17:29.5: Faker and Knight cams, Faker kills Xun (his 500th Worlds kill), Baron after
+  galioG5: { f: "51_faker_galio_g5_worlds24_final.mp4", len: 19 }, // 20:59-21:18: Faker's Galio ult lands on BLG, Oner double then triple kill
   chovyMvpFilm: { f: "48_chovy_closeup_mvp_film.mp4", len: 2.8 }, // burned subtitle from 3.0 s: never past 2.8 s
   gengMsi24Win: { f: "49_geng_msi2024_final_win_chovy.mp4", len: 7 },
   // v19f line 41 (ay 24 Nov 20:09: Chovy dodging and farming, Bin running people over on Jax): footage/clips-2009/CLIPS.md

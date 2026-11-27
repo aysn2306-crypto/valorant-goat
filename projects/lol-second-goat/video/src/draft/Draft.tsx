@@ -107,6 +107,8 @@ const whatChanged = (c: Ctx) => <MLBoard title="What changed" lines={[
       { label: "Version 1", value: "#14", frac: 0.3, color: "#8E97A3", at: 10 },
       { label: "Now", value: "#1", frac: 1, color: TEAL, at: at(c, W("15", "fixed")) }]} />} sideAt={10} big />;
 
+// ay 27 Nov 01:33: Faker's Sylas (game 4) and Galio (game 5) under line 28; cues move to those words once ay records them
+const said28 = (w: string) => HAS("28") && L("28").words.some((x) => x.w.toLowerCase().startsWith(w));
 const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // ay 20 Nov: footage only, never still player photos (lol-second-goat/footage, public/_local/footage)
   ["1", () => <Clip id="lift" from={2} />],
@@ -217,7 +219,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // big games + clutch: three game 5 endings (Worlds 2024 and 2025 finals, LCK 2024 Summer final) under "win every game 5"
   ["28", (c) => <SectionOpener title="BIG GAMES + CLUTCH" size={170} cardEnd={54} shots={[{ id: "g5Lck24", from: 0.5, at: 0 },
     // 25 Nov take: the Worlds 2024 final lands on "like Faker, Worlds 2024", then T1's 2025 game 5 on "a lot of players ... a clutch team"
-    { id: "g5Worlds24", from: 0, at: at(c, WA("28", ["like", "faker"])) - 3 }, { id: "g5Worlds25", from: 1, at: at(c, WA("28", ["lot", "part"])) - 3 }]} />],
+    { id: "sylasG4", from: 4, at: at(c, said28("sylas") ? WA("28", ["sylas"]) - 2.5 : WA("28", ["like", "faker"])) - 3 },
+    { id: "galioG5", from: 1.5, at: at(c, said28("galio") ? WA("28", ["galio"]) - 0.6 : WA("28", ["mattered", "showed"])) - 3 },
+    { id: "g5Worlds25", from: 1, at: at(c, WA("28", ["lot", "part"])) - 3 }]} />],
   ["29", (c) => { // the clutch scatter (locked walk: bottom, middle, top), now from line 29 so the title card gets line 28
     // v19: dots pop in over "Here's every player..." (about 4 s, locked 21 Nov), then 30a names the axes on the full graph
     const rv = at(c, WA("31", ["faker's", "faker", "baker's"])), ch = at(c, WA("30c", ["cream", "creme", "bottom"]));
