@@ -46,7 +46,9 @@ const dropOuts = (): Drop[] => {
     // stops for it there and comes back on the end card
     // ay 23 Nov 21:27: the music cuts on the vine boom and stays out while the minion points at Guma; it fades back in
     // softly as the outro starts (or stays out to the end when there is no outro)
-    { a: WA("94", ["still", "long"]) + 26 / 30 - 0.05, b: HAS("101") ? L("101").start - 0.4 : 1e6, out: 0.05, back: 1.5 },
+    // ay 27 Nov 01:29 (replaces 23 Nov 21:27): never fully silent here. The music cuts on the vine boom for about a
+    // second (Jxmy punch-line cut) and comes back in under the minion, then runs into the outro
+    { a: WA("94", ["still", "long"]) + 26 / 30 - 0.05, b: WA("94", ["still", "long"]) + 26 / 30 + 1.1, out: 0.05, back: 0.6 },
   ];
 };
 

@@ -15,6 +15,7 @@ import { PMLedger } from "./PMLedger";
 import { Music } from "./Music";
 import { TrophyShare } from "./TrophyShare";
 import { VersionOne } from "./VersionOne";
+import { EloLine, LongRace, MissingYears, StatMeanings } from "./Fixes1127";
 import { TrophySplit } from "./TrophySplit";
 import { TitleShare } from "./TitleShare";
 import { SeasonList } from "./SeasonList";
@@ -147,7 +148,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     { text: "TROPHIES: FAKER = 100", at: at(c, W("43", "faker")), accent: true, gap: 50 },
     { text: "EVERYONE ELSE = A SHARE OF HIM", at: at(c, W("43", "everyone")) }]} />],
   // ay 24 Nov 14:54: the trophies vs everything else bar is gone; the weights are explained once, in the Monte Carlo part
-  ["11", (c) => <VersionOne trophiesAt={10} partsAt={at(c, WA("11", ["14th", "14"]))} gamesAt={at(c, WA("13", ["tracked", "early"]))} damageAt={HAS("13b") ? at(c, WA("13b", ["damage"])) : 1e9} />],
+  // ay 27 Nov 01:29 ("what does 100 trophies mean?"): the v1 part bars and the footnote are gone; Fixes1127.tsx
+  ["11", (c) => <MissingYears cues={{ rank: at(c, WA("11", ["14th", "14"])), games: at(c, WA("13", ["tracked", "early"])) - 30,
+    damage: HAS("13b") ? at(c, WA("13b", ["games", "before"])) : 1e9, y2020: HAS("13b") ? at(c, WA("13b", ["damage", "stats"])) : 1e9,
+    long: at(c, WA("14", ["played", "long"])) }} />],
   // v19 (ay 24 Nov: "made up for the missing stats" needs a close, and the panel needs longer): "Faker now: #1" lands on
   // the new line 15x ("Faker went straight back to where he belongs"), and the board holds through it
   ["15", (c) => whatChanged(c)],
@@ -157,7 +161,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // v19f (25 Nov flow fix): skill opens on its card and "how well you play in every single game", then what every game is
   // scored on (16c, StatSheet), then the LPL problem back on LPL fights, the third fight on "demon"
   ["16a", (c) => <SectionOpener title="SKILL" cardEnd={48} shots={[{ id: "lplFight1", from: 0, at: 0 }]} />],
-  ["16c", (c) => <MatchupSheet cues={{ stats: [at(c, WA("16c", ["gold"])), at(c, WA("16c", ["cs", "see"])), at(c, WA("16c", ["kills"])), at(c, WA("16c", ["damage", "share"])),
+  // ay 27 Nov 01:29: what each stat means, not one player against another (Fixes1127.tsx)
+  ["16c", (c) => <StatMeanings cues={{ stats: [at(c, WA("16c", ["gold"])), at(c, WA("16c", ["cs", "see"])), at(c, WA("16c", ["kills"])), at(c, WA("16c", ["damage", "share"])),
     at(c, WA("16c", ["die", "dies", "dying", "often"]))], role: at(c, WA("16c", ["role", "own"])) }} />],
   ["16", (c) => <TaggedClips shots={[{ id: "lplFight2", from: 0, at: 0 }, { id: "lplFight3", from: 0.5, at: at(c, WA("16", ["demon", "absolute"])) - 6 }]} />],
   ["17", (c) => <KillsLine cues={{ lck: 6, lpl: at(c, W("17", "lpl")), gap: at(c, W("17", "3")) }} />],
@@ -166,8 +171,10 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   ["19@gen", () => <Clip id="close" from={22} />],
   // ay 24 Nov 14:54: Elo told like ranked: steal points, the favourite drops 29 losing to the underdog but gains only 3
   // beating them. Holds through 20a and 21
-  ["20", (c) => <EloTowers cues={{ steal: at(c, WA("20", ["steal"])), n26: at(c, WA("20", ["26,000", "26"])), games: at(c, WA("20", ["games"])),
-    fav: at(c, WA("20a", ["2", "two", "3", "three"])), upset: at(c, WA("20a", ["steal", "22", "29"])), hurt: at(c, WA("20a", ["hurts", "way"])) }} />],
+  // ay 27 Nov 01:29: no arrow, the ratings as lines going up and down with the points gained and lost (Fixes1127.tsx)
+  ["20", (c) => <EloLine cues={{ draw: at(c, WA("20", ["works", "like"])), drawEnd: at(c, WA("20", ["games"])), n26: at(c, WA("20", ["26,000", "26"])), games: at(c, WA("20", ["games"])),
+    dog: at(c, WA("20a", ["1300", "underdog"])), fav: at(c, WA("20a", ["1700.", "1700", "favourite"])), win2: at(c, WA("20a", ["wins,", "wins"])),
+    win22: at(c, WA("20a", ["steal"])) - 6, hurt: at(c, WA("20a", ["hurts", "way"])), climb: at(c, WA("20a", ["keeps", "beating"])), strong: at(c, WA("20a", ["strong", "actually"])) }} />],
   ["47", (c) => { const top = at(c, WA("48", ["chovy", "top"])); return <SeasonList n={8} cues={{ scroll0: at(c, WA("48", ["zeus", "here"])), scroll1: top - 2, spot: top, second: at(c, WA("48", ["knight", "night"])) }} />; }],
   ["49", (c) => <HeadToHead left="chovy" right="knight" title="SKILL PART: #1 VS #2" cues={{ in: 0, rows: 6, last: at(c, WA("49", ["behind", "just", "knight"])) }} rows={[
     { label: "CS AHEAD AT 15 MIN", l: "+10.4", r: "+7.7", better: "l" },
@@ -238,9 +245,11 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
       {HAS("37e") && <PartTop text="#1 IN TEAM IMPACT: FAKER" at={at(c, WA("37e", ["tops", "faker"]))} left={640} top={60} />}</>; }],
   ["38a", (c) => <AbsoluteFill><Concrete /><Ov.ChapterTitle text="LONGEVITY + RECOGNITION" at={4} size={136} /></AbsoluteFill>],
   // ay 24 Nov 14:54: the title had nothing after it. Longevity (great years, Faker #1) then recognition (Chovy #1) on one board
-  ...(HAS("38c") ? [["38a@how", (c: Ctx) => /* v20: the title types out over "The last two parts", the board comes on "how many great years" */ <LongRec cues={{ rows: [at(c, WA("38c", ["faker"])), at(c, WA("38c", ["deft"])), at(c, WA("38c", ["knight", "behind"])), at(c, WA("38c", ["chovy", "behind"])) + 8],
-    tagL: at(c, WA("38c", ["tops"])), right: at(c, L("38d").start), bars: [at(c, WA("38f", ["chovy"])), at(c, WA("38f", ["faker"])), at(c, WA("38f", ["knight"]))], tagR: at(c, WA("38f", ["tops"])),
-    key: [at(c, WA("38a", ["great"])), at(c, WA("38a", ["monster"])), at(c, WA("38a", ["just", "made"]))],
+  // ay 27 Nov 01:29 ("something that relates to time"): longevity as a season-by-season race with a year clock (Fixes1127.tsx)
+  ...(HAS("38c") ? [["38a@how", (c: Ctx) => <LongRace cues={{ start: at(c, WA("38a", ["how", "great"])), end: at(c, WA("38c", ["14", "years"])),
+    key: [at(c, WA("38a", ["great"])), at(c, WA("38a", ["monster"])), at(c, WA("38a", ["just", "made"]))], tagL: at(c, WA("38c", ["tops"])),
+    years: at(c, WA("38c", ["years", "14"])), deft: at(c, WA("38c", ["deft"])), right: at(c, L("38d").start),
+    bars: [at(c, WA("38f", ["chovy"])), at(c, WA("38f", ["faker"])), at(c, WA("38f", ["knight"]))], tagR: at(c, WA("38f", ["tops"])),
     patch: HAS("38e") ? [at(c, WA("38e", ["patch"])), at(c, WA("38e", ["meta", "year"])), at(c, WA("38e", ["relearn", "over"]))] : undefined }} />] as [string, (c: Ctx) => React.ReactNode]] : []),
   ["38", (c) => <PercentStack header="HOW MANY ALL-PRO PICKS COME OUT RIGHT" rows={[
     { icon: "trophy", label: "PICK FROM THE WINNING TEAMS", pct: 58, at: at(c, W("40", "winning")) },

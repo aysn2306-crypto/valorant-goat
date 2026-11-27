@@ -300,7 +300,7 @@ type CardSpec = { id: string; sub: string; flipAt: number; lines: { text: string
 // (public/_local/memes/intimidator-sticker.png from meme-assets/intimidator-badge.png), tucked into the top right of
 // Uzi's photo on "Intimidator badge"
 const Badge: React.FC<{ k: number }> = ({ k }) => (
-  <Img src={staticFile("_local/memes/intimidator-sticker.png")} style={{ width: 104, height: 120, objectFit: "contain", opacity: Math.min(1, k * 2),
+  <Img src={staticFile("_local/memes/intimidator-sticker.png")} style={{ width: 164, height: 191, objectFit: "contain", opacity: Math.min(1, k * 2),
     transform: `scale(${1.6 - 0.6 * k}) rotate(${8 - (1 - k) * 20}deg)` }} />
 );
 const BigCard: React.FC<{ c: CardSpec; w: number; h: number }> = ({ c, w, h }) => {
@@ -334,7 +334,7 @@ export const PlayerCards: React.FC<{ title: string; titleAt: number; cards: Card
         <React.Fragment key={c.id}>
           <div style={{ position: "absolute", left: x0 + i * gap - 60, top: 240 }}><Flip startAt={c.flipAt} w={w} h={h}><BigCard c={c} w={w} h={h} /></Flip></div>
           {c.badgeAt !== undefined && f >= c.badgeAt && (
-            <div style={{ position: "absolute", left: x0 + i * gap - 60 + w - 128, top: 262 }}>
+            <div style={{ position: "absolute", left: x0 + i * gap - 60 + w - 178, top: 250 }}>{/* ay 27 Nov: bigger, and the sticker must be the cut-out (meme-assets/intimidator-sticker.png), never the raw badge */}
               <Badge k={interpolate(f, [c.badgeAt, c.badgeAt + 8], [0, 1], { ...clamp, easing: easeOut })} /></div>)}
           <div style={{ position: "absolute", left: x0 + i * gap + w - 100, top: 470, width: 560, background: "#ECE6D2", boxShadow: "0 14px 30px rgba(0,0,0,0.45)",
             opacity: f >= Math.max(c.lines[0].at, c.flipAt + 6) ? 1 : 0 }}>{/* ay 14:36: a panel never shows before its card */}
