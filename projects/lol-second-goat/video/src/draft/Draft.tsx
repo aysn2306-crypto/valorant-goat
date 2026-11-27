@@ -165,8 +165,8 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
   // scored on (16c, StatSheet), then the LPL problem back on LPL fights, the third fight on "demon"
   ["16a", (c) => <SectionOpener title="SKILL" cardEnd={48} shots={[{ id: "lplFight1", from: 0, at: 0 }]} />],
   // ay 27 Nov 01:29: what each stat means, not one player against another (Fixes1127.tsx)
-  ["16c", (c) => <StatRadar cues={{ intro: at(c, WA("16c", ["stats", "every"])), stats: [at(c, WA("16c", ["gold"])), at(c, WA("16c", ["cs", "see"])), at(c, WA("16c", ["kills"])), at(c, WA("16c", ["damage", "share"])),
-    at(c, WA("16c", ["die", "dies", "dying", "often"]))], role: at(c, WA("16c", ["role", "own"])) }} />],
+  ["16c", (c) => <StatRadar cues={{ intro: at(c, WA("16c", ["stats", "every"])), stats: [at(c, WA("16c", ["gold"])), at(c, WA("16c", ["cs", "see"])), at(c, WA("16c", ["kills"])), at(c, WA("16c", ["damage", "share"]))],
+    die: at(c, WA("16c", ["die", "dies", "dying", "often"])), role: at(c, WA("16c", ["role", "own"])) }} />],
   ["16", (c) => <TaggedClips shots={[{ id: "lplFight2", from: 0, at: 0 }, { id: "lplFight3", from: 0.5, at: at(c, WA("16", ["demon", "absolute"])) - 6 }]} />],
   ["17", (c) => <KillsLine cues={{ lck: 6, lpl: at(c, W("17", "lpl")), gap: at(c, W("17", "3")) }} />],
   ["18", (c) => <TeamRoles cues={{ rows: Math.max(4, at(c, WA("18", ["compares"])) - 6), role: at(c, WA("18a", ["role", "lined"])), old: at(c, WA("18b", ["2013", "old"])) }} />],

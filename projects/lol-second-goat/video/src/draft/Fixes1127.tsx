@@ -255,7 +255,7 @@ const LONG: { name: string; yrs: Record<number, number> }[] = [
 const RECOG = [{ name: "CHOVY", v: 100 }, { name: "FAKER", v: 89 }, { name: "KNIGHT", v: 87 }];
 // ay 27 Nov 16:04: the year colours were too close to the video's teal and white. Medal colours instead:
 // gold = monster year, silver = great year, bronze = only just made it (filled, so those years are visible too)
-const TIER_COL = ["#B9733F", "#AEB7C3", "#F2B83A"];
+const TIER_COL = ["#D08A4E", "#AEB7C3", "#F2B83A"];
 const tierOf = (v: number) => (v >= 0.395 ? 2 : v >= 0.2 ? 1 : 0);
 
 /** the year clock runs 2013 to 2026 and each career bar grows by that season (a monster season adds more than one
@@ -268,7 +268,7 @@ export const LongRace: React.FC<{ cues: { start: number; end: number; key: numbe
   const rK = pop(f, cues.right, 12);
   const clock = interpolate(f, [cues.start, cues.end], [2012, 2026], clamp); // season 2013 fills between 2012 and 2013
   const year = Math.max(2013, Math.ceil(clock - 0.0001));
-  const X0 = 330, W = 740, total = Object.values(LONG[0].yrs).reduce((a, b) => a + b, 0);
+  const X0 = 330, W = 740, nYears = Object.keys(LONG[0].yrs).length;
   const rowY = (i: number) => 300 + i * 150;
   const sideOut = 1 - pop(f, cues.right - 8, 8);
   return (
@@ -278,9 +278,10 @@ export const LongRace: React.FC<{ cues: { start: number; end: number; key: numbe
         <div style={{ position: "absolute", left: 110, top: 110, fontFamily: BEBAS, fontSize: 72, letterSpacing: 3, color: INK }}>LONGEVITY</div>
         <div style={{ position: "absolute", left: 110, top: 190, fontFamily: BEBAS, fontSize: 34, letterSpacing: 3, color: MUTE }}>GREAT YEARS AT THE TOP, SEASON BY SEASON</div>
         <PartTop text="#1 FAKER" at={cues.tagL} top={118} right={1920 - 1010} />
-        {/* the key, said word by word, as a legend */}
+        {/* the key, said word by word, as a legend. ay 27 Nov 18:38: "only just made it" meant nothing on screen, so the
+            bronze chip says what it is: a year that barely counts as great (LOCKED) */}
         <div style={{ position: "absolute", left: 110, top: 900, display: "flex", gap: 46 }}>
-          {[{ t: "GREAT YEAR", tier: 1 }, { t: "MONSTER YEAR", tier: 2 }, { t: "ONLY JUST MADE IT", tier: 0 }].map((it, i) => (
+          {[{ t: "GREAT YEAR", tier: 1 }, { t: "MONSTER YEAR", tier: 2 }, { t: "BARELY A GREAT YEAR", tier: 0 }].map((it, i) => (
             <div key={it.t} style={{ display: "flex", alignItems: "center", gap: 14, opacity: pop(f, cues.key[i], 8) }}>
               <div style={{ width: 70, height: 34, boxSizing: "border-box", background: TIER_COL[it.tier] }} />
               <div style={{ fontFamily: BEBAS, fontSize: 38, letterSpacing: 2, color: TIER_COL[it.tier], whiteSpace: "nowrap" }}>{it.t}</div>
@@ -292,7 +293,9 @@ export const LongRace: React.FC<{ cues: { start: number; end: number; key: numbe
           const yrs = Object.keys(p.yrs).map(Number).sort((a, b) => a - b);
           let x = X0, count = 0;
           const segs = yrs.map((yr) => {
-            const g = interpolate(clock, [yr - 1, yr], [0, 1], clamp), w = (p.yrs[yr] / total) * W * g;
+            // ay 27 Nov 18:38: a "barely great" year was a thin bronze sliver nobody could read, so every great year is
+            // now one same-size block (the count of years is what's said) and the colour gives the tier
+            const g = interpolate(clock, [yr - 1, yr], [0, 1], clamp), w = (W / nYears) * g;
             if (g > 0) count++;
             const s = { yr, x, w, tier: tierOf(p.yrs[yr]), g };
             x += w > 0 ? w + 4 * g : 0;

@@ -18,15 +18,16 @@ const BEBAS = "Bebas Neue", INK = "#F2F2EE", MUTE = "#9BA3AE", TEAL = "#3FD0B5",
 const pop = (f: number, a: number, d = 8) => interpolate(f, [a, a + d], [0, 1], { ...clamp, easing: easeOut });
 
 // ------------------------------------------------------------------------------------------------ line 16c
+// ay 27 Nov 18:38: one KDA spoke, not kills and deaths as two ("two wasted sections"), and no explaining text under
+// the spoke names ("people obviously understand that less deaths is better"). LOCKED.
 const SPOKES = [
-  { term: "GOLD AHEAD AT 15", mean: "MORE GOLD THAN YOUR LANE OPPONENT", v: 0.82 },
-  { term: "CS AHEAD AT 15", mean: "MORE MINIONS AND MONSTERS KILLED", v: 0.72 },
-  { term: "KILLS", mean: "ENEMY CHAMPIONS YOU KILL", v: 0.64 },
-  { term: "DAMAGE SHARE", mean: "YOUR PART OF THE TEAM'S DAMAGE", v: 0.8 },
-  { term: "DEATHS", mean: "HOW OFTEN YOU DIE (FEWER IS BETTER)", v: 0.7 }];
+  { term: "GOLD AHEAD AT 15", v: 0.82 },
+  { term: "CS AHEAD AT 15", v: 0.72 },
+  { term: "KDA", v: 0.7 },
+  { term: "DAMAGE SHARE", v: 0.8 }];
 const ROLE_AVG = 0.5;
 
-export const StatRadar: React.FC<{ cues: { intro: number; stats: number[]; role: number } }> = ({ cues }) => {
+export const StatRadar: React.FC<{ cues: { intro: number; stats: number[]; die: number; role: number } }> = ({ cues }) => {
   const f = useCurrentFrame();
   const inK = pop(f, 0, 10);
   const CX = 760, CY = 600, R = 300, n = SPOKES.length;
@@ -38,13 +39,13 @@ export const StatRadar: React.FC<{ cues: { intro: number; stats: number[]; role:
   const grow = SPOKES.map((s, i) => s.v * interpolate(f, [cues.stats[i], cues.stats[i] + 14], [0, 1], { ...clamp, easing: easeOut }));
   const anyShape = grow.some((g) => g > 0.001);
   const roleK = pop(f, cues.role, 12);
-  const cur = (i: number) => f >= cues.stats[i] && (i === n - 1 ? f < cues.role : f < cues.stats[i + 1]);
+  const cur = (i: number) => (f >= cues.stats[i] && (i === n - 1 ? f < cues.die : f < cues.stats[i + 1])) || (i === 2 && f >= cues.die && f < cues.role);
   return (
     <AbsoluteFill style={{ opacity: inK }}>
       <Concrete />
       <div style={{ position: "absolute", left: 120, top: 60, fontFamily: BEBAS, fontSize: 72, letterSpacing: 3, color: INK }}>WHAT THE MODEL LOOKS AT IN EVERY GAME</div>
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
-        {/* web: four rings and five spokes, like the broadcast panel */}
+        {/* web: four rings and four spokes, like the broadcast panel */}
         {[0.25, 0.5, 0.75, 1].map((r) => (
           <polygon key={r} points={poly(SPOKES.map(() => r * web))} fill="none" stroke="rgba(242,242,238,0.16)" strokeWidth={r === 1 ? 3 : 2} />
         ))}
@@ -65,11 +66,10 @@ export const StatRadar: React.FC<{ cues: { intro: number; stats: number[]; role:
         const c = Math.cos(ang(i));
         const align = Math.abs(c) < 0.2 ? "center" : c > 0 ? "left" : "right";
         const left = align === "center" ? x - 400 : align === "left" ? x + 6 : x - 806;
-        const top = i === 0 ? y - 96 : y - 34;
+        const top = i === 0 ? y - 66 : y - 30;
         return (
           <div key={s.term} style={{ position: "absolute", left, top, width: 800, textAlign: align, opacity: f < cues.stats[i] ? k : k * (cur(i) || f >= cues.role ? 1 : 0.6) }}>
             <div style={{ fontFamily: BEBAS, fontSize: 58, lineHeight: 1, letterSpacing: 2, color: cur(i) ? TEAL : INK, whiteSpace: "nowrap" }}>{s.term}</div>
-            <div style={{ fontFamily: BEBAS, fontSize: 30, lineHeight: 1.1, letterSpacing: 2, color: MUTE, whiteSpace: "nowrap" }}>{s.mean}</div>
           </div>
         );
       })}
