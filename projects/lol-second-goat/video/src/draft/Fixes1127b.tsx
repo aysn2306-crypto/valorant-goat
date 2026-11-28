@@ -18,16 +18,19 @@ const BEBAS = "Bebas Neue", INK = "#F2F2EE", MUTE = "#9BA3AE", TEAL = "#3FD0B5",
 const pop = (f: number, a: number, d = 8) => interpolate(f, [a, a + d], [0, 1], { ...clamp, easing: easeOut });
 
 // ------------------------------------------------------------------------------------------------ line 16c
-// ay 27 Nov 18:38: one KDA spoke, not kills and deaths as two ("two wasted sections"), and no explaining text under
-// the spoke names ("people obviously understand that less deaths is better"). LOCKED.
+// ay 28 Nov 00:13: the spokes follow the voice (kills and deaths, not KDA: the model uses kills and deaths per minute and
+// KDA barely counts) and the shape is REAL data, not an invented example: Chovy 2025 against the 12 LCK mids with 20+
+// games, spoke = percentile rank (1 = best), dashed ring = the median mid (draft-v26/spider-data.md). No text under the
+// names (ay 27 Nov 18:38). LOCKED.
 const SPOKES = [
-  { term: "GOLD AHEAD AT 15", v: 0.82 },
-  { term: "CS AHEAD AT 15", v: 0.72 },
-  { term: "KDA", v: 0.7 },
-  { term: "DAMAGE SHARE", v: 0.8 }];
+  { term: "GOLD AHEAD AT 15", v: 1.0 },
+  { term: "CS AHEAD AT 15", v: 1.0 },
+  { term: "KILLS", v: 0.92 },
+  { term: "DAMAGE SHARE", v: 0.92 },
+  { term: "DEATHS", v: 1.0 }];
 const ROLE_AVG = 0.5;
 
-export const StatRadar: React.FC<{ cues: { intro: number; stats: number[]; die: number; role: number } }> = ({ cues }) => {
+export const StatRadar: React.FC<{ cues: { intro: number; stats: number[]; role: number } }> = ({ cues }) => {
   const f = useCurrentFrame();
   const inK = pop(f, 0, 10);
   const CX = 760, CY = 600, R = 300, n = SPOKES.length;
@@ -39,13 +42,13 @@ export const StatRadar: React.FC<{ cues: { intro: number; stats: number[]; die: 
   const grow = SPOKES.map((s, i) => s.v * interpolate(f, [cues.stats[i], cues.stats[i] + 14], [0, 1], { ...clamp, easing: easeOut }));
   const anyShape = grow.some((g) => g > 0.001);
   const roleK = pop(f, cues.role, 12);
-  const cur = (i: number) => (f >= cues.stats[i] && (i === n - 1 ? f < cues.die : f < cues.stats[i + 1])) || (i === 2 && f >= cues.die && f < cues.role);
+  const cur = (i: number) => f >= cues.stats[i] && (i === n - 1 ? f < cues.role : f < cues.stats[i + 1]);
   return (
     <AbsoluteFill style={{ opacity: inK }}>
       <Concrete />
       <div style={{ position: "absolute", left: 120, top: 60, fontFamily: BEBAS, fontSize: 72, letterSpacing: 3, color: INK }}>WHAT THE MODEL LOOKS AT IN EVERY GAME</div>
       <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
-        {/* web: four rings and four spokes, like the broadcast panel */}
+        {/* web: four rings and five spokes, like the broadcast panel */}
         {[0.25, 0.5, 0.75, 1].map((r) => (
           <polygon key={r} points={poly(SPOKES.map(() => r * web))} fill="none" stroke="rgba(242,242,238,0.16)" strokeWidth={r === 1 ? 3 : 2} />
         ))}
@@ -77,11 +80,11 @@ export const StatRadar: React.FC<{ cues: { intro: number; stats: number[]; die: 
       <div style={{ position: "absolute", left: 1300, top: 190, display: "flex", flexDirection: "column", gap: 22 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 20, opacity: pop(f, cues.stats[0], 8) }}>
           <div style={{ width: 80, height: 0, borderTop: `6px solid ${TEAL}` }} />
-          <div style={{ fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: TEAL }}>YOUR GAMES</div>
+          <div style={{ fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: TEAL }}>CHOVY 2025</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 20, opacity: roleK }}>
           <div style={{ width: 80, height: 0, borderTop: `6px dashed ${INK}` }} />
-          <div style={{ fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: INK }}>AVERAGE IN YOUR ROLE</div>
+          <div style={{ fontFamily: BEBAS, fontSize: 44, letterSpacing: 2, color: INK }}>AVERAGE LCK MID</div>
         </div>
       </div>
       <div style={{ position: "absolute", left: 1300, top: 790, opacity: roleK, transform: `translateY(${(1 - roleK) * 20}px)` }}>
