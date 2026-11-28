@@ -223,8 +223,9 @@ const SCENES: [string, (c: Ctx) => React.ReactNode][] = [
     // 27 Nov take (longer line): T1's walkout (FAKER on the back) on "being able to show up", Faker's portrait on "Faker,",
     // the Worlds 2024 final v BLG on "most clutch players ... T1 were down", then Sylas (game 4) and Galio (game 5)
     ...(said28("himself") ? [{ id: "fakerWalkout" as const, from: 12.5, at: at(c, WA("28", ["being", "show"]) - 0.2) - 3 },
-      { id: "skt2013Faker" as const, from: 3, at: at(c, WA("28", ["faker"]) - 0.1) - 3 },
-      { id: "g5Worlds24" as const, from: 0, at: at(c, WA("28", ["players"])) - 3 },
+      // ay 28 Nov 01:50: Faker stays on screen until "...of all time" ends (7:18); from 2.2 so the clip lasts that long
+      { id: "skt2013Faker" as const, from: 2.2, at: at(c, WA("28", ["faker"]) - 0.1) - 3 },
+      { id: "g5Worlds24" as const, from: 0, at: at(c, WA("28", ["time"]) + 0.5) - 3 },
       { id: "sylasG4" as const, from: 7, at: at(c, WA("28", ["2024"]) + 0.5) - 3 }]
       : [{ id: "sylasG4" as const, from: 4, at: at(c, said28("sylas") ? WA("28", ["sylas"]) - 2.5 : WA("28", ["like", "faker"])) - 3 }]),
     { id: "galioG5", from: 1.5, at: at(c, said28("galio") ? WA("28", ["galio"]) - 0.6 : WA("28", ["mattered", "showed"])) - 3 },
