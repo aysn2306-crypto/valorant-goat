@@ -204,3 +204,71 @@ export const EloSteal: React.FC<{ cues: { steal: number; n26: number; games: num
     </AbsoluteFill>
   );
 };
+
+// ------------------------------------------------------------------------------------------------ line 16c, draft 26
+// ay 28 Nov 00:42: "multiple spider diagrams comparing a bunch of players". Reference: ay's own mid small multiples
+// (refs-1127/ay-radar-small-multiples-mid.png: six LCK mids in a 2 x 3 grid, each with the dashed league-average
+// ring). Same six players, real data: Oracle's Elixir LCK 2025, the 12 mids with 20+ games; each spoke is the
+// player's percentile rank among them (1 = best; deaths: fewest = best); the dashed ring is the median mid
+// (draft-v26/spider-data.md). Spokes follow the voice: gold, CS, kills, damage share, deaths. No text under names.
+const SIX: { name: string; v: number[] }[] = [
+  { name: "CHOVY", v: [1.0, 1.0, 0.92, 0.92, 1.0] },
+  { name: "BDD", v: [0.83, 0.75, 1.0, 0.75, 0.83] },
+  { name: "CALIX", v: [0.5, 0.42, 0.42, 0.08, 0.33] },
+  { name: "SHOWMAKER", v: [0.67, 0.33, 0.75, 0.25, 0.92] },
+  { name: "FAKER", v: [0.17, 0.25, 0.5, 0.17, 0.67] },
+  { name: "ZEKA", v: [0.92, 0.5, 0.83, 0.5, 0.58] }];
+const SIX_TERMS = ["GOLD AT 15", "CS AT 15", "KILLS", "DAMAGE %", "DEATHS"];
+const NEUTRAL = "#AEB7C3";
+
+export const SpiderSix: React.FC<{ cues: { intro: number; stats: number[]; role: number } }> = ({ cues }) => {
+  const f = useCurrentFrame();
+  const inK = pop(f, 0, 10);
+  const n = 5, R = 132;
+  const ang = (i: number) => -Math.PI / 2 + (i * 2 * Math.PI) / n;
+  const cur = (i: number) => f >= cues.stats[i] && (i === n - 1 ? f < cues.role : f < cues.stats[i + 1]);
+  const roleK = pop(f, cues.role, 12);
+  const grow = (i: number) => interpolate(f, [cues.stats[i], cues.stats[i] + 14], [0, 1], { ...clamp, easing: easeOut });
+  return (
+    <AbsoluteFill style={{ opacity: inK }}>
+      <Concrete />
+      <div style={{ position: "absolute", left: 110, top: 46, fontFamily: BEBAS, fontSize: 64, letterSpacing: 3, color: INK }}>WHAT THE MODEL LOOKS AT IN EVERY GAME</div>
+      <div style={{ position: "absolute", left: 110, top: 116, fontFamily: BEBAS, fontSize: 36, letterSpacing: 3, color: MUTE }}>LCK MID LANERS, 2025</div>
+      <div style={{ position: "absolute", right: 110, top: 58, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 12 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, opacity: roleK }}>
+          <div style={{ width: 64, height: 0, borderTop: `5px dashed ${INK}` }} />
+          <div style={{ fontFamily: BEBAS, fontSize: 36, letterSpacing: 2, color: INK }}>AVERAGE LCK MID</div>
+        </div>
+        <div style={{ opacity: roleK, padding: "6px 18px 2px", background: TEAL, borderRadius: 8, fontFamily: BEBAS, fontSize: 36, letterSpacing: 3, color: GROUND, whiteSpace: "nowrap" }}>
+          ONLY AGAINST YOUR OWN ROLE</div>
+      </div>
+      {SIX.map((p, k) => {
+        const cx = 380 + (k % 3) * 580, cy = 420 + Math.floor(k / 3) * 400;
+        const pk = pop(f, cues.intro + k * 3, 8);
+        const lead = k === 0, col = lead ? TEAL : NEUTRAL;
+        const pt = (i: number, r: number) => [cx + Math.cos(ang(i)) * r * R, cy + Math.sin(ang(i)) * r * R];
+        const poly = (rs: number[]) => rs.map((r, i) => pt(i, r).join(",")).join(" ");
+        const g = p.v.map((v, i) => v * grow(i));
+        const any = g.some((x) => x > 0.001);
+        return (
+          <div key={p.name} style={{ opacity: pk }}>
+            <svg width={1920} height={1080} style={{ position: "absolute", inset: 0 }}>
+              {[0.25, 0.5, 0.75, 1].map((r) => <polygon key={r} points={poly(p.v.map(() => r))} fill="none" stroke="rgba(242,242,238,0.15)" strokeWidth={r === 1 ? 3 : 2} />)}
+              {p.v.map((_, i) => { const [x, y] = pt(i, 1); return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke={cur(i) ? "rgba(63,208,181,0.7)" : "rgba(242,242,238,0.18)"} strokeWidth={cur(i) ? 4 : 2} />; })}
+              {roleK > 0 && <polygon points={poly(p.v.map(() => 0.5 * roleK))} fill="none" stroke={INK} strokeWidth={4} strokeDasharray="12 9" opacity={roleK} />}
+              {any && <polygon points={poly(g)} fill={lead ? "rgba(63,208,181,0.3)" : "rgba(174,183,195,0.22)"} stroke={col} strokeWidth={5} strokeLinejoin="round" />}
+            </svg>
+            <div style={{ position: "absolute", left: cx - 200, width: 400, top: cy - R - 104, textAlign: "center", fontFamily: BEBAS, fontSize: 48, letterSpacing: 2, color: lead ? TEAL : INK }}>{p.name}</div>
+            {SIX_TERMS.map((t, i) => {
+              const [x, y] = pt(i, 1.14), c = Math.cos(ang(i));
+              const align = Math.abs(c) < 0.2 ? "center" : c > 0 ? "left" : "right";
+              const left = align === "center" ? x - 150 : align === "left" ? x + 4 : x - 304;
+              return <div key={t} style={{ position: "absolute", left, top: i === 0 ? y - 34 : y - 14, width: 300, textAlign: align, fontFamily: BEBAS, fontSize: 30, letterSpacing: 1,
+                color: cur(i) ? TEAL : MUTE, opacity: f < cues.stats[i] ? 0.5 : 1, whiteSpace: "nowrap" }}>{t}</div>;
+            })}
+          </div>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
